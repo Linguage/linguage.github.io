@@ -1,0 +1,68 @@
+/* 侧边栏 TOC 样式 */
+.widget-toc {
+    position: sticky;
+    top: 20px;
+    margin-bottom: 20px;
+}
+
+.widget-toc .widget__title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--highlight-color, #e22d30);
+}
+
+.widget-toc .widget__content {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.widget-toc .widget__content nav#TableOfContents {
+    font-size: 0.9em;
+}
+
+.widget-toc .widget__content nav#TableOfContents ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.widget-toc .widget__content nav#TableOfContents ul ul {
+    padding-left: 1em;
+}
+
+.widget-toc .widget__content nav#TableOfContents li {
+    margin: 0.25em 0;
+}
+
+.widget-toc .widget__content nav#TableOfContents a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.widget-toc .widget__content nav#TableOfContents a:hover {
+    background-color: rgba(226, 45, 48, 0.1);
+    color: var(--highlight-color, #e22d30);
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .widget-toc {
+        position: static;
+        margin-bottom: 20px;
+    }
+    
+    .widget-toc .widget__content {
+        max-height: none;
+    }
+}
+
+/* 确保侧边栏在单页面显示 */
+.single .sidebar {
+    display: block !important;
+}
