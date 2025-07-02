@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动报告：AI时代的超级个体经济</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Scholarly Neutral (Warm neutrals with a deep teal accent) -->
+    <!-- Application Structure Plan: The SPA is structured as a narrative journey in four main thematic sections, navigated via a top bar. 1) 'The Phenomenon': Presents compelling evidence (case studies, salary data) to establish the reality of 'super individuals'. 2) 'The Logic': Explains the 'why' behind the phenomenon using interactive diagrams for abstract concepts. 3) 'The Divide': Offers a direct, interactive comparison between AI and traditional industries. 4) 'The Future': Provides an actionable, forward-looking roadmap. This structure transforms the linear report into an exploratory experience, moving from evidence (what) to analysis (why) and finally to implication (so what), which is more engaging for a web user than a simple chapter-by-chapter layout. -->
+    <!-- Visualization & Content Choices: 1) Salary Gap: Report data on salary disparity -> Goal: Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: A toggle button dramatically updates the chart's y-axis and data to show the superstar vs. regular salary, creating a 'wow' effect to emphasize the scale difference. Justification: More impactful than static numbers. 2) 'Transformer' Diaspora: Report info on the 8 authors -> Goal: Organize/Show relationships -> Viz: HTML/CSS/Tailwind Flexbox diagram -> Interaction: Hovering over founder cards reveals details. Justification: Visually represents the 'starburst' effect better than a list. 3) Linear vs. Non-linear Impact: Report concept -> Goal: Compare/Inform -> Viz: HTML/CSS animated diagram -> Interaction: Toggling between two animated states. Justification: Simplifies an abstract concept. 4) Industry Comparison (Table 2): Report table -> Goal: Compare -> Viz: Interactive two-column card layout -> Interaction: Clicking a topic expands details for both sides. Justification: Less overwhelming and more engaging than a large table. 5) Transformation Roadmap (Table 3): Report table -> Goal: Inform/Organize -> Viz: Accordion-style expandable cards -> Interaction: Clicking to expand. Justification: Turns a dense table into a digestible, interactive tool. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FDFBF8;
+            color: #3a3a3a;
+        }
+        .nav-active {
+            color: #008080;
+            border-bottom: 2px solid #008080;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .section-card {
+            background-color: #FFFFFF;
+            border: 1px solid #EAEAEA;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .impact-box {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">AI时代的超级个体经济</h1>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#phenomenon" class="nav-link nav-active text-base font-medium pb-1">现象：证据与案例</a>
+                    <a href="#logic" class="nav-link text-base font-medium pb-1">逻辑：深层驱动力</a>
+                    <a href="#divide" class="nav-link text-base font-medium pb-1">分野：两种价值体系</a>
+                    <a href="#future" class="nav-link text-base font-medium pb-1">未来：伟大的重塑</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#phenomenon" class="block py-2 text-center text-gray-700 hover:bg-gray-100 rounded">现象</a>
+                <a href="#logic" class="block py-2 text-center text-gray-700 hover:bg-gray-100 rounded">逻辑</a>
+                <a href="#divide" class="block py-2 text-center text-gray-700 hover:bg-gray-100 rounded">分野</a>
+                <a href="#future" class="block py-2 text-center text-gray-700 hover:bg-gray-100 rounded">未来</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+
+        <!-- Section 1: The Phenomenon -->
+        <section id="phenomenon" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">现象：证据与案例</h2>
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">人工智能革命催生了“超级巨星经济”，少数顶尖人才的价值和影响力被不成比例地放大。本节通过具体案例和数据，揭示这一现象的真实性与普遍性。</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-bold mb-2 text-teal-700">薪酬战争：Meta vs OpenAI</h3>
+                    <p class="text-gray-600">为追赶竞争对手，Meta发起激进的人才招募，向OpenAI顶尖研究员开出传闻中高达1亿美元的薪酬包。这标志着人才竞争已演变为围绕少数关键个体的战略战争。</p>
+                </div>
+                <div class="section-card p-6">
+                    <h3 class="text-xl font-bold mb-2 text-teal-700">创始人即企业：Ilya Sutskever</h3>
+                    <p class="text-gray-600">OpenAI前首席科学家Ilya Sutskever创立的SSI，在无产品的情况下估值已达320亿美元。投资者押注的并非商业计划，而是其创始人的个人声誉与技术远见。</p>
+                </div>
+                <div class="section-card p-6 md:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl font-bold mb-2 text-teal-700">Transformer八子星散</h3>
+                    <p class="text-gray-600">提出Transformer架构的8位谷歌研究员全部离职创业，催生了Cohere、Character.AI等估值数十亿美元的公司，形成了一个全新的AI生态系统。</p>
+                </div>
+            </div>
+
+            <div class="section-card p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center mb-4">薪酬鸿沟：两个世界的差距</h3>
+                <p class="text-md text-gray-600 text-center max-w-2xl mx-auto mb-6">顶尖AI人才的价值并非线性增加，而是指数级增长。点击按钮，直观感受“超级个体”与行业普通水平之间的巨大薪酬差距。</p>
+                <div class="text-center mb-6">
+                    <button id="salary-toggle-btn" class="bg-teal-600 text-white font-bold py-2 px-6 rounded-full hover:bg-teal-700 transition duration-300">
+                        显示超级个体薪酬
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="salaryChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Logic -->
+        <section id="logic" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">逻辑：深层驱动力</h2>
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">“超级个体”的崛起并非偶然，其背后是技术、经济与组织结构等多重因素共同作用的结果。本节将通过互动图示，剖析其根本驱动力。</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-card p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-center mb-4">影响力杠杆：加法 vs. 乘法</h3>
+                    <p class="text-gray-600 text-center mb-6">传统行业的价值创造是线性的“加法”，而AI领域的突破则是非线性的“乘法”。一个正确的方向选择，能让后续投入产生千百倍的回报。</p>
+                    <div class="flex justify-center space-x-4 mb-6">
+                         <button id="impact-linear-btn" class="bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-full transition">传统 (线性)</button>
+                         <button id="impact-nonlinear-btn" class="bg-teal-600 text-white font-semibold py-2 px-4 rounded-full transition">AI (非线性)</button>
+                    </div>
+                    <div class="h-40 p-4 bg-gray-50 rounded-lg flex items-center justify-center space-x-2" id="impact-display">
+                    </div>
+                </div>
+
+                <div class="section-card p-6 md:p-8">
+                     <h3 class="text-2xl font-bold text-center mb-4">赢家通吃与极度稀缺</h3>
+                    <p class="text-gray-600 text-center mb-6">AGI竞赛被视为一场“赢家通吃”的赌局，潜在回报以万亿计。而能够推动前沿进展的人才却极其稀缺。这种“无限回报”与“极度稀缺”的组合，催生了天价薪酬的经济逻辑。</p>
+                    <div class="h-40 p-4 bg-gray-50 rounded-lg flex flex-col items-center justify-center text-center">
+                        <div class="text-4xl font-bold text-teal-600">∞</div>
+                        <p class="text-gray-700 font-medium mt-2">无限潜在市场 (TAM)</p>
+                        <div class="text-2xl my-1">/</div>
+                        <p class="text-gray-700 font-medium">极度稀缺的关键人才</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Divide -->
+        <section id="divide" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">分野：两种价值体系</h2>
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">传统行业为何长期“贬低”技术专长？通过对比AI科技公司与传统企业的职业路径、价值衡量等维度，可以清晰地看到两种体系在激励与利用人才上的根本性差异。</p>
+
+            <div id="comparison-accordion" class="space-y-4 max-w-4xl mx-auto">
+                <!-- Accordion items will be generated by JS -->
+            </div>
+        </section>
+
+        <!-- Section 4: The Future -->
+        <section id="future" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center mb-4">未来：伟大的重塑</h2>
+            <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">AI将如何改造传统行业？真正的突破将来自AI技术与深刻行业知识的融合，催生新一代的“融合型专家”。传统企业若想在这场变革中胜出，必须主动进行深刻的自我改造。</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-card p-6 flex flex-col justify-center items-center text-center">
+                     <h3 class="text-2xl font-bold mb-4">“融合型专家”的崛起</h3>
+                     <div class="text-5xl mb-4">🧬 + 🧠</div>
+                     <p class="text-gray-600">下一波超级个体将是能够将行业问题“翻译”成AI语言的专家，如用AI设计新药的生物学家、设计新材料的科学家。他们将成为企业最核心的资产。</p>
+                </div>
+                 <div class="section-card p-6 text-center">
+                     <h3 class="text-2xl font-bold mb-4">案例：生物技术革命</h3>
+                      <div class="text-5xl mb-4">💊</div>
+                     <p class="text-gray-600">生物技术行业已是先行者。Insilico Medicine、Recursion等公司正是在生物学与AI的交叉点上建立，吸引巨额投资，证明了“融合型专家”模式的巨大成功潜力。</p>
+                </div>
+            </div>
+
+            <div class="mt-12 section-card p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-center mb-6">传统企业转型路线图</h3>
+                <p class="text-md text-gray-600 text-center max-w-2xl mx-auto mb-8">传统企业拥有数据和领域知识的宝库，释放其价值的关键在于文化和组织结构的转型。以下是评估企业AI采纳成熟度的诊断工具。</p>
+                <div id="roadmap-accordion" class="space-y-4 max-w-4xl mx-auto">
+                    <!-- Roadmap accordion items will be generated by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="text-center py-8 border-t mt-12">
+        <p class="text-gray-500">基于“超级巨星经济”报告生成的互动式分析。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Smooth scrolling and active nav link
+            const navLinks = document.querySelectorAll('header nav a, #mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    if(mobileMenu.classList.contains('hidden') === false){
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const headerNavLinks = document.querySelectorAll('header nav a');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                headerNavLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('nav-active');
+                    }
+                });
+            });
+
+
+            // Salary Chart
+            const salaryCtx = document.getElementById('salaryChart').getContext('2d');
+            const salaryData = {
+                regular: {
+                    labels: ['普通AI研究员(大型科技公司)', 'OpenAI研究员(官方范围)'],
+                    values: [167500, 367500],
+                    label: '年薪中位数 (美元)',
+                    yMax: 500000
+                },
+                superstar: {
+                    labels: ['顶尖AI科学家', '头部初创公司应届生', '传闻中的最高薪酬包'],
+                    values: [5000000, 845000, 100000000],
+                    label: '年薪包 (美元)',
+                    yMax: 110000000
+                }
+            };
+            let currentSalaryView = 'regular';
+
+            const salaryChart = new Chart(salaryCtx, {
+                type: 'bar',
+                data: {
+                    labels: salaryData.regular.labels,
+                    datasets: [{
+                        label: salaryData.regular.label,
+                        data: salaryData.regular.values,
+                        backgroundColor: 'rgba(0, 128, 128, 0.6)',
+                        borderColor: 'rgba(0, 128, 128, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: salaryData.regular.yMax,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y.toLocaleString();
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const salaryToggleButton = document.getElementById('salary-toggle-btn');
+            salaryToggleButton.addEventListener('click', () => {
+                currentSalaryView = currentSalaryView === 'regular' ? 'superstar' : 'regular';
+                const newData = salaryData[currentSalaryView];
+                
+                salaryChart.data.labels = newData.labels;
+                salaryChart.data.datasets[0].data = newData.values;
+                salaryChart.data.datasets[0].label = newData.label;
+                salaryChart.options.scales.y.max = newData.yMax;
+
+                // For superstar view, use a logarithmic scale to show the vast difference
+                if(currentSalaryView === 'superstar') {
+                    salaryChart.options.scales.y.type = 'logarithmic';
+                } else {
+                    salaryChart.options.scales.y.type = 'linear';
+                }
+
+                salaryChart.update();
+
+                salaryToggleButton.textContent = currentSalaryView === 'regular' ? '显示超级个体薪酬' : '显示行业平均薪酬';
+            });
+            
+            // Impact visualization
+            const impactDisplay = document.getElementById('impact-display');
+            const linearBtn = document.getElementById('impact-linear-btn');
+            const nonLinearBtn = document.getElementById('impact-nonlinear-btn');
+
+            const createImpactBoxes = (isLinear) => {
+                impactDisplay.innerHTML = '';
+                if(isLinear){
+                    for (let i = 0; i < 5; i++) {
+                        const box = document.createElement('div');
+                        box.className = 'impact-box w-10 h-10 bg-gray-400 rounded';
+                        impactDisplay.appendChild(box);
+                    }
+                } else {
+                     const centralBox = document.createElement('div');
+                     centralBox.className = 'impact-box w-12 h-12 bg-teal-500 rounded flex items-center justify-center text-white font-bold text-lg';
+                     centralBox.textContent = '10x';
+                     impactDisplay.appendChild(centralBox);
+                }
+            };
+            
+            linearBtn.addEventListener('click', () => {
+                createImpactBoxes(true);
+                linearBtn.classList.remove('bg-gray-200', 'text-gray-800');
+                linearBtn.classList.add('bg-teal-600', 'text-white');
+                nonLinearBtn.classList.add('bg-gray-200', 'text-gray-800');
+                nonLinearBtn.classList.remove('bg-teal-600', 'text-white');
+            });
+
+            nonLinearBtn.addEventListener('click', () => {
+                createImpactBoxes(false);
+                nonLinearBtn.classList.remove('bg-gray-200', 'text-gray-800');
+                nonLinearBtn.classList.add('bg-teal-600', 'text-white');
+                linearBtn.classList.add('bg-gray-200', 'text-gray-800');
+                linearBtn.classList.remove('bg-teal-600', 'text-white');
+            });
+            
+            createImpactBoxes(false); // Initial state
+
+            // Comparison Accordion
+            const comparisonData = [
+                { title: '顶级技术头衔', tech: '首席/杰出工程师，与高管平级', traditional: '首席工程师/院士，稀有且影响力有限' },
+                { title: '影响力范围', tech: '跨组织架构，影响公司级技术战略', traditional: '项目特定，部门内部' },
+                { title: '薪酬天花板', tech: '可与VP等高管匹敌', traditional: '远低于高管级别' },
+                { title: '价值衡量', tech: '战略资产 (未来价值创造)', traditional: '成本中心 (当前产出效率)' },
+                { title: '创新模式', tech: '敏捷/探索式 (Agile/Discovery)', traditional: '瀑布/执行式 (Waterfall/Execution)' }
+            ];
+
+            const comparisonContainer = document.getElementById('comparison-accordion');
+            comparisonData.forEach((item, index) => {
+                const itemHtml = `
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="accordion-button w-full text-left p-4 bg-white hover:bg-gray-50 flex justify-between items-center transition">
+                            <span class="font-semibold text-lg text-gray-800">${item.title}</span>
+                            <span class="text-teal-600 text-2xl transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content bg-gray-50">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-700 mb-2">🚀 AI/科技公司</h4>
+                                    <p class="text-gray-600">${item.tech}</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-700 mb-2">🏭 传统行业</h4>
+                                    <p class="text-gray-600">${item.traditional}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                comparisonContainer.innerHTML += itemHtml;
+            });
+            
+            // Roadmap Accordion
+            const roadmapData = [
+                {
+                    title: '数据基础设施',
+                    low: '数据孤立、质量差、治理缺乏。',
+                    high: '统一数据湖/平台，数据高质量且标准化。',
+                    action: '投资数据清理和标准化；建立中央数据治理团队。'
+                },
+                {
+                    title: '员工技能差距',
+                    low: 'AI与业务团队脱节，员工存在技术焦虑。',
+                    high: '跨职能团队深度协作，领域专家参与模型验证。',
+                    action: '建立“融合型”培训项目，设立AI卓越中心。'
+                },
+                {
+                    title: '组织文化与领导力',
+                    low: '风险规避，瀑布式管理，惩罚失败。',
+                    high: '拥抱实验和快速迭代，从失败中学习，激励创新。',
+                    action: '领导层公开支持高风险AI项目，改革绩效评估体系。'
+                },
+                 {
+                    title: '遗留系统集成',
+                    low: '老旧封闭的系统，缺乏API接口。',
+                    high: '采用中间件或数据网关，模块化部署。',
+                    action: '制定分阶段的系统现代化路线图，优先开发API。'
+                }
+            ];
+            const roadmapContainer = document.getElementById('roadmap-accordion');
+            roadmapData.forEach((item, index) => {
+                 const itemHtml = `
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="accordion-button w-full text-left p-4 bg-white hover:bg-gray-50 flex justify-between items-center transition">
+                            <span class="font-semibold text-lg text-gray-800">${item.title}</span>
+                             <span class="text-teal-600 text-2xl transform transition-transform duration-300">+</span>
+                        </button>
+                        <div class="accordion-content bg-gray-50/50">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                                <div>
+                                    <h4 class="font-bold text-red-600 mb-2">低成熟度指标</h4>
+                                    <p class="text-gray-600">${item.low}</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-green-600 mb-2">高成熟度指标</h4>
+                                    <p class="text-gray-600">${item.high}</p>
+                                </div>
+                                 <div>
+                                    <h4 class="font-bold text-blue-600 mb-2">建议行动</h4>
+                                    <p class="text-gray-600">${item.action}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                roadmapContainer.innerHTML += itemHtml;
+            });
+
+
+            // Generic Accordion Logic
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('span:last-child');
+                    const isOpen = content.style.maxHeight;
+
+                    if (isOpen) {
+                        content.style.maxHeight = null;
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(45deg)';
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
