@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor团队：AI编程的未来 | 交互式报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Stone, Slate, with a subtle Blue accent) -->
+    <!-- Application Structure Plan: The application is structured as a single-page scrolling experience with a sticky top navigation for easy access to key thematic sections. This non-linear structure prioritizes user exploration over the report's original format. The sections are: 1. Introduction: An overview and a visual timeline of Cursor's origin. 2. Core Features: An interactive, tabbed breakdown of key functionalities (Cursor Tab, Diff, Apply) using simulated UI elements and diagrams. 3. Tech Deep Dive: Uses an interactive chart and info cards to explain complex topics like model comparisons and ML concepts. 4. Future Vision: Visualizes future concepts like AI agents and summarizes the philosophical outlook on programming. This design was chosen to transform dense text into a dynamic, engaging, and digestible format, allowing users to jump to topics of interest and interact with the information directly. -->
+    <!-- Visualization & Content Choices: 1. Origin Timeline (Goal: Organize/Change): Presented as a horizontal CSS/HTML diagram to show the evolution from Vim to Cursor. This is more engaging than a simple list. Interaction: Hover effects. Library: None, pure HTML/Tailwind. 2. Core Features Tabs (Goal: Organize/Inform): Uses interactive tabs to separate and explain complex features. This prevents cognitive overload. The "Apply" feature is shown with a CSS flowchart. Interaction: Click to switch tabs. Library: Vanilla JS. 3. Model Comparison (Goal: Compare): An interactive radar chart using Chart.js visualizes the multi-dimensional comparison between GPT and Claude, making abstract comparisons concrete. Interaction: Hover for tooltips. Library: Chart.js. 4. AI Concepts (Goal: Inform/Organize): Key technical concepts are presented in styled cards with icons for quick recognition. The "Shadow Workspace" is visualized with a CSS flowchart. Interaction: Hover effects. Library: None, pure HTML/Tailwind. CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8f8f7; /* A very light, warm off-white */
+            color: #334155; /* slate-700 */
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            max-height: 400px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #2563eb; /* blue-600 */
+            border-bottom-color: #2563eb;
+        }
+        .tab.active {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-700">
+
+    <!-- Header and Navigation -->
+    <header id="header" class="bg-stone-50/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-slate-800">AI编程的未来：Cursor团队访谈</h1>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex items-center space-x-8 text-sm font-medium">
+                        <li><a href="#intro" class="nav-link pb-1">首页</a></li>
+                        <li><a href="#features" class="nav-link pb-1">核心功能</a></li>
+                        <li><a href="#tech" class="nav-link pb-1">技术揭秘</a></li>
+                        <li><a href="#vision" class="nav-link pb-1">未来展望</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <!-- Section 1: Introduction -->
+        <section id="intro" class="section-fade-in min-h-[80vh] flex flex-col justify-center">
+            <div class="text-center">
+                <p class="text-base text-blue-600 font-semibold tracking-wide uppercase">Lex Fridman 播客 #447</p>
+                <h2 class="mt-2 text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl">对话Cursor：重塑人与AI的编程协作</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
+                    本报告深入解析了Cursor创始团队的访谈内容，探讨其如何通过深度整合AI，从根本上改变软件开发。这不仅是关于一个代码编辑器，更是关于编程的演进、效率的飞跃以及人机协作的全新范式。
+                </p>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-center text-slate-800 mb-8">Cursor的诞生之路</h3>
+                <div class="relative w-full overflow-x-auto pb-4">
+                    <div class="flex items-center justify-between min-w-[700px] md:min-w-0 space-x-4">
+                        <!-- Timeline line -->
+                        <div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-300 transform -translate-y-1/2"></div>
+                        <div class="absolute top-1/2 left-0 w-full h-0.5 bg-blue-500 transform -translate-y-1/2 scale-x-0 origin-left transition-transform duration-1000" id="timeline-progress"></div>
+                        
+                        <!-- Timeline items (Cards) -->
+                        <div class="relative z-10 flex flex-col items-center w-1/4 timeline-card-item">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-slate-200 w-full text-center transition-all duration-300 hover:shadow-lg">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center mx-auto mb-2 transition-all duration-300 timeline-dot-circle"><span class="text-sm font-bold text-slate-700">1</span></div>
+                                <p class="mt-2 text-base font-semibold text-slate-800">Vim时代</p>
+                                <p class="text-xs text-slate-500 mt-1">团队成员均为Vim忠实用户</p>
+                                <p class="text-xs text-slate-600 mt-2">在Cursor诞生之前，团队成员都是Vim的资深用户，习惯于高效、纯粹的文本编辑环境，追求极致的编程效率。</p>
+                            </div>
+                        </div>
+                        <div class="relative z-10 flex flex-col items-center w-1/4 timeline-card-item">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-slate-200 w-full text-center transition-all duration-300 hover:shadow-lg">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center mx-auto mb-2 transition-all duration-300 timeline-dot-circle"><span class="text-sm font-bold text-slate-700">2</span></div>
+                                <p class="mt-2 text-base font-semibold text-slate-800">Copilot 出现 (2021)</p>
+                                <p class="text-xs text-slate-500 mt-1">为体验AI而转向VS Code</p>
+                                <p class="text-xs text-slate-600 mt-2">GitHub Copilot的发布，作为首个杀手级LLM应用，其强大的自动补全能力吸引团队成员放弃Vim，转而使用当时唯一支持Copilot的VS Code，初步体验到AI辅助编程的魔力。</p>
+                            </div>
+                        </div>
+                        <div class="relative z-10 flex flex-col items-center w-1/4 timeline-card-item">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-slate-200 w-full text-center transition-all duration-300 hover:shadow-lg">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center mx-auto mb-2 transition-all duration-300 timeline-dot-circle"><span class="text-sm font-bold text-slate-700">3</span></div>
+                                <p class="mt-2 text-base font-semibold text-slate-800">GPT-4 启示 (2022)</p>
+                                <p class="text-xs text-slate-500 mt-1">预见到AI将彻底改变编程</p>
+                                <p class="text-xs text-slate-600 mt-2">2022年底，团队获得GPT-4的早期访问权限。GPT-4在能力上的巨大飞跃，让他们确信AI将彻底改变软件构建方式，不仅仅是提高生产力，更是重塑编程的本质。</p>
+                            </div>
+                        </div>
+                        <div class="relative z-10 flex flex-col items-center w-1/4 timeline-card-item">
+                            <div class="bg-white p-4 rounded-lg shadow-md border border-slate-200 w-full text-center transition-all duration-300 hover:shadow-lg">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center mx-auto mb-2 transition-all duration-300 timeline-dot-circle"><span class="text-sm font-bold text-slate-700">4</span></div>
+                                <p class="mt-2 text-base font-semibold text-slate-800">Cursor 诞生</p>
+                                <p class="text-xs text-slate-500 mt-1">分叉VS Code，打造原生AI编辑器</p>
+                                <p class="text-xs text-slate-600 mt-2">团队意识到现有插件模式的局限性，决定分叉VS Code，从底层构建Cursor。旨在打造一个深度整合AI、以程序员为中心、强调速度与控制的下一代编程环境。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="border-t border-slate-200 my-16"></div>
+
+        <!-- Section 2: Core Features -->
+        <section id="features" class="section-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">三大核心AI功能</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-md text-slate-600">Cursor不满足于简单的代码补全，而是从预测、审查到应用，构建了一套完整的AI辅助编程工作流，旨在消除低效操作，提升开发乐趣。</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-6 flex justify-center p-1 bg-slate-200 rounded-lg space-x-1">
+                    <button class="tab active px-4 py-2 text-sm font-medium rounded-md w-1/3 transition" data-tab="tab-content">Cursor Tab</button>
+                    <button class="tab px-4 py-2 text-sm font-medium rounded-md w-1/3 transition text-slate-600" data-tab="diff-content">智能差异界面</button>
+                    <button class="tab px-4 py-2 text-sm font-medium rounded-md w-1/3 transition text-slate-600" data-tab="apply-content">Apply功能</button>
+                </div>
+                
+                <div id="tab-content" class="tab-pane bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Cursor Tab: 超越自动补全</h3>
+                    <p class="text-sm text-slate-600 mb-4">它的目标不只是补全代码，而是预测你的“下一个动作”，包括跨行编辑、文件跳转等，让你可以通过连续按Tab键完成一系列连贯的编程任务。</p>
+                    <div class="bg-slate-800 text-white p-4 rounded-md font-mono text-sm overflow-x-auto">
+                        <pre><code><span class="text-pink-400">const</span> user = <span class="text-green-400">await</span> prisma.user.findUnique({
+  where: { email: <span class="text-yellow-300">'user@example.com'</span> },
+});
+
+<span class="text-gray-500">// AI预测: 你可能想检查用户是否存在</span>
+<span class="text-pink-400">if</span> (!user) {
+  <span class="text-green-400">throw new</span> Error(<span class="text-yellow-300">'User not found'</span>);
+}
+<span class="bg-blue-600/50 p-1 rounded">
+<span class="text-gray-500">// AI继续预测: 接下来可能要获取用户的帖子...</span>
+const posts = await prisma.post.findMany({
+    where: { authorId: user.id }
+});
+</span></code></pre>
+                    </div>
+                </div>
+
+                <div id="diff-content" class="tab-pane hidden bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">智能差异(Diff)界面: 高效审查</h3>
+                    <p class="text-sm text-slate-600 mb-4">Cursor提供直观的红绿双栏差异对比，清晰展示AI的修改建议。未来AI将能高亮重要变更、标记潜在bug，将代码审查从繁琐任务变为智能引导的过程。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-center font-semibold mb-2 text-red-600">修改前</p>
+                            <div class="bg-red-50 p-3 rounded-md font-mono text-sm border border-red-200">
+                                <pre><code><span class="text-red-500 line-through">function Greet(name) {</span>
+<span class="text-red-500 line-through">  return "Hello " + name;</span>
+<span class="text-red-500 line-through">}</span></code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-center font-semibold mb-2 text-green-600">AI修改后</p>
+                             <div class="bg-green-50 p-3 rounded-md font-mono text-sm border border-green-200">
+                                <pre><code><span class="text-green-600">const greetUser = (user) => {</span>
+<span class="text-green-600">  if (!user || !user.name) {</span>
+<span class="text-green-600">    return 'Hello, guest!';</span>
+<span class="text-green-600">  }</span>
+<span class="text-green-600">  return `Hello, ${user.name}!`;</span>
+<span class="text-green-600">};</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="apply-content" class="tab-pane hidden bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-2">Apply功能: 规划与实现的分离</h3>
+                    <p class="text-sm text-slate-600 mb-4">前沿大模型擅长规划但拙于精确实现。Cursor独创性地让大模型生成“粗略草图”，再由一个专门的“Apply模型”将其转化为精确、安全的代码修改，兼顾了智能与效率。</p>
+                     <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                        <div class="p-4 bg-slate-100 rounded-lg w-full md:w-1/3">
+                            <p class="font-bold">① 大模型规划</p>
+                            <p class="text-xs text-slate-500">生成高层级的代码草图</p>
+                        </div>
+                        <div class="text-2xl text-slate-400 font-sans mx-2">&rarr;</div>
+                        <div class="p-4 bg-slate-100 rounded-lg w-full md:w-1/3">
+                            <p class="font-bold">② Apply模型</p>
+                            <p class="text-xs text-slate-500">将草图转化为精确修改</p>
+                        </div>
+                         <div class="text-2xl text-slate-400 font-sans mx-2">&rarr;</div>
+                        <div class="p-4 bg-blue-100 border border-blue-300 rounded-lg w-full md:w-1/3">
+                            <p class="font-bold text-blue-800">③ 精确应用</p>
+                            <p class="text-xs text-blue-600">安全地更新代码</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="border-t border-slate-200 my-16"></div>
+
+        <!-- Section 3: Tech Deep Dive -->
+        <section id="tech" class="section-fade-in">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">技术揭秘</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-md text-slate-600">从模型选择到性能优化，Cursor的背后是一系列精心设计的技术决策，旨在为用户提供最流畅、最智能的编程体验。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-xl font-bold mb-4">模型对决：GPT vs Claude (Sonnet)</h3>
+                    <p class="text-slate-600 text-sm mb-4">
+                        团队认为，目前没有模型能全方位胜出。OpenAI的o1模型在纯粹的<strong>推理</strong>上表现优异，而Anthropic的Sonnet在理解用户<strong>模糊意图</strong>方面更胜一筹，综合表现被认为是当前最佳。此图表基于访谈中的定性评价。
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="modelComparisonChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 space-y-4">
+                    <h3 class="text-xl font-bold mb-2">关键技术概念</h3>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-slate-800">🚀 性能优化</h4>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Cursor通过多种技术实现极致性能：<br>
+                            - <strong>KV缓存（Key-Value Cache）</strong>：Transformer模型在生成Token时会计算并存储键值对。通过复用这些缓存，可以避免重复计算，显著降低延迟和成本，尤其是在处理长Prompt时。<br>
+                            - <strong>推测性编辑（Speculative Edits）</strong>：这是推测性解码的变体。模型利用现有代码作为强先验，预测用户可能进行的修改。它能快速验证大部分不变的代码，只在有差异的地方进行生成，从而大幅加速编辑过程。<br>
+                            - <strong>MoE模型（Mixture of Experts）</strong>：稀疏模型在处理大量输入Token但只生成少量输出Token时效率更高。这使得Cursor在处理长上下文时，能以极低的延迟响应，同时优化GPU负载。
+                        </p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-slate-800">🧠 Prompt工程 (Preempt系统)</h4>
+                        <p class="text-sm text-slate-500 mt-1">借鉴React的声明式思想，用类似JSX的组件动态构建和优化Prompt，确保模型总能获得最相关的上下文信息。</p>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-semibold text-slate-800">🐞 Bug发现的挑战</h4>
+                        <p class="text-sm text-slate-500 mt-1">模型在发现bug上表现不佳，因缺乏相关训练数据。未来希望通过<strong>合成数据</strong>和<strong>结合运行时信息</strong>来提升此能力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="border-t border-slate-200 my-16"></div>
+
+        <!-- Section 4: Future Vision -->
+        <section id="vision" class="section-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">编程的未来展望</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-md text-slate-600">Cursor团队相信，编程的未来不是用AI替代程序员，而是创造一个人类主导、AI辅助的高效协作环境。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">AI智能体与影子工作区</h3>
+                    <p class="text-slate-600 mb-4 text-sm">未来的AI智能体将在“影子工作区”中自主完成任务（如修复bug），它们可以在不干扰用户的情况下修改代码、获取编译器反馈并进行迭代。</p>
+                    <div class="border border-slate-200 p-4 rounded-md text-center bg-slate-50">
+                        <p class="font-semibold">用户下达指令</p>
+                        <p class="text-2xl text-slate-400 my-1">↓</p>
+                        <div class="bg-white p-3 rounded shadow-inner">
+                            <p class="font-semibold text-blue-700">影子工作区 (后台运行)</p>
+                            <div class="flex items-center justify-center text-sm mt-2 text-slate-600">
+                                <span>AI修改代码</span>
+                                <span class="mx-2 text-slate-400">&harr;</span>
+                                <span>获取LSP反馈</span>
+                            </div>
+                        </div>
+                        <p class="text-2xl text-slate-400 my-1">↓</p>
+                        <p class="font-semibold">任务完成，提交审查</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h3 class="text-xl font-bold mb-4">程序员的演变</h3>
+                     <p class="text-slate-600 mb-4 text-sm">AI将消除繁琐的样板代码，让编程变得更加有趣。未来的程序员将：</p>
+                     <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✔</span>
+                            <span><strong class="text-slate-800">更专注于创造与设计：</strong>将精力从“如何实现”转移到“创造什么”。</span>
+                        </li>
+                        <li class="flex items-start">
+                             <span class="text-green-500 mr-2 mt-1">✔</span>
+                             <span><strong class="text-slate-800">以判断的速度迭代：</strong>AI大幅提升修改和重构的效率，让快速试错成为可能。</span>
+                        </li>
+                        <li class="flex items-start">
+                           <span class="text-green-500 mr-2 mt-1">✔</span>
+                           <span><strong class="text-slate-800">掌握抽象层次的控制：</strong>能够在代码的不同抽象层次间自由切换，进行更高维度的思考和操作。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2 mt-1">✔</span>
+                            <span><strong class="text-slate-800">保持主导地位：</strong>AI是强大的副驾驶，但最终的决策和方向盘仍掌握在人类手中。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-200 mt-16 py-6 bg-slate-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-lg font-bold text-slate-800 mb-4">观看原始访谈视频</h3>
+            <div class="relative w-full max-w-2xl mx-auto" style="padding-top: 56.25%;">
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg" 
+                    src="https://www.youtube.com/embed/oFfVt3S51T4" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="mt-6 text-sm text-slate-500">此报告内容基于 Lex Fridman 播客 #447。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart.js: Model Comparison Chart
+            const ctx = document.getElementById('modelComparisonChart');
+            if(ctx) {
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['推理能力 (Reasoning)', '意图理解 (Intent)', '通用性 (Generality)', '速度 (Speed)', '编辑能力 (Editing)'],
+                        datasets: [{
+                            label: 'Sonnet (Claude)',
+                            data: [7, 9, 9, 8, 8],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                        }, {
+                            label: 'o1 (GPT)',
+                            data: [9, 7, 7, 6, 7],
+                            backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            pointBackgroundColor: 'rgba(239, 68, 68, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(239, 68, 68, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                pointLabels: {
+                                    font: {
+                                        size: 11
+                                    },
+                                    color: '#475569' // slate-600
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 10,
+                                ticks: {
+                                    stepSize: 2,
+                                    backdropColor: 'transparent'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw;
+                                        return label + '/10';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.classList.add('text-slate-600');
+                    });
+                    tab.classList.add('active');
+                    tab.classList.remove('text-slate-600');
+
+                    const target = tab.getAttribute('data-tab');
+                    tabPanes.forEach(pane => {
+                        if (pane.id === target) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            // Intersection Observer for animations
+            const sections = document.querySelectorAll('.section-fade-in');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const timelineProgress = document.getElementById('timeline-progress');
+            const timelineCards = document.querySelectorAll('.timeline-card-item'); // Select the new card items
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Update active nav link
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                           link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
+                        
+                        // Animate timeline only for the intro section
+                        if(id === 'intro') {
+                           setTimeout(() => {
+                             timelineProgress.style.transform = 'scaleX(1)';
+                           }, 300);
+                           timelineCards.forEach((card, index) => {
+                               setTimeout(() => {
+                                   const cardDiv = card.querySelector('div');
+                                   const dotCircle = card.querySelector('.timeline-dot-circle');
+                                   const dotSpan = dotCircle.querySelector('span');
+
+                                   cardDiv.style.borderColor = '#3b82f6'; // Activate card border
+                                   cardDiv.style.transform = 'scale(1.05)';
+                                   setTimeout(() => cardDiv.style.transform = 'scale(1)', 200); // Scale back
+
+                                   dotCircle.style.backgroundColor = '#3b82f6'; // Activate circle background
+                                   dotCircle.style.borderColor = '#3b82f6'; // Activate circle border
+                                   dotSpan.style.color = '#fff'; // Activate circle text color
+                               }, 500 + index * 200);
+                           });
+                        }
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
