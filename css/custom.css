@@ -226,3 +226,49 @@
         font-size: 1.1em;
     }
 }
+
+/* 浏览量显示样式 */
+.pageviews, .current-pageviews, .post-pageviews, .total-pageviews {
+    color: #666;
+    font-size: 0.9em;
+    margin-left: 0.5rem;
+}
+
+.pageviews i, .current-pageviews i, .post-pageviews i {
+    margin-right: 0.25rem;
+    opacity: 0.7;
+}
+
+.total-pageviews {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background: rgba(226, 45, 48, 0.1);
+    border-radius: 4px;
+    font-size: 0.95em;
+}
+
+.pageview-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.post-pageviews {
+    color: #888;
+    font-size: 0.85em;
+}
+
+/* 确保浏览量计数器不会破坏布局 */
+.post-meta .pageviews,
+.post-meta .current-pageviews,
+.post-meta .post-pageviews {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* 图标样式（如果没有图标字体，使用 emoji） */
+.icon-eye::before {
+    content: "👁️";
+    margin-right: 0.25rem;
+}
