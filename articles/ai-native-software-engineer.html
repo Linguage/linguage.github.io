@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI原生软件工程师：交互式指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Zen Developer (Warm neutrals: #F8F4E3 background, #4A4A4A text, with muted terracotta #E57373 and teal #4DB6AC accents) -->
+    <!-- Application Structure Plan: A narrative, single-page scrolling experience divided into thematic sections. This structure guides the user from the high-level concept ('what is an AI-Native Engineer?') through practical steps, tools, and best practices. It prioritizes a logical learning path over mirroring the report's exact layout. Key interactions include clickable cards for the '8 Steps', toggles for the 'Toolkit', and an interactive SDLC diagram to make dense information digestible and engaging without overwhelming the user. -->
+    <!-- Visualization & Content Choices: 1. Productivity Boost (Bar Chart): Goal=Compare. Viz=Chart.js Bar. Interaction=Animated on scroll. Justification=Visually represents the 2x-10x claim effectively. 2. 70/30 Problem (Doughnut Chart): Goal=Inform. Viz=Chart.js Doughnut. Interaction=Animated on scroll. Justification=Clearly shows the division of labor between AI and human oversight. 3. SDLC Diagram: Goal=Organize/Explore. Viz=HTML/CSS Flexbox. Interaction=Click to reveal details. Justification=Breaks down a complex process into manageable, interactive parts, encouraging exploration. 4. Tool Categories: Goal=Organize. Viz=HTML Tabs. Interaction=Click to switch views. Justification=Neatly organizes a long list of tools into two distinct, comparable categories. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F8F4E3;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link.active {
+            color: #E57373;
+            border-bottom-color: #E57373;
+        }
+        .sdlc-stage.active {
+            background-color: #4DB6AC;
+            color: white;
+            transform: scale(1.05);
+        }
+        .tab-button.active {
+            background-color: #E57373;
+            color: white;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+         .accordion-item.active .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-arrow {
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-gray-800">AI原生工程师</div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#principles" class="nav-link text-gray-600 hover:text-[#E57373] border-b-2 border-transparent pb-1">核心原则</a>
+                    <a href="#steps" class="nav-link text-gray-600 hover:text-[#E57373] border-b-2 border-transparent pb-1">实践步骤</a>
+                    <a href="#toolkit" class="nav-link text-gray-600 hover:text-[#E57373] border-b-2 border-transparent pb-1">工具箱</a>
+                    <a href="#sdlc" class="nav-link text-gray-600 hover:text-[#E57373] border-b-2 border-transparent pb-1">SDLC重构</a>
+                    <a href="#best-practices" class="nav-link text-gray-600 hover:text-[#E57373] border-b-2 border-transparent pb-1">最佳实践</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">欢迎来到AI原生时代</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">AI原生软件工程师，是将AI深度融入日常工作流程，视其为伙伴以放大自身能力的未来工程师。这不仅是技术的变革，更是一场思维的革命。</p>
+                 <p class="mt-8 text-2xl font-light text-[#4A4A4A] animate-pulse">对每项任务都问自己：“<span class="font-medium text-[#E57373]">AI能帮助我更快、更好或以不同方式完成这项任务吗？</span>”</p>
+            </div>
+        </section>
+
+        <section id="principles" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">两大核心原则</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">要成为AI原生工程师，首先要内化两个根本性的思维转变。这一节将通过对比，帮助您理解从传统工程师到AI原生工程师的角色演变。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <span class="text-3xl">🤝</span>
+                            <h3 class="text-2xl font-semibold text-gray-800">AI是协作者，非替代品</h3>
+                        </div>
+                        <p class="text-gray-600">将AI视为一个知识渊博但经验尚浅的结对编程伙伴。你仍然主导开发过程，利用AI获取想法、解决方案和警告。关键在于保持监督，对最终产出负责。</p>
+                        <div class="mt-6 bg-[#E57373] text-white p-4 rounded-lg">
+                            <p class="font-bold">核心思维: "信任但验证"</p>
+                            <p class="text-sm mt-1">AI可以快速生成代码，但你必须指导它并验证其输出的质量、安全性和正确性。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                         <div class="flex items-center space-x-4 mb-4">
+                            <span class="text-3xl">🧑‍💼</span>
+                            <h3 class="text-2xl font-semibold text-gray-800">现在每个工程师都是管理者</h3>
+                        </div>
+                        <p class="text-gray-600">工程师的角色从执行者转变为协调者。你更多地关注定义和“分配”工作给AI智能体，同时扮演监督者、导师和验证者的角色。</p>
+                        <div class="mt-6 bg-[#4DB6AC] text-white p-4 rounded-lg">
+                             <p class="font-bold">核心转变: 从执行到协调</p>
+                            <p class="text-sm mt-1">有意识地塑造代码库，使其易于与AI协作，从而让AI优先的团队规模更小，完成更多工作。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="steps" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">成为AI原生的8个实践步骤</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">从新手到熟练运用AI，需要一个循序渐进的过程。本节将为您展示八个具体的、可操作的步骤，帮助您系统地建立AI熟练度。点击每个步骤卡片，查看详细说明。</p>
+                </div>
+                <div id="steps-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+            </div>
+        </section>
+
+        <section id="toolkit" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">AI原生工程师的工具箱</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">知道针对不同任务如何利用哪些工具，是AI原生工程师的核心技能之一。这里我们将工具分为两大类，您可以通过点击按钮来切换查看。</p>
+                </div>
+                <div class="flex justify-center mb-8 space-x-2">
+                    <button id="assistants-tab" class="tab-button px-6 py-2 rounded-full font-medium transition active">AI编码助手</button>
+                    <button id="prototypers-tab" class="tab-button px-6 py-2 rounded-full font-medium transition">AI驱动原型工具</button>
+                </div>
+                <div id="toolkit-content" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+            </div>
+        </section>
+        
+        <section id="visualizations" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">AI带来的变革：可视化洞察</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">AI不仅改变了工作流程，还带来了显著的生产力提升，并重新定义了人机协作的边界。本节通过两个图表直观地展示这些影响。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4">生产力倍增潜力</h3>
+                        <div class="chart-container">
+                            <canvas id="productivityChart"></canvas>
+                        </div>
+                        <p class="text-center mt-4 text-gray-600 text-sm">AI可以将工程师的产出提高2倍、5倍，甚至10倍。</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4">70%问题：人机协作新模式</h3>
+                        <div class="chart-container">
+                            <canvas id="seventyPercentChart"></canvas>
+                        </div>
+                        <p class="text-center mt-4 text-gray-600 text-sm">AI能完成约70%的繁重工作，但最后30%需要人类的洞察、判断和验证。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sdlc" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">SDLC重构：AI赋能全流程</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">AI原生工程师不仅用AI编码，更将其应用于软件开发生命周期（SDLC）的每个阶段。点击下方流程中的任意阶段，探索AI如何在该环节中发挥作用。</p>
+                </div>
+                <div id="sdlc-stages" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                </div>
+                <div id="sdlc-content-container" class="bg-white p-8 rounded-xl shadow-lg min-h-[200px] transition-all duration-500">
+                </div>
+            </div>
+        </section>
+
+        <section id="best-practices" class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold">最佳实践与负责任的AI使用</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">要真正从AI中获益，必须遵循最佳实践并避免常见陷阱。这确保AI成为强大的盟友，而非错误的来源。展开下方各项，了解关键原则。</p>
+                </div>
+                <div id="practices-accordion" class="max-w-4xl mx-auto space-y-4">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+             <p class="font-bold mb-2">延伸阅读，持续进步</p>
+             <p class="text-sm text-gray-400 mb-4 max-w-3xl mx-auto">为了加深您的理解并持续改进您的AI辅助工作流程，原文作者推荐了以下来自Google, OpenAI, Anthropic等领先组织的优秀免费指南和资源。</p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <a href="https://services.google.com/fh/files/misc/gemini-for-google-workspace-prompting-guide-101.pdf" target="_blank" class="hover:text-[#E57373] transition">Google提示指南101</a>
+                <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" class="hover:text-[#E57373] transition">Claude Code最佳实践</a>
+                <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" class="hover:text-[#E57373] transition">OpenAI智能体构建指南</a>
+                <a href="https://assets.anthropic.com/m/66daaa23018ab0fd/original/Anthropic-enterprise-ebook-digital.pdf" target="_blank" class="hover:text-[#E57373] transition">Anthropic企业可信AI</a>
+            </div>
+             <p class="text-xs text-gray-500 mt-8">此交互式应用根据 Addy Osmani 的文章《The AI-Native Software Engineer》改编。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = {
+                steps: [
+                    { title: "1. 从AI开始", content: "工作流程通常首先将任务交给AI模型，而不是偶尔寻求帮助。幻觉可通过适当的上下文工程和反馈循环得到缓解。" },
+                    { title: "2. 准备工具", content: "在开发环境中设置至少一个编码助手，如GitHub Copilot, Cursor, 或Cline。这降低了使用AI的摩擦。" },
+                    { title: "3. 学习提示", content: "有效使用AI的核心技能是提示工程。指令要具体并提供上下文，避免模糊。多花一分钟澄清提示可以节省数小时的修正时间。" },
+                    { title: "4. 代码生成", content: "应用AI生成样板代码或重复性代码。不要盲目接受，要阅读并测试。这能在低风险任务上建立对AI能力的信心。" },
+                    { title: "5. 集成非编码任务", content: "将AI应用于写作（PR描述）、分析、规划和沟通等任务。最优秀的工程师知道他们的价值远不止敲代码。" },
+                    { title: "6. 迭代与改进", content: "将AI使用视为学习过程。注意AI输出需要修正的地方，并利用这些反馈在下次创建更好的提示。利用AI的交互性进行迭代。" },
+                    { title: "7. 验证与测试", content: "永远不要假设AI是100%正确的。对待AI的输出就像对待初级开发者的工作一样，进行严格审查和测试。" },
+                    { title: "8. 扩展到复杂用例", content: "一旦习惯，就可以探索更高级的集成，如自主智能体模式或端到端原型设计。这需要更高的警惕性，但能释放更大的生产力。" }
+                ],
+                toolkit: {
+                    assistants: [
+                        { name: "GitHub Copilot", desc: "从自动完成工具演变为真正的编码智能体，能分析代码库、提出多文件编辑建议、运行测试等。" },
+                        { name: "Cursor", desc: "深度集成AI的VS Code修改版，擅长AI感知导航和智能重构，特别适用于大型代码库。" },
+                        { name: "Windsurf", desc: "强调企业级数据隐私和合规性，在需要向AI提供大量上下文的场景中表现优异。" },
+                        { name: "Cline", desc: "作为编辑器内的自主智能体，能规划并执行多步任务，每一步都需人工确认，控制力强。" },
+                        { name: "异步智能体 (Jules/Codex)", desc: "自主协作者，在后台处理已定义的任务（如升级框架），并返回已完成的PR供审查。" }
+                    ],
+                    prototypers: [
+                        { name: "Bolt (bolt.new)", desc: "一键式全栈应用生成器，能根据自然语言描述在几分钟内生成可部署的MVP，速度极快。" },
+                        { name: "v0 (v0.dev by Vercel)", desc: "专注于Next.js的应用生成器，倾向于生成流行的ShadCN UI风格，适合快速功能原型。" },
+                        { name: "Lovable (lovable.dev)", desc: "更适合初学者或非工程师，通过可视化编辑器构建应用，易用性强但代码深度有限。" },
+                        { name: "Replit", desc: "在线IDE的AI模式，不仅编写代码，还能运行、测试并反复改进，常能生成功能最完整的结果。" },
+                        { name: "Firebase Studio", desc: "Google的智能体IDE，由Gemini驱动，可在浏览器中快速原型设计和发布全栈、AI集成应用。" }
+                    ]
+                },
+                sdlc: [
+                    { stage: "需求与构思", icon: "💡", content: "AI可充当头脑风暴伙伴，生成功能列表、用户故事和用例。它还可以进行竞品分析，帮助澄清模糊需求，充当高效的研究助手。" },
+                    { stage: "设计与规划", icon: "📐", content: "AI可充当架构的参考对象，对高层设计提出优缺点分析。它能帮助解决具体技术选型问题，甚至生成图表（如Mermaid）和API设计建议。我们正转向规范驱动的开发，工程师更多地思考如何编写规范。" },
+                    { stage: "实现与编码", icon: "💻", content: "AI辅助最具变革性的阶段。它能完成脚手架搭建、功能实现、代码复用、保持代码模式一致、伴随生成测试、调试辅助以及性能调优与重构等任务，将工程师从繁琐工作中解放出来。" },
+                    { stage: "测试与品保", icon: "🧪", content: "AI可以大放异彩的领域。它能系统性地生成单元测试、集成测试脚本、真实的测试数据，甚至通过智能体进行探索性测试，并帮助审查测试覆盖率，从而以更少的手动工作实现更高的质量。" },
+                    { stage: "维护与修复", icon: "🛠️", content: "AI可以减少维护负担。它能解释遗留代码、帮助识别bug根本原因、建议代码修复、半自动化地进行大规模重构，并协助更新文档和与用户沟通，保持代码库的现代化和清洁。" },
+                    { stage: "部署与运营", icon: "🚀", content: "AI可以生成基础设施即代码（如Terraform）、CI/CD流水线配置、监控与警报查询。它还能协助进行事件分析、聊天运维、容量规划，并起草运维运行手册，成为DevOps方面的副驾驶。" }
+                ],
+                practices: [
+                    { title: "提示工程", content: "将编写提示视为核心技能。始终为AI提供足够的上下文，具体说明输出格式，并将复杂任务分解。维护一个成功的提示库。" },
+                    { title: "信任但验证", content: "永远不要盲目信任AI的输出。像对待初级开发者的工作一样，进行严格的审查和测试。警惕AI的“幻觉”细节，尤其是在安全敏感的系统中。" },
+                    { title: "人工参与和范围界定", content: "利用AI放大生产力，而非完全自动化无法监督的工作。将大任务分解，并为AI智能体设置清晰的边界。抵制过度依赖，确保自己仍在学习和理解。" },
+                    { title: "持续学习和适应", content: "AI领域发展迅速，永不停止学习。关注新工具和最佳实践，通过副项目进行实验，并指导团队中的其他人，共同进步。" },
+                    { title: "协作AI使用实践", content: "将AI采纳视为团队运动。分享经验，制定团队惯例（如在PR中注明AI生成内容），并鼓励AI驱动的代码审查。尊重持谨慎态度者，用结果说话。" },
+                    { title: "负责任的AI使用", content: "注意数据隐私与安全，警惕偏见，对AI使用保持透明，关注知识产权问题，并确保在关键领域有人工监督和备用方案。" }
+                ]
+            };
+            
+            const stepsGrid = document.getElementById('steps-grid');
+            data.steps.forEach((step, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-50 p-6 rounded-lg shadow-sm cursor-pointer transition hover:shadow-md hover:scale-105';
+                card.innerHTML = `
+                    <h3 class="font-bold text-lg text-gray-800">${step.title}</h3>
+                    <p class="mt-2 text-sm text-gray-600">${step.content}</p>
+                `;
+                stepsGrid.appendChild(card);
+            });
+
+            const toolkitContent = document.getElementById('toolkit-content');
+            const assistantsTab = document.getElementById('assistants-tab');
+            const prototypersTab = document.getElementById('prototypers-tab');
+
+            function renderToolkit(type) {
+                toolkitContent.innerHTML = '';
+                data.toolkit[type].forEach(tool => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white p-6 rounded-xl shadow-lg transform transition hover:-translate-y-1';
+                    card.innerHTML = `
+                        <h4 class="font-semibold text-lg text-gray-800">${tool.name}</h4>
+                        <p class="mt-2 text-sm text-gray-600">${tool.desc}</p>
+                    `;
+                    toolkitContent.appendChild(card);
+                });
+            }
+
+            assistantsTab.addEventListener('click', () => {
+                assistantsTab.classList.add('active');
+                prototypersTab.classList.remove('active');
+                renderToolkit('assistants');
+            });
+
+            prototypersTab.addEventListener('click', () => {
+                prototypersTab.classList.add('active');
+                assistantsTab.classList.remove('active');
+                renderToolkit('prototypers');
+            });
+            
+            renderToolkit('assistants');
+
+            const sdlcStagesContainer = document.getElementById('sdlc-stages');
+            const sdlcContentContainer = document.getElementById('sdlc-content-container');
+            data.sdlc.forEach((item, index) => {
+                const stageButton = document.createElement('button');
+                stageButton.className = 'sdlc-stage px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow';
+                stageButton.textContent = `${item.icon} ${item.stage}`;
+                stageButton.addEventListener('click', () => {
+                    document.querySelectorAll('.sdlc-stage').forEach(btn => btn.classList.remove('active'));
+                    stageButton.classList.add('active');
+                    sdlcContentContainer.innerHTML = `
+                        <div class="flex items-center space-x-4 mb-4">
+                            <span class="text-3xl">${item.icon}</span>
+                            <h3 class="text-2xl font-semibold text-gray-800">${item.stage}</h3>
+                        </div>
+                        <p class="text-gray-600">${item.content}</p>
+                    `;
+                });
+                sdlcStagesContainer.appendChild(stageButton);
+                if (index === 0) stageButton.click();
+            });
+
+            const practicesAccordion = document.getElementById('practices-accordion');
+            data.practices.forEach(practice => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item bg-gray-50 rounded-lg shadow-sm';
+                item.innerHTML = `
+                    <button class="accordion-header w-full text-left p-4 flex justify-between items-center">
+                        <span class="font-semibold text-gray-800">${practice.title}</span>
+                        <span class="accordion-arrow text-xl transition-transform">▼</span>
+                    </button>
+                    <div class="accordion-content px-4 pb-4">
+                        <p class="text-sm text-gray-600">${practice.content}</p>
+                    </div>
+                `;
+                practicesAccordion.appendChild(item);
+
+                item.querySelector('.accordion-header').addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+            
+            let productivityChartInstance;
+            let seventyPercentChartInstance;
+
+            const productivityObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !productivityChartInstance) {
+                        const ctx = document.getElementById('productivityChart').getContext('2d');
+                        productivityChartInstance = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['2x', '5x', '10x'],
+                                datasets: [{
+                                    label: '生产力提升倍数',
+                                    data: [2, 5, 10],
+                                    backgroundColor: ['#A5D6A7', '#66BB6A', '#43A047'],
+                                    borderColor: ['#81C784', '#4CAF50', '#388E3C'],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, title: { display: true, text: '提升倍数' } } },
+                                plugins: { legend: { display: false } }
+                            }
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const seventyPercentObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !seventyPercentChartInstance) {
+                         const ctx = document.getElementById('seventyPercentChart').getContext('2d');
+                        seventyPercentChartInstance = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['AI完成的繁重工作', '人类的洞察与验证'],
+                                datasets: [{
+                                    data: [70, 30],
+                                    backgroundColor: ['#4DB6AC', '#E57373'],
+                                    hoverOffset: 4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { position: 'bottom' } }
+                            }
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            productivityObserver.observe(document.getElementById('productivityChart'));
+            seventyPercentObserver.observe(document.getElementById('seventyPercentChart'));
+
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            
+            sections.forEach(section => navObserver.observe(section));
+        });
+    </script>
+</body>
+</html>
