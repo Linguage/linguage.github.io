@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解密“谷子经济学”：Z世代消费新浪潮</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Harmony -->
+    <!-- Application Structure Plan: 本应用采用单页主题式滚动布局。从顶部的英雄区域开始，依次引导用户了解“什么是谷子”（文化解码）、“谷子经济现象”（经济洞察）、“线下场景革命”（产业案例）和“精神消费的内核”（消费心理），最后是“核心结论”。每个版块都设计了独特的交互方式，如卡片点击、图表悬停和视觉对比，旨在将对话中的复杂概念转化为直观的互动体验，让用户能以非线性的方式探索，同时又能感受到一条清晰的故事主线。这种结构比线性报告更能激发用户的探索欲和理解力。 -->
+    <!-- Visualization & Content Choices: 
+        - 谷子类型 -> 目标: 告知 -> 方式: 可点击的HTML卡片 -> 互动: 点击显示详情 -> 理由: 比列表更生动，保持界面整洁。
+        - 市场对比 (国漫 vs 日漫) -> 目标: 比较 -> 方式: Chart.js 柱状图 -> 互动: 悬停显示数据 -> 理由: 直观展示市场份额差距与增长潜力。
+        - 二手市场逻辑 -> 目标: 组织 -> 方式: HTML/CSS 流程图 -> 互动: 悬停提示 -> 理由: 简化复杂的“捆售”和“溢价”概念。
+        - 精神消费对比 (纸片人 vs 真人偶像) -> 目标: 比较 -> 方式: HTML Grid 并排布局 -> 互动: 静态对比 -> 理由: 突出“安全的情绪价值”这一核心驱动力。
+        - 案例 (郑州大上海城) -> 目标: 影响 -> 方式: 图文结合的卡片 -> 互动: 视觉强调 -> 理由: 讲述一个有冲击力的真实故事。
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FDFBF8; /* Warm off-white */
+            color: #4A4A4A; /* Dark gray for text */
+        }
+        .text-brand-brown { color: #8C6A5D; }
+        .bg-brand-brown { background-color: #8C6A5D; }
+        .bg-brand-accent { background-color: #EAE2D8; }
+        .border-brand-accent { border-color: #EAE2D8; }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #8C6A5D; /* brand-brown */
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .chart-container {
+            position: relative;
+            height: 40vh;
+            max-height: 400px;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-brand-brown">谷子经济学</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#section-what" class="nav-link">文化解码</a>
+                <a href="#section-economy" class="nav-link">经济现象</a>
+                <a href="#section-industry" class="nav-link">产业洞察</a>
+                <a href="#section-psychology" class="nav-link">精神内核</a>
+                <a href="#section-conclusion" class="nav-link">核心结论</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#section-what" class="block py-2 nav-link">文化解码</a>
+            <a href="#section-economy" class="block py-2 nav-link">经济现象</a>
+            <a href="#section-industry" class="block py-2 nav-link">产业洞察</a>
+            <a href="#section-psychology" class="block py-2 nav-link">精神内核</a>
+            <a href="#section-conclusion" class="block py-2 nav-link">核心结论</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="text-center py-20 px-6 bg-brand-accent">
+            <h2 class="text-4xl md:text-5xl font-bold text-brand-brown mb-4">泡泡玛特爆火只是表象</h2>
+            <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">背后是Z世代消费逻辑的巨变。当“为爱发电”成为一种经济模式，我们该如何理解“谷子”背后的商业新浪潮？</p>
+        </section>
+
+        <!-- Section 1: What is 'Guzi'? -->
+        <section id="section-what" class="py-16 md:py-24 container mx-auto px-6">
+            <header class="text-center mb-12">
+                <h3 class="text-3xl font-bold mb-2">文化解码：什么是“谷子”？</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">“谷子”，音译自日语"グッズ"(goods)，泛指动漫、漫画、游戏（ACG）的周边商品。它不仅是商品，更是粉丝身份的象征和情感的寄托。点击下方卡片，了解几种常见的谷子类型。</p>
+            </header>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer guzi-card" data-title="吧唧 (Baji)" data-desc="即徽章。通常为马口铁材质，是谷子中最常见、种类最丰富的品类之一，便于交换和装饰。">
+                    <div class="text-2xl mb-4">徽</div>
+                    <h4 class="text-xl font-semibold mb-2">吧唧</h4>
+                    <p class="text-gray-500">点击查看详情</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer guzi-card" data-title="亚克力牌 (Yakeli Pai)" data-desc="即立牌。由亚克力（一种塑料）制成，可以立在桌面上展示角色形象，因其精美的印刷和立体感而备受喜爱，单价也相对较高。">
+                    <div class="text-2xl mb-4">牌</div>
+                    <h4 class="text-xl font-semibold mb-2">亚克力牌</h4>
+                    <p class="text-gray-500">点击查看详情</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer guzi-card" data-title="痛包 (Ita-bag)" data-desc="一种特殊的包，通常有透明夹层，粉丝可以用吧唧、挂件等谷子填满夹层，以“痛苦”又幸福的方式展示对角色的热爱。">
+                    <div class="text-2xl mb-4">包</div>
+                    <h4 class="text-xl font-semibold mb-2">痛包</h4>
+                    <p class="text-gray-500">点击查看详情</p>
+                </div>
+                <div class="card bg-white p-6 rounded-lg shadow-md cursor-pointer guzi-card" data-title="镭射票 (Leishepiao)" data-desc="一种带有镭射工艺的票状收藏品，常作为纪念品或特典。其炫酷的视觉效果使其成为热门收藏对象。">
+                    <div class="text-2xl mb-4">票</div>
+                    <h4 class="text-xl font-semibold mb-2">镭射票</h4>
+                    <p class="text-gray-500">点击查看详情</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Economy Phenomenon -->
+        <section id="section-economy" class="py-16 md:py-24 bg-brand-accent px-6">
+            <div class="container mx-auto">
+                <header class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">经济现象：高溢价与独特市场</h3>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">谷子经济并非简单的买卖。一张明信片32元，一块小亚克力牌195元——惊人的价格背后，是一套由IP价值、稀缺性和粉丝情感驱动的独特市场规则。</p>
+                </header>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-6 text-center">看不懂的定价，看得懂的热爱</h4>
+                        <div class="space-y-6">
+                             <div class="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                                <div>
+                                    <h5 class="font-bold text-lg">一张明信片</h5>
+                                    <p class="text-sm text-gray-500">看似普通的纸制品</p>
+                                </div>
+                                <div class="text-3xl font-bold text-brand-brown">¥ 32</div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow flex items-center justify-between">
+                                <div>
+                                    <h5 class="font-bold text-lg">小亚克力牌</h5>
+                                    <p class="text-sm text-gray-500">IP价值的实体化</p>
+                                </div>
+                                <div class="text-3xl font-bold text-brand-brown">¥ 195</div>
+                            </div>
+                        </div>
+                         <h4 class="text-2xl font-semibold mt-10 mb-6 text-center">“烫门”与“冷门”的二手江湖</h4>
+                         <div class="bg-white p-6 rounded-lg shadow">
+                             <p class="text-center mb-4">在“鱼”（闲鱼）上，谷子形成了独特的交易生态：</p>
+                             <div class="flex flex-col md:flex-row justify-around text-center">
+                                 <div class="p-4">
+                                     <div class="text-2xl mb-2">🔥</div>
+                                     <h5 class="font-bold">烫门角色</h5>
+                                     <p class="text-gray-600">高价求购，一物难求</p>
+                                 </div>
+                                 <div class="p-4 text-3xl font-bold text-gray-400 self-center">→</div>
+                                  <div class="p-4">
+                                     <div class="text-2xl mb-2">❄️</div>
+                                     <h5 class="font-bold">冷门角色</h5>
+                                     <p class="text-gray-600">常需与热门捆绑销售</p>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-semibold mb-6 text-center">国漫崛起：市场格局正在改变</h4>
+                        <div class="chart-container">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-600 mt-4">虽然日漫产业链成熟，但国漫正以惊人的速度崛起，市场占有率已达20%并持续增长，预示着巨大的发展潜力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Industry Insight -->
+        <section id="section-industry" class="py-16 md:py-24 container mx-auto px-6">
+            <header class="text-center mb-12">
+                <h3 class="text-3xl font-bold mb-2">产业洞察：从拯救商场到场景革命</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">“给二次元一个支点，能撬动整个实体经济。” 这句断言，在现实中得到了印证。谷子经济的影响力已远超线上，正在重塑线下商业生态。</p>
+            </header>
+            <div class="bg-white rounded-lg shadow-lg p-8 md:p-12 overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center md:text-left">
+                        <span class="text-brand-brown font-semibold">真实案例</span>
+                        <h4 class="text-3xl font-bold my-3">郑州大上海城的“起死回生”</h4>
+                        <p class="text-gray-700 leading-relaxed">曾经萧条的郑州大上海城，因几家谷子店的入驻而重获新生。大量Z世代年轻人涌入，不仅消费，更在此进行舞蹈快闪等社交活动。这里不再只是商场，而是新一代的线下社交据点。</p>
+                    </div>
+                    <div class="flex justify-center items-center">
+                         <div class="relative w-64 h-64">
+                            <div class="absolute inset-0 border-4 border-brand-accent rounded-full"></div>
+                            <div class="absolute inset-4 border-4 border-brand-accent rounded-full animate-ping"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-6xl">🏢</span>
+                                <span class="text-4xl absolute -top-2 -right-2">✨</span>
+                                <span class="text-4xl absolute bottom-0 left-0 animate-pulse">💃</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Psychology -->
+        <section id="section-psychology" class="py-16 md:py-24 bg-brand-accent px-6">
+            <div class="container mx-auto">
+                <header class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">精神内核：为“纸片人”买单的安全感</h3>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">为什么年轻人愿意为虚拟角色一掷千金？核心在于，这是一种更纯粹、更安全的情绪投资。</p>
+                </header>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white p-8 rounded-lg border-2 border-red-200 shadow">
+                        <h4 class="text-2xl font-bold mb-4 text-center">追星真人偶像</h4>
+                        <ul class="space-y-3 list-disc list-inside text-gray-700">
+                            <li>人设存在“塌房”风险</li>
+                            <li>易受现实八卦新闻影响</li>
+                            <li>粉丝行为易引发争议</li>
+                            <li>情感投入可能瞬间崩塌</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg border-2 border-green-200 shadow-xl">
+                        <h4 class="text-2xl font-bold mb-4 text-center">喜爱“纸片人”</h4>
+                        <ul class="space-y-3 list-disc list-inside text-gray-700">
+                            <li><span class="font-bold">人设永恒</span>，不会有负面新闻</li>
+                            <li>提供<span class="font-bold">稳定的情绪价值</span>和精神慰藉</li>
+                            <li>可通过“二创”进行再创作，自由度高</li>
+                            <li>纯粹的情感寄托，安全可控</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Conclusion -->
+        <section id="section-conclusion" class="py-16 md:py-24 container mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold mb-4">核心结论：一场正在发生的消费革命</h3>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-8">谷子经济的崛起，标志着年轻一代的消费观已从物质满足转向精神需求。他们为热爱、为认同、为情绪价值买单，这种力量正在推动文化产业与实体经济深度融合，创造出前所未有的商业机遇。</p>
+            <div class="flex justify-center space-x-4">
+                 <a href="javascript:void(0)" id="back-to-top-btn" class="bg-brand-brown text-white font-bold py-3 px-6 rounded-full hover:bg-opacity-90 transition">返回顶部</a>
+            </div>
+        </section>
+
+        <!-- Section 6: Source Information -->
+        <section id="section-source" class="py-12 bg-gray-100 text-center px-6">
+            <div class="container mx-auto">
+                <h3 class="text-2xl font-bold mb-4 text-brand-brown">来源说明</h3>
+                <div class="text-gray-600 space-y-2">
+                    <p><strong>付鹏</strong></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Modal for Guzi Cards -->
+    <div id="guzi-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg shadow-2xl p-8 max-w-sm w-full mx-4">
+            <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="modal-desc" class="text-gray-700 mb-6"></p>
+            <button id="modal-close" class="bg-brand-brown text-white font-bold py-2 px-4 rounded-full w-full">关闭</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Market Share Chart
+            const ctx = document.getElementById('marketShareChart').getContext('2d');
+            const marketShareChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['日本动漫产业链', '中国动漫（国漫）'],
+                    datasets: [{
+                        label: '市场份额（估算）',
+                        data: [80, 20],
+                        backgroundColor: [
+                            'rgba(140, 106, 93, 0.6)', // brand-brown with opacity
+                            'rgba(234, 226, 216, 1)'  // brand-accent
+                        ],
+                        borderColor: [
+                            'rgba(140, 106, 93, 1)',
+                            'rgba(200, 180, 160, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                             ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Guzi Card Modal
+            const guziModal = document.getElementById('guzi-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+            const modalClose = document.getElementById('modal-close');
+            
+            document.querySelectorAll('.guzi-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    modalTitle.textContent = card.dataset.title;
+                    modalDesc.textContent = card.dataset.desc;
+                    guziModal.classList.remove('hidden');
+                    guziModal.classList.add('flex');
+                });
+            });
+
+            modalClose.addEventListener('click', () => {
+                guziModal.classList.add('hidden');
+                guziModal.classList.remove('flex');
+            });
+            
+            guziModal.addEventListener('click', (e) => {
+                if(e.target === guziModal) {
+                    guziModal.classList.add('hidden');
+                    guziModal.classList.remove('flex');
+                }
+            });
+
+            // Back to Top Button Smooth Scroll
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
