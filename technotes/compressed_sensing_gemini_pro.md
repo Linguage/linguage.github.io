@@ -1,3 +1,11 @@
+---
+title: '构建压缩感知（Compressed Sensing, CS）算法代码'
+author: Gemini Pro
+date: 2025-08-19T15:06:53+08:00
+draft: true
+mathjax: true
+---
+
 # 构建压缩感知（Compressed Sensing, CS）算法代码
 
  - 内容来自Gemini 2.5 pro
