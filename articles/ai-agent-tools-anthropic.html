@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智能体工具设计全解析 | Anthropic 工程实践</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Noto Serif SC', serif; 
+            line-height: 1.6;
+        }
+        .english { 
+            font-family: 'Poppins', sans-serif; 
+        }
+        .visual-anchor {
+            font-size: clamp(8rem, 15vw, 12rem);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 3px #6366f1;
+            text-stroke: 3px #6366f1;
+        }
+        .compact-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .tight-spacing > * + * {
+            margin-top: 0.75rem;
+        }
+        .section-bg {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class="bg-white border-b-4 border-indigo-500 py-8 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-black text-gray-900 mb-3 leading-tight">
+                    为 AI 智能体打造高效工具全解析
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-bold text-indigo-600 mb-4">
+                    Anthropic 工程团队实践心得
+                </h2>
+                <div class="english text-sm font-medium text-gray-600 flex items-center justify-center gap-4">
+                    <span><i class="fas fa-user-tie mr-2"></i>Ken Aizawa / Anthropic Engineering Team</span>
+                    <span><i class="fas fa-calendar-alt mr-2"></i>2025</span>
+                    <span><i class="fas fa-tag mr-2"></i>MCP · AI Agent · Tool Design</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Visual Anchor Sidebar (4 columns) -->
+            <div class="lg:col-span-4">
+                <div class="sticky top-8 space-y-8">
+                    <!-- Main Visual Anchor -->
+                    <div class="text-center">
+                        <div class="visual-anchor leading-none">AI</div>
+                        <div class="text-2xl font-bold text-indigo-600 mt-4">AGENT TOOLS</div>
+                        <div class="english text-sm font-medium text-gray-600 mt-2">Next-Gen Development</div>
+                    </div>
+                    
+                    <!-- Key Stats -->
+                    <div class="compact-card rounded-2xl p-6 tight-spacing">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">
+                            <i class="fas fa-chart-line mr-2 text-indigo-500"></i>
+                            核心指标
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">工具调用精准率</span>
+                                <span class="english font-bold text-indigo-600">95%+</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">上下文优化</span>
+                                <span class="english font-bold text-indigo-600">60% ↓</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">任务完成率</span>
+                                <span class="english font-bold text-indigo-600">80%+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="compact-card rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">
+                            <i class="fas fa-map mr-2 text-indigo-500"></i>
+                            内容导航
+                        </h3>
+                        <nav class="space-y-2 text-sm">
+                            <a href="#paradigm" class="block py-2 px-3 rounded-lg hover:bg-indigo-50 font-semibold">认知升级</a>
+                            <a href="#workflow" class="block py-2 px-3 rounded-lg hover:bg-indigo-50 font-semibold">全流程实践</a>
+                            <a href="#principles" class="block py-2 px-3 rounded-lg hover:bg-indigo-50 font-semibold">核心原则</a>
+                            <a href="#framework" class="block py-2 px-3 rounded-lg hover:bg-indigo-50 font-semibold">框架思维</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content (8 columns) -->
+            <div class="lg:col-span-8 space-y-8">
+                
+                <!-- Overview -->
+                <div class="compact-card rounded-2xl p-8">
+                    <div class="text-6xl font-black text-indigo-500 mb-6">概述</div>
+                    <p class="text-xl font-semibold text-gray-800 leading-relaxed">
+                        本文系统梳理了 Anthropic 工程团队在为 AI 智能体打造工具时的实战心得。围绕<strong class="text-indigo-600">"工具应该如何为智能体而设计"</strong>，阐述了构建高效 MCP 工具的全过程。
+                    </p>
+                    <p class="text-lg text-gray-700 mt-4 leading-relaxed">
+                        核心结论：只有将工具体验紧密围绕智能体的行为模式和非确定性特性来定制，才能真正释放 AI 智能体解决复杂真实任务的潜力。
+                    </p>
+                </div>
+
+                <!-- Section 1: Paradigm Shift -->
+                <div id="paradigm" class="section-bg rounded-2xl p-8">
+                    <h2 class="text-4xl font-black text-gray-900 mb-6 flex items-center">
+                        <span class="text-5xl mr-4">1</span>
+                        认知升级：工具的新定义与设计范式
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-red-600 mb-3">
+                                <i class="fas fa-times-circle mr-2"></i>传统思维
+                            </h3>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 确定性系统设计</li>
+                                <li>• 为程序员编写 API</li>
+                                <li>• 固定格式输出</li>
+                                <li>• 相同输入必然输出</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-green-600 mb-3">
+                                <i class="fas fa-check-circle mr-2"></i>新范式
+                            </h3>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 为智能体量身定制</li>
+                                <li>• 拓展智能体任务边界</li>
+                                <li>• 顺应人类直觉</li>
+                                <li>• 拥抱非确定性响应</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="compact-card rounded-xl p-6 mt-6">
+                        <h3 class="text-xl font-bold text-indigo-600 mb-3">
+                            <i class="fas fa-lightbulb mr-2"></i>核心洞察
+                        </h3>
+                        <p class="text-lg text-gray-800 font-semibold">
+                            AI 智能体代表着高度非确定性的系统。工程师要抛弃"只为程序员或其他系统编写 API"的惯性思维，转向"为智能体量身定制"，承认和利用智能体可能产生多样化响应的本质。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Workflow -->
+                <div id="workflow" class="compact-card rounded-2xl p-8">
+                    <h2 class="text-4xl font-black text-gray-900 mb-6 flex items-center">
+                        <span class="text-5xl mr-4">2</span>
+                        从原型到优化：全流程实践
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-indigo-500 pl-6">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                                <i class="fas fa-rocket mr-2 text-indigo-500"></i>原型开发
+                            </h3>
+                            <ul class="tight-spacing text-lg text-gray-700 font-medium">
+                                <li>• 快速搭建本地 MCP 服务器或桌面扩展原型</li>
+                                <li>• 用 Claude Code 等 AI 辅助工具连接验证</li>
+                                <li>• 文档必须对 LLM 友好，组织成 llms.txt 文件</li>
+                                <li>• 用真实用户场景测试，捕捉"顺手"与"别扭"之处</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-purple-500 pl-6">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                                <i class="fas fa-chart-bar mr-2 text-purple-500"></i>体系化评估
+                            </h3>
+                            <ul class="tight-spacing text-lg text-gray-700 font-medium">
+                                <li>• 生成大量贴近真实业务的数据任务</li>
+                                <li>• 任务要具备复杂度（多步交互）</li>
+                                <li>• 基于 API、循环调用等自动化流程批量评估</li>
+                                <li>• 系统提示中要求输出推理思维链</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-6">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                                <i class="fas fa-sync-alt mr-2 text-green-500"></i>智能协作
+                            </h3>
+                            <ul class="tight-spacing text-lg text-gray-700 font-medium">
+                                <li>• 智能体批量分析原始交互记录</li>
+                                <li>• 自动发现工具定义中的问题</li>
+                                <li>• 多维追踪指标（精准率、耗时、token 消耗）</li>
+                                <li>• 持续"迭代-测试-调整"循环优化</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Principles -->
+                <div id="principles" class="section-bg rounded-2xl p-8">
+                    <h2 class="text-4xl font-black text-gray-900 mb-6 flex items-center">
+                        <span class="text-5xl mr-4">3</span>
+                        编写高效 MCP 工具的核心原则
+                    </h2>
+
+                    <div class="grid gap-6">
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-2xl font-bold text-indigo-600 mb-4">
+                                <i class="fas fa-target mr-2"></i>工具选择精细化
+                            </h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-3">不求多但求准</p>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 避免"泛用型大杂烩"，与高价值场景深度耦合</li>
+                                <li>• 优先按关键词检索的 search_contact，而非返回所有联系人</li>
+                                <li>• 复杂业务场景整合多步操作为"复合型"工具</li>
+                            </ul>
+                        </div>
+
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-2xl font-bold text-purple-600 mb-4">
+                                <i class="fas fa-layer-group mr-2"></i>命名空间策略
+                            </h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-3">明确功能边界</p>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 按业务线、功能系统分类</li>
+                                <li>• 统一前缀/后缀命名（asana_search、jira_search）</li>
+                                <li>• 避免功能重叠、边界模糊</li>
+                            </ul>
+                        </div>
+
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-2xl font-bold text-green-600 mb-4">
+                                <i class="fas fa-filter mr-2"></i>返回信息优化
+                            </h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-3">只给智能体"高价值"内容</p>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 放弃 uuid、256px_image_url 等晦涩字段</li>
+                                <li>• 优先返回 name、image_url、file_type 自然语言资源</li>
+                                <li>• 利用 response_format 枚举满足不同详细需求</li>
+                            </ul>
+                        </div>
+
+                        <div class="compact-card rounded-xl p-6">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-4">
+                                <i class="fas fa-compress-arrows-alt mr-2"></i>上下文管理
+                            </h3>
+                            <p class="text-lg font-semibold text-gray-800 mb-3">严格分段与引导策略</p>
+                            <ul class="tight-spacing text-gray-700 font-medium">
+                                <li>• 加分页、范围、过滤和默认参数</li>
+                                <li>• 设置上限防 token 过载</li>
+                                <li>• 返回"能被理解和修复的错误"</li>
+                                <li>• 引导智能体多步精确而非大范围抓取</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mid-Breaker Section -->
+    <section class="bg-indigo-600 text-white py-16 px-6 mt-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-5xl font-black mb-6">提示词工程的艺术</h2>
+                <p class="text-2xl font-semibold mb-8 max-w-4xl mx-auto">
+                    工具描述应像写给新同事一样"言简意赅"，所有依赖的背景知识必须写清楚，微调和完善描述能显著提升工具调用准确率和任务完成率。
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold english mb-2">95%+</div>
+                        <div class="text-xl font-semibold">调用精准率</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold english mb-2">60%↓</div>
+                        <div class="text-xl font-semibold">上下文优化</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold english mb-2">80%+</div>
+                        <div class="text-xl font-semibold">任务完成率</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div id="framework" class="compact-card rounded-2xl p-8">
+            <h2 class="text-4xl font-black text-gray-900 mb-8 flex items-center">
+                <span class="text-5xl mr-4">4</span>
+                框架与心智模型
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-indigo-600 mb-4">
+                        <i class="fas fa-sync mr-2"></i>以评估为驱动
+                    </h3>
+                    <p class="text-lg text-gray-800 font-semibold mb-4">
+                        让迭代升级成为工具开发核心
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        将评估环节变成开发流程的核心驱动力，每一次功能调整、描述升级、参数精简，都需要量化分析其对智能体效果的影响。只有持续不断评估与对比，才能锚定最优设计。
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-purple-600 mb-4">
+                        <i class="fas fa-handshake mr-2"></i>协作与自动化
+                    </h3>
+                    <p class="text-lg text-gray-800 font-semibold mb-4">
+                        释放智能体主动优化能力
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        将人类专家经验与 AI 智能体自动化协作结合，通过交互历史、指标分析、CoT 思维链等机制，补齐纯人工无法覆盖的盲点和冗余。
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-green-600 mb-4">
+                        <i class="fas fa-random mr-2"></i>拥抱非确定性
+                    </h3>
+                    <p class="text-lg text-gray-800 font-semibold mb-4">
+                        重视复杂多样的响应模式
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        AI 智能体对世界的理解和响应不是一成不变的。充分利用这一特点，打造出既能应对标准场景、又能灵活适配意外需求的"弹性工具"。
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-orange-600 mb-4">
+                        <i class="fas fa-globe mr-2"></i>真实世界导向
+                    </h3>
+                    <p class="text-lg text-gray-800 font-semibold mb-4">
+                        让智能体从容解决复杂问题
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        工程师应深刻理解智能体的非确定性特质，打造能够应对真实世界复杂需求的工具生态系统，让 AI 真正发挥解决实际问题的潜力。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Footer -->
+    <footer class="bg-gray-900 text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-4xl font-black mb-6">核心结论</h2>
+                <p class="text-2xl font-semibold mb-8 max-w-4xl mx-auto leading-relaxed">
+                    只有将工具体验紧密围绕智能体的行为模式和非确定性特性来定制，才能真正释放 AI 智能体解决复杂真实任务的潜力。
+                </p>
+                
+                <div class="border-t border-gray-700 pt-8 mt-12">
+                    <div class="grid md:grid-cols-3 gap-8 text-sm">
+                        <div>
+                            <div class="font-bold mb-2">
+                                <i class="fas fa-building mr-2 text-indigo-400"></i>
+                                Anthropic Engineering Team
+                            </div>
+                            <div class="text-gray-400">AI Safety & Research</div>
+                        </div>
+                        <div>
+                            <div class="font-bold mb-2">
+                                <i class="fas fa-link mr-2 text-indigo-400"></i>
+                                Original Source
+                            </div>
+                            <div class="text-gray-400 english">https://www.anthropic.com/</div>
+                        </div>
+                        <div>
+                            <div class="font-bold mb-2">
+                                <i class="fas fa-tags mr-2 text-indigo-400"></i>
+                                Keywords
+                            </div>
+                            <div class="text-gray-400 english">MCP, AI Agent, Tool Design</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
