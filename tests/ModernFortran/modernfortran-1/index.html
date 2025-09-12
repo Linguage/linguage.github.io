@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>《现代Fortran——创建高效并行应用》：第1章 介绍 Fortran - Linguage</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:url" content="http://localhost:1313/tests/modernfortran/modernfortran-1/">
+  <meta property="og:site_name" content="Linguage">
+  <meta property="og:title" content="《现代Fortran——创建高效并行应用》：第1章 介绍 Fortran">
+  <meta property="og:description" content="Linguage&#39;s Personal blog about everything">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="tests">
+    <meta property="article:published_time" content="2024-04-20T09:51:12+08:00">
+    <meta property="article:modified_time" content="2024-04-20T09:51:12+08:00">
+    <meta property="article:tag" content="Fortran">
+    <meta property="article:tag" content="图书">
+
+		
+  <meta itemprop="name" content="《现代Fortran——创建高效并行应用》：第1章 介绍 Fortran">
+  <meta itemprop="description" content="Linguage&#39;s Personal blog about everything">
+  <meta itemprop="datePublished" content="2024-04-20T09:51:12+08:00">
+  <meta itemprop="dateModified" content="2024-04-20T09:51:12+08:00">
+  <meta itemprop="wordCount" content="1103">
+  <meta itemprop="keywords" content="Fortran,图书">
+		
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="《现代Fortran——创建高效并行应用》：第1章 介绍 Fortran">
+  <meta name="twitter:description" content="Linguage&#39;s Personal blog about everything">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Linguage" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/Avatar5518800.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Linguage</div>
+					<div class="logo__tagline">Stars cannot be surpassed</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">What&#39;s Old</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/books/">
+				
+				<span class="menu__text">Reading</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/labs/">
+				
+				<span class="menu__text">Lab</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/static/">
+				
+				<span class="menu__text">Notes</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="https://linguista.bearblog.dev/blog/">
+				
+				<span class="menu__text">Linguista</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tests/%E5%85%B3%E4%BA%8E/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+		<li class="menu__item menu__item--active">
+			<a class="menu__link" href="/tests/">
+				
+				<span class="menu__text">博客功能测试</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/drafts/">
+				
+				<span class="menu__text">草稿箱</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">《现代Fortran——创建高效并行应用》：第1章 介绍 Fortran</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0a14 14 0 1 1 0 28 1 1 0 0 1 0-28m0 3a3 3 0 1 0 0 22 3 3 0 0 0 0-22m1 4h-2v8.4l6.8 4.4L22 18l-6-3.8z"/></svg><time class="meta__text" datetime="2024-04-20T09:51:12&#43;08:00">2024-04-20</time></div></div>
+		</header>
+		
+		<div class="content post__content clearfix">
+			<blockquote>
+</blockquote>
+<p><img src="../Figures_0/%E6%88%AA%E5%B1%8F2024-02-21%2016.25.34.png" alt="封面"></p>
+<h2 id="第-1-部分-开始学习现代-fortran">第 1 部分 开始学习现代 Fortran</h2>
+<p>在这一部分，你将品尝一下 Fortran，并初步了解这门语言。在第 1 章中，我们将讨论 Fortran 的设计和特性，以及适合使用 Fortran 的问题类型。你将了解到为什么并行编程很重要，以及何时应该使用它。在第 2 章中，我们将构建一个海啸模拟器的最小工作示例，这个示例将贯穿整本书。这个示例将让你初步了解 Fortran 的基本要素：变量声明、数据类型、数组、循环和分支。如果你是 Fortran 的新手，这是一个很好的开始。在本书的这一部分结束时，你将能够编写简单但实用的 Fortran 程序。更重要的是，你将准备好更深入地学习 Fortran 的基本要素。</p>
+<h2 id="第1章-介绍-fortran">第1章 介绍 Fortran</h2>
+<blockquote>
+<p><strong>本章内容包括</strong></p></blockquote>
+<blockquote>
+<ul>
+<li>什么是 Fortran 以及为什么要学习它？</li>
+<li>Fortran 的优势和劣势</li>
+<li>并行思维</li>
+<li>从零开始构建并行模拟应用程序</li>
+</ul></blockquote>
+<p>这是一本关于 Fortran 的书，它是历史上最早的高级编程语言之一。本书将通过逐步引导您开发一个功能齐全的并行物理模拟应用程序来教授您这种语言。请注意重点是并行化。并行编程允许您将问题分解成多个部分，并让多个处理器分别处理问题的一部分，从而在较短的时间内达到解决问题的目的。到最后，您将能够识别可以并行化的问题，并使用现代 Fortran 技术来解决它们。</p>
+<p>本书并不是每个 Fortran 特性的全面参考手册，我故意省略了语言的重要部分。相反，我专注于您用于构建实际 Fortran 应用程序的最实用的特性。随着我们逐章开发我们的应用程序，我们将应用现代 Fortran 特性和软件设计技术，使我们的应用程序强大、可移植、易于使用并且易于扩展。这不仅仅是一本关于 Fortran 的书；它是一本关于使用现代 Fortran 构建强大的并行软件的书。</p>
+<h3 id="11-什么是-fortran">1.1 什么是 Fortran？</h3>
+<blockquote>
+<p>“我不知道 2000 年的编程语言会是什么样子，但我知道它将被称为 Fortran。”</p>
+<p>—— 托尼·霍尔（Tony Hoare），1980 年图灵奖获得者</p></blockquote>
+<p>Fortran 是一种通用的、并行的编程语言，在科学和工程应用中表现出色。最初于 1957 年被称为 FORTRAN（FORmula TRANslation），经过数十年的发展，它已经成为一种稳健、成熟、面向高性能的编程语言。如今，Fortran 在许多我们视为理所当然的系统中仍然发挥作用：</p>
+<ul>
+<li>数值天气、海洋和浪涌预测</li>
+<li>气候科学和预测</li>
+<li>机械和土木工程中使用的计算流体力学软件</li>
+<li>用于设计汽车、飞机和航天器的空气动力学求解器</li>
+<li>机器学习框架使用的快速线性代数库</li>
+<li>对世界上最快的超级计算机进行基准测试( <a href="https://top500.org">https://top500.org</a> )</li>
+</ul>
+<p>以下是一个具体的例子。在我的工作中，我开发天气、海洋表面波和深海环流的数值模型。多年来，我发现大多数人不知道天气预报来自何处。他们以为气象学家会聚在一起，绘制明天、下周或一个月后天气将会如何的图表。这只是部分正确。实际上，我们使用复杂的数值模型，在仓库大小的计算机上进行大量的数据计算。这些模型模拟大气，以便对未来的天气做出合理的猜测。气象学家使用这些模型的输出来创建有意义的天气地图，就像图 1.1 中所示的那样。这张地图只显示了这个模型产生的所有数据中的一小部分。像这样的天气预报的输出大小以数百千兆字节计算。</p>
+<p>最强大的 Fortran 应用程序在数百或数千个 CPU 上并行运行。Fortran 语言及其库的开发在很大程度上是由于解决物理学、工程学和生物医学中极大规模计算问题的需求。为了获得比当时最强大的单台计算机更多的计算能力，在 20 世纪末，我们开始用高带宽网络连接多台计算机，让它们各自处理问题的一部分。结果就是超级计算机，一台由数千个普通 CPU 组成的庞大计算机（图 1.2）。超级计算机类似于由 Google 或 Amazon 托管的现代服务器农场，只是超级计算机的网络基础设施旨在最大化服务器之间的带宽，最小化延迟，而不是与外部世界之间的通信延迟。因此，超级计算机中的 CPU 就像一个由分布式内存访问组成的巨大处理器，其速度几乎与本地内存访问一样快。直到今天，Fortran 仍然是用于这种大规模并行计算的主要语言。</p>
+<p><img src="../Figures_1/Figure_1_1.png" alt="图1.1 "></p>
+<blockquote>
+<p><strong>图 1.1</strong> 2017年9月10日飓风艾尔玛的预报，由用Fortran编写的操作性天气预报模型计算得出。阴影和风羽显示的是米每秒的地表风速，等高线是海平面气压等线。典型的天气预报是使用数百或数千个 CPU 并行计算得出的。（数据由美国国家环境预报中心（NCEP）提供）</p></blockquote>
+<p><img src="../Figures_1/Figure_1_2.png" alt="图1.2"></p>
+<blockquote>
+<p><strong>图 1.2</strong> 巴塞罗那超级计算中心的 MareNostrum 4 超级计算机。该计算机位于西班牙加泰罗尼亚巴塞罗那的托雷吉罗纳教堂内。高速网络将所有机柜连接在一起。MareNostrum 4 拥有 153,216 个英特尔至强处理器核心，截至 2020 年 6 月，是西班牙最快的超级计算机，全球排名第 37。（来源： <a href="https://www.top500.org/lists/2020/06">https://www.top500.org/lists/2020/06</a> ）。它被用于许多科学应用领域，从天体物理学和材料物理学，到气候和大气扬尘传输预测，再到生物医学。（图片来源：https://www.bsc.es/marenostrum/marenostrum ）</p></blockquote>
+<h3 id="12-fortran特性">1.2 Fortran特性</h3>
+<blockquote>
+<p>这可不是你父辈的Fortran。</p>
+<p>—— Damian Rouson</p></blockquote>
+<p>在编程语言的语境下，Fortran具有以下所有特点：</p>
+<ul>
+<li><em><strong>编译型</strong></em> &mdash; 你会编写完整的程序并在执行之前将它们传递给编译器。这与解释型编程语言（如Python或JavaScript）形成对比，后者逐行解析和执行代码。尽管这使得编写程序有些繁琐，但它允许编译器生成高效的可执行代码。在典型的使用情况下，Fortran程序的运行速度往往比等价的Python程序快一个或两个数量级。</li>
+</ul>
+<blockquote>
+<p><strong>编译器是什么？</strong>
+编译器是一种计算机程序，它读取用一种编程语言编写的源代码，并将其转换为另一种编程语言中的等价代码。在我们的情况下，一个Fortran编译器将读取Fortran源代码，并生成适当的汇编代码和机器（二进制）指令。</p></blockquote>
+<ul>
+<li>
+<p><em><strong>静态类型</strong></em> &mdash; 在Fortran中，您将使用类型声明所有变量，并且它们将保持该类型直到程序结束：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#75715e">! 在使用之前必须声明 pi。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">real</span> <span style="color:#66d9ef">::</span> pi
+</span></span><span style="display:flex;"><span><span style="color:#75715e">! 程序结束前，pi保持为实数。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>pi <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.141592</span>
+</span></span></code></pre></div><p>您还需要在使用变量之前明确声明它们，这被称为显式类型声明。最后，Fortran采用所谓的强类型，这意味着如果使用错误类型的参数调用过程，编译器将引发错误。虽然静态类型有助于编译器生成高效的程序，显式类型声明和强类型执行良好的编程习惯，使Fortran成为一种安全的语言。我发现编写正确的Fortran程序比Python或Javascript更容易，后者带有许多隐藏的注意事项和“陷阱”。</p>
+</li>
+<li>
+<p><em><strong>多范式</strong></em> &mdash; 您可以使用几种不同的范式或风格编写Fortran程序：命令式、过程式、面向对象，甚至函数式。根据您要解决的问题，某些范式可能比其他范式更合适。我们将在整本书的编写过程中探讨不同的范式。</p>
+</li>
+<li>
+<p><em><strong>并行</strong></em> &mdash; Fortran也是一种并行语言。并行性是将计算问题分配给通过网络进行通信的进程的能力。并行进程可以在相同的处理核心上运行（基于线程的并行）、在共享RAM的不同核心上运行（共享内存并行）或分布在网络上（分布式内存并行）。在同一个并行程序上共同工作的计算机可以物理上位于同一个机柜中、彼此之间隔着房间，甚至遍布世界各地。Fortran的主要并行结构是共存数组，它允许您表达并行算法和远程数据交换而无需任何外部库。共存数组允许您像访问数组元素一样访问远程内存，如下列程序所示:</p>
+<blockquote>
+<p><strong>程序1.1</strong> 并行图像之间的数据交换示例</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">program</span> hello_coarrays
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">none</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 每个图像声明一个整数“a”的本地副本。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> a[<span style="color:#f92672">*</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> i
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 每个图像将其编号（1、2、3 等）赋给“a”。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a <span style="color:#f92672">=</span> this_image()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (this_image() <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">then</span>     <span style="color:#75715e">! 只有图像 1 会进入此 if 块。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">do</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, num_images()      <span style="color:#75715e">! 从 1 迭代到图像的总数。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">! 对于每个远程图像，图像 1 将获取该图像上的“a”值并将其打印到屏幕上。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">print</span> <span style="color:#f92672">*</span>, <span style="color:#e6db74">&#39;Value on image&#39;</span>, i, <span style="color:#e6db74">&#39;is&#39;</span>, a[i]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#66d9ef">program</span> hello_coarrays
+</span></span></code></pre></div><p>Fortran标准并不规定数据交换在底层是如何实现的；它仅仅规定语法和期望的行为。这使得编译器开发人员可以在任何特定硬件上使用最佳方法。有了一款功能强大的编译器和库，Fortran程序员可以编写能在传统CPU或通用GPU上运行的代码。列表1.1仅供说明；然而，如果您想编译并运行它，请在按照附录A中的说明设置您的Fortran开发环境之后再这样做。</p>
+</li>
+<li>
+<p><em><strong>成熟</strong></em> &mdash; 2016年，我们庆祝Fortran诞生60周年。这门语言经历了几个标准的修订：– FORTRAN 66，也称为FORTRAN IV（ANSI，1966年）– FORTRAN 77（ANSI，1978年）– Fortran 90（ISO/IEC，1991年；ANSI，1992年）– Fortran 95（ISO/IEC，1997年）– Fortran 2003（ISO/IEC，2004年）– Fortran 2008（ISO/IEC，2010年）– Fortran 2018（ISO/IEC，2018年）Fortran在编译器的开发和实现方面得到了工业界的大力支持：IBM、Cray、Intel、NAG、NVIDIA等等。还有相当多的开源开发，其中最著名的是自由编译器gfortran( <a href="https://gcc.gnu.org/wiki/GFortran">https://gcc.gnu.org/wiki/GFortran</a> )、Flang ( <a href="https://github.com/flangcompiler/flang">https://github.com/flangcompiler/flang</a> )和LFortran ( <a href="https://lfortran.org">https://lfortran.org</a> )，以及其他社区项目（ <a href="https://fortran-lang.org/community">https://fortran-lang.org/community</a> ）。由于Fortran在计算机科学的早期占据主导地位，今天我们拥有了庞大而成熟的库，这些库是许多应用程序的计算基础。凭借成熟的编译器和庞大的遗留代码库，Fortran仍然是许多新软件项目的首选语言，特别是对于那些计算效率和并行执行至关重要的项目。</p>
+</li>
+<li>
+<p><em><strong>易于学习</strong></em> &mdash; 信不信由你，Fortran 实际上相当容易学习。这是我和许多同事的经验。Fortran易学部分归功于其严格的类型系统，这使得编译器能够在编译时检查程序员并在他们犯错时发出警告。虽然冗长，但语法清晰易读。然而，就像其他编程语言或一般技能一样，掌握Fortran是困难的。这也是我选择写这本书的原因之一。</p>
+</li>
+</ul>
+<h3 id="13-为什么学习fortran">1.3 为什么学习Fortran？</h3>
+<blockquote>
+<p>五千年前，人类离开地球之前就有人编写了这些程序。Sura说，这件事的奇迹——也是可怕之处——是与堪培拉过去的无用废墟不同，这些程序仍然能够运行！通过无数的继承线索，许多最古老的程序仍然在Qeng Ho系统的深处运行。
+——沃纳·温奇，《天空深处》</p></blockquote>
+<p>自上世纪90年代初以来，我们看到了新的编程语言和框架的爆发式增长，主要是由互联网的广泛使用和后来的移动设备推动的。C++占领了计算机科学部门，Java在企业中备受推崇，JavaScript重新定义了现代网络，R成为了统计学家的母语，Python在机器学习领域大放异彩。在所有这些中，Fortran在哪里？通过对语言的稳步修订，Fortran在其特定领域高性能计算（HPC）中保持了牢固的地位。其计算效率仍然是无与伦比的，只有C和C++接近。与C和C++不同，Fortran专为数组计算而设计，并且，在我看来，学习和编程要容易得多。最近，Fortran的另一个有力论据是其原生支持并行编程。</p>
+<blockquote>
+<p><strong>什么是高性能计算？</strong></p>
+<p>高性能计算（HPC）是将计算机资源组合起来解决计算问题的实践，这些问题在单个台式计算机上通常无法实现。HPC系统通常聚合了数百或数千台服务器，并通过快速网络连接它们。今天大多数HPC系统都运行某种版本的Linux操作系统。</p></blockquote>
+<p>尽管 Fortran 是几十年前的技术，但它具有一些吸引人的特性，使其不可或缺，甚至与更近期的语言相比也是如此：</p>
+<ul>
+<li>
+<p><em><strong>面向数组</strong></em> &mdash; Fortran 提供整个数组的算术和操作，大大简化了逐元素操作。考虑将两个二维数组相乘的任务：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">do</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, jm
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, im
+</span></span><span style="display:flex;"><span>        c(i,j) <span style="color:#f92672">=</span> a(i,j) <span style="color:#f92672">*</span> b(i,j)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#66d9ef">do</span>
+</span></span></code></pre></div><p>使用 Fortran 的整个数组算术，你可以写成 <code>c = a * b</code>。这不仅是更具表达力和可读性的代码，还提示编译器可以选择最佳的执行方式。数组很适合 CPU 架构和计算机内存，因为它们是连续的数字序列，因此反映了内存的物理布局。由于编译器可以安全地做出假设，Fortran 编译器能够生成极其高效的机器代码。</p>
+</li>
+<li>
+<p><em><strong>唯一由标准委员会（ISO）开发的并行语言</strong></em> &mdash; Fortran 标准委员会确保 Fortran 的发展符合其目标受众的方向：计算科学家和工程师。</p>
+</li>
+<li>
+<p><em><strong>成熟的科学、工程和数学库</strong></em> &mdash; Fortran 在 1950 年代作为科学、工程和数学的编程语言开始。几十年后，我们拥有了丰富的线性代数、数值微分和积分以及其他数学问题的健壮且值得信赖的库的遗产。这些库已经被几代程序员使用和测试过，以至于它们几乎没有错误。</p>
+</li>
+<li>
+<p><em><strong>日益增长的通用库生态系统</strong></em> &mdash; 在过去的十年里，Fortran 也看到了通用库生态系统的不断增长：文本解析和操作、许多数据格式的 I/O 库、处理日期和时间、集合和数据结构等等。任何编程语言的强大程度取决于其库，而不断增长的 Fortran 库数量使其比以往任何时候都更加有用。</p>
+</li>
+<li>
+<p><em><strong>无与伦比的性能</strong></em> &mdash; 编译后的 Fortran 程序与高级编程语言一样接近底层。这得益于它的面向数组的设计和成熟的编译器，后者不断改进以优化代码。如果你正在处理大数组的数学问题，很少有其他语言能与 Fortran 的性能相提并论。</p>
+</li>
+</ul>
+<p>总之，如果您需要在大型多维数组上实现高效的并行数值操作，请学习 Fortran。</p>
+<h3 id="14-优缺点">1.4 优缺点</h3>
+<p>Fortran具有许多特性，既有优势又有劣势。例如，它具备以下特点：</p>
+<ul>
+<li>一种特定领域的语言 — 尽管从技术上讲Fortran是一种通用编程语言，但它在很大程度上是一种特定领域的语言，意味着它专门为科学、工程和数学应用而设计。如果您的问题涉及对大型结构化数组进行一些算术运算，那么Fortran将发挥其优势。但如果您想编写网络浏览器或低级设备驱动程序，则Fortran并不是完成任务的正确工具。</li>
+<li>一种小众语言 — Fortran对于相对较少的人群非常重要：特定学科的科学家和工程师。因此，可能很难找到关于Fortran的教程或博客，这方面的资源比起更主流的编程语言要少得多。</li>
+<li>一种静态且强类型的语言 — 正如我之前提到的，这使得Fortran成为一种非常安全的编程语言，并帮助编译器生成高效的可执行文件。但另一方面，这也使得它的灵活性较差，代码较为冗长，因此并不是快速原型设计的理想语言。</li>
+</ul>
+<p>接下来将对Fortran与Python进行比较，以帮助您更好地理解它在通用编程环境中的优缺点。</p>
+<h4 id="141-与-python-的并排比较">1.4.1 与 Python 的并排比较</h4>
+<p>现代 Fortran 与最近的通用编程语言相比如何？过去几年中，Python 在数据分析和轻量级数值计算方面的生态系统增长最为迅速（ <a href="http://mng.bz/XP71">http://mng.bz/XP71</a> ）。许多 Fortran 程序员用它来进行模型输出后处理和数据分析。事实上，Python 是我第二喜欢的编程语言。由于 Fortran 和 Python 的应用领域重叠，总结两者之间的关键差异是有用的，如表 1.1 所示。如果你是 Python 程序员，这份摘要将让你了解你在 Fortran 中可以做什么，以及不能做什么。</p>
+<blockquote>
+<p><strong>表1.1</strong> Fortran 和 Python（特指 CPython）的比较</p></blockquote>
+<table>
+  <thead>
+      <tr>
+          <th>语言</th>
+          <th>Fortran</th>
+          <th>Python</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>首次出现</td>
+          <td>1957</td>
+          <td>1991</td>
+      </tr>
+      <tr>
+          <td>最新发布</td>
+          <td>Fortran 2018</td>
+          <td>3.8.5 (2020)</td>
+      </tr>
+      <tr>
+          <td>国际标准</td>
+          <td>ISO/IEC</td>
+          <td>无</td>
+      </tr>
+      <tr>
+          <td>实现语言</td>
+          <td>C、Fortran、Assembly（依赖于编译器）</td>
+          <td>C</td>
+      </tr>
+      <tr>
+          <td>编译 vs. 解释</td>
+          <td>编译</td>
+          <td>解释</td>
+      </tr>
+      <tr>
+          <td>类型体系</td>
+          <td>静态、强类型</td>
+          <td>动态、强类型</td>
+      </tr>
+      <tr>
+          <td>并行</td>
+          <td>共享和分布式内存</td>
+          <td>仅共享内存</td>
+      </tr>
+      <tr>
+          <td>多维数组</td>
+          <td>是，最多15维</td>
+          <td>是，但仅作为第三方库（numpy）的一部分使用</td>
+      </tr>
+      <tr>
+          <td>内置类型</td>
+          <td>字符串、复数、整数、逻辑、实数</td>
+          <td>布尔型、字节数组、字节、复数、字典、省略号、浮点数、不可变集合、整数、列表、集合、字符串、元组</td>
+      </tr>
+      <tr>
+          <td>常量</td>
+          <td>是</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>类</td>
+          <td>是</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>泛型编程</td>
+          <td>有限</td>
+          <td>有</td>
+      </tr>
+      <tr>
+          <td>纯函数</td>
+          <td>是</td>
+          <td>否</td>
+      </tr>
+      <tr>
+          <td>高阶函数</td>
+          <td>有限</td>
+          <td>有</td>
+      </tr>
+      <tr>
+          <td>匿名函数</td>
+          <td>否</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>与其他语言的互操作性</td>
+          <td>有限</td>
+          <td>有限</td>
+      </tr>
+      <tr>
+          <td>操作系统接口</td>
+          <td>有限</td>
+          <td>是</td>
+      </tr>
+      <tr>
+          <td>异常处理</td>
+          <td>有限</td>
+          <td>是</td>
+      </tr>
+  </tbody>
+</table>
+<p>从表 1.1 中，Fortran 和 Python 之间存在一些关键区别。首先，Fortran 是编译型且静态类型的，而 Python 是解释型且动态类型的。这使得 Fortran 编写起来更加冗长，速度较慢，但允许编译器生成快速的二进制代码。这既是一种福音也是一种诅咒：Fortran 不适合快速原型开发，但可以生成健壮而高效的程序。其次，Fortran 是一种原生的并行编程语言，其语法允许您编写独立于是否在共享内存或分布式内存计算机上运行的并行代码。相比之下，Python 中的分布式并行编程只能通过外部库实现，并且总体上更加困难。最后，Fortran 是一种更小的语言，专注于对几种不同数值数据类型的大型多维数组进行有效计算。另一方面，Python 拥有更广泛的数据结构、算法和通用实用工具。</p>
+<p>总之，Python 类似于一个全面灵活的工具箱，而 Fortran 则像是一种高度专业化的强大工具。因此，Fortran 不适合编写设备驱动程序、视频游戏或 Web 浏览器。然而，如果您需要解决可以在多台计算机上分布的大型数值问题，则 Fortran 是您的理想选择。</p>
+<h3 id="15-并行fortran的例证">1.5 并行Fortran的例证</h3>
+<p>我将以一个问题来说明Fortran真正发挥作用的情况。我们将这个例子称为“夏天结束了，老拉尔夫的农场”。</p>
+<p>农民拉尔夫有两个儿子和两个女儿，还有一个大农场。夏天快结束了，是时候割草，为牛做干草吃了。但牧场很大，老拉尔夫身体虚弱。然而，他的孩子们年轻而强壮。如果他们团结一致，共同努力，他们一天就能完成。他们决定平均分配工作量，将工作分成四份。拉尔夫的每个孩子拿着镰刀和叉子走向牧场的各个部分。他们努力工作，一排一排地割草。大约每隔一个小时，他们在边缘会合，磨削工具并聊聊天。工作进展顺利，到了下午中期，几乎所有的草都被割下来了。在一天结束时，他们把干草捆成一捆捆，带到谷仓里。老拉尔夫为自己拥有强壮而勤劳的孩子感到高兴，更高兴的是，他们组成了这么出色的团队！他们一起工作，完成了如果只有其中一个人工作的话需要四倍时间才能完成的工作。</p>
+<p>现在你一定在想，老拉尔夫的农场与并行Fortran编程有什么关系？我可以告诉你，事情远不止表面看到的那样！老拉尔夫和他的大牧场类似于一台慢速计算机和一个大型计算问题。就像拉尔夫要求孩子们帮他做家务一样，在典型的并行问题中，我们将计算域或输入数据分成相等的部分，并在CPU之间进行分配。回想一下，他的孩子们一排一排地割草，Fortran代码中一些最有效和表达力强的部分就是整体数组操作和算术运算。定期，他们会在边缘相遇，磨削工具并交谈。在许多现实世界的应用程序中，您将指示并行进程交换数据，这对我在本书中将引导您的大多数并行示例都是真实的。最后，每个并行进程异步将其数据写入磁盘，就像把干草捆带到谷仓一样。我在图1.3中展示了这种模式。</p>
+<p><img src="../Figures_1/Figure_1_3.png" alt=""></p>
+<blockquote>
+<p><strong>图1.3</strong> 并行编程模式：分割问题、交换数据、计算，并将结果存储到磁盘</p></blockquote>
+<h3 id="16-本书将教你什么">1.6 本书将教你什么？</h3>
+<p>本书将教你如何编写现代、高效和并行的Fortran程序。逐章阅读，我们将从零开始构建一个完全功能的、并行的流体动力学求解器，特别应用于海啸预测。如果你按照本书学习，你将获得三种不同的技能：</p>
+<ul>
+<li>你将熟练掌握大多数现代Fortran特性。这是一个独特且令人渴望的技能，在高性能计算（HPC）这个价值数十亿美元的行业中尤为重要。</li>
+<li>你将能够识别本质上是并行的问题。你会优先考虑并行，对问题的并行解决方案会显得很直观。相比之下，串行解决方案将成为边缘情况。</li>
+<li>你将掌握良好的软件设计、编写可重用代码和与在线社区分享项目的技能。你还将能够在项目中使用现有的Fortran库，并做出贡献。这不仅会使你的项目对他人有用，还可以为你的职业和学习机会打开大门。这对我来说也是如此！</li>
+</ul>
+<p>虽然我不指望你具有Fortran的先验经验，但我假设你至少具有Python、R、MATLAB或C等语言的一些编程经验。我们不会详细讨论什么是程序、变量、数据类型、源代码或计算机内存，我会假设你对这些概念有一定的了解。偶尔，我们会涉及到微积分的一些元素，但你不一定要熟悉它。我们也会在终端中进行大量操作（编译和运行程序），所以我假设你至少能够舒适地操作命令行。无论如何，为了确保清晰，本书中的任何Fortran概念都将从零开始教授。</p>
+<p>考虑到本书的主题，我预计它将非常适合以下几类读者：</p>
+<ul>
+<li>物理科学、工程学或应用数学的本科和研究生学生，尤其是专注于流体动力学的学生</li>
+<li>上述领域的教师和研究人员</li>
+<li>气象学家、海洋学家和其他在工业领域工作的流体动力学家</li>
+<li>希望提升并行编程能力的串行Fortran程序员</li>
+<li>高性能计算系统管理员</li>
+</ul>
+<p>如果你属于上述任何一类，你可能已经知道Fortran的主要优点是其编写高效并行程序的简易性，特别是针对大型超级计算机。这使得它成为了物理科学和工程领域主导的HPC语言。尽管本书将从零开始教授Fortran，但我还会采取非传统的方法，从并行编程的角度进行教学。你将学会如何进行并行思考，而不仅仅是获得另一种技术技能。你将认识到如何分配工作负载和内存以更有效地解决问题。通过并行思考，你将获得两个关键优势：</p>
+<ol>
+<li>你将能够在更短的时间内解决问题。</li>
+<li>你将能够解决无法在单台计算机上完成的问题。</li>
+</ol>
+<p>尽管第一个优势至少是一个好处，但第二个优势是至关重要的。一些问题简单地无法在没有并行编程的情况下解决。下一节将为你提供一个简要介绍并示例并行编程。</p>
+<h3 id="17-深思并行">1.7 深思并行！</h3>
+<blockquote>
+<p>十多年来，先知们声称，单个计算机的组织已经达到了极限，只有通过多台计算机的相互连接，才能取得真正重大的进展，从而允许协同解决问题。
+——Gene Amdahl（计算机架构师）于1967年</p></blockquote>
+<p>随着时间的推移，并行编程变得愈发重要。尽管摩尔定律描述的半导体密度增长率仍然是正向的，但存在着限制。传统上，我们通过在单个芯片上放置更多的处理核心来超越这个限制。即使是今天大多数智能手机中的处理器也是多核的。除了共享内存计算机，我们还将许多计算机连接成网络，并让它们相互通信以解决巨大的计算问题。你今天早上的天气预报是在数百或数千个并行处理器上计算的。由于摩尔定律的实际限制和当前向多核架构的趋势，有一种迫切的感觉要首先教授并行编程。</p>
+<blockquote>
+<p><strong>摩尔定律是什么？</strong></p></blockquote>
+<blockquote>
+<p>戈登·摩尔（Gordon Moore）是英特尔的联合创始人，他在1965年注意到CPU中的晶体管数量每年都在翻倍。后来，他修正了这一趋势，改为每两年翻倍一次。然而，增长率是指数级的，与计算机成本持续降低密切相关。你今天花1000美元购买的计算机大约是两年前同样价格的计算机的两倍强大。</p>
+<p>同样，当你购买一部新的智能手机时，操作系统和应用程序运行流畅迅速。两年后会发生什么？随着应用程序的更新和新增功能的膨胀，它们需要越来越多的CPU计算能力和内存。由于你手机中的硬件保持不变，最终应用程序会变得运行缓慢。</p></blockquote>
+<p>所有并行问题可以分为两类：</p>
+<ol>
+<li>尴尬并行 — 我指的是“尴尬地简单” — 这是一件好事！这些问题可以在处理器之间分配，几乎不需要任何努力（图1.4，左侧）。任何对数组x进行逐元素操作的函数f(x)，而无需元素之间的通信，都是尴尬并行的。由于尴尬并行问题的域分解是微不足道的，现代编译器通常可以自动并行化这样的代码。示例包括渲染图形、提供静态网站或处理大量独立数据记录。</li>
+<li>非尴尬并行 — 任何具有进程间依赖关系的并行问题都需要通信和同步（图1.4，右侧）。大多数偏微分方程求解器都是非尴尬并行的。相对通信量与计算量的比例决定了一个并行问题的扩展性。因此，大多数物理求解器的目标是尽量减少通信并最大化计算。示例包括天气预测、分子动力学和任何由偏微分方程描述的物理过程。这类并行问题更加困难，而且我认为更有趣！</li>
+</ol>
+<p><img src="../Figures_1/Figure_1_4.png" alt=""></p>
+<blockquote>
+<p><strong>图1.4</strong> 一个尴尬并行问题（左侧）与一个非尴尬并行问题（右侧）。在两种情况下，CPU接收输入（x₁，x₂）并处理它以产生输出（y₁，y₂）。在尴尬并行问题中，x₁和x₂可以独立处理。此外，输入和输出数据对于每个CPU在内存中都是本地的，用实箭头表示。在非尴尬并行问题中，输入数据并非总是对于每个CPU在内存中都是本地的，并且必须通过网络进行分发，用虚线箭头表示。此外，在计算步骤中，CPU之间可能存在数据依赖关系，需要同步（水平虚线箭头）。</p></blockquote>
+<blockquote>
+<p><strong>为什么称其为“尴尬并行”？</strong></p>
+<p>这个术语源自于过多的情况，就像拥有太多财富一样。这是一种你希望拥有的问题。这个术语被归功于MATLAB的发明者之一、EISPACK和LINPACK的作者之一Cleve Moler。LINPACK仍然用于评估世界上最快超级计算机的性能。</p></blockquote>
+<p>因为我们的应用领域主要涉及非尴尬并行问题，我们将专注于以清晰、表达力强和最简化的方式实现并行数据通信。这将涉及将输入数据分发给处理器（图1.4中的向下虚线箭头）以及在它们之间通信数据（图1.4中的水平虚线箭头）。</p>
+<p>过去的并行Fortran编程主要是使用OpenMP指令用于仅限共享内存计算机，或者使用消息传递接口(MPI)用于既有共享内存又有分布式内存的计算机。共享内存（SM）和分布式内存（DM）系统之间的区别如图1.5所示。SM系统的主要优势是进程之间通信的延迟非常低。然而，在SM系统中，你可以拥有的处理核心数量是有限的。由于OpenMP专门设计用于SM并行编程，我们将专注于MPI来进行我们的特定示例。</p>
+<p><img src="../Figures_1/Figure_1_5.png" alt=""></p>
+<blockquote>
+<p><strong>图 1.5</strong> 共享内存系统（左）与分布式内存系统（右）的对比。在共享内存系统中，处理器可以访问公共内存（RAM）。在分布式内存系统中，每个处理器都有自己的内存，并且它们通过网络进行数据交换，用虚线表示。分布式内存系统通常由多核共享内存系统组成。</p></blockquote>
+<blockquote>
+<p><strong>OpenMP与MPI的比较</strong></p></blockquote>
+<blockquote>
+<p>OpenMP是一组指令，允许程序员指示编译器并行化的代码部分。大多数Fortran编译器都实现了OpenMP，并且不需要外部库。然而，OpenMP仅限于共享内存机器。</p>
+<p>消息传递接口（MPI）是一种用于在任意远程进程之间传递消息（复制数据）的标准化规范。这意味着MPI可用于单核上的多线程处理，共享内存机器上的多核处理，或跨网络的分布式内存编程。MPI实现通常提供C、C++和Fortran的接口。MPI通常被描述为并行编程的汇编语言，说明大多数MPI操作都是低级的。</p>
+<p>尽管在HPC中仍然普遍存在，但OpenMP和MPI是并行计算的特定方法，可以更优雅地使用共数组（Coarrays）来表达。本书将专注于使用共数组进行并行编程。</p></blockquote>
+<h4 id="171-将数组从一个处理器复制到另一个处理器">1.7.1 将数组从一个处理器复制到另一个处理器</h4>
+<p>在大多数科学和工程并行应用中，处理之间存在数据依赖关系。通常，二维数组被分解成类似棋盘的瓦片，每个瓦片的工作负载被分配给一个处理器。每个瓦片在内存中都有自己的数据，这些数据对其处理器是本地的。为了说明在现实世界情景中并行编程的最简单情况，让我们以以下气象情景为例。假设数据包含两个变量：风和温度。风从一个温度较低的瓦片（冷瓦片）向另一个温度较高的瓦片（暖瓦片）吹。如果我们要解决温度随时间变化的问题，那么暖瓦片需要知道从冷瓦片中随风而来的温度是多少。因为这事先是未知的（记住数据对每个瓦片是本地的），我们需要将来自冷瓦片的数据复制到属于暖瓦片的内存中。在最低层次上，这是通过显式将数据从一个处理器复制到另一个处理器来完成的。当复制完成后，处理器可以继续进行剩余的计算。将一个或多个值从一个进程复制到另一个进程是并行编程中最常见的操作之一(如图1.6所示）。</p>
+<p><img src="../Figures_1/Figure_1_6.png" alt=""></p>
+<blockquote>
+<p><strong>图 1.6</strong> 在两个 CPU 之间进行远程数组复制的示意图。方框内的数字表示初始 <code>array</code> 的值。我们的目标是将来自 CPU 1 的数组值复制到 CPU 2。</p></blockquote>
+<p>让我们专注于这一个操作。我们的目标是执行以下步骤：</p>
+<ol>
+<li>在每个处理器上初始化数组 — 在 CPU 1 上为 [1, 2, 3, 4, 5]，在 CPU 2 上为全零。</li>
+<li>将数组的值从 CPU 1 复制到 CPU 2。</li>
+<li>在 CPU 2 上打印数组的新值。这些应该是 [1, 2, 3, 4, 5]。</li>
+</ol>
+<p>我将向您展示两种解决此问题的示例方法。一种是传统方法，使用类似 MPI 的外部库。除非您是有一定经验的 Fortran 程序员，否则不要试图理解此示例中的每个细节。我只是想演示它有多么复杂和冗长。然后，我会向您展示使用共组数组的解决方案。与 MPI 相比，共组数组使用类似数组索引的语法来在并行处理过程之间复制远程数据。</p>
+<h5 id="mpi传统的并行编程方法">MPI：传统的并行编程方法</h5>
+<p>正如前面所述，MPI经常被描述为并行编程的汇编语言，事实上，这是它的开发者最初的意图。MPI旨在由编译器开发人员实现，以启用原生并行编程语言。然而，在过去的三十年中，应用程序开发人员更快地直接在其程序中采用了MPI，并且它已经成为Fortran、C和C++中并行编程的事实标准工具，不管是好是坏。因此，今天大多数HPC应用程序依赖于低级别的MPI调用。</p>
+<blockquote>
+<p><strong>程序1.2</strong> 使用 MPI 将数组从一个进程复制到另一个进程</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">program</span> array_copy_mpi
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">use</span> mpi
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">none</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> ierr, nproc, procsize, request
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> stat(mpi_status_size)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> <span style="color:#66d9ef">array</span>(<span style="color:#ae81ff">5</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span>, <span style="color:#66d9ef">parameter</span> <span style="color:#66d9ef">::</span> sender <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, receiver <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 初始化 MPI
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> mpi_init(ierr)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 我是哪个处理器编号？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> mpi_comm_rank(mpi_comm_world, nproc, ierr)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 有多少个进程？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> mpi_comm_size(mpi_comm_world, procsize, ierr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 如果我们不在两个处理器上运行，则关闭 MPI 并停止程序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (procsize <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">call</span> mpi_finalize(ierr)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">stop</span> <span style="color:#e6db74">&#39;Error: This program must be run &amp; on 2 parallel processes&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 在发送进程上初始化数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (nproc <span style="color:#f92672">==</span> sender) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">array</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 使用特定格式向屏幕打印文本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;(a,i1,a,5(4x,i2))&#39;</span>, <span style="color:#e6db74">&#39;array on proc &#39;</span>, nproc, &amp;
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39; before copy:&#39;</span>, <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 在此等待两个进程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> mpi_barrier(mpi_comm_world, ierr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nproc <span style="color:#f92672">==</span> sender) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 发送者发布非阻塞发送
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">call</span> mpi_isend(<span style="color:#66d9ef">array</span>, size(<span style="color:#66d9ef">array</span>), mpi_int, &amp;
+</span></span><span style="display:flex;"><span>            receiver, <span style="color:#ae81ff">1</span>, mpi_comm_world, request, ierr)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nproc <span style="color:#f92672">==</span> receiver) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 接收者发布非阻塞接收
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">call</span> mpi_irecv(<span style="color:#66d9ef">array</span>, size(<span style="color:#66d9ef">array</span>), mpi_int, &amp;
+</span></span><span style="display:flex;"><span>            sender, <span style="color:#ae81ff">1</span>, mpi_comm_world, request, ierr)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 接收者等待消息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">call</span> mpi_wait(request, stat, ierr)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;(a,i1,a,5(4x,i2))&#39;</span>, <span style="color:#e6db74">&#39;array on proc &#39;</span>, nproc, &amp;
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39; after copy: &#39;</span>, <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 程序结束时终止 MPI
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">call</span> mpi_finalize(ierr)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#66d9ef">program</span> array_copy_mpi
+</span></span></code></pre></div><p>在两个处理器上运行此程序将输出如下内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">0</span> before copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">1</span> before copy: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">0</span> after copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">1</span> after copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span></code></pre></div><p>这证实了我们的程序达到了我们想要的效果：将数组从进程 0 复制到进程 1。</p>
+<blockquote>
+<p><strong>编译和运行示例</strong></p></blockquote>
+<blockquote>
+<p>目前不必担心自行构建和运行这些示例。在下一章的开头，我会要求您设置完整的计算环境，以便使用本书中的示例，包括这个示例。如果您愿意，您现在就可以按照附录 A 中的说明操作，而不必等待。</p></blockquote>
+<h5 id="进入fortran共数组coarrays">进入Fortran共数组(COARRAYS)</h5>
+<p>共数组(Coarrays)是Fortran中本地并行编程的主要数据结构。最初由Robert Numrich和John Reid在1990年代开发，作为Cray Fortran编译器的扩展，共数组已经从2008年版本开始被引入到标准中。共数组与数组非常相似，正如其名称所暗示的那样，不同之处在于它们的元素沿着并行进程（核心或线程）的轴分布。因此，它们提供了一种直观的方式来在远程进程之间复制数据。</p>
+<p>以下程序显示了我们数组复制示例的共数组版本。</p>
+<blockquote>
+<p><strong>程序 1.3</strong> 使用共数组将数组从一个进程复制到另一个进程</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">program</span> array_copy_caf
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">implicit</span> <span style="color:#66d9ef">none</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 声明并初始化整数共组成
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">integer</span> <span style="color:#66d9ef">::</span> <span style="color:#66d9ef">array</span>(<span style="color:#ae81ff">5</span>)[<span style="color:#f92672">*</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">integer</span>, <span style="color:#66d9ef">parameter</span> <span style="color:#66d9ef">::</span> sender <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, receiver <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (num_images() <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 如果不是在两个进程上运行，则报错
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">stop</span> <span style="color:#e6db74">&#39;Error: This program must be run on 2 parallel processes&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (this_image() <span style="color:#f92672">==</span> sender) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">! 初始化发送图像的数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">array</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;(a,i2,a,5(4x,i2))&#39;</span>, <span style="color:#e6db74">&#39;array on proc &#39;</span>, this_image(), &amp;
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39; before copy:&#39;</span>, <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 等待所有图像；相当于 mpi_barrier()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">sync</span> <span style="color:#66d9ef">all</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">! 从发送图像非阻塞复制到接收图像
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (this_image() <span style="color:#f92672">==</span> receiver) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">array</span>(:) <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(:)[sender]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#39;(a,i1,a,5(4x,i2))&#39;</span>, <span style="color:#e6db74">&#39;array on proc &#39;</span>, this_image(), &amp;
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39; after copy: &#39;</span>, <span style="color:#66d9ef">array</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#66d9ef">program</span> array_copy_caf
+</span></span></code></pre></div><p>程序的输出与MPI变体相同：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">1</span> before copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">2</span> before copy: <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">1</span> after copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span><span style="display:flex;"><span>array on proc <span style="color:#ae81ff">2</span> after copy: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> 
+</span></span></code></pre></div><p>因此，这两个程序在语义上是相同的。让我们看一下代码中的主要区别：</p>
+<ul>
+<li>代码行数（LOC）从MPI示例中的27行减少到coarray示例中的14行。减少了近2倍。然而，如果我们专门寻找MPI相关的样板代码，我们可以计算出15行这样的代码。将其与与coarrays相关的两行代码进行比较！由于调试时间与LOC大致成正比，我们可以看到coarrays在开发并行Fortran应用程序方面更具成本效益。</li>
+<li>MPI示例中数据复制的核心对于如此简单的操作来说相当冗长</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (nproc <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">call</span> mpi_isend(<span style="color:#66d9ef">array</span>, size(<span style="color:#66d9ef">array</span>), mpi_int, receiver, <span style="color:#ae81ff">1</span>, &amp;
+</span></span><span style="display:flex;"><span>    mpi_comm_world, request, ierr)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nproc <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">call</span> mpi_irecv(<span style="color:#66d9ef">array</span>, size(<span style="color:#66d9ef">array</span>), mpi_int, sender, <span style="color:#ae81ff">1</span>, &amp;
+</span></span><span style="display:flex;"><span>    mpi_comm_world, request, ierr)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">call</span> mpi_wait(request, stat, ierr)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>
+</span></span></code></pre></div><p>与coarrays的直观数组索引和赋值语法进行比较：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (this_image() <span style="color:#f92672">==</span> receiver) <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">array</span>(:) <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(:)[sender]
+</span></span></code></pre></div><ul>
+<li>最后，MPI需要使用 <code>mpi_init()</code>和 <code>mpi_finalize()</code>子程序进行初始化和终止。Coarrays不需要这样的代码。这是一个小但受欢迎的改进。</li>
+</ul>
+<blockquote>
+<p><strong>并行进程索引</strong></p>
+<p>您是否注意到在MPI示例中我们的并行进程被索引为0和1，而在coarray示例中被索引为1和2？MPI是用C实现的，在C中数组索引从0开始。相反，coarray图像默认从1开始索引。</p></blockquote>
+<p>正如我们在这个例子中看到的，无论是MPI还是coarrays都可以有效地用于在并行进程之间复制数据。然而，MPI代码是低级别且冗长的，随着您的应用程序规模和复杂性的增长，很快就会变得乏味且容易出错。coarrays提供了类似于数组操作的直观语法。此外，使用MPI时，您告诉编译器要做什么；而使用coarrays时，您告诉编译器您想要什么，并让它决定如何最好地实现。这减轻了您的责任负担，并让您专注于您的应用程序。我希望这能让您相信，Fortran coarrays是在并行进程之间进行表达和直观数据复制的最佳选择。</p>
+<blockquote>
+<p><strong>分区全局地址空间语言</strong></p>
+<p>Fortran是一种分区全局地址空间（PGAS）语言。简而言之，PGAS将分布式内存空间抽象化，使您能够做到以下几点：</p>
+<ul>
+<li>将内存布局视为共享内存空间——这将极大提高您在设计并行算法时的生产力和编程便利性。在执行数据复制时，您不需要将数组索引从一个映像转换或转换到另一个映像。属于远程映像的内存将显示为本地内存，您可以以这种方式表达您的算法。</li>
+<li>利用引用的局部性——您可以设计和编写并行算法，而无需预见一个内存子部分是否局部于当前映像。如果是，则编译器将利用该信息来实现优势。如果不是，则将执行最有效的数据复制模式。PGAS允许您使用一个映像来启动两个远程映像之间的数据复制：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fortran" data-lang="fortran"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (this_image() <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">array</span>(:)[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(:)[<span style="color:#ae81ff">8</span>]
+</span></span></code></pre></div><p><code>if</code>语句确保赋值仅在映像1上执行。然而，方括号内的索引指的是映像7和8。因此，映像1将异步请求从映像8复制数组到映像7。从我们的角度来看，方括号内的索引可以像内存中的任何其他数组元素一样处理。在实践中，这些映像可以映射到同一共享内存计算机上的不同核心，跨越服务器房间，甚至遍布全球。</p></blockquote>
+<h3 id="18-运行示例并行海啸模拟器">1.8 运行示例：并行海啸模拟器</h3>
+<p>学习最好的方式是通过实践而不是阅读，特别是当我们投入到一个较长的项目中时。因此，本书的课程围绕着开发您自己的、简单而完整的海啸模拟器展开。</p>
+<h4 id="181-为什么选择海啸模拟器">1.8.1 为什么选择海啸模拟器？</h4>
+<p>海啸是由大体积水体的位移引发的一系列长水波。这通常是由于地震、水下火山或山体滑坡造成的。一旦生成，海啸会径向向外传播到海洋表面。当进入浅水区时，海啸的高度和陡度会增加。海啸模拟器是本书的一个很好的运行示例，因为海啸具有以下特点：</p>
+<ul>
+<li>有趣 &mdash; 严格来说，作为一个科学家！海啸是一个在数值沙盒中观察和玩耍的有趣过程。</li>
+<li>危险 &mdash; 海啸对低洼和人口稠密的沿海地区构成巨大威胁。我们有必要更好地了解和预测它们。</li>
+<li>简单的数学 &mdash; 它们可以使用一组最小的方程式进行模拟 - 浅水方程式（SWEs）。这将帮助我们不被数学所困扰，而是专注于实现。</li>
+<li>可并行化 &mdash; 它们涉及适合教授并行编程的物理过程，特别是考虑到它是一个非尴尬并行的问题。为了使其工作，我们将在图像之间谨慎设计数据复制模式。为了模拟海啸，我们将编写一个浅水方程组的求解器。</li>
+</ul>
+<h4 id="182-浅水方程">1.8.2 浅水方程</h4>
+<p>浅水方程是从Navier-Stokes方程导出的一组简单方程。它们也被称为圣文森特方程，以法国工程师和数学家A. J. C. Barre de Saint-Venant的名字命名，他在对水利工程和开沟流动的兴趣中推导出了它们。浅水方程之所以强大，是因为它们能够再现大气和海洋中观察到的许多运动：</p>
+<ul>
+<li>大规模天气，如气旋和反气旋</li>
+<li>西边界洋流，如大西洋的墨西哥湾流和太平洋的黑潮</li>
+<li>长周期重力波，如海啸和潮波</li>
+<li>降雨和陆地融雪引起的流域</li>
+<li>风生成（浪）波</li>
+<li>池塘里的涟漪</li>
+</ul>
+<p>该系统仅包含几个术语，如图1.7所示。</p>
+<p><img src="../Figures_1/Figure_1_7.png" alt=""></p>
+<blockquote>
+<p><strong>图1.7</strong> 浅水方程。顶部方程是动量（速度）守恒定律，底部是质量（水位）守恒定律。$u$是二维速度向量，$g$是重力加速度，$h$是水位，$H$是未扰动水深，$t$是时间。符号“nabla”（倒三角形）是一个矢量微分运算符。</p></blockquote>
+<p>这个系统的物理解释是什么？顶部方程说明，当水面有坡度时，水会加速并向较低水位的区域移动，这是由于压力梯度造成的。对流项是非线性的，在流体中引起混沌行为（湍流）。底部方程说明，当水汇聚在一起时，水位会升高。这是因为水必须流向某处，这也是我们称之为质量守恒的原因。类似地，如果水分散开来，其水位将会下降。</p>
+<blockquote>
+<p><strong>对数学熟悉吗？</strong>
+如果你对微积分和偏微分方程有经验，那太棒了！附录B中还有更多内容等着你。否则，不用担心！本书不会过多涉及数学；它将专注于编程。</p></blockquote>
+<p>浅水方程对我来说意义重大，因为我最初是在贝尔格莱德大学的气象学本科项目中通过模拟这些方程来学习Fortran编程的。在某种程度上，我在撰写本书时回到了我的根源。尽管我的Fortran代码现在看起来（并且运行）与那时完全不同，但我仍然认为这个例子是教授并行Fortran编程的理想案例研究。希望你能像我一样享受这个过程。</p>
+<h4 id="183-我们希望我们的应用能做什么">1.8.3 我们希望我们的应用能做什么</h4>
+<p>让我们专注于我们海啸模拟器的规范：</p>
+<ul>
+<li><em>并行性</em> —— 模型将能够利用纯Fortran代码扩展到数百个处理器。这不仅对加速程序和减少计算时间至关重要，而且对于实现否则无法适应单台计算机内存的非常大的模拟也是至关重要的。随着大多数现代笔记本电脑至少拥有四个内核，你应该能够享受你的（并行编程）成果。</li>
+<li><em>可扩展性</em> —— 物理术语可以很容易地被制定并添加到求解器中。这对于模型的普遍可用性至关重要。如果我们可以设计我们的计算核心形成可重用的类和函数，我们就可以轻松地将新的物理术语添加为功能性的并行运算符，遵循Damian Rouson的方法（ <a href="http://mng.bz/vxPq">http://mng.bz/vxPq</a> ）。通过这种方式，技术实现被封装在这些函数内部，在高层次上，我们可以像在黑板上写一样编写我们的方程。</li>
+<li><em>软件库</em> —— 这将提供一组可重用的类和函数，可用于构建其他并行模型。</li>
+<li><em>文档化</em> —— 所有软件都应该是有用的，用户不应该猜测程序的作者的意图。我们将以这样的方式编写和记录我们的应用程序，以便代码可以轻松阅读和理解。</li>
+<li><em>在线发现性</em> —— 为自己编写程序对于学习和发现来说是很棒的。然而，当你能够与他人分享它来解决他们的问题时，软件才真正有用。这本书中开发的海啸模拟器和其他项目都在 <a href="https://github.com/modern-fortran">https://github.com/modern-fortran</a> 上在线。随意探索并尝试，当我们逐步阅读本书时，我们将一起深入了解细节。</li>
+</ul>
+<p>通过逐章阅读本书，你将获得从零开始开发完整功能的并行应用程序的经验。如果这是你的第一个软件项目，我希望它能激发你内心的软件开发者，激励你去创造属于自己的东西。我们将从设置开发环境开始下一章，这样你就可以编译和运行海啸模拟器的最小工作版本。</p>
+<blockquote>
+<p><strong>可视化海啸输出</strong></p>
+<p>在构建和运行模拟器时，我们主要关注它记录到终端的原始数字和时间步数。然而，能够可视化模型的输出既有帮助又令人满足。每当我们向模拟器添加新的部分时，我们都会这样做，这使得解决方案变得不同和更有趣。我在项目的 GitHub 存储库中提供了 Python 脚本，这样你就可以自己可视化输出。虽然直接从 Fortran 创建高质量的图形是可能的，但与使用 Python 相比，这并不容易。</p></blockquote>
+<h3 id="19-进一步阅读">1.9 进一步阅读</h3>
+<ul>
+<li>Fortran 官方网站: <a href="https://fortran-lang.org">https://fortran-lang.org</a></li>
+<li>Fortran 的历史: <a href="https://en.wikipedia.org/wiki/Fortran">https://en.wikipedia.org/wiki/Fortran</a></li>
+<li>分区全局地址空间: <a href="http://mng.bz/4A6g">http://mng.bz/4A6g</a></li>
+<li>本书的相关博客: <a href="https://medium.com/modern-fortran">https://medium.com/modern-fortran</a></li>
+</ul>
+<h3 id="总结">总结</h3>
+<ul>
+<li>Fortran 是迄今仍在使用的最古老的高级编程语言。</li>
+<li>它是科学和工程领域许多应用程序中使用的主要语言。</li>
+<li>Fortran 不适用于编写视频游戏或网络浏览器，但在大型多维数组上的数值、并行计算方面表现出色。</li>
+<li>它是唯一的标准化的本地并行编程语言。</li>
+<li>与传统的消息传递接口 (MPI) 编程相比，共数组（Coarrays）提供了更清晰、更富表达力的并行数据交换语法。</li>
+<li>Fortran 编译器和库经过了成熟和经过实战检验的测试。</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M4 0h8s2 0 4 2l15 15s2 2 0 4L21 31s-2 2-4 0L2 16s-2-2-2-4V3s0-3 4-3m3 10a3 3 0 0 0 0-6 3 3 0 0 0 0 6"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/fortran/" rel="tag">Fortran</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/%E5%9B%BE%E4%B9%A6/" rel="tag">图书</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/tests/modernfortran/moderfortran-0/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">《现代Fortran——创建高效并行程序》：前言</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/tests/modernfortran/modernfortran_2/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">《现代Fortran——创建高效并行应用》：第2章 入门</p>
+		</a>
+	</div>
+</nav>
+
+
+
+			</div>
+			
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	<div class="widget-toc widget">
+		<h4 class="widget__title">Page content</h4>
+		<div class="widget__content">
+			<nav id="TableOfContents">
+  <ul>
+    <li><a href="#第-1-部分-开始学习现代-fortran">第 1 部分 开始学习现代 Fortran</a></li>
+    <li><a href="#第1章-介绍-fortran">第1章 介绍 Fortran</a>
+      <ul>
+        <li><a href="#11-什么是-fortran">1.1 什么是 Fortran？</a></li>
+        <li><a href="#12-fortran特性">1.2 Fortran特性</a></li>
+        <li><a href="#13-为什么学习fortran">1.3 为什么学习Fortran？</a></li>
+        <li><a href="#14-优缺点">1.4 优缺点</a></li>
+        <li><a href="#15-并行fortran的例证">1.5 并行Fortran的例证</a></li>
+        <li><a href="#16-本书将教你什么">1.6 本书将教你什么？</a></li>
+        <li><a href="#17-深思并行">1.7 深思并行！</a></li>
+        <li><a href="#18-运行示例并行海啸模拟器">1.8 运行示例：并行海啸模拟器</a></li>
+        <li><a href="#19-进一步阅读">1.9 进一步阅读</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</div>
+	</div>
+</aside>
+
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2025 Linguage.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script><script src="/js/simple-pageviews.js"></script>
+
+<script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+</body>
+</html>
