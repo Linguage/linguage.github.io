@@ -16,8 +16,14 @@
             font-weight: 900; 
             color: transparent;
             -webkit-text-stroke: 3px #3B82F6;
-            text-stroke: 3px #3B82F6;
             line-height: 0.8;
+        }
+        /* Responsive scaling for the large visual anchor */
+        @media (max-width: 1024px) { /* md/lg */
+            .visual-anchor { font-size: 10rem; }
+        }
+        @media (max-width: 640px) { /* sm */
+            .visual-anchor { font-size: 6rem; -webkit-text-stroke: 2px #3B82F6; }
         }
         .gradient-highlight {
             background: linear-gradient(120deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.15) 100%);
@@ -35,8 +41,8 @@
     <header class="bg-white border-b-4 border-blue-600 py-8 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
-                <h1 class="text-6xl font-black text-gray-900 mb-4 leading-tight">德文：让AI实习生成为软件团队的无限力量</h1>
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">Scott Wu（Cognition Labs CEO）专访解读</h2>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4 leading-tight">德文：让AI实习生成为软件团队的无限力量</h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600 mb-6">Scott Wu（Cognition Labs CEO）专访解读</h2>
                 <div class="flex justify-center items-center space-x-8 text-sm poppins font-medium text-gray-600">
                     <span><i class="fas fa-calendar-alt mr-2"></i>2025.09.09</span>
                     <span><i class="fas fa-video mr-2"></i>How I AI</span>
@@ -47,13 +53,13 @@
     </header>
 
     <!-- Main Body -->
-    <main class="max-w-7xl mx-auto grid grid-cols-12 gap-8 py-12 px-6">
+    <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 py-12 px-6">
         <!-- Visual Anchor Area (4 columns) -->
-        <aside class="col-span-4">
-            <div class="sticky top-8">
+        <aside class="md:col-span-4 order-2 md:order-1">
+            <div class="md:sticky top-8">
                 <div class="text-center mb-8">
                     <div class="visual-anchor">AI</div>
-                    <div class="text-4xl font-black text-gray-800 mt-4">无限实习生</div>
+                    <div class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-800 mt-4">无限实习生</div>
                 </div>
                 
                 <div class="space-y-6">
@@ -91,11 +97,11 @@
         </aside>
 
         <!-- Core Content Area (8 columns) -->
-        <article class="col-span-8">
+        <article class="md:col-span-8 order-1 md:order-2">
             <!-- Overview Section -->
             <section class="mb-10">
                 <div class="gradient-highlight rounded-lg p-8 mb-8">
-                    <h2 class="text-4xl font-black text-gray-900 mb-6">概述</h2>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-6">概述</h2>
                     <p class="text-lg font-bold text-gray-800 leading-relaxed">本期视频由Cognition Labs联合创始人兼CEO Scott Wu带来，他深入讲解了公司AI代理产品Devin（德文）如何"像实习生一样"集成于开发团队，成为高效的工程助手。Scott以丰富案例展示了Devin在实际研发流程中的应用，包括自动化常规开发任务、缩减机械性工作负担、提升团队协作效率等，并探讨了AI与团队成员在流程和心智上的全新协作方式。</p>
                 </div>
             </section>
@@ -123,7 +129,7 @@
                         Devin产品方法与典型工作流
                     </h3>
                     <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-purple-500">
                                 <h4 class="text-xl font-black text-gray-900 mb-3">任务来源</h4>
                                 <p class="text-base font-semibold text-gray-700">通常由Slack、Linear等平台的问题反馈或任务分发触发，PM或团队成员简单"@Devin"，由其作为"一线响应者"接棒实施。</p>
@@ -191,10 +197,10 @@
     <section class="bg-gradient-to-r from-blue-900 to-purple-900 text-white py-16 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-5xl font-black mb-6">AI团队协作的四大心智模型</h2>
-                <p class="text-xl font-bold opacity-90">Scott Wu总结的框架与实践方法论</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6">AI团队协作的四大心智模型</h2>
+                <p class="text-base sm:text-lg md:text-xl font-bold opacity-90">Scott Wu总结的框架与实践方法论</p>
             </div>
-            <div class="grid grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-filter backdrop-blur-sm">
                     <div class="flex items-center mb-4">
                         <i class="fas fa-infinity text-3xl mr-4"></i>
@@ -235,7 +241,7 @@
                 <p class="text-xl font-bold opacity-90 max-w-4xl mx-auto">Scott Wu通过Devin的实践案例，展示了AI代理如何从"工具助手"进化为"团队成员"，开启了人机协作的全新篇章。未来的软件团队将是多智能体与多人类混合的高效协作生态，where界面就是AI本身，人类专注于创造性思考，AI承担执行性任务。</p>
             </div>
             
-            <div class="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-gray-700">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 pt-8 border-t border-gray-700">
                 <div class="text-center">
                     <div class="text-3xl font-black text-blue-400 mb-2">24/7</div>
                     <p class="font-semibold">永不休息的AI实习生</p>
