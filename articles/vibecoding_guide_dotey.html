@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <title>AI 协作编程指南</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --theme: #0ea5e9;
+            }
+            body {
+                font-family: "Noto Serif SC", serif;
+                background: #fdfcf8;
+                background-image:
+                    radial-gradient(
+                        circle at 20% 20%,
+                        rgba(212, 197, 185, 0.03) 1px,
+                        transparent 1px
+                    ),
+                    radial-gradient(
+                        circle at 80% 80%,
+                        rgba(212, 197, 185, 0.03) 1px,
+                        transparent 1px
+                    );
+            }
+            h1,
+            h2,
+            h3 {
+                font-weight: 900;
+                letter-spacing: 0.02em;
+            }
+            .en {
+                font-family: "Poppins", sans-serif;
+                font-weight: 400;
+            }
+            .card {
+                backdrop-filter: blur(2px);
+                border: 1.5px solid var(--theme);
+            }
+            .icon {
+                font-size: 3.25rem;
+                color: var(--theme);
+            }
+            .breaker {
+                background: linear-gradient(
+                    90deg,
+                    var(--theme) 0%,
+                    transparent 100%
+                );
+                height: 2px;
+            }
+        </style>
+    </head>
+
+    <body class="text-gray-900 antialiased">
+        <!-- 页头 -->
+        <header class="px-6 pt-16 pb-8 text-center">
+            <h1 class="text-6xl md:text-7xl leading-tight">AI 协作编程指南</h1>
+            <p class="en text-lg md:text-xl mt-4 text-gray-600">
+                驾驭“才华横溢却偶尔走神”的 AI 实习生
+            </p>
+            <p class="text-base text-gray-500 mt-2">2025-09-16</p>
+        </header>
+
+        <!-- 主内容 黄金分割 -->
+        <main class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 px-6 py-8">
+            <!-- 左侧：核心亮点 -->
+            <section class="space-y-6">
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-route icon"></i>
+                        <h2 class="text-3xl">规划流程</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        先写详尽 Markdown 计划 → 评审精简 → 小步快跑 →
+                        标记“暂不开发”，防范围蔓延。
+                    </p>
+                </div>
+
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-shield-halved icon"></i>
+                        <h2 class="text-3xl">版本控制</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        Git 是生命线；每功能前干净 commit，AI 一旦“天马行空”立即
+                        reset --hard，拒绝补丁堆积。
+                    </p>
+                </div>
+
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-flask-vial icon"></i>
+                        <h2 class="text-3xl">测试护栏</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        优先端到端集成测试，模拟真实用户点击；先写测试再给 AI
+                        边界，回归问题立即现形。
+                    </p>
+                </div>
+            </section>
+
+            <!-- 右侧：方法/行动 -->
+            <section class="space-y-6">
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-bug-slash icon"></i>
+                        <h2 class="text-3xl">高效修 Bug</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        完整错误日志直接贴 AI → 分析根因 → 失败就 reset →
+                        加日志/换模型 → 干净修复。
+                    </p>
+                </div>
+
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-screwdriver-wrench icon"></i>
+                        <h2 class="text-3xl">工具优化</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        cursor.rules / windsurf.rules 写清规范；本地放 API
+                        文档；前端 Cursor、后端 Windsurf 各取所长。
+                    </p>
+                </div>
+
+                <div class="card bg-white/60 p-6 rounded-2xl">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-cubes icon"></i>
+                        <h2 class="text-3xl">复杂功能</h2>
+                    </div>
+                    <p class="text-xl mt-4 text-gray-800">
+                        独立原型库先跑通 → 保持 API 一致 →
+                        模块化拆分；拒绝万行神文件，monorepo 先靠边。
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- 中段分隔 -->
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="breaker"></div>
+            <blockquote
+                class="text-center text-2xl md:text-3xl font-black italic mt-6"
+            >
+                “AI 能 1 小时干完你 1
+                周的活，也能悄悄埋雷——用工程化流程把它变成靠谱合伙人。”
+                <span class="en block text-lg font-normal text-gray-600 mt-2"
+                    >Code, Test, Reset, Refactor — Repeat.</span
+                >
+            </blockquote>
+        </div>
+
+        <!-- 深色页脚 -->
+        <footer class="bg-slate-900 text-slate-200">
+            <div
+                class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-2 gap-8 items-center"
+            >
+                <div>
+                    <h3 class="text-2xl font-black">立即行动</h3>
+                    <p class="en text-base mt-2">
+                        Write plan → Git init → Test first → Prompt in chunks →
+                        Reset if stinks → Ship.
+                    </p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-slate-400">© 2025 宝玉 @dotey</p>
+                    <p class="text-xs text-slate-500 mt-1">
+                        Source:
+                        <a
+                            href="https://x.com/dotey/status/1968071688282681533"
+                            class="underline hover:text-sky-400"
+                            target="_blank"
+                            >Twitter</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
