@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SymPy 基础入门教程：符号计算核心功能解析 • Linguage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/static/" class="nav-link ">交互式报告</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        <a href="/post/" class="btn solid">Posts</a>
+      
+    </div>
+    
+    
+
+    
+    <a href="/post/" class="mobile-nav-btn posts-btn-fixed" aria-label="Posts">Posts</a>
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/static/">交互式报告</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguage</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/labs/" class="crumb-sec">Lab</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">SymPy 基础入门教程：符号计算核心功能解析</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>SymPy 基础入门教程：符号计算核心功能解析</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Gemini Pro</span>
+           · 
+          <span class="meta-date">2025-08-19</span>
+        </div>
+      
+
+      
+      <p>欢迎来到 SymPy 的世界！SymPy 是一个强大的 Python 库，用于进行符号数学运算。与数值计算不同，符号计算处理的是数学表达式本身，而不是它们的具体数值。本教程将带您了解 SymPy 的基本功能，并通过与我们先前讨论的钢轨动力学案例相关联，展示这些功能在实际问题中的应用。</p>
+<h2 id="1-sympy-是什么为什么要用它">1. SymPy 是什么？为什么要用它？</h2>
+<p>想象一下，您在纸上推导复杂的数学公式，进行微分、积分、化简…… SymPy 就是您在计算机上的“草稿纸”和“数学助手”。它可以帮助您：</p>
+<ul>
+<li>精确地表示数学符号和表达式。</li>
+<li>执行符号微分、积分、求和等运算。</li>
+<li>化简和变换复杂的数学表达式。</li>
+<li>求解方程。</li>
+<li>进行矩阵运算。</li>
+</ul>
+<p>对于像钢轨动力学这样涉及大量复杂公式推导的问题，手动计算不仅耗时，还容易出错。SymPy 可以自动化这个过程，提高效率和准确性。</p>
+<h2 id="2-安装与基本设置">2. 安装与基本设置</h2>
+<p>如果您还没有安装 SymPy，可以通过 Python 的包管理器 pip 轻松安装：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pip install sympy
+</span></span></code></pre></div><p>在您的 Python 脚本或 Jupyter Notebook 中使用 SymPy 前，首先需要导入它。为了让输出的数学公式更易读（尤其是在 Jupyter 环境中），可以启用 SymPy 的“美观打印” (pretty printing) 功能。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sympy <span style="color:#75715e"># 导入 SymPy 库</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化美观打印功能</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># use_unicode=True 允许使用 Unicode 字符来显示更美观的公式</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># wrap_line=False 防止长公式在某些终端或 Notebook 中被不恰当地折行</span>
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>init_printing(use_unicode<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, wrap_line<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个简单的辅助函数，用于在教程中打印章节标题</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_header</span>(title):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34; </span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74"> &#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;=&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">50</span>)
+</span></span></code></pre></div><h2 id="3-核心概念一符号-symbols">3. 核心概念一：符号 (Symbols)</h2>
+<p>符号是 SymPy 进行运算的基本单元。它们代表了数学表达式中的变量或常数，但没有被赋予具体的数值。</p>
+<ul>
+<li>定义单个符号： 使用 <code>sympy.Symbol('名字')</code>。</li>
+<li>定义多个符号： 使用 <code>sympy.symbols('名字1 名字2 ...')</code>。</li>
+<li>为符号添加假设： 在定义符号时，可以指定其数学属性，如 <code>real=True</code> (实数), <code>positive=True</code> (正数), <code>integer=True</code> (整数)。这些假设有助于 SymPy 进行更精确的化简。</li>
+</ul>
+<h3 id="示例">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;3. 核心概念一：符号 (Symbols)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义单个符号 x</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;x&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 x: </span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义时间符号 t，并假设它是实数</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;t&#39;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 t: </span><span style="color:#e6db74">{</span>t<span style="color:#e6db74">}</span><span style="color:#e6db74">, 是实数吗? </span><span style="color:#e6db74">{</span>t<span style="color:#f92672">.</span>is_real<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一次定义多个符号，并假设它们是正实数</span>
+</span></span><span style="display:flex;"><span>l, E, I_y, m_r <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>symbols(<span style="color:#e6db74">&#39;l E I_y m_r&#39;</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 l: </span><span style="color:#e6db74">{</span>l<span style="color:#e6db74">}</span><span style="color:#e6db74">, 是正数吗? </span><span style="color:#e6db74">{</span>l<span style="color:#f92672">.</span>is_positive<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 E: </span><span style="color:#e6db74">{</span>E<span style="color:#e6db74">}</span><span style="color:#e6db74">, I_y: </span><span style="color:#e6db74">{</span>I_y<span style="color:#e6db74">}</span><span style="color:#e6db74">, m_r: </span><span style="color:#e6db74">{</span>m_r<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义整数符号，常用于索引或计数</span>
+</span></span><span style="display:flex;"><span>NM <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;NM&#39;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 例如，模态数</span>
+</span></span><span style="display:flex;"><span>k_idx <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;k&#39;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)  <span style="color:#75715e"># 例如，求和索引</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 NM: </span><span style="color:#e6db74">{</span>NM<span style="color:#e6db74">}</span><span style="color:#e6db74">, 是整数吗? </span><span style="color:#e6db74">{</span>NM<span style="color:#f92672">.</span>is_integer<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;符号 k_idx: </span><span style="color:#e6db74">{</span>k_idx<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="与钢轨案例的联系">与钢轨案例的联系：</h3>
+<p>在钢轨动力学推导中，我们首先定义了所有物理参数（如 l,E,I<sub>y</sub>,m<sub>r</sub>）、独立变量（x,t）、以及用于求和和表示模态的索引（k,h,s,j,NM,Nstotal​）作为 SymPy 符号。</p>
+<h2 id="4-核心概念二构建表达式-expressions">4. 核心概念二：构建表达式 (Expressions)</h2>
+<p>一旦定义了符号，就可以像在普通数学中一样，使用它们和标准的 Python 运算符（+, -, *, /, ** 代表乘方）来构建数学表达式。SymPy 还提供了丰富的数学函数，如 <code>sympy.sqrt()</code> (平方根), <code>sympy.sin()</code> (正弦), <code>sympy.cos()</code> (余弦), <code>sympy.pi</code> (圆周率 π) 等。</p>
+<h3 id="示例-1">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;4. 核心概念二：构建表达式 (Expressions)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用之前定义的符号构建表达式</span>
+</span></span><span style="display:flex;"><span>expr1 <span style="color:#f92672">=</span> x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;表达式 expr1:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr1) <span style="color:#75715e"># pprint 是 pretty print 的缩写</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 构建更复杂的表达式，例如简化的模态振型的一部分</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Z_k(x) 类似 sqrt(2/(m_r*l)) * sin(k*pi*x/l)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里我们用 k_idx 代表 k</span>
+</span></span><span style="display:flex;"><span>simple_modal_part <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>sin(k_idx <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> x <span style="color:#f92672">/</span> l)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">简化的模态振型部分 sin(k*pi*x/l):&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(simple_modal_part)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 包含物理参数的表达式</span>
+</span></span><span style="display:flex;"><span>stiffness_like_term <span style="color:#f92672">=</span> E <span style="color:#f92672">*</span> I_y <span style="color:#f92672">/</span> l<span style="color:#f92672">**</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">类刚度项 E*I_y/l^3:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(stiffness_like_term)
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-1">与钢轨案例的联系：</h3>
+<p>我们用这种方式构建了模态振型函数 Z<sub>k</sub>(x) 的完整表达式，以及后续推导中出现的各种中间表达式。</p>
+<h2 id="5-核心概念三符号函数-symbolic-functions">5. 核心概念三：符号函数 (Symbolic Functions)</h2>
+<p>有时，我们需要表示一个未指定具体形式的函数，或者一个依赖于某些符号变量的函数（例如 f(x) 或 q(t)）。</p>
+<ul>
+<li>定义通用未指定函数： 使用 <code>sympy.Function('函数名')(自变量)</code>。</li>
+<li>定义带索引的函数序列： 当有一系列函数，如 q<sub>1</sub>(t),q<sub>2</sub>(t),…,q<sub>k</sub>(t) 时，可以使用 <code>sympy.IndexedBase</code> 结合 <code>sympy.Function</code>。<code>IndexedBase('q')</code> 创建一个名为 q 的符号序列基底，然后 <code>q_base[k_idx]</code> 表示 q<sub>k</sub> 这个符号，最后 <code>sympy.Function(str(q_base[k_idx]))(t)</code> 将其定义为 t 的函数 q<sub>k</sub>(t)。</li>
+</ul>
+<h3 id="示例-2">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;5. 核心概念三：符号函数 (Symbolic Functions)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个通用的未指定函数 f(x)</span>
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(<span style="color:#e6db74">&#39;f&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;通用函数 f(x): </span><span style="color:#e6db74">{</span>f<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义一个时间 t 的函数 q(t)</span>
+</span></span><span style="display:flex;"><span>q_func_t <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(<span style="color:#e6db74">&#39;q&#39;</span>)(t)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;时间函数 q(t): </span><span style="color:#e6db74">{</span>q_func_t<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义带索引的函数 q_k(t)</span>
+</span></span><span style="display:flex;"><span>q_base <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>IndexedBase(<span style="color:#e6db74">&#39;q&#39;</span>) <span style="color:#75715e"># &#39;q&#39; 是这个函数序列的名称</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># q_base[k_idx] 代表符号 q_k (还不是一个函数)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sympy.Function(str(q_base[k_idx]))(t) 将 q_k 定义为 t 的函数</span>
+</span></span><span style="display:flex;"><span>q_k_t <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(str(q_base[k_idx]))(t)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;带索引的函数 q_k(t): </span><span style="color:#e6db74">{</span>q_k_t<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我们可以创建具体的 q_1(t)</span>
+</span></span><span style="display:flex;"><span>q_1_t <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(str(q_base[<span style="color:#ae81ff">1</span>]))(t)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;具体的 q_1(t): </span><span style="color:#e6db74">{</span>q_1_t<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-2">与钢轨案例的联系：</h3>
+<p>模态坐标 q<sub>k</sub>(t) 就是一个典型的带索引的时间函数，我们用 <code>IndexedBase</code> 和 <code>Function</code> 来精确表示它。轨枕基础位移 Zsb<sub>s</sub> 和车轮力 p<sub>j</sub> 也是如此。</p>
+<h2 id="6-核心概念四替换-substitution">6. 核心概念四：替换 (Substitution)</h2>
+<p>替换是符号运算中非常常用的操作，允许我们将表达式中的一个符号或子表达式替换为另一个符号或表达式。</p>
+<ul>
+<li>使用表达式对象的 <code>.subs({旧的: 新的, ...})</code> 方法。</li>
+</ul>
+<h3 id="示例-3">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;6. 核心概念四：替换 (Substitution)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>expr_to_sub <span style="color:#f92672">=</span> x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> sympy<span style="color:#f92672">.</span>sin(k_idx <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> x <span style="color:#f92672">/</span> l)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;原始表达式:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr_to_sub)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将 x 替换为符号 y</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;y&#39;</span>)
+</span></span><span style="display:flex;"><span>expr_sub_x_with_y <span style="color:#f92672">=</span> expr_to_sub<span style="color:#f92672">.</span>subs({x: y})
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">将 x 替换为 y:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr_sub_x_with_y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 将 k_idx 替换为具体的数值 1</span>
+</span></span><span style="display:flex;"><span>expr_sub_k_with_1 <span style="color:#f92672">=</span> expr_to_sub<span style="color:#f92672">.</span>subs({k_idx: <span style="color:#ae81ff">1</span>})
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">将 k_idx 替换为 1:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr_sub_k_with_1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 同时替换多个符号</span>
+</span></span><span style="display:flex;"><span>expr_sub_multiple <span style="color:#f92672">=</span> expr_to_sub<span style="color:#f92672">.</span>subs({x: <span style="color:#ae81ff">0</span>, k_idx: <span style="color:#ae81ff">2</span>, l: sympy<span style="color:#f92672">.</span>pi})
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">同时替换 x=0, k_idx=2, l=pi: </span><span style="color:#e6db74">{</span>expr_sub_multiple<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 结果是 sin(2*pi*0/pi) = sin(0) = 0</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-3">与钢轨案例的联系：</h3>
+<p>在构建具体的模态振型 Z<sub>1</sub>(x),Z<sub>h</sub>(x) 时，我们就是将通用模板 <code>Z_k_x_expr_template</code> 中的 <code>k_iter_sym</code> 替换为具体的数值或索引符号。在计算轨枕力时，将通用位移表达式中的 x 替换为特定轨枕的位置 x<sub>s</sub>[s]。</p>
+<h2 id="7-核心概念五微分-derivatives">7. 核心概念五：微分 (Derivatives)</h2>
+<p>符号微分是 SymPy 的核心功能之一。</p>
+<ul>
+<li>使用 <code>sympy.diff(表达式, 变量, 阶数)</code> 或表达式对象的 <code>.diff(变量, 阶数)</code> 方法。</li>
+</ul>
+<h3 id="示例-4">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;7. 核心概念五：微分 (Derivatives)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 之前定义的函数 q_1(t) 和符号 x</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># expr_for_diff = q_1_t * sympy.sin(x)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为了更清晰，我们重新定义一个简单的 q(t)</span>
+</span></span><span style="display:flex;"><span>q <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(<span style="color:#e6db74">&#39;q&#39;</span>)(t)
+</span></span><span style="display:flex;"><span>expr_for_diff <span style="color:#f92672">=</span> q <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>cos(x <span style="color:#f92672">*</span> t) <span style="color:#75715e"># 一个包含 q(t), x, t 的表达式</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;用于微分的表达式:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr_for_diff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对 t 求一阶偏导数 (q 是 t 的函数，cos(xt) 中的 t 也要考虑)</span>
+</span></span><span style="display:flex;"><span>diff_t1 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>diff(expr_for_diff, t)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">对 t 的一阶偏导数:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(diff_t1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对 t 求二阶偏导数</span>
+</span></span><span style="display:flex;"><span>diff_t2 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>diff(expr_for_diff, t, <span style="color:#ae81ff">2</span>) <span style="color:#75715e"># 或者 sympy.diff(expr_for_diff, t, t)</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">对 t 的二阶偏导数:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(diff_t2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对 x 求一阶偏导数</span>
+</span></span><span style="display:flex;"><span>diff_x1 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>diff(expr_for_diff, x)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">对 x 的一阶偏导数:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(diff_x1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 对 x 求四阶偏导数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 以 Z_h(x) 为例</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Z_h_x = sympy.sqrt(2 / (m_r * l)) * sympy.sin(h_idx * sympy.pi * x / l) (h_idx 未在此处定义，假设已定义或用k_idx代替)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假设 h_idx 已经定义，或者我们用一个具体的索引</span>
+</span></span><span style="display:flex;"><span>h_idx <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;h_idx&#39;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 假设 h_idx</span>
+</span></span><span style="display:flex;"><span>Z_h_x <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> (m_r <span style="color:#f92672">*</span> l)) <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>sin(h_idx <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> x <span style="color:#f92672">/</span> l)
+</span></span><span style="display:flex;"><span>Z_h_xxxx <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>diff(Z_h_x, x, <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Z_h(x) 对 x 的四阶导数:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(Z_h_xxxx)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;化简后:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(Z_h_xxxx<span style="color:#f92672">.</span>simplify()) <span style="color:#75715e"># 正弦函数的四阶导数会回到自身乘以一个系数</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-4">与钢轨案例的联系：</h3>
+<p>这是推导中的关键步骤。我们需要计算钢轨位移 Z<sub>r</sub>(x,t) 对时间 t 的二阶导数（得到加速度项 Z̈<sub>r</sub>）和对空间 x 的四阶导数（得到弯曲刚度项 Z<sub>r</sub>′′′′​）。</p>
+<h2 id="8-核心概念六积分-integrals">8. 核心概念六：积分 (Integrals)</h2>
+<p>SymPy 可以执行符号积分（不定积分和定积分）。</p>
+<ul>
+<li>创建积分对象： <code>sympy.Integral(表达式, (变量, 下限, 上限))</code>。这会创建一个“惰性”的积分对象，表示这个积分，但尚未计算。</li>
+<li>尝试计算积分： 对积分对象调用 <code>.doit()</code> 方法。</li>
+<li>直接计算积分： <code>sympy.integrate(表达式, (变量, 下限, 上限))</code> 或 <code>sympy.integrate(表达式, 变量)</code> (不定积分)。</li>
+</ul>
+<h3 id="示例-5">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;8. 核心概念六：积分 (Integrals)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 不定积分</span>
+</span></span><span style="display:flex;"><span>integral_cos_x_indef <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>integrate(sympy<span style="color:#f92672">.</span>cos(x), x)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Integral(cos(x), x) = </span><span style="color:#e6db74">{</span>integral_cos_x_indef<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 结果是 sin(x)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定积分</span>
+</span></span><span style="display:flex;"><span>integral_x_sq_0_to_1 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>integrate(x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, (x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Integral(x^2, (x, 0, 1)) = </span><span style="color:#e6db74">{</span>integral_x_sq_0_to_1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 结果是 1/3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建一个积分对象，然后计算</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 例如，计算 Integral( Z_1(x)^2 * m_r, (x, 0, l) )</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Z_1_x = sympy.sqrt(2 / (m_r * l)) * sympy.sin(1 * sympy.pi * x / l)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (需要确保 m_r, l, x 等符号已定义)</span>
+</span></span><span style="display:flex;"><span>Z_1_x <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> (m_r <span style="color:#f92672">*</span> l)) <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> x <span style="color:#f92672">/</span> l)
+</span></span><span style="display:flex;"><span>integral_obj <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Integral(m_r <span style="color:#f92672">*</span> Z_1_x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, (x, <span style="color:#ae81ff">0</span>, l))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">表示积分的对象:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(integral_obj)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> integral_obj<span style="color:#f92672">.</span>doit()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">计算后的积分结果 (应为1，表示模态正交归一性):&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(result<span style="color:#f92672">.</span>simplify())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 包含狄拉克 Delta 函数的积分</span>
+</span></span><span style="display:flex;"><span>f_of_x <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Function(<span style="color:#e6db74">&#39;f&#39;</span>)(x)
+</span></span><span style="display:flex;"><span>x0 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;x0&#39;</span>)
+</span></span><span style="display:flex;"><span>delta_integral_example <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>integrate(f_of_x <span style="color:#f92672">*</span> sympy<span style="color:#f92672">.</span>DiracDelta(x <span style="color:#f92672">-</span> x0), (x, <span style="color:#f92672">-</span>sympy<span style="color:#f92672">.</span>oo, sympy<span style="color:#f92672">.</span>oo))
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sympy.oo 代表无穷大</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Integral(f(x)*DiracDelta(x-x0), (x, -oo, oo)):&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(delta_integral_example) <span style="color:#75715e"># 结果应为 f(x0)</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-5">与钢轨案例的联系：</h3>
+<p>伽辽金法的核心步骤就是将残差与权函数（模态振型 Z<sub>h</sub>(x)）相乘，然后在钢轨长度 [0,l] 上进行定积分。积分运算对于处理狄拉克 δ 函数（表示点荷载）和利用模态正交性至关重要。</p>
+<h2 id="9-核心概念七求和-summations">9. 核心概念七：求和 (Summations)</h2>
+<p>与积分类似，SymPy 可以处理符号求和。</p>
+<ul>
+<li>创建求和对象： <code>sympy.Sum(表达式, (索引变量, 下限, 上限))</code>。</li>
+<li>尝试计算求和： 对求和对象调用 <code>.doit()</code> 方法（通常在上下限是具体数字时有效）。</li>
+</ul>
+<h3 id="示例-6">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;9. 核心概念七：求和 (Summations)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个简单的求和表达式 Sum_{k=1}^{N} k*x</span>
+</span></span><span style="display:flex;"><span>N_sum_limit <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;N&#39;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># k_idx 已经在前面定义为 sympy.Symbol(&#39;k&#39;, integer=True, positive=True)</span>
+</span></span><span style="display:flex;"><span>sum_expr_obj <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Sum(k_idx <span style="color:#f92672">*</span> x, (k_idx, <span style="color:#ae81ff">1</span>, N_sum_limit))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;符号求和对象 Sum_{k=1}^</span><span style="color:#e6db74">{N}</span><span style="color:#e6db74"> k*x:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(sum_expr_obj)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果上限是具体数字，可以尝试计算</span>
+</span></span><span style="display:flex;"><span>sum_k_1_to_3_obj <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Sum(k_idx<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, (k_idx, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Sum_{k=1}^</span><span style="color:#e6db74">{3}</span><span style="color:#e6db74"> k^2:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(sum_k_1_to_3_obj)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;计算结果: </span><span style="color:#e6db74">{</span>sum_k_1_to_3_obj<span style="color:#f92672">.</span>doit()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 1^2 + 2^2 + 3^2 = 1 + 4 + 9 = 14</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-6">与钢轨案例的联系：</h3>
+<p>钢轨的总位移 Z<sub>r</sub>(x,t) 是通过模态叠加法表示的，即对所有模态的贡献进行求和：Z<sub>r</sub>(x,t)=∑<sub>k=1</sub><sup>NM</sup>Z<sub>k</sub>(x)q<sub>k</sub>(t)。PDE 中的外力项（如轨枕力和车轮力）也涉及到对所有轨枕或车轮的求和。</p>
+<h2 id="10-核心概念八特殊函数">10. 核心概念八：特殊函数</h2>
+<p>SymPy 内置了许多数学中的特殊函数。在我们的案例中，最重要的是：</p>
+<ul>
+<li><code>sympy.DiracDelta(x)</code>: 狄拉克 δ 函数。它在 x=0 时为无穷大，其他地方为0，且其在整个实数轴上的积分为1。在物理中常用来表示点作用（如点荷载）。其重要性质是 ∫f(x)δ(x−x<sub>0</sub>)dx=f(x<sub>0</sub>)。</li>
+<li><code>sympy.KroneckerDelta(i, j)</code>: 克罗内克 δ 函数。当 i=j 时，其值为1；当 i≠j 时，其值为0。在处理正交基和矩阵运算时非常有用。</li>
+</ul>
+<h3 id="示例-7">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;10. 核心概念八：特殊函数&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DiracDelta 函数</span>
+</span></span><span style="display:flex;"><span>x_load_pos <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;x_load&#39;</span>)
+</span></span><span style="display:flex;"><span>point_load_representation <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>DiracDelta(x <span style="color:#f92672">-</span> x_load_pos)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;用 DiracDelta 表示在 x_load_pos 处的点作用:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(point_load_representation)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># KroneckerDelta 函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># h_idx, k_idx 假设已定义</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># h_idx = sympy.Symbol(&#39;h_idx&#39;, integer=True, positive=True) # 如果未定义</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># k_idx = sympy.Symbol(&#39;k_idx&#39;, integer=True, positive=True) # 如果未定义</span>
+</span></span><span style="display:flex;"><span>M_hk_mass_element <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>KroneckerDelta(h_idx, k_idx) <span style="color:#75715e"># 例如，质量矩阵的元素</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">用 KroneckerDelta 表示 M_hk:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(M_hk_mass_element)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;KroneckerDelta(1, 1) = </span><span style="color:#e6db74">{</span>sympy<span style="color:#f92672">.</span>KroneckerDelta(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 结果为 1</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;KroneckerDelta(1, 2) = </span><span style="color:#e6db74">{</span>sympy<span style="color:#f92672">.</span>KroneckerDelta(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 结果为 0</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-7">与钢轨案例的联系：</h3>
+<p>狄拉克 δ 函数用于表示作用在钢轨特定位置的轨枕反力和车轮力。克罗内克 δ 函数则源于模态振型的正交性，使得质量矩阵和钢轨自身刚度矩阵（在模态坐标下）通常是对角阵或包含 δ<sub>hk</sub>。</p>
+<h2 id="11-核心概念九代数操控-algebraic-manipulations">11. 核心概念九：代数操控 (Algebraic Manipulations)</h2>
+<p>得到符号表达式后，我们经常需要对其进行代数上的操控，如化简、展开、合并同类项、提取系数等。</p>
+<ul>
+<li><code>sympy.Eq(左端, 右端)</code>: 创建一个等式对象，表示 左端 = 右端。</li>
+<li><code>表达式.simplify()</code>: 尝试多种启发式方法来化简表达式，得到一个“更简单”的形式。</li>
+<li><code>表达式.expand()</code>: 展开乘积和幂次。</li>
+<li><code>sympy.collect(表达式, 符号或符号列表)</code>: 按照指定的符号（或它们的幂次）合并同类项。</li>
+<li><code>表达式.coeff(符号, 幂次)</code>: 提取表达式中 符号 的 幂次 项的系数。</li>
+</ul>
+<h3 id="示例-8">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;11. 核心概念九：代数操控 (Algebraic Manipulations)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建一个等式</span>
+</span></span><span style="display:flex;"><span>eq1 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Eq(x<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, (x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;等式对象:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(eq1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 化简</span>
+</span></span><span style="display:flex;"><span>expr_to_simplify <span style="color:#f92672">=</span> (sympy<span style="color:#f92672">.</span>sin(x)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> sympy<span style="color:#f92672">.</span>cos(x)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> (x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span>(x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">待化简表达式: </span><span style="color:#e6db74">{</span>expr_to_simplify<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;化简后: </span><span style="color:#e6db74">{</span>expr_to_simplify<span style="color:#f92672">.</span>simplify()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 结果应为 1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 展开</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># y 需要先定义</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;y&#39;</span>)
+</span></span><span style="display:flex;"><span>expr_to_expand <span style="color:#f92672">=</span> (x <span style="color:#f92672">+</span> y)<span style="color:#f92672">**</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">待展开表达式: (x+y)**3&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(expr_to_expand<span style="color:#f92672">.</span>expand())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 合并同类项</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假设有一个整理后的方程左端项，我们要按 q_k(t) 及其导数整理</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为了演示，构造一个简单的表达式</span>
+</span></span><span style="display:flex;"><span>a, b, c_const <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>symbols(<span style="color:#e6db74">&#39;a b c_const&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># q_1_t 已在前面定义: q_1_t = sympy.Function(str(q_base[1]))(t)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># q_base 和 t 均已定义</span>
+</span></span><span style="display:flex;"><span>collected_expr_example <span style="color:#f92672">=</span> a <span style="color:#f92672">*</span> q_1_t<span style="color:#f92672">.</span>diff(t,<span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> b <span style="color:#f92672">*</span> q_1_t<span style="color:#f92672">.</span>diff(t) <span style="color:#f92672">+</span> a <span style="color:#f92672">*</span> q_1_t<span style="color:#f92672">.</span>diff(t) <span style="color:#f92672">+</span> c_const <span style="color:#f92672">*</span> q_1_t
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">待合并同类项的表达式:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(collected_expr_example)
+</span></span><span style="display:flex;"><span>collected_result <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>collect(collected_expr_example, [q_1_t<span style="color:#f92672">.</span>diff(t,<span style="color:#ae81ff">2</span>), q_1_t<span style="color:#f92672">.</span>diff(t), q_1_t])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;按 q_1(t) 及其导数合并后:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(collected_result)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取系数</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 从 collected_result 中提取 q_1_t.diff(t) 的系数</span>
+</span></span><span style="display:flex;"><span>coeff_q1_dot <span style="color:#f92672">=</span> collected_result<span style="color:#f92672">.</span>coeff(q_1_t<span style="color:#f92672">.</span>diff(t))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">q_1_dot(t) 的系数: </span><span style="color:#e6db74">{</span>coeff_q1_dot<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 应该是 a + b</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 提取 q_1_t 的系数</span>
+</span></span><span style="display:flex;"><span>coeff_q1 <span style="color:#f92672">=</span> collected_result<span style="color:#f92672">.</span>coeff(q_1_t)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;q_1(t) 的系数: </span><span style="color:#e6db74">{</span>coeff_q1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>) <span style="color:#75715e"># 应该是 c_const</span>
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-8">与钢轨案例的联系：</h3>
+<p>在通过伽辽金法得到积分后的方程后，我们需要对其进行大量的代数整理，特别是使用 <code>collect</code> 和 <code>coeff</code> 来分离出 q̈<sub>k</sub>(t), q̇<sub>k</sub>(t), q<sub>k</sub>(t) 各项的系数，从而得到质量矩阵 M<sub>hk</sub>、阻尼矩阵 C<sub>hk</sub> 和刚度矩阵 K<sub>hk</sub> 的元素。</p>
+<h2 id="12-核心概念十矩阵-matrices-简介">12. 核心概念十：矩阵 (Matrices) (简介)</h2>
+<p>SymPy 提供了矩阵对象 <code>sympy.Matrix</code>，可以用于存储和操作符号矩阵。</p>
+<ul>
+<li>创建矩阵： <code>sympy.Matrix([[行1元素], [行2元素], ...])</code>。</li>
+<li>创建特殊矩阵： 如 <code>sympy.zeros(行数, 列数)</code> 创建零矩阵。</li>
+</ul>
+<h3 id="示例-9">示例：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;12. 核心概念十：矩阵 (Matrices) (简介)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建一个简单的 2x2 符号矩阵</span>
+</span></span><span style="display:flex;"><span>M11, M12, M21, M22 <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>symbols(<span style="color:#e6db74">&#39;M11 M12 M21 M22&#39;</span>)
+</span></span><span style="display:flex;"><span>matrix_M <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Matrix([
+</span></span><span style="display:flex;"><span>    [M11, M12],
+</span></span><span style="display:flex;"><span>    [M21, M22]
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;2x2 符号矩阵 M:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(matrix_M)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建一个 2x1 的列向量 (例如，模态坐标向量)</span>
+</span></span><span style="display:flex;"><span>q1_sym <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;q1&#39;</span>) <span style="color:#75715e"># 用简单符号代替 q_1(t) 以简化显示</span>
+</span></span><span style="display:flex;"><span>q2_sym <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Symbol(<span style="color:#e6db74">&#39;q2&#39;</span>)
+</span></span><span style="display:flex;"><span>vector_q <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Matrix([
+</span></span><span style="display:flex;"><span>    [q1_sym],
+</span></span><span style="display:flex;"><span>    [q2_sym]
+</span></span><span style="display:flex;"><span>])
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">2x1 列向量 q:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(vector_q)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 矩阵乘法 (符号层面)</span>
+</span></span><span style="display:flex;"><span>product_Mq <span style="color:#f92672">=</span> matrix_M <span style="color:#f92672">*</span> vector_q
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">矩阵乘积 M*q:&#34;</span>)
+</span></span><span style="display:flex;"><span>sympy<span style="color:#f92672">.</span>pprint(product_Mq)
+</span></span></code></pre></div><h3 id="与钢轨案例的联系-9">与钢轨案例的联系：</h3>
+<p>我们的最终目标之一就是得到系统运动方程的矩阵形式 Mq̈+Cq̇+Kq=F。通过提取系数得到的 M<sub>hk</sub>,C<sub>hk</sub>,K<sub>hk</sub> 就是这些矩阵的元素。</p>
+<h2 id="总结与展望">总结与展望</h2>
+<p>本教程介绍了 SymPy 的一些核心功能，这些功能是进行符号数学推导的基础。我们通过简单的示例解释了如何定义符号、构建表达式、进行微积分运算、处理求和与特殊函数、执行代数操控以及使用矩阵。每一个概念都与我们之前复杂的钢轨动力学推导案例中的步骤相关联。</p>
+<p>掌握了这些基础后，您就可以开始尝试更复杂的符号推导任务了。SymPy 的功能远不止于此，它还包括求解方程、级数展开、线性代数、张量运算等等。不断实践是学习 SymPy 的最佳途径。</p>
+<p>希望本教程能为您打开符号计算的大门！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print_header(<span style="color:#e6db74">&#34;教程结束&#34;</span>)
+</span></span></code></pre></div>
+      
+    </div>
+    
+  </article>
+
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+      
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-sympy-是什么为什么要用它">1. SymPy 是什么？为什么要用它？</a></li>
+    <li><a href="#2-安装与基本设置">2. 安装与基本设置</a></li>
+    <li><a href="#3-核心概念一符号-symbols">3. 核心概念一：符号 (Symbols)</a>
+      <ul>
+        <li><a href="#示例">示例：</a></li>
+        <li><a href="#与钢轨案例的联系">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-核心概念二构建表达式-expressions">4. 核心概念二：构建表达式 (Expressions)</a>
+      <ul>
+        <li><a href="#示例-1">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-1">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-核心概念三符号函数-symbolic-functions">5. 核心概念三：符号函数 (Symbolic Functions)</a>
+      <ul>
+        <li><a href="#示例-2">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-2">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-核心概念四替换-substitution">6. 核心概念四：替换 (Substitution)</a>
+      <ul>
+        <li><a href="#示例-3">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-3">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-核心概念五微分-derivatives">7. 核心概念五：微分 (Derivatives)</a>
+      <ul>
+        <li><a href="#示例-4">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-4">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-核心概念六积分-integrals">8. 核心概念六：积分 (Integrals)</a>
+      <ul>
+        <li><a href="#示例-5">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-5">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-核心概念七求和-summations">9. 核心概念七：求和 (Summations)</a>
+      <ul>
+        <li><a href="#示例-6">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-6">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-核心概念八特殊函数">10. 核心概念八：特殊函数</a>
+      <ul>
+        <li><a href="#示例-7">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-7">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#11-核心概念九代数操控-algebraic-manipulations">11. 核心概念九：代数操控 (Algebraic Manipulations)</a>
+      <ul>
+        <li><a href="#示例-8">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-8">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-核心概念十矩阵-matrices-简介">12. 核心概念十：矩阵 (Matrices) (简介)</a>
+      <ul>
+        <li><a href="#示例-9">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-9">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结与展望">总结与展望</a></li>
+  </ul>
+</nav>
+      
+          
+    </nav>
+    
+    
+  </aside>
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-sympy-是什么为什么要用它">1. SymPy 是什么？为什么要用它？</a></li>
+    <li><a href="#2-安装与基本设置">2. 安装与基本设置</a></li>
+    <li><a href="#3-核心概念一符号-symbols">3. 核心概念一：符号 (Symbols)</a>
+      <ul>
+        <li><a href="#示例">示例：</a></li>
+        <li><a href="#与钢轨案例的联系">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-核心概念二构建表达式-expressions">4. 核心概念二：构建表达式 (Expressions)</a>
+      <ul>
+        <li><a href="#示例-1">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-1">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-核心概念三符号函数-symbolic-functions">5. 核心概念三：符号函数 (Symbolic Functions)</a>
+      <ul>
+        <li><a href="#示例-2">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-2">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-核心概念四替换-substitution">6. 核心概念四：替换 (Substitution)</a>
+      <ul>
+        <li><a href="#示例-3">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-3">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-核心概念五微分-derivatives">7. 核心概念五：微分 (Derivatives)</a>
+      <ul>
+        <li><a href="#示例-4">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-4">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-核心概念六积分-integrals">8. 核心概念六：积分 (Integrals)</a>
+      <ul>
+        <li><a href="#示例-5">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-5">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#9-核心概念七求和-summations">9. 核心概念七：求和 (Summations)</a>
+      <ul>
+        <li><a href="#示例-6">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-6">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#10-核心概念八特殊函数">10. 核心概念八：特殊函数</a>
+      <ul>
+        <li><a href="#示例-7">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-7">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#11-核心概念九代数操控-algebraic-manipulations">11. 核心概念九：代数操控 (Algebraic Manipulations)</a>
+      <ul>
+        <li><a href="#示例-8">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-8">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-核心概念十矩阵-matrices-简介">12. 核心概念十：矩阵 (Matrices) (简介)</a>
+      <ul>
+        <li><a href="#示例-9">示例：</a></li>
+        <li><a href="#与钢轨案例的联系-9">与钢轨案例的联系：</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结与展望">总结与展望</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
