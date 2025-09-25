@@ -1,108 +1,571 @@
-<!doctype html><html class=no-js lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>构建压缩感知（Compressed Sensing, CS）算法代码 - Linguage</title><script>(function(e,t){e[t]=e[t].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content><meta property="og:url" content="https://linguage.github.io/labs/compressed_sensing_gemini_pro/"><meta property="og:site_name" content="Linguage"><meta property="og:title" content="构建压缩感知（Compressed Sensing, CS）算法代码"><meta property="og:description" content="构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="labs"><meta property="article:published_time" content="2025-08-19T15:06:53+08:00"><meta property="article:modified_time" content="2025-08-19T15:06:53+08:00"><meta property="article:tag" content="压缩感知"><meta itemprop=name content="构建压缩感知（Compressed Sensing, CS）算法代码"><meta itemprop=description content="构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。"><meta itemprop=datePublished content="2025-08-19T15:06:53+08:00"><meta itemprop=dateModified content="2025-08-19T15:06:53+08:00"><meta itemprop=wordCount content="879"><meta itemprop=keywords content="压缩感知"><meta name=twitter:card content="summary"><meta name=twitter:title content="构建压缩感知（Compressed Sensing, CS）算法代码"><meta name=twitter:description content="构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-R56T11N7PB"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-R56T11N7PB")}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class="logo logo--mixed"><a class=logo__link href=/ title=Linguage rel=home><div class="logo__item logo__imagebox"><img class=logo__img src=/img/Avatar5518800.png></div><div class="logo__item logo__text"><div class=logo__title>Linguage</div><div class=logo__tagline>Stars cannot be surpassed</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
-<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/post/><span class=menu__text>What's Old</span></a></li><li class=menu__item><a class=menu__link href=/books/><span class=menu__text>Reading</span></a></li><li class="menu__item menu__item--active"><a class=menu__link href=/labs/><span class=menu__text>Lab</span></a></li><li class=menu__item><a class=menu__link href=/static/><span class=menu__text>Notes</span></a></li><li class=menu__item><a class=menu__link href=https://linguista.bearblog.dev/blog/><span class=menu__text>Linguista</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>构建压缩感知（Compressed Sensing, CS）算法代码</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0a14 14 0 110 28 1 1 0 010-28m0 3a3 3 0 100 22 3 3 0 000-22m1 4h-2v8.4l6.8 4.4L22 18l-6-3.8z"/></svg><time class=meta__text datetime=2025-08-19T15:06:53+08:00>2025-08-19</time></div></div></header><div class="content post__content clearfix"><p>构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。</p><p>以下是构建压缩感知算法代码的一般步骤和关键组成部分：</p><p><strong>1. 定义稀疏信号 (Define the Sparse Signal):</strong></p><ul><li><strong>生成或获取原始信号 (Generate or Acquire the Original Signal):</strong> 这可能是一个图像、音频信号、时间序列数据等。</li><li><strong>稀疏表示 (Sparse Representation):</strong> 原始信号本身可能不是稀疏的，但可以在某个变换域中变得稀疏。常见的变换包括：<ul><li><strong>傅里叶变换 (Fourier Transform - FT):</strong> 适用于频域稀疏的信号。</li><li><strong>离散余弦变换 (Discrete Cosine Transform - DCT):</strong> 常用于图像和视频压缩。</li><li><strong>小波变换 (Wavelet Transform - WT):</strong> 适用于具有局部特征的信号。</li><li><strong>自定义字典 (Custom Dictionary):</strong> 对于特定类型的信号，可能会有更合适的稀疏基。</li><li>在代码中，你需要实现或使用库函数来对原始信号进行这些变换，得到稀疏系数向量 $\alpha$。通常，只有少数几个 $\alpha_i$ 的值很大，而其余的接近于零。</li></ul></li></ul><p><strong>2. 构建测量矩阵 (Construct the Measurement Matrix):</strong></p><ul><li>测量矩阵 $\Phi$ 是一个 $M \times N$ 的矩阵，其中 $N$ 是原始信号的维度（或稀疏表示的维度），$M$ 是测量次数 ($M &lt; N$)。</li><li>测量矩阵需要满足某些特性，如<strong>受限等距性质 (Restricted Isometry Property - RIP)</strong>，以保证能够从压缩测量中恢复稀疏信号。在实践中，通常使用随机矩阵，因为它们很大概率满足 RIP。常见的选择有：<ul><li><strong>高斯随机矩阵 (Gaussian Random Matrix):</strong> 矩阵的每个元素从高斯分布中独立采样。</li><li><strong>伯努利随机矩阵 (Bernoulli Random Matrix):</strong> 矩阵的每个元素从 ${-1, +1}$ 中等概率随机选择。</li><li><strong>部分傅里叶矩阵 (Partial Fourier Matrix):</strong> 随机选择傅里叶变换矩阵的 $M$ 行。</li><li><strong>稀疏随机矩阵 (Sparse Random Matrix):</strong> 包含大量零元素的随机矩阵，可以加速计算。</li></ul></li><li>在代码中，你需要生成这样一个矩阵。例如，在 Python 中，可以使用 <code>numpy.random.randn</code> 生成高斯矩阵。</li></ul><p><strong>3. 执行压缩感知测量 (Perform Compressed Sensing Measurement):</strong></p><ul><li>压缩测量是通过将原始信号（或其稀疏表示）与测量矩阵相乘来获得的。</li><li>如果直接对原始信号 $x$（维度为 $N$）进行测量，则测量结果 $y = \Phi x$（维度为 $M$）。</li><li>如果信号 $x$ 在某个正交基 $\Psi$ 下是稀疏的，即 $x = \Psi \alpha$（其中 $\alpha$ 是稀疏系数），那么测量可以表示为 $y = \Phi \Psi \alpha = \Theta \alpha$，其中 $\Theta = \Phi \Psi$ 称为传感矩阵或恢复矩阵。</li><li>在代码中，这一步通常是一个简单的矩阵向量乘法。</li></ul><p><strong>4. 实现重建算法 (Implement a Reconstruction Algorithm):</strong></p><ul><li><p>这是压缩感知中最核心和最具挑战性的部分。目标是从压缩测量 $y$ 和已知的测量矩阵 $\Phi$（或 $\Theta$）中恢复稀疏信号 $\alpha$（或 $x$）。</p></li><li><p>这是一个欠定方程组，因为 $M &lt; N$。重建算法利用信号的稀疏性来找到唯一的稀疏解。</p></li><li><p>常见的重建算法包括：</p><ul><li><strong>L1 范数最小化 (L1-norm Minimization) / 基追踪 (Basis Pursuit - BP):</strong>
-$$\min_{\alpha} |\alpha|_1 \quad \text{subject to} \quad y = \Theta \alpha$$
-这通常可以转化为线性规划问题。</li><li><strong>贪婪算法 (Greedy Algorithms):</strong><ul><li><strong>匹配追踪 (Matching Pursuit - MP):</strong> 迭代地选择与当前残差最相关的原子（$\Theta$ 的列）。</li><li><strong>正交匹配追踪 (Orthogonal Matching Pursuit - OMP):</strong> MP 的改进版，在每一步都对已选原子进行正交化，以确保残差与已选原子正交。这是教学和基础实现中非常流行的一种算法。</li><li><strong>压缩采样匹配追踪 (Compressive Sampling Matching Pursuit - CoSaMP):</strong> 每次迭代选择多个原子。</li><li><strong>迭代硬阈值 (Iterative Hard Thresholding - IHT):</strong> 通过梯度下降和硬阈值操作交替进行。</li></ul></li><li><strong>其他算法:</strong> 如迭代软阈值算法 (Iterative Soft-Thresholding Algorithm - ISTA)、快速迭代软阈值算法 (Fast Iterative Soft-Thresholding Algorithm - FISTA)、最小全变差 (Total Variation - TV) 最小化（常用于图像），以及基于贝叶斯的方法等。</li></ul></li><li><p><strong>代码实现注意事项:</strong></p><ul><li><strong>OMP 示例:</strong><ol><li>初始化残差 $r_0 = y$，支撑集 $S_0 = \emptyset$，迭代次数 $k=0$。</li><li>迭代直到满足停止条件 (例如，迭代次数达到稀疏度 $K$，或残差足够小)：
-a. 找到与当前残差 $r_k$ 最相关的原子（$\Theta$ 的列）：$j_k = \arg\max_j |\langle r_k, \theta_j \rangle|$。
-b. 更新支撑集: $S_{k+1} = S_k \cup {j_k}$。
-c. 求解最小二乘问题以获得当前支撑集上的信号估计: $\alpha_{S_{k+1}} = (\Theta_{S_{k+1}}^\dagger) y$，其中 $\Theta_{S_{k+1}}$ 是由 $S_{k+1}$ 中的列组成的矩阵，$\dagger$ 表示伪逆。
-d. 更新残差: $r_{k+1} = y - \Theta_{S_{k+1}} \alpha_{S_{k+1}}$。
-e. $k = k+1$。</li><li>最终的稀疏系数向量 $\hat{\alpha}$ 在 $S_k$ 上的分量为计算出的值，其余为零。</li></ol></li><li><strong>L1 最小化:</strong> 可以使用现有的凸优化库，如 Python 中的 <code>cvxpy</code> 或 MATLAB 中的 <code>CVX</code>。</li></ul></li></ul><p><strong>5. 信号恢复 (Signal Recovery):</strong></p><ul><li>如果重建的是稀疏系数 $\hat{\alpha}$，并且原始信号是在某个变换域 $\Psi$ 下稀疏的，那么需要通过逆变换来恢复原始信号：$\hat{x} = \Psi \hat{\alpha}$。</li><li>如果直接重建的是信号 $\hat{x}$，则此步骤不是必需的。</li></ul><p><strong>选择编程语言和库:</strong></p><ul><li><strong>Python:</strong><ul><li><code>NumPy</code>: 用于数值计算，特别是数组和矩阵操作。</li><li><code>SciPy</code>: 包含傅里叶变换、小波变换、线性代数模块等。</li><li><code>Scikit-learn</code>: 提供了一些稀疏编码和重建算法的实现 (例如 <code>OrthogonalMatchingPursuit</code>, <code>Lasso</code> 它对应于 L1 正则化的最小二乘，与基追踪相关)。</li><li><code>PyWavelets</code>: 用于小波变换。</li><li><code>CVXPY</code>: 用于凸优化问题建模，可以方便地实现 L1 最小化。</li><li><code>Sporco</code>: 一个专门用于稀疏表示和压缩感知的 Python 库。</li></ul></li><li><strong>MATLAB:</strong><ul><li>内置了丰富的信号处理、图像处理和优化工具箱。</li><li><code>fft</code>, <code>dct</code>, <code>dwt</code> (需要 Wavelet Toolbox) 等变换函数。</li><li><code>\ </code>(反斜杠运算符) 或 <code>pinv</code> 可以用于求解最小二乘问题。</li><li><code>CVX</code>: 流行的凸优化建模工具。</li><li>有一些研究者共享的压缩感知工具箱，如 <code>SPGL1</code>, <code>GPSR</code>, <code>OMPBox</code>。</li></ul></li></ul><p><strong>一个简化的 Python 伪代码示例 (使用 OMP):</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> scipy.fftpack <span style=color:#f92672>import</span> dct, idct <span style=color:#75715e># 以 DCT 为例</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> sklearn.linear_model <span style=color:#f92672>import</span> OrthogonalMatchingPursuit
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 1. 定义/生成稀疏信号</span>
-</span></span><span style=display:flex><span>N <span style=color:#f92672>=</span> <span style=color:#ae81ff>256</span>  <span style=color:#75715e># 信号长度</span>
-</span></span><span style=display:flex><span>K <span style=color:#f92672>=</span> <span style=color:#ae81ff>20</span>   <span style=color:#75715e># 稀疏度 (非零元素个数)</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 生成一个在 DCT 域稀疏的信号</span>
-</span></span><span style=display:flex><span>x_orig <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros(N)
-</span></span><span style=display:flex><span>t <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, N)
-</span></span><span style=display:flex><span>x_orig <span style=color:#f92672>+=</span> np<span style=color:#f92672>.</span>sin(<span style=color:#ae81ff>13</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> t)
-</span></span><span style=display:flex><span>x_orig <span style=color:#f92672>+=</span> np<span style=color:#f92672>.</span>sin(<span style=color:#ae81ff>37</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> t)
-</span></span><span style=display:flex><span><span style=color:#75715e># 在实际中，信号可能更复杂，稀疏性可能不完美</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 找到其 DCT 变换 (alpha)</span>
-</span></span><span style=display:flex><span>alpha <span style=color:#f92672>=</span> dct(x_orig, norm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ortho&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:#75715e># (可选) 人为制造稀疏性以简化示例</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># indices = np.random.choice(N, K, replace=False)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># alpha_sparse = np.zeros(N)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># alpha_sparse[indices] = alpha[indices] # 或者直接赋予一些值</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># x_sparse_domain = idct(alpha_sparse, norm=&#39;ortho&#39;) # 这是理想的稀疏信号</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 2. 构建测量矩阵</span>
-</span></span><span style=display:flex><span>M <span style=color:#f92672>=</span> <span style=color:#ae81ff>64</span>  <span style=color:#75715e># 测量次数， M &lt; N</span>
-</span></span><span style=display:flex><span>Phi <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>random<span style=color:#f92672>.</span>randn(M, N)
-</span></span><span style=display:flex><span><span style=color:#75715e># (可选) 对 Phi 进行正交化或归一化处理，但这不总是必需的</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 3. 执行压缩感知测量</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 假设我们直接测量原始信号 x，并且重建时考虑其在 DCT 域的稀疏性</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 那么传感矩阵 Theta = Phi * Psi_inv (这里 Psi_inv 是 IDCT 矩阵)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或者，如果我们知道信号在某个域是稀疏的，我们测量的是原始信号 x</span>
-</span></span><span style=display:flex><span>y <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>dot(Phi, x_orig)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 4. 实现重建算法 (使用 scikit-learn 的 OMP)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># OMP 试图找到 y = Phi @ x_reconstructed 中的 x_reconstructed</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 如果我们知道 x_reconstructed 在 DCT 域是稀疏的，</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 则令 x_reconstructed = IDCT(alpha_reconstructed)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 那么 y = Phi @ IDCT(alpha_reconstructed)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 我们可以定义 A = Phi @ IDCT_matrix，然后求解 y = A @ alpha_reconstructed</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或者，一些 OMP 实现可以直接处理字典</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 更直接的方法：许多 CS 公式假设 y = Theta * alpha，其中 Theta = Phi * Psi</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Psi 是稀疏基矩阵 (例如 DCT 矩阵的列是基向量)</span>
-</span></span><span style=display:flex><span>Psi <span style=color:#f92672>=</span> dct(np<span style=color:#f92672>.</span>eye(N), norm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ortho&#39;</span>) <span style=color:#75715e># DCT 矩阵 (每一列是一个基向量)</span>
-</span></span><span style=display:flex><span>Theta <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>dot(Phi, Psi<span style=color:#f92672>.</span>T) <span style=color:#75715e># Psi.T 因为我们用 alpha 做列向量 x = Psi.T @ alpha</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># 或者 Psi 的每一行是一个基向量，x_transformed = Psi @ x_original</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># 这里我们假设 x_orig = Psi_inv @ alpha, Psi_inv 是 IDCT</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># 所以 alpha = Psi @ x_orig.</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># y = Phi @ x_orig = Phi @ Psi_inv @ alpha</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># 令 Theta = Phi @ Psi_inv</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># Psi_inv 是 IDCT 矩阵，其列是 DCT 基函数。</span>
-</span></span><span style=display:flex><span>                          <span style=color:#75715e># 更简单地，scikit-learn 的 OMP 可以配置为在变换域寻找解。</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 使用 scikit-learn OMP</span>
-</span></span><span style=display:flex><span>omp <span style=color:#f92672>=</span> OrthogonalMatchingPursuit(n_nonzero_coefs<span style=color:#f92672>=</span>K) <span style=color:#75715e># 假设已知稀疏度 K</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 我们需要找到 alpha_reconstructed 使得 y ≈ Phi @ idct(alpha_reconstructed)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 或者，如果重建 x, 且 x 在 Psi 域稀疏。</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># sklearn 的 OMP 求解 y = D_omp @ coefs， 我们需要设定 D_omp 和要恢复的 coefs</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 如果我们要恢复 alpha，那么 D_omp = Phi @ Psi_inv。</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 如果我们要直接恢复 x，并且约束 x 在 Psi 域是稀疏的，则更复杂。</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 让我们尝试直接恢复 x，并期望恢复的 x 具有稀疏的 DCT 变换。</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 这不是 OMP 的标准用法，OMP 通常用于 y = D_omp @ sparse_coeffs</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 为了正确使用 OMP 来恢复 alpha:</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># Theta = Phi @ idct_matrix (idct_matrix 的列是 DCT 基函数)</span>
-</span></span><span style=display:flex><span><span style=color:#75715e># idct_matrix = Psi.T (因为 Psi 的行是 DCT 基函数)</span>
-</span></span><span style=display:flex><span>idct_matrix <span style=color:#f92672>=</span> idct(np<span style=color:#f92672>.</span>eye(N), norm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ortho&#39;</span>)<span style=color:#f92672>.</span>T <span style=color:#75715e># 列是 DCT 基向量</span>
-</span></span><span style=display:flex><span>Theta_omp <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>dot(Phi, idct_matrix)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>omp<span style=color:#f92672>.</span>fit(Theta_omp, y)
-</span></span><span style=display:flex><span>alpha_reconstructed <span style=color:#f92672>=</span> omp<span style=color:#f92672>.</span>coef_
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 5. 信号恢复</span>
-</span></span><span style=display:flex><span>x_reconstructed <span style=color:#f92672>=</span> idct(alpha_reconstructed, norm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;ortho&#39;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 评估重建效果</span>
-</span></span><span style=display:flex><span>mse <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mean((x_orig <span style=color:#f92672>-</span> x_reconstructed)<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span>)
-</span></span><span style=display:flex><span>print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;Mean Squared Error: </span><span style=color:#e6db74>{</span>mse<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># 可以绘制原始信号和重建信号进行比较</span>
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>6</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(t, x_orig, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Original Signal&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>plot(t, x_reconstructed, <span style=color:#e6db74>&#39;--&#39;</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Reconstructed Signal&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>legend()
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(figsize<span style=color:#f92672>=</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>4</span>))
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>stem(alpha, use_line_collection<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Original DCT Coefficients&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Original DCT&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>2</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>stem(alpha_reconstructed, use_line_collection<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, label<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Reconstructed DCT Coefficients&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Reconstructed DCT (via OMP)&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>tight_layout()
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
-</span></span></code></pre></div><p><strong>关键考虑因素:</strong></p><ul><li><strong>稀疏度 (Sparsity Level K):</strong> 重建算法的性能通常依赖于信号的稀疏度。有些算法（如OMP）可能需要预先知道或估计稀疏度。</li><li><strong>测量次数 (Number of Measurements M):</strong> $M$ 需要大于某个理论下限，通常与 $K \log(N/K)$ 成正比。$M$ 太小会导致重建失败或精度不高。</li><li><strong>测量矩阵的选择:</strong> 随机矩阵在理论上很好，但在特定硬件或应用中，结构化随机矩阵（如部分循环矩阵、托普利兹矩阵）可能更高效。</li><li><strong>计算复杂度:</strong> 不同的重建算法具有不同的计算复杂度。贪婪算法通常比 L1 最小化快，但 L1 最小化在某些条件下有更强的恢复保证。</li><li><strong>噪声鲁棒性:</strong> 实际测量通常包含噪声 ($y = \Theta \alpha + e$)。重建算法需要能够处理噪声。L1 最小化可以修改为有噪声的版本（如 Lasso 或 Basis Pursuit DeNoising - BPDN）。</li></ul><p>构建压缩感知代码是一个涉及理论理解和实践调整的过程。建议从简单的信号和算法（如一维信号、DCT稀疏性、OMP重建）开始，然后逐步扩展到更复杂的情况。查阅相关的研究论文和开源代码库也会非常有帮助。</p><ul><li>内容来自Gemini 2.5 pro</li></ul></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M4 0h8s2 0 4 2l15 15s2 2 0 4L21 31s-2 2-4 0L2 16s-2-2-2-4V3s0-3 4-3m3 10a3 3 0 000-6 3 3 0 000 6"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5/ rel=tag>压缩感知</a></li></ul></div></footer></article></main><section class=comments><script src=https://giscus.app/client.js data-repo=Linguage/Giscus data-repo-id=R_kgDOLxA-eA data-category=Announcements data-category-id=DIC_kwDOLxA-eM4Ce06R data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=zh-CN crossorigin=anonymous async></script></section></div><aside class=sidebar itemscope itemtype=http://schema.org/WPSideBar></aside></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2025 Linguage.
-<span class=footer__copyright-credits>Generated with <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> and <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a> theme.</span></div></div></footer></div><script async defer src=/js/menu.js></script><script src=/js/custom.js></script><script src=/js/simple-pageviews.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1366&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>构建压缩感知（Compressed Sensing, CS）算法代码 • Linguage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/static/" class="nav-link ">交互式报告</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        <a href="/post/" class="btn solid">Posts</a>
+      
+    </div>
+    
+    
+
+    
+    <a href="/post/" class="mobile-nav-btn posts-btn-fixed" aria-label="Posts">Posts</a>
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/static/">交互式报告</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguage</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/labs/" class="crumb-sec">Lab</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">构建压缩感知（Compressed Sensing, CS）算法代码</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>构建压缩感知（Compressed Sensing, CS）算法代码</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Gemini Pro</span>
+           · 
+          <span class="meta-date">2025-08-19</span>
+        </div>
+      
+
+      
+      <p>构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。</p>
+<p>以下是构建压缩感知算法代码的一般步骤和关键组成部分：</p>
+<p><strong>1. 定义稀疏信号 (Define the Sparse Signal):</strong></p>
+<ul>
+<li><strong>生成或获取原始信号 (Generate or Acquire the Original Signal):</strong> 这可能是一个图像、音频信号、时间序列数据等。</li>
+<li><strong>稀疏表示 (Sparse Representation):</strong> 原始信号本身可能不是稀疏的，但可以在某个变换域中变得稀疏。常见的变换包括：
+<ul>
+<li><strong>傅里叶变换 (Fourier Transform - FT):</strong> 适用于频域稀疏的信号。</li>
+<li><strong>离散余弦变换 (Discrete Cosine Transform - DCT):</strong> 常用于图像和视频压缩。</li>
+<li><strong>小波变换 (Wavelet Transform - WT):</strong> 适用于具有局部特征的信号。</li>
+<li><strong>自定义字典 (Custom Dictionary):</strong> 对于特定类型的信号，可能会有更合适的稀疏基。</li>
+<li>在代码中，你需要实现或使用库函数来对原始信号进行这些变换，得到稀疏系数向量 $\alpha$。通常，只有少数几个 $\alpha_i$ 的值很大，而其余的接近于零。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 构建测量矩阵 (Construct the Measurement Matrix):</strong></p>
+<ul>
+<li>测量矩阵 $\Phi$ 是一个 $M \times N$ 的矩阵，其中 $N$ 是原始信号的维度（或稀疏表示的维度），$M$ 是测量次数 ($M < N$)。</li>
+<li>测量矩阵需要满足某些特性，如<strong>受限等距性质 (Restricted Isometry Property - RIP)</strong>，以保证能够从压缩测量中恢复稀疏信号。在实践中，通常使用随机矩阵，因为它们很大概率满足 RIP。常见的选择有：
+<ul>
+<li><strong>高斯随机矩阵 (Gaussian Random Matrix):</strong> 矩阵的每个元素从高斯分布中独立采样。</li>
+<li><strong>伯努利随机矩阵 (Bernoulli Random Matrix):</strong> 矩阵的每个元素从 $\{-1, +1\}$ 中等概率随机选择。</li>
+<li><strong>部分傅里叶矩阵 (Partial Fourier Matrix):</strong> 随机选择傅里叶变换矩阵的 $M$ 行。</li>
+<li><strong>稀疏随机矩阵 (Sparse Random Matrix):</strong> 包含大量零元素的随机矩阵，可以加速计算。</li>
+</ul>
+</li>
+<li>在代码中，你需要生成这样一个矩阵。例如，在 Python 中，可以使用 <code>numpy.random.randn</code> 生成高斯矩阵。</li>
+</ul>
+<p><strong>3. 执行压缩感知测量 (Perform Compressed Sensing Measurement):</strong></p>
+<ul>
+<li>压缩测量是通过将原始信号（或其稀疏表示）与测量矩阵相乘来获得的。</li>
+<li>如果直接对原始信号 $x$（维度为 $N$）进行测量，则测量结果 $y = \Phi x$（维度为 $M$）。</li>
+<li>如果信号 $x$ 在某个正交基 $\Psi$ 下是稀疏的，即 $x = \Psi \alpha$（其中 $\alpha$ 是稀疏系数），那么测量可以表示为 $y = \Phi \Psi \alpha = \Theta \alpha$，其中 $\Theta = \Phi \Psi$ 称为传感矩阵或恢复矩阵。</li>
+<li>在代码中，这一步通常是一个简单的矩阵向量乘法。</li>
+</ul>
+<p><strong>4. 实现重建算法 (Implement a Reconstruction Algorithm):</strong></p>
+<ul>
+<li>
+<p>这是压缩感知中最核心和最具挑战性的部分。目标是从压缩测量 $y$ 和已知的测量矩阵 $\Phi$（或 $\Theta$）中恢复稀疏信号 $\alpha$（或 $x$）。</p>
+</li>
+<li>
+<p>这是一个欠定方程组，因为 $M < N$。重建算法利用信号的稀疏性来找到唯一的稀疏解。</p>
+</li>
+<li>
+<p>常见的重建算法包括：</p>
+<ul>
+<li><strong>L1 范数最小化 (L1-norm Minimization) / 基追踪 (Basis Pursuit - BP):</strong>
+$$\min_{\alpha} \|\alpha\|_1 \quad \text{subject to} \quad y = \Theta \alpha$$
+这通常可以转化为线性规划问题。</li>
+<li><strong>贪婪算法 (Greedy Algorithms):</strong>
+<ul>
+<li><strong>匹配追踪 (Matching Pursuit - MP):</strong> 迭代地选择与当前残差最相关的原子（$\Theta$ 的列）。</li>
+<li><strong>正交匹配追踪 (Orthogonal Matching Pursuit - OMP):</strong> MP 的改进版，在每一步都对已选原子进行正交化，以确保残差与已选原子正交。这是教学和基础实现中非常流行的一种算法。</li>
+<li><strong>压缩采样匹配追踪 (Compressive Sampling Matching Pursuit - CoSaMP):</strong> 每次迭代选择多个原子。</li>
+<li><strong>迭代硬阈值 (Iterative Hard Thresholding - IHT):</strong> 通过梯度下降和硬阈值操作交替进行。</li>
+</ul>
+</li>
+<li><strong>其他算法:</strong> 如迭代软阈值算法 (Iterative Soft-Thresholding Algorithm - ISTA)、快速迭代软阈值算法 (Fast Iterative Soft-Thresholding Algorithm - FISTA)、最小全变差 (Total Variation - TV) 最小化（常用于图像），以及基于贝叶斯的方法等。</li>
+</ul>
+</li>
+<li>
+<p><strong>代码实现注意事项:</strong></p>
+<ul>
+<li><strong>OMP 示例:</strong>
+<ol>
+<li>初始化残差 $r_0 = y$，支撑集 $S_0 = \emptyset$，迭代次数 $k=0$。</li>
+<li>迭代直到满足停止条件 (例如，迭代次数达到稀疏度 $K$，或残差足够小)：
+a.  找到与当前残差 $r_k$ 最相关的原子（$\Theta$ 的列）：$j_k = \arg\max_j |\langle r_k, \theta_j \rangle|$。
+b.  更新支撑集: $S_{k+1} = S_k \cup \{j_k\}$。
+c.  求解最小二乘问题以获得当前支撑集上的信号估计: $\alpha_{S_{k+1}} = (\Theta_{S_{k+1}}^\dagger) y$，其中 $\Theta_{S_{k+1}}$ 是由 $S_{k+1}$ 中的列组成的矩阵，$\dagger$ 表示伪逆。
+d.  更新残差: $r_{k+1} = y - \Theta_{S_{k+1}} \alpha_{S_{k+1}}$。
+e.  $k = k+1$。</li>
+<li>最终的稀疏系数向量 $\hat{\alpha}$ 在 $S_k$ 上的分量为计算出的值，其余为零。</li>
+</ol>
+</li>
+<li><strong>L1 最小化:</strong> 可以使用现有的凸优化库，如 Python 中的 <code>cvxpy</code> 或 MATLAB 中的 <code>CVX</code>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 信号恢复 (Signal Recovery):</strong></p>
+<ul>
+<li>如果重建的是稀疏系数 $\hat{\alpha}$，并且原始信号是在某个变换域 $\Psi$ 下稀疏的，那么需要通过逆变换来恢复原始信号：$\hat{x} = \Psi \hat{\alpha}$。</li>
+<li>如果直接重建的是信号 $\hat{x}$，则此步骤不是必需的。</li>
+</ul>
+<p><strong>选择编程语言和库:</strong></p>
+<ul>
+<li><strong>Python:</strong>
+<ul>
+<li><code>NumPy</code>: 用于数值计算，特别是数组和矩阵操作。</li>
+<li><code>SciPy</code>: 包含傅里叶变换、小波变换、线性代数模块等。</li>
+<li><code>Scikit-learn</code>: 提供了一些稀疏编码和重建算法的实现 (例如 <code>OrthogonalMatchingPursuit</code>, <code>Lasso</code> 它对应于 L1 正则化的最小二乘，与基追踪相关)。</li>
+<li><code>PyWavelets</code>: 用于小波变换。</li>
+<li><code>CVXPY</code>: 用于凸优化问题建模，可以方便地实现 L1 最小化。</li>
+<li><code>Sporco</code>: 一个专门用于稀疏表示和压缩感知的 Python 库。</li>
+</ul>
+</li>
+<li><strong>MATLAB:</strong>
+<ul>
+<li>内置了丰富的信号处理、图像处理和优化工具箱。</li>
+<li><code>fft</code>, <code>dct</code>, <code>dwt</code> (需要 Wavelet Toolbox) 等变换函数。</li>
+<li><code>\ </code> (反斜杠运算符) 或 <code>pinv</code> 可以用于求解最小二乘问题。</li>
+<li><code>CVX</code>: 流行的凸优化建模工具。</li>
+<li>有一些研究者共享的压缩感知工具箱，如 <code>SPGL1</code>, <code>GPSR</code>, <code>OMPBox</code>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>一个简化的 Python 伪代码示例 (使用 OMP):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> scipy.fftpack <span style="color:#f92672">import</span> dct, idct <span style="color:#75715e"># 以 DCT 为例</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> OrthogonalMatchingPursuit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. 定义/生成稀疏信号</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>  <span style="color:#75715e"># 信号长度</span>
+</span></span><span style="display:flex;"><span>K <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>   <span style="color:#75715e"># 稀疏度 (非零元素个数)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成一个在 DCT 域稀疏的信号</span>
+</span></span><span style="display:flex;"><span>x_orig <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(N)
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, N)
+</span></span><span style="display:flex;"><span>x_orig <span style="color:#f92672">+=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">13</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> t)
+</span></span><span style="display:flex;"><span>x_orig <span style="color:#f92672">+=</span> np<span style="color:#f92672">.</span>sin(<span style="color:#ae81ff">37</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">*</span> t)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在实际中，信号可能更复杂，稀疏性可能不完美</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 找到其 DCT 变换 (alpha)</span>
+</span></span><span style="display:flex;"><span>alpha <span style="color:#f92672">=</span> dct(x_orig, norm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ortho&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (可选) 人为制造稀疏性以简化示例</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># indices = np.random.choice(N, K, replace=False)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># alpha_sparse = np.zeros(N)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># alpha_sparse[indices] = alpha[indices] # 或者直接赋予一些值</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># x_sparse_domain = idct(alpha_sparse, norm=&#39;ortho&#39;) # 这是理想的稀疏信号</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 构建测量矩阵</span>
+</span></span><span style="display:flex;"><span>M <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>  <span style="color:#75715e"># 测量次数， M &lt; N</span>
+</span></span><span style="display:flex;"><span>Phi <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(M, N)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (可选) 对 Phi 进行正交化或归一化处理，但这不总是必需的</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 执行压缩感知测量</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 假设我们直接测量原始信号 x，并且重建时考虑其在 DCT 域的稀疏性</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 那么传感矩阵 Theta = Phi * Psi_inv (这里 Psi_inv 是 IDCT 矩阵)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者，如果我们知道信号在某个域是稀疏的，我们测量的是原始信号 x</span>
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(Phi, x_orig)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. 实现重建算法 (使用 scikit-learn 的 OMP)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OMP 试图找到 y = Phi @ x_reconstructed 中的 x_reconstructed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果我们知道 x_reconstructed 在 DCT 域是稀疏的，</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 则令 x_reconstructed = IDCT(alpha_reconstructed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 那么 y = Phi @ IDCT(alpha_reconstructed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我们可以定义 A = Phi @ IDCT_matrix，然后求解 y = A @ alpha_reconstructed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者，一些 OMP 实现可以直接处理字典</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更直接的方法：许多 CS 公式假设 y = Theta * alpha，其中 Theta = Phi * Psi</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Psi 是稀疏基矩阵 (例如 DCT 矩阵的列是基向量)</span>
+</span></span><span style="display:flex;"><span>Psi <span style="color:#f92672">=</span> dct(np<span style="color:#f92672">.</span>eye(N), norm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ortho&#39;</span>) <span style="color:#75715e"># DCT 矩阵 (每一列是一个基向量)</span>
+</span></span><span style="display:flex;"><span>Theta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(Phi, Psi<span style="color:#f92672">.</span>T) <span style="color:#75715e"># Psi.T 因为我们用 alpha 做列向量 x = Psi.T @ alpha</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># 或者 Psi 的每一行是一个基向量，x_transformed = Psi @ x_original</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># 这里我们假设 x_orig = Psi_inv @ alpha, Psi_inv 是 IDCT</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># 所以 alpha = Psi @ x_orig.</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># y = Phi @ x_orig = Phi @ Psi_inv @ alpha</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># 令 Theta = Phi @ Psi_inv</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># Psi_inv 是 IDCT 矩阵，其列是 DCT 基函数。</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#75715e"># 更简单地，scikit-learn 的 OMP 可以配置为在变换域寻找解。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用 scikit-learn OMP</span>
+</span></span><span style="display:flex;"><span>omp <span style="color:#f92672">=</span> OrthogonalMatchingPursuit(n_nonzero_coefs<span style="color:#f92672">=</span>K) <span style="color:#75715e"># 假设已知稀疏度 K</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 我们需要找到 alpha_reconstructed 使得 y ≈ Phi @ idct(alpha_reconstructed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者，如果重建 x, 且 x 在 Psi 域稀疏。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sklearn 的 OMP 求解 y = D_omp @ coefs， 我们需要设定 D_omp 和要恢复的 coefs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果我们要恢复 alpha，那么 D_omp = Phi @ Psi_inv。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如果我们要直接恢复 x，并且约束 x 在 Psi 域是稀疏的，则更复杂。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 让我们尝试直接恢复 x，并期望恢复的 x 具有稀疏的 DCT 变换。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这不是 OMP 的标准用法，OMP 通常用于 y = D_omp @ sparse_coeffs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为了正确使用 OMP 来恢复 alpha:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Theta = Phi @ idct_matrix (idct_matrix 的列是 DCT 基函数)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># idct_matrix = Psi.T (因为 Psi 的行是 DCT 基函数)</span>
+</span></span><span style="display:flex;"><span>idct_matrix <span style="color:#f92672">=</span> idct(np<span style="color:#f92672">.</span>eye(N), norm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ortho&#39;</span>)<span style="color:#f92672">.</span>T <span style="color:#75715e"># 列是 DCT 基向量</span>
+</span></span><span style="display:flex;"><span>Theta_omp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(Phi, idct_matrix)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>omp<span style="color:#f92672">.</span>fit(Theta_omp, y)
+</span></span><span style="display:flex;"><span>alpha_reconstructed <span style="color:#f92672">=</span> omp<span style="color:#f92672">.</span>coef_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 5. 信号恢复</span>
+</span></span><span style="display:flex;"><span>x_reconstructed <span style="color:#f92672">=</span> idct(alpha_reconstructed, norm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ortho&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 评估重建效果</span>
+</span></span><span style="display:flex;"><span>mse <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean((x_orig <span style="color:#f92672">-</span> x_reconstructed)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Mean Squared Error: </span><span style="color:#e6db74">{</span>mse<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 可以绘制原始信号和重建信号进行比较</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, x_orig, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Original Signal&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>plot(t, x_reconstructed, <span style="color:#e6db74">&#39;--&#39;</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Reconstructed Signal&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>legend()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>stem(alpha, use_line_collection<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Original DCT Coefficients&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Original DCT&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>stem(alpha_reconstructed, use_line_collection<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, label<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Reconstructed DCT Coefficients&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Reconstructed DCT (via OMP)&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>tight_layout()
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>show()
+</span></span></code></pre></div><p><strong>关键考虑因素:</strong></p>
+<ul>
+<li><strong>稀疏度 (Sparsity Level K):</strong> 重建算法的性能通常依赖于信号的稀疏度。有些算法（如OMP）可能需要预先知道或估计稀疏度。</li>
+<li><strong>测量次数 (Number of Measurements M):</strong> $M$ 需要大于某个理论下限，通常与 $K \log(N/K)$ 成正比。$M$ 太小会导致重建失败或精度不高。</li>
+<li><strong>测量矩阵的选择:</strong> 随机矩阵在理论上很好，但在特定硬件或应用中，结构化随机矩阵（如部分循环矩阵、托普利兹矩阵）可能更高效。</li>
+<li><strong>计算复杂度:</strong> 不同的重建算法具有不同的计算复杂度。贪婪算法通常比 L1 最小化快，但 L1 最小化在某些条件下有更强的恢复保证。</li>
+<li><strong>噪声鲁棒性:</strong> 实际测量通常包含噪声 ($y = \Theta \alpha + e$)。重建算法需要能够处理噪声。L1 最小化可以修改为有噪声的版本（如 Lasso 或 Basis Pursuit DeNoising - BPDN）。</li>
+</ul>
+<p>构建压缩感知代码是一个涉及理论理解和实践调整的过程。建议从简单的信号和算法（如一维信号、DCT稀疏性、OMP重建）开始，然后逐步扩展到更复杂的情况。查阅相关的研究论文和开源代码库也会非常有帮助。</p>
+<ul>
+<li>内容来自Gemini 2.5 pro</li>
+</ul>
+      
+    </div>
+    
+  </article>
+
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+      
+      
+        <nav id="TableOfContents"></nav>
+      
+          
+    </nav>
+    
+    
+  </aside>
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents"></nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

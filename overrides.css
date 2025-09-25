@@ -1,0 +1,220 @@
+:root{
+  /* Defaults if not provided by params.theme */
+  --theme-header-height: 64px;
+  --theme-breadcrumbs-height: 40px;
+  --theme-footer-height: 64px;
+  /* Widen overall container to use more horizontal space */
+  --container: 1440px;
+  --adaptive-media-img-height: clamp(200px, 32vw, 420px);
+}
+
+/* ============================= */
+/* Brand avatar styling (enhanced) */
+/* ============================= */
+.brand{ display: inline-flex; align-items: center; gap: 8px; }
+.brand-avatar-link{ display:inline-flex; line-height:0; }
+.brand-avatar-link{ width:32px; height:32px; border-radius:50%; overflow:hidden; position:relative; }
+.brand-avatar-link:focus-visible{ outline:2px solid var(--accent, #222); outline-offset:2px; border-radius:50%; }
+.brand .logo-avatar{
+  width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover; display: inline-block;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+}
+.brand-avatar-link .logo-avatar{ width:100%; height:100%; border-radius:50%; display:block; }
+.brand .logo-avatar:hover{ transform: translateY(-1px); box-shadow: 0 4px 12px -2px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.05); }
+.brand .logo-avatar:active{ transform: scale(.95); }
+.brand-text{ font-weight: 600; }
+@media (max-width: 900px){
+  .brand .logo-avatar{ width:28px; height:28px; }
+}
+@media (prefers-color-scheme: dark){
+  .brand .logo-avatar{ background:#222; border-color:rgba(255,255,255,.35); box-shadow:0 0 0 1px rgba(255,255,255,.12), 0 4px 10px -2px rgba(0,0,0,.6); }
+  .brand .logo-avatar:hover{ box-shadow:0 0 0 1px rgba(255,255,255,.25), 0 6px 14px -3px rgba(0,0,0,.7); }
+}
+.logo-avatar.avatar-fallback{ background:linear-gradient(135deg,#ddd,#bbb); border:2px dashed rgba(0,0,0,.25); box-shadow:none; }
+@media (prefers-color-scheme: dark){ .logo-avatar.avatar-fallback{ background:linear-gradient(135deg,#444,#222); border-color:rgba(255,255,255,.3); } }
+
+/* Make header fixed and reserve space so content won't jump under it */
+body{ padding-top: var(--theme-header-height); }
+.container{ max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+}
+
+/* Make breadcrumbs stick under the sticky header */
+.breadcrumbs{
+  position: sticky;
+  top: var(--theme-header-height);
+  z-index: 60;
+  background: rgba(248,246,242,.9);
+  -webkit-backdrop-filter: saturate(180%) blur(6px);
+  backdrop-filter: saturate(180%) blur(6px);
+  padding: 8px 0;
+  margin: 0 0 8px !important; /* override inline margin */
+  border-bottom: 1px solid var(--border);
+}
+
+/* Adjust sticky offsets for sidebar and TOC to sit below header+breadcrumbs */
+.docs-sidebar,
+.docs-toc{
+  position: sticky;
+  top: calc(var(--theme-header-height) + var(--theme-breadcrumbs-height));
+}
+
+/* ============================= */
+/* TOC indentation (up to 3 lvls) */
+/* ============================= */
+/* Remove bullets and spacing from Hugo TOC structure */
+.toc #TableOfContents ul{ list-style: none; margin: 0; padding: 0; }
+
+/* Base link style reset so indentation is controlled purely by level rules */
+.toc #TableOfContents a{ display:block; padding:6px 8px; }
+
+/* Level indents: 2ch per level */
+.toc #TableOfContents > ul > li > a{ padding-left: 0; }
+.toc #TableOfContents ul ul > li > a{ padding-left: 2ch; }
+.toc #TableOfContents ul ul ul > li > a{ padding-left: 4ch; }
+
+/* Hide depth >= 4 */
+.toc #TableOfContents ul ul ul ul{ display: none; }
+
+/* ============================= */
+/* Docs layout width tuning      */
+/* ============================= */
+/* Narrow side rails a bit and reduce gap to free center space */
+.docs-layout{
+  grid-template-columns: 240px minmax(0, 1fr) 220px; /* sidebar | content | toc */
+  gap: 22px;
+}
+
+/* ============================= */
+/* Fixed translucent footer      */
+/* ============================= */
+/* Reserve space so content bottom is not covered by fixed footer */
+body{ padding-bottom: var(--theme-footer-height); }
+
+.site-footer{
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 70; /* below header (100) but above content */
+  background: rgba(248,246,242,.9);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  backdrop-filter: saturate(180%) blur(8px);
+  border-top: 1px solid var(--border);
+}
+
+/* Footer social icons */
+.site-footer .social-links { display: flex; gap: 0.0rem; align-items: center; }
+.site-footer .social-links .social-icon { display: inline-flex; width: 32px; height: 32px; border-radius: 50%; align-items: center; justify-content: center; color: var(--color-text-secondary, #555); background: rgba(0,0,0,0.04); text-decoration: none; transition: background .25s, color .25s, transform .25s; }
+.site-footer .social-links .bear-badge { width: auto; min-width: 32px; padding: 0 0.85rem; border-radius: 999px; font-size: 0.95rem; font-weight: 600; font-family: "Inter", "SF Pro Text", "Segoe UI", sans-serif; letter-spacing: 0.01em; line-height: 1; }
+.site-footer .social-links .social-icon:hover, .site-footer .social-links .social-icon:focus-visible { background: var(--color-accent, #444); color: #fff; transform: translateY(-2px); }
+.site-footer .social-links .social-icon svg, .site-footer .social-links .social-icon img { width: 18px; height: 18px; display: block; }
+.site-footer .social-links .social-icon img { object-fit: contain; border-radius: 4px; }
+@media (prefers-color-scheme: dark) { .site-footer .social-links .social-icon { background: rgba(255,255,255,0.08); color: #ccc; } .site-footer .social-links .social-icon:hover, .site-footer .social-links .social-icon:focus-visible { background: var(--color-accent, #eee); color: #000; } }
+
+/* ============================= */
+/* Responsive priorities          */
+/* 1) Wide: show all 3 columns    */
+/* 2) Medium: hide LEFT sidebar   */
+/* 3) Small: only center content  */
+/* ============================= */
+@media (max-width: 1200px){ .docs-sidebar{ display: none; } .docs-layout{ grid-template-columns: minmax(0,1fr) 240px; } }
+@media (max-width: 900px){ .docs-toc{ display: none; } .docs-layout{ grid-template-columns: 1fr; } }
+
+/* Header: progressively hide less important items */
+@media (max-width: 900px){ .actions .btn.ghost:not(.posts-cta){ display: none; } }
+
+.actions .posts-cta{ background: #161616; color: #fff !important; border: 1px solid #161616; text-decoration: none; transition: background .25s ease, color .25s ease, transform .2s ease; }
+.actions .posts-cta:hover, .actions .posts-cta:focus-visible{ background: #000; color: #fff; transform: translateY(-1px); }
+.actions .posts-cta:active{ transform: translateY(0); background: #1f1f1f; }
+
+/* Footer: collapse nav on small screens */
+@media (max-width: 900px){ .footer-nav{ display: none; } .footer-inner{ justify-content: center; } }
+
+/* ============================= */
+/* Breadcrumb collapsing rules   */
+/* ============================= */
+@media (max-width: 900px){
+  /* Keep header and breadcrumbs attached on narrow screens */
+  body{ padding-top: var(--theme-header-height); }
+  .site-header{ position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+  .breadcrumbs{ top: var(--theme-header-height); }
+  .breadcrumbs{ font-size: 13px; }
+  /* Mobile: show current page title or section name; hide only ancestors */
+  .breadcrumbs .crumb-anc{ display: none; }
+  .breadcrumbs .crumb-sec{ display: inline; }
+  .breadcrumbs .crumb-current{ display: inline; }
+  /* No leading slashes when only one label is shown */
+  .breadcrumbs .crumb-sep{ display: none; }
+}
+
+/* ============================= */
+/* Mobile TOC mini button/drawer */
+/* ============================= */
+.toc-mini-btn{ display: none; }
+.toc-drawer{ display: none; }
+@media (max-width: 900px){
+  .toc-mini-btn{ position: fixed; right: 16px; bottom: calc(var(--theme-footer-height) + 24px); z-index: 200; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); padding: 8px 12px; box-shadow: var(--shadow); display: inline-flex; }
+  .toc-drawer{ position: fixed; right: 0; top: var(--theme-header-height); bottom: calc(var(--theme-footer-height) + 8px); width: min(86%, 340px); z-index: 110; }
+  .toc-drawer-inner{ height: 100%; background: var(--surface); border-left: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .toc-drawer-header{ display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  .toc-drawer-close{ border: 1px solid var(--border); background: transparent; border-radius: 8px; padding: 4px 8px; cursor: pointer; }
+  .toc-drawer .toc{ padding: 8px 8px; overflow: auto; }
+  /* visibility controlled by [hidden] attribute */
+  .toc-drawer[hidden]{ display: none; }
+  .toc-drawer:not([hidden]){ display: block; }
+}
+
+/* Header toggles are provided by theme; keep this block empty */
+
+/* Drawer styles (legacy from site; kept for compatibility if referenced) */
+/* If not needed, you may remove this section later. */
+
+/* Adaptive table layout (7-character principle) */
+.adaptive-table{ table-layout: fixed; width: 100%; }
+.adaptive-table th{ white-space: nowrap; }
+.adaptive-table td{ word-break: break-word; vertical-align: top; }
+.adaptive-table td .cell-inner{ display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.6; max-height: calc(1.6em * 3); text-overflow: ellipsis; }
+.adaptive-table td.nowrap-7{ white-space: nowrap; word-break: normal; }
+.adaptive-table td.nowrap-7 .cell-inner{ display: inline; -webkit-line-clamp: initial; line-clamp: unset; max-height: none; overflow: visible; white-space: nowrap; }
+.adaptive-table td.cell-media .cell-inner{ display: block; -webkit-line-clamp: initial; line-clamp: unset; max-height: none; overflow: visible; }
+.adaptive-table td.cell-media img, .adaptive-table td.cell-media picture, .adaptive-table td.cell-media figure, .adaptive-table td.cell-media iframe, .adaptive-table td.cell-media video, .adaptive-table td.cell-media svg{ max-width: 100%; display: block; margin: 0 auto; }
+.adaptive-table td.cell-media img, .adaptive-table td.cell-media picture img, .adaptive-table td.cell-media video, .adaptive-table td.cell-media iframe{ width: 100%; height: var(--adaptive-media-img-height); object-fit: cover; border-radius: 6px; }
+
+/* Responsive media inside article content */
+.docs-content .prose img, .docs-content .prose picture, .docs-content .prose video, .docs-content .prose iframe, .docs-content .prose svg{ max-width: 100%; height: auto; }
+.docs-content .prose picture, .docs-content .prose video, .docs-content .prose iframe{ display: block; }
+.docs-content .prose img,  .docs-content .prose picture img{ display: block; margin: 1.2rem auto; }
+  .docs-content .prose figure{ margin-left: 0; margin-right: 0; }
+  @media (max-width: 900px){ .adaptive-table{ font-size:14px; } }
+
+/* ===== Header action buttons (e.g., Posts): ensure no underline ===== */
+.actions .btn,
+.actions .btn:hover,
+.actions .btn:focus,
+.actions .btn:focus-visible,
+.actions .btn:active,
+.actions .btn:visited{ text-decoration: none !important; }
+
+/* ===== Mobile top-right permanent Posts button ===== */
+@media (max-width: 900px){
+  .posts-btn-fixed{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff !important;
+    border: none;
+    text-decoration: none !important;
+    line-height: 1;
+  }
+  .posts-btn-fixed:hover,
+  .posts-btn-fixed:focus-visible{ filter: brightness(.96); color:#fff !important; }
+}
