@@ -204,4 +204,17 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileDrawers();
   // Initialize footer auto-hide
   setupFooterAutoHide();
+
+  // Home hero search box: redirect to /search/?q=...
+  try{
+    const homeSearch = document.querySelector('.hero .search input[type="search"]');
+    if (homeSearch){
+      homeSearch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter'){
+          const q = homeSearch.value.trim();
+          if (q) window.location.href = `/search/?q=${encodeURIComponent(q)}`;
+        }
+      });
+    }
+  }catch(err){ /* no-op */ }
 });
