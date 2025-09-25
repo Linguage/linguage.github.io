@@ -5,6 +5,44 @@ function slugify(text){
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 }
+
+// Auto-hide fixed footer on scroll (hide on scroll down, show on scroll up)
+function setupFooterAutoHide(){
+  const footer = document.querySelector('.site-footer');
+  if (!footer) return;
+  let lastY = window.scrollY || 0;
+  const MIN_DELTA = 4;   // ignore tiny jitters
+  const REVEAL_AT_TOP = 80; // always reveal near top
+  const mq = window.matchMedia('(max-width: 900px)');
+  const isMobile = () => mq.matches;
+  const onScroll = () => {
+    // Only active on mobile viewports
+    if (!isMobile()){
+      footer.classList.remove('footer-hidden');
+      lastY = window.scrollY || 0;
+      return;
+    }
+    const y = window.scrollY || 0;
+    const dy = y - lastY;
+    // reveal near top or when scrolling up
+    if (y < REVEAL_AT_TOP || dy < -MIN_DELTA){
+      footer.classList.remove('footer-hidden');
+    } else if (dy > MIN_DELTA){
+      footer.classList.add('footer-hidden');
+    }
+    lastY = y;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  // Respond to viewport changes: reveal footer when switching to desktop
+  if (mq && mq.addEventListener){
+    mq.addEventListener('change', () => {
+      if (!isMobile()) footer.classList.remove('footer-hidden');
+      lastY = window.scrollY || 0;
+      onScroll();
+    });
+  }
+  onScroll();
+}
 function ensureIds(headings){
   headings.forEach(h => { if (!h.id){ h.id = slugify(h.textContent || 'section'); } });
 }
@@ -164,4 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Initialize mobile drawers on all pages (home, list, single)
   setupMobileDrawers();
+  // Initialize footer auto-hide
+  setupFooterAutoHide();
 });

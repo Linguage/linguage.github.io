@@ -107,6 +107,7 @@ body{ padding-bottom: var(--theme-footer-height); }
   backdrop-filter: saturate(180%) blur(8px);
   border-top: 1px solid var(--border);
   padding: 6px 0; /* compact padding */
+  transition: transform .25s ease, opacity .25s ease;
 }
 
 /* Footer social icons */
@@ -202,6 +203,9 @@ body{ padding-bottom: var(--theme-footer-height); }
   :root{ --theme-footer-height: 44px; }
   .site-footer{ padding: 4px 0; }
 }
+
+/* Footer auto-hide state */
+.site-footer.footer-hidden{ transform: translateY(100%); opacity: .85; }
 
 /* ===== Header action buttons (e.g., Posts): ensure no underline ===== */
 .actions .btn,
