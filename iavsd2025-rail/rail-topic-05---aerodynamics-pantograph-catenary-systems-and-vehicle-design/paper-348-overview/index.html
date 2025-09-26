@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Linguage</title>
+  <title>Linguista</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
@@ -35,9 +35,9 @@
 
   
   
-<meta property="og:site_name" content="Linguage">
+<meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguage"><meta property="og:description" content="IAVSD 2025 论文概览：paper-348 基本信息 论文编号：paper-348 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Extrapolating Railway Catenary Dynamics to Unobserved Operational Conditions Using Long Expressive Memory Networks 中文标题：利用长表达记忆网络将铁路接触网动力学外推到未观察到的运行条件 作者及单位：Taniya Kapoor⋆, Hongrui Wang⋆, Rolf Dollevoet, Alfredo Nunez (Delft University of Technology, The Netherlands) 摘要 准确的受电弓-接触网动力学建模对于理解影响受流质量的相互作用机制至关重要。为了模拟受电弓-接触网相互作用，广泛使用有限元模型。然而，这些模型计算密集，不适合数字孪生和硬件在环仿真等实时应用。虽然基于神经网络的数据驱动代理模型在近似铁路动力学方面显示出前景，但其泛化能力仍然有限，特别是在外推到更高列车速度等未观察到的运行条件时。本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决这些限制。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。实验证明，LEM模型在三个未见过速度下预测接触线抬升的相对L2误差在10⁻⁸数量级，最大绝对误差约为10⁻³。类似地，受电弓抬升预测的相对误差接近10⁻⁷，最大绝对误差在10⁻³数量级。
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-348 基本信息 论文编号：paper-348 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Extrapolating Railway Catenary Dynamics to Unobserved Operational Conditions Using Long Expressive Memory Networks 中文标题：利用长表达记忆网络将铁路接触网动力学外推到未观察到的运行条件 作者及单位：Taniya Kapoor⋆, Hongrui Wang⋆, Rolf Dollevoet, Alfredo Nunez (Delft University of Technology, The Netherlands) 摘要 准确的受电弓-接触网动力学建模对于理解影响受流质量的相互作用机制至关重要。为了模拟受电弓-接触网相互作用，广泛使用有限元模型。然而，这些模型计算密集，不适合数字孪生和硬件在环仿真等实时应用。虽然基于神经网络的数据驱动代理模型在近似铁路动力学方面显示出前景，但其泛化能力仍然有限，特别是在外推到更高列车速度等未观察到的运行条件时。本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决这些限制。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。实验证明，LEM模型在三个未见过速度下预测接触线抬升的相对L2误差在10⁻⁸数量级，最大绝对误差约为10⁻³。类似地，受电弓抬升预测的相对误差接近10⁻⁷，最大绝对误差在10⁻³数量级。
 关键词 #受电弓接触网相互作用 #接触线抬升 #受电弓抬升 #循环神经网络 #长表达记忆 #有限元模型 #代理模型 #数据驱动 #数字孪生 #硬件在环仿真 #外推能力 #泛化能力 #实时应用 #计算效率 #物理建模
 背景与动机 稳定的受电弓-接触网相互作用对于为高速电力列车安全可靠供电至关重要。准确预测不同列车速度下接触线和受电弓的动力学对于建模受电弓-接触网相互作用至关重要。它有助于改进能够维持稳定受流并减少机械磨损的系统设计。为了避免电弧和过度磨损等不良后果，必须预测不同运行条件下接触线和受电弓的动力学。随着全球列车运行速度的提高，无需大量物理测试即可预测这种动力学变得越来越重要。近年来，有限元方法（FEM）主导了铁路受电弓-接触网相互作用的仿真。仿真结果充分近似了真实受电弓-接触网相互作用，用于参数设计和预鉴定。然而，由于数学公式的性质，FEM模型求解相对耗时，特别是在需要高保真仿真时。对于受电弓-接触网相互作用建模的实时应用，如硬件在环仿真和数字孪生，FEM模型计算量太大，无法及时提供必要的仿真数据来通知或与物理世界交互。
 研究方法 本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决传统方法的局限性。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。研究团队通过实验验证了LEM模型在三个未见过速度下预测接触线抬升和受电弓抬升的准确性。该方法的创新之处在于结合了物理建模的优势与神经网络的表达能力，实现了对未观察到的运行条件的高精度外推预测。
@@ -45,7 +45,7 @@
 文章亮点或创新点 LEM网络创新应用：首次将长表达记忆网络应用于铁路接触网动力学建模，实现了高精度外推预测 物理神经网络架构：提出了结合物理建模与神经网络优势的创新架构，解决了传统方法的局限性 超强泛化能力：实现了对未观察到的运行条件的高精度预测，相对误差达到10⁻⁸数量级 实时应用潜力：显著降低了计算复杂度，为数字孪生和硬件在环仿真等实时应用提供了可能 数据效率提升：减少了对海量数据集的依赖，提高了数据利用效率和模型训练效率 专业词汇列表 英文术语 中文翻译 Pantograph-catenary interaction 受电弓-接触网相互作用 Contact wire uplift 接触线抬升 Pantograph uplift 受电弓抬升 Recurrent neural networks 循环神经网络 Long Expressive Memory (LEM) 长表达记忆 Finite element model 有限元模型 Surrogate model 代理模型 Data-driven 数据驱动 Digital twin 数字孪生 Hardware-in-the-loop simulation 硬件在环仿真 Extrapolation ability 外推能力 Generalization ability 泛化能力 Real-time application 实时应用 Computational efficiency 计算效率 Physics-based modeling 基于物理的建模 Ordinary differential equations 常微分方程 Hidden state update 隐藏状态更新 Temporal dependencies 时间依赖性 Current collection quality 受流质量 Mechanical wear 机械磨损 High-fidelity simulation 高保真仿真 Neural network architecture 神经网络架构 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
 "><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-348 基本信息 论文编号：paper-348 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Extrapolating Railway Catenary Dynamics to Unobserved Operational Conditions Using Long Expressive Memory Networks 中文标题：利用长表达记忆网络将铁路接触网动力学外推到未观察到的运行条件 作者及单位：Taniya Kapoor⋆, Hongrui Wang⋆, Rolf Dollevoet, Alfredo Nunez (Delft University of Technology, The Netherlands) 摘要 准确的受电弓-接触网动力学建模对于理解影响受流质量的相互作用机制至关重要。为了模拟受电弓-接触网相互作用，广泛使用有限元模型。然而，这些模型计算密集，不适合数字孪生和硬件在环仿真等实时应用。虽然基于神经网络的数据驱动代理模型在近似铁路动力学方面显示出前景，但其泛化能力仍然有限，特别是在外推到更高列车速度等未观察到的运行条件时。本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决这些限制。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。实验证明，LEM模型在三个未见过速度下预测接触线抬升的相对L2误差在10⁻⁸数量级，最大绝对误差约为10⁻³。类似地，受电弓抬升预测的相对误差接近10⁻⁷，最大绝对误差在10⁻³数量级。
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-348 基本信息 论文编号：paper-348 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Extrapolating Railway Catenary Dynamics to Unobserved Operational Conditions Using Long Expressive Memory Networks 中文标题：利用长表达记忆网络将铁路接触网动力学外推到未观察到的运行条件 作者及单位：Taniya Kapoor⋆, Hongrui Wang⋆, Rolf Dollevoet, Alfredo Nunez (Delft University of Technology, The Netherlands) 摘要 准确的受电弓-接触网动力学建模对于理解影响受流质量的相互作用机制至关重要。为了模拟受电弓-接触网相互作用，广泛使用有限元模型。然而，这些模型计算密集，不适合数字孪生和硬件在环仿真等实时应用。虽然基于神经网络的数据驱动代理模型在近似铁路动力学方面显示出前景，但其泛化能力仍然有限，特别是在外推到更高列车速度等未观察到的运行条件时。本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决这些限制。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。实验证明，LEM模型在三个未见过速度下预测接触线抬升的相对L2误差在10⁻⁸数量级，最大绝对误差约为10⁻³。类似地，受电弓抬升预测的相对误差接近10⁻⁷，最大绝对误差在10⁻³数量级。
 关键词 #受电弓接触网相互作用 #接触线抬升 #受电弓抬升 #循环神经网络 #长表达记忆 #有限元模型 #代理模型 #数据驱动 #数字孪生 #硬件在环仿真 #外推能力 #泛化能力 #实时应用 #计算效率 #物理建模
 背景与动机 稳定的受电弓-接触网相互作用对于为高速电力列车安全可靠供电至关重要。准确预测不同列车速度下接触线和受电弓的动力学对于建模受电弓-接触网相互作用至关重要。它有助于改进能够维持稳定受流并减少机械磨损的系统设计。为了避免电弧和过度磨损等不良后果，必须预测不同运行条件下接触线和受电弓的动力学。随着全球列车运行速度的提高，无需大量物理测试即可预测这种动力学变得越来越重要。近年来，有限元方法（FEM）主导了铁路受电弓-接触网相互作用的仿真。仿真结果充分近似了真实受电弓-接触网相互作用，用于参数设计和预鉴定。然而，由于数学公式的性质，FEM模型求解相对耗时，特别是在需要高保真仿真时。对于受电弓-接触网相互作用建模的实时应用，如硬件在环仿真和数字孪生，FEM模型计算量太大，无法及时提供必要的仿真数据来通知或与物理世界交互。
 研究方法 本文提出采用基于物理的循环神经网络架构——长表达记忆（LEM）网络，通过学习各种速度下的接触网动力学并预测未见场景来解决传统方法的局限性。LEM架构由于在隐藏状态更新中引入的常微分方程而捕获复杂的时间依赖性，并减少对海量数据集的依赖。研究团队通过实验验证了LEM模型在三个未见过速度下预测接触线抬升和受电弓抬升的准确性。该方法的创新之处在于结合了物理建模的优势与神经网络的表达能力，实现了对未观察到的运行条件的高精度外推预测。
@@ -126,10 +126,6 @@
             <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
           
         
-          
-            <a href="/static/" class="nav-link ">交互式报告</a>
-          
-        
       
       
     </nav>
@@ -167,9 +163,6 @@
           
         
           <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
-          
-        
-          <a class="nav-drawer-item" href="/static/">交互式报告</a>
           
         
       </nav>
@@ -370,7 +363,7 @@
       
       
       
-      <a href="/" class="crumb-anc">Linguage</a>
+      <a href="/" class="crumb-anc">Linguista</a>
     
       <span class="crumb-sep">/</span>
       

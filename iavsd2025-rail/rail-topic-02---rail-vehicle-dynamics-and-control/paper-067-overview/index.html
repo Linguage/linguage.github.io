@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Linguage</title>
+  <title>Linguista</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
@@ -35,9 +35,9 @@
 
   
   
-<meta property="og:site_name" content="Linguage">
+<meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguage"><meta property="og:description" content="IAVSD 2025 论文概览：067 基本信息 论文编号：067 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Disturbance Observer-based Sliding Mode Control of Active Yaw Damper for High-speed Rail Vehicles 中文标题：基于扰动观测器的高速轨道车辆主动抗蛇行减振器滑模控制 作者及单位：Huailong Shi¹, Jing Zeng¹, Jinying Guo², Shiqiao Tian¹ ¹ Southwest Jiaotong University, Chengdu, China ² Chengdu University of Information Technology, Chengdu, China 联系邮箱：shi@swjtu.edu.cn 摘要 本文开发了一种基于扰动观测器的滑模控制（SMC）方法，用于主动抗蛇行减振器（AYD）以提高高速轨道车辆的蛇行稳定性。首先，构建了包含车体横摆、俯仰和偏航，以及转向架俯仰和偏航运动的横向动力学车辆模型。然后为SMC设计滑模面，只需要转向架偏航运动的状态，但通过扰动观测器（DO）估计非线性轮轨力和未知轨道不平顺。通过与被动悬挂和天钩控制对比，在各种运行速度、轮轨磨损条件和悬挂布置下验证了AYD对车辆运行稳定性的控制效果。数值实验表明，AYD可以充分延长车辆对轮轨锥度的适应性，从而实现更长的镟轮周期和更高的运行速度。此外，使用SMC的AYD可以在小半径曲线中实现转向架径向转向控制，从而减少轮轨力，减少磨损。结论认为，通过基于DO的SMC可以充分实现AYD的多目标控制。
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：067 基本信息 论文编号：067 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Disturbance Observer-based Sliding Mode Control of Active Yaw Damper for High-speed Rail Vehicles 中文标题：基于扰动观测器的高速轨道车辆主动抗蛇行减振器滑模控制 作者及单位：Huailong Shi¹, Jing Zeng¹, Jinying Guo², Shiqiao Tian¹ ¹ Southwest Jiaotong University, Chengdu, China ² Chengdu University of Information Technology, Chengdu, China 联系邮箱：shi@swjtu.edu.cn 摘要 本文开发了一种基于扰动观测器的滑模控制（SMC）方法，用于主动抗蛇行减振器（AYD）以提高高速轨道车辆的蛇行稳定性。首先，构建了包含车体横摆、俯仰和偏航，以及转向架俯仰和偏航运动的横向动力学车辆模型。然后为SMC设计滑模面，只需要转向架偏航运动的状态，但通过扰动观测器（DO）估计非线性轮轨力和未知轨道不平顺。通过与被动悬挂和天钩控制对比，在各种运行速度、轮轨磨损条件和悬挂布置下验证了AYD对车辆运行稳定性的控制效果。数值实验表明，AYD可以充分延长车辆对轮轨锥度的适应性，从而实现更长的镟轮周期和更高的运行速度。此外，使用SMC的AYD可以在小半径曲线中实现转向架径向转向控制，从而减少轮轨力，减少磨损。结论认为，通过基于DO的SMC可以充分实现AYD的多目标控制。
 关键词 #轨道车辆 #主动悬挂 #滑模控制 #蛇行运动稳定性 #径向转向控制 #扰动观测器 #抗蛇行减振器
 背景与动机 主动悬挂已被证明比传统被动悬挂更有效地确保轨道车辆适应轨道的能力，从而提高车辆速度、乘坐舒适性、运行安全性并减少轮轨磨损。抗蛇行减振器纵向安装在转向架和车体之间，通常用于高速轨道车辆的二系悬挂中。抗蛇行减振器为转向架相对于车体提供足够的旋转阻力，以在高速下保持车辆系统的蛇行运动稳定性。另一方面，减振器提供的旋转阻力对车辆的曲线性能产生负面影响，特别是在曲线轨道的过渡段。
 主动抗蛇行减振器（AYD）可用于在车体和转向架之间施加可控的偏航扭矩，以抑制蛇行运动并提高曲线性能。由于滑模控制（SMC）在位移和速度域都具有鲁棒控制能力，本文提出开发一种采用基于扰动观测器（DO）的SMC的AYD控制律，以实现高速蛇行稳定性和小半径曲线径向转向的多目标控制。
@@ -46,7 +46,7 @@
 建立MATLAB简化横向动力学模型（7自由度）用于控制器设计 建立SIMPACK全自由度车辆模型用于现场运行条件下的控制性能评估 AYD采用电静压执行器，具有被动和主动双模式及故障安全功能 滑模控制设计：
 "><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：067 基本信息 论文编号：067 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Disturbance Observer-based Sliding Mode Control of Active Yaw Damper for High-speed Rail Vehicles 中文标题：基于扰动观测器的高速轨道车辆主动抗蛇行减振器滑模控制 作者及单位：Huailong Shi¹, Jing Zeng¹, Jinying Guo², Shiqiao Tian¹ ¹ Southwest Jiaotong University, Chengdu, China ² Chengdu University of Information Technology, Chengdu, China 联系邮箱：shi@swjtu.edu.cn 摘要 本文开发了一种基于扰动观测器的滑模控制（SMC）方法，用于主动抗蛇行减振器（AYD）以提高高速轨道车辆的蛇行稳定性。首先，构建了包含车体横摆、俯仰和偏航，以及转向架俯仰和偏航运动的横向动力学车辆模型。然后为SMC设计滑模面，只需要转向架偏航运动的状态，但通过扰动观测器（DO）估计非线性轮轨力和未知轨道不平顺。通过与被动悬挂和天钩控制对比，在各种运行速度、轮轨磨损条件和悬挂布置下验证了AYD对车辆运行稳定性的控制效果。数值实验表明，AYD可以充分延长车辆对轮轨锥度的适应性，从而实现更长的镟轮周期和更高的运行速度。此外，使用SMC的AYD可以在小半径曲线中实现转向架径向转向控制，从而减少轮轨力，减少磨损。结论认为，通过基于DO的SMC可以充分实现AYD的多目标控制。
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：067 基本信息 论文编号：067 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Disturbance Observer-based Sliding Mode Control of Active Yaw Damper for High-speed Rail Vehicles 中文标题：基于扰动观测器的高速轨道车辆主动抗蛇行减振器滑模控制 作者及单位：Huailong Shi¹, Jing Zeng¹, Jinying Guo², Shiqiao Tian¹ ¹ Southwest Jiaotong University, Chengdu, China ² Chengdu University of Information Technology, Chengdu, China 联系邮箱：shi@swjtu.edu.cn 摘要 本文开发了一种基于扰动观测器的滑模控制（SMC）方法，用于主动抗蛇行减振器（AYD）以提高高速轨道车辆的蛇行稳定性。首先，构建了包含车体横摆、俯仰和偏航，以及转向架俯仰和偏航运动的横向动力学车辆模型。然后为SMC设计滑模面，只需要转向架偏航运动的状态，但通过扰动观测器（DO）估计非线性轮轨力和未知轨道不平顺。通过与被动悬挂和天钩控制对比，在各种运行速度、轮轨磨损条件和悬挂布置下验证了AYD对车辆运行稳定性的控制效果。数值实验表明，AYD可以充分延长车辆对轮轨锥度的适应性，从而实现更长的镟轮周期和更高的运行速度。此外，使用SMC的AYD可以在小半径曲线中实现转向架径向转向控制，从而减少轮轨力，减少磨损。结论认为，通过基于DO的SMC可以充分实现AYD的多目标控制。
 关键词 #轨道车辆 #主动悬挂 #滑模控制 #蛇行运动稳定性 #径向转向控制 #扰动观测器 #抗蛇行减振器
 背景与动机 主动悬挂已被证明比传统被动悬挂更有效地确保轨道车辆适应轨道的能力，从而提高车辆速度、乘坐舒适性、运行安全性并减少轮轨磨损。抗蛇行减振器纵向安装在转向架和车体之间，通常用于高速轨道车辆的二系悬挂中。抗蛇行减振器为转向架相对于车体提供足够的旋转阻力，以在高速下保持车辆系统的蛇行运动稳定性。另一方面，减振器提供的旋转阻力对车辆的曲线性能产生负面影响，特别是在曲线轨道的过渡段。
 主动抗蛇行减振器（AYD）可用于在车体和转向架之间施加可控的偏航扭矩，以抑制蛇行运动并提高曲线性能。由于滑模控制（SMC）在位移和速度域都具有鲁棒控制能力，本文提出开发一种采用基于扰动观测器（DO）的SMC的AYD控制律，以实现高速蛇行稳定性和小半径曲线径向转向的多目标控制。
@@ -128,10 +128,6 @@
             <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
           
         
-          
-            <a href="/static/" class="nav-link ">交互式报告</a>
-          
-        
       
       
     </nav>
@@ -169,9 +165,6 @@
           
         
           <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
-          
-        
-          <a class="nav-drawer-item" href="/static/">交互式报告</a>
           
         
       </nav>
@@ -522,7 +515,7 @@
       
       
       
-      <a href="/" class="crumb-anc">Linguage</a>
+      <a href="/" class="crumb-anc">Linguista</a>
     
       <span class="crumb-sep">/</span>
       
