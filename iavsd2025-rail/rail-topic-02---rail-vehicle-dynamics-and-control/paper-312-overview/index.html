@@ -52,7 +52,7 @@
 橡胶组件弹性建模：根据回弹和压缩腔的压力以及活塞两侧的面积，可以通过方程计算减振器力。然而，对于具有橡胶端部安装的完整减振器，应使用串联弹簧元件考虑橡胶组件的弹性。
 参数估计：所描述的模型在Simulink中建立，参数在Simulink参数估计APP中估计，其中成本函数预先定义为在相同输入位移下模拟和测量的减振器力之间的差异，包括频率从1Hz到10Hz，交叉位移为0.5mm、1mm和2mm的测试条件。
 "><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"><meta property="og:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-312 基本信息 论文编号：312 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Study on Low-Frequency Hunting of High-Speed Vehicle at Medium Speed Range 中文标题：中速范围高速车辆低频蛇行研究 作者及单位：Bin Fu¹,², Xin Ding³,⁴, Binbin Liu², Gang Chen³,⁴, Gioele Isacchi², Stefano Bruni² (①重庆大学机械传动国家重点实验室，中国重庆；②米兰理工大学机械系，意大利米兰；③中车长春轨道客车股份有限公司国家轨道客车工程研究中心，中国长春；④中车长春德国轨道技术有限公司，德国亚琛) 摘要 临界速度通常被定义为超过该速度轨道车辆变得不稳定的速度。然而，车辆可能只在中速范围内经历低频蛇行振动，并在更高速度水平上重新获得稳定性，这种现象以前很少被研究。据报道，一辆高速车辆表现出这种行为，为了研究这种现象，仔细建模了车辆的非线性悬挂部件。特别关注抗蛇行减振器，这对车辆稳定性至关重要。本文创建了一个详细的物理抗蛇行减振器模型，能够对实施的抗蛇行减振器达到满意的精度。通过集成抗蛇行减振器，车辆动力学模型能够再现观察到的低频蛇行振动。进行了线性和非线性稳定性分析，以研究中速不稳定性。
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-312 基本信息 论文编号：312 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Study on Low-Frequency Hunting of High-Speed Vehicle at Medium Speed Range 中文标题：中速范围高速车辆低频蛇行研究 作者及单位：Bin Fu¹,², Xin Ding³,⁴, Binbin Liu², Gang Chen³,⁴, Gioele Isacchi², Stefano Bruni² (①重庆大学机械传动国家重点实验室，中国重庆；②米兰理工大学机械系，意大利米兰；③中车长春轨道客车股份有限公司国家轨道客车工程研究中心，中国长春；④中车长春德国轨道技术有限公司，德国亚琛) 摘要 临界速度通常被定义为超过该速度轨道车辆变得不稳定的速度。然而，车辆可能只在中速范围内经历低频蛇行振动，并在更高速度水平上重新获得稳定性，这种现象以前很少被研究。据报道，一辆高速车辆表现出这种行为，为了研究这种现象，仔细建模了车辆的非线性悬挂部件。特别关注抗蛇行减振器，这对车辆稳定性至关重要。本文创建了一个详细的物理抗蛇行减振器模型，能够对实施的抗蛇行减振器达到满意的精度。通过集成抗蛇行减振器，车辆动力学模型能够再现观察到的低频蛇行振动。进行了线性和非线性稳定性分析，以研究中速不稳定性。
 关键词 #高速车辆 #车辆稳定性 #低频蛇行振动 #抗蛇行减振器 #中速不稳定性
 背景与动机 通常，当运行速度上升到超过车辆系统变得不稳定的速度时，轨道车辆将表现出转向架蛇行振动，这个速度被称为临界速度。然而，在实际运营中，高速车辆可以在中等速度范围内经历低频蛇行运动，而不是在最大运行速度时。这显著降低了乘坐舒适性，并增加了车辆和基础设施的安全风险和维护成本，因为轮轨接触条件的严重性增加。这种中速范围的低频蛇行振动需要系统研究和有效的缓解策略。
 一辆最大运行速度可达310 km/h的高速车辆在某些轨道段被发现表现出这种中速低频蛇行行为。进行了实验测试以识别这种特殊的低频蛇行运动。在500秒的选定时间跨度内，车辆从30 km/h加速到300 km/h，横向加速度在三个速度状态下表现出不同的特征。当速度在130 km/h到250 km/h范围内时，车体横向振动显著增加，远高于速度低于130 km/h或高于250 km/h的条件。功率谱密度(PSD)分析显示，在中速范围内，车体在大约1.2 Hz处经历严重的低频车体蛇行振动。值得注意的是，这种振动现象在更高和更低速度时都会消失。
@@ -66,7 +66,7 @@
 流量与压力变化率关系：腔室流量与三个腔室压力变化率之间的关系根据方程描述。考虑管道长度、减振器活塞运动等因素。有效体积模量根据油中的压力和溶解空气而变化。
 橡胶组件弹性建模：根据回弹和压缩腔的压力以及活塞两侧的面积，可以通过方程计算减振器力。然而，对于具有橡胶端部安装的完整减振器，应使用串联弹簧元件考虑橡胶组件的弹性。
 参数估计：所描述的模型在Simulink中建立，参数在Simulink参数估计APP中估计，其中成本函数预先定义为在相同输入位移下模拟和测量的减振器力之间的差异，包括频率从1Hz到10Hz，交叉位移为0.5mm、1mm和2mm的测试条件。
-"><meta name="twitter:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/">
 
   
