@@ -35,6 +35,56 @@
 
   
   
+<meta property="og:site_name" content="Linguage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguage"><meta property="og:description" content="IAVSD 2025 论文概览：paper-270 基本信息 论文编号：270 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：An investigation into Nonlinear Hunting Stability Considering Creep Nonlinear Saturation Characteristics under Traction/braking Conditions 中文标题：牵引/制动工况下考虑蠕滑非线性饱和特性的蛇行稳定性研究 作者及单位：Junhao Zhang, Jinsong Zhou*, Xiaoyu Li, Zhanfei Zhang (同济大学交通运输学院，上海铁路基础设施耐久性与系统安全上海市重点实验室，中国上海) 摘要 铁路车辆有大量时间处于牵引和制动工况下，以往的研究总是将牵引/制动力视为难以影响系统稳定性的外部输入力，忽略了牵引/制动力对蠕滑非线性饱和特性的影响。因此，有必要考虑蠕滑非线性饱和特性，研究牵引和制动工况下车辆稳定性的变化。提出了等效蠕滑系数来量化蠕滑的非线性，以及获得它们的仿真方法。然后建立了一个动力学系统，发现非线性临界速度随着牵引/制动工况下蠕滑饱和度的增加而增加。
+关键词 #牵引/制动工况 #蛇行稳定性 #铁路车辆
+背景与动机 车辆系统的蛇行运动是一种非线性自激振动，由列车的前进功率提供能量，表现为车辆系统的横向周期性振动。线性和非线性蛇行稳定性及相应的临界速度一直是研究的重点，各种因素被证明影响车辆的蛇行稳定性，包括悬挂参数、气动载荷、磨损条件等。然而，牵引/制动工况对蛇行稳定性的影响很少被研究，因为牵引/制动力总是被视为难以影响系统稳定性的外部输入力。
+本文定义了等效蠕滑系数，可用于量化蠕滑非线性饱和特性，并研究稳态牵引/制动工况下纵向和横向蠕滑的耦合机制。介绍了等效蠕滑系数的仿真分析方法，等效蠕滑系数可视为蠕滑饱和度的函数，蠕滑饱和度也在本文中定义。然后研究了非线性蛇行稳定性，表明随着蠕滑饱和度的增加，非线性临界速度也会增加。
+研究方法 本文采用理论分析、数值仿真和参数研究相结合的方法：
+等效蠕滑系数定义：在切向稳态牵引/制动力下，将等效蠕滑系数定义为单位蠕滑增量引起的蠕滑力增量的负值。这个定义可以普遍用于仿真分析。
+动力学建模：基于某型高速列车，在SIMPACK中建立单车动力学模型，模型在轮组牵引扭矩和车钩力的联合作用下以250km/h的恒定速度运行。
+蠕滑理论选择：轮轨接触计算基于Vermeulen-Johnson理论，但由于SIMPACK中VJ理论和Shen理论共存，考虑了自旋蠕滑，这在后续分析中应该被排除。
+稳态工作点求解：首先求解所有车轮在牵引工况下的稳态工作点，轮组扭矩从0到17.5kNm，表明随着轮组扭矩的增加，稳态纵向蠕滑ξ_x0也会增加，且在大轮组扭矩时增加速度更快。
+圆柱形车轮应用：引入圆柱形车轮替代具有LM踏面的车轮，以减少自旋蠕滑的影响，使稳态横向蠕滑力减小到可视为0的低值。
+蠕滑饱和度定义：为了解决轴载荷传递的影响，将蠕滑饱和度α定义为纵向牵引/制动力与摩擦极限下最大切向力的比值。
+简化动力学模型：建立具有两个轮组和转向架构架的动力学模型，推导动力学方程研究等效蠕滑系数对车辆非线性蛇行稳定性的影响。
+极限环分析：通过动力学方程计算轮组和转向架横向和偏航运动的极限环，分析蠕滑饱和度对蛇行运动幅值的影响。
+主要结论 等效蠕滑系数变化规律：随着轮组扭矩的增加，纵向和横向的等效蠕滑系数都会减小，纵向方向的减小更快。自旋蠕滑的存在会引起横向蠕滑系数的波动，这可以通过使用圆柱形车轮来克服。
+轴载荷传递影响：在纵向和横向方向上，第一和第三轮组的等效蠕滑系数随着轮组扭矩的增加具有更大的减小速度。可以推断，在轴载荷传递的影响下，第一和第三轮组更容易达到蠕滑饱和。
+蠕滑饱和度函数关系：等效蠕滑系数可视为蠕滑饱和度的函数，随着蠕滑饱和度的增加，纵向和横向的等效蠕滑系数都会减小。
+蛇行运动幅值变化：随着蠕滑饱和度的增加，轮组和转向架的横向和偏航运动的稳定极限环或稳定相轨迹逐渐收缩但保持相同形状，直到蛇行运动收敛。
+临界速度提升：非线性临界速度随着蠕滑饱和度的增加而增加，且增加速度逐渐加快，这为通过提高蠕滑饱和度来改善车辆蛇行稳定性提供了新方法。
+工程应用途径：假设需要将临界速度提高到v_crexp，在牵引/制动工况下应将蠕滑饱和度提高到α_e，这可以通过增加分子或减少公式中的分布来实现，包括增加牵引/制动扭矩、减小摩擦系数、减小轴载荷等。
+理论与仿真一致性：基于Vermeulen-Johnson理论对等效蠕滑系数进行了分析研究，结果与仿真分析基本一致，验证了所提出方法的正确性。
+文章亮点或创新点 首次提出等效蠕滑系数概念来量化牵引/制动工况下的蠕滑非线性饱和特性 建立了等效蠕滑系数的仿真分析方法，揭示了其随蠕滑饱和度的变化规律 发现牵引/制动工况下非线性临界速度随蠕滑饱和度增加而提升的新现象 提出了通过提高蠕滑饱和度来改善车辆蛇行稳定性的新方法 系统研究了轴载荷传递对等效蠕滑系数的影响机制 为高速列车在牵引/制动工况下的稳定性控制提供了理论依据 专业词汇列表 英文术语 中文翻译 Hunting Stability 蛇行稳定性 Creep Nonlinear Saturation 蠕滑非线性饱和 Traction/Braking Conditions 牵引/制动工况 Equivalent Creep Coefficient 等效蠕滑系数 Creep Saturation Degree 蠕滑饱和度 Nonlinear Critical Velocity 非线性临界速度 Limit Cycle 极限环 Steady Working Point 稳态工作点 Spin Creepage 自旋蠕滑 Longitudinal Creep Force 纵向蠕滑力 Lateral Creep Force 横向蠕滑力 Wheelset Torque 轮组扭矩 Axle Load Transfer 轴载荷传递 Vermeulen-Johnson Theory Vermeulen-Johnson理论 Polach Theory Polach理论 Cylindrical Wheel 圆柱形车轮 LM Tread LM踏面 Contact Angle 接触角 Friction Limit 摩擦极限 Tangential Force 切向力 Phase Trajectory 相轨迹 Self-Excited Vibration 自激振动 Lateral Displacement 横向位移 Yaw Angle 偏航角 Equivalent Conicity 等效锥度 Bogie Frame 转向架构架 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"><meta property="og:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-270 基本信息 论文编号：270 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：An investigation into Nonlinear Hunting Stability Considering Creep Nonlinear Saturation Characteristics under Traction/braking Conditions 中文标题：牵引/制动工况下考虑蠕滑非线性饱和特性的蛇行稳定性研究 作者及单位：Junhao Zhang, Jinsong Zhou*, Xiaoyu Li, Zhanfei Zhang (同济大学交通运输学院，上海铁路基础设施耐久性与系统安全上海市重点实验室，中国上海) 摘要 铁路车辆有大量时间处于牵引和制动工况下，以往的研究总是将牵引/制动力视为难以影响系统稳定性的外部输入力，忽略了牵引/制动力对蠕滑非线性饱和特性的影响。因此，有必要考虑蠕滑非线性饱和特性，研究牵引和制动工况下车辆稳定性的变化。提出了等效蠕滑系数来量化蠕滑的非线性，以及获得它们的仿真方法。然后建立了一个动力学系统，发现非线性临界速度随着牵引/制动工况下蠕滑饱和度的增加而增加。
+关键词 #牵引/制动工况 #蛇行稳定性 #铁路车辆
+背景与动机 车辆系统的蛇行运动是一种非线性自激振动，由列车的前进功率提供能量，表现为车辆系统的横向周期性振动。线性和非线性蛇行稳定性及相应的临界速度一直是研究的重点，各种因素被证明影响车辆的蛇行稳定性，包括悬挂参数、气动载荷、磨损条件等。然而，牵引/制动工况对蛇行稳定性的影响很少被研究，因为牵引/制动力总是被视为难以影响系统稳定性的外部输入力。
+本文定义了等效蠕滑系数，可用于量化蠕滑非线性饱和特性，并研究稳态牵引/制动工况下纵向和横向蠕滑的耦合机制。介绍了等效蠕滑系数的仿真分析方法，等效蠕滑系数可视为蠕滑饱和度的函数，蠕滑饱和度也在本文中定义。然后研究了非线性蛇行稳定性，表明随着蠕滑饱和度的增加，非线性临界速度也会增加。
+研究方法 本文采用理论分析、数值仿真和参数研究相结合的方法：
+等效蠕滑系数定义：在切向稳态牵引/制动力下，将等效蠕滑系数定义为单位蠕滑增量引起的蠕滑力增量的负值。这个定义可以普遍用于仿真分析。
+动力学建模：基于某型高速列车，在SIMPACK中建立单车动力学模型，模型在轮组牵引扭矩和车钩力的联合作用下以250km/h的恒定速度运行。
+蠕滑理论选择：轮轨接触计算基于Vermeulen-Johnson理论，但由于SIMPACK中VJ理论和Shen理论共存，考虑了自旋蠕滑，这在后续分析中应该被排除。
+稳态工作点求解：首先求解所有车轮在牵引工况下的稳态工作点，轮组扭矩从0到17.5kNm，表明随着轮组扭矩的增加，稳态纵向蠕滑ξ_x0也会增加，且在大轮组扭矩时增加速度更快。
+圆柱形车轮应用：引入圆柱形车轮替代具有LM踏面的车轮，以减少自旋蠕滑的影响，使稳态横向蠕滑力减小到可视为0的低值。
+蠕滑饱和度定义：为了解决轴载荷传递的影响，将蠕滑饱和度α定义为纵向牵引/制动力与摩擦极限下最大切向力的比值。
+简化动力学模型：建立具有两个轮组和转向架构架的动力学模型，推导动力学方程研究等效蠕滑系数对车辆非线性蛇行稳定性的影响。
+极限环分析：通过动力学方程计算轮组和转向架横向和偏航运动的极限环，分析蠕滑饱和度对蛇行运动幅值的影响。
+主要结论 等效蠕滑系数变化规律：随着轮组扭矩的增加，纵向和横向的等效蠕滑系数都会减小，纵向方向的减小更快。自旋蠕滑的存在会引起横向蠕滑系数的波动，这可以通过使用圆柱形车轮来克服。
+轴载荷传递影响：在纵向和横向方向上，第一和第三轮组的等效蠕滑系数随着轮组扭矩的增加具有更大的减小速度。可以推断，在轴载荷传递的影响下，第一和第三轮组更容易达到蠕滑饱和。
+蠕滑饱和度函数关系：等效蠕滑系数可视为蠕滑饱和度的函数，随着蠕滑饱和度的增加，纵向和横向的等效蠕滑系数都会减小。
+蛇行运动幅值变化：随着蠕滑饱和度的增加，轮组和转向架的横向和偏航运动的稳定极限环或稳定相轨迹逐渐收缩但保持相同形状，直到蛇行运动收敛。
+临界速度提升：非线性临界速度随着蠕滑饱和度的增加而增加，且增加速度逐渐加快，这为通过提高蠕滑饱和度来改善车辆蛇行稳定性提供了新方法。
+工程应用途径：假设需要将临界速度提高到v_crexp，在牵引/制动工况下应将蠕滑饱和度提高到α_e，这可以通过增加分子或减少公式中的分布来实现，包括增加牵引/制动扭矩、减小摩擦系数、减小轴载荷等。
+理论与仿真一致性：基于Vermeulen-Johnson理论对等效蠕滑系数进行了分析研究，结果与仿真分析基本一致，验证了所提出方法的正确性。
+文章亮点或创新点 首次提出等效蠕滑系数概念来量化牵引/制动工况下的蠕滑非线性饱和特性 建立了等效蠕滑系数的仿真分析方法，揭示了其随蠕滑饱和度的变化规律 发现牵引/制动工况下非线性临界速度随蠕滑饱和度增加而提升的新现象 提出了通过提高蠕滑饱和度来改善车辆蛇行稳定性的新方法 系统研究了轴载荷传递对等效蠕滑系数的影响机制 为高速列车在牵引/制动工况下的稳定性控制提供了理论依据 专业词汇列表 英文术语 中文翻译 Hunting Stability 蛇行稳定性 Creep Nonlinear Saturation 蠕滑非线性饱和 Traction/Braking Conditions 牵引/制动工况 Equivalent Creep Coefficient 等效蠕滑系数 Creep Saturation Degree 蠕滑饱和度 Nonlinear Critical Velocity 非线性临界速度 Limit Cycle 极限环 Steady Working Point 稳态工作点 Spin Creepage 自旋蠕滑 Longitudinal Creep Force 纵向蠕滑力 Lateral Creep Force 横向蠕滑力 Wheelset Torque 轮组扭矩 Axle Load Transfer 轴载荷传递 Vermeulen-Johnson Theory Vermeulen-Johnson理论 Polach Theory Polach理论 Cylindrical Wheel 圆柱形车轮 LM Tread LM踏面 Contact Angle 接触角 Friction Limit 摩擦极限 Tangential Force 切向力 Phase Trajectory 相轨迹 Self-Excited Vibration 自激振动 Lateral Displacement 横向位移 Yaw Angle 偏航角 Equivalent Conicity 等效锥度 Bogie Frame 转向架构架 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
+"><meta name="twitter:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/">
+
+  
+  
   <script>
     window.MathJax = {
       loader: { load: ['[tex]/ams'] },

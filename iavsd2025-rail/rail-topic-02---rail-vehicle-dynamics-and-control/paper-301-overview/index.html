@@ -35,6 +35,54 @@
 
   
   
+<meta property="og:site_name" content="Linguage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguage"><meta property="og:description" content="IAVSD 2025 论文概览：paper-301 基本信息 论文编号：301 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Safety of High-Speed EMUs Under the Braking Condition 中文标题：制动条件下高速动车组的安全性 作者及单位：Jingcheng Wen¹, Honglin Zu¹, Qing Wei¹ (¹中国铁道科学研究院机车车辆研究所，中国北京) 摘要 当列车在运行中遇到紧急情况时，为了使列车能够尽快减速停车，制动控制单元一方面通过紧急制动提高轮轨间的粘着力，另一方面通过叠加列车的多种控制模式来最大化车辆减速度。然而，当轨道表面存在低粘着介质时，粘着控制可能失效导致车轮抱死，进而引起车轮踏面擦伤。本文结合实车试验和仿真方法，研究了车轮抱死时的踏面磨损及此条件下列车运行的安全性。结果表明，KTH模型更适合车轮抱死条件下擦伤斑点的仿真计算，因为它能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响。当车轮抱死时，轮轨力加剧，列车运行安全性降低，但没有明显的脱轨风险。研究结果为列车制动控制方法提供了实验和理论基础。
+关键词 #高速动车组 #制动 #动力响应 #安全性
+背景与动机 当列车在运行中遇到多种自然灾害和信号故障等意外情况时，为确保高速动车组能够在最短距离内减速制动，一方面通过粘着控制，最大化轮轨间的粘着力。另一方面，一些国家设置了减速度大于紧急制动的制动模式，称为极限制动模式。该模式主要通过电制动叠加空气制动，并有效结合涡流制动、磁轨制动等其他制动模式，配合喷射石英砂或陶瓷颗粒等材料提供更大的制动能力。
+相关测试表明，在轨道表面干燥条件下，极限制动模式可以进一步有效缩短制动距离达26.7%。然而，当轨道表面存在油污、雨雪、落叶等低粘着第三介质时，长制动距离的问题仍然显著，通过蠕滑率进行的粘着控制对制动能力的提高仍然有限。甚至导致防滑控制失效和轮对抱死。
+从理论角度来看，这种情况可能在一定程度上突破轮轨间的粘着极限，从而进一步提高制动能力。尽管如此，这种制动模式会造成车轮踏面擦伤，降低车轮和钢轨的使用寿命。此外，踏面磨损后的轮轨接触相互作用也会发生变化，这将影响列车的动力响应甚至运行安全。因此，在考虑制动效率的同时，合理评估极端制动条件下车轮抱死对运行安全的影响具有重要意义。
+研究方法 本文采用实车试验、数值仿真和动力学分析相结合的方法：
+极限制动实车试验：在国家铁道试验中心(中国北京)进行极限制动工况试验。试验中通过喷射防冻液将轨道表面置于低粘着介质条件。选择前转向架的导向轮对进行抱死，其他保持正常制动能力。试验过程中，列车在恒定速度稳定运行一段时间后，司机进行极限制动直至停车。
+擦伤斑点数值仿真：基于赫兹热源理论计算低粘着轨道条件下擦伤斑点位置的车轮和钢轨温度分布，获得摩擦温度下踏面金属材料的力学性能。结合擦伤斑点温度分布，基于KTH磨损理论、ZOBORY磨损理论和USFD磨损理论等数值方法，建立极限制动条件下车轮踏面磨损仿真模型。
+磨损模型比较：对比三种磨损计算模型的仿真精度，KTH模型因其能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响，且能考虑温度对材料参数的影响因素，更符合实际情况，被选为后续计算车轮侧擦伤斑点的方法。
+动力学建模：建立高速动车组-轨道系统动力学模型，以计算极端制动条件下列车的动力响应。列车模型采用运行速度200-350km/h的高速动车组，擦伤踏面轮廓作为输入参数。
+安全性评估：仿真计算列车通过直线、曲线和道岔时的动力响应，通过脱轨系数、轮重减载率和轴横向力等指标评估列车运行安全性。依据GB 5599-2019标准，评估快速货车运行安全性的标准及其限值。
+接触力学模型：车轮抱死时，轮轨接触关系属于大蠕滑条件，且由于踏面与轨道表面长距离摩擦，车轮与钢轨之间产生共形接触。针对这种情况，轮轨接触力采用基于虚拟渗透法的KP模型修正的赫兹接触理论，切向力模型采用适合大蠕滑条件的Polach算法。
+主要结论 磨损模型适用性：KTH模型更适合车轮抱死条件下擦伤斑点的仿真计算，因为它能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响。由于摩擦位置相对固定集中，摩擦点温度会逐渐升高，KTH模型还能考虑温度对材料参数的影响因素，更符合实际情况。
+轮轨力变化：当车轮抱死时，轮轨力加剧，列车运行安全性降低，但没有明显的脱轨风险。三种磨损计算模型获得的接触斑点磨损分布相对一致，磨损量基本相同，且接近试验结果。
+直线和曲线安全性：在直线和曲线条件下，车辆的脱轨系数、轮重减载率和轴横向力随车辆速度增加而增加，但均小于安全限值。列车在车轮抱死条件下仍满足安全要求。
+道岔通过安全性：当列车仅沿直向和侧向通过道岔时，脱轨系数相对接近。虽然轴横向力和轮重减载率有所不同，但仍满足标准要求，具有一定的安全裕度。
+速度影响规律：随着速度的增加，各安全指标呈现上升趋势，但即使在最高运行速度下，所有安全指标仍在允许范围内，表明极限制动模式在安全性方面是可控的。
+实际应用价值：研究结果为列车制动控制方法提供了实验和理论基础，支持了在紧急情况下采用极限制动模式的可行性，为制定更合理的制动控制策略提供了科学依据。
+工程指导意义：虽然车轮抱死会导致踏面擦伤，但在极端情况下，这种制动模式可以显著缩短制动距离，且不会立即危及行车安全，为制动系统的设计提供了重要参考。
+文章亮点或创新点 首次系统研究了极限制动条件下车轮抱死对高速动车组运行安全性的影响 建立了基于温度影响的轮轨磨损仿真模型，比较了三种磨损理论的适用性 通过实车试验验证了数值仿真方法的准确性和可靠性 揭示了车轮抱死条件下的轮轨接触力学特性和动力学响应规律 量化评估了极限制动模式在不同线路条件下的安全性裕度 为高速列车制动控制策略的优化提供了理论依据和实验支持 填补了极端制动条件下高速动车组安全性研究的空白 专业词汇列表 英文术语 中文翻译 High-Speed EMU 高速动车组 Braking Condition 制动条件 Dynamic Response 动力响应 Safety 安全性 Extreme Braking Mode 极限制动模式 Wheel Lock 车轮抱死 Tread Wear 踏面磨损 Scratch Spot 擦伤斑点 Low-Adhesion Medium 低粘着介质 Adhesion Control 粘着控制 Anti-Skid Control 防滑控制 Wheel-Rail Contact 轮轨接触 KTH Wear Theory KTH磨损理论 ZOBORY Wear Theory ZOBORY磨损理论 USFD Wear Theory USFD磨损理论 Hertzian Heat Source Theory 赫兹热源理论 Conformal Contact 共形接触 Large Creep Condition 大蠕滑条件 Derailment Coefficient 脱轨系数 Wheel Load Reduction Rate 轮重减载率 Axle Lateral Force 轴横向力 Creep Rate 蠕滑率 Braking Distance 制动距离 Electric Braking 电制动 Air Braking 空气制动 Eddy Current Braking 涡流制动 Magnetic Rail Braking 磁轨制动 Friction Heat Source 摩擦热源 Material Hardness 材料硬度 Sliding Distance 滑动距离 Normal Contact Stress 法向接触应力 Wear Coefficient 磨损系数 Energy Flow Density 能量流密度 Virtual Penetration Method 虚拟渗透法 Polach Algorithm Polach算法 Safety Margin 安全裕度 Running Safety 运行安全 Real Vehicle Test 实车试验 Numerical Simulation 数值仿真 Dynamic Model 动力学模型 Contact Mechanics 接触力学 Tribology 摩擦学 Temperature Distribution 温度分布 Mechanical Properties 力学性能 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"><meta property="og:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-301 基本信息 论文编号：301 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Safety of High-Speed EMUs Under the Braking Condition 中文标题：制动条件下高速动车组的安全性 作者及单位：Jingcheng Wen¹, Honglin Zu¹, Qing Wei¹ (¹中国铁道科学研究院机车车辆研究所，中国北京) 摘要 当列车在运行中遇到紧急情况时，为了使列车能够尽快减速停车，制动控制单元一方面通过紧急制动提高轮轨间的粘着力，另一方面通过叠加列车的多种控制模式来最大化车辆减速度。然而，当轨道表面存在低粘着介质时，粘着控制可能失效导致车轮抱死，进而引起车轮踏面擦伤。本文结合实车试验和仿真方法，研究了车轮抱死时的踏面磨损及此条件下列车运行的安全性。结果表明，KTH模型更适合车轮抱死条件下擦伤斑点的仿真计算，因为它能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响。当车轮抱死时，轮轨力加剧，列车运行安全性降低，但没有明显的脱轨风险。研究结果为列车制动控制方法提供了实验和理论基础。
+关键词 #高速动车组 #制动 #动力响应 #安全性
+背景与动机 当列车在运行中遇到多种自然灾害和信号故障等意外情况时，为确保高速动车组能够在最短距离内减速制动，一方面通过粘着控制，最大化轮轨间的粘着力。另一方面，一些国家设置了减速度大于紧急制动的制动模式，称为极限制动模式。该模式主要通过电制动叠加空气制动，并有效结合涡流制动、磁轨制动等其他制动模式，配合喷射石英砂或陶瓷颗粒等材料提供更大的制动能力。
+相关测试表明，在轨道表面干燥条件下，极限制动模式可以进一步有效缩短制动距离达26.7%。然而，当轨道表面存在油污、雨雪、落叶等低粘着第三介质时，长制动距离的问题仍然显著，通过蠕滑率进行的粘着控制对制动能力的提高仍然有限。甚至导致防滑控制失效和轮对抱死。
+从理论角度来看，这种情况可能在一定程度上突破轮轨间的粘着极限，从而进一步提高制动能力。尽管如此，这种制动模式会造成车轮踏面擦伤，降低车轮和钢轨的使用寿命。此外，踏面磨损后的轮轨接触相互作用也会发生变化，这将影响列车的动力响应甚至运行安全。因此，在考虑制动效率的同时，合理评估极端制动条件下车轮抱死对运行安全的影响具有重要意义。
+研究方法 本文采用实车试验、数值仿真和动力学分析相结合的方法：
+极限制动实车试验：在国家铁道试验中心(中国北京)进行极限制动工况试验。试验中通过喷射防冻液将轨道表面置于低粘着介质条件。选择前转向架的导向轮对进行抱死，其他保持正常制动能力。试验过程中，列车在恒定速度稳定运行一段时间后，司机进行极限制动直至停车。
+擦伤斑点数值仿真：基于赫兹热源理论计算低粘着轨道条件下擦伤斑点位置的车轮和钢轨温度分布，获得摩擦温度下踏面金属材料的力学性能。结合擦伤斑点温度分布，基于KTH磨损理论、ZOBORY磨损理论和USFD磨损理论等数值方法，建立极限制动条件下车轮踏面磨损仿真模型。
+磨损模型比较：对比三种磨损计算模型的仿真精度，KTH模型因其能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响，且能考虑温度对材料参数的影响因素，更符合实际情况，被选为后续计算车轮侧擦伤斑点的方法。
+动力学建模：建立高速动车组-轨道系统动力学模型，以计算极端制动条件下列车的动力响应。列车模型采用运行速度200-350km/h的高速动车组，擦伤踏面轮廓作为输入参数。
+安全性评估：仿真计算列车通过直线、曲线和道岔时的动力响应，通过脱轨系数、轮重减载率和轴横向力等指标评估列车运行安全性。依据GB 5599-2019标准，评估快速货车运行安全性的标准及其限值。
+接触力学模型：车轮抱死时，轮轨接触关系属于大蠕滑条件，且由于踏面与轨道表面长距离摩擦，车轮与钢轨之间产生共形接触。针对这种情况，轮轨接触力采用基于虚拟渗透法的KP模型修正的赫兹接触理论，切向力模型采用适合大蠕滑条件的Polach算法。
+主要结论 磨损模型适用性：KTH模型更适合车轮抱死条件下擦伤斑点的仿真计算，因为它能够充分考虑轮轨材料特性和轮轨接触条件对磨损率的动态影响。由于摩擦位置相对固定集中，摩擦点温度会逐渐升高，KTH模型还能考虑温度对材料参数的影响因素，更符合实际情况。
+轮轨力变化：当车轮抱死时，轮轨力加剧，列车运行安全性降低，但没有明显的脱轨风险。三种磨损计算模型获得的接触斑点磨损分布相对一致，磨损量基本相同，且接近试验结果。
+直线和曲线安全性：在直线和曲线条件下，车辆的脱轨系数、轮重减载率和轴横向力随车辆速度增加而增加，但均小于安全限值。列车在车轮抱死条件下仍满足安全要求。
+道岔通过安全性：当列车仅沿直向和侧向通过道岔时，脱轨系数相对接近。虽然轴横向力和轮重减载率有所不同，但仍满足标准要求，具有一定的安全裕度。
+速度影响规律：随着速度的增加，各安全指标呈现上升趋势，但即使在最高运行速度下，所有安全指标仍在允许范围内，表明极限制动模式在安全性方面是可控的。
+实际应用价值：研究结果为列车制动控制方法提供了实验和理论基础，支持了在紧急情况下采用极限制动模式的可行性，为制定更合理的制动控制策略提供了科学依据。
+工程指导意义：虽然车轮抱死会导致踏面擦伤，但在极端情况下，这种制动模式可以显著缩短制动距离，且不会立即危及行车安全，为制动系统的设计提供了重要参考。
+文章亮点或创新点 首次系统研究了极限制动条件下车轮抱死对高速动车组运行安全性的影响 建立了基于温度影响的轮轨磨损仿真模型，比较了三种磨损理论的适用性 通过实车试验验证了数值仿真方法的准确性和可靠性 揭示了车轮抱死条件下的轮轨接触力学特性和动力学响应规律 量化评估了极限制动模式在不同线路条件下的安全性裕度 为高速列车制动控制策略的优化提供了理论依据和实验支持 填补了极端制动条件下高速动车组安全性研究的空白 专业词汇列表 英文术语 中文翻译 High-Speed EMU 高速动车组 Braking Condition 制动条件 Dynamic Response 动力响应 Safety 安全性 Extreme Braking Mode 极限制动模式 Wheel Lock 车轮抱死 Tread Wear 踏面磨损 Scratch Spot 擦伤斑点 Low-Adhesion Medium 低粘着介质 Adhesion Control 粘着控制 Anti-Skid Control 防滑控制 Wheel-Rail Contact 轮轨接触 KTH Wear Theory KTH磨损理论 ZOBORY Wear Theory ZOBORY磨损理论 USFD Wear Theory USFD磨损理论 Hertzian Heat Source Theory 赫兹热源理论 Conformal Contact 共形接触 Large Creep Condition 大蠕滑条件 Derailment Coefficient 脱轨系数 Wheel Load Reduction Rate 轮重减载率 Axle Lateral Force 轴横向力 Creep Rate 蠕滑率 Braking Distance 制动距离 Electric Braking 电制动 Air Braking 空气制动 Eddy Current Braking 涡流制动 Magnetic Rail Braking 磁轨制动 Friction Heat Source 摩擦热源 Material Hardness 材料硬度 Sliding Distance 滑动距离 Normal Contact Stress 法向接触应力 Wear Coefficient 磨损系数 Energy Flow Density 能量流密度 Virtual Penetration Method 虚拟渗透法 Polach Algorithm Polach算法 Safety Margin 安全裕度 Running Safety 运行安全 Real Vehicle Test 实车试验 Numerical Simulation 数值仿真 Dynamic Model 动力学模型 Contact Mechanics 接触力学 Tribology 摩擦学 Temperature Distribution 温度分布 Mechanical Properties 力学性能 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
+"><meta name="twitter:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/">
+
+  
+  
   <script>
     window.MathJax = {
       loader: { load: ['[tex]/ams'] },

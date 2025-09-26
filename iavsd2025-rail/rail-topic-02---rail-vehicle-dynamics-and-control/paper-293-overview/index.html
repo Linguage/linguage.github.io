@@ -35,6 +35,40 @@
 
   
   
+<meta property="og:site_name" content="Linguage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguage"><meta property="og:description" content="IAVSD 2025 论文概览：paper-293 基本信息 论文编号：293 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Developing an AI-Infused Framework for the Automatic Generation of Vehicle System Dynamics Models 中文标题：开发一个融合人工智能的车辆系统动力学模型自动生成框架 作者及单位：Esteban Bernal¹, Maksym Spiryagin¹, Ingemar Persson², Qing Wu¹, Colin Cole¹ (¹中央昆士兰大学铁路工程中心，澳大利亚罗克汉普顿；²AB DEsolver，瑞典厄斯特松德) 摘要 车辆系统动力学建模需要专业的软件专业知识，限制了其在日常铁路运营中的应用，尽管在设计和维护方面已证明其价值。本文提出了一个车辆动力学生成模型(VDGM)框架，利用大型语言模型通过自然语言指令生成多体仿真脚本。以GENSYS软件为案例研究，实施了模块化方法，将复杂的仿真脚本文件简化为更简单的模板，实现专注的参数修改。通过系统变化关键参数(包括车辆速度、曲线半径、摩擦系数和轨道不平顺)生成了1000个训练示例的合成数据集。使用低秩适应(LoRA)对CodeLlama-7b进行微调，在NVIDIA H100 GPU上仅需8分钟。训练后的模型展示了零样本生成能力，成功从自然语言提示生成语法正确的GENSYS脚本。结果表明，VDGM可以降低在铁路运营中实施基于物理的数字孪生(DT)的技术障碍，使没有MBS编程专业知识的工程师能够在预定范围内修改仿真参数。
+关键词 #多体模型 #数字孪生 #基于物理的数字模型 #LLM #微调 #生成模型
+背景与动机 车辆系统动力学建模和仿真是铁路车队全生命周期的重要工具，支持设计决策、运营优化和维护规划。这些模型通常在专业软件中实现，如GENSYS、VAMPIRE或SIMPACK，需要广泛的领域知识来开发和应用。因此，它们的使用通常仅限于设计和批准阶段，在日常铁路运营中的应用很少。
+多体仿真(MBS)软件的复杂性对新应用和更广泛采用构成了重大障碍。工程师需要专业培训来开发模型、配置仿真和有效解释结果。即使对车辆参数或仿真场景的微小修改，通常也需要对软件界面和底层物理学有深入的理解。这种认知负担限制了基于MBS的数字孪生在铁路运营公司内提供实时运营洞察的潜力，尽管它们在理解车辆行为和预测性能结果方面已证明其价值。
+大型语言模型(LLM)和生成式人工智能的最新进展展示了自动化技术内容创建和简化复杂软件交互的卓越能力。例如，SIMULINK模型已成功使用GPT-2等模型的迁移学习进行生成、调试和测试。类似地，基于transformer的架构在生成机械部件和接口的最优配置方面显示了成功。
+LLM在车辆动力学建模中的应用仍然很大程度上未被探索，但其潜在好处是巨大的。当前的MBS软件要求用户导航复杂的界面，理解特定的语法要求，以及对车辆动力学原理的深入了解。基于LLM的接口可以使工程师能够使用自然语言与这些模型交互，降低学习曲线，促进基于物理的DT在铁路运营中的更广泛采用。
+研究方法 本文采用理论建模、软件开发和实验验证相结合的方法：
+VDGM框架设计：设计了车辆动力学生成模型框架，该框架在铁路系统的数字孪生中运行。VDGM支持DT系统的领域专家参与要求，使铁路工程从业人员能够高效地实施MBS数值程序修改，而无需MBS软件编码技能。
+模块化策略：采用模块化配置文件实现仿真输入脚本，基于物理系统特征。这种模块化具有双重目的：将修改限制在预选参数，确保模型保持代表物理孪生的动态行为，并简化LLM微调过程。
+GENSYS软件集成：以GENSYS MBS软件为例实施VDGM，但该方法可应用于任何其他基于脚本的MBS软件平台。首先开发车辆-轨道多体模型，然后通过GENSYS insert命令实现脚本模块化。
+合成数据生成：开发了基于Python的数据生成管道，创建全面的综合训练数据集。通过在模块化GENSYS仿真文件中系统变化关键车辆动力学参数，生成代表铁路系统中遇到的各种运营场景的多样化训练示例。
+参数选择与范围：选择了四个对车辆动力学行为有重大影响的参数进行变化：曲线半径(5-60 km/h)、车辆速度(曲线段500-2000 m，切线段110⁹⁹)、轮轨摩擦系数(0.1-0.6)和不平顺度(理想轨道为0，FRA等级不平顺为1-6)。
+LLM微调：选择CodeLlama-7b作为基础模型，使用低秩适应(LoRA)进行微调。在中央昆士兰大学Ada Love HPC设施上使用NVIDIA H100 NVL GPU(100 GB内存)进行训练。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"><meta property="og:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguage"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-293 基本信息 论文编号：293 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Developing an AI-Infused Framework for the Automatic Generation of Vehicle System Dynamics Models 中文标题：开发一个融合人工智能的车辆系统动力学模型自动生成框架 作者及单位：Esteban Bernal¹, Maksym Spiryagin¹, Ingemar Persson², Qing Wu¹, Colin Cole¹ (¹中央昆士兰大学铁路工程中心，澳大利亚罗克汉普顿；²AB DEsolver，瑞典厄斯特松德) 摘要 车辆系统动力学建模需要专业的软件专业知识，限制了其在日常铁路运营中的应用，尽管在设计和维护方面已证明其价值。本文提出了一个车辆动力学生成模型(VDGM)框架，利用大型语言模型通过自然语言指令生成多体仿真脚本。以GENSYS软件为案例研究，实施了模块化方法，将复杂的仿真脚本文件简化为更简单的模板，实现专注的参数修改。通过系统变化关键参数(包括车辆速度、曲线半径、摩擦系数和轨道不平顺)生成了1000个训练示例的合成数据集。使用低秩适应(LoRA)对CodeLlama-7b进行微调，在NVIDIA H100 GPU上仅需8分钟。训练后的模型展示了零样本生成能力，成功从自然语言提示生成语法正确的GENSYS脚本。结果表明，VDGM可以降低在铁路运营中实施基于物理的数字孪生(DT)的技术障碍，使没有MBS编程专业知识的工程师能够在预定范围内修改仿真参数。
+关键词 #多体模型 #数字孪生 #基于物理的数字模型 #LLM #微调 #生成模型
+背景与动机 车辆系统动力学建模和仿真是铁路车队全生命周期的重要工具，支持设计决策、运营优化和维护规划。这些模型通常在专业软件中实现，如GENSYS、VAMPIRE或SIMPACK，需要广泛的领域知识来开发和应用。因此，它们的使用通常仅限于设计和批准阶段，在日常铁路运营中的应用很少。
+多体仿真(MBS)软件的复杂性对新应用和更广泛采用构成了重大障碍。工程师需要专业培训来开发模型、配置仿真和有效解释结果。即使对车辆参数或仿真场景的微小修改，通常也需要对软件界面和底层物理学有深入的理解。这种认知负担限制了基于MBS的数字孪生在铁路运营公司内提供实时运营洞察的潜力，尽管它们在理解车辆行为和预测性能结果方面已证明其价值。
+大型语言模型(LLM)和生成式人工智能的最新进展展示了自动化技术内容创建和简化复杂软件交互的卓越能力。例如，SIMULINK模型已成功使用GPT-2等模型的迁移学习进行生成、调试和测试。类似地，基于transformer的架构在生成机械部件和接口的最优配置方面显示了成功。
+LLM在车辆动力学建模中的应用仍然很大程度上未被探索，但其潜在好处是巨大的。当前的MBS软件要求用户导航复杂的界面，理解特定的语法要求，以及对车辆动力学原理的深入了解。基于LLM的接口可以使工程师能够使用自然语言与这些模型交互，降低学习曲线，促进基于物理的DT在铁路运营中的更广泛采用。
+研究方法 本文采用理论建模、软件开发和实验验证相结合的方法：
+VDGM框架设计：设计了车辆动力学生成模型框架，该框架在铁路系统的数字孪生中运行。VDGM支持DT系统的领域专家参与要求，使铁路工程从业人员能够高效地实施MBS数值程序修改，而无需MBS软件编码技能。
+模块化策略：采用模块化配置文件实现仿真输入脚本，基于物理系统特征。这种模块化具有双重目的：将修改限制在预选参数，确保模型保持代表物理孪生的动态行为，并简化LLM微调过程。
+GENSYS软件集成：以GENSYS MBS软件为例实施VDGM，但该方法可应用于任何其他基于脚本的MBS软件平台。首先开发车辆-轨道多体模型，然后通过GENSYS insert命令实现脚本模块化。
+合成数据生成：开发了基于Python的数据生成管道，创建全面的综合训练数据集。通过在模块化GENSYS仿真文件中系统变化关键车辆动力学参数，生成代表铁路系统中遇到的各种运营场景的多样化训练示例。
+参数选择与范围：选择了四个对车辆动力学行为有重大影响的参数进行变化：曲线半径(5-60 km/h)、车辆速度(曲线段500-2000 m，切线段110⁹⁹)、轮轨摩擦系数(0.1-0.6)和不平顺度(理想轨道为0，FRA等级不平顺为1-6)。
+LLM微调：选择CodeLlama-7b作为基础模型，使用低秩适应(LoRA)进行微调。在中央昆士兰大学Ada Love HPC设施上使用NVIDIA H100 NVL GPU(100 GB内存)进行训练。
+"><meta name="twitter:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/">
+
+  
+  
   <script>
     window.MathJax = {
       loader: { load: ['[tex]/ams'] },
