@@ -54,7 +54,7 @@
 我将此解释为代码以显示几个重要细节。我想稍微偏向概率以避免误报，通过反复试验，我发现一个好的方法是将good中的所有数字加倍。这有助于区分偶尔确实出现在合法邮件中的词和几乎从不出现的词。我只考虑总共出现超过五次的词（实际上，由于加倍，在非垃圾邮件中出现三次就足够了）。然后是关于给在一个语料库中出现但不在另一个语料库中出现的词分配什么概率的问题。同样通过反复试验，我选择了.01和.99。这里可能还有调整的空间，但随着语料库的增长，这种调整无论如何都会自动发生。
 特别细心的人会注意到，虽然为了计算出现次数的目的我将每个语料库视为一个长文本流，但在计算垃圾邮件概率时，我使用每个语料库中的邮件数量，而不是它们的组合长度作为除数。这增加了另一个轻微的偏向以防止误报。
 当新邮件到达时，它被扫描成标记，最有趣的十五个标记，其中有趣度是通过它们的垃圾邮件概率与中性的.5相差多远来衡量的，被用来计算邮件是垃圾邮件的概率。如果probs是十五个单独概率的列表，你这样计算组合概率：(let ((prod (apply #&rsquo;* probs))) (/ prod (&#43; prod (apply #&rsquo;* (mapcar #&rsquo;(lambda (x) (- 1 x)) probs))))) 实践中出现的一个问题是给你从未见过的词分配什么概率，即没有出现在词概率哈希表中的词。我再次通过反复试验发现，.4是一个好数字。如果你以前从未见过一个词，它可能是相当无辜的；垃圾邮件词往往太熟悉了。
-"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/spam/"><meta property="og:image" content="https://linguage.github.io/img/einstein-wallpaper_imresizer.jpg">
+"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/spam/">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="垃圾邮件过滤计划"><meta name="twitter:description" content="→ English Version
 垃圾邮件过滤计划 2002年8月
 （本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。
