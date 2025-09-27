@@ -8,6 +8,9 @@
   --adaptive-media-img-height: clamp(200px, 32vw, 420px);
 }
 
+/* Hide mobile-only Posts button by default (desktop) */
+.posts-btn-fixed{ display: none; }
+
 /* ============================= */
 /* Brand avatar styling (enhanced) */
 /* ============================= */
@@ -231,4 +234,53 @@ body{ padding-bottom: var(--theme-footer-height); }
   }
   .posts-btn-fixed:hover,
   .posts-btn-fixed:focus-visible{ filter: brightness(.96); color:#fff !important; }
+}
+
+/* ============================= */
+/* Mobile header compact layout   */
+/* ============================= */
+@media (max-width: 900px){
+  /* Hide brand text to save space */
+  .brand-text{ display: none; }
+  /* Show drawer toggle next to avatar */
+  .mobile-nav-btn--header{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-left: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    /* override default absolute positioning from .mobile-nav-btn */
+    position: static !important; /* ensure override over theme absolute rule */
+    right: auto; top: auto; transform: none;
+    z-index: 101;
+  }
+  /* Push Posts button to far right */
+  .header-inner .posts-btn-fixed{ margin-left: auto; }
+  /* Mobile header: compact yet with some breathing room */
+  .site-header .header-inner{ height: 66px; align-items: center; }
+}
+
+/* ============================= */
+/* Mobile: hide breadcrumbs       */
+/* ============================= */
+@media (max-width: 900px){
+  .breadcrumbs{ display: none !important; }
+}
+
+/* ============================= */
+/* Posts pill restyle (white)     */
+/* ============================= */
+@media (max-width: 900px){
+  .posts-btn-fixed{
+    background: #fff;
+    color: #000 !important;
+    border: 1px solid var(--border);
+  }
 }
