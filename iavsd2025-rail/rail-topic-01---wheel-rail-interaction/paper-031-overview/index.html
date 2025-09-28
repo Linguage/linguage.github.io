@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -43,7 +43,7 @@
 研究方法 本文重点研究通过函数评估蠕变力的方法。由于没有解析表达式可用于包含自旋的任何蠕变组合（Kalker线性理论除外），这些方法通常是FASTSIM的近似解。Chopaya函数（以Chollet、Pascal和Ayasse命名）是VOCO车辆动力学软件包中的默认蠕变方法。Chopaya公式是FASTSIM蠕变力的曲线拟合。它们不能直接提供任何关于牵引的信息。Chopaya方法的应用限于赫兹接触。
 方法的核心包括：
 归一化蠕变定义：定义纵向、横向和自旋蠕变率 曲线拟合函数：引入Δx、Δy和Δφ函数来拟合FASTSIM结果 饱和定律：应用Vermeulen和Johnson饱和定律 扩展方法：基于改进的FASTSIM方法处理牵引/制动应用 主要结论 Chopaya函数使用曲线拟合方法近似FASTSIM。本文提出了Chopaya方法的扩展版本，基于扩展的Polach模型和改进的FASTSIM方法用于牵引/制动应用。 在根据欧洲标准EN14363的虚拟认证模拟中，将Chopaya方法与其他蠕变力模型进行比较。这个例子似乎表明Chopaya模型提供了比任何其他通过函数评估蠕变力的模型更准确的FASTSIM近似，特别是在大量自旋的情况下。 扩展的Chopaya方法在Polach研究的一组7次现场测量中得到验证，代表了不同速度下的干燥和潮湿条件。希望所提出的方法将在多功能性、计算时间和准确性方面代表新的折衷方案。 文章亮点或创新点 方法创新：将Chopaya方法从无自旋情况扩展到包含自旋的复杂情况 精度提升：通过引入曲线拟合函数，显著提高了存在自旋时的蠕变力计算精度 计算效率：在保持较高精度的同时，维持了快速计算的特性 适用性扩展：成功将方法扩展到牵引/制动应用场景 验证充分：通过虚拟认证测试和实际机车测量验证了方法的有效性 专业词汇列表 英文术语 中文翻译 Tangential contact 切向接触 Rail traction vehicles 轨道牵引车辆 Creep forces 蠕变力 Hertzian Contact 赫兹接触 Spin 自旋 FASTSIM 快速简化接触算法 CONTACT 接触力学计算软件 Multi-body systems (MBS) 多体系统 Adhesion limit 粘着极限 Traction/braking 牵引/制动 Normalized creepages 归一化蠕变率 Contact ellipse 接触椭圆 Coulomb limit 库仑极限 Shear modulus 剪切模量 Coefficient of friction (COF) 摩擦系数 Curve-fitting functions 曲线拟合函数 Virtual testing track (VTT) 虚拟测试轨道 European standard EN14363 欧洲标准EN14363 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：031 基本信息 论文编号：031 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：A new fast and approximate method for solving tangential contact in simulations of rail traction vehicles 中文标题：解决轨道牵引车辆模拟中切向接触的一种快速近似新方法 作者及单位：Michel Sebès¹[0000-0002-8358-152X] 和 Honoré Yin² ¹ Univ Gustave Eiffel, COSYS-GRETTIA, Marne-la-Vallée, France ² Laboratoire Navier, Ecole des Ponts, Univ Gustave Eiffel, CNRS, Marne-la-Vallée, France 联系邮箱：michel.sebes@univ-eiffel.fr 摘要 本文提出了一种用于解决轨道牵引车辆模拟中切向接触问题的快速近似新方法。Chopaya（Chollet-Pascal-Ayasse）模型是一种通过函数评估蠕变力的方法，这类方法的难点在于处理包含自旋的蠕变组合，因为解析解仅存在于无自旋配置中。本文将Chopaya方法扩展以解决牵引/制动应用。提出了原始方法和扩展方法的公式。Chopaya方法回归到Shen-Hendrick-Elkins（SHE）方法，不同之处在于引入了曲线拟合函数，以更准确地评估存在自旋时的蠕变力，以FASTSIM为参考。扩展的Chopaya方法受到Spiryagin等人提出的改进FASTSIM方法的启发。以CONTACT为参考，将Chopaya方法与SHE方法、Polach方法和FASTSIM进行比较：Chopaya结果最接近FASTSIM。在一组Polach发表的机车测量中，证明了扩展的Chopaya方法能够表示真实的牵引曲线。希望该方法将在计算时间、准确性和多功能性方面代表新的折衷方案。
 关键词 #铁路动力学 #赫兹接触 #蠕变力 #快速方法 #牵引制动
@@ -51,8 +51,8 @@
 研究方法 本文重点研究通过函数评估蠕变力的方法。由于没有解析表达式可用于包含自旋的任何蠕变组合（Kalker线性理论除外），这些方法通常是FASTSIM的近似解。Chopaya函数（以Chollet、Pascal和Ayasse命名）是VOCO车辆动力学软件包中的默认蠕变方法。Chopaya公式是FASTSIM蠕变力的曲线拟合。它们不能直接提供任何关于牵引的信息。Chopaya方法的应用限于赫兹接触。
 方法的核心包括：
 归一化蠕变定义：定义纵向、横向和自旋蠕变率 曲线拟合函数：引入Δx、Δy和Δφ函数来拟合FASTSIM结果 饱和定律：应用Vermeulen和Johnson饱和定律 扩展方法：基于改进的FASTSIM方法处理牵引/制动应用 主要结论 Chopaya函数使用曲线拟合方法近似FASTSIM。本文提出了Chopaya方法的扩展版本，基于扩展的Polach模型和改进的FASTSIM方法用于牵引/制动应用。 在根据欧洲标准EN14363的虚拟认证模拟中，将Chopaya方法与其他蠕变力模型进行比较。这个例子似乎表明Chopaya模型提供了比任何其他通过函数评估蠕变力的模型更准确的FASTSIM近似，特别是在大量自旋的情况下。 扩展的Chopaya方法在Polach研究的一组7次现场测量中得到验证，代表了不同速度下的干燥和潮湿条件。希望所提出的方法将在多功能性、计算时间和准确性方面代表新的折衷方案。 文章亮点或创新点 方法创新：将Chopaya方法从无自旋情况扩展到包含自旋的复杂情况 精度提升：通过引入曲线拟合函数，显著提高了存在自旋时的蠕变力计算精度 计算效率：在保持较高精度的同时，维持了快速计算的特性 适用性扩展：成功将方法扩展到牵引/制动应用场景 验证充分：通过虚拟认证测试和实际机车测量验证了方法的有效性 专业词汇列表 英文术语 中文翻译 Tangential contact 切向接触 Rail traction vehicles 轨道牵引车辆 Creep forces 蠕变力 Hertzian Contact 赫兹接触 Spin 自旋 FASTSIM 快速简化接触算法 CONTACT 接触力学计算软件 Multi-body systems (MBS) 多体系统 Adhesion limit 粘着极限 Traction/braking 牵引/制动 Normalized creepages 归一化蠕变率 Contact ellipse 接触椭圆 Coulomb limit 库仑极限 Shear modulus 剪切模量 Coefficient of friction (COF) 摩擦系数 Curve-fitting functions 曲线拟合函数 Virtual testing track (VTT) 虚拟测试轨道 European standard EN14363 欧洲标准EN14363 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
-<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/">
+"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
+<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/">
 
   
 
@@ -81,13 +81,6 @@
 
   
   
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-99PGBGJH4S');
-  </script>
 </head>
 <body>
   
