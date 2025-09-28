@@ -177,6 +177,99 @@ function setupMobileDrawers(){
   }
 }
 
+const THEME_KEY = 'theme';
+const themeMediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+let themeToggleBtn = null;
+const THEME_ICON_LIGHT = '◐';
+const THEME_ICON_DARK = '◑';
+
+function getSavedTheme(){
+  try{
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === 'light' || saved === 'dark'){ return saved; }
+  }catch(err){ /* ignore storage errors */ }
+  return null;
+}
+
+function syncGiscusTheme(theme){
+  const iframe = document.querySelector('iframe.giscus-frame');
+  if (!iframe) return;
+  try{
+    iframe.contentWindow?.postMessage({
+      giscus: { setConfig: { theme } }
+    }, 'https://giscus.app');
+  }catch(err){ /* ignore cross-origin issues */ }
+}
+
+function updateThemeToggleIcon(){
+  if (!themeToggleBtn) return;
+  const manual = document.documentElement.dataset.theme || null;
+  const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
+  const effectiveDark = manual ? manual === 'dark' : prefersDark;
+  themeToggleBtn.textContent = effectiveDark ? THEME_ICON_DARK : THEME_ICON_LIGHT;
+  themeToggleBtn.setAttribute('aria-label','切换主题');
+  themeToggleBtn.setAttribute('title','切换主题');
+}
+
+function applyThemePreference(theme){
+  const root = document.documentElement;
+  if (theme === 'light' || theme === 'dark'){
+    root.dataset.theme = theme;
+  } else {
+    delete root.dataset.theme;
+  }
+  updateThemeToggleIcon();
+  const effective = theme || ((themeMediaQuery && themeMediaQuery.matches) ? 'dark' : 'light');
+  syncGiscusTheme(effective);
+}
+
+function setThemePreference(theme){
+  try{
+    if (theme === 'light' || theme === 'dark'){
+      localStorage.setItem(THEME_KEY, theme);
+    } else {
+      localStorage.removeItem(THEME_KEY);
+    }
+  }catch(err){ /* ignore storage errors */ }
+  applyThemePreference(theme);
+}
+
+function toggleThemePreference(){
+  const manual = document.documentElement.dataset.theme || null;
+  const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
+  let next;
+  if (!manual){
+    next = prefersDark ? 'light' : 'dark';
+  } else if (manual === 'dark'){
+    next = 'light';
+  } else {
+    next = null; // return to system preference
+  }
+  setThemePreference(next);
+}
+
+function initThemeToggle(){
+  themeToggleBtn = document.getElementById('themeToggle');
+  if (!themeToggleBtn) return;
+  const saved = getSavedTheme();
+  applyThemePreference(saved);
+  themeToggleBtn.addEventListener('click', toggleThemePreference);
+  if (themeMediaQuery){
+    const mqListener = () => {
+      if (!document.documentElement.dataset.theme){
+        applyThemePreference(null);
+      } else {
+        updateThemeToggleIcon();
+      }
+    };
+    if (themeMediaQuery.addEventListener){
+      themeMediaQuery.addEventListener('change', mqListener);
+    } else if (themeMediaQuery.addListener){
+      themeMediaQuery.addListener(mqListener);
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initial measurement
   syncHeaderHeightVar();
@@ -204,6 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileDrawers();
   // Initialize footer auto-hide
   setupFooterAutoHide();
+  // Theme toggle button (light/dark)
+  initThemeToggle();
 
   // Home hero search box: redirect to /search/?q=...
   try{
