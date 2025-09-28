@@ -243,7 +243,8 @@ function toggleThemePreference(){
   } else if (manual === 'dark'){
     next = 'light';
   } else {
-    next = null; // return to system preference
+    // 当前是手动浅色。优先切到深色，若系统偏好深色则回到系统模式即可达成同样效果。
+    next = prefersDark ? null : 'dark';
   }
   setThemePreference(next);
 }

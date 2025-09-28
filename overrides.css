@@ -66,6 +66,51 @@ body{ padding-top: var(--theme-header-height); }
   top: calc(var(--theme-header-height) + var(--theme-breadcrumbs-height));
 }
 
+.docs-toc{
+  align-self: flex-start;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  --toc-hover-bg: rgba(0,0,0,0.04);
+  --toc-active-bg: rgba(0,0,0,0.08);
+}
+
+.docs-toc .toc-title{
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.docs-toc .toc{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 0px;
+}
+
+.docs-toc .toc #TableOfContents{
+  display: block;
+  padding-top: 16px;
+}
+
+.docs-toc .toc #TableOfContents > ul{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.docs-toc .toc #TableOfContents > ul > li:first-child > a{
+  margin-top: 4px;
+}
+
 /* ============================= */
 /* TOC indentation (up to 3 lvls) */
 /* ============================= */
@@ -73,12 +118,40 @@ body{ padding-top: var(--theme-header-height); }
 .toc #TableOfContents ul{ list-style: none; margin: 0; padding: 0; }
 
 /* Base link style reset so indentation is controlled purely by level rules */
-.toc #TableOfContents a{ display:block; padding:6px 8px; }
+.toc #TableOfContents a{
+  display: block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.toc #TableOfContents a:hover{
+  background: var(--toc-hover-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.toc #TableOfContents a.is-active{
+  background: var(--toc-active-bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .docs-toc{
+  --toc-hover-bg: rgba(255,255,255,0.08);
+  --toc-active-bg: rgba(255,255,255,0.14);
+}
 
 /* Level indents: 2ch per level */
-.toc #TableOfContents > ul > li > a{ padding-left: 0; }
-.toc #TableOfContents ul ul > li > a{ padding-left: 2ch; }
-.toc #TableOfContents ul ul ul > li > a{ padding-left: 4ch; }
+.toc #TableOfContents > ul > li > a{ padding-left: 12px; }
+.toc #TableOfContents ul ul > li > a{ padding-left: calc(1.2rem + 6px); }
+.toc #TableOfContents ul ul ul > li > a{ padding-left: calc(2.4rem + 6px); }
+
+.toc #TableOfContents li + li{ margin-top: 2px; }
+.toc #TableOfContents ul ul{ margin-top: 2px; }
 
 /* Hide depth >= 4 */
 .toc #TableOfContents ul ul ul ul{ display: none; }
@@ -347,7 +420,7 @@ body{ padding-bottom: var(--theme-footer-height); }
     overflow: auto;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     -webkit-overflow-scrolling: touch;
     scrollbar-gutter: stable;
     flex: 1 1 auto;
