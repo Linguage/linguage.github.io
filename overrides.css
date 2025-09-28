@@ -166,6 +166,136 @@ body{ padding-top: var(--theme-header-height); }
 }
 
 /* ============================= */
+/* Home updates accordion cards   */
+/* ============================= */
+.home-updates{
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+  grid-template-columns: 1fr;
+}
+
+.home-updates-column{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 900px){
+  .home-updates{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.home-update-card{
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow .2s ease, border-color .2s ease;
+  display: block;
+}
+
+.home-update-card summary{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  position: relative;
+  padding-right: 44px;
+}
+
+.home-update-card summary::-webkit-details-marker{ display: none; }
+
+.home-update-card summary::after{
+  content: "\25BC";
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform .2s ease;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.home-update-card[open] summary::after{
+  transform: rotate(180deg);
+}
+
+.home-update-title{
+  font-size: 16px;
+  flex: 1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.home-update-meta{
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-update-card[open]{
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-hover);
+}
+
+.home-update-body{
+  border-top: 1px solid var(--border);
+  padding: 16px 20px 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.home-update-body p{ margin: 0 0 10px; }
+
+.home-update-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent-2);
+}
+
+.home-update-link::after{
+  content: "\2192";
+  font-size: 14px;
+}
+
+.home-update-more{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--accent-2);
+  text-decoration: none;
+  justify-self: flex-start;
+  padding: 6px 0;
+}
+
+.home-update-more{ grid-column: 1 / -1; }
+
+.home-update-more::after{
+  content: "\2192";
+  font-size: 14px;
+}
+
+@media (max-width: 600px){
+  .home-update-card summary{ flex-direction: column; align-items: flex-start; gap: 8px; padding-right: 20px; }
+  .home-update-card summary::after{ right: 16px; }
+  .home-update-meta{ font-size: 12px; margin-left: 0; }
+}
+
+/* ============================= */
 /* Fixed translucent footer      */
 /* ============================= */
 /* Reserve space so content bottom is not covered by fixed footer */
