@@ -371,6 +371,7 @@
 
       
       <p>经过一天的工作，我昨天配置的博客评论区离奇消失，查找记录时发现更惊悚的事：我近几天的Git提交记录全部失踪，并因一个误操作导致代码回滚到三天前的基础版本，所有后期工作成果瞬间清零。我向 GPT-5-Codex 求救，它立即启动高级Git命令进行抢救。最终，在GPT的指导下，我执行了几行恢复命令，代码起死回生，成功回到了误操作前的状态。这次劫后余生的经历，让我深切体会到Git的强大与学习它的必要性。</p>
+<p>如果你对类似的情况感到恐惧，或者对Git的使用还不够熟悉，可以参考<a href="/labs/git-recover_guide/">我的自救手册</a>。本文主要讲述这件事情的前后经过。</p>
 <h2 id="故事的前后经过">故事的前后经过</h2>
 <p>今天我发现博客的评论区没了，我感到很奇怪，因为昨这是我昨天下午做的，当时也提交git了，可能是今天进行主题修改的时候，AI不小心把该部分代码删掉了。虽然有点小不爽，但想来也不是很复杂的事情，毕竟昨天配置评论区的时候也没费多大劲。</p>
 <p>然而，当我打开windsurf试图查找之前的记录，发现GPT-5-Codex一如既往地陷入了“内耗式”地查找，来来回回几圈之后，我忍不住叫停问它：到底找没找到？它的回答是，没有…</p>
@@ -385,79 +386,6 @@
 <p>于是，我在它的指导下执行了那几行陌生但寄托了我所有希望的命令，然后就是起死回生的时刻，我长舒了一口气。
 此时，我的代码回到了我的”残之一手“点击GitHub Desktop的那一刻之前的状态，我博客配置中，评论区的内容依然找不到。但是我已经不再为此感到一丝一毫的不爽，全是劫后余生的庆幸。</p>
 <p>后面，借助Windsurf+GPT-5，我把评论区补上了，又将其它已经发现的小bug进行了修复，然后开始写了这篇博客。这件事情始于经验的缺乏带来的误操作，不过还好我用的是git，这款软件真是大慈大悲的发明。过去两年我一直在使用git，但是只学会了最基础的操作，这件事情也让我意识到多学点git应该没啥坏处。</p>
-<hr>
-<h2 id="git-历史回退自救手册reflog-找回与分支指针恢复">Git 历史回退自救手册：reflog 找回与分支指针恢复</h2>
-<blockquote>
-<p>一份精简但可操作的“掉历史”自救清单：当你在 GUI 或命令行误操作后，发现最近提交“消失”时，如何快速定位并安全恢复。</p></blockquote>
-<h3 id="典型症状">典型症状</h3>
-<ul>
-<li><strong>近期提交不见了</strong>：<code>git log</code> 顶端不是你刚做的提交。</li>
-<li><strong>工作区回到旧版本</strong>：本地文件和远端网站内容明显“时光倒流”。</li>
-<li><strong>远端与本地不一致</strong>：<code>git status -sb</code> 显示 <code>main...origin/main [ahead N|behind N]</code>。</li>
-</ul>
-<h3 id="成因与诱因简明">成因与诱因（简明）</h3>
-<ul>
-<li><strong>直接成因</strong>：分支指针被移到旧提交，或进入分离 HEAD，导致近期提交不在当前分支历史中。</li>
-<li><strong>前几天可能埋下的雷</strong>：
-<ul>
-<li>直接 <code>git checkout &lt;commit&gt;</code> 查看旧版本后继续开发/提交；</li>
-<li>用 GUI 的“Checkout/Reset/Restore”类功能回到旧提交但未建保护分支；</li>
-<li>偶发 <code>git reset --hard &lt;old&gt;</code>；</li>
-<li>未及时推送，远端与本地脱节，引发误判。</li>
-</ul>
-</li>
-<li><strong>今天触发的动作</strong>：在 GUI 中对某个旧提交执行了“Checkout/Reset”，把当前分支（例如 <code>main</code>）指针回退了。</li>
-</ul>
-<h3 id="本次拯救摘要">本次拯救（摘要）</h3>
-<ol>
-<li>
-<p>用 <code>reflog</code> 找到目标提交 <code>&lt;sha&gt;</code>（历史未丢，只是指针偏了）。</p>
-</li>
-<li>
-<p>二选一恢复：</p>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 安全合并法（推荐）</span>
-</span></span><span style="display:flex;"><span>git checkout -b restore-work &lt;sha&gt;
-</span></span><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge restore-work
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或：直接重置法（快捷）</span>
-</span></span><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git reset --hard &lt;sha&gt;
-</span></span></code></pre></div><ol start="3">
-<li>如远端历史需以本地为准：<code>git push -f origin main</code></li>
-</ol>
-<h3 id="恢复步骤">恢复步骤</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 1) 快速浏览当前可达历史</span>
-</span></span><span style="display:flex;"><span>git log --oneline -10
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2) 关键：查看 HEAD 的移动“航迹记录”</span>
-</span></span><span style="display:flex;"><span>git reflog -20
-</span></span></code></pre></div><ul>
-<li>在 <code>reflog</code> 输出中，<strong>找到你需要回到的那次正确提交的 SHA</strong>（记为 <code>&lt;sha&gt;</code>）。</li>
-</ul>
-<h3 id="两种恢复方式择一">两种恢复方式（择一）</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 从目标提交创建保护分支</span>
-</span></span><span style="display:flex;"><span>git checkout -b restore-work &lt;sha&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 回到主分支并合并恢复</span>
-</span></span><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git merge restore-work
-</span></span></code></pre></div><p>说明：保留现场，历史连贯，最不容易出岔子。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
-</span></span><span style="display:flex;"><span>git reset --hard &lt;sha&gt;
-</span></span></code></pre></div><p>说明：让当前分支指针“瞬移”到 <code>&lt;sha&gt;</code>；如远端不是你想要的历史，后续可能需要强推。</p>
-<h3 id="同步远端如有需要">同步远端（如有需要）</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 仅当你确认“本地才是正确历史”时才执行强推！</span>
-</span></span><span style="display:flex;"><span>git push -f origin main
-</span></span></code></pre></div><h3 id="预防与习惯精简版">预防与习惯（精简版）</h3>
-<ul>
-<li><strong>查看旧版本用新分支</strong>：<code>git checkout -b inspect-&lt;date&gt; &lt;sha&gt;</code>。</li>
-<li><strong>小步提交，及时推送</strong>：远端即备份。</li>
-<li><strong>危险操作前打快照</strong>：<code>git branch backup-&lt;date&gt;</code> 或 <code>git tag safety-&lt;date&gt;</code>。</li>
-<li><strong>丢历史先看 reflog</strong>：优先 <code>git reflog</code>，再考虑其他。</li>
-</ul>
       
     </div>
     
@@ -496,17 +424,6 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#故事的前后经过">故事的前后经过</a></li>
-    <li><a href="#git-历史回退自救手册reflog-找回与分支指针恢复">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
-      <ul>
-        <li><a href="#典型症状">典型症状</a></li>
-        <li><a href="#成因与诱因简明">成因与诱因（简明）</a></li>
-        <li><a href="#本次拯救摘要">本次拯救（摘要）</a></li>
-        <li><a href="#恢复步骤">恢复步骤</a></li>
-        <li><a href="#两种恢复方式择一">两种恢复方式（择一）</a></li>
-        <li><a href="#同步远端如有需要">同步远端（如有需要）</a></li>
-        <li><a href="#预防与习惯精简版">预防与习惯（精简版）</a></li>
-      </ul>
-    </li>
   </ul>
 </nav>
           
@@ -535,17 +452,6 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#故事的前后经过">故事的前后经过</a></li>
-    <li><a href="#git-历史回退自救手册reflog-找回与分支指针恢复">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
-      <ul>
-        <li><a href="#典型症状">典型症状</a></li>
-        <li><a href="#成因与诱因简明">成因与诱因（简明）</a></li>
-        <li><a href="#本次拯救摘要">本次拯救（摘要）</a></li>
-        <li><a href="#恢复步骤">恢复步骤</a></li>
-        <li><a href="#两种恢复方式择一">两种恢复方式（择一）</a></li>
-        <li><a href="#同步远端如有需要">同步远端（如有需要）</a></li>
-        <li><a href="#预防与习惯精简版">预防与习惯（精简版）</a></li>
-      </ul>
-    </li>
   </ul>
 </nav>
       </nav>
