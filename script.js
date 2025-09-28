@@ -220,7 +220,9 @@ function applyThemePreference(theme){
   }
   updateThemeToggleIcon();
   const effective = theme || ((themeMediaQuery && themeMediaQuery.matches) ? 'dark' : 'light');
-  syncGiscusTheme(effective);
+  // Map site theme to giscus theme names (monokai-like for dark)
+  const giscusTheme = effective === 'dark' ? 'dark_dimmed' : 'light';
+  syncGiscusTheme(giscusTheme);
 }
 
 function setThemePreference(theme){
