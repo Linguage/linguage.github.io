@@ -478,6 +478,8 @@ body{ padding-bottom: var(--theme-footer-height); }
   --accent-2: #f9d67b;
   --shadow: 0 12px 28px rgba(0,0,0,0.55);
   --shadow-hover: 0 18px 38px rgba(0,0,0,0.7);
+  --docs-nav-current-bg: rgba(50,49,44,0.95);
+  --docs-nav-current-border: rgba(249,214,123,0.25);
 }
 
 :root[data-theme="dark"] .site-header,
@@ -505,6 +507,14 @@ body{ padding-bottom: var(--theme-footer-height); }
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a.active,
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="page"],
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="true"]{
+  background: rgba(50,49,44,0.95);
+  color: var(--accent-2);
+  box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+}
+:root[data-theme="dark"] .docs-sidebar .docs-nav a.is-active,
+:root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="page"],
+:root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="true"],
+:root[data-theme="dark"] .toc a.is-active{
   background: rgba(50,49,44,0.95);
   color: var(--accent-2);
   box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
