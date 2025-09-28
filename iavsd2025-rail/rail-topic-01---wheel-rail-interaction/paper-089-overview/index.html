@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -51,7 +51,7 @@
 Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易产生波动 初始接触点位置：在某些特殊情况下，接触点位置可能发生不连续变化 接触斑横向边界位置：接触斑的横向边界也可能表现出不连续变化 改进策略：
 曲率处理：排除曲率或采用适当的平滑技术 接触点依赖：避免依赖初始接触点，使用全局接触参数 边界位置：避免依赖接触斑横向边界，使用整个接触斑的积分特性 模型选择建议：
 推荐使用更鲁棒的MKP模型替代KP模型 采用加权平均接触角而非局部接触角 使用基于整个接触斑特性的全局接触参数 文章亮点或创新点 问题系统性分析：首次系统性地分析了轮轨接触模型鲁棒性问题的表现形式和根本原因 三因素识别：识别了导致鲁棒性问题的三个关键因素（曲率、接触点、边界位置） 案例验证：通过多个实际案例验证了鲁棒性问题对车辆动力学模拟的影响 实用解决方案：提出了具体可行的改进策略和模型选择建议 安全评估影响：揭示了鲁棒性问题对车辆安全评估可靠性的重要影响 专业词汇列表 英文术语 中文翻译 Robustness Issues 鲁棒性问题 Wheel-Rail Contact Models 轮轨接触模型 Vehicle Dynamics Simulations 车辆动力学模拟 Algorithmic Robustness 算法鲁棒性 Hertzian Contact 赫兹接触 Non-Hertzian Contact 非赫兹接触 Pseudo-Impact Effects 伪冲击效应 Contact Forces 接触力 High-Frequency Oscillations 高频振荡 Unloading Rate 卸载率 Derailment Coefficient 脱轨系数 Contact Patch 接触斑 Initial Contact Point 初始接触点 Curvature Fluctuations 曲率波动 Contact Boundary 接触边界 Planar Contact Approach 平面接触方法 Conformal Contact Model 共形接触模型 Kik-Piotrowski (KP) Model KP模型 RNHM Model RNHM模型 Boussinesq-Cerruti Formula Boussinesq-Cerruti公式 Wheel Profile 轮型 Rail Profile 轨型 Lateral Displacement 横向位移 Normal Interpenetration 法向贯入量 Contact Angle 接触角 Creepages 蠕变率 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：089 基本信息 论文编号：089 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations 中文标题：铁路车辆动力学模拟中轮轨接触模型的鲁棒性问题 作者及单位：孙宇* 南京工业大学交通运输工程学院，南京211816，中国 联系邮箱：sunyu.9003@163.com 摘要 在铁路车辆动力学模拟中，轮轨接触算法的鲁棒性问题可能导致人为的轮轨冲击，从而影响模拟结果的准确性。本文研究了车辆动力学模拟中由轮轨接触算法引起的数值鲁棒性问题现象。首先，介绍了轮轨接触算法中鲁棒性问题的表现形式及其对车辆动力学模拟结果和轮轨运营安全评估的影响。然后，讨论了导致轮轨接触模型缺乏鲁棒性的三个常见因素。最后，提出了相应的缓解策略来解决这些问题。
 关键词 #轮轨接触 #车辆动力学模拟 #算法鲁棒性 #赫兹接触 #非赫兹接触
@@ -67,8 +67,8 @@ Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易�
 Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易产生波动 初始接触点位置：在某些特殊情况下，接触点位置可能发生不连续变化 接触斑横向边界位置：接触斑的横向边界也可能表现出不连续变化 改进策略：
 曲率处理：排除曲率或采用适当的平滑技术 接触点依赖：避免依赖初始接触点，使用全局接触参数 边界位置：避免依赖接触斑横向边界，使用整个接触斑的积分特性 模型选择建议：
 推荐使用更鲁棒的MKP模型替代KP模型 采用加权平均接触角而非局部接触角 使用基于整个接触斑特性的全局接触参数 文章亮点或创新点 问题系统性分析：首次系统性地分析了轮轨接触模型鲁棒性问题的表现形式和根本原因 三因素识别：识别了导致鲁棒性问题的三个关键因素（曲率、接触点、边界位置） 案例验证：通过多个实际案例验证了鲁棒性问题对车辆动力学模拟的影响 实用解决方案：提出了具体可行的改进策略和模型选择建议 安全评估影响：揭示了鲁棒性问题对车辆安全评估可靠性的重要影响 专业词汇列表 英文术语 中文翻译 Robustness Issues 鲁棒性问题 Wheel-Rail Contact Models 轮轨接触模型 Vehicle Dynamics Simulations 车辆动力学模拟 Algorithmic Robustness 算法鲁棒性 Hertzian Contact 赫兹接触 Non-Hertzian Contact 非赫兹接触 Pseudo-Impact Effects 伪冲击效应 Contact Forces 接触力 High-Frequency Oscillations 高频振荡 Unloading Rate 卸载率 Derailment Coefficient 脱轨系数 Contact Patch 接触斑 Initial Contact Point 初始接触点 Curvature Fluctuations 曲率波动 Contact Boundary 接触边界 Planar Contact Approach 平面接触方法 Conformal Contact Model 共形接触模型 Kik-Piotrowski (KP) Model KP模型 RNHM Model RNHM模型 Boussinesq-Cerruti Formula Boussinesq-Cerruti公式 Wheel Profile 轮型 Rail Profile 轨型 Lateral Displacement 横向位移 Normal Interpenetration 法向贯入量 Contact Angle 接触角 Creepages 蠕变率 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
-<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/">
 
   
 
@@ -97,6 +97,13 @@ Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易�
 
   
   
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
 </head>
 <body>
   

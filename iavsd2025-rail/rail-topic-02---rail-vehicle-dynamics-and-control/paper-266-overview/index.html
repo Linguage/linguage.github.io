@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -55,7 +55,7 @@
 稳定性提升：牵引扭矩可以显著提高车辆的临界速度，应用优化的扭矩分布策略后，这一指标得到进一步提升，有利于车辆稳定性。当给每个轴增加12 kNm的牵引扭矩时，铁路车辆的临界速度从304.75 km/h提高到350.42 km/h。采用扭矩分布策略后，临界速度达到355.98 km/h。
 线性关系：轮重减载率和轮轴横向力相对于牵引/制动力的变化趋势几乎是线性的，这为理解和预测车辆在不同工况下的性能提供了理论基础。
 文章亮点或创新点 系统研究了牵引/制动工况下动车组曲线通过性能的影响机制 提出了基于转向架的扭矩分布优化策略 发现扭矩分布对车辆安全性、磨损性能和稳定性的综合影响 验证了优化扭矩分布策略对车辆稳定性的提升效果 为川藏铁路等复杂线路条件下的列车运行提供了理论指导 揭示了牵引/制动扭矩对轮轨磨损和转向能力的影响规律 专业词汇列表 英文术语 中文翻译 Curve Negotiation 曲线通过 Traction/Braking Conditions 牵引/制动工况 Torque Distribution 扭矩分布 EMU (Electric Multiple Unit) 动车组 Derailment Coefficient 脱轨系数 Wheel Load Reduction Rate 轮重减载率 Wheel Axle Lateral Force 轮轴横向力 Wear Number 磨损数 Longitudinal Creep Force 纵向蠕滑力 Steering Ability 转向能力 Critical Speed 临界速度 Helix Line 螺旋线路 Multibody Dynamics 多体动力学 Nonlinear Suspension 非线性悬挂 Track Irregularity 轨道不平顺 Adhesion Limit 粘着限制 Bogie 转向架 Wheelset 轮对 Primary Suspension 一系悬挂 Secondary Suspension 二系悬挂 Air Spring 空气弹簧 Anti-roll Torsion Bar 抗侧滚扭杆 Traction Rod 牵引拉杆 Deceleration-Speed Method 减速速度法 Lateral Displacement 横向位移 Coupling Force 车钩力 Running Resistance 运行阻力 Gravitational Force Component 重力分量 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-266 基本信息 论文编号：266 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Curve Negotiation Analysis of EMUs under Traction/Braking Conditions 中文标题：牵引/制动工况下动车组的曲线通过性能分析 作者及单位：Jinsong Zhou, Yuheng Gu, Zhanfei Zhang, Yiyang Song, Dao Gong (同济大学交通运输学院，上海铁路基础设施耐久性与系统安全上海市重点实验室，中国上海) 摘要 川藏铁路具有大量螺旋线路，其中水平曲线和坡度在某些路段上耦合以适应地形约束。因此，有必要研究牵引/制动工况下列车通过曲线的动态性能。研究表明，与惰行工况相比，牵引和制动对动态性能有显著影响，牵引扭矩明显加剧了曲线通过性能恶化的趋势，而制动扭矩有时会优化动车组的运行安全性。轮重减载率和轮轴横向力相对于牵引/制动力的变化趋势几乎是线性的。此外，还研究了转向架前后轴之间扭矩分布对车辆在曲线轨道上安全性和转向的影响。仿真结果证明，通过将扭矩分配给后轴，安全和磨损性能通常令人满意，扭矩值越大，优化效果越明显。优化的扭矩分布策略还可以提高动车组的稳定性。
 关键词 #曲线通过 #牵引/制动力 #扭矩分布 #动车组
@@ -75,8 +75,8 @@
 稳定性提升：牵引扭矩可以显著提高车辆的临界速度，应用优化的扭矩分布策略后，这一指标得到进一步提升，有利于车辆稳定性。当给每个轴增加12 kNm的牵引扭矩时，铁路车辆的临界速度从304.75 km/h提高到350.42 km/h。采用扭矩分布策略后，临界速度达到355.98 km/h。
 线性关系：轮重减载率和轮轴横向力相对于牵引/制动力的变化趋势几乎是线性的，这为理解和预测车辆在不同工况下的性能提供了理论基础。
 文章亮点或创新点 系统研究了牵引/制动工况下动车组曲线通过性能的影响机制 提出了基于转向架的扭矩分布优化策略 发现扭矩分布对车辆安全性、磨损性能和稳定性的综合影响 验证了优化扭矩分布策略对车辆稳定性的提升效果 为川藏铁路等复杂线路条件下的列车运行提供了理论指导 揭示了牵引/制动扭矩对轮轨磨损和转向能力的影响规律 专业词汇列表 英文术语 中文翻译 Curve Negotiation 曲线通过 Traction/Braking Conditions 牵引/制动工况 Torque Distribution 扭矩分布 EMU (Electric Multiple Unit) 动车组 Derailment Coefficient 脱轨系数 Wheel Load Reduction Rate 轮重减载率 Wheel Axle Lateral Force 轮轴横向力 Wear Number 磨损数 Longitudinal Creep Force 纵向蠕滑力 Steering Ability 转向能力 Critical Speed 临界速度 Helix Line 螺旋线路 Multibody Dynamics 多体动力学 Nonlinear Suspension 非线性悬挂 Track Irregularity 轨道不平顺 Adhesion Limit 粘着限制 Bogie 转向架 Wheelset 轮对 Primary Suspension 一系悬挂 Secondary Suspension 二系悬挂 Air Spring 空气弹簧 Anti-roll Torsion Bar 抗侧滚扭杆 Traction Rod 牵引拉杆 Deceleration-Speed Method 减速速度法 Lateral Displacement 横向位移 Coupling Force 车钩力 Running Resistance 运行阻力 Gravitational Force Component 重力分量 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
-<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/">
 
   
 
@@ -105,6 +105,13 @@
 
   
   
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
 </head>
 <body>
   

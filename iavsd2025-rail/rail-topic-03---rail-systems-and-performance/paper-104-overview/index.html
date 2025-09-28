@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -43,7 +43,7 @@
 研究方法 开发的环境在Matlab和Simulink中实现，用于模拟在固定闭塞(FB)和移动闭塞(MB)信号系统下的铁路运营。当前配置模拟两列列车的运动：前导列车在没有信号约束的情况下运行，而后续列车的运动通过信号逻辑受到前导列车的影响。无线电闭塞中心(RBC)模块接收来自列车的关于其当前状态的实时信息。基于这些数据，RBC计算后续列车的行车许可(MA)。列车的状态和MA以不同的格式传输，具体取决于采用的信号策略。车载单元(OBU)作为线路侧和车载组件之间的接口，接收MA并通过减少静态参考(sMRSP)来计算动态最限制速度曲线(dMRSP)，以考虑信号约束。dMRSP然后传递到车载控制系统，其中速度控制算法确定适当的驾驶动作。采用了质点模型来抽象机械复杂性。列车状态通过求解运动方程来计算，从而闭合车载设备和线路侧RBC之间的反馈循环。为了增强真实性，虚拟模拟已集成到硬件在环(HiL)测试台中，设计用于实时执行。这种配置允许详细研究与系统组件之间通信相关的可能问题，并支持人在环测试。
 主要结论 该研究开发了一个用于铁路运营的模拟环境，考虑了两列连续列车，称为前导列车和后续列车。重点放在评估铁路信号策略，考虑固定闭塞(FB)和移动闭塞(MB)系统。虚拟模拟器已扩展到具有单独物理组件的协同仿真环境，旨在实现用于测试、验证和性能分析的硬件在环架构。在意大利北部一条包含12个车站的主要铁路线的实际案例中应用了该框架。为了突出信号系统对列车运动的影响，规定了前导列车和后续列车之间2分钟的短初始间距。模拟结果展示了在严格运行条件下移动闭塞(MB)信号相对于固定闭塞(FB)信号的优势，特别是在增强交通容量(TC)和改善运行规律性(MR)方面。这些结果突显了MB系统在保持运营性能的同时管理服务中断的更高能力。这主要归因于它们对传统信号系统约束的较低依赖性，以及它们支持较短车间距的能力，从而提高整体容量。相反，MB在整体运营的能源消耗(EC)方面效率较低，这是由于更灵敏的距离逻辑所需的频繁减速和加速阶段。
 文章亮点或创新点 最小可扩展架构设计：提出了一种精简而高效的硬件在环架构，通过将车载单元部署到专用硬件平台，实现了信号系统的实时测试和验证 混合建模方法：创新性地结合宏观和微观建模技术，在保证模拟精度的同时提高了计算效率，为铁路运营分析提供了新的技术路径 综合性能评估体系：建立了包含交通容量、运行规律性和能源消耗三个维度的评估指标，为不同信号系统的比较提供了科学的量化依据 工程应用价值：该架构已在实际铁路线路中得到验证，为铁路信号系统的优化设计和运营管理提供了实用的技术支持 专业词汇列表 英文术语 中文翻译 Hardware-in-the-Loop (HiL) 硬件在环 Fixed Block (FB) 固定闭塞 Moving Block (MB) 移动闭塞 Radio Block Centre (RBC) 无线电闭塞中心 On-Board Unit (OBU) 车载单元 Movement Authority (MA) 行车许可 Most Restrictive Speed Profile (MRSP) 最限制速度曲线 Traffic Capacity (TC) 交通容量 Motion Regularity (MR) 运行规律性 Energy Consumption (EC) 能源消耗 Co-simulation 协同仿真 Real-time Simulation 实时仿真 Train Separation 列车分离 Headway 车间距 Macroscopic Modelling 宏观建模 Microscopic Modelling 微观建模 Driver Model 驾驶员模型 Braking Curves 制动曲线 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：104 基本信息 论文编号：104 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：A Minimal and Scalable Architecture for Hardware-in-the-loop Simulations of Railway Signalling Systems 中文标题：铁路信号系统硬件在环模拟的最小可扩展架构 作者及单位：Marco Barbaro*, Ivano La Paglia, Luca Bernardini, Andrea Collina (米兰理工大学机械系，意大利) 摘要 铁路信号系统在确保列车运行的安全和高效管理中起着关键作用。本文提出了一个基于模拟的框架，用于分析两种主要信号范式的运营性能，即固定闭塞(FB)和移动闭塞(MB)系统。重点放在系统能源效率、延迟管理、交通容量和运行规律性方面的性能。开发的环境在Matlab和Simulink中实现，结合了宏观和微观建模，以在模拟保真度和计算效率之间取得平衡。本文还介绍了一种硬件在环(HiL)架构，通过将一列列车的车载单元(OBU)部署到专用硬件平台上，实现对车载子系统的实时测试。此外，通过引入高性能计算机，通过协同仿真设置实现实时模拟。该框架应用于意大利北部一条主要铁路线的实际案例研究。定义了三个性能指标：交通容量(TC)、运行规律性(MR)和能源消耗(EC)，并在FB和MB系统下进行评估。结果表明，MB信号能够在缩短车间距的情况下实现更高的吞吐量和更平稳的列车运行，但以增加能源消耗为代价，展示了其在高需求铁路网络中的优缺点。
 关键词 #铁路信号系统 #固定闭塞 #移动闭塞 #硬件在环 #交通容量 #运行规律性 #能源效率 #实时仿真 #列车控制 #安全间距
@@ -51,8 +51,8 @@
 研究方法 开发的环境在Matlab和Simulink中实现，用于模拟在固定闭塞(FB)和移动闭塞(MB)信号系统下的铁路运营。当前配置模拟两列列车的运动：前导列车在没有信号约束的情况下运行，而后续列车的运动通过信号逻辑受到前导列车的影响。无线电闭塞中心(RBC)模块接收来自列车的关于其当前状态的实时信息。基于这些数据，RBC计算后续列车的行车许可(MA)。列车的状态和MA以不同的格式传输，具体取决于采用的信号策略。车载单元(OBU)作为线路侧和车载组件之间的接口，接收MA并通过减少静态参考(sMRSP)来计算动态最限制速度曲线(dMRSP)，以考虑信号约束。dMRSP然后传递到车载控制系统，其中速度控制算法确定适当的驾驶动作。采用了质点模型来抽象机械复杂性。列车状态通过求解运动方程来计算，从而闭合车载设备和线路侧RBC之间的反馈循环。为了增强真实性，虚拟模拟已集成到硬件在环(HiL)测试台中，设计用于实时执行。这种配置允许详细研究与系统组件之间通信相关的可能问题，并支持人在环测试。
 主要结论 该研究开发了一个用于铁路运营的模拟环境，考虑了两列连续列车，称为前导列车和后续列车。重点放在评估铁路信号策略，考虑固定闭塞(FB)和移动闭塞(MB)系统。虚拟模拟器已扩展到具有单独物理组件的协同仿真环境，旨在实现用于测试、验证和性能分析的硬件在环架构。在意大利北部一条包含12个车站的主要铁路线的实际案例中应用了该框架。为了突出信号系统对列车运动的影响，规定了前导列车和后续列车之间2分钟的短初始间距。模拟结果展示了在严格运行条件下移动闭塞(MB)信号相对于固定闭塞(FB)信号的优势，特别是在增强交通容量(TC)和改善运行规律性(MR)方面。这些结果突显了MB系统在保持运营性能的同时管理服务中断的更高能力。这主要归因于它们对传统信号系统约束的较低依赖性，以及它们支持较短车间距的能力，从而提高整体容量。相反，MB在整体运营的能源消耗(EC)方面效率较低，这是由于更灵敏的距离逻辑所需的频繁减速和加速阶段。
 文章亮点或创新点 最小可扩展架构设计：提出了一种精简而高效的硬件在环架构，通过将车载单元部署到专用硬件平台，实现了信号系统的实时测试和验证 混合建模方法：创新性地结合宏观和微观建模技术，在保证模拟精度的同时提高了计算效率，为铁路运营分析提供了新的技术路径 综合性能评估体系：建立了包含交通容量、运行规律性和能源消耗三个维度的评估指标，为不同信号系统的比较提供了科学的量化依据 工程应用价值：该架构已在实际铁路线路中得到验证，为铁路信号系统的优化设计和运营管理提供了实用的技术支持 专业词汇列表 英文术语 中文翻译 Hardware-in-the-Loop (HiL) 硬件在环 Fixed Block (FB) 固定闭塞 Moving Block (MB) 移动闭塞 Radio Block Centre (RBC) 无线电闭塞中心 On-Board Unit (OBU) 车载单元 Movement Authority (MA) 行车许可 Most Restrictive Speed Profile (MRSP) 最限制速度曲线 Traffic Capacity (TC) 交通容量 Motion Regularity (MR) 运行规律性 Energy Consumption (EC) 能源消耗 Co-simulation 协同仿真 Real-time Simulation 实时仿真 Train Separation 列车分离 Headway 车间距 Macroscopic Modelling 宏观建模 Microscopic Modelling 微观建模 Driver Model 驾驶员模型 Braking Curves 制动曲线 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
-<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/">
 
   
 
@@ -81,6 +81,13 @@
 
   
   
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
 </head>
 <body>
   

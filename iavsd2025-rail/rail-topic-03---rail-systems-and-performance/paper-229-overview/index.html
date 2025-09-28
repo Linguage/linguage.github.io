@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -43,7 +43,7 @@
 研究方法 本研究依赖于耦合的多体-有限元(MBFE)模型来模拟高速铁路车辆的脱轨后动力学及其与围护结构的相互作用。车辆使用刚性多体公式建模，其中车辆由七个刚体组成：一个车体、两个转向架和四个轮对，每个有六个自由度，导致每辆车42个自由度。在模拟中，通过人工模拟轮缘故障来诱导脱轨。在脱轨后阶段，在 each 模拟时间步监控车辆上选定潜在冲击点的运动，以检测与脱轨围护墙(DCW)的接触。检测到接触后，基于Lankarani-Nikravesh接触-冲击模型施加非线性法向力。这项工作的创新性在于通过脱轨轮对与DCW相互作用的离线详细有限元分析推导出精细的局部接触刚度。该参数然后用于研究本研究的一个关键结果：脱轨围护墙底部的弯矩。在模拟框架中，考虑了额外的方程组来建模受冲击DCW的动态响应。DCW的行为然后通过由Kirchhoff板元素组成的有限元模型表示。
 主要结论 通过引入一种新颖的基于FEA的方法来评估局部接触刚度范围，本研究增强了用于脱轨后多体模拟的接触-冲击模型，这些模型与围护结构的有限元模型耦合。这导致脱轨轮对与DCW之间相互作用的更真实和可靠的表示。此外，将详细FE分析推导的一系列局部刚度值集成到多体模拟框架中，允许更准确地预测脱轨期间传递到围护墙的载荷。结果表明，虽然较高的刚度值导致峰值冲击力增加，但它们对墙底部弯矩的影响被DCW的动力学所衰减。这突显了在设计脱轨缓解设备时考虑完全耦合动力学的重要性。所提出的方法为围护系统的改进结构尺寸奠定了基础，因为目前不存在标准化指南。未来发展将专注于将这种方法扩展到其他围护措施，如安装在轨道轨距内的护轨。由于这些系统与围护墙相比表现出不同的接触行为，通过FEA评估其局部刚度并将其集成到多体模拟中对于全面评估其在脱轨后场景中的有效性至关重要。
 文章亮点或创新点 创新性方法论：提出了基于FEA的局部接触刚度估算方法，解决了脱轨后多体模拟中接触刚度定义的关键不确定性问题 耦合建模技术：建立了多体-有限元耦合模型，实现了脱轨车辆与围护结构动态相互作用的高精度模拟 参数化研究：系统研究了不同冲击角度对接触刚度的影响，发现冲击角度增大会导致有效接触面积减小和接触刚度降低 工程应用价值：研究结果为脱轨围护设备的结构设计提供了更可靠的基础，对提高铁路运输安全性具有重要意义 专业词汇列表 英文术语 中文翻译 Train Derailment 列车脱轨 Finite Element Analysis (FEA) 有限元分析 Contact Stiffness 接触刚度 Post-Derailment Dynamics 脱轨后动力学 Multibody Simulations 多体模拟 Containment Structures 围护结构 Derailment Mitigation Measures (DMM) 脱轨缓解措施 Contact-Impact Model 接触-冲击模型 Lankarani-Nikravesh Model Lankarani-Nikravesh模型 Wheelset 轮对 Derailment Containment Wall (DCW) 脱轨围护墙 Impact Force 冲击力 Bending Moment 弯矩 High-Speed Railway 高速铁路 Structural Design 结构设计 Numerical Simulation 数值模拟 Safety Assessment 安全评估 Railway Infrastructure 铁路基础设施 Dynamic Response 动态响应 Coupled System 耦合系统 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：229 基本信息 论文编号：229 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：Estimation of the Local Stiffness Between Derailed Railway Axles and Containment Structures for Multibody Post-Derailment Simulations 中文标题：用于多体脱轨后模拟的脱轨铁路轴与围护结构之间局部刚度的估算 作者及单位：Edoardo Montini, Matteo Santelia*, Francesco Mazzeo, Egidio Di Gialleonardo, Stefano Bruni (米兰理工大学机械工程系，意大利) 摘要 列车脱轨对铁路安全构成重大风险，需要有效的围护措施来减轻其后果。在各种脱轨缓解措施(DMM)中，轨道安装的围护设备，如脱轨围护墙、护轨和路缘石，通常用于铁路线路的高风险区域。然而，它们的设计和优化仍然具有挑战性，主要由于难以准确预测冲击力、缺乏标准化指南以及难以进行实验测试。因此，数值模拟被广泛采用来研究脱轨后行为，特别是与围护结构的相互作用。脱轨后阶段数值模拟中的主要不确定性之一在于定义脱轨轮对与围护结构在相互作用过程中的局部接触刚度，这可能显著影响结构响应和冲击引起的载荷。本研究通过提出一种系统方法来估算脱轨轮对与DMM之间的局部接触刚度参数，解决了这一挑战，考虑了脱轨围护墙的情况。使用有限元分析在各种场景下计算接触刚度，然后将其引入为研究脱轨后动力学而开发的多体模型中。多体模型集成了特定的接触-冲击模型，以提高脱轨车辆与基础设施之间力预测的准确性。通过改进接触刚度表征，该研究为脱轨围护设备设计提供了更可靠的框架，能够更好地评估其有效性和结构性能。未来工作将把该方法扩展到不同的DMM，如护轨，以及其他脱轨场景，进一步增强铁路运输的安全性。
 关键词 #列车脱轨 #有限元分析 #接触刚度 #脱轨后动力学 #多体模拟 #围护结构 #冲击力 #铁路安全
@@ -51,8 +51,8 @@
 研究方法 本研究依赖于耦合的多体-有限元(MBFE)模型来模拟高速铁路车辆的脱轨后动力学及其与围护结构的相互作用。车辆使用刚性多体公式建模，其中车辆由七个刚体组成：一个车体、两个转向架和四个轮对，每个有六个自由度，导致每辆车42个自由度。在模拟中，通过人工模拟轮缘故障来诱导脱轨。在脱轨后阶段，在 each 模拟时间步监控车辆上选定潜在冲击点的运动，以检测与脱轨围护墙(DCW)的接触。检测到接触后，基于Lankarani-Nikravesh接触-冲击模型施加非线性法向力。这项工作的创新性在于通过脱轨轮对与DCW相互作用的离线详细有限元分析推导出精细的局部接触刚度。该参数然后用于研究本研究的一个关键结果：脱轨围护墙底部的弯矩。在模拟框架中，考虑了额外的方程组来建模受冲击DCW的动态响应。DCW的行为然后通过由Kirchhoff板元素组成的有限元模型表示。
 主要结论 通过引入一种新颖的基于FEA的方法来评估局部接触刚度范围，本研究增强了用于脱轨后多体模拟的接触-冲击模型，这些模型与围护结构的有限元模型耦合。这导致脱轨轮对与DCW之间相互作用的更真实和可靠的表示。此外，将详细FE分析推导的一系列局部刚度值集成到多体模拟框架中，允许更准确地预测脱轨期间传递到围护墙的载荷。结果表明，虽然较高的刚度值导致峰值冲击力增加，但它们对墙底部弯矩的影响被DCW的动力学所衰减。这突显了在设计脱轨缓解设备时考虑完全耦合动力学的重要性。所提出的方法为围护系统的改进结构尺寸奠定了基础，因为目前不存在标准化指南。未来发展将专注于将这种方法扩展到其他围护措施，如安装在轨道轨距内的护轨。由于这些系统与围护墙相比表现出不同的接触行为，通过FEA评估其局部刚度并将其集成到多体模拟中对于全面评估其在脱轨后场景中的有效性至关重要。
 文章亮点或创新点 创新性方法论：提出了基于FEA的局部接触刚度估算方法，解决了脱轨后多体模拟中接触刚度定义的关键不确定性问题 耦合建模技术：建立了多体-有限元耦合模型，实现了脱轨车辆与围护结构动态相互作用的高精度模拟 参数化研究：系统研究了不同冲击角度对接触刚度的影响，发现冲击角度增大会导致有效接触面积减小和接触刚度降低 工程应用价值：研究结果为脱轨围护设备的结构设计提供了更可靠的基础，对提高铁路运输安全性具有重要意义 专业词汇列表 英文术语 中文翻译 Train Derailment 列车脱轨 Finite Element Analysis (FEA) 有限元分析 Contact Stiffness 接触刚度 Post-Derailment Dynamics 脱轨后动力学 Multibody Simulations 多体模拟 Containment Structures 围护结构 Derailment Mitigation Measures (DMM) 脱轨缓解措施 Contact-Impact Model 接触-冲击模型 Lankarani-Nikravesh Model Lankarani-Nikravesh模型 Wheelset 轮对 Derailment Containment Wall (DCW) 脱轨围护墙 Impact Force 冲击力 Bending Moment 弯矩 High-Speed Railway 高速铁路 Structural Design 结构设计 Numerical Simulation 数值模拟 Safety Assessment 安全评估 Railway Infrastructure 铁路基础设施 Dynamic Response 动态响应 Coupled System 耦合系统 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
-<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/">
 
   
 
@@ -81,6 +81,13 @@
 
   
   
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
 </head>
 <body>
   

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Linguista</title>
@@ -50,7 +50,7 @@ DDAEKF模型设计：将DDAEKF公式化为EnKF的扩展，同时保持其核心�
 观测建模：采用随机传感器模型生成粒子级观测值y_t^{(i)} ~ ζ(y_t|y_t)，模拟实际传感器读数的随机性。同时学习测量噪声模型以估计测量噪声的协方差，增强在噪声条件下的鲁棒性。
 更新步骤：将每个预测状态x_t^{(i)}通过观测模型h_ψ(也由MLP表示)得到预测测量值ŷ_t^{(i)}。这些预测与观测数据比较，计算创新协方差矩阵S_t，捕获预测和实际观测之间的差异。
 卡尔曼增益计算：使用集合平均偏差A_t和观测预测偏差HA_t计算卡尔曼增益K_t，这是平衡模型预测和传感器测量影响的关键项。
-"><meta property="og:url" content="http://localhost:1355/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-305 基本信息 论文编号：305 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Data-Driven Differentiable Adaptive Ensemble Kalman Filter for Enhanced Vehicle State Estimation 中文标题：数据驱动可微分自适应集合卡尔曼滤波器用于增强车辆状态估计 作者及单位：Maozhenning Yang¹,², Jiarui Hu¹,², Kaiying Zhang¹,², Xiaoguang Ma¹,³, Yuanjin Ji¹,²*, Lihui Ren¹,² (¹同济大学交通运输学院，中国；②上海铁路基础设施耐久性与系统安全上海市重点实验室，中国；③中车南京浦镇车辆有限公司，中国) 摘要 跨座式单轨车辆在城市轨道交通中具有显著优势，如高机动性和对复杂地形的强适应性。然而，这些车辆在运行过程中会受到严重的冲击载荷，特别是在梁连接点，这会导致高应力集中并引起关键部件的疲劳损伤。本研究提出了一种数据驱动可微分自适应集合卡尔曼滤波器(DDAEKF)，用于单轨转向架的实时状态估计。通过将递归贝叶斯滤波与基于深度学习的状态转移和观测模型相结合，所提出的方法提高了动态运行条件下的状态估计准确性，为后续故障诊断奠定了基础。该模型通过数值仿真和1:8比例试验台进行验证，在2000秒评估期间实现了对车辆状态的稳定鲁棒跟踪。结果表明，DDAEKF能够有效估计位移和速度，同时减轻方向估计中的不确定性。该方法为提高跨座式单轨系统的安全性和运行效率提供了可靠的状态监测方法。
 关键词 #单轨 #状态估计 #动态自适应集合卡尔曼滤波器 #智能状态监测
@@ -65,8 +65,8 @@ DDAEKF模型设计：将DDAEKF公式化为EnKF的扩展，同时保持其核心�
 观测建模：采用随机传感器模型生成粒子级观测值y_t^{(i)} ~ ζ(y_t|y_t)，模拟实际传感器读数的随机性。同时学习测量噪声模型以估计测量噪声的协方差，增强在噪声条件下的鲁棒性。
 更新步骤：将每个预测状态x_t^{(i)}通过观测模型h_ψ(也由MLP表示)得到预测测量值ŷ_t^{(i)}。这些预测与观测数据比较，计算创新协方差矩阵S_t，捕获预测和实际观测之间的差异。
 卡尔曼增益计算：使用集合平均偏差A_t和观测预测偏差HA_t计算卡尔曼增益K_t，这是平衡模型预测和传感器测量影响的关键项。
-"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
-<link rel="canonical" href="http://localhost:1355/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/">
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/">
 
   
 
@@ -95,6 +95,13 @@ DDAEKF模型设计：将DDAEKF公式化为EnKF的扩展，同时保持其核心�
 
   
   
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
 </head>
 <body>
   
