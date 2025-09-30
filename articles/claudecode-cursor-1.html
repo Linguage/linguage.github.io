@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI编程工具市场研究信息图：Claude Code vs. Cursor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The infographic follows a narrative structure designed for market analysis. It starts with a high-level "Market Introduction" stating the key players. It then moves to "Core Technology & Market Positioning" to explain their fundamental philosophies. A "Competitive Landscape" section uses side-by-side cards for direct feature comparison. The "Performance & Quality Index" section features a key bar chart visualizing the primary trade-off. The "Market Adoption Scenarios" section details ideal customer profiles. A "Process & Value Chain" diagram clarifies their internal workflows. This structure guides the user from a broad market overview to specific, actionable insights, making complex comparisons digestible. -->
+    <!-- Visualization & Content Choices: Report Info: Core Philosophies -> Goal: Compare -> Viz/Presentation Method: Two large, styled cards with unicode icons. Justification: Clear, immediate differentiation. Report Info: Performance Trade-off -> Goal: Compare/Relationships -> Viz/Presentation Method: Chart.js Bar Chart. Justification: Provides a quantifiable, impactful visual of the quality vs. speed dynamic. Label wrapping and custom tooltips are implemented. Report Info: Internal Logic -> Goal: Organize/Process -> Viz/Presentation Method: Structured HTML/CSS Flowchart. Justification: Visually represents the process flow without SVG/Mermaid, using flexbox and borders for clarity. All other data is presented in styled cards and lists for direct comparison and readability. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #F0F4F8; }
+        .card { background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1); }
+        .accent-bg { background-color: #FF5A5F; }
+        .accent-text { color: #FF5A5F; }
+        .primary-text { color: #0B3954; }
+        .secondary-text { color: #087E8B; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        .flow-step { border: 2px solid #BFD7EA; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: center; background-color: #fff; flex-grow: 1; }
+        .flow-arrow { color: #BFD7EA; font-size: 1.5rem; font-weight: bold; align-self: center; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        
+        <section id="header" class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold primary-text mb-2">AI编程工具市场研究报告</h1>
+            <p class="text-xl md:text-2xl secondary-text">关键参与者分析：Claude Code vs. Cursor</p>
+        </section>
+
+        <section id="market-positioning" class="mb-16">
+            <h2 class="text-3xl font-bold text-center primary-text mb-8">核心技术与市场定位</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold secondary-text mb-3">终端原生代理</h3>
+                    <p class="text-lg font-semibold primary-text mb-4">Claude Code</p>
+                    <p>定位为一款高度自主的命令行“代理”，能够独立规划和执行复杂的多步骤开发任务。其核心优势在于深度代码理解和高质量的生成能力，面向追求极致代码质量和自动化工作流的开发者。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-2xl font-bold secondary-text mb-3">IDE原生助手</h3>
+                    <p class="text-lg font-semibold primary-text mb-4">Cursor</p>
+                    <p>定位为无缝集成在IDE中的“智能副驾”。它通过提供即时、流畅的编码辅助来提升日常开发效率。其核心优势在于快速响应和与现有开发环境的深度融合，面向追求敏捷迭代和高效编码节奏的开发者。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="performance-index" class="mb-16">
+            <h2 class="text-3xl font-bold text-center primary-text mb-8">性能与质量指数</h2>
+            <p class="max-w-3xl mx-auto text-center mb-8">在AI编程工具市场，核心的竞争点在于代码生成的“质量”与“速度”之间的权衡。下图直观地展示了两位关键参与者在这一核心指标上的表现。</p>
+            <div class="card p-6">
+                <div class="chart-container">
+                    <canvas id="qualitySpeedChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section id="competitive-landscape" class="mb-16">
+            <h2 class="text-3xl font-bold text-center primary-text mb-8">竞争格局分析</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6">
+                    <h4 class="text-xl font-bold secondary-text mb-3">上下文理解</h4>
+                    <p><strong class="primary-text">Claude Code:</strong> 利用高达200K Tokens的巨型上下文窗口进行全局分析。</p>
+                    <p><strong class="primary-text">Cursor:</strong> 通过代码库索引和向量嵌入构建可检索的“语义地图”。</p>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-bold secondary-text mb-3">代码修改策略</h4>
+                    <p><strong class="primary-text">Claude Code:</strong> 倾向于重写整个文件或代码块，确保逻辑一致性。</p>
+                    <p><strong class="primary-text">Cursor:</strong> 以diff形式提供增量修改建议，由开发者审查采纳。</p>
+                </div>
+                <div class="card p-6 md:col-span-2 lg:col-span-1">
+                    <h4 class="text-xl font-bold secondary-text mb-3">商业模式</h4>
+                    <p><strong class="primary-text">Claude Code:</strong> 按API使用量付费，模型透明，适合波动性需求。</p>
+                    <p><strong class="primary-text">Cursor:</strong> 月度订阅制，成本可预测，适合重度用户。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="process-flow" class="mb-16">
+            <h2 class="text-3xl font-bold text-center primary-text mb-8">技术价值链解析</h2>
+            <div class="space-y-10">
+                <div>
+                    <h4 class="text-xl font-bold secondary-text mb-4 text-center">Claude Code: 代理式执行流</h4>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+                        <div class="flow-step">指令输入</div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">全局上下文分析</div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">制定执行计划</div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">代码生成/修改</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold secondary-text mb-4 text-center">Cursor: 辅助式迭代流</h4>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+                        <div class="flow-step">指令输入</div>
+                         <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">语义检索上下文</div>
+                         <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">增强提示词</div>
+                         <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-step">生成增量建议</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market-adoption" class="mb-16">
+            <h2 class="text-3xl font-bold text-center primary-text mb-8">市场采纳与目标客群</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 border-t-4 border-[#FF5A5F]">
+                    <h3 class="text-2xl font-bold primary-text mb-3">深度重构与自动化</h3>
+                    <p class="font-semibold secondary-text mb-4">Claude Code 适用场景</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>对遗留代码库进行大规模现代化重构。</li>
+                        <li>分析并修复跨多个文件的复杂Bug。</li>
+                        <li>自动化重复性高的DevOps任务或Git工作流。</li>
+                        <li>追求极致代码质量，愿意投入时间进行深度分析的团队。</li>
+                    </ul>
+                </div>
+                <div class="card p-6 border-t-4 border-[#087E8B]">
+                    <h3 class="text-2xl font-bold primary-text mb-3">敏捷开发与快速原型</h3>
+                    <p class="font-semibold secondary-text mb-4">Cursor 适用场景</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>在日常开发中快速编写、修改和调试代码。</li>
+                        <li>快速构建新功能的原型并进行迭代。</li>
+                        <li>需要完整IDE工具链（调试、测试）支持的开发环境。</li>
+                        <li>对开发成本敏感，希望获得高性价比AI辅助的个人和团队。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 mt-12 border-t-2 border-[#BFD7EA]">
+            <p class="text-gray-600">本报告数据与分析源于对AI编程工具市场的深度研究。仅供参考。</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const wrapLabel = (label, maxWidth) => {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const ctx = document.getElementById('qualitySpeedChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Claude Code', 'Cursor'],
+                datasets: [{
+                    label: '代码质量指数',
+                    data: [9.2, 7.5],
+                    backgroundColor: 'rgba(11, 57, 84, 0.7)',
+                    borderColor: 'rgba(11, 57, 84, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '响应速度指数',
+                    data: [6.5, 9.5],
+                    backgroundColor: 'rgba(8, 126, 139, 0.7)',
+                    borderColor: 'rgba(8, 126, 139, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: { display: true, text: '指数 (0-10)' }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

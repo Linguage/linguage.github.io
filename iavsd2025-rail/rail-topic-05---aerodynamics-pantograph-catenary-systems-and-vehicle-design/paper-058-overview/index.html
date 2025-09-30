@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-058 基本信息 论文编号：paper-058 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Study on contact force identification method considering vibrations of stable arm on pantograph 中文标题：考虑受电弓稳流臂振动的接触力识别方法研究 作者及单位：Haifei Wei, Ning Zhou*, Xingshuai Zhi, Weihua Zhang (Southwest Jiaotong University, China) 摘要 接触力的测量长期以来一直是受电弓-接触网研究的中心话题。作为受电弓和接触网之间的关键耦合变量，接触力包含丰富信息，可用于评估受流质量、接触条或接触线的磨损状况，以及诊断各种故障状态。在本研究中，受电弓头被视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。此外，提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。此外，研究表明考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。
+关键词 #受电弓接触网系统 #接触力识别 #逆问题 #正则化 #模态叠加法 #稳流臂振动 #移动接触力 #L1正则化 #余弦小波字典匹配 #鲁棒性 #噪声干扰 #平衡臂振动 #非侵入式测量 #光纤传感器 #应变传感器
+背景与动机 随着列车运行速度的不断提高，受电弓与接触网之间的耦合相互作用加剧，使得受电弓-接触网接触力的测量变得越来越具有挑战性。这一问题长期以来一直困扰着研究人员，并引发了广泛的研究努力。早在20世纪70年代，德国研究人员就在接触条两端和悬置内嵌入了力传感器来直接测量接触力。为避免电磁干扰，Bocciolone等人采用了光纤传感器，将其封装为力传感器进行嵌入式测量。然而，这种侵入式测量方法不可避免地改变了受电弓的结构特性，传感器自身的结构可能影响运行安全。为解决这些问题，一些研究人员利用接触条的线性弹性特性，结合光纤布拉格光栅应变传感器，以非侵入方式计算接触力。考虑到受电弓-接触网系统中的多物理相互作用，还开发了FBG传感器的温度补偿算法，以提高在线接触力识别的准确性。随着计算机视觉技术的进步，几种非接触测量技术得到了发展。这些方法通过使用非接触设备测量弓头的振动加速度和位移来估计接触力。
+研究方法 本研究将受电弓头视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。研究提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。该方法通过建立受电弓头的动力学模型，考虑稳流臂振动的影响，采用正则化技术来处理逆问题的不适定性。研究还建立了相应的实验验证系统，通过对比识别结果与实际测量值来验证方法的有效性。
+主要结论 识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。研究证明，考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。通过对比分析，验证了基于余弦和小波字典匹配的L1正则化方法在接触力识别中的优越性能。该方法不仅能够准确识别接触力的大小，还能有效捕捉接触力的动态变化特性，为受电弓-接触网系统的状态监测和故障诊断提供了新的技术手段。
+文章亮点或创新点 创新性识别方法：首次提出了考虑受电弓稳流臂振动的接触力识别方法，突破了传统方法的局限性 L1正则化技术：开发了基于余弦和小波字典匹配的新型L1正则化方法，有效解决了逆问题的不适定性 多输入建模：建立了以移动接触力和稳流臂振动为输入的受电弓头动力学模型，提高了识别精度 鲁棒性验证：通过大量实验验证了方法在噪声干扰下的强鲁棒性和稳定性 工程应用价值：为受电弓-接触网系统的状态监测和故障诊断提供了新的非侵入式技术手段 专业词汇列表 英文术语 中文翻译 Pantograph-catenary system 受电弓-接触网系统 Contact force identification 接触力识别 Inverse problem 逆问题 Regularization 正则化 Modal superposition method 模态叠加法 Stable arm vibration 稳流臂振动 Moving contact force 移动接触力 L1-regularization L1正则化 Cosine and wavelet dictionary matching 余弦和小波字典匹配 Robustness 鲁棒性 Noise interference 噪声干扰 Balancing arm vibration 平衡臂振动 Non-intrusive measurement 非侵入式测量 Optical fiber sensor 光纤传感器 Strain sensor 应变传感器 Fiber Bragg grating (FBG) 光纤布拉格光栅 Temperature compensation 温度补偿 Input-system-output subsystem 输入-系统-输出子系统 Forward and inverse models 正向和逆向模型 Current collection quality 受流质量 Fault diagnosis 故障诊断 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-058 基本信息 论文编号：paper-058 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Study on contact force identification method considering vibrations of stable arm on pantograph 中文标题：考虑受电弓稳流臂振动的接触力识别方法研究 作者及单位：Haifei Wei, Ning Zhou*, Xingshuai Zhi, Weihua Zhang (Southwest Jiaotong University, China) 摘要 接触力的测量长期以来一直是受电弓-接触网研究的中心话题。作为受电弓和接触网之间的关键耦合变量，接触力包含丰富信息，可用于评估受流质量、接触条或接触线的磨损状况，以及诊断各种故障状态。在本研究中，受电弓头被视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。此外，提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。此外，研究表明考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。
+关键词 #受电弓接触网系统 #接触力识别 #逆问题 #正则化 #模态叠加法 #稳流臂振动 #移动接触力 #L1正则化 #余弦小波字典匹配 #鲁棒性 #噪声干扰 #平衡臂振动 #非侵入式测量 #光纤传感器 #应变传感器
+背景与动机 随着列车运行速度的不断提高，受电弓与接触网之间的耦合相互作用加剧，使得受电弓-接触网接触力的测量变得越来越具有挑战性。这一问题长期以来一直困扰着研究人员，并引发了广泛的研究努力。早在20世纪70年代，德国研究人员就在接触条两端和悬置内嵌入了力传感器来直接测量接触力。为避免电磁干扰，Bocciolone等人采用了光纤传感器，将其封装为力传感器进行嵌入式测量。然而，这种侵入式测量方法不可避免地改变了受电弓的结构特性，传感器自身的结构可能影响运行安全。为解决这些问题，一些研究人员利用接触条的线性弹性特性，结合光纤布拉格光栅应变传感器，以非侵入方式计算接触力。考虑到受电弓-接触网系统中的多物理相互作用，还开发了FBG传感器的温度补偿算法，以提高在线接触力识别的准确性。随着计算机视觉技术的进步，几种非接触测量技术得到了发展。这些方法通过使用非接触设备测量弓头的振动加速度和位移来估计接触力。
+研究方法 本研究将受电弓头视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。研究提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。该方法通过建立受电弓头的动力学模型，考虑稳流臂振动的影响，采用正则化技术来处理逆问题的不适定性。研究还建立了相应的实验验证系统，通过对比识别结果与实际测量值来验证方法的有效性。
+主要结论 识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。研究证明，考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。通过对比分析，验证了基于余弦和小波字典匹配的L1正则化方法在接触力识别中的优越性能。该方法不仅能够准确识别接触力的大小，还能有效捕捉接触力的动态变化特性，为受电弓-接触网系统的状态监测和故障诊断提供了新的技术手段。
+文章亮点或创新点 创新性识别方法：首次提出了考虑受电弓稳流臂振动的接触力识别方法，突破了传统方法的局限性 L1正则化技术：开发了基于余弦和小波字典匹配的新型L1正则化方法，有效解决了逆问题的不适定性 多输入建模：建立了以移动接触力和稳流臂振动为输入的受电弓头动力学模型，提高了识别精度 鲁棒性验证：通过大量实验验证了方法在噪声干扰下的强鲁棒性和稳定性 工程应用价值：为受电弓-接触网系统的状态监测和故障诊断提供了新的非侵入式技术手段 专业词汇列表 英文术语 中文翻译 Pantograph-catenary system 受电弓-接触网系统 Contact force identification 接触力识别 Inverse problem 逆问题 Regularization 正则化 Modal superposition method 模态叠加法 Stable arm vibration 稳流臂振动 Moving contact force 移动接触力 L1-regularization L1正则化 Cosine and wavelet dictionary matching 余弦和小波字典匹配 Robustness 鲁棒性 Noise interference 噪声干扰 Balancing arm vibration 平衡臂振动 Non-intrusive measurement 非侵入式测量 Optical fiber sensor 光纤传感器 Strain sensor 应变传感器 Fiber Bragg grating (FBG) 光纤布拉格光栅 Temperature compensation 温度补偿 Input-system-output subsystem 输入-系统-输出子系统 Forward and inverse models 正向和逆向模型 Current collection quality 受流质量 Fault diagnosis 故障诊断 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/" class="crumb-sec">Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览paper-058">IAVSD 2025 论文概览：paper-058</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：paper-058</li>
+<li><strong>所属主题</strong>：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</li>
+<li><strong>英文标题</strong>：Study on contact force identification method considering vibrations of stable arm on pantograph</li>
+<li><strong>中文标题</strong>：考虑受电弓稳流臂振动的接触力识别方法研究</li>
+<li><strong>作者及单位</strong>：Haifei Wei, Ning Zhou*, Xingshuai Zhi, Weihua Zhang (Southwest Jiaotong University, China)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>接触力的测量长期以来一直是受电弓-接触网研究的中心话题。作为受电弓和接触网之间的关键耦合变量，接触力包含丰富信息，可用于评估受流质量、接触条或接触线的磨损状况，以及诊断各种故障状态。在本研究中，受电弓头被视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。此外，提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。此外，研究表明考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。</p>
+<h2 id="关键词">关键词</h2>
+<p>#受电弓接触网系统 #接触力识别 #逆问题 #正则化 #模态叠加法 #稳流臂振动 #移动接触力 #L1正则化 #余弦小波字典匹配 #鲁棒性 #噪声干扰 #平衡臂振动 #非侵入式测量 #光纤传感器 #应变传感器</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着列车运行速度的不断提高，受电弓与接触网之间的耦合相互作用加剧，使得受电弓-接触网接触力的测量变得越来越具有挑战性。这一问题长期以来一直困扰着研究人员，并引发了广泛的研究努力。早在20世纪70年代，德国研究人员就在接触条两端和悬置内嵌入了力传感器来直接测量接触力。为避免电磁干扰，Bocciolone等人采用了光纤传感器，将其封装为力传感器进行嵌入式测量。然而，这种侵入式测量方法不可避免地改变了受电弓的结构特性，传感器自身的结构可能影响运行安全。为解决这些问题，一些研究人员利用接触条的线性弹性特性，结合光纤布拉格光栅应变传感器，以非侵入方式计算接触力。考虑到受电弓-接触网系统中的多物理相互作用，还开发了FBG传感器的温度补偿算法，以提高在线接触力识别的准确性。随着计算机视觉技术的进步，几种非接触测量技术得到了发展。这些方法通过使用非接触设备测量弓头的振动加速度和位移来估计接触力。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究将受电弓头视为一个独立的输入-系统-输出子系统，以移动接触力和稳流臂振动作为输入。基于模态叠加方法，建立了受电弓头动力学的正向和逆向模型，为接触力识别过程奠定了基础。研究提出了一种基于余弦和小波字典匹配的新型L1正则化方法来解决逆问题并估计接触力。该方法通过建立受电弓头的动力学模型，考虑稳流臂振动的影响，采用正则化技术来处理逆问题的不适定性。研究还建立了相应的实验验证系统，通过对比识别结果与实际测量值来验证方法的有效性。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>识别结果表明，所提出的方法具有很强的鲁棒性和稳定性，即使在噪声干扰下也能有效工作。研究证明，考虑平衡臂的振动对于提高移动接触力识别的准确性至关重要。通过对比分析，验证了基于余弦和小波字典匹配的L1正则化方法在接触力识别中的优越性能。该方法不仅能够准确识别接触力的大小，还能有效捕捉接触力的动态变化特性，为受电弓-接触网系统的状态监测和故障诊断提供了新的技术手段。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>创新性识别方法</strong>：首次提出了考虑受电弓稳流臂振动的接触力识别方法，突破了传统方法的局限性</li>
+<li><strong>L1正则化技术</strong>：开发了基于余弦和小波字典匹配的新型L1正则化方法，有效解决了逆问题的不适定性</li>
+<li><strong>多输入建模</strong>：建立了以移动接触力和稳流臂振动为输入的受电弓头动力学模型，提高了识别精度</li>
+<li><strong>鲁棒性验证</strong>：通过大量实验验证了方法在噪声干扰下的强鲁棒性和稳定性</li>
+<li><strong>工程应用价值</strong>：为受电弓-接触网系统的状态监测和故障诊断提供了新的非侵入式技术手段</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pantograph-catenary system</td>
+          <td>受电弓-接触网系统</td>
+      </tr>
+      <tr>
+          <td>Contact force identification</td>
+          <td>接触力识别</td>
+      </tr>
+      <tr>
+          <td>Inverse problem</td>
+          <td>逆问题</td>
+      </tr>
+      <tr>
+          <td>Regularization</td>
+          <td>正则化</td>
+      </tr>
+      <tr>
+          <td>Modal superposition method</td>
+          <td>模态叠加法</td>
+      </tr>
+      <tr>
+          <td>Stable arm vibration</td>
+          <td>稳流臂振动</td>
+      </tr>
+      <tr>
+          <td>Moving contact force</td>
+          <td>移动接触力</td>
+      </tr>
+      <tr>
+          <td>L1-regularization</td>
+          <td>L1正则化</td>
+      </tr>
+      <tr>
+          <td>Cosine and wavelet dictionary matching</td>
+          <td>余弦和小波字典匹配</td>
+      </tr>
+      <tr>
+          <td>Robustness</td>
+          <td>鲁棒性</td>
+      </tr>
+      <tr>
+          <td>Noise interference</td>
+          <td>噪声干扰</td>
+      </tr>
+      <tr>
+          <td>Balancing arm vibration</td>
+          <td>平衡臂振动</td>
+      </tr>
+      <tr>
+          <td>Non-intrusive measurement</td>
+          <td>非侵入式测量</td>
+      </tr>
+      <tr>
+          <td>Optical fiber sensor</td>
+          <td>光纤传感器</td>
+      </tr>
+      <tr>
+          <td>Strain sensor</td>
+          <td>应变传感器</td>
+      </tr>
+      <tr>
+          <td>Fiber Bragg grating (FBG)</td>
+          <td>光纤布拉格光栅</td>
+      </tr>
+      <tr>
+          <td>Temperature compensation</td>
+          <td>温度补偿</td>
+      </tr>
+      <tr>
+          <td>Input-system-output subsystem</td>
+          <td>输入-系统-输出子系统</td>
+      </tr>
+      <tr>
+          <td>Forward and inverse models</td>
+          <td>正向和逆向模型</td>
+      </tr>
+      <tr>
+          <td>Current collection quality</td>
+          <td>受流质量</td>
+      </tr>
+      <tr>
+          <td>Fault diagnosis</td>
+          <td>故障诊断</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

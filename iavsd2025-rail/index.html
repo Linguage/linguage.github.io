@@ -1,0 +1,1710 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IAVSD 2025 铁道车辆动力学与仿真 • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IAVSD 2025 铁道车辆动力学与仿真"><meta property="og:description" content="IAVSD 2025国际车辆系统动力学会议铁路部分完整论文汇总，包含152篇铁道车辆动力学与仿真领域最新研究论文"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="IAVSD 2025 铁道车辆动力学与仿真"><meta name="twitter:description" content="IAVSD 2025国际车辆系统动力学会议铁路部分完整论文汇总，包含152篇铁道车辆动力学与仿真领域最新研究论文"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/">Rail Topic 01 - Wheel-Rail Interaction</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/">Rail Topic 02 - Rail Vehicle Dynamics and Control</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/">Rail Topic 03 - Rail Systems and Performance</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/">Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/">Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</a>
+    
+  
+
+
+
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  <nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+    <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+    
+    
+      
+        
+        
+          
+          <a href="/" class="crumb-anc">Linguista</a>
+        
+        <span class="crumb-sep">/</span>
+      
+      <a href="/iavsd2025-rail/" class="crumb-sec">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    
+  </nav>
+
+  
+  
+    <div class="docs-layout">
+      
+      <aside class="docs-sidebar" aria-label="Sections">
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/">Rail Topic 01 - Wheel-Rail Interaction</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/">Rail Topic 02 - Rail Vehicle Dynamics and Control</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/">Rail Topic 03 - Rail Systems and Performance</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/">Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/">Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</a>
+    
+  
+
+
+
+
+
+
+        </nav>
+      </aside>
+
+      
+      <article class="docs-content">
+        <div class="prose">
+          
+          
+          
+          
+          <div><h1 id="iavsd-2025-铁路部分所有论文汇总">IAVSD 2025 铁路部分所有论文汇总</h1>
+<p><strong>文档生成时间</strong>: Wed Sep  3 12:39:18 CST 2025</p>
+<h2 id="-主题详细导航">🎯 主题详细导航</h2>
+<p>IAVSD 2025会议铁路部分共包含5个主要主题，总计152篇论文。</p>
+<h3 id="-快速跳转">📚 快速跳转</h3>
+<p>点击下方链接快速访问各主题的详细汇总文档：</p>
+<table>
+  <thead>
+      <tr>
+          <th>主题名称</th>
+          <th>论文总数</th>
+          <th>原文缺失</th>
+          <th>主题特色</th>
+          <th>汇总文档链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>轮轨相互作用</td>
+          <td>14</td>
+          <td>2</td>
+          <td>研究轮轨接触力学、磨损机理、接触建模等基础理论问题</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/">访问文档</a></td>
+      </tr>
+      <tr>
+          <td>轨道车辆动力学与控制</td>
+          <td>63</td>
+          <td>13</td>
+          <td>关注轨道车辆动力学特性、控制系统设计、稳定性分析等核心技术</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/">访问文档</a></td>
+      </tr>
+      <tr>
+          <td>轨道系统与性能</td>
+          <td>24</td>
+          <td>2</td>
+          <td>探讨轨道结构性能、系统动力学、基础设施技术等工程应用</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/">访问文档</a></td>
+      </tr>
+      <tr>
+          <td>轨道系统优化、维护与监测</td>
+          <td>20</td>
+          <td>4</td>
+          <td>专注于系统优化策略、维护技术、监测方法等运营管理</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/">访问文档</a></td>
+      </tr>
+      <tr>
+          <td>空气动力学、受电弓-接触网系统与车辆设计</td>
+          <td>31</td>
+          <td>6</td>
+          <td>涵盖空气动力学、受电弓接触网系统、车辆设计等综合技术</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/">访问文档</a></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-研究热点分析">🔍 研究热点分析</h2>
+<h3 id="-主要研究领域分布">📊 主要研究领域分布</h3>
+<p>根据论文分布情况，铁路部分的研究主要集中在以下几个领域：</p>
+<ol>
+<li>
+<p><strong>轨道车辆动力学与控制</strong> (Rail Topic 02)</p>
+<ul>
+<li>论文数量最多，涵盖车辆稳定性、控制系统、动力学分析等</li>
+<li>包含了现代铁路车辆的核心技术研究方向</li>
+</ul>
+</li>
+<li>
+<p><strong>受电弓-接触网系统与车辆设计</strong> (Rail Topic 05)</p>
+<ul>
+<li>涵盖空气动力学、受流系统、车辆设计等应用研究</li>
+<li>体现了现代铁路技术的综合性特点</li>
+</ul>
+</li>
+<li>
+<p><strong>轨道系统与性能</strong> (Rail Topic 03)</p>
+<ul>
+<li>轨道结构、系统性能、基础设施等研究</li>
+<li>关注铁路基础设施的技术发展</li>
+</ul>
+</li>
+<li>
+<p><strong>轨道系统优化与维护</strong> (Rail Topic 04)</p>
+<ul>
+<li>系统优化、维护策略、监测技术等应用研究</li>
+<li>强调铁路系统的可持续发展和智能化维护</li>
+</ul>
+</li>
+<li>
+<p><strong>轮轨相互作用</strong> (Rail Topic 01)</p>
+<ul>
+<li>轮轨接触力学、磨损分析、接触建模等基础研究</li>
+<li>为铁路运输安全性和效率提供理论基础</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-总体统计">📊 总体统计</h2>
+<ul>
+<li><strong>论文总数</strong>: 152 篇</li>
+<li><strong>原文缺失</strong>: 27 篇</li>
+</ul>
+<hr>
+<h2 id="-完整论文清单">📋 完整论文清单</h2>
+<h3 id="rail-topic-01---轮轨相互作用">Rail Topic 01 - 轮轨相互作用</h3>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>9</td>
+          <td>Wheel-Rail Force and State Estimation Method for Active Steering Bogie Based on Distributed Actuation-Sensing Configuration</td>
+          <td>基于分布式驱动传感配置的主动转向转向架轮轨力与状态估计方法</td>
+          <td>Shiqiao Tian, Lai Wei, Huailong Shi, SouthWest Jia&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>31</td>
+          <td>A New Fast and Approximate Method for Solving Tangential Contact in Simulations of Rail Traction Vehicles</td>
+          <td>解决轨道牵引车辆模拟中切向接触的一种快速近似新方法</td>
+          <td>Michel Seb`es, Univ Gustave Eiffel, France Honor´&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/">paper-031-overview</a></td>
+      </tr>
+      <tr>
+          <td>38</td>
+          <td>Evaluation Method for Wheel-Rail Relationship Based on Nonlinear Characteristics of Equivalent Conicity</td>
+          <td>基于等效锥度非线性特征的轮轨关系评价方法</td>
+          <td>Zhenhuan Yang, Huanyun Dai, Southwest Jiaotong Uni&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-038-overview/">paper-038-overview</a></td>
+      </tr>
+      <tr>
+          <td>70</td>
+          <td>Analysis of Wheel-Rail Contact Stability Under Variable Friction Coefficients</td>
+          <td>可变摩擦系数下轮轨接触稳定性分析</td>
+          <td>Xinwen Yang, Yingtao Qu, Shutong Liu, Shaolong Lv,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-070-overview/">paper-070-overview</a></td>
+      </tr>
+      <tr>
+          <td>89</td>
+          <td>Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations</td>
+          <td>铁路车辆动力学模拟中轮轨接触模型的鲁棒性问题</td>
+          <td>Yu Sun, College of Transportation Engineering, Nan&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/">paper-089-overview</a></td>
+      </tr>
+      <tr>
+          <td>113</td>
+          <td>Optimization of Dynamic and Wear Performance of Railway Vehicle Using Traction/Braking Torque</td>
+          <td>利用牵引/制动扭矩优化铁路车辆的动力学和磨损性能</td>
+          <td>Zhanfei Zhang, Jinsong Zhou, Tongji University, Sh&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-113-overview/">paper-113-overview</a></td>
+      </tr>
+      <tr>
+          <td>162</td>
+          <td>A Real-Time Wheel-Rail Force Identification Method Using Inertia Parameters of the Axlebox via a CNN-ATT Model</td>
+          <td>基于CNN-ATT模型的轴箱惯性参数实时轮轨力识别方法</td>
+          <td>Zhiqiang Zhang, Jinhai Wang, Jianwei Yang, Beijing&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-162-overview/">paper-162-overview</a></td>
+      </tr>
+      <tr>
+          <td>218</td>
+          <td>Effect of Unsteady Wheel-Rail Contact on the Prediction of Rail Corrugation and Curve Squeal</td>
+          <td>非稳态轮轨接触对钢轨波磨和曲线尖叫预测的影响</td>
+          <td>Leonardo Faccini, Federico Castellini, Egidio Di G&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-218-overview/">paper-218-overview</a></td>
+      </tr>
+      <tr>
+          <td>219</td>
+          <td>Modelling of Railway Wheelsets in Turnouts Incorporating Real Contact Geometry</td>
+          <td>考虑真实接触几何的道岔铁路轮对建模</td>
+          <td>Luis Baeza, Juan Giner-Navarro, I2MB, Universitat &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-219-overview/">paper-219-overview</a></td>
+      </tr>
+      <tr>
+          <td>225</td>
+          <td>A Simple Onboard Methodology to Measure the Wheel Rail Contact Forces</td>
+          <td>一种简单的车载轮轨接触力测量方法</td>
+          <td>Asier Alonso, Xabier Perez, Construcciones y Auxil&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-225-overview/">paper-225-overview</a></td>
+      </tr>
+      <tr>
+          <td>256</td>
+          <td>Assessing the Results of Simplified Non-Hertzian Contact Algorithms</td>
+          <td>评估简化非赫兹接触算法的结果</td>
+          <td>Edwin Vollebregt, Vtech CMCC, Rotterdam, The Nethe&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/">paper-256-overview</a></td>
+      </tr>
+      <tr>
+          <td>277</td>
+          <td>When Are Non-Elliptic and Conformal Wheel-Rail Contact Models Required for Multibody Simulations?</td>
+          <td>多体模拟何时需要非椭圆和共形轮轨接触模型？</td>
+          <td>Binbin Liu, Bin Fu, Stefano Bruni, Dipartimento di&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-277-overview/">paper-277-overview</a></td>
+      </tr>
+      <tr>
+          <td>328</td>
+          <td>Design and Calibration of a Twin-Disc Test Rig for Wear and Thermal Tests</td>
+          <td>用于磨损和热测试的双盘试验台设计与校准</td>
+          <td>Antonio Gugliotta, Matteo Magelli, Nicol`o Zampie&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-328-overview/">paper-328-overview</a></td>
+      </tr>
+      <tr>
+          <td>354</td>
+          <td>Efficient Modelling of Train-Track Interaction Using Floating Frame of Reference Formulation</td>
+          <td>基于浮动参考坐标系公式的列车-轨道相互作用高效建模</td>
+          <td>Xinxin Yu, Tampere University, Finland Chen Shen, &hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="rail-topic-02---轨道车辆动力学与控制">Rail Topic 02 - 轨道车辆动力学与控制</h3>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>6</td>
+          <td>The Mechanics of Shimmy Vibration of Monorail Vehicle</td>
+          <td>单轨车辆摆振的力学研究</td>
+          <td>Shiqiao Tian, SouthWest Jiaotong University, State&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>Quantum Computing in Vehicle Dynamics and an Example of Its Application to Locomotive Traction Control</td>
+          <td>车辆动力学中的量子计算及其在机车牵引控制中的应用实例</td>
+          <td>Maksym Spiryagin, Dan Agustin, Qing Wu, Esteban Be&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/">paper-014-overview</a></td>
+      </tr>
+      <tr>
+          <td>17</td>
+          <td>Rail Vehicle Dynamics and Track Irregularity Monitoring Using Artificial Intelligence</td>
+          <td>基于人工智能的轨道车辆动力学与轨道不平顺监测</td>
+          <td>Philipp Leibner, Michael Ebbers, Christian Schindl&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/">paper-017-overview</a></td>
+      </tr>
+      <tr>
+          <td>18</td>
+          <td>Dynamic Trajectory Control System (DTCS): A Co-Simulation Approach for Wear Reduction in Trailing Railway Bogies</td>
+          <td>动态轨迹控制系统（DTCS）：一种用于减少铁路拖车转向架磨损的协同仿真方法</td>
+          <td>Simone Urbinati, Sidrah Lari, Xiaotao Ren, Traila &hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>32</td>
+          <td>Improving the Lateral Stability of High-Speed Trains Using Elastic-Suspended Motors Based on Inerter Structure</td>
+          <td>基于惯性结构弹性悬挂电机改善高速列车横向稳定性</td>
+          <td>Yayun Qi, School of Mechanotronics and Vehicle Eng&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>36</td>
+          <td>A Method for Suppressing the Development of Wheel Polygonal Wear Considering Electromechanical Coupling in Traction Drive Systems</td>
+          <td>考虑牵引传动系统机电耦合的轮对多边形磨耗抑制方法</td>
+          <td>Bing Lu, Zhigang Liu, School of Electrical Enginee&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/">paper-036-overview</a></td>
+      </tr>
+      <tr>
+          <td>37</td>
+          <td>The Influence of EHA Active Control Anti-Yaw Damper on the Stability of HighSpeed Trains</td>
+          <td>EHA主动控制抗偏摆减震器对高速列车稳定性的影响</td>
+          <td>Huanyun Dai, State Key Laboratory of Rail Transit &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/">paper-037-overview</a></td>
+      </tr>
+      <tr>
+          <td>39</td>
+          <td>Co-Simulation of Lateral Dynamic Response of a High-Speed EMU Under Unsteady Aerodynamic Loads Using Panel Aerodynamics</td>
+          <td>基于面板空气动力学的非稳态气动载荷下高速动车组横向动力响应协同仿真</td>
+          <td>Guozhen Jing, Hauke Schmidt, Gang Chen, CRRC CHANG&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/">paper-039-overview</a></td>
+      </tr>
+      <tr>
+          <td>40</td>
+          <td>Observer Based Control for Railway Vehicles with Independently Rotating Driven Wheels</td>
+          <td>带有独立旋转驱动轮的铁路车辆基于观测器的控制</td>
+          <td>Tobias Posielek, Institute of System Dynamics and &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/">paper-040-overview</a></td>
+      </tr>
+      <tr>
+          <td>44</td>
+          <td>The Third Generation of Self-Steering Running Gears with Independently Rotating Wheels: Experiment and Simulation</td>
+          <td>第三代独立旋转车轮自转向走行装置：实验与仿真</td>
+          <td>Yuanjie Hu, Chao Yang, Jianxin Zhou, Haotian Wang,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/">paper-044-overview</a></td>
+      </tr>
+      <tr>
+          <td>53</td>
+          <td>Influences of Rail Vehicle Suspension Dynamics to Train Tractive Energy Savings</td>
+          <td>轨道车辆悬挂动力学对列车牵引节能的影响</td>
+          <td>Qing Wu, Sanjar Ahmad, Colin Cole, Maksym Spiryagi&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/">paper-053-overview</a></td>
+      </tr>
+      <tr>
+          <td>54</td>
+          <td>Dynamic Analysis of Railway Wagon Vibrational and Frictional Energy Consumptions Under Different Track Irregularities</td>
+          <td>不同轨道不平顺下铁路货车振动和摩擦能耗的动态分析</td>
+          <td>Sanjar Ahmad, Qing Wu, Maksym Spiryagin, Colin Col&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>59</td>
+          <td>A Method for Identifying Wheel-Rail Lateral Forces Based on Bogie Vibration Acceleration</td>
+          <td>基于转向架振动加速度识别轮轨横向力的方法</td>
+          <td>Shuoqiao Zhong, Jiawei Huang, Xin Zhou, Xiaozhen S&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/">paper-059-overview</a></td>
+      </tr>
+      <tr>
+          <td>60</td>
+          <td>Robustness of Active Control Strategies for Railway Wheelset</td>
+          <td>铁路轮对主动控制策略的鲁棒性</td>
+          <td>T X Mei, School of Science, Engineering and Enviro&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/">paper-060-overview</a></td>
+      </tr>
+      <tr>
+          <td>61</td>
+          <td>Vibration Fatigue Damage Assessment of Motor-hanging Frames Using Rigid-flex Coupling Simulation Technique for Service Motor Vehicles</td>
+          <td>基于刚柔耦合仿真技术对服役电动车辆悬挂电机框架的振动疲劳损伤评估</td>
+          <td>Si-yang Piao, Cheng-zhuo Sun, Qi-bin Wang, Peng Da&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/">paper-061-overview</a></td>
+      </tr>
+      <tr>
+          <td>62</td>
+          <td>Design and Evaluation of Lateral Dynamic Vibration Absorber for Speed Increased Motor Vehicles Oriented to Uncertain Influences of Wheel Spin Dissipation</td>
+          <td>针对轮对打滑耗散不确定性影响的增程式电动车横向动态减振器设计与评估</td>
+          <td>Si-yang Piao, Xi-bei Chen, Qi-bin Wang, Zhan Tiany&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/">paper-062-overview</a></td>
+      </tr>
+      <tr>
+          <td>65</td>
+          <td>Dynamic Characteristic Research of Primary Suspension Under Medium and High Frequency Vibration</td>
+          <td>中高频振动下一次悬挂动力特性研究</td>
+          <td>Li Xin, Huanyun Dai, Suqin Wang , State Key Labora&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/">paper-065-overview</a></td>
+      </tr>
+      <tr>
+          <td>67</td>
+          <td>Disturbance Observer-based Sliding Mode Control of Active Yaw Damper for High-speed Rail Vehicles</td>
+          <td>基于扰动观测器的高速轨道车辆主动抗蛇行减振器滑模控制</td>
+          <td>Huailong Shi, Jing Zeng, Shiqiao Tian, State Key L&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/">paper-067-overview</a></td>
+      </tr>
+      <tr>
+          <td>68</td>
+          <td>Numerical Simulation Model of Pneumatic Braking System for Heavy-haul Combination Trains</td>
+          <td>重载组合列车气制动系统数值仿真模型</td>
+          <td>Kaizhong Liu, Zhiwei Wang, Weihua Zhang, State Key&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/">paper-068-overview</a></td>
+      </tr>
+      <tr>
+          <td>77</td>
+          <td>Rail Vehicle Collision Dynamics-driven Study on the Practical Application of Train Collision Derailment Prevention</td>
+          <td>轨道车辆碰撞动力学驱动的列车碰撞脱轨预防实用应用研究</td>
+          <td>Wenyue Yuan, Haoxu Ding, Jingke Zhang, Tao Zhu, So&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/">paper-077-overview</a></td>
+      </tr>
+      <tr>
+          <td>82</td>
+          <td>Research on the Mass Parameters Identification of the Complete Carbody of Railway Vehicle Based on the Frequency Response Function Mass Line Method</td>
+          <td>基于频响函数质量线法的铁路车辆完整车体质量参数识别研究</td>
+          <td>Hhuiwen Pang, Chen Gang, CRRC Changchun Germany Ra&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/">paper-082-overview</a></td>
+      </tr>
+      <tr>
+          <td>86</td>
+          <td>A Feed-forward Spatial-delay Control Strategy for Active Steering of Trailing Bogies in Trams</td>
+          <td>有轨电车拖车转向架主动转向的前馈空间延迟控制策略</td>
+          <td>Xiaotao Ren, Traila AG, Trockenloostrasse 101, Swi&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>95</td>
+          <td>Intelligent Condition Monitoring of Wheel Polygon Using a Deep Learning Model with Novel Metrics and Loss Functions</td>
+          <td>基于深度学习模型和新型度量与损失函数的轮对多边形智能状态监测</td>
+          <td>Qinglin Xie, Gongquan Tao, Zefeng Wen, State Key L&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>96</td>
+          <td>Influence of Triggering Conditions for Cyclic Air Brake on the Safe Operation of Heavy-Haul Combined Trains</td>
+          <td>周期性空气制动触发条件对重载组合列车安全运行的影响</td>
+          <td>Mi Wei, Qingyuan Wang, Pengfei Sun, Xiaoyun Feng, &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/">paper-096-overview</a></td>
+      </tr>
+      <tr>
+          <td>100</td>
+          <td>Research on Collision Dynamics Modeling and Derailment Behavior Based on Speed-Sensitive Coupler</td>
+          <td>基于速度敏感联轴器的碰撞动力学建模与脱轨行为研究</td>
+          <td>Haoxu Ding, Binlin Wang, Wenyue Yuan, Tianyi Lv, T&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/">paper-100-overview</a></td>
+      </tr>
+      <tr>
+          <td>103</td>
+          <td>Research on Diagnosis Method of Hunting Instability of High-Speed Trains Based on Transfer Learning</td>
+          <td>基于迁移学习的高速列车蛇行失稳诊断方法研究</td>
+          <td>Jiayi Liang, Jianfeng Sun, Yonghua Jiang, Weidong &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/">paper-103-overview</a></td>
+      </tr>
+      <tr>
+          <td>105</td>
+          <td>Theoretical Investigation on Coupler Buckling Instability of High-Speed Trains Based on Collision Dynamics</td>
+          <td>基于碰撞动力学的高速列车车钩屈曲失稳理论研究</td>
+          <td>Binlin Wang, Shoune Xiao, Jingke Zhang, Tao Zhu, H&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/">paper-105-overview</a></td>
+      </tr>
+      <tr>
+          <td>116</td>
+          <td>Research on Modal Optimization Method and Dynamic Performance Improvement of Rack Vehicles</td>
+          <td>齿轮轨车辆模态优化方法与动力性能提升研究</td>
+          <td>Haitao Zhang, Zaigang Chen, State Key Laboratory o&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/">paper-116-overview</a></td>
+      </tr>
+      <tr>
+          <td>118</td>
+          <td>Research on Vibration and Noise Control of End-Wall Structure of High-Speed EMU Under Aerodynamic Excitation</td>
+          <td>气动激励下高速动车组端墙结构振动噪声控制研究</td>
+          <td>Xin Ding, Lei Zhang, Yizheng Yu, Tao Liu, CRRC Cha&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/">paper-118-overview</a></td>
+      </tr>
+      <tr>
+          <td>121</td>
+          <td>Study on Vibration Damping of Traction Transformers Under High-Speed Trains Based on Acoustic Black Hole</td>
+          <td>基于声学黑洞的高速列车牵引变压器减振研究</td>
+          <td>Jiwei Wu, Dao Gong, Jinsong Zhou, College of Trans&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/">paper-121-overview</a></td>
+      </tr>
+      <tr>
+          <td>123</td>
+          <td>Analysis of Modal Coupling Effect Between Hunting Motion and Carbody Flexibility of High-Speed Train</td>
+          <td>高速列车蛇行运动与车体柔性之间的模态耦合效应分析</td>
+          <td>Heng Zhang, Liang Ling, Wanming Zhai, Southwest Ji&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>128</td>
+          <td>Adaptability Study of a Semi-Active Anti-Rolling Device for Active Tilting Trains</td>
+          <td>主动倾斜列车半主动防侧滚装置适应性研究</td>
+          <td>Mingxing Liu, Liang Luo, Minyi Zheng, Weimin Zhong&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/">paper-128-overview</a></td>
+      </tr>
+      <tr>
+          <td>134</td>
+          <td>Effects of Interphase Short-Circuit Fault of Permanent Magnet Traction Motor on the Dynamic Performance of a Direct-Drive Locomotive</td>
+          <td>永磁牵引电机相间短路故障对直驱机车动态性能的影响</td>
+          <td>Zirui Ye, Zaigang Chen, State Key laboratory of Ra&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/">paper-134-overview</a></td>
+      </tr>
+      <tr>
+          <td>135</td>
+          <td>Analysis of Braking Force Distribution Ratio on the Dynamic Characteristics of Rack Vehicles Under Large Slope Braking Conditions</td>
+          <td>大坡度制动工况下制动力分配比对齿轮轨车辆动力特性的影响</td>
+          <td>Guojun Yang, Zaigang Chen, State Key Laboratory of&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/">paper-135-overview</a></td>
+      </tr>
+      <tr>
+          <td>138</td>
+          <td>Safety Assessment Based on Machine Learning Methods of the Heavy-haul Trains During Emergency Braking Process Under Different Line Conditions</td>
+          <td>不同线路工况下重载列车紧急制动过程安全性的机器学习方法评估</td>
+          <td>Yukun Wang, Zhiwei Wang, Kaizhong Liu, Mingtao Zha&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/">paper-138-overview</a></td>
+      </tr>
+      <tr>
+          <td>158</td>
+          <td>Hardware-in-the-Loop Test Rig to Assess the Influence of Secondary Dampers on Hunting Motions of Rail Vehicles</td>
+          <td>评估二系减振器对轨道车辆蛇行运动影响的硬件在环试验台</td>
+          <td>Gioele Isacchi, Egidio Di Gialleonardo, Francesco &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/">paper-158-overview</a></td>
+      </tr>
+      <tr>
+          <td>176</td>
+          <td>Performance Evaluation of Regenerative Dampers in High-Speed Trains Wheel Wear, Dynamics, and Energy Recovery</td>
+          <td>再生阻尼器在高速列车轮对磨损、动力学和能量回收中的性能评估</td>
+          <td>Ruichen Wang, Yunfan Yang, Yating Han, School of M&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>183</td>
+          <td>Comparison of Alternative Control Laws to Suppress Car Body Bending Vibrations with Semi-Active Yaw Dampers</td>
+          <td>采用半主动抗蛇行减振器抑制车体弯曲振动的替代控制律比较</td>
+          <td>Gioele Isacchi, Francesco Ripamonti, Department of&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>203</td>
+          <td>Design and Application of a New Wheel Profile for Mitigating Abnormal Carbody Swaying of a Metro Vehicle</td>
+          <td>一种用于缓解地铁车辆异常车体摆动的新型车轮踏面设计与应用</td>
+          <td>Wei Li, Maoru Chi, Yabo Zhou, Zefeng Wen, Xiaoxiao&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/">paper-203-overview</a></td>
+      </tr>
+      <tr>
+          <td>205</td>
+          <td>Research on Feature of Hunting Stability of EMU Based on Wheel Tread Hollow Worn and Modal Vibration Decomposition Method</td>
+          <td>基于车轮踏面空心磨耗和模态振动分解方法的动车组蛇行稳定性特征研究</td>
+          <td>Xiaoyu Li, Jinsong Zhou, Tongji University, China</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>207</td>
+          <td>Experimental Investigation of the Influential Factors of Abnormal Vehicle Interior Noise in a Metro Line</td>
+          <td>地铁线路车辆内部异常噪声影响因素的实验研究</td>
+          <td>Xiangming Liu, Ying Chen, Yuxuan Wei, Long Wang, C&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>213</td>
+          <td>Simulation of the Wheel–Rail Contact Temperature Induced by Braking</td>
+          <td>制动引起的轮轨接触温度仿真</td>
+          <td>Yifan Yang, Qiuyong Tian, Claudio Colao, Hecht Mar&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/">paper-213-overview</a></td>
+      </tr>
+      <tr>
+          <td>220</td>
+          <td>Application of an Advanced Railway Vehicle Motion Simulator for the Assessment of Passenger Comfort in Curves and Transitions</td>
+          <td>先进铁路车辆运动模拟器在曲线和过渡段乘客舒适度评估中的应用</td>
+          <td>Adam Bevan, Paul Allen, David Crosbee, Institute o&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/">paper-220-overview</a></td>
+      </tr>
+      <tr>
+          <td>236</td>
+          <td>Semi-Active Secondary Suspension with Model Predictive Control to Improve Ride Comfort</td>
+          <td>采用模型预测控制的半主动二系悬挂以提高乘坐舒适性</td>
+          <td>Alexander Posseckert, German Aerospace Center, Ins&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/">paper-236-overview</a></td>
+      </tr>
+      <tr>
+          <td>239</td>
+          <td>Impact Assessment of High-Speed Train Suspension Parameters and Track Characteristics on Smooth Running by Computer Modeling Method</td>
+          <td>基于计算机建模方法评估高速列车悬挂参数和轨道特性对平稳运行的影响</td>
+          <td>Veronika Fedorova, Anna Komarova, Alina Saidova, A&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/">paper-239-overview</a></td>
+      </tr>
+      <tr>
+          <td>241</td>
+          <td>Active Wheelset Steering Based on Suspension Deflection Control Considering Non-compensated Lateral Acceleration</td>
+          <td>考虑未补偿横向加速度的基于悬挂挠度控制的主动轮对转向</td>
+          <td>Prapanpong Damsongsaeng, Rickard Persson, Carlos C&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/">paper-241-overview</a></td>
+      </tr>
+      <tr>
+          <td>243</td>
+          <td>Dynamic Performance Evolution of High-Speed Trains Considering Different Service States of Yaw Damper</td>
+          <td>考虑不同抗蛇行减振器服役状态的高速列车动力性能演变</td>
+          <td>Chenchen Jiang, Liang Ling, Wanming Zhai, State Ke&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/">paper-243-overview</a></td>
+      </tr>
+      <tr>
+          <td>244</td>
+          <td>Railway Vehicle Comfort Optimization Using Stochastic Comfort Metrics</td>
+          <td>采用随机舒适度指标优化铁路车辆舒适性</td>
+          <td>Angel Luis Morales, Daniel Rodr´ıguez, Eduardo Pal&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>254</td>
+          <td>Coupled Dynamics Characteristics of Straddle-Monorail Train with Steel Track Beam System</td>
+          <td>跨座式单轨列车与钢轨梁系统耦合动力学特性</td>
+          <td>Jiayuan Song, Zhida Yang, Qinglie He, Kaiyun Wang,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/">paper-254-overview</a></td>
+      </tr>
+      <tr>
+          <td>266</td>
+          <td>Negotiation Analysis of Emus Under Traction/Braking Conditions</td>
+          <td>牵引/制动工况下动车组的通过性能分析</td>
+          <td>Jinsong Zhou, Zhanfei Zhang, Yiyang Song, Dao Gong&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/">paper-266-overview</a></td>
+      </tr>
+      <tr>
+          <td>270</td>
+          <td>An Investigation into Hunting Stability Considering the Creep Nonlinear Saturation Characteristics Under Traction/Braking Conditions</td>
+          <td>牵引/制动工况下考虑蠕滑非线性饱和特性的蛇行稳定性研究</td>
+          <td>Junhao Zhang, Jinsong Zhou, Xiaoyu Li, Zhanfei Zha&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/">paper-270-overview</a></td>
+      </tr>
+      <tr>
+          <td>278</td>
+          <td>Dynamic Vehicle-Track Interaction at Swing Nose Crossings – Validation of an MBS Model and Evaluation of Instrumentation for Condition Monitoring</td>
+          <td>可动心轨岔处的车辆-轨道动态相互作用——MBS模型验证和状态监测仪表评估</td>
+          <td>Bj¨orn P˚alsson, CHARMEC, Chalmers University of T&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/">paper-278-overview</a></td>
+      </tr>
+      <tr>
+          <td>283</td>
+          <td>Thermomechanical Fatigue Life Evaluation of Train Brake Discs: Integrating Slope Profiles and Wheel-Rail Dynamic Response</td>
+          <td>列车制动盘热机械疲劳寿命评估：结合坡度轮廓和轮轨动态响应</td>
+          <td>Jiacheng Shen, Yu Pan, Jianyong Zuo, Tongji Univer&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/">paper-283-overview</a></td>
+      </tr>
+      <tr>
+          <td>289</td>
+          <td>Comparison of Train-single/double Line Track-Subgrade Spatial Coupled Dynamics Models Using Green&rsquo;s Function Method</td>
+          <td>基于格林函数法的列车-单/双线轨道-路基空间耦合动力学模型比较</td>
+          <td>Sen Zhang, Yu Sun, Liming Zhu, School of Transport&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/">paper-289-overview</a></td>
+      </tr>
+      <tr>
+          <td>293</td>
+          <td>Developing an AI-Infused Framework for the Automatic Generation of Vehicle System Dynamics Models</td>
+          <td>开发一个融合人工智能的车辆系统动力学模型自动生成框架</td>
+          <td>Esteban Bernal, Maksym Spiryagin, Qing Wu, Colin C&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/">paper-293-overview</a></td>
+      </tr>
+      <tr>
+          <td>295</td>
+          <td>Experimental Study on Modal Coupling Characteristics and Mechanism of HeavyHaul Train-Track Dynamic Interaction</td>
+          <td>重载列车-轨道动力相互作用的模态耦合特性和机理实验研究</td>
+          <td>Peibin Jiang, Liang Ling, Wanming Zhai, State Key &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/">paper-295-overview</a></td>
+      </tr>
+      <tr>
+          <td>301</td>
+          <td>Safety of High-Speed EMUs Under the Braking Condition</td>
+          <td>制动条件下高速动车组的安全性</td>
+          <td>Jingcheng Wen, Honglin Zu, Qing Wei, Locomotive an&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/">paper-301-overview</a></td>
+      </tr>
+      <tr>
+          <td>304</td>
+          <td>Modelling of High Frequency Vibration of High-Speed Railway Bogie Frame</td>
+          <td>高速铁路转向架构架高频振动建模</td>
+          <td>Xingwen Wu, Yanyuan Ye, Ningrui Yang, Liangcheng D&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/">paper-304-overview</a></td>
+      </tr>
+      <tr>
+          <td>305</td>
+          <td>Data-Driven Differentiable Adaptive Ensemble Kalman Filter for Enhanced Vehicle State Estimation</td>
+          <td>数据驱动可微分自适应集合卡尔曼滤波器用于增强车辆状态估计</td>
+          <td>Maozhenning Yang, Jiarui Hu, Kaiying Zhang, Yuanji&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/">paper-305-overview</a></td>
+      </tr>
+      <tr>
+          <td>312</td>
+          <td>Study on Low-Frequency Hunting of High-Speed Vehicle at Medium Speed Range</td>
+          <td>中速范围高速车辆低频蛇行研究</td>
+          <td>Bin Fu, Binbin Liu, Stefano Bruni, Dipartimento di&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/">paper-312-overview</a></td>
+      </tr>
+      <tr>
+          <td>318</td>
+          <td>Dynamic Study and Analysis of a Novel Energy Harvesting Inerter Damper on Rail Vehicle Suspension</td>
+          <td>轨道车辆悬挂系统中新型能量收集惯性阻尼器的动力学研究与分析</td>
+          <td>Yu Pan, Peng He, Wei Liao, Jianyong Zuo, Tongji Un&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>320</td>
+          <td>Study on Dynamic Behaviors of High-Speed Train Vehicles with a Cracked Wheelset Axle</td>
+          <td>具有裂纹轮对轴高速列车车辆动力学行为研究</td>
+          <td>Ningrui Yang, Xingwen Wu, Zheng Guan, Bo Peng, Mao&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/">paper-320-overview</a></td>
+      </tr>
+      <tr>
+          <td>355</td>
+          <td>Carbody Sway Behaviour of Train Negotiating Tunnels Due to Vortex Induced Vibrations</td>
+          <td>列车通过隧道时涡流诱导振动引起的车体摆动行为</td>
+          <td>Lai Wei, Jing Zeng, Southwest Jiaotong University,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/">paper-355-overview</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="rail-topic-03---轨道系统与性能">Rail Topic 03 - 轨道系统与性能</h3>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>57</td>
+          <td>Tensor Singular Spectrum Analysis for Rail Corrugation Detection by Vibration and Noise Signals</td>
+          <td>基于振动和噪声信号的张量奇异谱分析用于钢轨波磨检测</td>
+          <td>Xuegeng Mao, Zhehao Huang, Jinzhao Liu, Zezhou Liu&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-057-overview/">paper-057-overview</a></td>
+      </tr>
+      <tr>
+          <td>64</td>
+          <td>A Multi-Layer Progressive Analysis Method for Collision Energy Flow in Rail Trains</td>
+          <td>铁路列车碰撞能量流的多层渐进分析方法</td>
+          <td>Jingke Zhang, Tao Zhu, State Key Laboratory of Rai&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-064-overview/">paper-064-overview</a></td>
+      </tr>
+      <tr>
+          <td>74</td>
+          <td>Suppressing Localized-Rail Bending Modal Vibration by Designing High-Frequency Vibration-Absorbing Fasteners</td>
+          <td>通过设计高频吸振扣件抑制局部钢轨弯曲模态振动</td>
+          <td>Zhecheng Tao, Yunguang Ye, Dadi Li, Huanyun Dai, S&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-074-overview/">paper-074-overview</a></td>
+      </tr>
+      <tr>
+          <td>75</td>
+          <td>Reproduction of Wheel Polygonization and Rail Rutting Corrugation on a Full-Scale Roller Rig</td>
+          <td>全尺寸滚子台架上车轮多边形化和钢轨车辙波磨的再现</td>
+          <td>Felix Platzer, Klaus Six, Virtual Vehicle Research&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-075-overview/">paper-075-overview</a></td>
+      </tr>
+      <tr>
+          <td>94</td>
+          <td>Modeling and Analysis of the Dynamic Interaction Between Derailed Trains and Trackside Infrastructure</td>
+          <td>脱轨列车与线路基础设施动态相互作用的建模与分析</td>
+          <td>Zhiming Qu, Zhao Tang, Tao Chen, Southwest Jiaoton&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-094-overview/">paper-094-overview</a></td>
+      </tr>
+      <tr>
+          <td>104</td>
+          <td>A Minimal and Scalable Architecture for Hardware-in-the-loop Simulations of Railway Signalling Systems</td>
+          <td>铁路信号系统硬件在环模拟的最小可扩展架构</td>
+          <td>Marco Barbaro, Ivano La Paglia, Lorenzo Bernardini&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/">paper-104-overview</a></td>
+      </tr>
+      <tr>
+          <td>131</td>
+          <td>Rail Corrugation Identification Using a Time-Frequency Normalized Superposition Method of Multi-Source Detection Data</td>
+          <td>多源检测数据时频归一化叠加法进行钢轨波磨识别</td>
+          <td>Jianli Cong, Fei Yang, Zilong Wei, Xianfu Sun, Xue&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-131-overview/">paper-131-overview</a></td>
+      </tr>
+      <tr>
+          <td>142</td>
+          <td>Low-frequency Vibration Isolation in Metro Floating Slab Tracks Using Chiral Phononic Crystals</td>
+          <td>采用手性声子晶体实现地铁浮置板轨道低频隔振</td>
+          <td>Shuai Qu, Xinwen Yang, Tongji University, China We&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-142-overview/">paper-142-overview</a></td>
+      </tr>
+      <tr>
+          <td>175</td>
+          <td>Stability Analysis of Continuous Welded Rails on Long-span High-speed Railway Bridges Under Temperature Gradient Effects</td>
+          <td>温度梯度效应下大跨度高速铁路桥梁上无缝线路的稳定性分析</td>
+          <td>Jijun wei, Shuai Qu, Xinwen Yang, Tongji Universit&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/">paper-175-overview</a></td>
+      </tr>
+      <tr>
+          <td>195</td>
+          <td>Dynamic Performances of DEM-based Ballasted Track Subjected to Polygonal Wear of Locomotive Wheels</td>
+          <td>基于DEM的道砟轨道在机车车轮多边形磨耗下的动力性能</td>
+          <td>Can Shi, KTH Royal Institute of Technology, Sweden&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-195-overview/">paper-195-overview</a></td>
+      </tr>
+      <tr>
+          <td>204</td>
+          <td>Research on Short-wave Impact of Turnouts Based on Empirical Mode Decomposition and Reconstruction of Axle Box Acceleration</td>
+          <td>基于经验模态分解和轴箱加速度重构的道岔短波冲击研究</td>
+          <td>Tian Yang, Hangyuan Qin, Infrastructure Inspection&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-204-overview/">paper-204-overview</a></td>
+      </tr>
+      <tr>
+          <td>229</td>
+          <td>Estimation of the Local Stiffness Between Derailed Railway Axles and Containment Structures for Multibody Post-Derailment Simulations</td>
+          <td>用于多体脱轨后模拟的脱轨铁路轴与围护结构之间局部刚度的估算</td>
+          <td>Edoardo Montini, Matteo Santelia, Francesco Mazzeo&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/">paper-229-overview</a></td>
+      </tr>
+      <tr>
+          <td>234</td>
+          <td>Integration of Floating Slab Track with Quasi-zero Stiffness Mechanism and Dynamic Vibration Absorber for Low-Frequency Vibration Mitigation</td>
+          <td>浮置板轨道与准零刚度机构和动态减振器集成用于低频振动减缓</td>
+          <td>Yuhao Ren, Shengyang Zhu, Wanming Zhai, Southwest &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-234-overview/">paper-234-overview</a></td>
+      </tr>
+      <tr>
+          <td>253</td>
+          <td>Prediction of Derailment Coefficient From Onboard and Ground Sensors Using LSTM Model</td>
+          <td>使用LSTM模型通过车载和地面传感器预测脱轨系数</td>
+          <td>Abhinav Srivastava, Yoshihiro Suda, Kenji Ejiri, Y&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/">paper-253-overview</a></td>
+      </tr>
+      <tr>
+          <td>259</td>
+          <td>Accurate Measurement and Modelling of Load- and Frequency-Dependent Properties of an Embedded Rail Structure for Vibration Transmission Analysis</td>
+          <td>用于振动传输分析的嵌入式轨道结构载荷和频率相关特性的精确测量与建模</td>
+          <td>Qianqian Li, Egidio Di Gialleonardo, Andrea Collin&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-259-overview/">paper-259-overview</a></td>
+      </tr>
+      <tr>
+          <td>269</td>
+          <td>In-Motion Monitoring of Lateral Track Stability Using Doppler Lidar Systems</td>
+          <td>使用多普勒激光雷达系统进行横向轨道稳定性在途监测</td>
+          <td>S. Morteza Mirzaei, Carvel Holton, Mehdi Ahmadian,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-269-overview/">paper-269-overview</a></td>
+      </tr>
+      <tr>
+          <td>279</td>
+          <td>Origin of Train-induced Vibrations at Insulated Joint: Contributions of Track Irregularity and Stiffness Variations</td>
+          <td>绝缘接头处列车诱发振动的来源：轨道不平顺和刚度变化的贡献</td>
+          <td>Chen Shen, You Wu, Zili Li, Secton of Railway Engi&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-279-overview/">paper-279-overview</a></td>
+      </tr>
+      <tr>
+          <td>298</td>
+          <td>Study on Detecting of the Early Signs of Derailment Using Ocsvm with Experiment Data</td>
+          <td>基于Ocsvm和实验数据检测脱轨早期迹象的研究</td>
+          <td>Shogo Matsuo, Graduate School of Engineering, The &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-298-overview/">paper-298-overview</a></td>
+      </tr>
+      <tr>
+          <td>313</td>
+          <td>Investigation on Coupled Vibration Characteristics of the Metro Vehicle-Floating Slab Track System</td>
+          <td>地铁车辆-浮置板轨道系统耦合振动特性研究</td>
+          <td>Xuancheng Yuan, Longjiang Shen, Zhixiang Luo, Zuob&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>331</td>
+          <td>Rail Surface Degradation: Challenges and Insights From Heavy Haul Railways</td>
+          <td>钢轨表面退化：重载铁路面临的挑战和见解</td>
+          <td>Om Prakash Yadav, Jonathan Leung, Mats Berg, Sebas&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>341</td>
+          <td>Wheel–rail Impact Loads Induced by Wheel Flats – Simulation Model Using Data From 3D Laser-Scanned Wheel Tread Defects</td>
+          <td>轮平引起的轮轨冲击载荷——基于3D激光扫描轮踏面缺陷数据的仿真模型</td>
+          <td>Michele Maglio, Klara Mattsson, Trafikverket, Goth&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-341-overview/">paper-341-overview</a></td>
+      </tr>
+      <tr>
+          <td>350</td>
+          <td>A Numerical Study on the Impact of Automatic Train Operation (ATO) on Rail Wear</td>
+          <td>自动列车运行（ATO）对钢轨磨损影响的数值研究</td>
+          <td>Chunyan He, Zhen Yang, Zili Li, Delft University o&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-350-overview/">paper-350-overview</a></td>
+      </tr>
+      <tr>
+          <td>353</td>
+          <td>Development of a Test Zone for High Speed Stability Tests of Freight Cars</td>
+          <td>货车高速稳定性试验区的开发</td>
+          <td>Russell Walker, Yuqing Zheng, Michael Craft, and N&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-353-overview/">paper-353-overview</a></td>
+      </tr>
+      <tr>
+          <td>359</td>
+          <td>An Investigation of Wear and RCF Damage Mechanism on Switchback Turnouts of an Urban Intercity Railway Line Through Train-Turnout Interaction Analysis</td>
+          <td>通过列车-道岔相互作用分析研究城市城际铁路折返道岔的磨损和RCF损伤机理</td>
+          <td>Lizuo Xin, Zhejiang Rail Transit Operation Managem&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-359-overview/">paper-359-overview</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="rail-topic-04---轨道系统优化维护与监测">Rail Topic 04 - 轨道系统优化、维护与监测</h3>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>22</td>
+          <td>A Novel Method for Determining Track Irregularity Thresholds on Long-Span High-Speed Railway Bridges</td>
+          <td>一种确定大跨度高速铁路桥梁轨道不平顺阈值的新方法</td>
+          <td>Ruoyu Li, Shengyang Zhu, Wanming Zhai, Southwest J&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/">paper-022-overview</a></td>
+      </tr>
+      <tr>
+          <td>24</td>
+          <td>Trajectory Optimization of 30,000-Ton Large-Scale Heavy-Haul Trainsets with Train-to-Train Communication</td>
+          <td>3万吨大型重载列车列车间通信下的轨迹优化</td>
+          <td>Xiangping Wang, Shengyang Zhu, and Wanming Zhai, S&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>33</td>
+          <td>Prediction and Optimization of Wheel Asymmetrical Wear Under Traction/Braking Conditions</td>
+          <td>牵引/制动工况下车轮不对称磨损预测与优化</td>
+          <td>Yiyang Song, Jinsong Zhou, Zhanfei Zhang, Zegen Wa&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/">paper-033-overview</a></td>
+      </tr>
+      <tr>
+          <td>47</td>
+          <td>Identification of the Lateral Track Irregularities from the Behavior of the Train&rsquo;s Axles on a Surrogate Railway Dynamics Model</td>
+          <td>基于替代铁路动力学模型从列车轴行为识别横向轨道不平顺</td>
+          <td>Malek Chihaoui, Denis Duhamel, Laboratoire Navier,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/">paper-047-overview</a></td>
+      </tr>
+      <tr>
+          <td>69</td>
+          <td>Investigation of Ballast Degradation and Fouling Based on In-Situ Sampling</td>
+          <td>基于现场取样的道砟劣化与污染研究</td>
+          <td>Wenli Jia, Fei Yang, Weile Qiang, Jinzhao Liu, Chi&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>139</td>
+          <td>Explicit Speed-integrated LSTM Network for Non-Stationary Bogie Vibration Representation and Beam Joint Detection Under Varying Speed Conditions</td>
+          <td>变速度工况下非平稳转向架振动表示和梁接头检测的显式速度积分LSTM网络</td>
+          <td>Xiaoguang Ma, Yuanjin Ji, Lihui Ren, Yuejian Chen,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/">paper-139-overview</a></td>
+      </tr>
+      <tr>
+          <td>143</td>
+          <td>Yolov8-pose for Wheel-Rail Lateral Displacement Detection of the Small Radius Curve</td>
+          <td>Yolov8-pose在小半径曲线轮轨横向位移检测中的应用</td>
+          <td>Zhiang Sun, Xinwen Yang, Tongji University, China</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/">paper-143-overview</a></td>
+      </tr>
+      <tr>
+          <td>155</td>
+          <td>Augmented State Functionals: A Proposal to Improve the Accuracy of Neural Networks by Incorporating Physical Knowledge in Data Models</td>
+          <td>增广状态泛函：一种通过在数据模型中融入物理知识提高神经网络精度的建议</td>
+          <td>Ane Oyarzabal, Nere Gil-Negrete, University of Nav&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/">paper-155-overview</a></td>
+      </tr>
+      <tr>
+          <td>197</td>
+          <td>Wheel-flat Identification Study by Means of Experimental Tests in a Railway Closed Circuit</td>
+          <td>铁路封闭回路实验测试的轮扁识别研究</td>
+          <td>Arianna Cavallo, Enkeled Hoxha, Gisella Tomasini, &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/">paper-197-overview</a></td>
+      </tr>
+      <tr>
+          <td>215</td>
+          <td>Direct and Indirect Calculation of the Track Decay Rate Based on the Analytical Method</td>
+          <td>基于解析方法的轨道衰减率直接与间接计算</td>
+          <td>Qiuyong Tian, Yifan Yang, Markus Hecht, Institute &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/">paper-215-overview</a></td>
+      </tr>
+      <tr>
+          <td>217</td>
+          <td>A Neural Network Approach to the Modelization of Railway Couplers</td>
+          <td>铁路车钩建模的神经网络方法</td>
+          <td>Laurens Lanzillo, Francesco Mazzeo, Stefano Melzi,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/">paper-217-overview</a></td>
+      </tr>
+      <tr>
+          <td>223</td>
+          <td>A Fault Diagnosis Method for Axlebox Bearings of High-Speed Trains Based on Multi-Source Vibration Signal Fusion and Transfer Learning</td>
+          <td>基于多源振动信号融合和迁移学习的高速列车轴箱轴承故障诊断方法</td>
+          <td>Xiao Xu, Dongli Song, Zejun Zheng, Zifan Wang, Sou&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/">paper-223-overview</a></td>
+      </tr>
+      <tr>
+          <td>232</td>
+          <td>Physics-guided Reinforcement Learning for Straddle Monorail Active Suspension with Image-based Beam Joint Detection</td>
+          <td>图像识别梁接头检测的物理引导强化学习用于跨座式单轨主动悬挂</td>
+          <td>Yuanjin Ji, Jian Li, Kaiying Zhang, Jiakang Li, Li&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/">paper-232-overview</a></td>
+      </tr>
+      <tr>
+          <td>249</td>
+          <td>Quantitative Detection of OOR Roughness Level of High-Speed Train Wheels Using On-Site Measured Datasets of Axle Box Acceleration</td>
+          <td>利用现场测量的轴箱加速度数据集定量检测高速列车车轮OOR粗糙度水平</td>
+          <td>Gongquan Tao, Tao Huang, Qinglin Xie, Wentian Xu, &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/">paper-249-overview</a></td>
+      </tr>
+      <tr>
+          <td>272</td>
+          <td>Torque-Modulation-Based Method for Rapid Identification of Rail Sections with Low Friction Levels</td>
+          <td>基于扭矩调制方法的低摩擦水平钢轨段快速识别</td>
+          <td>Gokul J. Krishnan, Zhen Yang, Zili Li, Rolf Dollev&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/">paper-272-overview</a></td>
+      </tr>
+      <tr>
+          <td>284</td>
+          <td>Optimization Strategy for Rail Grinding to Improve Dynamic Performance of HighSpeed Trains Passing through Turnouts</td>
+          <td>钢轨打磨优化策略以提高高速列车通过道岔的动力性能</td>
+          <td>Chao Chang, East China Jiaotong University, Nancha&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/">paper-284-overview</a></td>
+      </tr>
+      <tr>
+          <td>288</td>
+          <td>Energy-Saving Optimization Strategy for Train Speed Trajectory Based on Improved Non-dominated Genetic Algorithm</td>
+          <td>基于改进非支配遗传算法的列车速度轨迹节能优化策略</td>
+          <td>Jinsong Kang, Xinyue Li, HongZhe Li, Tongji Univer&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/">paper-288-overview</a></td>
+      </tr>
+      <tr>
+          <td>310</td>
+          <td>Trainpulse: A Novel Approach to Predicting Squat Formation Using ForwardFacing Cameras</td>
+          <td>列车脉冲：一种利用前向摄像头预测钢轨蹲踞形成的新方法</td>
+          <td>Roger Lewis, Tomlinson Kate, Artur Gower, Matthew &hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>321</td>
+          <td>A Hybrid-Driven Bogie Stress Monitoring Method Based on the Integration of TF-CNN-LSTM</td>
+          <td>基于TF-CNN-LSTM集成的混合驱动转向架应力监测方法</td>
+          <td>Junzuo Liu, Xingwen Wu, School of Mechanical Engin&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/">paper-321-overview</a></td>
+      </tr>
+      <tr>
+          <td>335</td>
+          <td>Sensor Fusion for Detection of Rail Bending at 320km/h</td>
+          <td>320公里/小时钢轨弯曲检测的传感器融合</td>
+          <td>Solenne Thevenet, St´ephane Neveu, Marc Ledet, SNC&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="rail-topic-05---空气动力学受电弓-接触网系统与车辆设计">Rail Topic 05 - 空气动力学、受电弓-接触网系统与车辆设计</h3>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>10</td>
+          <td>Study on the Ablation Characteristics of Contact Wire Under Different PantographCatenary Dynamic Separation Behaviors</td>
+          <td>不同受电弓-接触网动态分离行为下接触线烧蚀特性研究</td>
+          <td>Xiaokang Wang, Jien Chen, Hao Liu, Long Chen, Zhig&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/">paper-010-overview</a></td>
+      </tr>
+      <tr>
+          <td>13</td>
+          <td>Dynamic Performance Analysis of the Pantograph-Catenary System on Long Suspension Bridges Considering Rail Irregularities</td>
+          <td>考虑钢轨不平顺的长大悬索桥受电弓-接触网系统动力性能分析</td>
+          <td>Xufan Wang, Yang Song, Zhigang Liu, Southwest Jiao&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/">paper-013-overview</a></td>
+      </tr>
+      <tr>
+          <td>19</td>
+          <td>A New Method for Predicting the Fatigue Life of Catenary Dropper Using Image Recognition Technology</td>
+          <td>基于图像识别技术的接触网吊弦疲劳寿命预测新方法</td>
+          <td>Yongming Yao, Jing Wang, Hongbo Kou , Zhipeng Yang&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/">paper-019-overview</a></td>
+      </tr>
+      <tr>
+          <td>21</td>
+          <td>Numerical Study on Wear Mechanism of Pantograph Contact Strip in Electrical Road System Under Complex Truck Driving Behavior</td>
+          <td>复杂卡车驾驶行为下电气化公路系统受电弓接触条磨损机理的数值研究</td>
+          <td>Zhiwei Zhou, Yan Xu, Faculty of Transportation Eng&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/">paper-021-overview</a></td>
+      </tr>
+      <tr>
+          <td>56</td>
+          <td>Numerical Simulation-based Study on the Dynamics of the Pantograph-Catenary System at Railway Turnouts</td>
+          <td>基于数值模拟的铁路道岔受电弓-接触网系统动力学研究</td>
+          <td>Wenyan Qi, Shiyu Zhao, Zhong Huang, Jiangwen Wang,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/">paper-056-overview</a></td>
+      </tr>
+      <tr>
+          <td>58</td>
+          <td>Study on Contact Force Identification Method Considering Vibrations of Stable Arm on Pantograph</td>
+          <td>考虑受电弓稳流臂振动的接触力识别方法研究</td>
+          <td>Haifei Wei, Ning Zhou, Xingshuai Zhi, Weihua Zhang&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/">paper-058-overview</a></td>
+      </tr>
+      <tr>
+          <td>80</td>
+          <td>Dynamic Loading of Bulk Cargo Containers Under Impacts During Rail Transportation on 1520 Gauge</td>
+          <td>1520mm轨距铁路运输中散装货物集装箱在冲击下的动态载荷</td>
+          <td>Tsyganskaya L.V., Tanicheva N.A., Emperor Alexande&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>107</td>
+          <td>Investigating the Role of Bogie Architecture in Tramcar Curve Squeal</td>
+          <td>转向架结构在有轨电车曲线尖叫中的作用研究</td>
+          <td>Federico Castellini, Leonardo Faccini, Egidio Di G&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/">paper-107-overview</a></td>
+      </tr>
+      <tr>
+          <td>110</td>
+          <td>Physics-informed Data-Driven Prediction of Abnormal Tram Wheel Wear</td>
+          <td>物理信息和数据驱动的异常有轨电车车轮磨损预测</td>
+          <td>Maozhenning Yang, Yuanjin Ji, Zhangxing Huang, Lih&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>112</td>
+          <td>Low-Cycle Fatigue Damage Assessment and Strategy for Some Stainless Coal Hopper Wagons Based on Rigid-Flex Coupling Simulation Technique</td>
+          <td>基于刚柔耦合仿真技术的部分不锈钢运煤漏斗车低周疲劳损伤评估与策略</td>
+          <td>Shi-ying Jin, Zong-yu Hu, Ming-wei Piao, Mechanica&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/">paper-112-overview</a></td>
+      </tr>
+      <tr>
+          <td>133</td>
+          <td>Research on Dynamic Parameters Matching of Pantograph and Overhead Conductor Rail System at Speed of 200km/h</td>
+          <td>200公里/小时速度下受电弓与接触轨系统动态参数匹配研究</td>
+          <td>Shiyu Zhao, Guiming Mei, Jiangwen Wang, Zhong Huan&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>141</td>
+          <td>A Rapid Simulation Method for Dynamic Interaction Analysis of Long-Distance Flexible Overhead Contact System-Pantograph</td>
+          <td>长距离柔性接触网-受电弓系统动态相互作用的快速仿真方法</td>
+          <td>Zhong Huang, Guiming Mei, Weihua Zhang, Bingrong M&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>151</td>
+          <td>A Quick Analysis Approach for Multiple Pantographs Operation</td>
+          <td>多受电弓运行的快速分析方法</td>
+          <td>Hongming Chen, Ning Zhou, WenWei Lu, State Key Lab&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/">paper-151-overview</a></td>
+      </tr>
+      <tr>
+          <td>160</td>
+          <td>Software Integration and Experimental Testing of a Hybrid Powertrain for an Unmanned Railway Vehicle</td>
+          <td>无人驾驶铁路车辆混合动力总成的软件集成与实验测试</td>
+          <td>Nicola Debattisti, Davide Tarsitano, Michele Vigna&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/">paper-160-overview</a></td>
+      </tr>
+      <tr>
+          <td>165</td>
+          <td>Experimental Study of a Scaled Running Gear Based on Independently Rotating Wheels with Caster Angles</td>
+          <td>基于带主销后倾角的独立旋转车轮的比例走行装置实验研究</td>
+          <td>Chao Yang, Yuxian Liu, Haotian Wang, Jianxin Zhou,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/">paper-165-overview</a></td>
+      </tr>
+      <tr>
+          <td>166</td>
+          <td>Optimization of Wheel Profile According to Wheel-Rail Friction Temperature</td>
+          <td>根据轮轨摩擦温度优化轮廓</td>
+          <td>Longjiang Shen, Xihong Chen, Xiaobo Zhong, Bo Peng&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/">paper-166-overview</a></td>
+      </tr>
+      <tr>
+          <td>169</td>
+          <td>Analysis of Electromechanical Coupled Resonance Mechanism of Permanent Magnet Direct-Drive Inboard Bearing Bogie</td>
+          <td>永磁直驱内侧轴承转向架机电耦合共振机理分析</td>
+          <td>Chen Yang, Maoru Chi, Wubin Cai, Guanzhou Ren, Xin&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/">paper-169-overview</a></td>
+      </tr>
+      <tr>
+          <td>172</td>
+          <td>Predicting Light Rail Vehicle Wheel Profile Evolution Under Severe and Mild Wear Conditions Using Numerical Simulations</td>
+          <td>利用数值模拟预测重度和轻度磨损条件下轻轨车辆轮廓演变</td>
+          <td>Yunendar Handoko, Fariz Kharisma, Eki Putra, Insti&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/">paper-172-overview</a></td>
+      </tr>
+      <tr>
+          <td>188</td>
+          <td>Tuning the Three-Piece Bogie Design for Application on Various Infrastructures</td>
+          <td>三件套转向架设计在各种基础设施上的应用调整</td>
+          <td>Artem Gusev, Ekaterina Rudakova, All-Union Center &hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>196</td>
+          <td>Design, Development, and Instrumentation of the KTH Scaled Roller Rig</td>
+          <td>KTH比例滚子台架的设计、开发和仪器仪表</td>
+          <td>Alireza Qazizadeh, Rohan Kulkarni, Rocco Giossi, P&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/">paper-196-overview</a></td>
+      </tr>
+      <tr>
+          <td>228</td>
+          <td>Research on Biased Loading of Helical Gear in High-Speed Vehicle with Inner Axle-Box Bogie</td>
+          <td>内置轴箱转向架高速车辆斜齿轮偏载研究</td>
+          <td>Jieyu Ning, Zaigang Chen, Southwest Jiaotong Unive&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/">paper-228-overview</a></td>
+      </tr>
+      <tr>
+          <td>257</td>
+          <td>Simplifying Railway Catenary Structures by Cancelling Catenary Stagger</td>
+          <td>通过取消接触网错位简化铁路接触网结构</td>
+          <td>William Zhendong Liu, Bastian Schick, Sebastian St&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/">paper-257-overview</a></td>
+      </tr>
+      <tr>
+          <td>261</td>
+          <td>Impact Dynamic Behaviors of the Pantograph-Catenary System in the Overlap Section at a Speed of $4 0 0 \mathsf { K m / h }$</td>
+          <td>400公里/小时速度下受电弓-接触网系统在交跨段的冲击动力学行为</td>
+          <td>Jiangwen Wang, Guiming MEI, Weihua Zhang, Southwes&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>300</td>
+          <td>The Mechanism of High-Order Wheel Polygonal Wear of Two Types of Metro Trains on the Same Line</td>
+          <td>同一线路两种地铁列车高阶车轮多边形磨损机理</td>
+          <td>Xiaoxuan Yang, Pengfei Liu, Shijiazhuang Tiedao Un&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/">paper-300-overview</a></td>
+      </tr>
+      <tr>
+          <td>324</td>
+          <td>Wheel Profile Optimization: A Hybrid Approach Combining Dynamic Simulations, Evolutionary Algorithms, and Wear Modeling</td>
+          <td>轮廓优化：结合动态仿真、进化算法和磨损建模的混合方法</td>
+          <td>Elham Khorazmad, Carlos Casanueva, Sebastian Stich&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/">paper-324-overview</a></td>
+      </tr>
+      <tr>
+          <td>327</td>
+          <td>Study on the Countermeasures for Preventing Coupler Separation of Middle Locomotives in 20,000-Tonne Heavy-Haul Trains</td>
+          <td>2万吨重载列车中间机车车钩分离的预防对策研究</td>
+          <td>Jian Wu, Liang Ling, Shiqian Chen, Kaiyun Wang, So&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/">paper-327-overview</a></td>
+      </tr>
+      <tr>
+          <td>330</td>
+          <td>Research on Evaluation Method for Conformal Wear of High-Speed Train WheelRail Surface</td>
+          <td>高速列车轮轨表面共形磨损评价方法研究</td>
+          <td>Gang Shen, Fan Guangneng, Chen Hongxuan, Tongji Un&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/">paper-330-overview</a></td>
+      </tr>
+      <tr>
+          <td>340</td>
+          <td>The Influence of Tread Modification on the Wheel Profile Comprehensive Wear of High-Speed Trains: Characteristic and Optimization</td>
+          <td>踏面改性对高速列车轮廓综合磨损的影响：特性与优化</td>
+          <td>Yuchen Xie, Wubin Cai, Yabo Zhou, Maoru Chi, Shuli&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/">paper-340-overview</a></td>
+      </tr>
+      <tr>
+          <td>348</td>
+          <td>Extrapolating Railway Catenary Dynamics to Unobserved Operational Conditions Using Long Expressive Memory Networks</td>
+          <td>利用长表达记忆网络将铁路接触网动力学外推到未观察到的运行条件</td>
+          <td>Taniya Kapoor, Hongrui Wang, Alfredo Nunez Vicenci&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/">paper-348-overview</a></td>
+      </tr>
+      <tr>
+          <td>349</td>
+          <td>Development of a Validated Neutral Section Model for Pantograph-Catenary Interaction Dynamics</td>
+          <td>用于受电弓-接触网相互作用动力学的验证中性区模型开发</td>
+          <td>Jose Rebelo, Jo˜ao Pombo, Pedro Antunes, Institute&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/">paper-349-overview</a></td>
+      </tr>
+      <tr>
+          <td>360</td>
+          <td>Effects of Resilient Wheel on the Vibration of Wheel–Rail Coupled System</td>
+          <td>弹性车轮对轮轨耦合系统振动的影响</td>
+          <td>Qinghua Guan, Haoning Fu, Zefeng Wen, Xuesong Jin &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/">paper-360-overview</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-说明">📝 说明</h2>
+<ul>
+<li><strong>原文缺失</strong>: PDF文件不存在，无法进行处理</li>
+<li>点击文档链接可直接访问相应文件</li>
+</ul>
+<hr>
+<p><em>本文档为IAVSD 2025铁路部分所有论文的统一汇总文档，整合了所有5个主题的论文信息。</em></p>
+</div>
+
+          
+          
+          
+            
+          
+
+          
+            
+          
+        </div>
+      </article>
+
+      
+      
+      
+      
+      
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <nav class="toc">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-主题详细导航">🎯 主题详细导航</a>
+      <ul>
+        <li><a href="#-快速跳转">📚 快速跳转</a></li>
+      </ul>
+    </li>
+    <li><a href="#-研究热点分析">🔍 研究热点分析</a>
+      <ul>
+        <li><a href="#-主要研究领域分布">📊 主要研究领域分布</a></li>
+      </ul>
+    </li>
+    <li><a href="#-总体统计">📊 总体统计</a></li>
+    <li><a href="#-完整论文清单">📋 完整论文清单</a>
+      <ul>
+        <li><a href="#rail-topic-01---轮轨相互作用">Rail Topic 01 - 轮轨相互作用</a></li>
+        <li><a href="#rail-topic-02---轨道车辆动力学与控制">Rail Topic 02 - 轨道车辆动力学与控制</a></li>
+        <li><a href="#rail-topic-03---轨道系统与性能">Rail Topic 03 - 轨道系统与性能</a></li>
+        <li><a href="#rail-topic-04---轨道系统优化维护与监测">Rail Topic 04 - 轨道系统优化、维护与监测</a></li>
+        <li><a href="#rail-topic-05---空气动力学受电弓-接触网系统与车辆设计">Rail Topic 05 - 空气动力学、受电弓-接触网系统与车辆设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#-说明">📝 说明</a></li>
+  </ul>
+</nav>
+        </nav>
+      </aside>
+      
+    </div>
+    
+    
+      <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+      <div id="tocDrawer" class="toc-drawer" hidden>
+        <div class="toc-drawer-inner">
+          <div class="toc-drawer-header">
+            <span>目录</span>
+          </div>
+          <nav class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-主题详细导航">🎯 主题详细导航</a>
+      <ul>
+        <li><a href="#-快速跳转">📚 快速跳转</a></li>
+      </ul>
+    </li>
+    <li><a href="#-研究热点分析">🔍 研究热点分析</a>
+      <ul>
+        <li><a href="#-主要研究领域分布">📊 主要研究领域分布</a></li>
+      </ul>
+    </li>
+    <li><a href="#-总体统计">📊 总体统计</a></li>
+    <li><a href="#-完整论文清单">📋 完整论文清单</a>
+      <ul>
+        <li><a href="#rail-topic-01---轮轨相互作用">Rail Topic 01 - 轮轨相互作用</a></li>
+        <li><a href="#rail-topic-02---轨道车辆动力学与控制">Rail Topic 02 - 轨道车辆动力学与控制</a></li>
+        <li><a href="#rail-topic-03---轨道系统与性能">Rail Topic 03 - 轨道系统与性能</a></li>
+        <li><a href="#rail-topic-04---轨道系统优化维护与监测">Rail Topic 04 - 轨道系统优化、维护与监测</a></li>
+        <li><a href="#rail-topic-05---空气动力学受电弓-接触网系统与车辆设计">Rail Topic 05 - 空气动力学、受电弓-接触网系统与车辆设计</a></li>
+      </ul>
+    </li>
+    <li><a href="#-说明">📝 说明</a></li>
+  </ul>
+</nav></nav>
+        </div>
+      </div>
+    
+    
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

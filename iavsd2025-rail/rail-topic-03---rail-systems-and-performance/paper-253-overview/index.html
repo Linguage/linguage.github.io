@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：253 基本信息 论文编号：253 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：Prediction of Derailment Coefficient From Onboard and Ground Sensors Using LSTM Model 中文标题：使用LSTM模型通过车载和地面传感器预测脱轨系数 作者及单位：Abhinav Srivastava, Kenji Ejiri*, Keisuke Shimono, Masaru Abe, Hiroshi Ohbayashi, Masuhisa Tanimoto, Daisuke Shinagawa, Yoshihiro Suda (东京大学大学院工学系研究科，日本；东京地铁株式会社，日本；Metro Sharyo株式会社，日本；日本制铁株式会社，日本) 摘要 本研究探讨了长短期记忆(LSTM)模型在预测脱轨系数方面的应用，脱轨系数是脱轨风险的关键指标。研究使用来自东京地铁列车的车载和轨道侧面传感器数据构建了基于LSTM的预测模型，这些模型基于列车速度、轮载荷、偏航角速度和轴箱加速度等输入来估算横向力和Q/P比率。验证结果表明，预测的Q/P趋势与各种轨道条件（包括曲率变化）下的测量值紧密跟随。这表明使用LSTM进行铁路状态监测的准确趋势预测是可行的。所提出的方法支持从传统计划维护向预测性维护的转变，可能实现实时监测和早期干预，以提高安全性和运营效率。总体而言，研究结果表明，像LSTM这样的机器学习模型在开发更智能、更可靠的铁路维护策略方面可以发挥重要作用。
+关键词 #长短期记忆网络 #车载传感器 #脱轨系数 #状态监测 #大数据应用 #预测性维护 #铁路安全 #机器学习 #横向力预测 #轮轨相互作用
+背景与动机 铁路长期以来一直是进步的生命线，承载着连接和经济增长的持久承诺。自19世纪初以来，火车在推动工业发展方面发挥了关键作用。如今，它们构成了全球交通基础设施的重要组成部分，高效地运送大量人员和货物，同时促进经济和社会进步。随着铁路网络的不断扩展，基础设施和资产的有效维护变得越来越重要，以确保乘客安全和运营不受干扰。在铁路系统的各种安全问题中，脱轨仍然是最关键的风险之一。为了减轻此类危险，持续的警惕和不断创新的维护实践对于确保更安全、更可靠的铁路运营至关重要。适当的维护对于任何机器或设备的可靠和无中断运行都是必不可少的。在铁路背景下，机车车辆维护在确保运营效率和最小化服务中断方面发挥着关键作用。传统上，维护策略严重依赖定期检查和定期大修。然而，为了提高铁路维护的效率和有效性，从基于时间的维护向预测性维护的转变正在越来越多地被追求。
+研究方法 本研究使用长短期记忆(LSTM)机器学习算法来预测每个车轮的横向力(Q)与轮载荷(P)的比率，这些数据来自东京地铁的车载（转向架）和地面（轨道）传感器。相对于外轨的前轮组的横向力与轮载荷的比率特别称为&quot;脱轨系数(Q/P)&quot;，其预测很重要。因为该值是列车脱轨的指标。最终，本研究旨在为铁路维护提供一个工具，可以预测轨道沿线任何位置任何列车类型的脱轨风险，实现主动维护干预，提高整体铁路安全性和效率。数据收集阶段对于全面了解轨道和转向架在铁路轨道动态条件下的行为至关重要。多个传感器已安装用于收集转向架和轨道的数据。东京地铁有一个特殊的转向架称为&quot;PQ监测转向架&quot;，可以测量目标车轮的横向力和轮载荷用于监测。该转向架安装在东京地铁拥有的特定列车组的车辆中。本文中我们将该转向架的车辆称为&quot;测量车辆&quot;。
+主要结论 为实现有效的基于状态的维护(CBM)，本研究提出应用长短期记忆(LSTM)，这是一种机器学习算法中的方法。为了阐明LSTM对CBM的有效性，通过使用从车辆传感器收集的数据进行学习，构建了一个预测脱轨系数的模型。通过学习得到的LSTM模型预测的脱轨系数与测量的脱轨系数相对应，证明了LSTM的有效性。虽然LSTM模型可以预测测量值的变化趋势，但它们不能充分反映测量值的大小。通过详细观察可以发现，测量值和预测值在低值范围内几乎相等。然而，随着测量值绝对值的增加，差异变得更大。为了阐明差异的原因并提高LSTM模型的准确性，我们持续深入分析LSTM模型。研究结果表明，LSTM模型可以预测整个轨道长度上测量数据的趋势，这证明了该方法在铁路状态监测中的可行性。
+文章亮点或创新点 创新性预测模型：首次将LSTM神经网络应用于铁路脱轨系数预测，实现了从车载和地面传感器数据到关键安全指标的准确预测 多源数据融合：成功整合了车载转向架传感器和地面轨道传感器的多源数据，构建了全面的铁路状态监测系统 预测性维护应用：推动了铁路维护从传统计划维护向预测性维护的转变，为实时监测和早期干预提供了技术基础 工程实用价值：研究结果表明LSTM模型可以准确预测脱轨系数的变化趋势，为铁路安全运营和维护策略优化提供了重要工具 专业词汇列表 英文术语 中文翻译 Long Short-Term Memory (LSTM) 长短期记忆网络 Derailment Coefficient 脱轨系数 Onboard Sensors 车载传感器 Ground Sensors 地面传感器 Condition Monitoring 状态监测 Predictive Maintenance 预测性维护 Lateral Force 横向力 Wheel Load 轮载荷 Bogie 转向架 Axle Box 轴箱 Yaw Angular Velocity 偏航角速度 Machine Learning 机器学习 Neural Network 神经网络 Time Series Prediction 时间序列预测 Railway Safety 铁路安全 PQ Monitoring Bogie PQ监测转向架 Real-time Monitoring 实时监测 Big Data Application 大数据应用 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：253 基本信息 论文编号：253 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：Prediction of Derailment Coefficient From Onboard and Ground Sensors Using LSTM Model 中文标题：使用LSTM模型通过车载和地面传感器预测脱轨系数 作者及单位：Abhinav Srivastava, Kenji Ejiri*, Keisuke Shimono, Masaru Abe, Hiroshi Ohbayashi, Masuhisa Tanimoto, Daisuke Shinagawa, Yoshihiro Suda (东京大学大学院工学系研究科，日本；东京地铁株式会社，日本；Metro Sharyo株式会社，日本；日本制铁株式会社，日本) 摘要 本研究探讨了长短期记忆(LSTM)模型在预测脱轨系数方面的应用，脱轨系数是脱轨风险的关键指标。研究使用来自东京地铁列车的车载和轨道侧面传感器数据构建了基于LSTM的预测模型，这些模型基于列车速度、轮载荷、偏航角速度和轴箱加速度等输入来估算横向力和Q/P比率。验证结果表明，预测的Q/P趋势与各种轨道条件（包括曲率变化）下的测量值紧密跟随。这表明使用LSTM进行铁路状态监测的准确趋势预测是可行的。所提出的方法支持从传统计划维护向预测性维护的转变，可能实现实时监测和早期干预，以提高安全性和运营效率。总体而言，研究结果表明，像LSTM这样的机器学习模型在开发更智能、更可靠的铁路维护策略方面可以发挥重要作用。
+关键词 #长短期记忆网络 #车载传感器 #脱轨系数 #状态监测 #大数据应用 #预测性维护 #铁路安全 #机器学习 #横向力预测 #轮轨相互作用
+背景与动机 铁路长期以来一直是进步的生命线，承载着连接和经济增长的持久承诺。自19世纪初以来，火车在推动工业发展方面发挥了关键作用。如今，它们构成了全球交通基础设施的重要组成部分，高效地运送大量人员和货物，同时促进经济和社会进步。随着铁路网络的不断扩展，基础设施和资产的有效维护变得越来越重要，以确保乘客安全和运营不受干扰。在铁路系统的各种安全问题中，脱轨仍然是最关键的风险之一。为了减轻此类危险，持续的警惕和不断创新的维护实践对于确保更安全、更可靠的铁路运营至关重要。适当的维护对于任何机器或设备的可靠和无中断运行都是必不可少的。在铁路背景下，机车车辆维护在确保运营效率和最小化服务中断方面发挥着关键作用。传统上，维护策略严重依赖定期检查和定期大修。然而，为了提高铁路维护的效率和有效性，从基于时间的维护向预测性维护的转变正在越来越多地被追求。
+研究方法 本研究使用长短期记忆(LSTM)机器学习算法来预测每个车轮的横向力(Q)与轮载荷(P)的比率，这些数据来自东京地铁的车载（转向架）和地面（轨道）传感器。相对于外轨的前轮组的横向力与轮载荷的比率特别称为&quot;脱轨系数(Q/P)&quot;，其预测很重要。因为该值是列车脱轨的指标。最终，本研究旨在为铁路维护提供一个工具，可以预测轨道沿线任何位置任何列车类型的脱轨风险，实现主动维护干预，提高整体铁路安全性和效率。数据收集阶段对于全面了解轨道和转向架在铁路轨道动态条件下的行为至关重要。多个传感器已安装用于收集转向架和轨道的数据。东京地铁有一个特殊的转向架称为&quot;PQ监测转向架&quot;，可以测量目标车轮的横向力和轮载荷用于监测。该转向架安装在东京地铁拥有的特定列车组的车辆中。本文中我们将该转向架的车辆称为&quot;测量车辆&quot;。
+主要结论 为实现有效的基于状态的维护(CBM)，本研究提出应用长短期记忆(LSTM)，这是一种机器学习算法中的方法。为了阐明LSTM对CBM的有效性，通过使用从车辆传感器收集的数据进行学习，构建了一个预测脱轨系数的模型。通过学习得到的LSTM模型预测的脱轨系数与测量的脱轨系数相对应，证明了LSTM的有效性。虽然LSTM模型可以预测测量值的变化趋势，但它们不能充分反映测量值的大小。通过详细观察可以发现，测量值和预测值在低值范围内几乎相等。然而，随着测量值绝对值的增加，差异变得更大。为了阐明差异的原因并提高LSTM模型的准确性，我们持续深入分析LSTM模型。研究结果表明，LSTM模型可以预测整个轨道长度上测量数据的趋势，这证明了该方法在铁路状态监测中的可行性。
+文章亮点或创新点 创新性预测模型：首次将LSTM神经网络应用于铁路脱轨系数预测，实现了从车载和地面传感器数据到关键安全指标的准确预测 多源数据融合：成功整合了车载转向架传感器和地面轨道传感器的多源数据，构建了全面的铁路状态监测系统 预测性维护应用：推动了铁路维护从传统计划维护向预测性维护的转变，为实时监测和早期干预提供了技术基础 工程实用价值：研究结果表明LSTM模型可以准确预测脱轨系数的变化趋势，为铁路安全运营和维护策略优化提供了重要工具 专业词汇列表 英文术语 中文翻译 Long Short-Term Memory (LSTM) 长短期记忆网络 Derailment Coefficient 脱轨系数 Onboard Sensors 车载传感器 Ground Sensors 地面传感器 Condition Monitoring 状态监测 Predictive Maintenance 预测性维护 Lateral Force 横向力 Wheel Load 轮载荷 Bogie 转向架 Axle Box 轴箱 Yaw Angular Velocity 偏航角速度 Machine Learning 机器学习 Neural Network 神经网络 Time Series Prediction 时间序列预测 Railway Safety 铁路安全 PQ Monitoring Bogie PQ监测转向架 Real-time Monitoring 实时监测 Big Data Application 大数据应用 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-057-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-064-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-074-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-075-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-094-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-131-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-142-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-195-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-204-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-234-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-259-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-269-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-279-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-298-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-341-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-350-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-353-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-359-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/" class="crumb-sec">Rail Topic 03 - Rail Systems and Performance</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-057-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-064-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-074-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-075-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-094-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-131-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-142-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-195-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-204-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-234-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-259-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-269-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-279-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-298-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-341-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-350-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-353-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-359-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览253">IAVSD 2025 论文概览：253</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：253</li>
+<li><strong>所属主题</strong>：Rail Topic 03 - Rail Systems and Performance</li>
+<li><strong>英文标题</strong>：Prediction of Derailment Coefficient From Onboard and Ground Sensors Using LSTM Model</li>
+<li><strong>中文标题</strong>：使用LSTM模型通过车载和地面传感器预测脱轨系数</li>
+<li><strong>作者及单位</strong>：Abhinav Srivastava, Kenji Ejiri*, Keisuke Shimono, Masaru Abe, Hiroshi Ohbayashi, Masuhisa Tanimoto, Daisuke Shinagawa, Yoshihiro Suda (东京大学大学院工学系研究科，日本；东京地铁株式会社，日本；Metro Sharyo株式会社，日本；日本制铁株式会社，日本)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>本研究探讨了长短期记忆(LSTM)模型在预测脱轨系数方面的应用，脱轨系数是脱轨风险的关键指标。研究使用来自东京地铁列车的车载和轨道侧面传感器数据构建了基于LSTM的预测模型，这些模型基于列车速度、轮载荷、偏航角速度和轴箱加速度等输入来估算横向力和Q/P比率。验证结果表明，预测的Q/P趋势与各种轨道条件（包括曲率变化）下的测量值紧密跟随。这表明使用LSTM进行铁路状态监测的准确趋势预测是可行的。所提出的方法支持从传统计划维护向预测性维护的转变，可能实现实时监测和早期干预，以提高安全性和运营效率。总体而言，研究结果表明，像LSTM这样的机器学习模型在开发更智能、更可靠的铁路维护策略方面可以发挥重要作用。</p>
+<h2 id="关键词">关键词</h2>
+<p>#长短期记忆网络 #车载传感器 #脱轨系数 #状态监测 #大数据应用 #预测性维护 #铁路安全 #机器学习 #横向力预测 #轮轨相互作用</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>铁路长期以来一直是进步的生命线，承载着连接和经济增长的持久承诺。自19世纪初以来，火车在推动工业发展方面发挥了关键作用。如今，它们构成了全球交通基础设施的重要组成部分，高效地运送大量人员和货物，同时促进经济和社会进步。随着铁路网络的不断扩展，基础设施和资产的有效维护变得越来越重要，以确保乘客安全和运营不受干扰。在铁路系统的各种安全问题中，脱轨仍然是最关键的风险之一。为了减轻此类危险，持续的警惕和不断创新的维护实践对于确保更安全、更可靠的铁路运营至关重要。适当的维护对于任何机器或设备的可靠和无中断运行都是必不可少的。在铁路背景下，机车车辆维护在确保运营效率和最小化服务中断方面发挥着关键作用。传统上，维护策略严重依赖定期检查和定期大修。然而，为了提高铁路维护的效率和有效性，从基于时间的维护向预测性维护的转变正在越来越多地被追求。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究使用长短期记忆(LSTM)机器学习算法来预测每个车轮的横向力(Q)与轮载荷(P)的比率，这些数据来自东京地铁的车载（转向架）和地面（轨道）传感器。相对于外轨的前轮组的横向力与轮载荷的比率特别称为&quot;脱轨系数(Q/P)&quot;，其预测很重要。因为该值是列车脱轨的指标。最终，本研究旨在为铁路维护提供一个工具，可以预测轨道沿线任何位置任何列车类型的脱轨风险，实现主动维护干预，提高整体铁路安全性和效率。数据收集阶段对于全面了解轨道和转向架在铁路轨道动态条件下的行为至关重要。多个传感器已安装用于收集转向架和轨道的数据。东京地铁有一个特殊的转向架称为&quot;PQ监测转向架&quot;，可以测量目标车轮的横向力和轮载荷用于监测。该转向架安装在东京地铁拥有的特定列车组的车辆中。本文中我们将该转向架的车辆称为&quot;测量车辆&quot;。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>为实现有效的基于状态的维护(CBM)，本研究提出应用长短期记忆(LSTM)，这是一种机器学习算法中的方法。为了阐明LSTM对CBM的有效性，通过使用从车辆传感器收集的数据进行学习，构建了一个预测脱轨系数的模型。通过学习得到的LSTM模型预测的脱轨系数与测量的脱轨系数相对应，证明了LSTM的有效性。虽然LSTM模型可以预测测量值的变化趋势，但它们不能充分反映测量值的大小。通过详细观察可以发现，测量值和预测值在低值范围内几乎相等。然而，随着测量值绝对值的增加，差异变得更大。为了阐明差异的原因并提高LSTM模型的准确性，我们持续深入分析LSTM模型。研究结果表明，LSTM模型可以预测整个轨道长度上测量数据的趋势，这证明了该方法在铁路状态监测中的可行性。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>创新性预测模型</strong>：首次将LSTM神经网络应用于铁路脱轨系数预测，实现了从车载和地面传感器数据到关键安全指标的准确预测</li>
+<li><strong>多源数据融合</strong>：成功整合了车载转向架传感器和地面轨道传感器的多源数据，构建了全面的铁路状态监测系统</li>
+<li><strong>预测性维护应用</strong>：推动了铁路维护从传统计划维护向预测性维护的转变，为实时监测和早期干预提供了技术基础</li>
+<li><strong>工程实用价值</strong>：研究结果表明LSTM模型可以准确预测脱轨系数的变化趋势，为铁路安全运营和维护策略优化提供了重要工具</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Long Short-Term Memory (LSTM)</td>
+          <td>长短期记忆网络</td>
+      </tr>
+      <tr>
+          <td>Derailment Coefficient</td>
+          <td>脱轨系数</td>
+      </tr>
+      <tr>
+          <td>Onboard Sensors</td>
+          <td>车载传感器</td>
+      </tr>
+      <tr>
+          <td>Ground Sensors</td>
+          <td>地面传感器</td>
+      </tr>
+      <tr>
+          <td>Condition Monitoring</td>
+          <td>状态监测</td>
+      </tr>
+      <tr>
+          <td>Predictive Maintenance</td>
+          <td>预测性维护</td>
+      </tr>
+      <tr>
+          <td>Lateral Force</td>
+          <td>横向力</td>
+      </tr>
+      <tr>
+          <td>Wheel Load</td>
+          <td>轮载荷</td>
+      </tr>
+      <tr>
+          <td>Bogie</td>
+          <td>转向架</td>
+      </tr>
+      <tr>
+          <td>Axle Box</td>
+          <td>轴箱</td>
+      </tr>
+      <tr>
+          <td>Yaw Angular Velocity</td>
+          <td>偏航角速度</td>
+      </tr>
+      <tr>
+          <td>Machine Learning</td>
+          <td>机器学习</td>
+      </tr>
+      <tr>
+          <td>Neural Network</td>
+          <td>神经网络</td>
+      </tr>
+      <tr>
+          <td>Time Series Prediction</td>
+          <td>时间序列预测</td>
+      </tr>
+      <tr>
+          <td>Railway Safety</td>
+          <td>铁路安全</td>
+      </tr>
+      <tr>
+          <td>PQ Monitoring Bogie</td>
+          <td>PQ监测转向架</td>
+      </tr>
+      <tr>
+          <td>Real-time Monitoring</td>
+          <td>实时监测</td>
+      </tr>
+      <tr>
+          <td>Big Data Application</td>
+          <td>大数据应用</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

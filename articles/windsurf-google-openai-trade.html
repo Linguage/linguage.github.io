@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsurf 事件交互式解读</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Deep Night Gradient -->
+    <!-- Application Structure Plan: The application is designed as a single-page narrative journey. The user scrolls through chronological and thematic sections to understand the complex Windsurf story. The structure begins with an overview of the key players, moves to the failed OpenAI deal, explains Google's unique intervention, analyzes the developer market landscape, and concludes with the aftermath. This narrative structure was chosen over a dashboard because the source material is a story with a clear cause-and-effect flow. Interactive elements like clickable cards and charts are embedded within this flow to allow for deeper exploration without breaking the narrative, ensuring maximum comprehension and user engagement. -->
+    <!-- Visualization & Content Choices: 
+        - Key Players Section: Goal: Introduce actors. Method: Interactive cards (HTML/Tailwind/JS). Interaction: Click to reveal role. Justification: Quickly provides context on each company.
+        - Failed Deal Flowchart: Goal: Explain deal collapse. Method: HTML/Tailwind diagram. Interaction: Static visual. Justification: Clearly illustrates the "Microsoft IP Block" sequence without complex charts, adhering to NO SVG rule.
+        - Google's Deal Comparison: Goal: Contrast deal types. Method: Bar Chart (Chart.js). Interaction: Hover for details. Justification: Visually quantifies the difference between a traditional acquisition and Google's unique acqui-hire/license model.
+        - Developer Battlefield: Goal: Show market segmentation. Method: Interactive timeline/spectrum (HTML/Tailwind/JS). Interaction: Click buttons to highlight different market segments and players. Justification: This is the core analytical insight of the report, and an interactive diagram makes it engaging and easy to understand.
+        - Anthropic Revenue Chart: Goal: Demonstrate developer market value. Method: Bar Chart (Chart.js). Interaction: Hover for details. Justification: Provides quantitative proof for the strategic importance of winning developers.
+        - Aftermath Cards: Goal: Summarize outcomes. Method: Static info cards (HTML/Tailwind). Interaction: None. Justification: Presents concluding facts clearly and concisely.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #1a2035; /* Deep dark blue from image */
+            color: #e2e8f0; /* Light slate for text on dark background */
+        }
+        .nav-link {
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            color: #a7b0c0; /* Slightly muted light text for nav */
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #ffe066; /* Yellow accent from image */
+            border-bottom-color: #ffe066;
+        }
+        .content-card {
+            background-color: #2a304a; /* Slightly lighter dark blue for cards */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #e2e8f0; /* Light text on card */
+        }
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.2);
+        }
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px;
+            width: 100%;
+            max-width: 600px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#1a2035]/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-slate-200">Windsurf 事件解读</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#players" class="nav-link">关键角色</a>
+                <a href="#deal" class="nav-link">交易风云</a>
+                <a href="#battlefield" class="nav-link">开发者战场</a>
+                <a href="#aftermath" class="nav-link">事件余波</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="intro" class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight text-white">一场30亿美元交易的坍塌<br/>与AI开发者工具的重塑</h2>
+            <p class="max-w-3xl mx-auto text-slate-300 text-lg mb-8">
+                本应用将带您深入了解Windsurf公司近期所经历的一系列复杂事件。从其与OpenAI备受瞩目的收购谈判为何最终破裂，到科技巨头谷歌如何以一种出人意料的方式介入。这一连串的事件不仅反映了当前AI市场的动态，更揭示了未来开发者工具的演进方向。
+            </p>
+            <div class="relative w-full max-w-4xl mx-auto" style="padding-bottom: 56.25%;">
+                <iframe class="absolute top-0 left-0 w-full h-full rounded-lg shadow-xl" src="https://www.youtube.com/embed/urEaHW-emY4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="players" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-2 text-white">事件的关键角色</h3>
+            <p class="text-center text-slate-400 mb-12">点击卡片了解它们在本次事件中的角色</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card p-6 text-center cursor-pointer player-card" data-info="主角公司，前身为Codeium，一款AI辅助编程工具。在与OpenAI价值30亿美元的收购失败后，其核心团队和IP被谷歌以一种非传统方式“收购”。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">Windsurf (Codeium)</h4>
+                    <p class="text-slate-400">风暴中心的主角</p>
+                </div>
+                <div class="content-card p-6 text-center cursor-pointer player-card" data-info="最初的收购方，计划以30亿美元收购Windsurf。但由于其与微软的IP共享协议，这笔交易对OpenAI失去了战略价值，最终导致交易失败。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">OpenAI</h4>
+                    <p class="text-slate-400">失意的收购者</p>
+                </div>
+                <div class="content-card p-6 text-center cursor-pointer player-card" data-info="最终的“赢家”，通过支付24亿美元许可费并雇佣核心团队的方式，巧妙地获取了Windsurf的技术和人才，同时规避了反垄断风险。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">Google</h4>
+                    <p class="text-slate-400">精明的破局者</p>
+                </div>
+                <div class="content-card p-6 text-center cursor-pointer player-card" data-info="作为OpenAI的主要投资者和基础设施提供商，其与OpenAI的IP协议是导致收购失败的关键“绊脚石”，无意中阻止了这笔交易。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">Microsoft</h4>
+                    <p class="text-slate-400">无形的规则制定者</p>
+                </div>
+                 <div class="content-card p-6 text-center cursor-pointer player-card" data-info="其模型(Claude)在开发者中广受欢迎，尤其在工具调用方面表现出色。它的成功证明了赢得开发者心智的巨大商业价值，是谷歌和OpenAI都想效仿的对象。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">Anthropic</h4>
+                    <p class="text-slate-400">开发者市场的标杆</p>
+                </div>
+                <div class="content-card p-6 text-center cursor-pointer player-card" data-info="一款集成AI功能的VS Code分支，在开发者市场中迅速崛起。它的成功迫使Windsurf重新思考其市场战略，是本次事件的重要背景板。">
+                    <h4 class="text-2xl font-bold mb-2 text-white">Cursor</h4>
+                    <p class="text-slate-400">市场的搅局者</p>
+                </div>
+            </div>
+            <div id="player-info-box" class="mt-8 p-6 bg-[#3a405a] border-l-4 border-[#66e0ff] text-[#66e0ff] rounded-r-lg hidden">
+                <p id="player-info-text"></p>
+            </div>
+        </section>
+
+        <section id="deal" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">交易风云：从收购到“收购”</h3>
+            <p class="max-w-3xl mx-auto text-slate-300 text-lg mb-12 text-center">
+                整个事件的核心是两场截然不同的“交易”。一场是传统的公司收购，但最终失败；另一场则是谷歌精心设计的“人才+IP”的非传统收购，最终改变了所有参与者的命运。
+            </p>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="content-card p-8">
+                    <h4 class="text-2xl font-bold mb-4 text-white">第一幕：失败的30亿美元收购</h4>
+                     <p class="text-slate-300 mb-6">OpenAI对Windsurf的收购案，因一个关键的协议细节而搁浅。这个流程图揭示了交易失败的根本原因。</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="bg-[#e066ff] text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">1</div>
+                            <p class="ml-4 font-semibold text-slate-200">OpenAI提出30亿美元收购Windsurf</p>
+                        </div>
+                        <div class="pl-4">
+                            <div class="h-8 w-px bg-slate-600 ml-3.5"></div>
+                            <span class="text-[#ffc060] font-bold ml-8">触发协议 ⇣</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-[#ffc060] text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">2</div>
+                            <p class="ml-4 font-semibold text-slate-200">微软根据协议有权访问所有OpenAI的IP</p>
+                        </div>
+                        <div class="pl-4">
+                            <div class="h-8 w-px bg-slate-600 ml-3.5"></div>
+                            <span class="text-[#ffc060] font-bold ml-8">导致后果 ⇣</span>
+                        </div>
+                         <div class="flex items-center">
+                            <div class="bg-slate-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">3</div>
+                            <p class="ml-4 font-semibold text-slate-200">Windsurf核心IP对OpenAI失去独占价值</p>
+                        </div>
+                         <div class="pl-4">
+                            <div class="h-8 w-px bg-slate-600 ml-3.5"></div>
+                        </div>
+                         <div class="flex items-center">
+                            <div class="bg-black text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">✕</div>
+                            <p class="ml-4 font-semibold text-xl text-white">交易失败</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="content-card p-8">
+                    <h4 class="text-2xl font-bold mb-4 text-white">第二幕：谷歌的24亿美元“组合拳”</h4>
+                    <p class="text-slate-300 mb-6">谷歌并未直接收购公司，而是将24亿美元拆分为两部分：一部分用于雇佣核心团队（人才收购），另一部分作为IP许可费支付给Windsurf公司，作为对股东的补偿。下图对比了两种模式。</p>
+                    <div class="chart-container">
+                        <canvas id="dealComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="battlefield" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-2 text-white">开发者心智的战场</h3>
+            <p class="text-center text-slate-400 mb-12 max-w-3xl mx-auto">AI开发者工具市场并非铁板一块，而是存在一个从“新手/氛围开发者”到“资深/企业开发者”的光谱。不同产品的定位决定了它们的战略。Windsurf的摇摆和最终的拆分，正是这个战场竞争的缩影。</p>
+            <div class="bg-[#2a304a] p-8 rounded-xl shadow-lg">
+                <div class="relative w-full h-4 bg-gradient-to-r from-[#e066ff] via-[#66e0ff] to-[#ffe066] rounded-full mb-4">
+                     <div id="marker-newbie" class="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-[#e066ff] rounded-full border-2 border-white shadow-md" style="left: 15%;"></div>
+                     <div id="marker-cursor" class="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-[#66e0ff] rounded-full border-2 border-white shadow-md" style="left: 50%;"></div>
+                     <div id="marker-enterprise" class="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-[#ffe066] rounded-full border-2 border-white shadow-md" style="left: 85%;"></div>
+                </div>
+                <div class="flex justify-between text-sm font-semibold text-slate-300 px-2">
+                    <span>新手/氛围开发者</span>
+                    <span>专业/中间开发者</span>
+                    <span>企业级开发者</span>
+                </div>
+                <div class="text-center my-8">
+                    <button class="battlefield-btn bg-[#e066ff]/20 text-[#e066ff] hover:bg-[#e066ff]/40 px-4 py-2 rounded-full mr-2" data-target="newbie">谷歌的目标</button>
+                    <button class="battlefield-btn bg-[#66e0ff]/20 text-[#66e0ff] hover:bg-[#66e0ff]/40 px-4 py-2 rounded-full mr-2" data-target="cursor">Cursor的阵地</button>
+                    <button class="battlefield-btn bg-[#ffe066]/20 text-[#ffe066] hover:bg-[#ffe066]/40 px-4 py-2 rounded-full" data-target="enterprise">Codeium的新方向</button>
+                </div>
+                <div id="battlefield-info" class="p-6 rounded-lg bg-[#3a405a] border border-slate-600 min-h-[150px]">
+                     <div id="info-newbie" class="battlefield-content">
+                        <h4 class="font-bold text-lg text-[#e066ff]">新手市场：增长的引擎</h4>
+                        <p class="text-slate-300 mt-2">这个群体注重易用性和快速上手体验。谷歌通过获取Windsurf面向初学者的技术和团队，意图在这个高增长的领域建立据点，正如他们当年收购Firebase一样。这是赢得未来开发者的关键一步。</p>
+                    </div>
+                    <div id="info-cursor" class="battlefield-content hidden">
+                        <h4 class="font-bold text-lg text-[#66e0ff]">中间市场：竞争的红海</h4>
+                        <p class="text-slate-300 mt-2">Cursor通过深度集成AI功能，成功在VS Code用户中开辟了新天地，赢得了大量寻求效率提升的专业开发者。它的成功迫使Windsurf等竞争对手不得不跟进，从而引发了市场定位的摇摆。</p>
+                    </div>
+                    <div id="info-enterprise" class="battlefield-content hidden">
+                        <h4 class="font-bold text-lg text-[#ffe066]">企业市场：利润的基石</h4>
+                        <p class="text-slate-300 mt-2">企业开发者注重稳定性、安全性及与现有工具（如JetBrains）的集成。这是Windsurf（当时叫Codeium）最初的优势所在。在分拆后，新的Codeium公司将重新聚焦于这个高利润、高壁垒的市场。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="aftermath" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">事件余波与未来展望</h3>
+             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="content-card p-6">
+                    <h4 class="text-xl font-bold mb-2 text-white">谷歌：赢得未来</h4>
+                    <p class="text-slate-300">获得了Windsurf的核心团队和IP，大大加速了其在AI开发者工具领域的布局。无需担心融资问题，团队可以专注于技术创新，直接与Anthropic和OpenAI争夺开发者心智。</p>
+                     <p class="pill bg-[#66e0ff]/20 text-[#66e0ff] mt-4">战略优势</p>
+                </div>
+                <div class="content-card p-6">
+                    <h4 class="text-xl font-bold mb-2 text-white">Codeium (新Windsurf)</h4>
+                    <p class="text-slate-300">剥离了面向普通开发者的业务后，公司将重新聚焦于高利润的企业市场。虽然估值大幅降低，但有望实现盈利，并继续在企业AI辅助开发领域深耕。</p>
+                     <p class="pill bg-[#e066ff]/20 text-[#e066ff] mt-4">业务聚焦</p>
+                </div>
+                <div class="content-card p-6">
+                    <h4 class="text-xl font-bold mb-2 text-white">投资者：获得回报</h4>
+                    <p class="text-slate-300">通过谷歌支付的24亿美元许可费（实质上的“补偿金”），早期投资者获得了足够的回报，避免了因收购失败和公司价值暴跌而导致的潜在巨大损失。</p>
+                     <p class="pill bg-[#ffe066]/20 text-[#ffe066] mt-4">财务保障</p>
+                </div>
+            </div>
+            <div class="mt-12 content-card p-8">
+                <h4 class="text-2xl font-bold mb-4 text-center text-white">启示：为何开发者如此重要？</h4>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-slate-300">Anthropic的崛起是最好的例证。尽管其模型在某些指标上并非最强，但凭借在代码生成和工具调用方面的可靠性，赢得了开发者的青睐。开发者用脚投票，将Anthropic的年收入从10亿美元推向45亿美元。这证明了开发者是AI时代真正的“造王者”，他们选择使用的模型和工具，将直接决定技术生态的最终格局。</p>
+                    </div>
+                    <div class="chart-container h-64 md:h-80">
+                         <canvas id="anthropicRevenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-8 border-t border-slate-700">
+        <p class="text-slate-400">此交互式报告根据公开信息整理，仅供学习和参考。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Player card interaction
+            const playerCards = document.querySelectorAll('.player-card');
+            const infoBox = document.getElementById('player-info-box');
+            const infoText = document.getElementById('player-info-text');
+
+            playerCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    infoText.textContent = card.dataset.info;
+                    infoBox.classList.remove('hidden');
+                });
+            });
+
+            // Deal comparison chart
+            const dealCtx = document.getElementById('dealComparisonChart').getContext('2d');
+            new Chart(dealCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['传统收购', '谷歌模式'],
+                    datasets: [{
+                        label: '公司控制权',
+                        data: [100, 0],
+                        backgroundColor: '#6A5ACD', /* SlateBlue */
+                    }, {
+                        label: '核心人才获取',
+                        data: [100, 100],
+                        backgroundColor: '#483D8B', /* DarkSlateBlue */
+                    }, {
+                        label: 'IP所有权',
+                        data: [100, 0],
+                        backgroundColor: '#8A2BE2', /* BlueViolet */
+                    }, {
+                        label: 'IP使用权',
+                        data: [100, 100],
+                        backgroundColor: '#4B0082', /* Indigo */
+                    }, {
+                       label: '反垄断风险',
+                        data: [80, 20],
+                        backgroundColor: '#800080', /* Purple */
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            stacked: true,
+                            max: 420,
+                            ticks: { display: false },
+                            grid: { display: false }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            position: 'bottom',
+                            labels: {
+                                color: '#e2e8f0' /* Light text for legend */
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if(label === '反垄断风险: '){
+                                        label += context.raw > 50 ? '高' : '低';
+                                    } else {
+                                        label += context.raw > 0 ? '获得' : '未获得';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Battlefield interaction
+            const battlefieldBtns = document.querySelectorAll('.battlefield-btn');
+            const battlefieldContents = document.querySelectorAll('.battlefield-content');
+
+            // Initially ensure only the first content div is visible
+            battlefieldContents.forEach((content, index) => {
+                if (index === 0) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            battlefieldBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.dataset.target;
+                    battlefieldContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    const targetElement = document.getElementById(`info-${target}`);
+                    if (targetElement) { // Added null check here
+                        targetElement.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Anthropic revenue chart
+            const revenueCtx = document.getElementById('anthropicRevenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['去年', '今年（预计）'],
+                    datasets: [{
+                        label: '年收入（亿美元）',
+                        data: [10, 45],
+                        backgroundColor: ['#e066ff', '#66e0ff'], /* Pink and Light Blue */
+                        borderColor: ['#e066ff', '#66e0ff'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.raw + ' 亿美元';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '收入（亿美元）',
+                                color: '#e2e8f0' /* Light text for axis title */
+                            },
+                            ticks: {
+                                color: '#a7b0c0' /* Muted light text for axis ticks */
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)' /* Subtle grid lines */
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#a7b0c0' /* Muted light text for axis ticks */
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)' /* Subtle grid lines */
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Nav link active state on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

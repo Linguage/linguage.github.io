@@ -1,0 +1,3504 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>书呆子的复仇 • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="书呆子的复仇"><meta property="og:description" content="→ English Version
+书呆子的复仇 想要创业？获得Y Combinator的投资。
+2002年5月
+&ldquo;我们当时在追逐C&#43;&#43;程序员。我们成功地将他们中的许多人拖到了Lisp的路上。&rdquo;
+Guy Steele，Java规范合著者 在软件行业中，一直存在着一场持续的斗争，一方是尖脑袋的学者，另一方是同样强大的力量——尖头发的老板。大家都知道尖头发的老板是谁，对吧？我认为技术界的大多数人不仅认识这个卡通人物，而且知道他们公司中这个人物的原型是谁。
+尖头发的老板奇迹般地结合了两个各自常见但很少同时出现的品质：(a)他对技术一无所知，(b)他对技术有非常强烈的看法。
+假设，例如，你需要编写一个软件。尖头发的老板对这个软件应该如何工作一无所知，也无法区分一种编程语言和另一种，但他知道你应该用什么语言来编写它。完全正确。他认为你应该用Java来编写。
+他为什么这么认为？让我们来看看尖头发的老板的大脑里面在想什么。他在想的大概是这样的。Java是一个标准。我知道它一定是标准，因为我总是在媒体上看到它。既然它是标准，我使用它就不会惹上麻烦。这也意味着总会有很多Java程序员，所以如果现在为我工作的程序员辞职了——为我工作的程序员总是神秘地辞职——我可以很容易地替换他们。
+嗯，这听起来并不那么不合理。但这一切都基于一个未言明的假设，而这个假设结果是错误的。尖头发的老板认为所有编程语言都差不多是等价的。如果这是真的，那他完全正确。如果所有语言都等价，当然，使用其他人都在使用的语言。
+但并非所有语言都是等价的，我想我甚至不需要深入它们之间的差异就能向你证明这一点。如果你在1992年问尖头发的老板软件应该用什么语言编写，他会像今天一样毫不犹豫地回答。软件应该用C&#43;&#43;编写。但如果所有语言都等价，为什么尖头发的老板的意见会改变？事实上，Java的开发者为什么要费心创建一种新语言？
+据推测，如果你创建一种新语言，那是因为你认为它在某些方面比人们已有的语言更好。事实上，Gosling在第一份Java白皮书中明确表示，Java被设计用来解决C&#43;&#43;的一些问题。所以事情就是这样：语言并不都是等价的。如果你顺着尖头发的老板的大脑思路追踪到Java，然后再回溯Java的历史到它的起源，你最终会得到一个与你开始时的假设相矛盾的想法。
+那么，谁是对的？James Gosling，还是尖头发的老板？毫不奇怪，Gosling是对的。某些语言对于某些问题来说比其他语言更好。你知道，这引发了一些有趣的问题。Java被设计为在特定问题上比C&#43;&#43;更好。什么问题？什么时候Java更好，什么时候C&#43;&#43;更好？是否存在某些情况下其他语言比两者都更好？
+一旦你开始考虑这个问题，你就打开了一个真正的潘多拉盒子。如果尖头发的老板不得不以全部复杂性来思考这个问题，他的大脑会爆炸。只要他认为所有语言都等价，他所要做的就是选择一个似乎最有势头的语言，既然这更多是时尚问题而不是技术问题，即使他也可能得到正确的答案。但如果语言各不相同，他突然必须同时解两个方程，试图在他一无所知的两件事之间找到最佳平衡：解决他需要解决的问题的二十种左右主要语言的相对适用性，以及为每种语言找到程序员、库等的可能性。如果门后是这样的东西，尖头发的老板不想打开它也就不足为奇了。
+认为所有编程语言都等价的缺点是这不是真的。但优点是它让你的生活简单得多。我认为这是这个想法如此广泛传播的主要原因。这是一个令人舒适的想法。
+我们知道Java一定相当不错，因为它是酷的、新的编程语言。或者真是如此吗？如果你从远处看编程语言的世界，看起来Java是最新的事物。（从足够远的地方看，你只能看到Sun支付的大型闪烁广告牌。）但如果你近距离观察这个世界，你会发现酷的程度是不同的。在黑客亚文化中，有一种叫做Perl的语言被认为比Java酷得多。例如，Slashdot就是用Perl生成的。我想你不会发现那些家伙使用Java Server Pages。但还有另一种更新的语言叫做Python，它的用户倾向于看不起Perl，还有更多的语言在等待。
+如果你按顺序看这些语言，Java、Perl、Python，你会注意到一个有趣的模式。至少，如果你是Lisp黑客，你会注意到这种模式。每一种都比前一种更像Lisp。Python甚至复制了许多Lisp黑客认为是错误的特性。你可以将简单的Lisp程序逐行翻译成Python。现在是2002年，编程语言几乎赶上了1958年。
+追上数学 我的意思是，Lisp是John McCarthy在1958年首次发现的，而流行的编程语言现在才赶上他当时发展的想法。
+现在，这怎么可能是真的？计算机技术不是变化很快的东西吗？我的意思是，在1958年，计算机是冰箱大小的庞然大物，处理能力相当于手表。怎么可能有那么古老的技术仍然相关，更不用说比最新的发展更优越？
+我来告诉你原因。这是因为Lisp并不是真正被设计为一种编程语言，至少不是我们今天意义上的编程语言。我们所说的编程语言是我们用来告诉计算机做什么的东西。McCarthy最终确实打算发展这种意义上的编程语言，但我们实际得到的Lisp是基于他作为理论练习所做的另一件事——努力定义一个比图灵机更方便的替代方案。正如McCarthy后来所说，
+展示Lisp比图灵机更整洁的另一种方法是编写一个通用的Lisp函数，并证明它比通用图灵机的描述更简洁、更易理解。这就是Lisp函数eval&hellip;&hellip;它计算Lisp表达式的值&hellip;&hellip;编写eval需要发明一种表示Lisp函数作为Lisp数据的符号，这种符号是为了论文的目的而设计的，并没有想到它会用来实际表达Lisp程序。
+接下来发生的事情是，在1958年末的某个时候，Steve Russell，McCarthy的一个研究生，看着这个eval的定义，意识到如果将它翻译成机器语言，结果将是一个Lisp解释器。
+这在当时是一个很大的惊喜。以下是McCarthy后来在采访中对此的评论：
+Steve Russell说，看，为什么我不来编程这个eval&hellip;&hellip;，我对他说，呵，呵，你把理论和实践混淆了，这个eval是为了阅读，不是为了计算的。但他还是继续做了。也就是说，他把我论文中的eval编译成[IBM] 704机器码，修复了一些错误，然后将其宣传为Lisp解释器，它确实是。在那时，Lisp基本上就有了今天的形式。
+所以，我想在几周内，McCarthy发现他的理论练习转变为实际的编程语言——而且是一种比他预期更强大的语言。
+所以，这个1950年代的语言没有过时的简短解释是它不是技术而是数学，而数学不会过时。将Lisp比较的正确对象不是1950年代的硬件，而是，比如说，快速排序算法，它发现于1960年，至今仍然是最快的通用排序算法。
+1950年代还有另一种语言幸存下来，Fortran，它代表了语言设计的相反方法。Lisp是一段意想不到地转变为编程语言的理论。Fortran是故意被开发为一种编程语言的，但我们现在认为是一种非常低级的语言。
+1956年开发的Fortran I语言与现在的Fortran是完全不同的动物。Fortran I基本上是带有数学的汇编语言。在某些方面它比最近的汇编语言功能更弱；例如，没有子程序，只有分支。现在的Fortran可以说更接近Lisp而不是Fortran I。
+Lisp和Fortran是两个独立进化树的树干，一个根植于数学，一个根植于机器架构。这两棵树从那时起一直在收敛。Lisp开始时很强大，在接下来的二十年里变得快速。所谓的主流语言开始时很快，在接下来的四十年里逐渐变得更强大，直到现在它们中最先进的相当接近Lisp。接近，但仍然缺少一些东西。
+使Lisp不同的东西 当Lisp首次被开发时，它体现了九个新想法。其中一些我们现在认为是理所当然的，其他只在更先进的语言中看到，有两个仍然是Lisp独有的。这九个想法按主流采用的顺序排列，
+条件语句。条件语句是if-then-else结构。我们现在认为这是理所当然的，但Fortran I没有它们。它只有基于底层机器指令的条件goto。
+函数类型。在Lisp中，函数是一种像整数或字符串一样的数据类型。它们有字面表示，可以存储在变量中，可以作为参数传递，等等。
+递归。Lisp是第一种支持递归的编程语言。
+动态类型。在Lisp中，所有变量实际上都是指针。值才有类型，变量没有，赋值或绑定变量意味着复制指针，而不是它们指向的内容。
+垃圾回收。
+由表达式组成的程序。Lisp程序是表达式的树，每个表达式都返回一个值。这与Fortran和大多数后续语言形成对比，它们区分表达式和语句。
+在Fortran I中很自然要有这种区别，因为你不能嵌套语句。所以虽然你需要表达式来进行数学运算，但没有必要让其他任何东西返回值，因为不可能有任何东西在等待它。
+随着块结构语言的出现，这种限制消失了，但那时已经太晚了。表达式和语句的区别已经根深蒂固。它从Fortran传播到Algol，然后传播到它们两者的后代。
+符号类型。符号实际上是指向存储在哈希表中的字符串的指针。所以你可以通过比较指针来测试相等性，而不是比较每个字符。
+使用符号和常量树的代码表示法。
+整个语言一直存在。读取时、编译时和运行时之间没有真正的区别。你可以在读取时编译或运行代码，在编译时读取或运行代码，在运行时读取或编译代码。
+在读取时运行代码允许用户重新编程Lisp的语法；在编译时运行代码是宏的基础；在运行时编译是Lisp在Emacs等程序中用作扩展语言的基础；在运行时读取使程序能够使用s表达式进行通信，这是一个最近重新发明的想法，称为XML。
+当Lisp首次出现时，这些想法与普通的编程实践相距甚远，这在很大程度上是由1950年代后期可用的硬件决定的。随着时间的推移，默认语言，体现在一系列流行语言中，逐渐向Lisp发展。想法1-5现在已经广泛传播。数字6开始出现在主流中。Python有7的形式，尽管似乎没有任何语法。
+至于数字8，这可能是最有趣的。想法8和9只是偶然成为Lisp的一部分，因为Steve Russell实现了McCarthy从未打算实现的东西。然而，这些想法结果要对Lisp的奇怪外观和其最独特的特征负责。Lisp看起来奇怪不是因为它有奇怪的语法，而是因为它没有语法；你直接在解析树中表达程序，当其他语言被解析时，这些解析树是在幕后构建的，而这些树是由列表组成的，列表是Lisp数据结构。
+用其自身的数据结构表达语言结果证明是一个非常强大的特性。想法8和9一起意味着你可以编写编写程序的程序。这可能听起来像是一个奇怪的想法，但在Lisp中这是日常的事情。最常见的方法是使用叫做宏的东西。
+&ldquo;宏&quot;这个术语在Lisp中的含义与其他语言中的含义不同。Lisp宏可以是从缩写到新语言编译器的任何东西。如果你想真正理解Lisp，或者只是扩展你的编程视野，我会学习更多关于宏的知识。
+据我所知，Lisp意义上的宏仍然是Lisp独有的。这部分是因为为了拥有宏，你可能必须使你的语言看起来像Lisp一样奇怪。也可能是因为如果你确实添加了这最后的力量增量，你不能再声称你发明了一种新语言，只是一种新的Lisp方言。
+我提到这主要是作为一个笑话，但这是相当真实的。如果你定义一种具有car、cdr、cons、quote、cond、atom、eq和函数列表表示法的语言，那么你可以从中构建出所有其余的Lisp。这实际上是Lisp的定义品质：McCarthy给予Lisp现在的形状就是为了使这一点成为可能。
+语言重要的地方 所以假设Lisp确实代表了主流语言渐近接近的一种极限——这是否意味着你实际上应该使用它来编写软件？使用不太强大的语言你会失去多少？有时候，不处于创新的最前沿不是更明智吗？受欢迎度在某种程度上不是其自身的证明吗？例如，尖头发的老板想要使用一种他可以轻松雇到程序员的语言，难道不对吗？
+当然，有些项目编程语言的选择并不重要。通常，应用程序要求越高，使用强大语言获得的优势就越大。但很多项目根本不要求高。大多数编程可能包括编写小的粘合程序，对于小的粘合程序，你可以使用任何你已经熟悉的语言，并且对于你需要做的事情有好的库。如果你只需要将数据从一个Windows应用程序馈送到另一个，当然，使用Visual Basic。
+"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/icad/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="书呆子的复仇"><meta name="twitter:description" content="→ English Version
+书呆子的复仇 想要创业？获得Y Combinator的投资。
+2002年5月
+&ldquo;我们当时在追逐C&#43;&#43;程序员。我们成功地将他们中的许多人拖到了Lisp的路上。&rdquo;
+Guy Steele，Java规范合著者 在软件行业中，一直存在着一场持续的斗争，一方是尖脑袋的学者，另一方是同样强大的力量——尖头发的老板。大家都知道尖头发的老板是谁，对吧？我认为技术界的大多数人不仅认识这个卡通人物，而且知道他们公司中这个人物的原型是谁。
+尖头发的老板奇迹般地结合了两个各自常见但很少同时出现的品质：(a)他对技术一无所知，(b)他对技术有非常强烈的看法。
+假设，例如，你需要编写一个软件。尖头发的老板对这个软件应该如何工作一无所知，也无法区分一种编程语言和另一种，但他知道你应该用什么语言来编写它。完全正确。他认为你应该用Java来编写。
+他为什么这么认为？让我们来看看尖头发的老板的大脑里面在想什么。他在想的大概是这样的。Java是一个标准。我知道它一定是标准，因为我总是在媒体上看到它。既然它是标准，我使用它就不会惹上麻烦。这也意味着总会有很多Java程序员，所以如果现在为我工作的程序员辞职了——为我工作的程序员总是神秘地辞职——我可以很容易地替换他们。
+嗯，这听起来并不那么不合理。但这一切都基于一个未言明的假设，而这个假设结果是错误的。尖头发的老板认为所有编程语言都差不多是等价的。如果这是真的，那他完全正确。如果所有语言都等价，当然，使用其他人都在使用的语言。
+但并非所有语言都是等价的，我想我甚至不需要深入它们之间的差异就能向你证明这一点。如果你在1992年问尖头发的老板软件应该用什么语言编写，他会像今天一样毫不犹豫地回答。软件应该用C&#43;&#43;编写。但如果所有语言都等价，为什么尖头发的老板的意见会改变？事实上，Java的开发者为什么要费心创建一种新语言？
+据推测，如果你创建一种新语言，那是因为你认为它在某些方面比人们已有的语言更好。事实上，Gosling在第一份Java白皮书中明确表示，Java被设计用来解决C&#43;&#43;的一些问题。所以事情就是这样：语言并不都是等价的。如果你顺着尖头发的老板的大脑思路追踪到Java，然后再回溯Java的历史到它的起源，你最终会得到一个与你开始时的假设相矛盾的想法。
+那么，谁是对的？James Gosling，还是尖头发的老板？毫不奇怪，Gosling是对的。某些语言对于某些问题来说比其他语言更好。你知道，这引发了一些有趣的问题。Java被设计为在特定问题上比C&#43;&#43;更好。什么问题？什么时候Java更好，什么时候C&#43;&#43;更好？是否存在某些情况下其他语言比两者都更好？
+一旦你开始考虑这个问题，你就打开了一个真正的潘多拉盒子。如果尖头发的老板不得不以全部复杂性来思考这个问题，他的大脑会爆炸。只要他认为所有语言都等价，他所要做的就是选择一个似乎最有势头的语言，既然这更多是时尚问题而不是技术问题，即使他也可能得到正确的答案。但如果语言各不相同，他突然必须同时解两个方程，试图在他一无所知的两件事之间找到最佳平衡：解决他需要解决的问题的二十种左右主要语言的相对适用性，以及为每种语言找到程序员、库等的可能性。如果门后是这样的东西，尖头发的老板不想打开它也就不足为奇了。
+认为所有编程语言都等价的缺点是这不是真的。但优点是它让你的生活简单得多。我认为这是这个想法如此广泛传播的主要原因。这是一个令人舒适的想法。
+我们知道Java一定相当不错，因为它是酷的、新的编程语言。或者真是如此吗？如果你从远处看编程语言的世界，看起来Java是最新的事物。（从足够远的地方看，你只能看到Sun支付的大型闪烁广告牌。）但如果你近距离观察这个世界，你会发现酷的程度是不同的。在黑客亚文化中，有一种叫做Perl的语言被认为比Java酷得多。例如，Slashdot就是用Perl生成的。我想你不会发现那些家伙使用Java Server Pages。但还有另一种更新的语言叫做Python，它的用户倾向于看不起Perl，还有更多的语言在等待。
+如果你按顺序看这些语言，Java、Perl、Python，你会注意到一个有趣的模式。至少，如果你是Lisp黑客，你会注意到这种模式。每一种都比前一种更像Lisp。Python甚至复制了许多Lisp黑客认为是错误的特性。你可以将简单的Lisp程序逐行翻译成Python。现在是2002年，编程语言几乎赶上了1958年。
+追上数学 我的意思是，Lisp是John McCarthy在1958年首次发现的，而流行的编程语言现在才赶上他当时发展的想法。
+现在，这怎么可能是真的？计算机技术不是变化很快的东西吗？我的意思是，在1958年，计算机是冰箱大小的庞然大物，处理能力相当于手表。怎么可能有那么古老的技术仍然相关，更不用说比最新的发展更优越？
+我来告诉你原因。这是因为Lisp并不是真正被设计为一种编程语言，至少不是我们今天意义上的编程语言。我们所说的编程语言是我们用来告诉计算机做什么的东西。McCarthy最终确实打算发展这种意义上的编程语言，但我们实际得到的Lisp是基于他作为理论练习所做的另一件事——努力定义一个比图灵机更方便的替代方案。正如McCarthy后来所说，
+展示Lisp比图灵机更整洁的另一种方法是编写一个通用的Lisp函数，并证明它比通用图灵机的描述更简洁、更易理解。这就是Lisp函数eval&hellip;&hellip;它计算Lisp表达式的值&hellip;&hellip;编写eval需要发明一种表示Lisp函数作为Lisp数据的符号，这种符号是为了论文的目的而设计的，并没有想到它会用来实际表达Lisp程序。
+接下来发生的事情是，在1958年末的某个时候，Steve Russell，McCarthy的一个研究生，看着这个eval的定义，意识到如果将它翻译成机器语言，结果将是一个Lisp解释器。
+这在当时是一个很大的惊喜。以下是McCarthy后来在采访中对此的评论：
+Steve Russell说，看，为什么我不来编程这个eval&hellip;&hellip;，我对他说，呵，呵，你把理论和实践混淆了，这个eval是为了阅读，不是为了计算的。但他还是继续做了。也就是说，他把我论文中的eval编译成[IBM] 704机器码，修复了一些错误，然后将其宣传为Lisp解释器，它确实是。在那时，Lisp基本上就有了今天的形式。
+所以，我想在几周内，McCarthy发现他的理论练习转变为实际的编程语言——而且是一种比他预期更强大的语言。
+所以，这个1950年代的语言没有过时的简短解释是它不是技术而是数学，而数学不会过时。将Lisp比较的正确对象不是1950年代的硬件，而是，比如说，快速排序算法，它发现于1960年，至今仍然是最快的通用排序算法。
+1950年代还有另一种语言幸存下来，Fortran，它代表了语言设计的相反方法。Lisp是一段意想不到地转变为编程语言的理论。Fortran是故意被开发为一种编程语言的，但我们现在认为是一种非常低级的语言。
+1956年开发的Fortran I语言与现在的Fortran是完全不同的动物。Fortran I基本上是带有数学的汇编语言。在某些方面它比最近的汇编语言功能更弱；例如，没有子程序，只有分支。现在的Fortran可以说更接近Lisp而不是Fortran I。
+Lisp和Fortran是两个独立进化树的树干，一个根植于数学，一个根植于机器架构。这两棵树从那时起一直在收敛。Lisp开始时很强大，在接下来的二十年里变得快速。所谓的主流语言开始时很快，在接下来的四十年里逐渐变得更强大，直到现在它们中最先进的相当接近Lisp。接近，但仍然缺少一些东西。
+使Lisp不同的东西 当Lisp首次被开发时，它体现了九个新想法。其中一些我们现在认为是理所当然的，其他只在更先进的语言中看到，有两个仍然是Lisp独有的。这九个想法按主流采用的顺序排列，
+条件语句。条件语句是if-then-else结构。我们现在认为这是理所当然的，但Fortran I没有它们。它只有基于底层机器指令的条件goto。
+函数类型。在Lisp中，函数是一种像整数或字符串一样的数据类型。它们有字面表示，可以存储在变量中，可以作为参数传递，等等。
+递归。Lisp是第一种支持递归的编程语言。
+动态类型。在Lisp中，所有变量实际上都是指针。值才有类型，变量没有，赋值或绑定变量意味着复制指针，而不是它们指向的内容。
+垃圾回收。
+由表达式组成的程序。Lisp程序是表达式的树，每个表达式都返回一个值。这与Fortran和大多数后续语言形成对比，它们区分表达式和语句。
+在Fortran I中很自然要有这种区别，因为你不能嵌套语句。所以虽然你需要表达式来进行数学运算，但没有必要让其他任何东西返回值，因为不可能有任何东西在等待它。
+随着块结构语言的出现，这种限制消失了，但那时已经太晚了。表达式和语句的区别已经根深蒂固。它从Fortran传播到Algol，然后传播到它们两者的后代。
+符号类型。符号实际上是指向存储在哈希表中的字符串的指针。所以你可以通过比较指针来测试相等性，而不是比较每个字符。
+使用符号和常量树的代码表示法。
+整个语言一直存在。读取时、编译时和运行时之间没有真正的区别。你可以在读取时编译或运行代码，在编译时读取或运行代码，在运行时读取或编译代码。
+在读取时运行代码允许用户重新编程Lisp的语法；在编译时运行代码是宏的基础；在运行时编译是Lisp在Emacs等程序中用作扩展语言的基础；在运行时读取使程序能够使用s表达式进行通信，这是一个最近重新发明的想法，称为XML。
+当Lisp首次出现时，这些想法与普通的编程实践相距甚远，这在很大程度上是由1950年代后期可用的硬件决定的。随着时间的推移，默认语言，体现在一系列流行语言中，逐渐向Lisp发展。想法1-5现在已经广泛传播。数字6开始出现在主流中。Python有7的形式，尽管似乎没有任何语法。
+至于数字8，这可能是最有趣的。想法8和9只是偶然成为Lisp的一部分，因为Steve Russell实现了McCarthy从未打算实现的东西。然而，这些想法结果要对Lisp的奇怪外观和其最独特的特征负责。Lisp看起来奇怪不是因为它有奇怪的语法，而是因为它没有语法；你直接在解析树中表达程序，当其他语言被解析时，这些解析树是在幕后构建的，而这些树是由列表组成的，列表是Lisp数据结构。
+用其自身的数据结构表达语言结果证明是一个非常强大的特性。想法8和9一起意味着你可以编写编写程序的程序。这可能听起来像是一个奇怪的想法，但在Lisp中这是日常的事情。最常见的方法是使用叫做宏的东西。
+&ldquo;宏&quot;这个术语在Lisp中的含义与其他语言中的含义不同。Lisp宏可以是从缩写到新语言编译器的任何东西。如果你想真正理解Lisp，或者只是扩展你的编程视野，我会学习更多关于宏的知识。
+据我所知，Lisp意义上的宏仍然是Lisp独有的。这部分是因为为了拥有宏，你可能必须使你的语言看起来像Lisp一样奇怪。也可能是因为如果你确实添加了这最后的力量增量，你不能再声称你发明了一种新语言，只是一种新的Lisp方言。
+我提到这主要是作为一个笑话，但这是相当真实的。如果你定义一种具有car、cdr、cons、quote、cond、atom、eq和函数列表表示法的语言，那么你可以从中构建出所有其余的Lisp。这实际上是Lisp的定义品质：McCarthy给予Lisp现在的形状就是为了使这一点成为可能。
+语言重要的地方 所以假设Lisp确实代表了主流语言渐近接近的一种极限——这是否意味着你实际上应该使用它来编写软件？使用不太强大的语言你会失去多少？有时候，不处于创新的最前沿不是更明智吗？受欢迎度在某种程度上不是其自身的证明吗？例如，尖头发的老板想要使用一种他可以轻松雇到程序员的语言，难道不对吗？
+当然，有些项目编程语言的选择并不重要。通常，应用程序要求越高，使用强大语言获得的优势就越大。但很多项目根本不要求高。大多数编程可能包括编写小的粘合程序，对于小的粘合程序，你可以使用任何你已经熟悉的语言，并且对于你需要做的事情有好的库。如果你只需要将数据从一个Windows应用程序馈送到另一个，当然，使用Visual Basic。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/icad/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/prcmc/"> pooled-risk 公司管理公司</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/artistsship/">&#34;艺术家要发布&#34;的另一面</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/6631327/">6,631,372</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnb/">Airbnb</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnbs/">Airbnb团队</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl1txtt1748944359/">ANSI Common Lisp 简介</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/javacover/">Java的外衣</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/diff/">Lisp的不同之处</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/rootsoflisp/">Lisp的根源</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mac/">Mac的回归</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nthings/">N 件事的清单</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/progbot/">Progbot</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/prop62/">Prop62</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/property/">Property</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pypar/">Python悖论</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/reddits/">Reddit创始人</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ronco/">Ronco原则</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/rss/">RSS</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/web20/">Web 2.0</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycstart/">Y Combinator 的创立故事</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/heroes/">一些英雄</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/revolution/">一场本地革命？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycombinator/">一种新的风险投资动物</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/relres/">不屈不挠的足智多谋</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/inequality/">不平等</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/say/">不能说的话</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/notnot/">不要不要创业</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/patentpledge/">专利承诺</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/judgement/">两种判断</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/noop/">为什么 Arc 不是特别面向对象的</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nerds/">为什么书呆子不受欢迎</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hubs/">为什么创业中心有效</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/america/">为什么创业公司在美国聚集</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/safe/">为什么创始人友善是安全的</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/badeconomy/">为什么在经济衰退时期创业</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/twitter/">为什么推特很重要</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuphubs/">为什么搬到创业中心</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/whyyc/">为什么是YC</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/googles/">为什么没有更多的Google</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/convergence/">为什么电视输了</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bronze/">为什么聪明人有坏想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/maybe/">也许</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/paul_graham/essays_zh/icad/">书呆子的复仇</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/5founders/">五位创始人</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vb/">人生苦短</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/work/">什么不像工作？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/conformism/">从众主义</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ambitious/">令人恐惧的雄心勃勃的创业想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/corpdev/">企业开发</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/writes/">会写的人和不会写的人</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gh/">伟大的黑客</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/when/">何时做你热爱的事</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/want/">你（想要）*想要什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hs/">你会希望你当初知道的事</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/know/">你如何知道</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/boss/">你本不该有老板</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/top/">你脑海中最主要的想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/identity/">保持身份小规模</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wisdom/">值得拥有智慧吗？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/noob/">做个新手</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/good/">做善事</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ds/">做无法扩展的事情</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/talk/">像你说话一样写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/langdes/">关于语言设计的五个问题</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/kids/">养育孩子</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/re/">再分化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/speak/">写作与演讲</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/writing44/">写作简述</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/cred/">冠状病毒与信誉</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/determination/">决心的剖析</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/kate/">凯特在硅谷看到的</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/distraction/">分心</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/before/">创业之前</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/growth/">创业公司 = 增长</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuplessons/">创业公司最难学到的教训</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/really/">创业公司真实情况</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/future/">创业公司融资的未来</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ideas/">创业想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/invtrend/">创业投资趋势</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundermode/">创始人模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundervisa/">创始人签证</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/newthings/">创造新事物的六个原则</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/taste/">创造者的品味</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/makersschedule/">创造者的日程表，管理者的日程表</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mean/">刻薄</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/colleges/">前线消息</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ffb/">反击的过滤器</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/disc/">发现的风险</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/road/">另一条道路</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/publishing/">后媒体时代的出版</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundersatwork/">向创始人学习</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/opensource/">商业可以从开源中学到什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/seesv/">在哪里看硅谷</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/spam/">垃圾邮件过滤计划</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/cities/">城市与雄心</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lwba/">基于Web应用的Lisp</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/copy/">复制你喜欢的东西</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/alien/">外星真理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/college/">大学本科</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/genius/">天才的公交车票理论</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/procrastination/">好坏拖延症</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodwriting/">好的写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/disagree/">如何不同意</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/die/">如何不死</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupfunding/">如何为创业公司融资</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/love/">如何做你热爱的事情</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/greatwork/">如何做出伟大的工作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/philosophy/">如何做哲学</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/start/">如何创业</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/google/">如何创建Google</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wealth/">如何创造财富</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hwh/">如何努力工作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/popular/">如何变得流行</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/investors/">如何向投资者展示</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ecw/">如何在变化的世界中成为专家</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/angelinvesting/">如何成为天使投资人</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/siliconvalley/">如何成为硅谷</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/selfindulgence/">如何浪费时间和金钱</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/think/">如何独立思考</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fr/">如何筹集资金</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupideas/">如何获得创业想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/getideas/">如何获得新想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pgh/">如何让匹兹堡成为创业中心</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/convince/">如何说服投资者</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/iflisp/">如果Lisp这么好</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mit/">学生创业指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/words/">将思想转化为文字</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/head/">将程序装在脑中</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/island/">岛屿测试</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/unions/">工会的另一种理论</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/polls/">布拉德利的幽灵</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/tablets/">平板电脑</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/real/">废除死刑的真正原因</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/heresy/">异端</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/microsoft/">微软已死</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vw/">快照：Viaweb，1998年6月</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/weird/">怪异语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/addiction/">成瘾性</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/sfp/">我今年夏天做了什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hackernews/">我从Hacker News学到的</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/users/">我从用户身上学到了什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lies/">我们告诉孩子的谎言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/founders/">我们寻找创始人的品质</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/worked/">我所从事的工作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/todo/">我的待办事项清单顶端</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/herd/">投资者群体动态</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ramenprofitable/">拉面盈利</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/schlep/">拖累盲区</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiring/">招聘已经过时</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nft/">拯救生命的 NFT</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/control/">控制权</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/essay/">散文的时代</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/field/">散文领域的形态</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/superangels/">新的融资格局</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nov/">新颖与异端</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/donate/">无限制捐赠</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/early/">早期</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fp/">时髦问题</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/charisma/">是魅力，笨蛋</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/sun/">普遍而惊人的</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/better/">更好的贝叶斯过滤</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/name/">更改你的名字</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/best/">最佳文章</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/organic/">有机的创业想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/useful/">有用的文章</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupmistakes/">杀死创业公司的18个错误</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pow/">权力</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/jessica/">杰西卡·利文斯顿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ladder/">梯子之后</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bias/">检测偏见的一种方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wtax/">模拟财富税</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl2txtt1748944359/">欢迎来到Lisp</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/persistence/">正确的固执</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/orth/">正统特权</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bubble/">泡沫的正确之处</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gap/">注意差距</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/laundry/">洗衣</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/woke/">清醒文化的起源</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mod/">温和派</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/submarine/">潜水艇</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/stuff/">物品</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fn/">猛烈的极客</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/richnow/">现在人们如何变富</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/13sentences/">用13句话讲清楚创业</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/newideas/">疯狂的新想法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hundred/">百年编程语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/randomness/">看见随机性</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodtaste/">真有好品味这回事吗？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/earnest/">真诚</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hw/">硬件复兴</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/simply/">简单写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/power/">简洁即力量</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ace/">精通</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ineq/">经济不平等</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/word/">给足智多谋者的忠告</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fix/">编程语言修复了什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/webstartups/">网络创业公司的未来</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/trolls/">网络喷子</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/usa/">美国制造</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/equity/">股权方程式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/own/">自己的项目</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pinch/">致命的困境</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodart/">艺术如何能够优秀</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/apple/">苹果的错误</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fundraising/">融资生存指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/95/">让另外95%的优秀程序员进来</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/desres/">设计与研究</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/credentials/">证书之后</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/do/">该做什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/discover/">说服还是发现</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/segway/">赛格威的麻烦</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/superlinear/">超线性回报</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/avg/">超越平均水平</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/smart/">超越聪明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/softwarepatents/">软件专利是邪恶的吗？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/marginal/">边缘的力量</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/altair/">这是哪个微软的Altair Basic？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/read/">阅读的必要</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/yahoo/">雅虎发生了什么</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lesson/">需要忘掉的一课</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/divergence/">风险投资会成为经济衰退的牺牲品吗？</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/venturecapital/">风险投资糟糕性的统一理论</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vcsqueeze/">风险资本挤压</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/guidetoinvestors/">骇客投资者指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/highres/">高分辨率社会</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiresfund/">高分辨率融资</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/swan/">黑天鹅养殖</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hp/">黑客与画家</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gba/">黑客这个词</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fh/">黑粉</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/paul_graham/essays_zh/aord/">默认生存还是默认死亡？</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/paul_graham/" class="crumb-anc">Paul Graham</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/paul_graham/essays_zh/" class="crumb-sec">文章（中文）</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">书呆子的复仇</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+      
+
+
+
+
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/prcmc/"> pooled-risk 公司管理公司</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/artistsship/">&#34;艺术家要发布&#34;的另一面</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/6631327/">6,631,372</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnb/">Airbnb</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnbs/">Airbnb团队</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl1txtt1748944359/">ANSI Common Lisp 简介</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/javacover/">Java的外衣</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/diff/">Lisp的不同之处</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/rootsoflisp/">Lisp的根源</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mac/">Mac的回归</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nthings/">N 件事的清单</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/progbot/">Progbot</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/prop62/">Prop62</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/property/">Property</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pypar/">Python悖论</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/reddits/">Reddit创始人</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ronco/">Ronco原则</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/rss/">RSS</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/web20/">Web 2.0</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycstart/">Y Combinator 的创立故事</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/heroes/">一些英雄</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/revolution/">一场本地革命？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycombinator/">一种新的风险投资动物</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/relres/">不屈不挠的足智多谋</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/inequality/">不平等</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/say/">不能说的话</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/notnot/">不要不要创业</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/patentpledge/">专利承诺</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/judgement/">两种判断</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/noop/">为什么 Arc 不是特别面向对象的</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nerds/">为什么书呆子不受欢迎</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hubs/">为什么创业中心有效</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/america/">为什么创业公司在美国聚集</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/safe/">为什么创始人友善是安全的</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/badeconomy/">为什么在经济衰退时期创业</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/twitter/">为什么推特很重要</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuphubs/">为什么搬到创业中心</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/whyyc/">为什么是YC</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/googles/">为什么没有更多的Google</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/convergence/">为什么电视输了</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bronze/">为什么聪明人有坏想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/maybe/">也许</a>
+  
+
+  
+  
+    <a class="depth-0 file-link is-active" href="/paul_graham/essays_zh/icad/">书呆子的复仇</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/5founders/">五位创始人</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vb/">人生苦短</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/work/">什么不像工作？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/conformism/">从众主义</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ambitious/">令人恐惧的雄心勃勃的创业想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/corpdev/">企业开发</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/writes/">会写的人和不会写的人</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gh/">伟大的黑客</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/when/">何时做你热爱的事</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/want/">你（想要）*想要什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hs/">你会希望你当初知道的事</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/know/">你如何知道</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/boss/">你本不该有老板</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/top/">你脑海中最主要的想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/identity/">保持身份小规模</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wisdom/">值得拥有智慧吗？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/noob/">做个新手</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/good/">做善事</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ds/">做无法扩展的事情</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/talk/">像你说话一样写作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/langdes/">关于语言设计的五个问题</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/kids/">养育孩子</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/re/">再分化</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/speak/">写作与演讲</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/writing44/">写作简述</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/cred/">冠状病毒与信誉</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/determination/">决心的剖析</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/kate/">凯特在硅谷看到的</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/distraction/">分心</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/before/">创业之前</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/growth/">创业公司 = 增长</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuplessons/">创业公司最难学到的教训</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/really/">创业公司真实情况</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/future/">创业公司融资的未来</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ideas/">创业想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/invtrend/">创业投资趋势</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundermode/">创始人模式</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundervisa/">创始人签证</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/newthings/">创造新事物的六个原则</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/taste/">创造者的品味</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/makersschedule/">创造者的日程表，管理者的日程表</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mean/">刻薄</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/colleges/">前线消息</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ffb/">反击的过滤器</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/disc/">发现的风险</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/road/">另一条道路</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/publishing/">后媒体时代的出版</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundersatwork/">向创始人学习</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/opensource/">商业可以从开源中学到什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/seesv/">在哪里看硅谷</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/spam/">垃圾邮件过滤计划</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/cities/">城市与雄心</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lwba/">基于Web应用的Lisp</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/copy/">复制你喜欢的东西</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/alien/">外星真理</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/college/">大学本科</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/genius/">天才的公交车票理论</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/procrastination/">好坏拖延症</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodwriting/">好的写作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/disagree/">如何不同意</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/die/">如何不死</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupfunding/">如何为创业公司融资</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/love/">如何做你热爱的事情</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/greatwork/">如何做出伟大的工作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/philosophy/">如何做哲学</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/start/">如何创业</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/google/">如何创建Google</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wealth/">如何创造财富</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hwh/">如何努力工作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/popular/">如何变得流行</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/investors/">如何向投资者展示</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ecw/">如何在变化的世界中成为专家</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/angelinvesting/">如何成为天使投资人</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/siliconvalley/">如何成为硅谷</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/selfindulgence/">如何浪费时间和金钱</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/think/">如何独立思考</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fr/">如何筹集资金</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupideas/">如何获得创业想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/getideas/">如何获得新想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pgh/">如何让匹兹堡成为创业中心</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/convince/">如何说服投资者</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/iflisp/">如果Lisp这么好</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mit/">学生创业指南</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/words/">将思想转化为文字</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/head/">将程序装在脑中</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/island/">岛屿测试</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/unions/">工会的另一种理论</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/polls/">布拉德利的幽灵</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/tablets/">平板电脑</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/real/">废除死刑的真正原因</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/heresy/">异端</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/microsoft/">微软已死</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vw/">快照：Viaweb，1998年6月</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/weird/">怪异语言</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/addiction/">成瘾性</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/sfp/">我今年夏天做了什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hackernews/">我从Hacker News学到的</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/users/">我从用户身上学到了什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lies/">我们告诉孩子的谎言</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/founders/">我们寻找创始人的品质</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/worked/">我所从事的工作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/todo/">我的待办事项清单顶端</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/herd/">投资者群体动态</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ramenprofitable/">拉面盈利</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/schlep/">拖累盲区</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiring/">招聘已经过时</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nft/">拯救生命的 NFT</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/control/">控制权</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/essay/">散文的时代</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/field/">散文领域的形态</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/superangels/">新的融资格局</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nov/">新颖与异端</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/donate/">无限制捐赠</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/early/">早期</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fp/">时髦问题</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/charisma/">是魅力，笨蛋</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/sun/">普遍而惊人的</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/better/">更好的贝叶斯过滤</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/name/">更改你的名字</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/best/">最佳文章</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/organic/">有机的创业想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/useful/">有用的文章</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupmistakes/">杀死创业公司的18个错误</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pow/">权力</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/jessica/">杰西卡·利文斯顿</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ladder/">梯子之后</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bias/">检测偏见的一种方法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wtax/">模拟财富税</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl2txtt1748944359/">欢迎来到Lisp</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/persistence/">正确的固执</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/orth/">正统特权</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bubble/">泡沫的正确之处</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gap/">注意差距</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/laundry/">洗衣</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/woke/">清醒文化的起源</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mod/">温和派</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/submarine/">潜水艇</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/stuff/">物品</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fn/">猛烈的极客</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/richnow/">现在人们如何变富</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/13sentences/">用13句话讲清楚创业</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/newideas/">疯狂的新想法</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hundred/">百年编程语言</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/randomness/">看见随机性</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodtaste/">真有好品味这回事吗？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/earnest/">真诚</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hw/">硬件复兴</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/simply/">简单写作</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/power/">简洁即力量</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ace/">精通</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ineq/">经济不平等</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/word/">给足智多谋者的忠告</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fix/">编程语言修复了什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/webstartups/">网络创业公司的未来</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/trolls/">网络喷子</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/usa/">美国制造</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/equity/">股权方程式</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/own/">自己的项目</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pinch/">致命的困境</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodart/">艺术如何能够优秀</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/apple/">苹果的错误</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fundraising/">融资生存指南</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/95/">让另外95%的优秀程序员进来</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/desres/">设计与研究</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/credentials/">证书之后</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/do/">该做什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/discover/">说服还是发现</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/segway/">赛格威的麻烦</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/superlinear/">超线性回报</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/avg/">超越平均水平</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/smart/">超越聪明</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/softwarepatents/">软件专利是邪恶的吗？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/marginal/">边缘的力量</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/altair/">这是哪个微软的Altair Basic？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/read/">阅读的必要</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/yahoo/">雅虎发生了什么</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lesson/">需要忘掉的一课</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/divergence/">风险投资会成为经济衰退的牺牲品吗？</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/venturecapital/">风险投资糟糕性的统一理论</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vcsqueeze/">风险资本挤压</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/guidetoinvestors/">骇客投资者指南</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/highres/">高分辨率社会</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiresfund/">高分辨率融资</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/swan/">黑天鹅养殖</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hp/">黑客与画家</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gba/">黑客这个词</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fh/">黑粉</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/paul_graham/essays_zh/aord/">默认生存还是默认死亡？</a>
+  
+
+
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <p>→ <a href="/paul_graham/essays_en/icad/">English Version</a></p>
+<h1 id="书呆子的复仇">书呆子的复仇</h1>
+<p>想要创业？获得Y Combinator的投资。</p>
+<p>2002年5月</p>
+<p>&ldquo;我们当时在追逐C++程序员。我们成功地将他们中的许多人拖到了Lisp的路上。&rdquo;</p>
+<ul>
+<li>Guy Steele，Java规范合著者</li>
+</ul>
+<p>在软件行业中，一直存在着一场持续的斗争，一方是尖脑袋的学者，另一方是同样强大的力量——尖头发的老板。大家都知道尖头发的老板是谁，对吧？我认为技术界的大多数人不仅认识这个卡通人物，而且知道他们公司中这个人物的原型是谁。</p>
+<p>尖头发的老板奇迹般地结合了两个各自常见但很少同时出现的品质：(a)他对技术一无所知，(b)他对技术有非常强烈的看法。</p>
+<p>假设，例如，你需要编写一个软件。尖头发的老板对这个软件应该如何工作一无所知，也无法区分一种编程语言和另一种，但他知道你应该用什么语言来编写它。完全正确。他认为你应该用Java来编写。</p>
+<p>他为什么这么认为？让我们来看看尖头发的老板的大脑里面在想什么。他在想的大概是这样的。Java是一个标准。我知道它一定是标准，因为我总是在媒体上看到它。既然它是标准，我使用它就不会惹上麻烦。这也意味着总会有很多Java程序员，所以如果现在为我工作的程序员辞职了——为我工作的程序员总是神秘地辞职——我可以很容易地替换他们。</p>
+<p>嗯，这听起来并不那么不合理。但这一切都基于一个未言明的假设，而这个假设结果是错误的。尖头发的老板认为所有编程语言都差不多是等价的。如果这是真的，那他完全正确。如果所有语言都等价，当然，使用其他人都在使用的语言。</p>
+<p>但并非所有语言都是等价的，我想我甚至不需要深入它们之间的差异就能向你证明这一点。如果你在1992年问尖头发的老板软件应该用什么语言编写，他会像今天一样毫不犹豫地回答。软件应该用C++编写。但如果所有语言都等价，为什么尖头发的老板的意见会改变？事实上，Java的开发者为什么要费心创建一种新语言？</p>
+<p>据推测，如果你创建一种新语言，那是因为你认为它在某些方面比人们已有的语言更好。事实上，Gosling在第一份Java白皮书中明确表示，Java被设计用来解决C++的一些问题。所以事情就是这样：语言并不都是等价的。如果你顺着尖头发的老板的大脑思路追踪到Java，然后再回溯Java的历史到它的起源，你最终会得到一个与你开始时的假设相矛盾的想法。</p>
+<p>那么，谁是对的？James Gosling，还是尖头发的老板？毫不奇怪，Gosling是对的。某些语言对于某些问题来说比其他语言更好。你知道，这引发了一些有趣的问题。Java被设计为在特定问题上比C++更好。什么问题？什么时候Java更好，什么时候C++更好？是否存在某些情况下其他语言比两者都更好？</p>
+<p>一旦你开始考虑这个问题，你就打开了一个真正的潘多拉盒子。如果尖头发的老板不得不以全部复杂性来思考这个问题，他的大脑会爆炸。只要他认为所有语言都等价，他所要做的就是选择一个似乎最有势头的语言，既然这更多是时尚问题而不是技术问题，即使他也可能得到正确的答案。但如果语言各不相同，他突然必须同时解两个方程，试图在他一无所知的两件事之间找到最佳平衡：解决他需要解决的问题的二十种左右主要语言的相对适用性，以及为每种语言找到程序员、库等的可能性。如果门后是这样的东西，尖头发的老板不想打开它也就不足为奇了。</p>
+<p>认为所有编程语言都等价的缺点是这不是真的。但优点是它让你的生活简单得多。我认为这是这个想法如此广泛传播的主要原因。这是一个令人舒适的想法。</p>
+<p>我们知道Java一定相当不错，因为它是酷的、新的编程语言。或者真是如此吗？如果你从远处看编程语言的世界，看起来Java是最新的事物。（从足够远的地方看，你只能看到Sun支付的大型闪烁广告牌。）但如果你近距离观察这个世界，你会发现酷的程度是不同的。在黑客亚文化中，有一种叫做Perl的语言被认为比Java酷得多。例如，Slashdot就是用Perl生成的。我想你不会发现那些家伙使用Java Server Pages。但还有另一种更新的语言叫做Python，它的用户倾向于看不起Perl，还有更多的语言在等待。</p>
+<p>如果你按顺序看这些语言，Java、Perl、Python，你会注意到一个有趣的模式。至少，如果你是Lisp黑客，你会注意到这种模式。每一种都比前一种更像Lisp。Python甚至复制了许多Lisp黑客认为是错误的特性。你可以将简单的Lisp程序逐行翻译成Python。现在是2002年，编程语言几乎赶上了1958年。</p>
+<h2 id="追上数学">追上数学</h2>
+<p>我的意思是，Lisp是John McCarthy在1958年首次发现的，而流行的编程语言现在才赶上他当时发展的想法。</p>
+<p>现在，这怎么可能是真的？计算机技术不是变化很快的东西吗？我的意思是，在1958年，计算机是冰箱大小的庞然大物，处理能力相当于手表。怎么可能有那么古老的技术仍然相关，更不用说比最新的发展更优越？</p>
+<p>我来告诉你原因。这是因为Lisp并不是真正被设计为一种编程语言，至少不是我们今天意义上的编程语言。我们所说的编程语言是我们用来告诉计算机做什么的东西。McCarthy最终确实打算发展这种意义上的编程语言，但我们实际得到的Lisp是基于他作为理论练习所做的另一件事——努力定义一个比图灵机更方便的替代方案。正如McCarthy后来所说，</p>
+<p>展示Lisp比图灵机更整洁的另一种方法是编写一个通用的Lisp函数，并证明它比通用图灵机的描述更简洁、更易理解。这就是Lisp函数eval&hellip;&hellip;它计算Lisp表达式的值&hellip;&hellip;编写eval需要发明一种表示Lisp函数作为Lisp数据的符号，这种符号是为了论文的目的而设计的，并没有想到它会用来实际表达Lisp程序。</p>
+<p>接下来发生的事情是，在1958年末的某个时候，Steve Russell，McCarthy的一个研究生，看着这个eval的定义，意识到如果将它翻译成机器语言，结果将是一个Lisp解释器。</p>
+<p>这在当时是一个很大的惊喜。以下是McCarthy后来在采访中对此的评论：</p>
+<p>Steve Russell说，看，为什么我不来编程这个eval&hellip;&hellip;，我对他说，呵，呵，你把理论和实践混淆了，这个eval是为了阅读，不是为了计算的。但他还是继续做了。也就是说，他把我论文中的eval编译成[IBM] 704机器码，修复了一些错误，然后将其宣传为Lisp解释器，它确实是。在那时，Lisp基本上就有了今天的形式。</p>
+<p>所以，我想在几周内，McCarthy发现他的理论练习转变为实际的编程语言——而且是一种比他预期更强大的语言。</p>
+<p>所以，这个1950年代的语言没有过时的简短解释是它不是技术而是数学，而数学不会过时。将Lisp比较的正确对象不是1950年代的硬件，而是，比如说，快速排序算法，它发现于1960年，至今仍然是最快的通用排序算法。</p>
+<p>1950年代还有另一种语言幸存下来，Fortran，它代表了语言设计的相反方法。Lisp是一段意想不到地转变为编程语言的理论。Fortran是故意被开发为一种编程语言的，但我们现在认为是一种非常低级的语言。</p>
+<p>1956年开发的Fortran I语言与现在的Fortran是完全不同的动物。Fortran I基本上是带有数学的汇编语言。在某些方面它比最近的汇编语言功能更弱；例如，没有子程序，只有分支。现在的Fortran可以说更接近Lisp而不是Fortran I。</p>
+<p>Lisp和Fortran是两个独立进化树的树干，一个根植于数学，一个根植于机器架构。这两棵树从那时起一直在收敛。Lisp开始时很强大，在接下来的二十年里变得快速。所谓的主流语言开始时很快，在接下来的四十年里逐渐变得更强大，直到现在它们中最先进的相当接近Lisp。接近，但仍然缺少一些东西。</p>
+<h2 id="使lisp不同的东西">使Lisp不同的东西</h2>
+<p>当Lisp首次被开发时，它体现了九个新想法。其中一些我们现在认为是理所当然的，其他只在更先进的语言中看到，有两个仍然是Lisp独有的。这九个想法按主流采用的顺序排列，</p>
+<ol>
+<li>
+<p><strong>条件语句</strong>。条件语句是if-then-else结构。我们现在认为这是理所当然的，但Fortran I没有它们。它只有基于底层机器指令的条件goto。</p>
+</li>
+<li>
+<p><strong>函数类型</strong>。在Lisp中，函数是一种像整数或字符串一样的数据类型。它们有字面表示，可以存储在变量中，可以作为参数传递，等等。</p>
+</li>
+<li>
+<p><strong>递归</strong>。Lisp是第一种支持递归的编程语言。</p>
+</li>
+<li>
+<p><strong>动态类型</strong>。在Lisp中，所有变量实际上都是指针。值才有类型，变量没有，赋值或绑定变量意味着复制指针，而不是它们指向的内容。</p>
+</li>
+<li>
+<p><strong>垃圾回收</strong>。</p>
+</li>
+<li>
+<p><strong>由表达式组成的程序</strong>。Lisp程序是表达式的树，每个表达式都返回一个值。这与Fortran和大多数后续语言形成对比，它们区分表达式和语句。</p>
+<p>在Fortran I中很自然要有这种区别，因为你不能嵌套语句。所以虽然你需要表达式来进行数学运算，但没有必要让其他任何东西返回值，因为不可能有任何东西在等待它。</p>
+<p>随着块结构语言的出现，这种限制消失了，但那时已经太晚了。表达式和语句的区别已经根深蒂固。它从Fortran传播到Algol，然后传播到它们两者的后代。</p>
+</li>
+<li>
+<p><strong>符号类型</strong>。符号实际上是指向存储在哈希表中的字符串的指针。所以你可以通过比较指针来测试相等性，而不是比较每个字符。</p>
+</li>
+<li>
+<p><strong>使用符号和常量树的代码表示法</strong>。</p>
+</li>
+<li>
+<p><strong>整个语言一直存在</strong>。读取时、编译时和运行时之间没有真正的区别。你可以在读取时编译或运行代码，在编译时读取或运行代码，在运行时读取或编译代码。</p>
+<p>在读取时运行代码允许用户重新编程Lisp的语法；在编译时运行代码是宏的基础；在运行时编译是Lisp在Emacs等程序中用作扩展语言的基础；在运行时读取使程序能够使用s表达式进行通信，这是一个最近重新发明的想法，称为XML。</p>
+</li>
+</ol>
+<p>当Lisp首次出现时，这些想法与普通的编程实践相距甚远，这在很大程度上是由1950年代后期可用的硬件决定的。随着时间的推移，默认语言，体现在一系列流行语言中，逐渐向Lisp发展。想法1-5现在已经广泛传播。数字6开始出现在主流中。Python有7的形式，尽管似乎没有任何语法。</p>
+<p>至于数字8，这可能是最有趣的。想法8和9只是偶然成为Lisp的一部分，因为Steve Russell实现了McCarthy从未打算实现的东西。然而，这些想法结果要对Lisp的奇怪外观和其最独特的特征负责。Lisp看起来奇怪不是因为它有奇怪的语法，而是因为它没有语法；你直接在解析树中表达程序，当其他语言被解析时，这些解析树是在幕后构建的，而这些树是由列表组成的，列表是Lisp数据结构。</p>
+<p>用其自身的数据结构表达语言结果证明是一个非常强大的特性。想法8和9一起意味着你可以编写编写程序的程序。这可能听起来像是一个奇怪的想法，但在Lisp中这是日常的事情。最常见的方法是使用叫做宏的东西。</p>
+<p>&ldquo;宏&quot;这个术语在Lisp中的含义与其他语言中的含义不同。Lisp宏可以是从缩写到新语言编译器的任何东西。如果你想真正理解Lisp，或者只是扩展你的编程视野，我会学习更多关于宏的知识。</p>
+<p>据我所知，Lisp意义上的宏仍然是Lisp独有的。这部分是因为为了拥有宏，你可能必须使你的语言看起来像Lisp一样奇怪。也可能是因为如果你确实添加了这最后的力量增量，你不能再声称你发明了一种新语言，只是一种新的Lisp方言。</p>
+<p>我提到这主要是作为一个笑话，但这是相当真实的。如果你定义一种具有car、cdr、cons、quote、cond、atom、eq和函数列表表示法的语言，那么你可以从中构建出所有其余的Lisp。这实际上是Lisp的定义品质：McCarthy给予Lisp现在的形状就是为了使这一点成为可能。</p>
+<h2 id="语言重要的地方">语言重要的地方</h2>
+<p>所以假设Lisp确实代表了主流语言渐近接近的一种极限——这是否意味着你实际上应该使用它来编写软件？使用不太强大的语言你会失去多少？有时候，不处于创新的最前沿不是更明智吗？受欢迎度在某种程度上不是其自身的证明吗？例如，尖头发的老板想要使用一种他可以轻松雇到程序员的语言，难道不对吗？</p>
+<p>当然，有些项目编程语言的选择并不重要。通常，应用程序要求越高，使用强大语言获得的优势就越大。但很多项目根本不要求高。大多数编程可能包括编写小的粘合程序，对于小的粘合程序，你可以使用任何你已经熟悉的语言，并且对于你需要做的事情有好的库。如果你只需要将数据从一个Windows应用程序馈送到另一个，当然，使用Visual Basic。</p>
+<p>你也可以在Lisp中编写小的粘合程序（我把它用作桌面计算器），但像Lisp这样的语言最大的胜利是在光谱的另一端，在那里你需要编写复杂的程序来解决在激烈竞争中难以解决的问题。一个好的例子是ITA Software授权给Orbitz的机票票价搜索程序。这些人进入了一个已经由两个大型、根深蒂固的竞争对手Travelocity和Expedia主导的市场，并且似乎在技术上羞辱了他们。</p>
+<p>ITA应用程序的核心是一个20万行的Common Lisp程序，它搜索比竞争对手多几个数量级的可能性，而竞争对手显然仍在使用大型机时代的编程技术。（尽管ITA在某种意义上也在使用大型机时代的编程语言。）我从未见过ITA的任何代码，但根据他们的一位顶级黑客的说法，他们使用了很多宏，我对此并不感到惊讶。</p>
+<h2 id="向心力">向心力</h2>
+<p>我不是说使用不常见的技术没有成本。尖头发的老板担心这一点并不是完全错误的。但因为他不理解风险，他倾向于夸大它们。</p>
+<p>我能想到使用不常见语言可能出现的三个问题。你的程序可能无法很好地用其他语言编写的程序一起工作。你可用的库可能更少。你可能很难雇到程序员。</p>
+<p>这些问题各自有多大？第一个的重要性取决于你是否控制整个系统。如果你编写的软件必须运行在远程用户的机器上，运行在有缺陷的、封闭的操作系统之上（我不点名），用与操作系统相同的语言编写应用程序可能有优势。但如果你控制整个系统并拥有所有部分的源代码，就像ITA可能做的那样，你可以使用任何你想要的语言。如果出现任何不兼容性，你可以自己修复。</p>
+<p>在基于服务器的应用程序中，你可以逃脱使用最先进的技术，我认为这是Jonathan Erickson称之为&quot;编程语言复兴&quot;的主要原因。这就是为什么我们甚至听说像Perl和Python这样的新语言。我们听说这些语言不是因为人们用它们来编写Windows应用程序，而是因为人们在服务器上使用它们。随着软件从桌面转移到服务器（一个即使微软似乎也认命的未来），使用中间技术的压力将越来越小。</p>
+<p>至于库，它们的重要性也取决于应用程序。对于要求不高的问题，库的可用性可能超过语言的内在力量。盈亏平衡点在哪里？很难确切地说，但无论在哪里，都短于你可能称之为应用程序的任何东西。如果一家公司认为自己在软件行业，他们正在编写将成为其产品之一的应用程序，那么它可能涉及几个黑客，至少需要六个月时间来编写。在这样规模的项目中，强大的语言可能开始超过预存在库的便利性。</p>
+<p>尖头发的老板第三个担忧，雇用程序员的困难，我认为是一个红鲱鱼。毕竟，你需要雇用多少黑客？现在我肯定我们都知道，软件最好由不到十人的团队开发。对于任何人听说过的任何语言，你在这个规模上雇用黑客应该不会有麻烦。如果你找不到十个Lisp黑客，那么你的公司可能基于错误的城市来开发软件。</p>
+<p>事实上，选择更强大的语言可能会减少你需要的团队规模，因为(a)如果你使用更强大的语言，你可能不需要那么多黑客，(b)在更先进语言中工作的黑客可能更聪明。</p>
+<p>我不是说你不会受到很多压力去使用被认为是&quot;标准&quot;的技术。在Viaweb（现在的Yahoo Store），我们使用Lisp引起了一些风险投资人和潜在收购者的惊讶。但我们使用通用Intel盒子作为服务器而不是像Sun这样的&quot;工业强度&quot;服务器，使用当时鲜为人知的开源Unix变体FreeBSD而不是真正的商业操作系统如Windows NT，忽略了一个叫做SET的所谓电子商务标准，现在没有人记得它，等等，我们也引起了惊讶。</p>
+<p>你不能让西装为你做技术决定。我们使用Lisp让一些潜在收购者感到担忧吗？有些，轻微，但如果我们没有使用Lisp，我们就无法编写出让他们想收购我们的软件。对他们来说似乎异常的东西实际上是因果关系。</p>
+<p>如果你创办创业公司，不要为了取悦风险投资人或潜在收购者而设计你的产品。为了取悦用户而设计你的产品。如果你赢得了用户，其他一切都会随之而来。如果你没有，没有人会在乎你的技术选择是多么令人欣慰地正统。</p>
+<h2 id="成为普通人的代价">成为普通人的代价</h2>
+<p>使用不太强大的语言你会失去多少？实际上有一些关于这方面的数据。</p>
+<p>衡量力量的最方便指标可能是代码大小。高级语言的意义是给你更大的抽象——更大的砖块，可以说，所以你不需要那么多来建造给定大小的墙。所以语言越强大，程序越短（当然不是简单地按字符数，而是按不同的元素）。</p>
+<p>更强大的语言如何使你能够编写更短的程序？如果语言允许，你可以使用的一种技术叫做自底向上编程。你不是简单地在基础语言中编写你的应用程序，而是在基础语言之上构建一种用于编写像你这样的程序的语言，然后用它编写你的程序。组合的代码可以比你在基础语言中编写整个程序短得多——实际上，这就是大多数压缩算法的工作原理。自底向上的程序也应该更容易修改，因为在许多情况下，语言层根本不需要改变。</p>
+<p>代码大小很重要，因为编写程序所需的时间主要取决于其长度。如果你的程序在另一种语言中会长三倍，它将花费三倍的时间来编写——而且你不能通过雇用更多的人来解决这个问题，因为超过一定规模新雇员实际上是净损失。Fred Brooks在他著名的书《人月神话》中描述了这种现象，我所看到的一切都倾向于证实他说的话。</p>
+<p>那么，如果你用Lisp编写程序，它们会短多少？例如，我听到的大多数关于Lisp对C的数字都在7-10倍左右。但最近New Architect杂志上一篇关于ITA的文章说&quot;一行Lisp可以替代20行C&rdquo;，由于这篇文章充满了ITA总裁的引用，我假设他们是从ITA得到这个数字的。如果是这样，那么我们可以对此有一些信心；ITA的软件也包括很多C和C++以及Lisp，所以他们是从经验说话的。</p>
+<p>我的猜测是这些倍数甚至不是恒定的。我认为当你面对更难的问题时，以及当你有更聪明的程序员时，它们会增加。一个真正优秀的黑客可以从更好的工具中挤出更多。</p>
+<p>无论如何，作为曲线上的一个数据点，如果你要与ITA竞争并选择用C编写你的软件，他们将能够比你快二十倍地开发软件。如果你在一个新功能上花费一年，他们将能够在不到三周内复制它。而如果他们只花三个月开发新东西，你将在五年后才有它。</p>
+<p>你知道什么？那是最好的情况。当你谈论代码大小比率时，你隐含地假设你实际上可以在较弱的语言中编写程序。但事实上，程序员的能力是有限制的。如果你试图用太低级的语言解决一个难题，你会达到一个点，即一次要记住的东西太多。</p>
+<p>所以当我说ITA的假想竞争对手需要五年时间复制ITA可以在Lisp中三个月内写出的东西时，我的意思是如果不出错需要五年。事实上，在大多数公司中事情运作的方式，任何需要五年的开发项目很可能根本无法完成。</p>
+<p>我承认这是一个极端情况。ITA的黑客似乎异常聪明，而C是相当低级的语言。但在竞争市场中，即使是二比一或三比一的差异也足以保证你永远落后。</p>
+<h2 id="一个配方">一个配方</h2>
+<p>这是尖头发的老板甚至不想考虑的那种可能性。所以他们大多数人不会。因为，你知道，归根结底，尖头发的老板不介意他的公司被踢屁股，只要没有人能证明是他的错。对他个人来说，最安全的计划是紧贴群体的中心。</p>
+<p>在大型组织内部，用来描述这种方法的短语是&quot;行业最佳实践&quot;。其目的是保护尖头发的老板免于责任：如果他选择的是&quot;行业最佳实践&quot;的东西，公司亏损，他不能被责怪。他没有选择，行业选择了。</p>
+<p>我相信这个术语最初是用来描述会计方法等的。它的意思大致是，不要做任何奇怪的事情。在会计中，这可能是个好主意。&ldquo;尖端&quot;和&quot;会计&quot;这两个词听起来不太合适。但当你将这个标准导入技术决策时，你开始得到错误的答案。</p>
+<p>技术应该是尖端的。在编程语言中，正如Erann Gat所指出的，&ldquo;行业最佳实践&quot;实际给你的不是最好的，而只是普通的。当一个决定导致你以更积极竞争对手的一小部分速度开发软件时，&ldquo;最佳实践&quot;是用词不当。</p>
+<p>所以我们有两条我认为非常有价值的信息。事实上，我从自己的经验中知道这一点。数字1，语言的力量各不相同。数字2，大多数经理故意忽略这一点。这两者之间，这两个事实字面上就是一个赚钱的配方。ITA是这个配方在行动中的一个例子。如果你想在软件业务中获胜，只接受你能找到的最难的问题，使用你能获得的最强大的语言，等待你的竞争对手的尖头发的老板回归普通。</p>
+<h2 id="附录力量">附录：力量</h2>
+<p>作为我对编程语言相对力量意思的说明，考虑以下问题。我们想编写一个生成累加器的函数——一个接受数字n并返回另一个函数的函数，该函数接受另一个数字i并返回n增加i。</p>
+<p>（那是增加，不是加。累加器必须累加。）</p>
+<p>在Common Lisp中这将是</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(defun foo (n)
+</span></span><span style="display:flex;"><span>  (lambda (i) (incf n i)))
+</span></span></code></pre></div><p>在Perl 5中，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-perl" data-lang="perl"><span style="display:flex;"><span><span style="color:#66d9ef">sub</span> <span style="color:#a6e22e">foo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">my</span> ($n) <span style="color:#f92672">=</span> @_;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">sub</span> {$n <span style="color:#f92672">+=</span> shift}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这比Lisp版本有更多的元素，因为在Perl中你必须手动提取参数。</p>
+<p>在Smalltalk中，代码比Lisp稍长</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-smalltalk" data-lang="smalltalk"><span style="display:flex;"><span><span style="color:#a6e22e">foo:</span> n
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span>s<span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">:=</span> n.
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">^</span>[<span style="color:#f92672">:</span>i<span style="color:#f92672">|</span> s <span style="color:#f92672">:=</span> s<span style="color:#a6e22e">+</span>i. ]
+</span></span></code></pre></div><p>因为虽然一般来说词法变量工作，但你不能对参数进行赋值，所以你必须创建一个新变量s。</p>
+<p>在Javascript中，示例再次稍长，因为Javascript保留了语句和表达式之间的区别，所以你需要显式的return语句来返回值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>(<span style="color:#a6e22e">n</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">i</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">i</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>（公平地说，Perl也保留了这种区别，但以典型的Perl方式通过让你省略returns来处理它。）</p>
+<p>如果你尝试将Lisp/Perl/Smalltalk/Javascript代码翻译成Python，你会遇到一些限制。因为Python不完全支持词法变量，你必须创建一个数据结构来保存n的值。虽然Python确实有函数数据类型，但没有字面表示（除非体只是单个表达式），所以你需要创建一个命名函数来返回。你最终得到的是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(n):
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> [n]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bar</span>(i):
+</span></span><span style="display:flex;"><span>        s[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+=</span> i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bar
+</span></span></code></pre></div><p>Python用户可能会合理地问为什么他们不能只写</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> i: <span style="color:#66d9ef">return</span> n <span style="color:#f92672">+=</span> i
+</span></span></code></pre></div><p>或者甚至</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">lambda</span> i: n <span style="color:#f92672">+=</span> i
+</span></span></code></pre></div><p>我的猜测是他们可能有一天会。（但如果他们不想等待Python进化到Lisp的其余部分，他们总是可以&hellip;）</p>
+<p>在OO语言中，你可以在有限程度上模拟闭包（一个引用在封闭作用域中定义的变量的函数），通过定义一个类，该类有一个方法和一个字段来替换封闭作用域中的每个变量。这使得程序员做一些在有完全词法作用域支持的语言中由编译器做的代码分析工作，如果多个函数引用同一个变量，它就不起作用，但在像这样的简单情况下足够了。</p>
+<p>Python专家似乎同意这是在Python中解决问题的首选方法，写作</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">foo</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">acc</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, s):
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>s <span style="color:#f92672">=</span> s
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inc</span>(self, i):
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>s <span style="color:#f92672">+=</span> i
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>s
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> acc(n)<span style="color:#f92672">.</span>inc
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">foo</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, n):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>n <span style="color:#f92672">=</span> n
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__call__</span>(self, i):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>n <span style="color:#f92672">+=</span> i
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>n
+</span></span></code></pre></div><p>我包括这些是因为我不希望Python倡导者说我歪曲了语言，但两者在我看来都比第一个版本更复杂。你在做同样的事情，设置一个单独的地方来保存累加器；它只是对象中的一个字段而不是列表的头。而这些特殊的保留字段名，特别是<code>__call__</code>，似乎有点像hack。</p>
+<p>在Perl和Python的竞争中，Python黑客的主张似乎是Python是Perl的一个更优雅的替代品，但这个案例表明的是力量是终极的优雅：Perl程序更简单（元素更少），即使语法有点丑。</p>
+<p>其他语言呢？本次讲座中提到的其他语言——Fortran、C、C++、Java和Visual Basic——不清楚是否真的可以解决这个问题。Ken Anderson说以下代码是Java中最接近的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Inttoint</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">call</span>(<span style="color:#66d9ef">int</span> i);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Inttoint <span style="color:#a6e22e">foo</span>(<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Inttoint() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">call</span>(<span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>            s <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这不符合规范，因为它只适用于整数。在与Java黑客多次电子邮件交流后，我想说编写一个像前面例子那样行为的多态版本介于非常困难和不可能之间。如果有人想写一个，我会很好奇看到它，但我个人已经超时了。</p>
+<p>当然，在其他语言中不可能解决这个问题并不是字面上的真实情况。所有这些语言都是图灵等价的事实意味着，严格来说，你可以用任何一种语言编写任何程序。那么你会怎么做？在极限情况下，通过在较弱的语言中编写Lisp解释器。</p>
+<p>这听起来像是一个笑话，但它在大型编程项目中以不同程度经常发生，以至于这种现象有一个名字，Greenspun第十规则：任何足够复杂的C或Fortran程序都包含Common Lisp一半的临时非正式指定的充满bug的缓慢实现。</p>
+<p>如果你试图解决一个难题，问题不是你是否会使用足够强大的语言，而是你是否会(a)使用强大的语言，(b)为一种语言编写事实上的解释器，或(c)你自己成为一种语言的编译器。我们在Python示例中已经看到开始发生这种情况，我们实际上在模拟编译器为实现词法变量而生成的代码。</p>
+<p>这种做法不仅常见，而且制度化。例如，在OO世界中，你听到很多关于&quot;模式&quot;的东西。我想知道这些模式有时是否不是案例(c)的证据，即人类编译器在工作。当我在程序中看到模式时，我认为这是一个麻烦的迹象。程序的形状应该只反映它需要解决的问题。代码中的任何其他规律性，对我来说至少，表明你使用的抽象不够强大——通常是你手工生成一些你需要编写的宏的扩展。</p>
+<h2 id="注释">注释</h2>
+<p>[1] IBM 704 CPU大约有冰箱那么大，但重得多。CPU重3150磅，4K RAM在另一个重4000磅的盒子中。Sub-Zero 690，最大的家用冰箱之一，重656磅。</p>
+<p>[2] Steve Russell也在1962年编写了第一个（数字）计算机游戏Spacewar。</p>
+<p>[3] 如果你想欺骗尖头发的老板让你用Lisp编写软件，你可以尝试告诉他这是XML。</p>
+<p>[4] 其他Lisp方言中的累加器生成器：</p>
+<p>Scheme: <code>(define (foo n) (lambda (i) (set! n (+ n i)) n))</code></p>
+<p>Goo: <code>(df foo (n) (op incf n _)))</code></p>
+<p>Arc: <code>(def foo (n) [++ n _])</code></p>
+<p>[5] Erann Gat关于JPL&quot;行业最佳实践&quot;的悲伤故事启发我解决这个普遍误用的短语。</p>
+<p>[6] Peter Norvig发现《设计模式》中23个模式中的16个在Lisp中&quot;不可见或更简单&rdquo;。</p>
+<p>感谢许多回答了我关于各种语言的问题和/或阅读了本文草稿的人，包括Ken Anderson、Trevor Blackwell、Erann Gat、Dan Giffin、Sarah Harlin、Jeremy Hylton、Robert Morris、Peter Norvig、Guy Steele和Anton van Straaten。他们对表达的任何意见不承担任何责任。</p>
+<p>相关：许多人回应了这个讲座，所以我建立了一个额外的页面来处理他们提出的问题：Re: Revenge of the Nerds。</p>
+<p>它还在LL1邮件列表上引发了广泛且经常有用的讨论。特别参见Anton van Straaten关于语义压缩的邮件。</p>
+<p>LL1上的一些邮件促使我尝试在Succinctness is Power中更深入地探讨语言力量主题。</p>
+<p>累加器基准测试的规范实现集收集在它们自己的页面上。</p>
+<p>日语翻译，西班牙语翻译，中文翻译</p>
+<p>你会在《黑客与画家》中找到这篇文章和其他14篇。</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#追上数学">追上数学</a></li>
+    <li><a href="#使lisp不同的东西">使Lisp不同的东西</a></li>
+    <li><a href="#语言重要的地方">语言重要的地方</a></li>
+    <li><a href="#向心力">向心力</a></li>
+    <li><a href="#成为普通人的代价">成为普通人的代价</a></li>
+    <li><a href="#一个配方">一个配方</a></li>
+    <li><a href="#附录力量">附录：力量</a></li>
+    <li><a href="#注释">注释</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#追上数学">追上数学</a></li>
+    <li><a href="#使lisp不同的东西">使Lisp不同的东西</a></li>
+    <li><a href="#语言重要的地方">语言重要的地方</a></li>
+    <li><a href="#向心力">向心力</a></li>
+    <li><a href="#成为普通人的代价">成为普通人的代价</a></li>
+    <li><a href="#一个配方">一个配方</a></li>
+    <li><a href="#附录力量">附录：力量</a></li>
+    <li><a href="#注释">注释</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

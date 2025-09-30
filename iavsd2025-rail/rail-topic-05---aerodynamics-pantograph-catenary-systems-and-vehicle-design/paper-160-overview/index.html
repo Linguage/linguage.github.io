@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-160 基本信息 论文编号：160 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design (空气动力学、受电弓-接触网系统与车辆设计) 英文标题：Software Integration and Experimental Testing of a Hybrid Powertrain for an Unmanned Railway Vehicle 中文标题：无人驾驶铁路车辆混合动力总成的软件集成与实验测试 作者及单位：Nicola Debattisti, Davide Tarsitano, Michele Vignati (Politecnico di Milano, Department of Mechanical Engineering, Italy) 摘要 铁路车辆历来是最有前景的运输系统之一，但基础设施故障（特别是来自故意威胁）可能导致严重后果。为了增强高速线路的监控能力，本文介绍了一种配备异常检测视觉系统的无人驾驶铁路车辆（URV）的开发。紧凑性需求导致排除了架空线供电，设计了采用串联式混合架构的动力总成。这种选择结合了电池、牵引电机和增程器（带发电机的内燃机），符合可持续发展目标。关键开发活动包括高压和低压系统、气动制动系统和控制算法。URV的核心是车辆控制单元（VCU），管理所有车辆操作。使用软件在环（SiL）测试台来模拟动力学并验证控制律。在滚子测试台上的实验验证确认了车辆性能和软件准确性。
+关键词 #无人驾驶铁路车辆 #混合动力总成 #软件在环 #车辆控制单元 #增程器 #实验验证 #控制算法 #安全监控 #高压系统 #气动制动
+背景与动机 铁路运输在全球范围内变得越来越重要，无论是客运还是货运需求。铁路基础设施的故障可能产生灾难性影响，包括经济损失、服务中断和安全风险。在高速铁路线路的背景下，这些故障变得特别关键，即使是轻微的破坏也可能传播重大延误和运营挑战。
+巴黎、布鲁塞尔和伦敦等地发生的恐怖威胁事件引发的紧急情况，凸显了运输安全管理人员需要减少其关键基础设施（CI）资产的脆弱性。这项研究介绍了专为高速铁路线路监控设计的无人驾驶铁路车辆（URV）的第一个原型，解决了安全问题。
+URV配备先进的视觉系统，确保全面监控，提供远程和周边扫描能力，同时实时检测异常。这种车辆还配备了SCMT/ERTMS信号系统，确保符合铁路交通管理标准的安全水平。一个关键的设计考虑因素是其紧凑的尺寸，这使得URV能够高效运行，同时满足超过400公里的扩展运行范围要求。
+研究方法 本研究涵盖了URV的概念设计、控制算法的开发和实验验证过程。验证在滚子测试台上进行，该测试台可以复制真实世界的任务概况，允许详细比较实验数据和仿真结果，以验证车辆在各种条件下的性能。
+车辆架构：URV的设计基于经过认证的高速转向架，支撑定制设计的车体。该车体经过开发，用于容纳动力总成部件（牵引电池、电机、增程器等）以及任务所需的监控仪器。为确保稳定性和可靠性，车体配备了专门设计的二次悬架，以减轻高速运行期间产生的振动。
+混合动力总成架构：URV的动力总成架构是一个关键特征，将锂离子电池、牵引电机和增程器结合在一个冗余系统中，允许灵活的能源管理。特别是，高压系统架构由两个不同的独立牵引单元（电池-逆变器-电机）组成，每个轮对一个。牵引电池系统包括两个具有高压能力的独立组件，标称电压为742V，可用能量为124kWh。
+车辆控制单元：VCU代表URV的操作核心，管理牵引力、速度调节和整体动力总成管理。通过与所有子系统通过CAN总线协议集成和实现许多嵌套状态机，VCU调节操作模式和故障处理程序。
+控制算法：动态调节的牵引/制动力代表VCU上实现的主要控制算法之一。控制算法的输入是参考力（F_ref），该参考力由外部（由自动列车运行系统）或内部速度调节器提供。该力被分成电力（F_el）和气动（F_pn）分量，以便评估要提供给电机驱动器的参考扭矩（T_ref,mot）和要提供给BSC的参考压力（p_ref）。
+主要结论 这项工作专注于开发和验证第一个无人驾驶铁路车辆原型，专为高速铁路线路的安全行动而设计。URV是一种混合动力自动驾驶车辆，采用串联式混合动力总成，其中增程器为直流总线供电，然后为牵引电池和电机供电。URV能够在没有外部干预的情况下在铁路基础设施上运行。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-160 基本信息 论文编号：160 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design (空气动力学、受电弓-接触网系统与车辆设计) 英文标题：Software Integration and Experimental Testing of a Hybrid Powertrain for an Unmanned Railway Vehicle 中文标题：无人驾驶铁路车辆混合动力总成的软件集成与实验测试 作者及单位：Nicola Debattisti, Davide Tarsitano, Michele Vignati (Politecnico di Milano, Department of Mechanical Engineering, Italy) 摘要 铁路车辆历来是最有前景的运输系统之一，但基础设施故障（特别是来自故意威胁）可能导致严重后果。为了增强高速线路的监控能力，本文介绍了一种配备异常检测视觉系统的无人驾驶铁路车辆（URV）的开发。紧凑性需求导致排除了架空线供电，设计了采用串联式混合架构的动力总成。这种选择结合了电池、牵引电机和增程器（带发电机的内燃机），符合可持续发展目标。关键开发活动包括高压和低压系统、气动制动系统和控制算法。URV的核心是车辆控制单元（VCU），管理所有车辆操作。使用软件在环（SiL）测试台来模拟动力学并验证控制律。在滚子测试台上的实验验证确认了车辆性能和软件准确性。
+关键词 #无人驾驶铁路车辆 #混合动力总成 #软件在环 #车辆控制单元 #增程器 #实验验证 #控制算法 #安全监控 #高压系统 #气动制动
+背景与动机 铁路运输在全球范围内变得越来越重要，无论是客运还是货运需求。铁路基础设施的故障可能产生灾难性影响，包括经济损失、服务中断和安全风险。在高速铁路线路的背景下，这些故障变得特别关键，即使是轻微的破坏也可能传播重大延误和运营挑战。
+巴黎、布鲁塞尔和伦敦等地发生的恐怖威胁事件引发的紧急情况，凸显了运输安全管理人员需要减少其关键基础设施（CI）资产的脆弱性。这项研究介绍了专为高速铁路线路监控设计的无人驾驶铁路车辆（URV）的第一个原型，解决了安全问题。
+URV配备先进的视觉系统，确保全面监控，提供远程和周边扫描能力，同时实时检测异常。这种车辆还配备了SCMT/ERTMS信号系统，确保符合铁路交通管理标准的安全水平。一个关键的设计考虑因素是其紧凑的尺寸，这使得URV能够高效运行，同时满足超过400公里的扩展运行范围要求。
+研究方法 本研究涵盖了URV的概念设计、控制算法的开发和实验验证过程。验证在滚子测试台上进行，该测试台可以复制真实世界的任务概况，允许详细比较实验数据和仿真结果，以验证车辆在各种条件下的性能。
+车辆架构：URV的设计基于经过认证的高速转向架，支撑定制设计的车体。该车体经过开发，用于容纳动力总成部件（牵引电池、电机、增程器等）以及任务所需的监控仪器。为确保稳定性和可靠性，车体配备了专门设计的二次悬架，以减轻高速运行期间产生的振动。
+混合动力总成架构：URV的动力总成架构是一个关键特征，将锂离子电池、牵引电机和增程器结合在一个冗余系统中，允许灵活的能源管理。特别是，高压系统架构由两个不同的独立牵引单元（电池-逆变器-电机）组成，每个轮对一个。牵引电池系统包括两个具有高压能力的独立组件，标称电压为742V，可用能量为124kWh。
+车辆控制单元：VCU代表URV的操作核心，管理牵引力、速度调节和整体动力总成管理。通过与所有子系统通过CAN总线协议集成和实现许多嵌套状态机，VCU调节操作模式和故障处理程序。
+控制算法：动态调节的牵引/制动力代表VCU上实现的主要控制算法之一。控制算法的输入是参考力（F_ref），该参考力由外部（由自动列车运行系统）或内部速度调节器提供。该力被分成电力（F_el）和气动（F_pn）分量，以便评估要提供给电机驱动器的参考扭矩（T_ref,mot）和要提供给BSC的参考压力（p_ref）。
+主要结论 这项工作专注于开发和验证第一个无人驾驶铁路车辆原型，专为高速铁路线路的安全行动而设计。URV是一种混合动力自动驾驶车辆，采用串联式混合动力总成，其中增程器为直流总线供电，然后为牵引电池和电机供电。URV能够在没有外部干预的情况下在铁路基础设施上运行。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/" class="crumb-sec">Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览paper-160">IAVSD 2025 论文概览：paper-160</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：160</li>
+<li><strong>所属主题</strong>：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design (空气动力学、受电弓-接触网系统与车辆设计)</li>
+<li><strong>英文标题</strong>：Software Integration and Experimental Testing of a Hybrid Powertrain for an Unmanned Railway Vehicle</li>
+<li><strong>中文标题</strong>：无人驾驶铁路车辆混合动力总成的软件集成与实验测试</li>
+<li><strong>作者及单位</strong>：Nicola Debattisti, Davide Tarsitano, Michele Vignati (Politecnico di Milano, Department of Mechanical Engineering, Italy)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>铁路车辆历来是最有前景的运输系统之一，但基础设施故障（特别是来自故意威胁）可能导致严重后果。为了增强高速线路的监控能力，本文介绍了一种配备异常检测视觉系统的无人驾驶铁路车辆（URV）的开发。紧凑性需求导致排除了架空线供电，设计了采用串联式混合架构的动力总成。这种选择结合了电池、牵引电机和增程器（带发电机的内燃机），符合可持续发展目标。关键开发活动包括高压和低压系统、气动制动系统和控制算法。URV的核心是车辆控制单元（VCU），管理所有车辆操作。使用软件在环（SiL）测试台来模拟动力学并验证控制律。在滚子测试台上的实验验证确认了车辆性能和软件准确性。</p>
+<h2 id="关键词">关键词</h2>
+<p>#无人驾驶铁路车辆 #混合动力总成 #软件在环 #车辆控制单元 #增程器 #实验验证 #控制算法 #安全监控 #高压系统 #气动制动</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>铁路运输在全球范围内变得越来越重要，无论是客运还是货运需求。铁路基础设施的故障可能产生灾难性影响，包括经济损失、服务中断和安全风险。在高速铁路线路的背景下，这些故障变得特别关键，即使是轻微的破坏也可能传播重大延误和运营挑战。</p>
+<p>巴黎、布鲁塞尔和伦敦等地发生的恐怖威胁事件引发的紧急情况，凸显了运输安全管理人员需要减少其关键基础设施（CI）资产的脆弱性。这项研究介绍了专为高速铁路线路监控设计的无人驾驶铁路车辆（URV）的第一个原型，解决了安全问题。</p>
+<p>URV配备先进的视觉系统，确保全面监控，提供远程和周边扫描能力，同时实时检测异常。这种车辆还配备了SCMT/ERTMS信号系统，确保符合铁路交通管理标准的安全水平。一个关键的设计考虑因素是其紧凑的尺寸，这使得URV能够高效运行，同时满足超过400公里的扩展运行范围要求。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究涵盖了URV的概念设计、控制算法的开发和实验验证过程。验证在滚子测试台上进行，该测试台可以复制真实世界的任务概况，允许详细比较实验数据和仿真结果，以验证车辆在各种条件下的性能。</p>
+<p><strong>车辆架构</strong>：URV的设计基于经过认证的高速转向架，支撑定制设计的车体。该车体经过开发，用于容纳动力总成部件（牵引电池、电机、增程器等）以及任务所需的监控仪器。为确保稳定性和可靠性，车体配备了专门设计的二次悬架，以减轻高速运行期间产生的振动。</p>
+<p><strong>混合动力总成架构</strong>：URV的动力总成架构是一个关键特征，将锂离子电池、牵引电机和增程器结合在一个冗余系统中，允许灵活的能源管理。特别是，高压系统架构由两个不同的独立牵引单元（电池-逆变器-电机）组成，每个轮对一个。牵引电池系统包括两个具有高压能力的独立组件，标称电压为742V，可用能量为124kWh。</p>
+<p><strong>车辆控制单元</strong>：VCU代表URV的操作核心，管理牵引力、速度调节和整体动力总成管理。通过与所有子系统通过CAN总线协议集成和实现许多嵌套状态机，VCU调节操作模式和故障处理程序。</p>
+<p><strong>控制算法</strong>：动态调节的牵引/制动力代表VCU上实现的主要控制算法之一。控制算法的输入是参考力（F_ref），该参考力由外部（由自动列车运行系统）或内部速度调节器提供。该力被分成电力（F_el）和气动（F_pn）分量，以便评估要提供给电机驱动器的参考扭矩（T_ref,mot）和要提供给BSC的参考压力（p_ref）。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>这项工作专注于开发和验证第一个无人驾驶铁路车辆原型，专为高速铁路线路的安全行动而设计。URV是一种混合动力自动驾驶车辆，采用串联式混合动力总成，其中增程器为直流总线供电，然后为牵引电池和电机供电。URV能够在没有外部干预的情况下在铁路基础设施上运行。</p>
+<p><strong>系统集成</strong>：工作的很大一部分涉及完整车辆系统的设计和集成。高压架构包括所有主要的动力总成部件（电池、电机驱动器、牵引电机、增程器等），而低压系统管理控制单元、子系统和气动制动系统。</p>
+<p><strong>控制算法验证</strong>：在软件方面，开发、实施和验证了控制和管理算法。VCU包含几种控制策略，包括力和速度控制回路，并与自动列车运行系统等外部系统交互。</p>
+<p><strong>实验验证</strong>：为了验证实施，在滚子测试台上进行了广泛的测试。所示的结果代表了在车辆上进行的测试会话的一个子集。这些结果的共同条件是动力总成完全可用。结果显示与数值模拟良好吻合，除了由于滚子测试台限制（如内部摩擦和尺度差异）造成的一些差异。</p>
+<p><strong>性能确认</strong>：尽管存在这些问题，动力总成控制算法已成功验证，允许规划下一阶段：在运行条件下的真实现场测试。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p><strong>无人驾驶铁路车辆原型首创</strong>：开发了首个专为高速铁路线路安全监控设计的无人驾驶铁路车辆原型，填补了铁路安全监控领域的技术空白。</p>
+</li>
+<li>
+<p><strong>串联式混合动力总成创新设计</strong>：创造性地将增程器、锂离子电池和牵引电机结合成冗余的串联式混合动力系统，实现了超过400公里的扩展运行范围，无需依赖架空接触网。</p>
+</li>
+<li>
+<p><strong>复杂控制算法系统集成</strong>：开发了包含力和速度控制回路的多层控制算法系统，实现了电力制动与气动制动的智能切换，优化了能量回收和机械部件磨损。</p>
+</li>
+<li>
+<p><strong>软件在环测试台应用</strong>：创新性地使用软件在环（SiL）测试台进行控制算法验证，实现了更快速、更安全、更经济的开发过程，为铁路车辆控制系统开发提供了新方法。</p>
+</li>
+<li>
+<p><strong>全面实验验证体系</strong>：在滚子测试台上进行了系统性的实验验证，包括不同控制策略、各种参数影响、牵引和制动阶段的全面测试，确保了理论模型与实际性能的高度吻合。</p>
+</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Unmanned Railway Vehicle (URV)</td>
+          <td>无人驾驶铁路车辆</td>
+      </tr>
+      <tr>
+          <td>Hybrid Powertrain</td>
+          <td>混合动力总成</td>
+      </tr>
+      <tr>
+          <td>Range Extender</td>
+          <td>增程器</td>
+      </tr>
+      <tr>
+          <td>Vehicle Control Unit (VCU)</td>
+          <td>车辆控制单元</td>
+      </tr>
+      <tr>
+          <td>Software-in-the-Loop (SiL)</td>
+          <td>软件在环</td>
+      </tr>
+      <tr>
+          <td>Critical Infrastructure (CI)</td>
+          <td>关键基础设施</td>
+      </tr>
+      <tr>
+          <td>Series Hybrid Architecture</td>
+          <td>串联式混合架构</td>
+      </tr>
+      <tr>
+          <td>High Voltage System</td>
+          <td>高压系统</td>
+      </tr>
+      <tr>
+          <td>Traction Battery</td>
+          <td>牵引电池</td>
+      </tr>
+      <tr>
+          <td>Braking System Controller (BSC)</td>
+          <td>制动系统控制器</td>
+      </tr>
+      <tr>
+          <td>Wheel-Slide Protection (WSP)</td>
+          <td>轮滑保护</td>
+      </tr>
+      <tr>
+          <td>State of Charge (SOC)</td>
+          <td>充电状态</td>
+      </tr>
+      <tr>
+          <td>Battery Management System (BMS)</td>
+          <td>电池管理系统</td>
+      </tr>
+      <tr>
+          <td>Automatic Train Operation (ATO)</td>
+          <td>自动列车运行</td>
+      </tr>
+      <tr>
+          <td>SCMT/ERTMS Signalling Systems</td>
+          <td>SCMT/ERTMS信号系统</td>
+      </tr>
+      <tr>
+          <td>Roller Test Bench</td>
+          <td>滚子测试台</td>
+      </tr>
+      <tr>
+          <td>Traction Cut Off (TCO)</td>
+          <td>牵引切断</td>
+      </tr>
+      <tr>
+          <td>Electro-Dynamic Braking Management (EDBM)</td>
+          <td>电制动管理</td>
+      </tr>
+      <tr>
+          <td>Adhesion Condition</td>
+          <td>粘着条件</td>
+      </tr>
+      <tr>
+          <td>Feed-Forward Reference</td>
+          <td>前馈参考</td>
+      </tr>
+      <tr>
+          <td>Proportional Feedback</td>
+          <td>比例反馈</td>
+      </tr>
+      <tr>
+          <td>Integral Component</td>
+          <td>积分分量</td>
+      </tr>
+      <tr>
+          <td>Pneumatic Braking System</td>
+          <td>气动制动系统</td>
+      </tr>
+      <tr>
+          <td>Secondary Suspensions</td>
+          <td>二次悬架</td>
+      </tr>
+      <tr>
+          <td>Internal Combustion Engine (ICE)</td>
+          <td>内燃机</td>
+      </tr>
+      <tr>
+          <td>Three-Phase Induction Motors</td>
+          <td>三相感应电机</td>
+      </tr>
+      <tr>
+          <td>CAN-bus Protocols</td>
+          <td>CAN总线协议</td>
+      </tr>
+      <tr>
+          <td>State-Machines</td>
+          <td>状态机</td>
+      </tr>
+      <tr>
+          <td>Mission Profiles</td>
+          <td>任务概况</td>
+      </tr>
+      <tr>
+          <td>Real-World Conditions</td>
+          <td>真实世界条件</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

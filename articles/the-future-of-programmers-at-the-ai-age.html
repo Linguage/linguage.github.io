@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动报告：AI时代的程序员升格之路</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page narrative dashboard, guiding the user from a high-level thesis to actionable advice. It uses thematic sections (Duality, History, New Roles, Strategic Roadmap) instead of mirroring the report's linear chapters. This non-linear, thematic approach enhances usability by allowing users to explore topics based on interest. Key interactions include toggling between "Promise" and "Peril," an interactive timeline, and role-based accordions, making the data more digestible and personally relevant than a static document. -->
+    <!-- Visualization & Content Choices: Data is presented through interactive charts and diagrams to simplify complex ideas. Goal: Compare -> Chart.js bar chart for productivity vs. stability. Goal: Change over Time -> HTML/CSS interactive timeline for historical context. Goal: Organize -> Interactive cards for new roles and accordion for actionable advice. These choices prioritize user engagement and understanding. All visualizations are built with Chart.js or pure HTML/CSS, adhering to the NO SVG/Mermaid constraint and supporting the designed interactive structure. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #f8f7f5; color: #3d3d3d; }
+        .bg-primary { background-color: #f8f7f5; }
+        .bg-secondary { background-color: #edece9; }
+        .text-accent { color: #8a6e5a; }
+        .border-accent { border-color: #8a6e5a; }
+        .btn-accent { background-color: #8a6e5a; color: #ffffff; transition: background-color 0.3s; }
+        .btn-accent:hover { background-color: #6b5546; }
+        .nav-link { position: relative; padding-bottom: 4px; color: #5c5c5c; transition: color 0.3s; }
+        .nav-link:hover { color: #8a6e5a; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: #8a6e5a; transition: width 0.3s; }
+        .nav-link.active::after, .nav-link:hover::after { width: 100%; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 40vh; max-height: 350px; }
+        .timeline-item.active { background-color: #8a6e5a; color: white; box-shadow: 0 4px 14px 0 rgba(138, 110, 90, 0.3); transform: scale(1.05); }
+        .timeline-item { transition: all 0.3s ease-in-out; }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-primary">
+
+    <header class="sticky top-0 bg-primary/80 backdrop-blur-sm z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-accent">程序员的升格</h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#hero" class="nav-link active">核心论点</a>
+                <a href="#duality" class="nav-link">双面透视</a>
+                <a href="#history" class="nav-link">历史回响</a>
+                <a href="#playbook" class="nav-link">未来图鉴</a>
+                <a href="#roadmap" class="nav-link">行动指南</a>
+            </div>
+             <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-accent">
+                <span class="text-2xl leading-none">☰</span>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2">
+             <a href="#hero" class="block py-2 text-center nav-link mobile-nav-link">核心论点</a>
+             <a href="#duality" class="block py-2 text-center nav-link mobile-nav-link">双面透视</a>
+             <a href="#history" class="block py-2 text-center nav-link mobile-nav-link">历史回响</a>
+             <a href="#playbook" class="block py-2 text-center nav-link mobile-nav-link">未来图鉴</a>
+             <a href="#roadmap" class="block py-2 text-center nav-link mobile-nav-link">行动指南</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-16">
+
+        <section id="hero" class="text-center min-h-[60vh] flex flex-col justify-center items-center fade-in">
+            <h2 class="text-4xl md:text-6xl font-bold leading-tight">不是终结，而是<span class="text-accent">升格</span></h2>
+            <p class="mt-4 md:text-xl max-w-3xl mx-auto text-gray-600">AI不会取代程序员，而是将他们从代码的创作者，提升为复杂系统的战略架构师。历史反复证明，更高层次的抽象会催生对更高层次技能的爆炸性需求。</p>
+            <a href="#duality" class="mt-8 px-8 py-3 btn-accent rounded-full font-semibold">探索这场变革</a>
+        </section>
+
+        <section id="duality" class="py-16 fade-in">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">双面透视：AI的承诺与陷阱</h3>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">AI对软件开发的影响如同一枚硬币的两面。它既带来了前所未有的生产力提升，也伴随着质量下降和技术债累积的隐性风险。理解这种二元性，是制定应对策略的第一步。</p>
+            </div>
+            <div class="flex justify-center mb-8">
+                <div class="bg-secondary p-1 rounded-full flex space-x-1">
+                    <button id="promise-btn" class="duality-toggle px-6 py-2 rounded-full text-sm font-semibold btn-accent">光明前景</button>
+                    <button id="peril-btn" class="duality-toggle px-6 py-2 rounded-full text-sm font-semibold">潜在危机</button>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div id="duality-text-content">
+                    <h4 id="duality-title" class="text-2xl font-semibold mb-4 text-accent">🚀 生产力的巨大飞跃</h4>
+                    <p id="duality-p" class="text-gray-700">研究表明，使用AI工具的程序员完成任务的速度提升高达55.8%。AI能够将专家的隐性知识传递给新手，显著提升经验不足员工的生产力（约35%），实现了技能的“扁平化”，并催生了对软件的爆炸性需求（杰文斯悖论）。</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="dualityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="py-16 bg-secondary rounded-2xl fade-in">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">历史回响：技术革命的周期</h3>
+                 <p class="mt-2 text-gray-600 max-w-2xl mx-auto">当前对AI的焦虑并非史无前例。从编译器到低代码平台，软件工程史就是一部不断抽象化的历史。每一次变革都曾引发“程序员将失业”的论调，但最终都极大地扩展了软件的应用领域，创造了新的、更高层次的岗位。</p>
+            </div>
+            <div class="w-full overflow-x-auto pb-4">
+                <div class="flex justify-center items-center space-x-2 md:space-x-4 min-w-max px-4">
+                    <div class="timeline-item cursor-pointer p-3 md:p-4 rounded-lg text-center active" data-id="compiler">
+                        <div class="font-bold text-sm md:text-base">1950s</div>
+                        <div class="text-xs md:text-sm">编译器</div>
+                    </div>
+                    <div class="h-px w-8 bg-gray-300"></div>
+                    <div class="timeline-item cursor-pointer p-3 md:p-4 rounded-lg text-center" data-id="case">
+                        <div class="font-bold text-sm md:text-base">1980s</div>
+                        <div class="text-xs md:text-sm">CASE工具</div>
+                    </div>
+                     <div class="h-px w-8 bg-gray-300"></div>
+                    <div class="timeline-item cursor-pointer p-3 md:p-4 rounded-lg text-center" data-id="rad">
+                        <div class="font-bold text-sm md:text-base">1990s</div>
+                        <div class="text-xs md:text-sm">RAD/VB</div>
+                    </div>
+                    <div class="h-px w-8 bg-gray-300"></div>
+                    <div class="timeline-item cursor-pointer p-3 md:p-4 rounded-lg text-center" data-id="lowcode">
+                        <div class="font-bold text-sm md:text-base">2010s</div>
+                        <div class="text-xs md:text-sm">低代码</div>
+                    </div>
+                     <div class="h-px w-8 bg-gray-300"></div>
+                    <div class="timeline-item cursor-pointer p-3 md:p-4 rounded-lg text-center" data-id="ai">
+                        <div class="font-bold text-sm md:text-base">2020s</div>
+                        <div class="text-xs md:text-sm">生成式AI</div>
+                    </div>
+                </div>
+            </div>
+            <div id="history-content" class="mt-8 bg-primary p-6 rounded-lg max-w-3xl mx-auto shadow-inner">
+                <h4 id="history-title" class="text-2xl font-semibold mb-2 text-accent">编译器时代 (1950s)</h4>
+                <p id="history-fear" class="mb-2"><strong>当时的论调：</strong> “有了编译器，编程只剩写英语，程序员将消失。”</p>
+                <p id="history-outcome" class="text-gray-700"><strong>实际结果：</strong> 将程序员从机器码中解放，极大降低了开发门槛，催生了“商业程序员”这一全新角色，软件应用领域爆炸性增长，创造了远超以往的岗位数量。</p>
+            </div>
+        </section>
+
+        <section id="playbook" class="py-16 fade-in">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">未来图鉴：AI时代的新角色与核心能力</h3>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">当编写代码本身被大规模自动化，“软件工程师”的价值基础便从代码实现转向更高维度的能力。传统的角色正在分化，新的职业赛道正在出现。理解这些新角色和所需的核心能力，是规划未来职业发展的关键。</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">🧠 系统思维与架构能力</h4>
+                    <p class="text-gray-600 text-sm">核心价值在于将成千上万的AI生成组件，有效地组织成一个可扩展、可维护的复杂系统。这是人类架构师无法被替代的全局视野。</p>
+                </div>
+                <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">🎯 面向产品的工程能力</h4>
+                    <p class="text-gray-600 text-sm">像产品经理一样思考，深刻理解用户需求和商业目标，将技术决策与业务价值紧密对齐。回答“为何构建”比“如何构建”更重要。</p>
+                </div>
+                 <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">🗣️ 沟通与协作能力</h4>
+                    <p class="text-gray-600 text-sm">在由人类和AI代理组成的混合团队中，清晰地向非技术人员解释、协商和共创的能力，是项目成功的粘合剂。</p>
+                </div>
+                 <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">🤖 AI编排者</h4>
+                    <p class="text-gray-600 text-sm">从“执行者”转变为“编排者”，核心工作是定义意图、监督AI、验证结果，确保AI的产出符合高质量标准和战略目标。</p>
+                </div>
+                <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">🔍 AI质量审计师</h4>
+                    <p class="text-gray-600 text-sm">作为AI生成代码的“把关人”，系统性地审查其正确性、安全性、是否存在偏见和伦理风险，成为质量保证的新前沿。</p>
+                </div>
+                 <div class="bg-secondary p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-bold mb-2">✍️ 提示词工程师</h4>
+                    <p class="text-gray-600 text-sm">人与AI之间的“翻译官”，专注于设计和优化指令，引导AI产生高质量、准确的输出。这是一项关于逻辑、语言和创造力的技能。</p>
+                </div>
+            </div>
+             <div class="text-center mt-12">
+                <h4 class="text-2xl font-bold mb-4">职业阶梯的重构</h4>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">AI正冲击传统的职业晋升路径，入门级岗位需求萎缩，而资深岗位的定义正在改变。这带来了“导师制度的悖论”和未来“资深技能断崖”的风险。</p>
+                 <div class="chart-container">
+                    <canvas id="hiringTrendChart"></canvas>
+                </div>
+             </div>
+        </section>
+
+        <section id="roadmap" class="py-16 bg-secondary rounded-2xl fade-in">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold">行动指南：你的战略路线图</h3>
+                <p class="mt-2 text-gray-600 max-w-2xl mx-auto">面对变革，不同职业阶段的开发者和技术领导者需要采取不同的应对策略。这里为你提供了具体、可操作的行动计划，以构建职业韧性，在新时代中脱颖而出。</p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-3 text-accent">🌱 初级工程师 / 新入行者</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>发展路径：</strong>放弃宽泛的“全栈”，专注于AI/ML、网络安全、数据工程等高需求领域，建立深度专长。</li>
+                        <li><strong>能力证明：</strong>构建强大的个人作品集。积极为开源项目贡献测试和文档，考取专业认证。</li>
+                        <li><strong>市场定位：</strong>将自己定位为“AI增强型”开发者，突出验证、测试和调试AI生成代码的能力。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-3 text-accent">🚀 中高级工程师</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                         <li><strong>发展路径：</strong>主动从“执行者”转变为“编排者”，将精力投入到系统架构、产品思维和跨职能领导力上。</li>
+                        <li><strong>能力证明：</strong>在组织内领导AI集成试点项目，为团队制定AI工具使用规范，扮演“教人如何与AI协作”的导师角色。</li>
+                        <li><strong>市场定位：</strong>成为团队中不可或缺的“人在回路”，核心价值是为开发流程带来质量、安全和业务对齐。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-3 text-accent">🧭 技术领导者 (CTO / VP)</h4>
+                     <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>人才战略：</strong>战略性地对现有员工进行技能再培训。重新设计职业阶梯，奖励开发内部工具、建立AI最佳实践的员工，以解决“导师悖论”。</li>
+                        <li><strong>流程与治理：</strong>放弃“代码行数”等过时指标，转向采用DORA等系统健康度量。为AI代码建立强制性的治理和审查流程。</li>
+                        <li><strong>技术战略：</strong>鼓励受控实验，但加强人工监督。避免被单一AI供应商锁定，投资于可互操作的平台和技能。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 border-t border-gray-200">
+        <p class="text-gray-500 text-sm">一个基于报告的互动体验 | 设计与实现 &copy; 2025</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const appData = {
+                duality: {
+                    promise: {
+                        title: '🚀 生产力的巨大飞跃',
+                        text: '研究表明，使用AI工具的程序员完成任务的速度提升高达55.8%。AI能够将专家的隐性知识传递给新手，显著提升经验不足员工的生产力（约35%），实现了技能的“扁平化”，并催生了对软件的爆炸性需求（杰文斯悖论）。',
+                        chartData: [55.8, 35],
+                        chartLabels: ['任务完成速度提升', '初级开发者生产力提升'],
+                        chartBg: 'rgba(138, 110, 90, 0.6)'
+                    },
+                    peril: {
+                        title: '📉 质量与技术债的隐患',
+                        text: 'AI生成代码倾向于复制粘贴而非优雅抽象，导致“代码流失率”增加，技术债累积。DORA报告发现，AI导致交付稳定性下降7.2%。开发者需花费更多时间审查和调试AI引入的微妙错误，形成“生产力悖论”。',
+                        chartData: [7.2, 20],
+                        chartLabels: ['交付稳定性下降', '代码流失率(示意)'],
+                        chartBg: 'rgba(211, 108, 108, 0.6)'
+                    }
+                },
+                history: {
+                    compiler: {
+                        title: '编译器时代 (1950s)',
+                        fear: '<strong>当时的论调：</strong> “有了编译器，编程只剩写英语，程序员将消失。”',
+                        outcome: '<strong>实际结果：</strong> 将程序员从机器码中解放，极大降低了开发门槛，催生了“商业程序员”这一全新角色，软件应用领域爆炸性增长，创造了远超以往的岗位数量。'
+                    },
+                    case: {
+                        title: 'CASE工具时代 (1980s)',
+                        fear: '<strong>当时的论调：</strong> “按图拉程序，编码100%自动化，程序员多余。”',
+                        outcome: '<strong>实际结果：</strong> 工具过于僵化复杂，未能实现承诺。但其理念被拆解为IDE、版本控制等模块化工具并大获成功，提升了而非取代了开发者。'
+                    },
+                    rad: {
+                        title: 'RAD/Visual Basic时代 (1990s)',
+                        fear: '<strong>当时的论调：</strong> “拖拽组件即完工，IT部门将裁减。”',
+                        outcome: '<strong>实际结果：</strong> 催生了一代“公民开发者”，极大提高了企业敏捷性。同时，也创造了对专业工程师进行应用维护、扩展和重构的巨大长尾需求。'
+                    },
+                    lowcode: {
+                        title: '低代码时代 (2010s)',
+                        fear: '<strong>当时的论调：</strong> “‘公民开发者’点击部署应用，企业不再雇程序员。”',
+                        outcome: '<strong>实际结果：</strong> 进一步加速了应用开发，但专业开发者转向更高价值的架构、集成和治理工作，其薪酬和满意度反而提升。'
+                    },
+                    ai: {
+                        title: '生成式AI时代 (2020s)',
+                        fear: '<strong>当时的论调：</strong> “大模型能写90%代码，90%程序员将被替代。”',
+                        outcome: '<strong>正在发生：</strong> 程序员角色正在“升格”为AI编排者、系统架构师和质量监督者。对更高层次认知能力的需求正在激增。'
+                    }
+                },
+                hiring: {
+                    labels: ['前AI时代', 'AI时代'],
+                    datasets: [
+                        { label: '初级岗位比例', data: [30, 20], backgroundColor: 'rgba(138, 110, 90, 0.5)' },
+                        { label: '中级岗位比例', data: [40, 40], backgroundColor: 'rgba(180, 180, 180, 0.5)' },
+                        { label: '高级岗位比例', data: [30, 40], backgroundColor: 'rgba(92, 92, 92, 0.5)' },
+                    ]
+                }
+            };
+            
+            let dualityChart, hiringTrendChart;
+
+            function initDualityChart() {
+                const ctx = document.getElementById('dualityChart').getContext('2d');
+                dualityChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: appData.duality.promise.chartLabels,
+                        datasets: [{
+                            label: '百分比 (%)',
+                            data: appData.duality.promise.chartData,
+                            backgroundColor: appData.duality.promise.chartBg,
+                            borderColor: appData.duality.promise.chartBg.replace('0.6', '1'),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } }, x: { grid: { display: false } } },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            function updateDualityChart(type) {
+                const data = appData.duality[type];
+                dualityChart.data.labels = data.chartLabels;
+                dualityChart.data.datasets[0].data = data.chartData;
+                dualityChart.data.datasets[0].backgroundColor = data.chartBg;
+                dualityChart.data.datasets[0].borderColor = data.chartBg.replace('0.6', '1');
+                dualityChart.update();
+
+                document.getElementById('duality-title').innerHTML = data.title;
+                document.getElementById('duality-p').textContent = data.text;
+            }
+
+            function initHiringTrendChart() {
+                const ctx = document.getElementById('hiringTrendChart').getContext('2d');
+                hiringTrendChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: appData.hiring,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { stacked: true, max: 100, ticks: { callback: value => value + '%' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                            y: { stacked: true, grid: { display: false } }
+                        },
+                        plugins: {
+                            legend: { position: 'top' },
+                            tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${context.raw}%` } }
+                        }
+                    }
+                });
+            }
+
+
+            document.querySelectorAll('.duality-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.duality-toggle').forEach(b => b.classList.remove('btn-accent'));
+                    btn.classList.add('btn-accent');
+                    const type = btn.id.includes('promise') ? 'promise' : 'peril';
+                    updateDualityChart(type);
+                });
+            });
+
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    const id = item.dataset.id;
+                    const data = appData.history[id];
+                    const contentDiv = document.getElementById('history-content');
+                    contentDiv.classList.remove('fade-in');
+                    void contentDiv.offsetWidth; 
+                    contentDiv.classList.add('fade-in');
+                    document.getElementById('history-title').innerHTML = data.title;
+                    document.getElementById('history-fear').innerHTML = data.fear;
+                    document.getElementById('history-outcome').innerHTML = data.outcome;
+                });
+            });
+            
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const navLinks = document.querySelectorAll('header .nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            const targetId = link.getAttribute('href').substring(1);
+                            if (targetId === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-40% 0px -60% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+
+            initDualityChart();
+            initHiringTrendChart();
+        });
+    </script>
+</body>
+</html>

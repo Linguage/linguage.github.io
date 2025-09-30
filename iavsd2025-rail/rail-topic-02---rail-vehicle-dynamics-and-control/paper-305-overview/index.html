@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-305 基本信息 论文编号：305 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Data-Driven Differentiable Adaptive Ensemble Kalman Filter for Enhanced Vehicle State Estimation 中文标题：数据驱动可微分自适应集合卡尔曼滤波器用于增强车辆状态估计 作者及单位：Maozhenning Yang¹,², Jiarui Hu¹,², Kaiying Zhang¹,², Xiaoguang Ma¹,³, Yuanjin Ji¹,²*, Lihui Ren¹,² (¹同济大学交通运输学院，中国；②上海铁路基础设施耐久性与系统安全上海市重点实验室，中国；③中车南京浦镇车辆有限公司，中国) 摘要 跨座式单轨车辆在城市轨道交通中具有显著优势，如高机动性和对复杂地形的强适应性。然而，这些车辆在运行过程中会受到严重的冲击载荷，特别是在梁连接点，这会导致高应力集中并引起关键部件的疲劳损伤。本研究提出了一种数据驱动可微分自适应集合卡尔曼滤波器(DDAEKF)，用于单轨转向架的实时状态估计。通过将递归贝叶斯滤波与基于深度学习的状态转移和观测模型相结合，所提出的方法提高了动态运行条件下的状态估计准确性，为后续故障诊断奠定了基础。该模型通过数值仿真和1:8比例试验台进行验证，在2000秒评估期间实现了对车辆状态的稳定鲁棒跟踪。结果表明，DDAEKF能够有效估计位移和速度，同时减轻方向估计中的不确定性。该方法为提高跨座式单轨系统的安全性和运行效率提供了可靠的状态监测方法。
+关键词 #单轨 #状态估计 #动态自适应集合卡尔曼滤波器 #智能状态监测
+背景与动机 跨座式单轨车辆因其独特的优势，如小转弯半径和对复杂地形的强适应性，已被广泛应用于城市轨道交通系统。然而，这些车辆面临重大的工程挑战，其中最突出的是从轨道传递到转向架的冲击载荷。这种冲击在梁连接点处尤为严重，常常导致严重的应力集中。这些集中应力是行走轮和导向轮等关键部件疲劳和冲击损伤的主要原因。
+如图1所示，在单轨混凝土梁连接处设计了伸缩缝以适应热膨胀。当车辆通过这些接缝时，车轮上产生的冲击会导致轮毂损坏。这不仅损害了单轨系统的运行安全性和可靠性，还显著增加了维护成本。因此，进行详细的车辆状态估计对于全面了解疲劳失效机制至关重要。
+卡尔曼滤波器(KF)作为状态估计的经典算法，已广泛应用于交通系统、机器人导航、目标跟踪和工业自动化。在线性高斯系统假设下，KF提供最优状态估计。然而，在处理非线性系统结构、异构多传感器观测和时变噪声特性时，其建模能力和适应性受到显著限制。
+为提高在非线性环境中的估计准确性和鲁棒性，已开发了各种改进的滤波方法，包括扩展卡尔曼滤波器(EKF)、无迹卡尔曼滤波器(UKF)和集合卡尔曼滤波器(EnKF)。EnKF是一种顺序蒙特卡罗方法，是传统卡尔曼滤波器的替代方案，以及基于伴随或四维变分方法。它特别适合解决大状态空间和估计误差的非线性演化。
+然而，EnKF的性能仍然高度依赖于过程和观测模型的准确性。在实际工程应用中，环境干扰、建模偏差和传感器故障通常导致状态转移和观测的不准确表示，导致估计误差的显著累积。最近，随着深度学习在时间序列建模和动力系统识别中的快速发展，研究人员探索了数据驱动技术与卡尔曼滤波的集成，旨在构建端到端可训练的状态估计框架。
+研究方法 本文采用理论建模、算法开发和实验验证相结合的方法：
+DDAEKF模型设计：将DDAEKF公式化为EnKF的扩展，同时保持其核心算法步骤不变。具体来说，使用动态集合成员来表示状态分布。集合数量通过动态调整策略确定：N_ensemble = N_min &#43; ασ_t，其中N_ensemble是集合成员数量，N_min是最小集合成员数量，α是动态调整系数，σ_t是时间t的状态估计协方差的范数或主特征值。
+预测步骤：首先使用先验状态x_{t-1}生成扰动样本集合X_{t-1} = {x_{t-1}^{(1)},&hellip;,x_{t-1}^{(E)}}。然后通过非线性状态转移模型f_θ(由多层感知器表示)传播每个集合成员，并添加过程噪声v_t ~ N(0,q_ψ(x_{t-1}))以捕获动态不确定性。
+观测建模：采用随机传感器模型生成粒子级观测值y_t^{(i)} ~ ζ(y_t|y_t)，模拟实际传感器读数的随机性。同时学习测量噪声模型以估计测量噪声的协方差，增强在噪声条件下的鲁棒性。
+更新步骤：将每个预测状态x_t^{(i)}通过观测模型h_ψ(也由MLP表示)得到预测测量值ŷ_t^{(i)}。这些预测与观测数据比较，计算创新协方差矩阵S_t，捕获预测和实际观测之间的差异。
+卡尔曼增益计算：使用集合平均偏差A_t和观测预测偏差HA_t计算卡尔曼增益K_t，这是平衡模型预测和传感器测量影响的关键项。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-305 基本信息 论文编号：305 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Data-Driven Differentiable Adaptive Ensemble Kalman Filter for Enhanced Vehicle State Estimation 中文标题：数据驱动可微分自适应集合卡尔曼滤波器用于增强车辆状态估计 作者及单位：Maozhenning Yang¹,², Jiarui Hu¹,², Kaiying Zhang¹,², Xiaoguang Ma¹,³, Yuanjin Ji¹,²*, Lihui Ren¹,² (¹同济大学交通运输学院，中国；②上海铁路基础设施耐久性与系统安全上海市重点实验室，中国；③中车南京浦镇车辆有限公司，中国) 摘要 跨座式单轨车辆在城市轨道交通中具有显著优势，如高机动性和对复杂地形的强适应性。然而，这些车辆在运行过程中会受到严重的冲击载荷，特别是在梁连接点，这会导致高应力集中并引起关键部件的疲劳损伤。本研究提出了一种数据驱动可微分自适应集合卡尔曼滤波器(DDAEKF)，用于单轨转向架的实时状态估计。通过将递归贝叶斯滤波与基于深度学习的状态转移和观测模型相结合，所提出的方法提高了动态运行条件下的状态估计准确性，为后续故障诊断奠定了基础。该模型通过数值仿真和1:8比例试验台进行验证，在2000秒评估期间实现了对车辆状态的稳定鲁棒跟踪。结果表明，DDAEKF能够有效估计位移和速度，同时减轻方向估计中的不确定性。该方法为提高跨座式单轨系统的安全性和运行效率提供了可靠的状态监测方法。
+关键词 #单轨 #状态估计 #动态自适应集合卡尔曼滤波器 #智能状态监测
+背景与动机 跨座式单轨车辆因其独特的优势，如小转弯半径和对复杂地形的强适应性，已被广泛应用于城市轨道交通系统。然而，这些车辆面临重大的工程挑战，其中最突出的是从轨道传递到转向架的冲击载荷。这种冲击在梁连接点处尤为严重，常常导致严重的应力集中。这些集中应力是行走轮和导向轮等关键部件疲劳和冲击损伤的主要原因。
+如图1所示，在单轨混凝土梁连接处设计了伸缩缝以适应热膨胀。当车辆通过这些接缝时，车轮上产生的冲击会导致轮毂损坏。这不仅损害了单轨系统的运行安全性和可靠性，还显著增加了维护成本。因此，进行详细的车辆状态估计对于全面了解疲劳失效机制至关重要。
+卡尔曼滤波器(KF)作为状态估计的经典算法，已广泛应用于交通系统、机器人导航、目标跟踪和工业自动化。在线性高斯系统假设下，KF提供最优状态估计。然而，在处理非线性系统结构、异构多传感器观测和时变噪声特性时，其建模能力和适应性受到显著限制。
+为提高在非线性环境中的估计准确性和鲁棒性，已开发了各种改进的滤波方法，包括扩展卡尔曼滤波器(EKF)、无迹卡尔曼滤波器(UKF)和集合卡尔曼滤波器(EnKF)。EnKF是一种顺序蒙特卡罗方法，是传统卡尔曼滤波器的替代方案，以及基于伴随或四维变分方法。它特别适合解决大状态空间和估计误差的非线性演化。
+然而，EnKF的性能仍然高度依赖于过程和观测模型的准确性。在实际工程应用中，环境干扰、建模偏差和传感器故障通常导致状态转移和观测的不准确表示，导致估计误差的显著累积。最近，随着深度学习在时间序列建模和动力系统识别中的快速发展，研究人员探索了数据驱动技术与卡尔曼滤波的集成，旨在构建端到端可训练的状态估计框架。
+研究方法 本文采用理论建模、算法开发和实验验证相结合的方法：
+DDAEKF模型设计：将DDAEKF公式化为EnKF的扩展，同时保持其核心算法步骤不变。具体来说，使用动态集合成员来表示状态分布。集合数量通过动态调整策略确定：N_ensemble = N_min &#43; ασ_t，其中N_ensemble是集合成员数量，N_min是最小集合成员数量，α是动态调整系数，σ_t是时间t的状态估计协方差的范数或主特征值。
+预测步骤：首先使用先验状态x_{t-1}生成扰动样本集合X_{t-1} = {x_{t-1}^{(1)},&hellip;,x_{t-1}^{(E)}}。然后通过非线性状态转移模型f_θ(由多层感知器表示)传播每个集合成员，并添加过程噪声v_t ~ N(0,q_ψ(x_{t-1}))以捕获动态不确定性。
+观测建模：采用随机传感器模型生成粒子级观测值y_t^{(i)} ~ ζ(y_t|y_t)，模拟实际传感器读数的随机性。同时学习测量噪声模型以估计测量噪声的协方差，增强在噪声条件下的鲁棒性。
+更新步骤：将每个预测状态x_t^{(i)}通过观测模型h_ψ(也由MLP表示)得到预测测量值ŷ_t^{(i)}。这些预测与观测数据比较，计算创新协方差矩阵S_t，捕获预测和实际观测之间的差异。
+卡尔曼增益计算：使用集合平均偏差A_t和观测预测偏差HA_t计算卡尔曼增益K_t，这是平衡模型预测和传感器测量影响的关键项。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/" class="crumb-sec">Rail Topic 02 - Rail Vehicle Dynamics and Control</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览paper-305">IAVSD 2025 论文概览：paper-305</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：305</li>
+<li><strong>所属主题</strong>：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制)</li>
+<li><strong>英文标题</strong>：Data-Driven Differentiable Adaptive Ensemble Kalman Filter for Enhanced Vehicle State Estimation</li>
+<li><strong>中文标题</strong>：数据驱动可微分自适应集合卡尔曼滤波器用于增强车辆状态估计</li>
+<li><strong>作者及单位</strong>：Maozhenning Yang¹,², Jiarui Hu¹,², Kaiying Zhang¹,², Xiaoguang Ma¹,³, Yuanjin Ji¹,²*, Lihui Ren¹,² (¹同济大学交通运输学院，中国；②上海铁路基础设施耐久性与系统安全上海市重点实验室，中国；③中车南京浦镇车辆有限公司，中国)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>跨座式单轨车辆在城市轨道交通中具有显著优势，如高机动性和对复杂地形的强适应性。然而，这些车辆在运行过程中会受到严重的冲击载荷，特别是在梁连接点，这会导致高应力集中并引起关键部件的疲劳损伤。本研究提出了一种数据驱动可微分自适应集合卡尔曼滤波器(DDAEKF)，用于单轨转向架的实时状态估计。通过将递归贝叶斯滤波与基于深度学习的状态转移和观测模型相结合，所提出的方法提高了动态运行条件下的状态估计准确性，为后续故障诊断奠定了基础。该模型通过数值仿真和1:8比例试验台进行验证，在2000秒评估期间实现了对车辆状态的稳定鲁棒跟踪。结果表明，DDAEKF能够有效估计位移和速度，同时减轻方向估计中的不确定性。该方法为提高跨座式单轨系统的安全性和运行效率提供了可靠的状态监测方法。</p>
+<h2 id="关键词">关键词</h2>
+<p>#单轨 #状态估计 #动态自适应集合卡尔曼滤波器 #智能状态监测</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>跨座式单轨车辆因其独特的优势，如小转弯半径和对复杂地形的强适应性，已被广泛应用于城市轨道交通系统。然而，这些车辆面临重大的工程挑战，其中最突出的是从轨道传递到转向架的冲击载荷。这种冲击在梁连接点处尤为严重，常常导致严重的应力集中。这些集中应力是行走轮和导向轮等关键部件疲劳和冲击损伤的主要原因。</p>
+<p>如图1所示，在单轨混凝土梁连接处设计了伸缩缝以适应热膨胀。当车辆通过这些接缝时，车轮上产生的冲击会导致轮毂损坏。这不仅损害了单轨系统的运行安全性和可靠性，还显著增加了维护成本。因此，进行详细的车辆状态估计对于全面了解疲劳失效机制至关重要。</p>
+<p>卡尔曼滤波器(KF)作为状态估计的经典算法，已广泛应用于交通系统、机器人导航、目标跟踪和工业自动化。在线性高斯系统假设下，KF提供最优状态估计。然而，在处理非线性系统结构、异构多传感器观测和时变噪声特性时，其建模能力和适应性受到显著限制。</p>
+<p>为提高在非线性环境中的估计准确性和鲁棒性，已开发了各种改进的滤波方法，包括扩展卡尔曼滤波器(EKF)、无迹卡尔曼滤波器(UKF)和集合卡尔曼滤波器(EnKF)。EnKF是一种顺序蒙特卡罗方法，是传统卡尔曼滤波器的替代方案，以及基于伴随或四维变分方法。它特别适合解决大状态空间和估计误差的非线性演化。</p>
+<p>然而，EnKF的性能仍然高度依赖于过程和观测模型的准确性。在实际工程应用中，环境干扰、建模偏差和传感器故障通常导致状态转移和观测的不准确表示，导致估计误差的显著累积。最近，随着深度学习在时间序列建模和动力系统识别中的快速发展，研究人员探索了数据驱动技术与卡尔曼滤波的集成，旨在构建端到端可训练的状态估计框架。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本文采用理论建模、算法开发和实验验证相结合的方法：</p>
+<ol>
+<li>
+<p><strong>DDAEKF模型设计</strong>：将DDAEKF公式化为EnKF的扩展，同时保持其核心算法步骤不变。具体来说，使用动态集合成员来表示状态分布。集合数量通过动态调整策略确定：N_ensemble = N_min + ασ_t，其中N_ensemble是集合成员数量，N_min是最小集合成员数量，α是动态调整系数，σ_t是时间t的状态估计协方差的范数或主特征值。</p>
+</li>
+<li>
+<p><strong>预测步骤</strong>：首先使用先验状态x_{t-1}生成扰动样本集合X_{t-1} = {x_{t-1}^{(1)},&hellip;,x_{t-1}^{(E)}}。然后通过非线性状态转移模型f_θ(由多层感知器表示)传播每个集合成员，并添加过程噪声v_t ~ N(0,q_ψ(x_{t-1}))以捕获动态不确定性。</p>
+</li>
+<li>
+<p><strong>观测建模</strong>：采用随机传感器模型生成粒子级观测值y_t^{(i)} ~ ζ(y_t|y_t)，模拟实际传感器读数的随机性。同时学习测量噪声模型以估计测量噪声的协方差，增强在噪声条件下的鲁棒性。</p>
+</li>
+<li>
+<p><strong>更新步骤</strong>：将每个预测状态x_t^{(i)}通过观测模型h_ψ(也由MLP表示)得到预测测量值ŷ_t^{(i)}。这些预测与观测数据比较，计算创新协方差矩阵S_t，捕获预测和实际观测之间的差异。</p>
+</li>
+<li>
+<p><strong>卡尔曼增益计算</strong>：使用集合平均偏差A_t和观测预测偏差HA_t计算卡尔曼增益K_t，这是平衡模型预测和传感器测量影响的关键项。</p>
+</li>
+<li>
+<p><strong>集合更新</strong>：使用标准卡尔曼更新规则更新每个集合成员：x_t^{(i)} = x̂_t^{(i)} + K_t(y_t^{(i)} - ŷ_t^{(i)})。最终状态估计通过平均校正后的集合获得：x̂_t = (1/E)Σ_{i=1}^E x_t^{(i)}。</p>
+</li>
+<li>
+<p><strong>端到端训练</strong>：定义三个损失函数：状态预测损失L_fθ、观测预测损失L_sζ和最终估计损失L_final。这些目标指导转移和观测模型的联合优化，使DDAEKF能够从数据中学习，同时保持递归滤波结构。</p>
+</li>
+<li>
+<p><strong>实验验证</strong>：从动态仿真软件和1:8比例试验台收集转向架的相应加速度和速度数据用于训练。使用PyTorch框架在NVIDIA RTX 3090 GPU上实现模型。</p>
+</li>
+</ol>
+<h2 id="主要结论">主要结论</h2>
+<ol>
+<li>
+<p><strong>模型有效性</strong>：DDAEKF模型在2000秒的长期状态估计实验中表现出色，在动力学仿真软件和1:8试验台中都能实现车辆状态的鲁棒稳定跟踪。</p>
+</li>
+<li>
+<p><strong>状态估计精度</strong>：所提出的方法能够有效估计位移和速度，同时减轻方向估计中的不确定性。尽管方向向量表现出相对较高的不确定性，该框架仍能随时间准确跟踪整体状态。</p>
+</li>
+<li>
+<p><strong>自适应能力</strong>：通过动态集合调整和基于深度学习的建模，DDAEKF在保持效率的同时提高了估计准确性。模型能够适应变化的条件，增强稳定性和适应性。</p>
+</li>
+<li>
+<p><strong>算法优势</strong>：DDAEKF将自适应集合调整与深度学习建模相结合，既保留了传统滤波的结构优势，又显著增强了复杂运行条件下的估计准确性和鲁棒性。</p>
+</li>
+<li>
+<p><strong>工程应用价值</strong>：该方法为提高跨座式单轨系统的安全性和运行效率提供了可靠的状态监测方法，在预测性维护和故障诊断方面具有潜力。</p>
+</li>
+<li>
+<p><strong>技术创新</strong>：通过将递归贝叶斯滤波与基于深度学习的状态转移和观测模型相结合，DDAEKF为非线性动力系统中的鲁棒准确状态估计提供了新框架。</p>
+</li>
+<li>
+<p><strong>实时性能</strong>：模型在2000秒评估期间保持了稳定的计算性能，表明其适用于实时状态监测应用。</p>
+</li>
+</ol>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>首次提出数据驱动可微分自适应集合卡尔曼滤波器(DDAEKF)用于单轨车辆状态估计</li>
+<li>开发了动态集合调整策略，能够根据状态估计不确定性自适应调整集合大小</li>
+<li>将深度神经网络与贝叶斯递归估计无缝集成，实现端到端训练</li>
+<li>通过1:8比例试验台验证了算法在实际工程环境中的有效性</li>
+<li>实现了2000秒长期状态估计的稳定鲁棒跟踪</li>
+<li>为单轨系统安全性和运行效率提升提供了新的智能监测方法</li>
+<li>在预测性维护和故障诊断方面具有重要应用潜力</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Data-Driven Differentiable Adaptive Ensemble Kalman Filter (DDAEKF)</td>
+          <td>数据驱动可微分自适应集合卡尔曼滤波器</td>
+      </tr>
+      <tr>
+          <td>Straddle-Type Monorail</td>
+          <td>跨座式单轨</td>
+      </tr>
+      <tr>
+          <td>State Estimation</td>
+          <td>状态估计</td>
+      </tr>
+      <tr>
+          <td>Dynamic Adaptive Ensemble Kalman Filter</td>
+          <td>动态自适应集合卡尔曼滤波器</td>
+      </tr>
+      <tr>
+          <td>Intelligent State Monitoring</td>
+          <td>智能状态监测</td>
+      </tr>
+      <tr>
+          <td>Bayesian Filtering</td>
+          <td>贝叶斯滤波</td>
+      </tr>
+      <tr>
+          <td>Deep Learning</td>
+          <td>深度学习</td>
+      </tr>
+      <tr>
+          <td>State Transition Model</td>
+          <td>状态转移模型</td>
+      </tr>
+      <tr>
+          <td>Observation Model</td>
+          <td>观测模型</td>
+      </tr>
+      <tr>
+          <td>Ensemble Kalman Filter (EnKF)</td>
+          <td>集合卡尔曼滤波器</td>
+      </tr>
+      <tr>
+          <td>Extended Kalman Filter (EKF)</td>
+          <td>扩展卡尔曼滤波器</td>
+      </tr>
+      <tr>
+          <td>Unscented Kalman Filter (UKF)</td>
+          <td>无迹卡尔曼滤波器</td>
+      </tr>
+      <tr>
+          <td>Recursive Bayesian Filtering</td>
+          <td>递归贝叶斯滤波</td>
+      </tr>
+      <tr>
+          <td>Sequential Monte Carlo Method</td>
+          <td>顺序蒙特卡罗方法</td>
+      </tr>
+      <tr>
+          <td>Particle Filter</td>
+          <td>粒子滤波器</td>
+      </tr>
+      <tr>
+          <td>Multilayer Perceptron (MLP)</td>
+          <td>多层感知器</td>
+      </tr>
+      <tr>
+          <td>End-to-End Training</td>
+          <td>端到端训练</td>
+      </tr>
+      <tr>
+          <td>State Vector</td>
+          <td>状态向量</td>
+      </tr>
+      <tr>
+          <td>Covariance Matrix</td>
+          <td>协方差矩阵</td>
+      </tr>
+      <tr>
+          <td>Kalman Gain</td>
+          <td>卡尔曼增益</td>
+      </tr>
+      <tr>
+          <td>Innovation Covariance Matrix</td>
+          <td>创新协方差矩阵</td>
+      </tr>
+      <tr>
+          <td>Process Noise</td>
+          <td>过程噪声</td>
+      </tr>
+      <tr>
+          <td>Measurement Noise</td>
+          <td>测量噪声</td>
+      </tr>
+      <tr>
+          <td>Loss Function</td>
+          <td>损失函数</td>
+      </tr>
+      <tr>
+          <td>Prediction Step</td>
+          <td>预测步骤</td>
+      </tr>
+      <tr>
+          <td>Update Step</td>
+          <td>更新步骤</td>
+      </tr>
+      <tr>
+          <td>Ensemble Members</td>
+          <td>集合成员</td>
+      </tr>
+      <tr>
+          <td>Stochastic Neural Networks</td>
+          <td>随机神经网络</td>
+      </tr>
+      <tr>
+          <td>Physics Transformations</td>
+          <td>物理变换</td>
+      </tr>
+      <tr>
+          <td>Bogie</td>
+          <td>转向架</td>
+      </tr>
+      <tr>
+          <td>Running Wheel</td>
+          <td>行走轮</td>
+      </tr>
+      <tr>
+          <td>Guiding Wheel</td>
+          <td>导向轮</td>
+      </tr>
+      <tr>
+          <td>Expansion Joint</td>
+          <td>伸缩缝</td>
+      </tr>
+      <tr>
+          <td>Impact Load</td>
+          <td>冲击载荷</td>
+      </tr>
+      <tr>
+          <td>Stress Concentration</td>
+          <td>应力集中</td>
+      </tr>
+      <tr>
+          <td>Fatigue Damage</td>
+          <td>疲劳损伤</td>
+      </tr>
+      <tr>
+          <td>Nonlinear Dynamics</td>
+          <td>非线性动力学</td>
+      </tr>
+      <tr>
+          <td>Multi-Source Observation</td>
+          <td>多源观测</td>
+      </tr>
+      <tr>
+          <td>Sensor Variability</td>
+          <td>传感器变异性</td>
+      </tr>
+      <tr>
+          <td>High-Dimensional Measurements</td>
+          <td>高维测量</td>
+      </tr>
+      <tr>
+          <td>Robustness</td>
+          <td>鲁棒性</td>
+      </tr>
+      <tr>
+          <td>Adaptability</td>
+          <td>适应性</td>
+      </tr>
+      <tr>
+          <td>Real-Time State Estimation</td>
+          <td>实时状态估计</td>
+      </tr>
+      <tr>
+          <td>Condition Monitoring</td>
+          <td>状态监测</td>
+      </tr>
+      <tr>
+          <td>Fault Diagnosis</td>
+          <td>故障诊断</td>
+      </tr>
+      <tr>
+          <td>Predictive Maintenance</td>
+          <td>预测性维护</td>
+      </tr>
+      <tr>
+          <td>Scale Test Rig</td>
+          <td>比例试验台</td>
+      </tr>
+      <tr>
+          <td>Numerical Simulation</td>
+          <td>数值仿真</td>
+      </tr>
+      <tr>
+          <td>PyTorch Framework</td>
+          <td>PyTorch框架</td>
+      </tr>
+      <tr>
+          <td>GPU Acceleration</td>
+          <td>GPU加速</td>
+      </tr>
+      <tr>
+          <td>Long-Term Tracking</td>
+          <td>长期跟踪</td>
+      </tr>
+      <tr>
+          <td>Orientation Uncertainty</td>
+          <td>方向不确定性</td>
+      </tr>
+      <tr>
+          <td>Operational Safety</td>
+          <td>运行安全</td>
+      </tr>
+      <tr>
+          <td>Maintenance Cost</td>
+          <td>维护成本</td>
+      </tr>
+      <tr>
+          <td>Urban Rail Transit</td>
+          <td>城市轨道交通</td>
+      </tr>
+      <tr>
+          <td>Complex Terrain</td>
+          <td>复杂地形</td>
+      </tr>
+      <tr>
+          <td>Small Turning Radius</td>
+          <td>小转弯半径</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-02</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

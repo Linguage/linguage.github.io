@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>格非：节制欲望需要大智慧 - 交互式解读</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Chosen Palette: Warm Neutrals (Stone, Amber) -->
+        <!-- Application Structure Plan: The SPA uses a thematic, tab-based navigation to deconstruct Ge Fei's complex philosophical discourse into four digestible themes: Era, Inner Peace, Literature, and Life's Wisdom. This non-linear structure empowers users to explore topics of interest freely, enhancing comprehension and engagement compared to a linear text format. Interactions within each section (e.g., clickable diagrams, toggles, charts) are designed to reveal information progressively, encouraging active exploration rather than passive reading. -->
+        <!-- Visualization & Content Choices: 1. Era: Side-by-side HTML layout to compare Rural/Urban concepts (Goal: Compare, Method: HTML/CSS). 2. Inner Peace: Doughnut chart to visualize the relationship between the external 'World of Life' and 'Inner Meaning' (Goal: Relationships, Method: Chart.js). 3. Literature: Radar chart to contrast 'Great' vs. 'Popular' works (Goal: Compare, Method: Chart.js). 4. Life's Wisdom: Interactive HTML cards for topical advice and a CSS bar visual for the 'Pressure vs. Ability' concept (Goal: Organize/Inform, Method: HTML/CSS). These choices use simple, effective visuals to clarify abstract concepts without overwhelming the user. -->
+        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+        <style>
+            body {
+                font-family: "Noto Sans SC", sans-serif;
+                background-color: #f5f5f4;
+                color: #44403c;
+            }
+            h1,
+            h2,
+            h3 {
+                font-family: "Noto Serif SC", serif;
+            }
+            .nav-active {
+                color: #d97706;
+                border-color: #d97706;
+            }
+            .nav-inactive {
+                color: #78716c;
+                border-color: transparent;
+            }
+            .content-section {
+                display: none;
+            }
+            .content-section.active {
+                display: block;
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 320px;
+                max-height: 400px;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 400px;
+                }
+            }
+            .interactive-card {
+                transition: all 0.3s ease-in-out;
+            }
+        </style>
+    </head>
+    <body class="antialiased">
+        <div class="container mx-auto px-4 py-8 max-w-5xl">
+            <header class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-stone-900">
+                    格非：节制欲望需要大智慧
+                </h1>
+                <p class="text-stone-600 mt-2 text-lg">
+                    对时代、内心、文学与生活的交互式思考
+                </p>
+            </header>
+
+            <nav class="flex justify-center border-b border-stone-300 mb-8">
+                <button
+                    class="nav-btn py-4 px-2 md:px-6 text-sm md:text-base font-medium border-b-2 transition-colors duration-300"
+                    data-target="era"
+                >
+                    时代之思
+                </button>
+                <button
+                    class="nav-btn py-4 px-2 md:px-6 text-sm md:text-base font-medium border-b-2 transition-colors duration-300"
+                    data-target="peace"
+                >
+                    内心之安
+                </button>
+                <button
+                    class="nav-btn py-4 px-2 md:px-6 text-sm md:text-base font-medium border-b-2 transition-colors duration-300"
+                    data-target="literature"
+                >
+                    文学之道
+                </button>
+                <button
+                    class="nav-btn py-4 px-2 md:px-6 text-sm md:text-base font-medium border-b-2 transition-colors duration-300"
+                    data-target="wisdom"
+                >
+                    生活之智
+                </button>
+            </nav>
+
+            <main>
+                <section id="era" class="content-section">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-stone-800">
+                            时代之思
+                        </h2>
+                        <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+                            中国社会正经历从乡村到城市的剧烈转型。这不仅是地理的变迁，更是文化、价值观与生活方式的深刻冲突与融合。我们都在这不确定的洪流中调整着自身。
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <div
+                            class="bg-white p-6 rounded-lg shadow-sm text-center"
+                        >
+                            <h3 class="text-2xl font-semibold text-amber-700">
+                                乡村社会
+                            </h3>
+                            <p class="text-stone-500 mt-2 mb-4">
+                                相对缓慢 | 传统安稳 | 熟人社会
+                            </p>
+                            <div
+                                id="era-rural-content"
+                                class="text-left p-4 bg-stone-50 rounded-md min-h-[150px]"
+                            >
+                                <p class="text-stone-700">
+                                    “没有变化或者是相对变化比较缓慢的是乡村社会。”
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-lg shadow-sm text-center"
+                        >
+                            <h3 class="text-2xl font-semibold text-sky-700">
+                                城市社会
+                            </h3>
+                            <p class="text-stone-500 mt-2 mb-4">
+                                快速变迁 | 价值冲突 | 新旧混杂
+                            </p>
+                            <div
+                                id="era-urban-content"
+                                class="text-left p-4 bg-stone-50 rounded-md min-h-[150px]"
+                            >
+                                <p class="text-stone-700">
+                                    “中国社会一直在一个快速的变化当中，眼花缭乱到今天已经让我们感到非常非常的震惊。”
+                                </p>
+                                <p class="text-stone-700 mt-2">
+                                    “能明显感觉到这两个不同的文化之间的这种冲突，他有不同的价值观，不同的处事方式。”
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 bg-white p-6 rounded-lg shadow-sm">
+                        <h3
+                            class="text-2xl font-semibold text-center text-stone-800 mb-4"
+                        >
+                            拥抱不确定性
+                        </h3>
+                        <p class="text-stone-700 text-center max-w-3xl mx-auto">
+                            “这个进程的目的地我们谁都不清楚，取决于文明要把我们带向何方。我觉得应该把没有结果、没有稳定当成一个结果预先来接受。”
+                        </p>
+                    </div>
+                </section>
+
+                <section id="peace" class="content-section">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-stone-800">
+                            内心之安
+                        </h2>
+                        <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+                            我们同时活在两个世界：可经验的“生活世界”与规定生死的“超越世界”。内心的安宁，源于找到内在的生命意义，而非追逐外在的“仪式感”。
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container">
+                            <canvas id="peaceChart"></canvas>
+                        </div>
+                        <div
+                            id="peace-content"
+                            class="bg-white p-6 rounded-lg shadow-sm min-h-[320px] md:min-h-[400px] flex flex-col justify-center"
+                        >
+                            <h3
+                                id="peace-title"
+                                class="text-2xl font-semibold text-stone-800 mb-4 text-center"
+                            >
+                                两个世界
+                            </h3>
+                            <p id="peace-text" class="text-stone-700">
+                                点击图表的不同部分，探索“生活世界”与“内在意义”的关系。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="literature" class="content-section">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-stone-800">
+                            文学之道
+                        </h2>
+                        <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+                            文学的价值是什么？在商品逻辑盛行的今天，我们如何看待文学的传统与未来？伟大的作品拥有超越时间与市场的力量。
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container">
+                            <canvas id="literatureChart"></canvas>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-lg shadow-sm min-h-[320px] md:min-h-[400px]"
+                        >
+                            <h3
+                                class="text-2xl font-semibold text-stone-800 mb-4 text-center"
+                            >
+                                伟大作品的特质
+                            </h3>
+                            <ul class="space-y-4">
+                                <li class="p-4 bg-stone-50 rounded-md">
+                                    <h4 class="font-bold text-amber-800">
+                                        耐得起反复阅读
+                                    </h4>
+                                    <p class="text-stone-600 text-sm">
+                                        每次重读都有新的体悟，其内涵不会被一次性消费耗尽。
+                                    </p>
+                                </li>
+                                <li class="p-4 bg-stone-50 rounded-md">
+                                    <h4 class="font-bold text-amber-800">
+                                        耐心等待你的成长
+                                    </h4>
+                                    <p class="text-stone-600 text-sm">
+                                        年轻时觉得伟大，年长后会觉得更伟大，作品的深度随读者阅历的增长而愈发显现。
+                                    </p>
+                                </li>
+                                <li class="p-4 bg-stone-50 rounded-md">
+                                    <h4 class="font-bold text-amber-800">
+                                        为未来写作
+                                    </h4>
+                                    <p class="text-stone-600 text-sm">
+                                        如司马迁“藏之名山，传之后世”，不为即时名利，而为传递超越时代的价值。
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="wisdom" class="content-section">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-stone-800">
+                            生活之智
+                        </h2>
+                        <p class="mt-2 text-stone-600 max-w-2xl mx-auto">
+                            从亲子关系到应对压力，从节制欲望到面对忙碌，格非分享了他在生活中积累的智慧：平等、勇气、节制，以及在日常中寻找幸福的能力。
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                教育之道
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                与孩子建立平等、融洽的关系，让他视你为依靠和参谋。在他提问时教育，而非强行灌输。
+                            </p>
+                        </div>
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                勇气的力量
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                社会压力巨大，但无需恐惧。勇气是我们唯一的资源，有了它，就能克服困难，感知生活之美。
+                            </p>
+                        </div>
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                欲望的陷阱
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                当代文化制造了永不满足的欲望。人需要在欲望面前停步，这需要大智慧。现在，就该停下来。
+                            </p>
+                        </div>
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                面对忙碌
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                忙是时代的常态，逃避不切实际。坦然面对，心保持宁静，即“勤迷于劳，心有长闲”。
+                            </p>
+                        </div>
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                压力的平衡
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                禅宗说：你的压力和你的能力相比，永远是“刚好”。上帝给的苦难，也必会给予承受的能力。
+                            </p>
+                        </div>
+                        <div
+                            class="interactive-card bg-white p-6 rounded-lg shadow-sm hover:shadow-xl hover:scale-105"
+                        >
+                            <h3 class="text-xl font-bold text-amber-700">
+                                日常的幸福
+                            </h3>
+                            <p class="mt-2 text-stone-600">
+                                珍惜每一天。早上醒来，晚上睡着，在两者之间做愿意做的事。安静的工作是美好的世界。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="text-center mt-12 border-t border-stone-300 pt-6">
+                <p class="text-stone-500 text-sm">
+                    内容整理自优酷纪实访谈节目【重温文化跨年】EP20 格非
+                </p>
+            </footer>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const navButtons = document.querySelectorAll(".nav-btn");
+                const contentSections =
+                    document.querySelectorAll(".content-section");
+                let peaceChartInstance, literatureChartInstance;
+
+                const peaceChartData = {
+                    labels: [
+                        "生活世界 (仪式感, 随波逐流)",
+                        "内在意义 (生命价值, 内心安宁)",
+                    ],
+                    datasets: [
+                        {
+                            data: [65, 35],
+                            backgroundColor: ["#d6d3d1", "#f59e0b"],
+                            borderColor: "#f5f5f4",
+                            borderWidth: 4,
+                            hoverOffset: 4,
+                        },
+                    ],
+                };
+
+                const peaceContent = {
+                    0: {
+                        title: "生活世界",
+                        text: "“我们今天都基本上在一个生活世界里边来随波逐流。” 他是经验可判断的，但充满了外在的、有时甚至是虚假的“仪式感”，比如为了面子而贷款办宴席。这种追求会让人成为“奴隶”。",
+                    },
+                    1: {
+                        title: "内在意义",
+                        text: "“你要从内在能够感受到你生命的意义，然后你能够坚信这个意义，这样的话你也不会去追求这种所谓的仪式感。” 这是一种超越生活世界的价值逻辑，是灵魂与精神安定的基石。",
+                    },
+                };
+
+                const literatureChartData = {
+                    labels: [
+                        "耐读性",
+                        "思想深度",
+                        "等待读者",
+                        "超越时代",
+                        "市场销量",
+                        "即时名利",
+                    ],
+                    datasets: [
+                        {
+                            label: "伟大作品",
+                            data: [9, 8, 9, 8, 3, 2],
+                            fill: true,
+                            backgroundColor: "rgba(245, 158, 11, 0.2)",
+                            borderColor: "rgb(245, 158, 11)",
+                            pointBackgroundColor: "rgb(245, 158, 11)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgb(245, 158, 11)",
+                        },
+                        {
+                            label: "流行作品",
+                            data: [3, 4, 2, 3, 9, 8],
+                            fill: true,
+                            backgroundColor: "rgba(100, 116, 139, 0.2)",
+                            borderColor: "rgb(100, 116, 139)",
+                            pointBackgroundColor: "rgb(100, 116, 139)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgb(100, 116, 139)",
+                        },
+                    ],
+                };
+
+                function setActiveTab(targetId) {
+                    navButtons.forEach((button) => {
+                        if (button.dataset.target === targetId) {
+                            button.classList.add("nav-active");
+                            button.classList.remove("nav-inactive");
+                        } else {
+                            button.classList.add("nav-inactive");
+                            button.classList.remove("nav-active");
+                        }
+                    });
+
+                    contentSections.forEach((section) => {
+                        if (section.id === targetId) {
+                            section.classList.add("active");
+                        } else {
+                            section.classList.remove("active");
+                        }
+                    });
+
+                    if (targetId === "peace" && !peaceChartInstance) {
+                        createPeaceChart();
+                    }
+
+                    if (targetId === "literature" && !literatureChartInstance) {
+                        createLiteratureChart();
+                    }
+                }
+
+                function createPeaceChart() {
+                    const ctx = document
+                        .getElementById("peaceChart")
+                        .getContext("2d");
+                    peaceChartInstance = new Chart(ctx, {
+                        type: "doughnut",
+                        data: peaceChartData,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutout: "50%",
+                            plugins: {
+                                legend: {
+                                    position: "bottom",
+                                    labels: {
+                                        font: {
+                                            family: "'Noto Sans SC', sans-serif",
+                                        },
+                                    },
+                                },
+                                tooltip: { enabled: true },
+                            },
+                            onClick: (event, elements) => {
+                                if (elements.length > 0) {
+                                    const index = elements[0].index;
+                                    const peaceTitle =
+                                        document.getElementById("peace-title");
+                                    const peaceText =
+                                        document.getElementById("peace-text");
+                                    peaceTitle.textContent =
+                                        peaceContent[index].title;
+                                    peaceText.textContent =
+                                        peaceContent[index].text;
+                                }
+                            },
+                        },
+                    });
+                }
+
+                function createLiteratureChart() {
+                    const ctx = document
+                        .getElementById("literatureChart")
+                        .getContext("2d");
+                    literatureChartInstance = new Chart(ctx, {
+                        type: "radar",
+                        data: literatureChartData,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            elements: {
+                                line: { borderWidth: 3 },
+                            },
+                            scales: {
+                                r: {
+                                    angleLines: { color: "#d6d3d1" },
+                                    grid: { color: "#e7e5e4" },
+                                    pointLabels: {
+                                        font: {
+                                            size: 12,
+                                            family: "'Noto Sans SC', sans-serif",
+                                        },
+                                        color: "#57534e",
+                                    },
+                                    ticks: {
+                                        color: "#a8a29e",
+                                        backdropColor:
+                                            "rgba(255, 255, 255, 0.75)",
+                                    },
+                                },
+                            },
+                            plugins: {
+                                legend: {
+                                    position: "bottom",
+                                    labels: {
+                                        font: {
+                                            family: "'Noto Sans SC', sans-serif",
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                }
+
+                navButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        setActiveTab(button.dataset.target);
+                    });
+                });
+
+                setActiveTab("era");
+            });
+        </script>
+    </body>
+</html>

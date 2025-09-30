@@ -1,0 +1,1339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：121 基本信息 论文编号：121 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Study on Vibration Damping of Traction Transformers under High-Speed Trains Based on Acoustic Black Hole 中文标题：基于声学黑洞的高速列车牵引变压器减振研究 作者及单位：Jiwei Wu¹, Dao Gong¹, Jinsong Zhou¹ ¹ College of Transportation, Shanghai Key Laboratory of Rail Infrastructure Durability and System Safety, Tongji University, China 联系邮箱：Wujiwei0630@outlook.com 摘要 随着动车组技术的广泛应用，越来越多不同质量的设备如变压器和电力转换器悬挂在车辆底盘下，显著恶化了轨道车辆的振动水平，对运营安全和使用寿命构成挑战。本文提出了一种基于声学黑洞（ABH）概念的高速列车牵引变压器减振解决方案。以特定高速列车车型为案例，根据工程要求设计了适用于牵引变压器的声学黑洞吸振器尺寸。通过有限元分析验证了减振功能的有效性和可行性。在此基础上，通过结构、布局和拓扑优化系统分析了阻尼层参数和布局策略对吸振性能的影响。提出了一种新型吸振器拓扑结构，在轻量化设计和减振性能之间取得了平衡。最后在特定动车组车型的牵引变压器上进行了应用研究，确认了在全频率范围内的优异减振性能。
+关键词 #声学黑洞 #动力吸振器 #减振降噪 #有限元分析 #牵引变压器 #高速列车 #振动控制 #拓扑优化
+背景与动机 随着高速列车分布式动力技术的进步，牵引变压器等大型电气部件越来越多地悬挂在车辆底盘下。其运行过程中产生的周期性电磁力和强制风冷系统的振动已成为列车低频结构振动的主要来源之一。这些振动不仅影响乘坐稳定性和乘客舒适性，还会加速部件的疲劳损伤，从而降低其使用寿命。
+当前牵引变压器的振动缓解策略主要包括弹性悬挂优化、阻尼材料应用和动力吸振器使用。然而，这些方法在低频范围（特别是50Hz及其谐波）通常效果有限，并且难以同时实现宽带性能、轻量化设计和结构兼容性。与传统动力吸振器相比，声学黑洞结构具有几个独特优势，包括强结构集成性、全向振动衰减能力和无需外部能量输入的被动运行。
+研究方法 本研究采用理论分析、数值仿真和参数优化相结合的方法：
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：121 基本信息 论文编号：121 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Study on Vibration Damping of Traction Transformers under High-Speed Trains Based on Acoustic Black Hole 中文标题：基于声学黑洞的高速列车牵引变压器减振研究 作者及单位：Jiwei Wu¹, Dao Gong¹, Jinsong Zhou¹ ¹ College of Transportation, Shanghai Key Laboratory of Rail Infrastructure Durability and System Safety, Tongji University, China 联系邮箱：Wujiwei0630@outlook.com 摘要 随着动车组技术的广泛应用，越来越多不同质量的设备如变压器和电力转换器悬挂在车辆底盘下，显著恶化了轨道车辆的振动水平，对运营安全和使用寿命构成挑战。本文提出了一种基于声学黑洞（ABH）概念的高速列车牵引变压器减振解决方案。以特定高速列车车型为案例，根据工程要求设计了适用于牵引变压器的声学黑洞吸振器尺寸。通过有限元分析验证了减振功能的有效性和可行性。在此基础上，通过结构、布局和拓扑优化系统分析了阻尼层参数和布局策略对吸振性能的影响。提出了一种新型吸振器拓扑结构，在轻量化设计和减振性能之间取得了平衡。最后在特定动车组车型的牵引变压器上进行了应用研究，确认了在全频率范围内的优异减振性能。
+关键词 #声学黑洞 #动力吸振器 #减振降噪 #有限元分析 #牵引变压器 #高速列车 #振动控制 #拓扑优化
+背景与动机 随着高速列车分布式动力技术的进步，牵引变压器等大型电气部件越来越多地悬挂在车辆底盘下。其运行过程中产生的周期性电磁力和强制风冷系统的振动已成为列车低频结构振动的主要来源之一。这些振动不仅影响乘坐稳定性和乘客舒适性，还会加速部件的疲劳损伤，从而降低其使用寿命。
+当前牵引变压器的振动缓解策略主要包括弹性悬挂优化、阻尼材料应用和动力吸振器使用。然而，这些方法在低频范围（特别是50Hz及其谐波）通常效果有限，并且难以同时实现宽带性能、轻量化设计和结构兼容性。与传统动力吸振器相比，声学黑洞结构具有几个独特优势，包括强结构集成性、全向振动衰减能力和无需外部能量输入的被动运行。
+研究方法 本研究采用理论分析、数值仿真和参数优化相结合的方法：
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/" class="crumb-sec">Rail Topic 02 - Rail Vehicle Dynamics and Control</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览121">IAVSD 2025 论文概览：121</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：121</li>
+<li><strong>所属主题</strong>：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制)</li>
+<li><strong>英文标题</strong>：Study on Vibration Damping of Traction Transformers under High-Speed Trains Based on Acoustic Black Hole</li>
+<li><strong>中文标题</strong>：基于声学黑洞的高速列车牵引变压器减振研究</li>
+<li><strong>作者及单位</strong>：Jiwei Wu¹, Dao Gong¹, Jinsong Zhou¹
+<ul>
+<li>¹ College of Transportation, Shanghai Key Laboratory of Rail Infrastructure Durability and System Safety, Tongji University, China</li>
+</ul>
+</li>
+<li><strong>联系邮箱</strong>：Wujiwei0630@outlook.com</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>随着动车组技术的广泛应用，越来越多不同质量的设备如变压器和电力转换器悬挂在车辆底盘下，显著恶化了轨道车辆的振动水平，对运营安全和使用寿命构成挑战。本文提出了一种基于声学黑洞（ABH）概念的高速列车牵引变压器减振解决方案。以特定高速列车车型为案例，根据工程要求设计了适用于牵引变压器的声学黑洞吸振器尺寸。通过有限元分析验证了减振功能的有效性和可行性。在此基础上，通过结构、布局和拓扑优化系统分析了阻尼层参数和布局策略对吸振性能的影响。提出了一种新型吸振器拓扑结构，在轻量化设计和减振性能之间取得了平衡。最后在特定动车组车型的牵引变压器上进行了应用研究，确认了在全频率范围内的优异减振性能。</p>
+<h2 id="关键词">关键词</h2>
+<p>#声学黑洞 #动力吸振器 #减振降噪 #有限元分析 #牵引变压器 #高速列车 #振动控制 #拓扑优化</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着高速列车分布式动力技术的进步，牵引变压器等大型电气部件越来越多地悬挂在车辆底盘下。其运行过程中产生的周期性电磁力和强制风冷系统的振动已成为列车低频结构振动的主要来源之一。这些振动不仅影响乘坐稳定性和乘客舒适性，还会加速部件的疲劳损伤，从而降低其使用寿命。</p>
+<p>当前牵引变压器的振动缓解策略主要包括弹性悬挂优化、阻尼材料应用和动力吸振器使用。然而，这些方法在低频范围（特别是50Hz及其谐波）通常效果有限，并且难以同时实现宽带性能、轻量化设计和结构兼容性。与传统动力吸振器相比，声学黑洞结构具有几个独特优势，包括强结构集成性、全向振动衰减能力和无需外部能量输入的被动运行。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究采用理论分析、数值仿真和参数优化相结合的方法：</p>
+<ol>
+<li>
+<p><strong>声学黑洞理论研究</strong>：</p>
+<ul>
+<li>分析声学黑洞吸振器的基本原理：楔形板中弯曲波传播特性</li>
+<li>建立厚度变化幂律函数模型：h(r)=0.00125(r-150)²+2</li>
+<li>设计二维声学黑洞吸振器结构，阻尼层厚度4mm</li>
+</ul>
+</li>
+<li>
+<p><strong>减振性能验证</strong>：</p>
+<ul>
+<li>建立三维模型并导入HyperMesh进行网格划分</li>
+<li>进行模态分析比较复合结构和平板的模态响应</li>
+<li>应用垂直正弦激励分析瞬态响应和功率流特性</li>
+</ul>
+</li>
+<li>
+<p><strong>参数优化研究</strong>：</p>
+<ul>
+<li><strong>阻尼层宽度优化</strong>：比较10mm、20mm、30mm宽度的减振效果</li>
+<li><strong>阻尼材料选择</strong>：对比普通橡胶、高阻尼橡胶和尼龙的性能</li>
+<li><strong>吸振器数量优化</strong>：研究1、2、3个吸振器的布局效果</li>
+<li><strong>吸振器间距优化</strong>：比较50mm和150mm间距的振动响应</li>
+</ul>
+</li>
+<li>
+<p><strong>拓扑优化设计</strong>：</p>
+<ul>
+<li>通过减少原二维结构绕轴旋转角度进行拓扑优化</li>
+<li>在保持减振性能的同时实现轻量化目标</li>
+</ul>
+</li>
+<li>
+<p><strong>工程应用验证</strong>：</p>
+<ul>
+<li>在特定动车组牵引变压器上进行应用研究</li>
+<li>建立4.10吨质量的牵引变压器壳体模型</li>
+<li>在壳体上表面四角布置四个声学黑洞吸振器</li>
+</ul>
+</li>
+</ol>
+<h2 id="主要结论">主要结论</h2>
+<ol>
+<li>
+<p><strong>声学黑洞减振机制</strong>：</p>
+<ul>
+<li>低频范围内复合结构和平板的模态形状基本一致，ABH结构对低频振动控制效果有限</li>
+<li>随着频率增加，吸振器开始表现出局部模态特性</li>
+<li>当模态频率接近300Hz时，模态形状发生显著变化，振动能量集中在ABH边缘和橡胶阻尼层周围</li>
+</ul>
+</li>
+<li>
+<p><strong>参数优化效果</strong>：</p>
+<ul>
+<li><strong>阻尼层宽度</strong>：30mm配置在425-725Hz频率范围内表现出最佳减振性能</li>
+<li><strong>阻尼材料</strong>：高阻尼橡胶因其较高的材料损耗因子，在多个频带表现出优越的振动衰减能力</li>
+<li><strong>吸振器数量</strong>：增加吸振器数量显著增强减振效果，特别是50Hz以上激励频率的峰值响应</li>
+<li><strong>吸振器间距</strong>：150mm间距配置在所有响应点实现23dB的振动降低增益</li>
+</ul>
+</li>
+<li>
+<p><strong>拓扑优化成果</strong>：</p>
+<ul>
+<li>通过拓扑优化，质量从463.7g减少到192.3g，实现约58.5%的减重</li>
+<li>关键激励频率处的振动速度水平仅增加约0.4dB</li>
+<li>有效平衡轻量化构造与振动缓解，适合实际工程应用</li>
+</ul>
+</li>
+<li>
+<p><strong>工程应用验证</strong>：</p>
+<ul>
+<li>在50Hz激励下，ABH吸振器使振动速度水平降低2.78dB，加速度水平降低2.82dB</li>
+<li>在100Hz激励下，速度水平降低1.89dB，加速度水平降低1.40dB</li>
+<li>在150Hz下，速度和加速度水平分别降低7.88dB和8.91dB</li>
+<li>装备ABH吸振器的牵引变压器壳体在所有频带表现出降低的振动水平</li>
+</ul>
+</li>
+</ol>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>理论应用</strong>：将声学黑洞理论应用于高速列车牵引变压器减振</li>
+<li><strong>参数系统优化</strong>：全面研究阻尼层参数和布局策略对减振性能的影响</li>
+<li><strong>拓扑创新</strong>：提出新型二维声学黑洞拓扑结构，实现58.5%的减重</li>
+<li><strong>工程验证</strong>：在真实动车组牵引变压器上验证减振效果</li>
+<li><strong>宽带控制</strong>：实现50Hz及其谐波的典型低频振动宽带控制</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Acoustic Black Hole (ABH)</td>
+          <td>声学黑洞</td>
+      </tr>
+      <tr>
+          <td>Dynamic Vibration Absorber</td>
+          <td>动力吸振器</td>
+      </tr>
+      <tr>
+          <td>Traction Transformer</td>
+          <td>牵引变压器</td>
+      </tr>
+      <tr>
+          <td>Finite Element Analysis</td>
+          <td>有限元分析</td>
+      </tr>
+      <tr>
+          <td>Vibration and Noise Reduction</td>
+          <td>减振降噪</td>
+      </tr>
+      <tr>
+          <td>Topology Optimization</td>
+          <td>拓扑优化</td>
+      </tr>
+      <tr>
+          <td>Damping Layer</td>
+          <td>阻尼层</td>
+      </tr>
+      <tr>
+          <td>Modal Analysis</td>
+          <td>模态分析</td>
+      </tr>
+      <tr>
+          <td>Power Flow Analysis</td>
+          <td>功率流分析</td>
+      </tr>
+      <tr>
+          <td>Electric Multiple Unit (EMU)</td>
+          <td>动车组</td>
+      </tr>
+      <tr>
+          <td>Bending Wave</td>
+          <td>弯曲波</td>
+      </tr>
+      <tr>
+          <td>Power-Law Function</td>
+          <td>幂律函数</td>
+      </tr>
+      <tr>
+          <td>Transient Response</td>
+          <td>瞬态响应</td>
+      </tr>
+      <tr>
+          <td>Frequency Response</td>
+          <td>频率响应</td>
+      </tr>
+      <tr>
+          <td>Vibration Velocity Level</td>
+          <td>振动速度水平</td>
+      </tr>
+      <tr>
+          <td>Material Loss Factor</td>
+          <td>材料损耗因子</td>
+      </tr>
+      <tr>
+          <td>Lightweight Design</td>
+          <td>轻量化设计</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-02</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

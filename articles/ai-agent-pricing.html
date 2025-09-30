@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI定价策略分析</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Chosen Palette: Analyst Neutral -->
+        <!-- Application Structure Plan: 我设计了一个单页、垂直滚动的“故事化”叙事结构。用户从顶部的宏观概述开始，通过滚动和交互，逐步深入AI定价的各个层面。导航栏提供快速跳转，避免用户迷失。核心结构分为四个探索区域：1)“两大层级”通过交互式卡片对比$20和$200套餐，比静态表格更直观；2)“成本引擎”使用动态条形图揭示价格背后的经济学，让用户亲手操作感受成本的指数级差异；3)“战略演算”将抽象的商业策略（如用户分层、升级路径）转化为可视化的HTML/CSS图表；4)“未来展望”则用简洁的卡片式交互来介绍新兴的定价模型。这种结构将线性报告转化为多维度的探索体验，旨在通过“引导式发现”而非“被动阅读”来提升用户的理解和参与感。 -->
+        <!-- Visualization & Content Choices:
+        - 报告信息: 套餐对比 (表1) -> 目标: 比较 -> 可视化: 交互式并排卡片 -> 交互: 点击服务商按钮切换内容 -> 理由: 避免在移动端出现难以阅读的宽表格，更具吸引力 -> 方法: HTML/Tailwind + JS。
+        - 报告信息: API成本 (表2) -> 目标: 比较/展示变化 -> 可视化: 动态对数条形图 -> 交互: 点击服务商按钮更新图表 -> 理由: 相比表格，能更震撼地展示指数级成本差异。对数刻度能让小数值不被忽略。交互性使用户能主动探索数据。 -> 方法: Chart.js (Canvas)。
+        - 报告信息: 用户分层 -> 目标: 组织/展示结构 -> 可视化: HTML/CSS金字塔图 -> 交互: 悬停显示详情 -> 理由: 比列表更直观地展示层级关系 -> 方法: HTML/Tailwind。
+        - 报告信息: 用户升级路径 -> 目标: 展示流程 -> 可视化: HTML/CSS步骤条 -> 交互: 无 (静态展示) -> 理由: 清晰地呈现线性流程，简单有效 -> 方法: HTML/Tailwind。
+        - 报告信息: 未来定价模型 -> 目标: 组织/告知 -> 可视化: 交互式信息卡片 -> 交互: 点击展开详情 -> 理由: 鼓励用户主动发现，比静态文本更有趣 -> 方法: HTML/Tailwind + JS。
+        所有可视化选择都旨在将报告中的关键数据和概念转化为更易消化和记忆的视觉元素，并通过互动加深理解。
+    -->
+        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+        <style>
+            body {
+                font-family: "Inter", "Noto Sans SC", sans-serif;
+                background-color: #f8fafc; /* slate-50 */
+                color: #1e293b; /* slate-800 */
+            }
+            .nav-link {
+                transition:
+                    color 0.3s,
+                    border-color 0.3s;
+            }
+            .nav-link.active {
+                color: #0ea5e9; /* sky-500 */
+                border-bottom-color: #0ea5e9; /* sky-500 */
+            }
+            .provider-btn.active {
+                background-color: #0ea5e9; /* sky-500 */
+                color: white;
+                box-shadow:
+                    0 4px 6px -1px rgb(0 0 0 / 0.1),
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 400px;
+                max-height: 50vh;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 450px;
+                }
+            }
+            .content-card {
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+            .content-card:hover {
+                transform: translateY(-5px);
+                box-shadow:
+                    0 10px 15px -3px rgb(0 0 0 / 0.1),
+                    0 4px 6px -2px rgb(0 0 0 / 0.1);
+            }
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
+        </style>
+    </head>
+    <body class="antialiased">
+        <header
+            id="header"
+            class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm"
+        >
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex-shrink-0">
+                        <a
+                            href="#hero"
+                            class="text-2xl font-bold text-slate-800"
+                            >AI工具的定价策略分析</a
+                        >
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a
+                                href="#section-tiers"
+                                class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-sky-500 border-b-2 border-transparent"
+                                >两大层级</a
+                            >
+                            <a
+                                href="#section-cost"
+                                class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-sky-500 border-b-2 border-transparent"
+                                >成本引擎</a
+                            >
+                            <a
+                                href="#section-strategy"
+                                class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-sky-500 border-b-2 border-transparent"
+                                >战略演算</a
+                            >
+                            <a
+                                href="#section-future"
+                                class="nav-link px-3 py-2 text-sm font-medium text-slate-600 hover:text-sky-500 border-b-2 border-transparent"
+                                >未来展望</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero" class="py-20 md:py-32 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1
+                        class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900"
+                    >
+                        <span class="block">从 $20 到 $200：</span>
+                        <span class="block text-sky-600"
+                            >解构AI产业的价格飞跃</span
+                        >
+                    </h1>
+                    <p
+                        class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-600"
+                    >
+                        人工智能行业正在经历一场深刻的战略转型。每月200美元高端会员的出现，远非简单的价格上涨，它揭示了计算成本的显性化、精细化的用户分层，以及整个行业对可持续商业模式的集体追求。本应用将带您互动式地探索这一变革背后的完整逻辑。
+                    </p>
+                </div>
+            </section>
+
+            <section id="section-tiers" class="py-16 md:py-24">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl font-bold tracking-tight sm:text-4xl"
+                        >
+                            两大层级：一个市场的两种玩法
+                        </h2>
+                        <p
+                            class="mt-4 max-w-2xl mx-auto text-lg text-slate-600"
+                        >
+                            从解决“可用性”的20美元专业版，到满足“能力无上限”需求的200美元超级版，AI服务商为两类截然不同的用户群体构建了差异化的价值主张。请选择一个服务商，直观对比其不同套餐的核心区别。
+                        </p>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <div
+                            id="tier-provider-selector"
+                            class="inline-flex rounded-md shadow-sm"
+                            role="group"
+                        >
+                            <button
+                                type="button"
+                                class="provider-btn active px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="openai"
+                            >
+                                OpenAI
+                            </button>
+                            <button
+                                type="button"
+                                class="provider-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="anthropic"
+                            >
+                                Anthropic
+                            </button>
+                            <button
+                                type="button"
+                                class="provider-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-r border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="google"
+                            >
+                                Google
+                            </button>
+                            <button
+                                type="button"
+                                class="provider-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="cursor"
+                            >
+                                Cursor
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        id="tier-comparison-container"
+                        class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+                    ></div>
+                </div>
+            </section>
+
+            <section id="section-cost" class="py-16 md:py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl font-bold tracking-tight sm:text-4xl"
+                        >
+                            成本引擎：10倍溢价背后的经济现实
+                        </h2>
+                        <p
+                            class="mt-4 max-w-3xl mx-auto text-lg text-slate-600"
+                        >
+                            从20美元到200美元的价格跳跃，其根本驱动力是不同AI模型间指数级增长的“推理成本”。更强大的模型在生成每个词元时都需要进行远超常规的“思考”。通过各大公司的API定价，我们可以一窥这个成本鸿沟。请选择服务商来观察其不同模型处理一百万个输出词元的成本差异。
+                        </p>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <div
+                            id="cost-provider-selector"
+                            class="inline-flex rounded-md shadow-sm"
+                            role="group"
+                        >
+                            <button
+                                type="button"
+                                class="provider-btn active px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="openai"
+                            >
+                                OpenAI
+                            </button>
+                            <button
+                                type="button"
+                                class="provider-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="anthropic"
+                            >
+                                Anthropic
+                            </button>
+                            <button
+                                type="button"
+                                class="provider-btn px-4 py-2 text-sm font-medium text-gray-900 bg-white border-r border-t border-b border-gray-200 rounded-r-md hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-sky-500"
+                                data-provider="google"
+                            >
+                                Google
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="apiCostChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-sm text-slate-500">
+                        注意：Y轴使用对数刻度，以更好地展示巨大差异。
+                    </p>
+                </div>
+            </section>
+
+            <section id="section-strategy" class="py-16 md:py-24">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2
+                            class="text-3xl font-bold tracking-tight sm:text-4xl"
+                        >
+                            战略演算：超越成本的商业武器
+                        </h2>
+                        <p
+                            class="mt-4 max-w-2xl mx-auto text-lg text-slate-600"
+                        >
+                            多层级定价不仅是成本回收工具，更是一种塑造市场、引导用户和构建竞争壁垒的精密武器。它实现了基于价值的用户分层，并为用户创造了清晰的升级路径。
+                        </p>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+                    >
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-slate-800">
+                                用户分层金字塔
+                            </h3>
+                            <p class="text-slate-600 mb-6">
+                                AI服务商通过精细的定价，将市场划分为特征鲜明的子集，并为每个层级量身定制价值主张，构成了整个用户漏斗。
+                            </p>
+                            <div
+                                class="space-y-1 text-center font-semibold text-white"
+                            >
+                                <div class="bg-sky-600 p-3 rounded-t-lg shadow">
+                                    企业用户 (B2B)
+                                </div>
+                                <div class="bg-sky-500 p-3 shadow">
+                                    超级用户层 (~$200)
+                                </div>
+                                <div class="bg-sky-400 p-3 shadow">
+                                    专业用户层 (~$20)
+                                </div>
+                                <div class="bg-sky-300 p-3 rounded-b-lg shadow">
+                                    免费用户层
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4 text-slate-800">
+                                用户升级路径
+                            </h3>
+                            <p class="text-slate-600 mb-6">
+                                这套价格阶梯也扮演了用户自我筛选和产品发现向导的角色，引导用户自然地走向价值最大化的终点。
+                            </p>
+                            <ol class="relative border-l border-gray-300">
+                                <li class="mb-10 ml-6">
+                                    <span
+                                        class="absolute flex items-center justify-center w-6 h-6 bg-sky-200 rounded-full -left-3 ring-8 ring-white"
+                                        >1</span
+                                    >
+                                    <h4
+                                        class="flex items-center mb-1 text-lg font-semibold text-gray-900"
+                                    >
+                                        发现阶段
+                                    </h4>
+                                    <p
+                                        class="text-base font-normal text-gray-500"
+                                    >
+                                        通过免费版初次体验AI的魅力，建立基本认知。
+                                    </p>
+                                </li>
+                                <li class="mb-10 ml-6">
+                                    <span
+                                        class="absolute flex items-center justify-center w-6 h-6 bg-sky-200 rounded-full -left-3 ring-8 ring-white"
+                                        >2</span
+                                    >
+                                    <h4
+                                        class="mb-1 text-lg font-semibold text-gray-900"
+                                    >
+                                        依赖阶段
+                                    </h4>
+                                    <p
+                                        class="text-base font-normal text-gray-500"
+                                    >
+                                        免费版限制开始带来困扰，升级至$20专业版，追求稳定与效率。
+                                    </p>
+                                </li>
+                                <li class="mb-10 ml-6">
+                                    <span
+                                        class="absolute flex items-center justify-center w-6 h-6 bg-sky-200 rounded-full -left-3 ring-8 ring-white"
+                                        >3</span
+                                    >
+                                    <h4
+                                        class="mb-1 text-lg font-semibold text-gray-900"
+                                    >
+                                        精通阶段
+                                    </h4>
+                                    <p
+                                        class="text-base font-normal text-gray-500"
+                                    >
+                                        工作流与AI深度融合，对AI的依赖日益加深。
+                                    </p>
+                                </li>
+                                <li class="ml-6">
+                                    <span
+                                        class="absolute flex items-center justify-center w-6 h-6 bg-sky-200 rounded-full -left-3 ring-8 ring-white"
+                                        >4</span
+                                    >
+                                    <h4
+                                        class="mb-1 text-lg font-semibold text-gray-900"
+                                    >
+                                        突破阶段
+                                    </h4>
+                                    <p
+                                        class="text-base font-normal text-gray-500"
+                                    >
+                                        触及专业版天花板，为解决瓶颈，升级至$200超级版，追求极致能力。
+                                    </p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-future" class="py-16 md:py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl font-bold tracking-tight sm:text-4xl"
+                        >
+                            下一个前沿：超越固定订阅制
+                        </h2>
+                        <p
+                            class="mt-4 max-w-3xl mx-auto text-lg text-slate-600"
+                        >
+                            当前的订阅模式很可能只是过渡。AI的价值与计算工作量直接相关，而非用户数，这预示着一个更加动态和价值对齐的定价未来。点击卡片了解新兴的AI原生定价模型。
+                        </p>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                    >
+                        <div
+                            class="accordion-item bg-slate-50 rounded-lg p-6 border border-slate-200 cursor-pointer content-card"
+                        >
+                            <div
+                                class="accordion-header flex justify-between items-center"
+                            >
+                                <h3 class="text-xl font-bold text-slate-800">
+                                    基于使用的定价 (UBP)
+                                </h3>
+                                <span
+                                    class="text-sky-500 text-2xl transform transition-transform duration-300"
+                                    >＋</span
+                                >
+                            </div>
+                            <div class="accordion-content">
+                                <p class="mt-4 text-slate-600">
+                                    根据客户消耗的资源量（如处理的词元数、API调用次数）收费。成本与使用量完全挂钩，对客户公平，但预算难以预测。
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="accordion-item bg-slate-50 rounded-lg p-6 border border-slate-200 cursor-pointer content-card"
+                        >
+                            <div
+                                class="accordion-header flex justify-between items-center"
+                            >
+                                <h3 class="text-xl font-bold text-slate-800">
+                                    基于成果的定价 (VaaS)
+                                </h3>
+                                <span
+                                    class="text-sky-500 text-2xl transform transition-transform duration-300"
+                                    >＋</span
+                                >
+                            </div>
+                            <div class="accordion-content">
+                                <p class="mt-4 text-slate-600">
+                                    根据AI为客户创造的实际业务成果（如成功解决的工单数、促成的销售线索）收费。与价值最紧密对齐，但实施最为复杂。
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="accordion-item bg-slate-50 rounded-lg p-6 border border-slate-200 cursor-pointer content-card"
+                        >
+                            <div
+                                class="accordion-header flex justify-between items-center"
+                            >
+                                <h3 class="text-xl font-bold text-slate-800">
+                                    混合订阅模型
+                                </h3>
+                                <span
+                                    class="text-sky-500 text-2xl transform transition-transform duration-300"
+                                    >＋</span
+                                >
+                            </div>
+                            <div class="accordion-content">
+                                <p class="mt-4 text-slate-600">
+                                    包含一个固定的基础订阅费，再叠加一个基于使用量或成果的可变费用。试图在可预测性与灵活性之间取得平衡。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-slate-800 text-white">
+            <div
+                class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center"
+            >
+                <p>这是一个基于源报告创建的互动式Web应用示例。</p>
+                <p class="text-sm text-slate-400 mt-2">
+                    所有内容均提炼自提供的分析报告。
+                </p>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const tierData = {
+                    openai: {
+                        pro: {
+                            name: "ChatGPT Plus ($20/月)",
+                            value: "优先访问、更快响应、访问GPT-4o（使用量最高为免费版5倍）。",
+                            target: "需要稳定、高效AI辅助日常工作的专业人士。",
+                            diff: "从“有限增强”到“无限算力”的飞跃，聚焦最强推理能力。",
+                        },
+                        ultra: {
+                            name: "ChatGPT Pro ($200/月)",
+                            value: "<strong>无限制</strong>访问推理模型(o1)和GPT-4.1，扩展访问Sora等前沿工具。",
+                            target: "依赖AI进行深度研究、复杂推理和前沿探索的开发者与研究员。",
+                        },
+                    },
+                    anthropic: {
+                        pro: {
+                            name: "Claude Pro ($20/月)",
+                            value: "比免费版多<strong>5倍</strong>使用量，访问Opus等高级模型，集成工具。",
+                            target: "希望提升日常任务生产力的专业人士。",
+                            diff: "明确量化的使用量大幅提升，解决Pro版的天花板问题。",
+                        },
+                        ultra: {
+                            name: "Claude Max ($100-200/月)",
+                            value: "比Pro版多<strong>5倍或20倍</strong>使用量，更高输出限制，早期功能访问权。",
+                            target: "工作流完全以AI为中心，频繁触及Pro版使用上限的重度用户。",
+                        },
+                    },
+                    google: {
+                        pro: {
+                            name: "Google AI Pro ($19.99/月)",
+                            value: "访问Gemini 1.5 Pro，集成谷歌套件，2TB存储空间。",
+                            target: "深度使用谷歌生态，寻求AI赋能工作流的专业用户。",
+                            diff: "独占访问最前沿、未发布的技术，提供极致性能。",
+                        },
+                        ultra: {
+                            name: "Google AI Ultra ($249.99/月)",
+                            value: "<strong>最高使用限制</strong>，独家访问最顶级模型（如2.5 Pro Deep Think, Veo 3）。",
+                            target: "需要最顶尖AI模型进行创作、开发和处理极端工作负载的专业人士。",
+                        },
+                    },
+                    cursor: {
+                        pro: {
+                            name: "Pro ($20/月)",
+                            value: "<strong>无限制</strong>的AI代码生成和智能体请求，访问高级功能。",
+                            target: "在日常编码中使用AI辅助的开发者。",
+                            diff: "从“功能无限制”到“算力无限制”的跨越，提供海量多模型调用能力。",
+                        },
+                        ultra: {
+                            name: "Ultra ($200/月)",
+                            value: "在所有模型（OpenAI, Claude, Gemini）上获得<strong>20倍</strong>使用量。",
+                            target: "工作流需要海量、跨平台调用最强编码模型的顶尖开发者和团队。",
+                        },
+                    },
+                };
+
+                const costData = {
+                    openai: {
+                        labels: ["GPT-4o mini", "GPT-4o", "o1", "o1-pro"],
+                        costs: [0.6, 10.0, 60.0, 600.0],
+                    },
+                    anthropic: {
+                        labels: [
+                            "Claude Haiku",
+                            "Claude 3.5 Sonnet",
+                            "Claude 3 Opus",
+                        ],
+                        costs: [1.25, 15.0, 75.0],
+                    },
+                    google: {
+                        labels: ["Gemini 1.5 Flash", "Gemini 1.5 Pro"],
+                        costs: [0.3, 5.0],
+                    },
+                };
+
+                const tierContainer = document.getElementById(
+                    "tier-comparison-container",
+                );
+                const tierSelector = document.getElementById(
+                    "tier-provider-selector",
+                );
+
+                function updateTierCards(provider) {
+                    const data = tierData[provider];
+                    tierContainer.innerHTML = `
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-slate-300 content-card">
+                    <h3 class="text-2xl font-bold mb-2">${data.pro.name}</h3>
+                    <p class="text-slate-500 mb-4 font-semibold">专业版</p>
+                    <ul class="space-y-3 text-slate-600">
+                        <li><strong>核心价值:</strong> ${data.pro.value}</li>
+                        <li><strong>目标用户:</strong> ${data.pro.target}</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-sky-500 content-card">
+                    <h3 class="text-2xl font-bold mb-2">${data.ultra.name}</h3>
+                    <p class="text-sky-600 mb-4 font-semibold">超级版</p>
+                    <ul class="space-y-3 text-slate-600">
+                        <li><strong>核心价值:</strong> ${data.ultra.value}</li>
+                        <li><strong>目标用户:</strong> ${data.ultra.target}</li>
+                        <li class="mt-4 pt-4 border-t border-slate-200"><strong>关键差异:</strong> ${data.pro.diff}</li>
+                    </ul>
+                </div>
+            `;
+                }
+
+                tierSelector.addEventListener("click", (e) => {
+                    if (e.target.tagName === "BUTTON") {
+                        const provider = e.target.dataset.provider;
+                        tierSelector
+                            .querySelectorAll("button")
+                            .forEach((btn) => btn.classList.remove("active"));
+                        e.target.classList.add("active");
+                        updateTierCards(provider);
+                    }
+                });
+
+                updateTierCards("openai");
+
+                const costSelector = document.getElementById(
+                    "cost-provider-selector",
+                );
+                const ctx = document
+                    .getElementById("apiCostChart")
+                    .getContext("2d");
+                let apiCostChart;
+
+                function updateCostChart(provider) {
+                    const data = costData[provider];
+                    if (apiCostChart) {
+                        apiCostChart.destroy();
+                    }
+                    apiCostChart = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: "每百万输出词元成本 ($)",
+                                    data: data.costs,
+                                    backgroundColor: [
+                                        "rgba(56, 189, 248, 0.6)", // sky-400
+                                        "rgba(14, 165, 233, 0.6)", // sky-500
+                                        "rgba(2, 132, 199, 0.6)", // sky-600
+                                        "rgba(12, 74, 110, 0.6)", // sky-800
+                                    ],
+                                    borderColor: [
+                                        "rgba(56, 189, 248, 1)",
+                                        "rgba(14, 165, 233, 1)",
+                                        "rgba(2, 132, 199, 1)",
+                                        "rgba(12, 74, 110, 1)",
+                                    ],
+                                    borderWidth: 1,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            indexAxis: "y",
+                            scales: {
+                                x: {
+                                    type: "logarithmic",
+                                    title: {
+                                        display: true,
+                                        text: "成本 (美元, 对数刻度)",
+                                    },
+                                    ticks: {
+                                        callback: function (
+                                            value,
+                                            index,
+                                            values,
+                                        ) {
+                                            return "$" + value.toLocaleString();
+                                        },
+                                    },
+                                },
+                                y: {
+                                    grid: {
+                                        display: false,
+                                    },
+                                },
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            let label =
+                                                context.dataset.label || "";
+                                            if (label) {
+                                                label += ": ";
+                                            }
+                                            if (context.parsed.x !== null) {
+                                                label +=
+                                                    "$" +
+                                                    context.parsed.x.toFixed(2);
+                                            }
+                                            return label;
+                                        },
+                                    },
+                                },
+                                title: {
+                                    display: true,
+                                    text: `${provider.charAt(0).toUpperCase() + provider.slice(1)} API成本对比`,
+                                    font: {
+                                        size: 18,
+                                    },
+                                },
+                            },
+                        },
+                    });
+                }
+
+                costSelector.addEventListener("click", (e) => {
+                    if (e.target.tagName === "BUTTON") {
+                        const provider = e.target.dataset.provider;
+                        costSelector
+                            .querySelectorAll("button")
+                            .forEach((btn) => btn.classList.remove("active"));
+                        e.target.classList.add("active");
+                        updateCostChart(provider);
+                    }
+                });
+
+                updateCostChart("openai");
+
+                const accordions = document.querySelectorAll(".accordion-item");
+                accordions.forEach((item) => {
+                    const header = item.querySelector(".accordion-header");
+                    const content = item.querySelector(".accordion-content");
+                    const icon = header.querySelector("span");
+
+                    header.addEventListener("click", () => {
+                        if (content.style.maxHeight) {
+                            content.style.maxHeight = null;
+                            icon.style.transform = "rotate(0deg)";
+                        } else {
+                            content.style.maxHeight =
+                                content.scrollHeight + "px";
+                            icon.style.transform = "rotate(45deg)";
+                        }
+                    });
+                });
+
+                const sections = document.querySelectorAll("section[id]");
+                const navLinks = document.querySelectorAll(".nav-link");
+
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                navLinks.forEach((link) => {
+                                    link.classList.remove("active");
+                                    if (
+                                        link
+                                            .getAttribute("href")
+                                            .substring(1) === entry.target.id
+                                    ) {
+                                        link.classList.add("active");
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    { rootMargin: "-50% 0px -50% 0px" },
+                );
+
+                sections.forEach((section) => {
+                    observer.observe(section);
+                });
+            });
+        </script>
+    </body>
+</html>

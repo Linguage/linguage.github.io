@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：218 基本信息 论文编号：218 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Effect of Unsteady Wheel-Rail Contact on the Prediction of Rail Corrugation and Curve Squeal 中文标题：非稳态轮轨接触对钢轨波磨和曲线尖叫预测的影响 作者及单位：Leonardo Faccini¹, Federico Castellini¹, Egidio Di Gialleonardo¹, Juan Giner-Navarro², Luis Baeza², Roberto Corradi¹ ¹ Politecnico di Milano, Department of Mechanical Engineering, Milano, Italy ² I2MB, Universitat Politècnica de València, València, Spain 联系邮箱：leonardo.faccini@polimi.it 摘要 本研究研究了非稳态切向接触建模对钢轨波磨和曲线尖叫预测的影响。将频域非稳态接触公式集成到线性化轮轨相互作用模型中，并应用于小半径地铁曲线场景。虽然稳态接触模型足以识别易产生波磨的波长，但非稳态接触模型提高了磨损率预测的准确性。在曲线尖叫的情况下，非稳态方法捕获了使用稳态接触模型未检测到的额外高频不稳定性。研究结果突显了非稳态接触效应在准确捕捉动态轮轨现象中的关键作用，特别是在较高频率下。
+关键词 #轮轨接触 #非稳态接触模型 #钢轨波磨 #曲线尖叫
+背景与动机 铁路噪声和振动现象的研究一直是理解其成因和识别合适缓解解决方案的重要研究领域。其中大多数源于轮轨相互作用的中高频动力学。因此，它们的分析需要一个轮轨相互作用模型，通过真实的接触模型将车辆和轨道的动力学行为耦合起来。
+大多数现有接触理论假设接触斑内存在稳态条件。然而，文献表明，随着频率的增加，传统稳态接触模型可能导致不准确的结果，需要包含非稳态接触条件。尽管如此，使用非稳态接触模型对噪声和振动问题研究的影响仍然 poorly understood。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-218-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：218 基本信息 论文编号：218 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Effect of Unsteady Wheel-Rail Contact on the Prediction of Rail Corrugation and Curve Squeal 中文标题：非稳态轮轨接触对钢轨波磨和曲线尖叫预测的影响 作者及单位：Leonardo Faccini¹, Federico Castellini¹, Egidio Di Gialleonardo¹, Juan Giner-Navarro², Luis Baeza², Roberto Corradi¹ ¹ Politecnico di Milano, Department of Mechanical Engineering, Milano, Italy ² I2MB, Universitat Politècnica de València, València, Spain 联系邮箱：leonardo.faccini@polimi.it 摘要 本研究研究了非稳态切向接触建模对钢轨波磨和曲线尖叫预测的影响。将频域非稳态接触公式集成到线性化轮轨相互作用模型中，并应用于小半径地铁曲线场景。虽然稳态接触模型足以识别易产生波磨的波长，但非稳态接触模型提高了磨损率预测的准确性。在曲线尖叫的情况下，非稳态方法捕获了使用稳态接触模型未检测到的额外高频不稳定性。研究结果突显了非稳态接触效应在准确捕捉动态轮轨现象中的关键作用，特别是在较高频率下。
+关键词 #轮轨接触 #非稳态接触模型 #钢轨波磨 #曲线尖叫
+背景与动机 铁路噪声和振动现象的研究一直是理解其成因和识别合适缓解解决方案的重要研究领域。其中大多数源于轮轨相互作用的中高频动力学。因此，它们的分析需要一个轮轨相互作用模型，通过真实的接触模型将车辆和轨道的动力学行为耦合起来。
+大多数现有接触理论假设接触斑内存在稳态条件。然而，文献表明，随着频率的增加，传统稳态接触模型可能导致不准确的结果，需要包含非稳态接触条件。尽管如此，使用非稳态接触模型对噪声和振动问题研究的影响仍然 poorly understood。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-218-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-038-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-070-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-113-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-162-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-218-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-219-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-225-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-277-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-328-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/" class="crumb-sec">Rail Topic 01 - Wheel-Rail Interaction</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-031-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-038-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-070-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-113-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-162-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-218-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-219-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-225-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-277-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-328-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览218">IAVSD 2025 论文概览：218</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：218</li>
+<li><strong>所属主题</strong>：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用)</li>
+<li><strong>英文标题</strong>：Effect of Unsteady Wheel-Rail Contact on the Prediction of Rail Corrugation and Curve Squeal</li>
+<li><strong>中文标题</strong>：非稳态轮轨接触对钢轨波磨和曲线尖叫预测的影响</li>
+<li><strong>作者及单位</strong>：Leonardo Faccini¹, Federico Castellini¹, Egidio Di Gialleonardo¹, Juan Giner-Navarro², Luis Baeza², Roberto Corradi¹
+<ul>
+<li>¹ Politecnico di Milano, Department of Mechanical Engineering, Milano, Italy</li>
+<li>² I2MB, Universitat Politècnica de València, València, Spain</li>
+</ul>
+</li>
+<li><strong>联系邮箱</strong>：leonardo.faccini@polimi.it</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>本研究研究了非稳态切向接触建模对钢轨波磨和曲线尖叫预测的影响。将频域非稳态接触公式集成到线性化轮轨相互作用模型中，并应用于小半径地铁曲线场景。虽然稳态接触模型足以识别易产生波磨的波长，但非稳态接触模型提高了磨损率预测的准确性。在曲线尖叫的情况下，非稳态方法捕获了使用稳态接触模型未检测到的额外高频不稳定性。研究结果突显了非稳态接触效应在准确捕捉动态轮轨现象中的关键作用，特别是在较高频率下。</p>
+<h2 id="关键词">关键词</h2>
+<p>#轮轨接触 #非稳态接触模型 #钢轨波磨 #曲线尖叫</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>铁路噪声和振动现象的研究一直是理解其成因和识别合适缓解解决方案的重要研究领域。其中大多数源于轮轨相互作用的中高频动力学。因此，它们的分析需要一个轮轨相互作用模型，通过真实的接触模型将车辆和轨道的动力学行为耦合起来。</p>
+<p>大多数现有接触理论假设接触斑内存在稳态条件。然而，文献表明，随着频率的增加，传统稳态接触模型可能导致不准确的结果，需要包含非稳态接触条件。尽管如此，使用非稳态接触模型对噪声和振动问题研究的影响仍然 poorly understood。</p>
+<p>本文的目的是通过在线性化轮轨相互作用预测工具中引入线性非稳态切向接触公式，评估接触模型在中高频问题分析中的作用，分析地铁线路的小半径曲线作为参考场景。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究采用频域分析方法，结合线性化轮轨相互作用模型来研究非稳态接触效应：</p>
+<ol>
+<li>
+<p><strong>理论框架建立</strong>：</p>
+<ul>
+<li>将接触变量分解为稳态分量和时变分量</li>
+<li>基于多体仿真计算稳态条件</li>
+<li>在频域中建立线性化轮轨相互作用模型</li>
+</ul>
+</li>
+<li>
+<p><strong>接触模型开发</strong>：</p>
+<ul>
+<li>法向采用线性化赫兹接触模型</li>
+<li>切向采用基于Kalker CONTACT算法的线性非稳态接触模型</li>
+<li>推导频率相关蠕变系数</li>
+</ul>
+</li>
+<li>
+<p><strong>车辆-轨道系统建模</strong>：</p>
+<ul>
+<li><strong>轮对动力学</strong>：采用模态表示法，包含有限元模型提取的固有频率和模态形状</li>
+<li><strong>轨道动力学</strong>：考虑无限长Timoshenko梁和连续双层支撑，包含轨垫和橡胶靴层</li>
+<li><strong>参数设置</strong>：170m半径曲线，45km/h速度，0.5摩擦系数</li>
+</ul>
+</li>
+<li>
+<p><strong>分析方法</strong>：</p>
+<ul>
+<li><strong>钢轨波磨分析</strong>：计算磨损率与轨道不平顺之间的传递函数，识别波化指数</li>
+<li><strong>曲线尖叫分析</strong>：采用广义Nyquist判据进行系统稳定性分析，识别潜在不稳定频率</li>
+<li><strong>参数化研究</strong>：变化摩擦系数(0.3-0.6)和接触点位置(15-35mm)</li>
+</ul>
+</li>
+</ol>
+<h2 id="主要结论">主要结论</h2>
+<ol>
+<li>
+<p><strong>钢轨波磨预测</strong>：</p>
+<ul>
+<li>稳态和非稳态接触模型在波磨频率识别上基本一致</li>
+<li>非稳态模型在波磨指数幅度上显示出一些差异，特别是在220Hz处</li>
+<li>在低轨侧识别出三个主要峰值：70Hz（轮对弯曲/扭转模式）、205Hz（轨道动力学）、220Hz（轮对0节圆0节径模式）</li>
+<li>如果只需要识别波磨频率，稳态接触模型可以安全使用；但如果需要精确的磨损率估计，非稳态模型更优</li>
+</ul>
+</li>
+<li>
+<p><strong>曲线尖叫预测</strong>：</p>
+<ul>
+<li>在3kHz以下频率范围内，两种模型识别出相同的不稳定模式</li>
+<li>非稳态模型在更高频率（4kHz以上）捕获了额外的失稳现象</li>
+<li>参数分析显示五种不同的不稳定频率：70Hz（弯曲模式）、425Hz（2节轴向模式）、1140Hz（3节轴向模式）、2370Hz（高阶轴向模式）、4890Hz（6节径向模式）</li>
+<li>非稳态模型在高频尖叫（&gt;3-4kHz）预测中显示出明显优势</li>
+</ul>
+</li>
+<li>
+<p><strong>模型选择建议</strong>：</p>
+<ul>
+<li><strong>稳态模型适用场景</strong>：主要用于识别主导频率，计算效率高</li>
+<li><strong>非稳态模型必要性</strong>：需要精确估计接触力动态分量时，特别是高频现象</li>
+<li><strong>高频现象</strong>：对于高于3-4kHz的曲线尖叫，稳态模型可能不足以正确预测潜在不稳定模式</li>
+</ul>
+</li>
+<li>
+<p><strong>局限性说明</strong>：</p>
+<ul>
+<li>分析限于特定情况，仅基于摩擦系数和接触点位置的参数变化</li>
+<li>曲线尖叫还受接触角、横向蠕变等其他因素强烈影响</li>
+<li>线性化模型虽然包含非稳态接触力学效应，但可能仍不足以分析不稳定振动期间的复杂非线性行为</li>
+</ul>
+</li>
+</ol>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>方法创新</strong>：首次将频域非稳态接触模型集成到钢轨波磨和曲线尖叫预测中</li>
+<li><strong>对比研究</strong>：系统比较了稳态和非稳态接触模型在两种典型轮轨问题中的表现</li>
+<li><strong>频率依赖性</strong>：揭示了接触模型选择对不同频率范围预测精度的影响</li>
+<li><strong>实用指导</strong>：为工程实践中接触模型的选择提供了明确的指导原则</li>
+<li><strong>高频现象</strong>：发现了非稳态接触模型在高频尖叫预测中的关键作用</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Unsteady Wheel-Rail Contact</td>
+          <td>非稳态轮轨接触</td>
+      </tr>
+      <tr>
+          <td>Rail Corrugation</td>
+          <td>钢轨波磨</td>
+      </tr>
+      <tr>
+          <td>Curve Squeal</td>
+          <td>曲线尖叫</td>
+      </tr>
+      <tr>
+          <td>Frequency-Domain Analysis</td>
+          <td>频域分析</td>
+      </tr>
+      <tr>
+          <td>Tangential Contact</td>
+          <td>切向接触</td>
+      </tr>
+      <tr>
+          <td>Steady-State Contact Model</td>
+          <td>稳态接触模型</td>
+      </tr>
+      <tr>
+          <td>Contact Patch</td>
+          <td>接触斑</td>
+      </tr>
+      <tr>
+          <td>Creep Coefficients</td>
+          <td>蠕变系数</td>
+      </tr>
+      <tr>
+          <td>Linearized Model</td>
+          <td>线性化模型</td>
+      </tr>
+      <tr>
+          <td>Wear Rate</td>
+          <td>磨损率</td>
+      </tr>
+      <tr>
+          <td>Instability</td>
+          <td>不稳定性</td>
+      </tr>
+      <tr>
+          <td>Nyquist Criterion</td>
+          <td>Nyquist判据</td>
+      </tr>
+      <tr>
+          <td>Contact Point Position</td>
+          <td>接触点位置</td>
+      </tr>
+      <tr>
+          <td>Friction Coefficient</td>
+          <td>摩擦系数</td>
+      </tr>
+      <tr>
+          <td>Modal Representation</td>
+          <td>模态表示</td>
+      </tr>
+      <tr>
+          <td>Finite Element Model</td>
+          <td>有限元模型</td>
+      </tr>
+      <tr>
+          <td>Timoshenko Beam</td>
+          <td>Timoshenko梁</td>
+      </tr>
+      <tr>
+          <td>Track Dynamics</td>
+          <td>轨道动力学</td>
+      </tr>
+      <tr>
+          <td>Wheelset Dynamics</td>
+          <td>轮对动力学</td>
+      </tr>
+      <tr>
+          <td>Parametric Analysis</td>
+          <td>参数化分析</td>
+      </tr>
+      <tr>
+          <td>High-Frequency Phenomena</td>
+          <td>高频现象</td>
+      </tr>
+      <tr>
+          <td>Vibration Modes</td>
+          <td>振动模态</td>
+      </tr>
+      <tr>
+          <td>Natural Frequencies</td>
+          <td>固有频率</td>
+      </tr>
+      <tr>
+          <td>Damping Ratios</td>
+          <td>阻尼比</td>
+      </tr>
+      <tr>
+          <td>Contact Forces</td>
+          <td>接触力</td>
+      </tr>
+      <tr>
+          <td>Rail Irregularities</td>
+          <td>轨道不平顺</td>
+      </tr>
+      <tr>
+          <td>Stability Analysis</td>
+          <td>稳定性分析</td>
+      </tr>
+      <tr>
+          <td>Transfer Function</td>
+          <td>传递函数</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-02</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

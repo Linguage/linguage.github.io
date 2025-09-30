@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：175 基本信息 论文编号：175 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：Stability Analysis of Continuous Welded Rails on Long-span High-speed Railway Bridges Under Temperature Gradient Effects 中文标题：温度梯度效应下大跨度高速铁路桥梁上无缝线路的稳定性分析 作者及单位：Jijun Wei, Shuai Qu, Xinwen Yang (同济大学上海轨道交通基础设施耐久与系统安全重点实验室，中国) 摘要 大跨度桥梁上受热诱导长波长不平顺影响的连续焊接钢轨(CWR)的动态行为对确保运营安全和结构效率至关重要。本研究研究了CWR在热效应下的稳态变形及其对车辆-桥梁耦合系统动态响应的后续影响。使用ANSYS和Universal Mechanism (UM)开发了列车-轨道-桥梁系统的刚柔耦合有限元模型，用于多物理场协同仿真。使用ANSYS量化了轨道-桥梁系统在不同热条件下的几何变形特征，并将热诱导轨道不平顺纳入UM动态模型。进行了参数仿真以阐明热效应如何影响车辆-斜拉桥耦合系统的动态响应机制。主要发现包括：(1) 梁端区域的CWR对均匀季节性温度变化高度敏感；(2) 桥梁构件与运行钢轨之间的异步热演化产生短波长不平顺，显著增加轮重减载率；(3) 由斜向太阳辐射引起的水平热梯度在中跨CWR段产生曲率畸变，可能构成脱轨危险。
+关键词 #温度梯度 #大跨度桥梁 #连续焊接钢轨 #热变形 #车辆-轨道-桥梁耦合 #稳定性分析 #高速铁路 #热力耦合
+背景与动机 大跨度桥梁上的连续焊接钢轨(CWR)受到复杂热效应的影响，这些效应影响轨道稳定性和地铁运营的安全性。温度变化在钢轨中产生热应力，可能导致侧向屈曲或过大的纵向位移，特别是在热梯度和桥梁与轨道之间差异膨胀显著的大跨度桥梁中。尽管已经对列车与铁路桥梁之间的动态相互作用进行了大量研究，但非均匀温度场下CWR的稳定性仍然是一个关键挑战，特别是在季节性温度波动显著的地区。最近的研究强调了在耦合的列车-轨道-桥梁系统中考虑热变形的重要性。然而，大多数研究要么专注于动态响应，要么专注于静态热效应，在CWR稳定性评估中两者的整合有限。太阳能辐射和日温度变化等环境因素进一步使情况复杂化。尽管取得了这些进展，但仍然缺乏一个全面的CWR稳定性评估框架，以考虑瞬态热梯度和长期热膨胀。
+研究方法 本研究通过整合ANSYS和UM建立协同仿真框架，为车辆-轨道-桥梁耦合系统开发全面的多体动力学(MBD)模型。研究系统地检查了三种热载荷情景对CWR稳定性的复合效应：(i) 季节性均匀温度变化，(ii) 横截面温度梯度，以及(iii) 桥梁构件与运行钢轨之间的异步热演化。该方法的创新性在于将热诱导静态轨道变形作为后续动态相互作用分析的边界条件。研究定量阐明了初始几何缺陷对桥梁-车辆振动特性的非线性放大。建立了耦合的车辆-柔性轨道-斜拉桥相互作用模型，该模型包含两个子模型：1) 轨道-桥梁耦合模型：在ANSYS中实施的有限元(FE)子模型，用于模拟耦合的轨道-桥梁系统，计算热载荷下钢轨的长波不规则变形；2) 车辆-轨道-桥梁耦合系统的MBD模型：在Universal Mechanism (UM) v9.1中建立的多体动力学(MBD)子模型，分析车辆与桥梁之间的动态相互作用。
+主要结论 研究表明，大跨度桥梁梁端区域的连续焊接钢轨(CWR)受温度变化影响最大，主要是由于这些区域的位移变化范围大且复杂。均匀温度变化在梁端区域的CWR中产生累积的纵向力，导致轨道几何不平顺，如钢轨波磨或局部屈曲。整个桥梁的水平温度梯度在中跨的CWR中引起曲率，导致列车的轴重减载率较高，可能影响运营安全。桥梁温度从10°C增加到30°C时，车体垂直加速度表现出速度依赖性放大特征：在60 km/h时增加1.5倍，而在120 km/h时仅增加0.6倍。相比之下，横向加速度对温度变化不敏感，在所有情况下始终保持在0.02 m/s²以下。轮重减载率主要对列车速度敏感，而不是温度升高。边跨中点垂直加速度表现出速度依赖性放大模式，在60 km/h时相对增加100%，80 km/h时增加200%，100 km/h时增加140%，120 km/h时增加80%。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：175 基本信息 论文编号：175 所属主题：Rail Topic 03 - Rail Systems and Performance 英文标题：Stability Analysis of Continuous Welded Rails on Long-span High-speed Railway Bridges Under Temperature Gradient Effects 中文标题：温度梯度效应下大跨度高速铁路桥梁上无缝线路的稳定性分析 作者及单位：Jijun Wei, Shuai Qu, Xinwen Yang (同济大学上海轨道交通基础设施耐久与系统安全重点实验室，中国) 摘要 大跨度桥梁上受热诱导长波长不平顺影响的连续焊接钢轨(CWR)的动态行为对确保运营安全和结构效率至关重要。本研究研究了CWR在热效应下的稳态变形及其对车辆-桥梁耦合系统动态响应的后续影响。使用ANSYS和Universal Mechanism (UM)开发了列车-轨道-桥梁系统的刚柔耦合有限元模型，用于多物理场协同仿真。使用ANSYS量化了轨道-桥梁系统在不同热条件下的几何变形特征，并将热诱导轨道不平顺纳入UM动态模型。进行了参数仿真以阐明热效应如何影响车辆-斜拉桥耦合系统的动态响应机制。主要发现包括：(1) 梁端区域的CWR对均匀季节性温度变化高度敏感；(2) 桥梁构件与运行钢轨之间的异步热演化产生短波长不平顺，显著增加轮重减载率；(3) 由斜向太阳辐射引起的水平热梯度在中跨CWR段产生曲率畸变，可能构成脱轨危险。
+关键词 #温度梯度 #大跨度桥梁 #连续焊接钢轨 #热变形 #车辆-轨道-桥梁耦合 #稳定性分析 #高速铁路 #热力耦合
+背景与动机 大跨度桥梁上的连续焊接钢轨(CWR)受到复杂热效应的影响，这些效应影响轨道稳定性和地铁运营的安全性。温度变化在钢轨中产生热应力，可能导致侧向屈曲或过大的纵向位移，特别是在热梯度和桥梁与轨道之间差异膨胀显著的大跨度桥梁中。尽管已经对列车与铁路桥梁之间的动态相互作用进行了大量研究，但非均匀温度场下CWR的稳定性仍然是一个关键挑战，特别是在季节性温度波动显著的地区。最近的研究强调了在耦合的列车-轨道-桥梁系统中考虑热变形的重要性。然而，大多数研究要么专注于动态响应，要么专注于静态热效应，在CWR稳定性评估中两者的整合有限。太阳能辐射和日温度变化等环境因素进一步使情况复杂化。尽管取得了这些进展，但仍然缺乏一个全面的CWR稳定性评估框架，以考虑瞬态热梯度和长期热膨胀。
+研究方法 本研究通过整合ANSYS和UM建立协同仿真框架，为车辆-轨道-桥梁耦合系统开发全面的多体动力学(MBD)模型。研究系统地检查了三种热载荷情景对CWR稳定性的复合效应：(i) 季节性均匀温度变化，(ii) 横截面温度梯度，以及(iii) 桥梁构件与运行钢轨之间的异步热演化。该方法的创新性在于将热诱导静态轨道变形作为后续动态相互作用分析的边界条件。研究定量阐明了初始几何缺陷对桥梁-车辆振动特性的非线性放大。建立了耦合的车辆-柔性轨道-斜拉桥相互作用模型，该模型包含两个子模型：1) 轨道-桥梁耦合模型：在ANSYS中实施的有限元(FE)子模型，用于模拟耦合的轨道-桥梁系统，计算热载荷下钢轨的长波不规则变形；2) 车辆-轨道-桥梁耦合系统的MBD模型：在Universal Mechanism (UM) v9.1中建立的多体动力学(MBD)子模型，分析车辆与桥梁之间的动态相互作用。
+主要结论 研究表明，大跨度桥梁梁端区域的连续焊接钢轨(CWR)受温度变化影响最大，主要是由于这些区域的位移变化范围大且复杂。均匀温度变化在梁端区域的CWR中产生累积的纵向力，导致轨道几何不平顺，如钢轨波磨或局部屈曲。整个桥梁的水平温度梯度在中跨的CWR中引起曲率，导致列车的轴重减载率较高，可能影响运营安全。桥梁温度从10°C增加到30°C时，车体垂直加速度表现出速度依赖性放大特征：在60 km/h时增加1.5倍，而在120 km/h时仅增加0.6倍。相比之下，横向加速度对温度变化不敏感，在所有情况下始终保持在0.02 m/s²以下。轮重减载率主要对列车速度敏感，而不是温度升高。边跨中点垂直加速度表现出速度依赖性放大模式，在60 km/h时相对增加100%，80 km/h时增加200%，100 km/h时增加140%，120 km/h时增加80%。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-057-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-064-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-074-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-075-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-094-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-131-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-142-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-195-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-204-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-234-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-259-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-269-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-279-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-298-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-341-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-350-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-353-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-359-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/" class="crumb-sec">Rail Topic 03 - Rail Systems and Performance</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-057-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-064-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-074-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-075-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-094-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-104-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-131-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-142-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-175-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-195-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-204-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-229-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-234-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-253-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-259-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-269-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-279-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-298-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-341-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-350-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-353-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-03---rail-systems-and-performance/paper-359-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览175">IAVSD 2025 论文概览：175</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：175</li>
+<li><strong>所属主题</strong>：Rail Topic 03 - Rail Systems and Performance</li>
+<li><strong>英文标题</strong>：Stability Analysis of Continuous Welded Rails on Long-span High-speed Railway Bridges Under Temperature Gradient Effects</li>
+<li><strong>中文标题</strong>：温度梯度效应下大跨度高速铁路桥梁上无缝线路的稳定性分析</li>
+<li><strong>作者及单位</strong>：Jijun Wei, Shuai Qu, Xinwen Yang (同济大学上海轨道交通基础设施耐久与系统安全重点实验室，中国)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>大跨度桥梁上受热诱导长波长不平顺影响的连续焊接钢轨(CWR)的动态行为对确保运营安全和结构效率至关重要。本研究研究了CWR在热效应下的稳态变形及其对车辆-桥梁耦合系统动态响应的后续影响。使用ANSYS和Universal Mechanism (UM)开发了列车-轨道-桥梁系统的刚柔耦合有限元模型，用于多物理场协同仿真。使用ANSYS量化了轨道-桥梁系统在不同热条件下的几何变形特征，并将热诱导轨道不平顺纳入UM动态模型。进行了参数仿真以阐明热效应如何影响车辆-斜拉桥耦合系统的动态响应机制。主要发现包括：(1) 梁端区域的CWR对均匀季节性温度变化高度敏感；(2) 桥梁构件与运行钢轨之间的异步热演化产生短波长不平顺，显著增加轮重减载率；(3) 由斜向太阳辐射引起的水平热梯度在中跨CWR段产生曲率畸变，可能构成脱轨危险。</p>
+<h2 id="关键词">关键词</h2>
+<p>#温度梯度 #大跨度桥梁 #连续焊接钢轨 #热变形 #车辆-轨道-桥梁耦合 #稳定性分析 #高速铁路 #热力耦合</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>大跨度桥梁上的连续焊接钢轨(CWR)受到复杂热效应的影响，这些效应影响轨道稳定性和地铁运营的安全性。温度变化在钢轨中产生热应力，可能导致侧向屈曲或过大的纵向位移，特别是在热梯度和桥梁与轨道之间差异膨胀显著的大跨度桥梁中。尽管已经对列车与铁路桥梁之间的动态相互作用进行了大量研究，但非均匀温度场下CWR的稳定性仍然是一个关键挑战，特别是在季节性温度波动显著的地区。最近的研究强调了在耦合的列车-轨道-桥梁系统中考虑热变形的重要性。然而，大多数研究要么专注于动态响应，要么专注于静态热效应，在CWR稳定性评估中两者的整合有限。太阳能辐射和日温度变化等环境因素进一步使情况复杂化。尽管取得了这些进展，但仍然缺乏一个全面的CWR稳定性评估框架，以考虑瞬态热梯度和长期热膨胀。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究通过整合ANSYS和UM建立协同仿真框架，为车辆-轨道-桥梁耦合系统开发全面的多体动力学(MBD)模型。研究系统地检查了三种热载荷情景对CWR稳定性的复合效应：(i) 季节性均匀温度变化，(ii) 横截面温度梯度，以及(iii) 桥梁构件与运行钢轨之间的异步热演化。该方法的创新性在于将热诱导静态轨道变形作为后续动态相互作用分析的边界条件。研究定量阐明了初始几何缺陷对桥梁-车辆振动特性的非线性放大。建立了耦合的车辆-柔性轨道-斜拉桥相互作用模型，该模型包含两个子模型：1) 轨道-桥梁耦合模型：在ANSYS中实施的有限元(FE)子模型，用于模拟耦合的轨道-桥梁系统，计算热载荷下钢轨的长波不规则变形；2) 车辆-轨道-桥梁耦合系统的MBD模型：在Universal Mechanism (UM) v9.1中建立的多体动力学(MBD)子模型，分析车辆与桥梁之间的动态相互作用。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>研究表明，大跨度桥梁梁端区域的连续焊接钢轨(CWR)受温度变化影响最大，主要是由于这些区域的位移变化范围大且复杂。均匀温度变化在梁端区域的CWR中产生累积的纵向力，导致轨道几何不平顺，如钢轨波磨或局部屈曲。整个桥梁的水平温度梯度在中跨的CWR中引起曲率，导致列车的轴重减载率较高，可能影响运营安全。桥梁温度从10°C增加到30°C时，车体垂直加速度表现出速度依赖性放大特征：在60 km/h时增加1.5倍，而在120 km/h时仅增加0.6倍。相比之下，横向加速度对温度变化不敏感，在所有情况下始终保持在0.02 m/s²以下。轮重减载率主要对列车速度敏感，而不是温度升高。边跨中点垂直加速度表现出速度依赖性放大模式，在60 km/h时相对增加100%，80 km/h时增加200%，100 km/h时增加140%，120 km/h时增加80%。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>多物理场协同仿真</strong>：首次建立了ANSYS和UM的协同仿真框架，实现了热-结构-动力学的多物理场耦合分析，为复杂热环境下桥梁轨道系统稳定性研究提供了新方法</li>
+<li><strong>三种热载荷机制系统研究</strong>：创新性地系统研究了均匀温度变化、横截面温度梯度和异步热演化三种热载荷机制对CWR稳定性的复合效应，揭示了不同热载荷的作用机理</li>
+<li><strong>热变形与动态响应耦合分析</strong>：将热诱导静态轨道变形作为动态相互作用分析的边界条件，定量阐明了初始几何缺陷对桥梁-车辆振动特性的非线性放大效应</li>
+<li><strong>工程安全指导价值</strong>：研究发现梁端区域CWR对温度变化高度敏感，水平热梯度可能引起脱轨危险，为大跨度高速铁路桥梁的设计、维护和安全运营提供了重要的理论依据</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Continuous Welded Rail (CWR)</td>
+          <td>连续焊接钢轨</td>
+      </tr>
+      <tr>
+          <td>Temperature Gradient</td>
+          <td>温度梯度</td>
+      </tr>
+      <tr>
+          <td>Long-span Bridge</td>
+          <td>大跨度桥梁</td>
+      </tr>
+      <tr>
+          <td>Thermal Deformation</td>
+          <td>热变形</td>
+      </tr>
+      <tr>
+          <td>Vehicle-Track-Bridge Coupling</td>
+          <td>车辆-轨道-桥梁耦合</td>
+      </tr>
+      <tr>
+          <td>Thermal Stress</td>
+          <td>热应力</td>
+      </tr>
+      <tr>
+          <td>Lateral Buckling</td>
+          <td>侧向屈曲</td>
+      </tr>
+      <tr>
+          <td>Longitudinal Displacement</td>
+          <td>纵向位移</td>
+      </tr>
+      <tr>
+          <td>Thermal Expansion</td>
+          <td>热膨胀</td>
+      </tr>
+      <tr>
+          <td>Multi-physics Co-simulation</td>
+          <td>多物理场协同仿真</td>
+      </tr>
+      <tr>
+          <td>Rigid-Flexible Coupling</td>
+          <td>刚柔耦合</td>
+      </tr>
+      <tr>
+          <td>Finite Element Model (FEM)</td>
+          <td>有限元模型</td>
+      </tr>
+      <tr>
+          <td>Multibody Dynamics (MBD)</td>
+          <td>多体动力学</td>
+      </tr>
+      <tr>
+          <td>Cable-Stayed Bridge</td>
+          <td>斜拉桥</td>
+      </tr>
+      <tr>
+          <td>Track Irregularity</td>
+          <td>轨道不平顺</td>
+      </tr>
+      <tr>
+          <td>Thermally Induced Deformation</td>
+          <td>热诱导变形</td>
+      </tr>
+      <tr>
+          <td>Wheel Load Reduction Rate</td>
+          <td>轮重减载率</td>
+      </tr>
+      <tr>
+          <td>Operational Safety</td>
+          <td>运营安全</td>
+      </tr>
+      <tr>
+          <td>Uniform Temperature Load</td>
+          <td>均匀温度载荷</td>
+      </tr>
+      <tr>
+          <td>Cross-sectional Temperature Gradient</td>
+          <td>横截面温度梯度</td>
+      </tr>
+      <tr>
+          <td>Asynchronous Thermal Evolution</td>
+          <td>异步热演化</td>
+      </tr>
+      <tr>
+          <td>Structural Stability</td>
+          <td>结构稳定性</td>
+      </tr>
+      <tr>
+          <td>Dynamic Response</td>
+          <td>动态响应</td>
+      </tr>
+      <tr>
+          <td>Heat Transfer</td>
+          <td>热传递</td>
+      </tr>
+      <tr>
+          <td>Solar Radiation</td>
+          <td>太阳辐射</td>
+      </tr>
+      <tr>
+          <td>Seasonal Temperature Variation</td>
+          <td>季节性温度变化</td>
+      </tr>
+      <tr>
+          <td>Bridge-Rail Differential Temperature</td>
+          <td>桥梁-钢轨差异温度</td>
+      </tr>
+      <tr>
+          <td>Geometric Imperfection</td>
+          <td>几何缺陷</td>
+      </tr>
+      <tr>
+          <td>Nonlinear Amplification</td>
+          <td>非线性放大</td>
+      </tr>
+      <tr>
+          <td>Vibration Characteristics</td>
+          <td>振动特性</td>
+      </tr>
+      <tr>
+          <td>High-Speed Railway</td>
+          <td>高速铁路</td>
+      </tr>
+      <tr>
+          <td>Track Structure</td>
+          <td>轨道结构</td>
+      </tr>
+      <tr>
+          <td>Bridge Engineering</td>
+          <td>桥梁工程</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+  
+  <aside class="docs-toc" aria-label="On this page">
+    
+    <div class="toc-title">On this page</div>
+    
+    <nav class="toc">
+      
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+          
+    </nav>
+    
+    
+  </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
