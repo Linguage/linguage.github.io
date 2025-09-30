@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>On a New Route to Chaos in Railway Dynamics • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="On a New Route to Chaos in Railway Dynamics"><meta property="og:description" content="铁路动力学中通向混沌的新途径 摘要 本文提出并分析了铁路车辆动力学系统中出现混沌运动的新机制。通过对系统非线性动力学的理论推导和数值仿真，作者发现铁路车辆在特定参数下会经历新的分岔过程，最终导致轨道车辆运动出现混沌现象。这一发现丰富了铁路动力学系统混沌演化的理论基础，对实际轨道安全和车辆设计具有重要启示意义。
+关键词 #混沌 #铁路动力学 #分岔 #非线性系统 #轨道安全
+"><meta property="og:url" content="https://linguage.github.io/hanstrue/paper_summary/new-route-chaos-railway-dynamics/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="On a New Route to Chaos in Railway Dynamics"><meta name="twitter:description" content="铁路动力学中通向混沌的新途径 摘要 本文提出并分析了铁路车辆动力学系统中出现混沌运动的新机制。通过对系统非线性动力学的理论推导和数值仿真，作者发现铁路车辆在特定参数下会经历新的分岔过程，最终导致轨道车辆运动出现混沌现象。这一发现丰富了铁路动力学系统混沌演化的理论基础，对实际轨道安全和车辆设计具有重要启示意义。
+关键词 #混沌 #铁路动力学 #分岔 #非线性系统 #轨道安全
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/hanstrue/" class="crumb-sec">Hans True论文集</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">On a New Route to Chaos in Railway Dynamics</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>On a New Route to Chaos in Railway Dynamics</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Nordstrøm Jensen, Hans True</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <h2 id="铁路动力学中通向混沌的新途径">铁路动力学中通向混沌的新途径</h2>
+<h2 id="摘要">摘要</h2>
+<p>本文提出并分析了铁路车辆动力学系统中出现混沌运动的新机制。通过对系统非线性动力学的理论推导和数值仿真，作者发现铁路车辆在特定参数下会经历新的分岔过程，最终导致轨道车辆运动出现混沌现象。这一发现丰富了铁路动力学系统混沌演化的理论基础，对实际轨道安全和车辆设计具有重要启示意义。</p>
+<h2 id="关键词">关键词</h2>
+<p>#混沌 #铁路动力学 #分岔 #非线性系统 #轨道安全</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着高速铁路技术的发展，车辆—轨道系统的非线性动力学行为日益复杂。已有研究发现轨道车辆的运动可能出现周期性、准周期性甚至混沌现象，但机制尚未完全揭示。本文动机在于探索铁路动力系统混沌出现的新途径，进一步理解轨道系统的稳定性问题，为安全设计提供理论支持。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>作者采用非线性动力学理论框架，建立铁路车辆动力学的数学模型，结合数值仿真考察分岔与混沌的产生。主要方法包括分岔分析、Lyapunov指数计算和轨道车辆参数的敏感性测试，同时利用实际车辆参数进行仿真，比对理论预测与数值结果。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>本文发现：在新的参数空间区域内，铁路车辆系统存在尚未被发现的分岔路径，系统会由稳定运动经分岔进入混沌区域。研究阐明了铁路车辆混沌运动的新机制，并指出参数扰动对系统动力学行为有重大影响。这些结论提示合理选择参数和结构对轨道安全至关重要。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p>提出铁路动力学系统中混沌的新形成途径</p>
+</li>
+<li>
+<p>系统分析分岔过程与参数敏感性</p>
+</li>
+<li>
+<p>拓展了轨道车辆混沌理论及其工程应用</p>
+</li>
+</ol>
+<h2 id="深度要点问题问答">深度要点问题问答</h2>
+<p><strong>Q: 这篇论文涉及哪些比较核心的概念？</strong></p>
+<p>A:
+这篇论文涉及有核心概念&quot;混沌动力学&quot;、&ldquo;分岔理论&rdquo;、&ldquo;非线性铁轨车辆动力学&rdquo;，基于论文内容及公开资料其对应解读：</p>
+<ul>
+<li>
+<p>混沌动力学：研究系统在确定性条件下出现难以预测、初值敏感的复杂运动。</p>
+</li>
+<li>
+<p>分岔理论：描述系统参数变化引发动力学行为突变的数学理论。</p>
+</li>
+<li>
+<p>非线性铁轨车辆动力学：轨道车辆受多重因素影响，运动方程表现强非线性特征，分析其稳定性及复杂行为非常重要。</p>
+</li>
+</ul>
+<p><strong>Q: 这篇论文试图解决什么问题？</strong></p>
+<p>A:
+这篇论文提出了&quot;新分岔途径理论&quot;，旨在解决&quot;轨道车辆混沌形成机制不清&quot;这一核心问题。具体来说，它试图解决以下问题：</p>
+<ul>
+<li>
+<p>铁路车辆系统中混沌是如何出现的？</p>
+</li>
+<li>
+<p>参数扰动如何影响混沌行为的出现？</p>
+</li>
+</ul>
+<p>为了解决这些问题，文中的&quot;新分岔途径理论&quot;利用了&quot;非线性动力学分析与数值仿真&quot;的原理。方法关键优势包括：</p>
+<ul>
+<li>
+<p>理论与仿真结果结合，复现轨道车辆复杂行为；</p>
+</li>
+<li>
+<p>明确参数空间范围，指导安全设计；</p>
+</li>
+<li>
+<p>揭示混沌与车辆动力学的关联。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中提及了哪些相关的研究？</strong></p>
+<p>A:
+这篇论文提到了&quot;轨道车辆混沌形成机制&quot;相关的研究工作，主要包括以下几个方面：</p>
+<ul>
+<li>
+<p>轨道系统非线性动力学的基础研究</p>
+</li>
+<li>
+<p>铁路车辆稳定性分析的经典分岔理论</p>
+</li>
+<li>
+<p>以往混沌现象发生条件的理论模型</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文如何解决这些问题？</strong></p>
+<p>A:
+论文提出了一个&quot;新分岔路径与参数空间分析法&quot;用于解决&quot;轨道车辆混沌运动生成机制&quot;这一核心问题。方法包含以下几个关键步骤：</p>
+<ul>
+<li>
+<p>构建并化简轨道车辆动力学系统的方程</p>
+</li>
+<li>
+<p>运用分岔分析理论寻找引发混沌的参数区域</p>
+</li>
+<li>
+<p>通过数值仿真验证所提出的分岔途径确实导致混沌</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中的研究方法所依托的基本假设有哪些？</strong></p>
+<p>A:
+论文提出的&quot;新分岔途径理论&quot;所依托的基本假设如下：</p>
+<ul>
+<li>
+<p>车辆与轨道的动力学模型可以用有限自由度描述；</p>
+</li>
+<li>
+<p>非线性因素（如轮轨接触）在模型中充分体现；</p>
+</li>
+<li>
+<p>外部扰动可视为参数微小变化。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文做了哪些实验？</strong></p>
+<p>A:
+文章进行了如下一系列实验来评估&quot;新分岔途径理论&quot;。实验主要内容包括：</p>
+<ul>
+<li>
+<p>数值模拟不同参数下车辆动力学响应流程</p>
+</li>
+<li>
+<p>运用Lyapunov指数评估混沌的显著性</p>
+</li>
+<li>
+<p>对比实验前后系统动力学的行为变化</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 有什么可以进一步探索的点？</strong></p>
+<p>A:
+尽管文中在&quot;轨道车辆混沌机制&quot;研究方面取得了一系列成果，但仍有一些潜在研究方向可以进一步探索：</p>
+<ul>
+<li>
+<p>更复杂车辆系统（如多节列车）动力学混沌形成的机制</p>
+</li>
+<li>
+<p>轨道结构变化对混沌发生的影响及工程控制措施</p>
+</li>
+</ul>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chaos</td>
+          <td>混沌</td>
+      </tr>
+      <tr>
+          <td>Bifurcation</td>
+          <td>分岔</td>
+      </tr>
+      <tr>
+          <td>Nonlinear Dynamics</td>
+          <td>非线性动力学</td>
+      </tr>
+      <tr>
+          <td>Lyapunov Exponent</td>
+          <td>李雅普诺夫指数</td>
+      </tr>
+      <tr>
+          <td>Parameter Sensitivity</td>
+          <td>参数敏感性</td>
+      </tr>
+      <tr>
+          <td>Stability</td>
+          <td>稳定性</td>
+      </tr>
+      <tr>
+          <td>Simulation</td>
+          <td>仿真</td>
+      </tr>
+      <tr>
+          <td>Vehicle-Track System</td>
+          <td>车辆—轨道系统</td>
+      </tr>
+      <tr>
+          <td>Safety Design</td>
+          <td>安全设计</td>
+      </tr>
+      <tr>
+          <td>Dynamic Model</td>
+          <td>动力学模型</td>
+      </tr>
+      <tr>
+          <td>Periodic Motion</td>
+          <td>周期运动</td>
+      </tr>
+      <tr>
+          <td>Quasi-Periodic Motion</td>
+          <td>准周期运动</td>
+      </tr>
+      <tr>
+          <td>Rail Vehicle</td>
+          <td>轨道车辆</td>
+      </tr>
+      <tr>
+          <td>State Space</td>
+          <td>状态空间</td>
+      </tr>
+      <tr>
+          <td>Attractor</td>
+          <td>吸引子</td>
+      </tr>
+      <tr>
+          <td>Fractal</td>
+          <td>分形</td>
+      </tr>
+      <tr>
+          <td>Deterministic System</td>
+          <td>确定性系统</td>
+      </tr>
+      <tr>
+          <td>Equilibrium</td>
+          <td>平衡态</td>
+      </tr>
+      <tr>
+          <td>Structural Perturbation</td>
+          <td>结构扰动</td>
+      </tr>
+      <tr>
+          <td>Critical Parameter</td>
+          <td>临界参数</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="文章框架">文章框架</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1. 引言
+</span></span><span style="display:flex;"><span>2. 背景与已有研究综述
+</span></span><span style="display:flex;"><span>3. 铁路车辆动力学模型构建
+</span></span><span style="display:flex;"><span>4. 非线性与分岔分析理论
+</span></span><span style="display:flex;"><span>5. 新的参数途径与混沌现象发现
+</span></span><span style="display:flex;"><span>6. 数值仿真及实验结果
+</span></span><span style="display:flex;"><span>7. 讨论与工程应用展望
+</span></span><span style="display:flex;"><span>8. 结论
+</span></span><span style="display:flex;"><span>9. 参考文献
+</span></span></code></pre></div><h2 id="基本信息">基本信息</h2>
+<ul>
+<li>
+<p><strong>所属主题</strong>：非线性动力学，轨道工程</p>
+</li>
+<li>
+<p><strong>英文标题</strong>：On a New Route to Chaos in Railway Dynamics</p>
+</li>
+<li>
+<p><strong>中文标题</strong>：铁路动力学中通向混沌的新途径</p>
+</li>
+<li>
+<p><strong>作者及单位</strong>：Nordstrøm Jensen &amp; Hans True, Technical University of Denmark</p>
+</li>
+<li>
+<p><strong>Harvard格式引用</strong>：Nordstrøm Jensen, H. &amp; True, H. (1997) &lsquo;On a New Route to Chaos in Railway Dynamics&rsquo;, Nonlinear Dynamics, 13(2), pp. 205–218. doi:10.1023/A:1008224625406.</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#铁路动力学中通向混沌的新途径">铁路动力学中通向混沌的新途径</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#铁路动力学中通向混沌的新途径">铁路动力学中通向混沌的新途径</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

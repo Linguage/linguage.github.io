@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way"><meta property="og:description" content="多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式 摘要 本文聚焦于铁道车辆动力学中的多重吸引子现象与临界速度（临界参数），并系统性讨论如何通过数值方法寻找这些关键参数。作者比较了三种主流策略：&ldquo;正确方法&quot;强调路径跟踪和沿分支查找 bifurcation 点；&ldquo;错误方法&quot;仅用线性稳定性分析，难以找到真正的临界速度；&ldquo;赌博方式&quot;则依靠有限扰动引发周期吸引子，但由于依赖于初始扰动维度，易产生误判。文章还对轨道车辆的多吸引子动力学、亚临界与超临界分岔、允许线性化的条件、超临界速度运行的风险与混沌运动等进行了全面梳理。
+关键词 #分岔分析 #稳定性分析 #多重吸引子 #临界速度 #铁道车辆动力学
+"><meta property="og:url" content="https://linguage.github.io/hanstrue/paper_summary/multiple-attractors-critical-parameters/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way"><meta name="twitter:description" content="多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式 摘要 本文聚焦于铁道车辆动力学中的多重吸引子现象与临界速度（临界参数），并系统性讨论如何通过数值方法寻找这些关键参数。作者比较了三种主流策略：&ldquo;正确方法&quot;强调路径跟踪和沿分支查找 bifurcation 点；&ldquo;错误方法&quot;仅用线性稳定性分析，难以找到真正的临界速度；&ldquo;赌博方式&quot;则依靠有限扰动引发周期吸引子，但由于依赖于初始扰动维度，易产生误判。文章还对轨道车辆的多吸引子动力学、亚临界与超临界分岔、允许线性化的条件、超临界速度运行的风险与混沌运动等进行了全面梳理。
+关键词 #分岔分析 #稳定性分析 #多重吸引子 #临界速度 #铁道车辆动力学
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/hanstrue/paper_summary/multiple-attractors-critical-parameters/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/hanstrue/" class="crumb-sec">Hans True论文集</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Hans True</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <h2 id="多重吸引子与临界参数及数值寻找方法正确错误与赌博方式">多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式</h2>
+<h2 id="摘要">摘要</h2>
+<p>本文聚焦于铁道车辆动力学中的多重吸引子现象与临界速度（临界参数），并系统性讨论如何通过数值方法寻找这些关键参数。作者比较了三种主流策略：&ldquo;正确方法&quot;强调路径跟踪和沿分支查找 bifurcation 点；&ldquo;错误方法&quot;仅用线性稳定性分析，难以找到真正的临界速度；&ldquo;赌博方式&quot;则依靠有限扰动引发周期吸引子，但由于依赖于初始扰动维度，易产生误判。文章还对轨道车辆的多吸引子动力学、亚临界与超临界分岔、允许线性化的条件、超临界速度运行的风险与混沌运动等进行了全面梳理。</p>
+<h2 id="关键词">关键词</h2>
+<p>#分岔分析 #稳定性分析 #多重吸引子 #临界速度 #铁道车辆动力学</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>铁道车辆在高速度下常出现&quot;hunting&quot;运动（周期性摇摆），寻找引发此现象的临界速度对于车辆安全和设计至关重要。近年来，部分学者提出&quot;简易数值法&quot;寻找临界速度，虽然在某些情况下有效，但通常依赖于运气和初值选择而不可靠。因此，系统性分析和可靠计算方法成为研究重点。</p>
+<h2 id="研究方法">研究方法</h2>
+<ul>
+<li>
+<p>采用非线性动力系统的分岔分析理论，尤其关注多体系统的路径跟踪（continuation/path following）与分支查找。</p>
+</li>
+<li>
+<p>典型模型为非线性微分方程系统，参数（例如速度）变化产生吸引子数量变化。</p>
+</li>
+<li>
+<p>以稳定性理论、Hopf分岔、鞍/节点分岔等为定量判据。</p>
+</li>
+<li>
+<p>通过数值积分、扰动分析和系统仿真，分别追踪稳态与周期性解的演变过程。</p>
+</li>
+</ul>
+<h2 id="主要结论">主要结论</h2>
+<ul>
+<li>
+<p>正确计算临界速度需沿新的分支跟踪轨迹至下一个分岔点，而非仅通过线性化与稳定性分析。</p>
+</li>
+<li>
+<p>传统稳定性分析只给出对无穷小扰动稳定区域，而实际临界值往往更低。</p>
+</li>
+<li>
+<p>数值&quot;赌博法&quot;结果依赖初始扰动维度，极易偏离真实临界速度。</p>
+</li>
+<li>
+<p>铁道车辆动力系统常见多重吸引子现象，周期吸引子（hunting motion）更为鲁棒，远超理想稳态。</p>
+</li>
+<li>
+<p>路试与仿真皆需采用&quot;路径跟踪—减速法&quot;才能获得可靠的临界速度。</p>
+</li>
+</ul>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p>系统梳理三大数值策略优劣，明确区分分岔问题与稳定性问题。</p>
+</li>
+<li>
+<p>明确提出多数&quot;临界速度&quot;计算方案的不足之处和理论陷阱。</p>
+</li>
+<li>
+<p>多维动力学几何解释，丰富多吸引子状态空间的认知。</p>
+</li>
+</ol>
+<h2 id="深度要点问题问答">深度要点问题问答</h2>
+<p><strong>Q: 这篇论文涉及哪些比较核心的概念？</strong></p>
+<p>A: 这篇论文涉及有核心概念{多重吸引子、分岔分析、临界速度、稳定性分析、轨道车辆动力学}，基于论文内容与以及公开资料其对应的解读：</p>
+<ul>
+<li>
+<p>多重吸引子：指状态空间中存在多个稳定解，车辆可能因扰动陷入不同轨迹。</p>
+</li>
+<li>
+<p>分岔分析：用来描述随着参数（速度）变化，系统解结构如何发生变化（从稳态到周期或混沌）。</p>
+</li>
+<li>
+<p>临界速度：车辆从稳态运动转为周期性&quot;hunting&quot;运动的速度阈值。</p>
+</li>
+<li>
+<p>稳定性分析：只适合分析局部扰动下的解，不适合判定真实临界速度。</p>
+</li>
+<li>
+<p>轨道车辆动力学：铁道车辆多体系统复杂的非线性动力学行为。</p>
+</li>
+</ul>
+<p><strong>Q: 这篇论文试图解决什么问题？</strong></p>
+<p>A: 这篇论文提出了{路径跟踪与分岔分析算法}，旨在解决{临界速度识别、非线性系统多解分析}。具体来说，它试图解决以下问题：</p>
+<ul>
+<li>
+<p>如何系统性计算并识别铁道车辆动力系统的临界速度。</p>
+</li>
+<li>
+<p>如何区别实际稳定性临界点与多个分支带来的真实临界速度。</p>
+</li>
+</ul>
+<p>为了解决这些问题，文中的{路径跟踪法}利用了{非线性分岔分析与吸引子识别原理}。这种方法的关键优势包括：</p>
+<ul>
+<li>
+<p>能正确定位所有分岔点，避免漏检隐藏的周期吸引子；</p>
+</li>
+<li>
+<p>不依赖初始扰动维度，计算结果稳定可靠；</p>
+</li>
+<li>
+<p>能适配于铁道车辆高维、非光滑状态空间情形。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中提及了哪些相关的研究？</strong></p>
+<p>A: 这篇论文提到了{临界速度识别、多吸引子分岔分析}相关的研究工作，主要包括以下几个方面：</p>
+<ul>
+<li>
+<p>True 和 Kaas-Petersen（1984）：轨道车辆多体系统的分岔分析。</p>
+</li>
+<li>
+<p>Schupp（2004）：轨道车辆动力学分岔路径跟踪。</p>
+</li>
+<li>
+<p>Stichel（1999）：周期吸引子判别方法与路径回溯。</p>
+</li>
+<li>
+<p>Jensen（1995）、Xia（2002）：车辆路试与仿真临界速度判别方案。</p>
+</li>
+<li>
+<p>Moon（1992）、Pascal（1995）：混沌动力学领域相关理论。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文如何解决这些问题？</strong></p>
+<p>A: 论文提出了一个{路径跟踪+分岔识别算法}用于解决{轨道车辆临界速度的数值识别难题}。这个方法包含以下几个关键步骤：</p>
+<ul>
+<li>
+<p>先对稳态解进行路径跟踪，识别分支点；</p>
+</li>
+<li>
+<p>出现周期解时，沿新分支路径逆向回溯，查找周期吸引子消失点；</p>
+</li>
+<li>
+<p>通过加扰动与递进算法，判断多重吸引子域的归属，实现系统全局分析。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中的研究方法所依托的基本假设有哪些？</strong></p>
+<p>A: 论文提出的{分岔分析路径法}所依托的基本假设如下：</p>
+<ul>
+<li>
+<p>铁道车辆系统可用非线性微分方程描述；</p>
+</li>
+<li>
+<p>状态空间内分岔现象可通过数值路径跟踪捕捉；</p>
+</li>
+<li>
+<p>系统多体模型参数充分，初值选择可控；</p>
+</li>
+<li>
+<p>吸引子域在高维空间中的几何分隔成立。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文做了哪些实验？</strong></p>
+<p>A: 文章进行了如下一系列实验来评估{分岔分析路径法}。实验的主要内容包括：</p>
+<ul>
+<li>
+<p>铁道车辆经典模型的数值仿真实验；</p>
+</li>
+<li>
+<p>运用路径跟踪算法，沿速度参数递增/递减，识别分岔点与吸引子；</p>
+</li>
+<li>
+<p>实验评价方法为轨迹收敛性分析、周期吸引子与稳态解域判别；</p>
+</li>
+<li>
+<p>实验结果显示，路径跟踪法比传统稳定性分析能更精确地识别临界速度，且对初值不敏感。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 有什么可以进一步探索的点？</strong></p>
+<p>A: 尽管文中在{临界速度与多吸引子动力学}的研究方面取得了一系列成果，但仍有一些潜在的研究方向可以进一步探索：</p>
+<ul>
+<li>
+<p>推广分岔路径跟踪算法至更复杂、多体、更高维度车辆系统；</p>
+</li>
+<li>
+<p>鲁棒性分析及不同扰动类型在多吸引子域中的影响规律；</p>
+</li>
+<li>
+<p>结合混沌动力学与实际轨道车辆测试数据，开发更智能化的临界速度识别平台。</p>
+</li>
+</ul>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Bifurcation</td>
+          <td>分岔</td>
+      </tr>
+      <tr>
+          <td>Attractor</td>
+          <td>吸引子</td>
+      </tr>
+      <tr>
+          <td>Critical Speed</td>
+          <td>临界速度</td>
+      </tr>
+      <tr>
+          <td>Stability Analysis</td>
+          <td>稳定性分析</td>
+      </tr>
+      <tr>
+          <td>Hopf Bifurcation</td>
+          <td>Hopf分岔</td>
+      </tr>
+      <tr>
+          <td>Saddle-node Bifurcation</td>
+          <td>鞍节点分岔</td>
+      </tr>
+      <tr>
+          <td>Limit Cycle</td>
+          <td>极限环</td>
+      </tr>
+      <tr>
+          <td>Hunting Motion</td>
+          <td>摇摆（周期运动）</td>
+      </tr>
+      <tr>
+          <td>Path Following</td>
+          <td>路径跟踪</td>
+      </tr>
+      <tr>
+          <td>Continuation</td>
+          <td>延续法</td>
+      </tr>
+      <tr>
+          <td>State Space</td>
+          <td>状态空间</td>
+      </tr>
+      <tr>
+          <td>Eigenvalue</td>
+          <td>特征值</td>
+      </tr>
+      <tr>
+          <td>Quasi-periodic Solution</td>
+          <td>准周期解</td>
+      </tr>
+      <tr>
+          <td>Chaotic Attractor</td>
+          <td>混沌吸引子</td>
+      </tr>
+      <tr>
+          <td>Periodic Solution</td>
+          <td>周期解</td>
+      </tr>
+      <tr>
+          <td>Domain of Attraction</td>
+          <td>吸引域</td>
+      </tr>
+      <tr>
+          <td>Nonlinear Dynamics</td>
+          <td>非线性动力学</td>
+      </tr>
+      <tr>
+          <td>Initial Value Problem</td>
+          <td>初值问题</td>
+      </tr>
+      <tr>
+          <td>Dissipative System</td>
+          <td>耗散系统</td>
+      </tr>
+      <tr>
+          <td>Jacobian</td>
+          <td>雅可比矩阵</td>
+      </tr>
+      <tr>
+          <td>Fold Bifurcation</td>
+          <td>折叠分岔</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="文章框架">文章框架</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1. 引言
+</span></span><span style="display:flex;"><span>2. 正确计算临界速度的方法
+</span></span><span style="display:flex;"><span>3. 错误计算方法的陷阱
+</span></span><span style="display:flex;"><span>4. &#34;赌博&#34;方法及其讨论
+</span></span><span style="display:flex;"><span>5. 周期吸引子（hunting motion）的鲁棒性分析
+</span></span><span style="display:flex;"><span>6. 多维状态空间下吸引子的空间分离特征
+</span></span><span style="display:flex;"><span>7. 超临界速度与系统混沌行为探讨
+</span></span><span style="display:flex;"><span>8. 实际车辆路试中的临界速度判别
+</span></span><span style="display:flex;"><span>9. 总结
+</span></span><span style="display:flex;"><span>参考文献
+</span></span></code></pre></div><h2 id="基本信息">基本信息</h2>
+<ul>
+<li>
+<p><strong>所属主题</strong>：铁道车辆动力学，非线性系统分析</p>
+</li>
+<li>
+<p><strong>英文标题</strong>：Multiple attractors and critical parameters and how to find them numerically: the right, the wrong and the gambling way</p>
+</li>
+<li>
+<p><strong>中文标题</strong>：多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式</p>
+</li>
+<li>
+<p><strong>作者及单位</strong>：Hans True, DTU Informatics, The Technical University of Denmark, Asmussens alle 305, DK-2800 Kgs. Lyngby, Denmark</p>
+</li>
+<li>
+<p><strong>Harvard格式引用</strong>：True, H. (2013). Multiple attractors and critical parameters and how to find them numerically: the right, the wrong and the gambling way. <em>Vehicle System Dynamics</em>, 51(3), 443-459. doi:10.1080/00423114.2012.738919</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#多重吸引子与临界参数及数值寻找方法正确错误与赌博方式">多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#多重吸引子与临界参数及数值寻找方法正确错误与赌博方式">多重吸引子与临界参数及数值寻找方法：正确、错误与赌博方式</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

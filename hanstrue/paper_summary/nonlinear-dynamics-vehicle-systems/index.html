@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics"><meta property="og:description" content="非线性动力学理论及其在车辆系统动力学中的应用 摘要 本文简要概述了非线性动力学及其在车辆系统动力学问题中的应用。引入了相空间的概念，并讨论了多重平衡态及其对参数的依赖。强调了在分析非线性动力学问题时，首先应分析完整非线性问题的平衡态，并在已知平衡态的基础上，对于某些问题可以进行局部线性化，以加快数值解算过程，但并非所有问题都能线性化。此外，分析了非线性动力学在车辆仿真中的应用，提出在仿真计算前必须明确完整非线性系统的平衡态。
+关键词 #非线性动力学 #车辆系统 #平衡态 #分岔 #混沌
+"><meta property="og:url" content="https://linguage.github.io/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics"><meta name="twitter:description" content="非线性动力学理论及其在车辆系统动力学中的应用 摘要 本文简要概述了非线性动力学及其在车辆系统动力学问题中的应用。引入了相空间的概念，并讨论了多重平衡态及其对参数的依赖。强调了在分析非线性动力学问题时，首先应分析完整非线性问题的平衡态，并在已知平衡态的基础上，对于某些问题可以进行局部线性化，以加快数值解算过程，但并非所有问题都能线性化。此外，分析了非线性动力学在车辆仿真中的应用，提出在仿真计算前必须明确完整非线性系统的平衡态。
+关键词 #非线性动力学 #车辆系统 #平衡态 #分岔 #混沌
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/hanstrue/" class="crumb-sec">Hans True论文集</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Hans True</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <h2 id="非线性动力学理论及其在车辆系统动力学中的应用">非线性动力学理论及其在车辆系统动力学中的应用</h2>
+<h2 id="摘要">摘要</h2>
+<p>本文简要概述了非线性动力学及其在车辆系统动力学问题中的应用。引入了相空间的概念，并讨论了多重平衡态及其对参数的依赖。强调了在分析非线性动力学问题时，首先应分析完整非线性问题的平衡态，并在已知平衡态的基础上，对于某些问题可以进行局部线性化，以加快数值解算过程，但并非所有问题都能线性化。此外，分析了非线性动力学在车辆仿真中的应用，提出在仿真计算前必须明确完整非线性系统的平衡态。</p>
+<h2 id="关键词">关键词</h2>
+<p>#非线性动力学 #车辆系统 #平衡态 #分岔 #混沌</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>几乎所有车辆系统的运动学和本构关系都是非线性的，建模过程自然而然地引出了非线性动力学系统。线性方法在工程领域有着悠久的贡献，但在现代车辆系统里，单纯依赖线性方法常导致错误结果。文章阐明了何时、为何需要使用非线性动力学去研究车辆系统，并强调掌握非线性理论的重要性。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>采用非线性动力学理论、相空间分析、分岔理论与平衡态分析，从数学建模到数值仿真，结合结构稳定性和轨道稳定性的判据，通过对车辆系统动力学的参数化建模与数值模拟，揭示非线性特征及其影响。</p>
+<h2 id="主要结论">主要结论</h2>
+<ul>
+<li>
+<p>非线性动力学在车辆系统中不可忽视，线性化分析存在局限。</p>
+</li>
+<li>
+<p>仿真前必须分析完整非线性系统的所有平衡态及其分岔点，合理选择数值解算器。</p>
+</li>
+<li>
+<p>一些系统不可线性化，应用线性方法会导致误判甚至工程事故，例如干摩擦和非光滑接触。</p>
+</li>
+</ul>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p>强调非线性系统平衡态分析对工程仿真的关键作用</p>
+</li>
+<li>
+<p>系统梳理了分岔和混沌在车辆动力学中的工程意义</p>
+</li>
+<li>
+<p>对非光滑动力学系统如干摩擦、冲击等提出了需专门处理的建议</p>
+</li>
+</ol>
+<h2 id="深度要点问题问答">深度要点问题问答</h2>
+<p><strong>Q: 这篇论文涉及哪些比较核心的概念？</strong></p>
+<p>A:
+这篇论文涉及有核心概念非线性动力学、平衡态、分岔、混沌。基于论文内容与公开资料其对应的解读：</p>
+<ul>
+<li>
+<p>非线性动力学：研究运动系统中非线性关系，揭示如多稳态、分岔、混沌等复杂行为。</p>
+</li>
+<li>
+<p>分岔（Bifurcation）：参数变化时，系统平衡态数量或类型发生突变。</p>
+</li>
+<li>
+<p>混沌（Chaos）：确定性系统表现出的高度复杂、随机但又非随机的行为。</p>
+</li>
+</ul>
+<p><strong>Q: 这篇论文试图解决什么问题？</strong></p>
+<p>A:
+这篇论文提出了平衡态分析与分岔理论，旨在解决车辆系统动力学非线性建模和分析的关键问题。具体来说，它试图解决以下问题：</p>
+<ul>
+<li>
+<p>线性方法在复杂车辆系统中的失效机制</p>
+</li>
+<li>
+<p>如何查明和分类车辆系统中的多种平衡态及其转移机制</p>
+</li>
+</ul>
+<p>为了解决这些问题，文中的核心方法利用了相空间分析、雅可比矩阵的特征值判据等原理。关键优势包括：</p>
+<ul>
+<li>
+<p>能揭示系统所有可能的运行状态</p>
+</li>
+<li>
+<p>可预判系统性能极限及失稳边界</p>
+</li>
+<li>
+<p>为数值模拟提供合理基础</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中提及了哪些相关的研究？</strong></p>
+<p>A:
+这篇论文提到了非线性动力学理论相关的研究工作，主要包括以下几个方面：</p>
+<ul>
+<li>
+<p>分岔理论及其在车辆动力学中的应用（如Hopf分岔，鞍结分岔等）</p>
+</li>
+<li>
+<p>混沌理论及实际工程中的chaotic attractors分析</p>
+</li>
+<li>
+<p>车辆系统非光滑动力学专题（干摩擦、冲击、渐变接触几何等）</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文如何解决这些问题？</strong></p>
+<p>A:
+论文提出了一个基于相空间和分岔分析的非线性动力学方法用于解决车辆系统的稳态及转移机制。这个方法包含以下几个关键步骤：</p>
+<ul>
+<li>
+<p>构建完整非线性动力学模型</p>
+</li>
+<li>
+<p>计算所有平衡态及其分岔点</p>
+</li>
+<li>
+<p>采用数值仿真验证仿真结果的结构稳定性</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中的研究方法所依托的基本假设有哪些？</strong></p>
+<p>A:
+论文提出的非线性分析方法所依托的基本假设如下：</p>
+<ul>
+<li>
+<p>系统参数可以外控或调节（如速度、阻尼等）</p>
+</li>
+<li>
+<p>物理模型参数与实际车辆系统高度相关</p>
+</li>
+<li>
+<p>部分模型具备足够光滑性，可以应用分岔理论；对于非光滑模型需酌情处理</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文做了哪些实验？</strong></p>
+<p>A:
+文章进行了如下一系列实验来评估非线性车辆动力学参数化建模方法。实验的主要内容包括：</p>
+<ul>
+<li>
+<p>利用MATLAB仿真工具，测试不同参数下系统的运行状态</p>
+</li>
+<li>
+<p>评价方法包括平衡态分布、分岔点定位、混沌吸引子的轨道结构分析</p>
+</li>
+<li>
+<p>得出关键参数临界值和失稳边界，验证理论与仿真结果的一致性</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 有什么可以进一步探索的点？</strong></p>
+<p>A:
+尽管文中在车辆系统非线性动力学方面取得了一系列成果，但仍有一些潜在的研究方向可以进一步探索：</p>
+<ul>
+<li>
+<p>非光滑动力学模型与车辆失稳现象的对应分析</p>
+</li>
+<li>
+<p>混沌状态下系统安全边界与工程预警机制的构建</p>
+</li>
+</ul>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Bifurcation</td>
+          <td>分岔</td>
+      </tr>
+      <tr>
+          <td>Chaos</td>
+          <td>混沌</td>
+      </tr>
+      <tr>
+          <td>Phase Space</td>
+          <td>相空间</td>
+      </tr>
+      <tr>
+          <td>Attractor</td>
+          <td>吸引子</td>
+      </tr>
+      <tr>
+          <td>Saddle-node</td>
+          <td>鞍结分岔</td>
+      </tr>
+      <tr>
+          <td>Hopf bifurcation</td>
+          <td>Hopf分岔</td>
+      </tr>
+      <tr>
+          <td>Lyapunov Exponent</td>
+          <td>李雅普诺夫指数</td>
+      </tr>
+      <tr>
+          <td>Basin of Attraction</td>
+          <td>吸引域</td>
+      </tr>
+      <tr>
+          <td>Structural Stability</td>
+          <td>结构稳定性</td>
+      </tr>
+      <tr>
+          <td>Nonlinear Dynamics</td>
+          <td>非线性动力学</td>
+      </tr>
+      <tr>
+          <td>Equilibrium State</td>
+          <td>平衡态</td>
+      </tr>
+      <tr>
+          <td>Floquet Multiplier</td>
+          <td>Floquet乘子</td>
+      </tr>
+      <tr>
+          <td>Discrete Map</td>
+          <td>离散映射</td>
+      </tr>
+      <tr>
+          <td>Multibody System</td>
+          <td>多体系统</td>
+      </tr>
+      <tr>
+          <td>Numerical Integrator</td>
+          <td>数值积分器</td>
+      </tr>
+      <tr>
+          <td>Damping</td>
+          <td>阻尼</td>
+      </tr>
+      <tr>
+          <td>Dry friction</td>
+          <td>干摩擦</td>
+      </tr>
+      <tr>
+          <td>Impact</td>
+          <td>冲击</td>
+      </tr>
+      <tr>
+          <td>Critical Speed</td>
+          <td>临界速度</td>
+      </tr>
+      <tr>
+          <td>Creep Force Theory</td>
+          <td>蠕变力理论</td>
+      </tr>
+      <tr>
+          <td>Pitchfork bifurcation</td>
+          <td>分叉分岔</td>
+      </tr>
+      <tr>
+          <td>Orbital Stability</td>
+          <td>轨道稳定性</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="文章框架">文章框架</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1. 引言
+</span></span><span style="display:flex;"><span>2. 线性与非线性动力学的重要差异
+</span></span><span style="display:flex;"><span>3. 非线性动力学基础及相空间描述
+</span></span><span style="display:flex;"><span>4. 参数依赖系统与分岔分析
+</span></span><span style="display:flex;"><span>5. 应用于车辆系统动力学
+</span></span><span style="display:flex;"><span>   5.1 正常解决方案
+</span></span><span style="display:flex;"><span>   5.2 混沌现象分析
+</span></span><span style="display:flex;"><span>   5.3 数值方法
+</span></span><span style="display:flex;"><span>6. 非光滑动力学理论
+</span></span><span style="display:flex;"><span>7. 结论与展望
+</span></span><span style="display:flex;"><span>参考文献
+</span></span></code></pre></div><h2 id="基本信息">基本信息</h2>
+<ul>
+<li>
+<p><strong>所属主题</strong>：车辆系统动力学、非线性理论</p>
+</li>
+<li>
+<p><strong>英文标题</strong>：On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</p>
+</li>
+<li>
+<p><strong>中文标题</strong>：非线性动力学理论及其在车辆系统动力学中的应用</p>
+</li>
+<li>
+<p><strong>作者及单位</strong>：Hans True, Technical University of Denmark</p>
+</li>
+<li>
+<p><strong>Harvard格式引用</strong>：True, H. (1999). On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics. Vehicle System Dynamics, 31(5), 393-421. doi:10.1076/vesd.31.5.393.8361</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#非线性动力学理论及其在车辆系统动力学中的应用">非线性动力学理论及其在车辆系统动力学中的应用</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#非线性动力学理论及其在车辆系统动力学中的应用">非线性动力学理论及其在车辆系统动力学中的应用</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

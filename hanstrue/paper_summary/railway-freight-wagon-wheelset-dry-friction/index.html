@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping"><meta property="og:description" content="铁路货车轮对干摩擦阻尼的动力学 摘要 本文研究了铁路货车轮对在存在干摩擦阻尼（dry friction damping）条件下的动力学行为。作者通过理论模型和分析，揭示了摩擦阻尼对轮对振动与系统稳定性的影响，并分析了摩擦力变化与轮对运动之间的关系。
+关键词 #铁路货车 #轮对动力学 #干摩擦阻尼 #振动分析 #非线性动力学
+"><meta property="og:url" content="https://linguage.github.io/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping"><meta name="twitter:description" content="铁路货车轮对干摩擦阻尼的动力学 摘要 本文研究了铁路货车轮对在存在干摩擦阻尼（dry friction damping）条件下的动力学行为。作者通过理论模型和分析，揭示了摩擦阻尼对轮对振动与系统稳定性的影响，并分析了摩擦力变化与轮对运动之间的关系。
+关键词 #铁路货车 #轮对动力学 #干摩擦阻尼 #振动分析 #非线性动力学
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/hanstrue/" class="crumb-sec">Hans True论文集</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Hans True</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <h2 id="铁路货车轮对干摩擦阻尼的动力学">铁路货车轮对干摩擦阻尼的动力学</h2>
+<h2 id="摘要">摘要</h2>
+<p>本文研究了铁路货车轮对在存在干摩擦阻尼（dry friction damping）条件下的动力学行为。作者通过理论模型和分析，揭示了摩擦阻尼对轮对振动与系统稳定性的影响，并分析了摩擦力变化与轮对运动之间的关系。</p>
+<h2 id="关键词">关键词</h2>
+<p>#铁路货车 #轮对动力学 #干摩擦阻尼 #振动分析 #非线性动力学</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着铁路货运量的增加，货车轮对的振动问题和运行稳定性成为关键的工程课题。干摩擦阻尼广泛存在于轨道轮对系统中，显著影响车辆运行的平顺性和安全性。为深入理解干摩擦对轮对动力学特性的作用，有必要针对典型工况开展系统性的分析与建模。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>论文采用非线性动力学建模，结合理论分析与数值模拟，构建了包含干摩擦阻尼的铁路货车轮对系统模型。通过参数分析与系统响应特性研究，探讨干摩擦阻尼对振动与稳定性的影响。</p>
+<h2 id="主要结论">主要结论</h2>
+<ul>
+<li>
+<p>干摩擦阻尼增强了系统的振动耗散能力，有助于轮对的稳定运行。</p>
+</li>
+<li>
+<p>摩擦力的变化与轮对滑移行为密切相关，显著影响系统的非线性动力学特性。</p>
+</li>
+<li>
+<p>适量的干摩擦能够有效抑制大幅度振动，提升轮对运行的整体安全性。</p>
+</li>
+</ul>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p>提出并分析了铁路轮对干摩擦阻尼模型，揭示其非线性动力学规律。</p>
+</li>
+<li>
+<p>系统探讨了摩擦对轮对平顺性与安全性的作用机制。</p>
+</li>
+<li>
+<p>为相关工程实践提供了理论依据和模型参考。</p>
+</li>
+</ol>
+<h2 id="深度要点问题问答">深度要点问题问答</h2>
+<p><strong>Q: 这篇论文涉及哪些比较核心的概念？</strong></p>
+<p>A: 这篇论文涉及有核心概念{铁路货车动力学、干摩擦阻尼、非线性系统分析}，基于论文内容以及公开资料其对应的解读：</p>
+<p>铁路货车动力学：研究车辆在轨道上运行时的力学响应规律。
+干摩擦阻尼：因摩擦材料接触而产生的能量损耗机制，常见于实际轮轨系统。
+非线性系统分析：针对含摩擦、间隙等非线性要素动力学系统的研究方法。</p>
+<p><strong>Q: 这篇论文试图解决什么问题？</strong></p>
+<p>A: 这篇论文提出了基于干摩擦的非线性动力学模型方法，旨在解决铁路货车轮对振动和稳定性影响机制的核心问题。具体来说，它试图解决以下问题：</p>
+<p>轮对中的摩擦力如何影响其动力学响应？
+干摩擦阻尼对振动（如颤振、共振）有何抑制与诱发作用？</p>
+<p>为了解决这些问题，文中的动力学建模方法利用了非线性耗散理论和摩擦学原理。这种方法的关键优势包括：</p>
+<ul>
+<li>
+<p>可描述实际轮对摩擦现象的复杂动力学。</p>
+</li>
+<li>
+<p>便于参数分析对安全性的深入探讨。</p>
+</li>
+<li>
+<p>支持工程优化策略制定。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中提及了哪些相关的研究？</strong></p>
+<p>A: 这篇论文提到了铁路动力学及摩擦阻尼相关的研究工作，主要包括以下几个方面：</p>
+<ul>
+<li>
+<p>以往有关车辆系统中摩擦对振动影响的理论与实验分析。</p>
+</li>
+<li>
+<p>轨道车辆非线性振动控制相关文献。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文如何解决这些问题？</strong></p>
+<p>A: 论文提出了一个非线性动力学模型法用于解决轮对系统摩擦影响研究。这个方法包含以下几个关键步骤：</p>
+<ul>
+<li>
+<p>构建包含摩擦效应的轮对动力学微分方程。</p>
+</li>
+<li>
+<p>通过数值仿真分析参数对系统响应的作用。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中的研究方法所依托的基本假设有哪些？</strong></p>
+<p>A: 论文提出的非线性动力学模型所依托的基本假设如下：</p>
+<ul>
+<li>
+<p>摩擦力与相对滑移速度间存在确定关系，并可建模为非线性项。</p>
+</li>
+<li>
+<p>轮对与轨道材料特性在分析尺度内可视为均匀。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文做了哪些实验？</strong></p>
+<p>A: 文章进行了如下一系列仿真实验来评估动力学模型方法。实验的主要内容包括：</p>
+<ul>
+<li>
+<p>参数化轮对系统模拟</p>
+</li>
+<li>
+<p>运用系统响应曲线及稳定性评价方法</p>
+</li>
+<li>
+<p>结果对比分析摩擦参数对系统性能的影响</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 有什么可以进一步探索的点？</strong></p>
+<p>A: 尽管文中在轮对摩擦影响研究方面取得了一系列成果，但仍有一些潜在的研究方向可以进一步探索：</p>
+<ul>
+<li>
+<p>实车测试进一步验证仿真模型适用性</p>
+</li>
+<li>
+<p>更复杂摩擦接触条件及多体系统模型拓展</p>
+</li>
+</ul>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Wheelset</td>
+          <td>轮对</td>
+      </tr>
+      <tr>
+          <td>Dry Friction</td>
+          <td>干摩擦</td>
+      </tr>
+      <tr>
+          <td>Damping</td>
+          <td>阻尼</td>
+      </tr>
+      <tr>
+          <td>Vehicle System</td>
+          <td>车辆系统</td>
+      </tr>
+      <tr>
+          <td>Dynamics</td>
+          <td>动力学</td>
+      </tr>
+      <tr>
+          <td>Nonlinear</td>
+          <td>非线性</td>
+      </tr>
+      <tr>
+          <td>Vibration</td>
+          <td>振动</td>
+      </tr>
+      <tr>
+          <td>Stability</td>
+          <td>稳定性</td>
+      </tr>
+      <tr>
+          <td>Simulation</td>
+          <td>仿真</td>
+      </tr>
+      <tr>
+          <td>Parameter</td>
+          <td>参数</td>
+      </tr>
+      <tr>
+          <td>Contact</td>
+          <td>接触</td>
+      </tr>
+      <tr>
+          <td>Slip</td>
+          <td>滑移</td>
+      </tr>
+      <tr>
+          <td>Friction Force</td>
+          <td>摩擦力</td>
+      </tr>
+      <tr>
+          <td>Differential Equation</td>
+          <td>微分方程</td>
+      </tr>
+      <tr>
+          <td>Excitation</td>
+          <td>振动激励</td>
+      </tr>
+      <tr>
+          <td>Dissipation</td>
+          <td>能量耗散</td>
+      </tr>
+      <tr>
+          <td>Noise</td>
+          <td>噪声</td>
+      </tr>
+      <tr>
+          <td>Track</td>
+          <td>轨道</td>
+      </tr>
+      <tr>
+          <td>Wheel-rail</td>
+          <td>轮轨</td>
+      </tr>
+      <tr>
+          <td>Material Properties</td>
+          <td>材料特性</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="文章框架">文章框架</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1. 引言及研究背景
+</span></span><span style="display:flex;"><span>2. 干摩擦阻尼理论概述
+</span></span><span style="display:flex;"><span>3. 铁路货车轮对系统建模
+</span></span><span style="display:flex;"><span>4. 非线性动力学方程推导
+</span></span><span style="display:flex;"><span>5. 数值仿真与实验设计
+</span></span><span style="display:flex;"><span>6. 结果分析与讨论
+</span></span><span style="display:flex;"><span>7. 结论与未来方向
+</span></span></code></pre></div><h2 id="基本信息">基本信息</h2>
+<ul>
+<li>
+<p><strong>所属主题</strong>：轨道车辆动力学、非线性动力学</p>
+</li>
+<li>
+<p><strong>英文标题</strong>：The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</p>
+</li>
+<li>
+<p><strong>中文标题</strong>：铁路货车轮对干摩擦阻尼的动力学</p>
+</li>
+<li>
+<p><strong>作者及单位</strong>：Hans True, Technical University of Denmark</p>
+</li>
+<li>
+<p><strong>Harvard格式引用</strong>：True, H. and Asmund, 2003. The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping. In Vehicle System Dynamics. DOI:10.1007/1-4020-3268-4_15.</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#铁路货车轮对干摩擦阻尼的动力学">铁路货车轮对干摩擦阻尼的动力学</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#铁路货车轮对干摩擦阻尼的动力学">铁路货车轮对干摩擦阻尼的动力学</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
