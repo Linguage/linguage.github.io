@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战 • Linguista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/overrides.css" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战"><meta property="og:description" content=" 原文见：Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges
+我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。
+2025年9月29日 Cognition 团队
+"><meta property="og:url" content="https://linguage.github.io/labs/rosetta/cognition_report_claude-4-5/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战"><meta name="twitter:description" content=" 原文见：Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges
+我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。
+2025年9月29日 Cognition 团队
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/labs/rosetta/cognition_report_claude-4-5/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">Lab</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">Lab</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/labs/static/">交互式静态网页收藏</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/anthropic_context_engineering/">「翻译」Anthropic:为人工智能代理进行有效的上下文工程</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/labs/rosetta/cognition_report_claude-4-5/">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/git-recover_guide/">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/labs/" class="crumb-sec">Lab</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/labs/static/">交互式静态网页收藏</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/anthropic_context_engineering/">「翻译」Anthropic:为人工智能代理进行有效的上下文工程</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/labs/rosetta/cognition_report_claude-4-5/">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/git-recover_guide/">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Cognition Team</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <blockquote>
+<p>原文见：<a href="https://cognition.ai/blog/devin-sonnet-4-5-lessons-and-challenges#the-model-is-aware-of-its-context-window">Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges</a></p></blockquote>
+<p>我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。</p>
+<p>2025年9月29日 Cognition 团队</p>
+<p><strong>我们为 Claude Sonnet 4.5 重构了 Devin。</strong></p>
+<p>新版本在我们的初级开发人员评估中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。</p>
+<p>为什么选择重构，而不是简单地替换成新的 Sonnet 模型就草草了事？因为这个模型的运作方式<em>与众不同</em>——它打破了我们对智能代理应如何构建的固有设想。以下是我们的心得：</p>
+<p><a href="https://cdn.sanity.io/images/2mc9cv2v/production/307b567295a50c82cb3fea942dd578f576beb5f0-2926x2074.png"><img src="https://cdn.sanity.io/images/2mc9cv2v/production/307b567295a50c82cb3fea942dd578f576beb5f0-2926x2074.png" alt=""></a></p>
+<p>因为 Devin 是一个会规划、执行和迭代的智能代理，而不仅仅是自动补全代码（或充当一个“副驾驶”），所以我们得以用一个独特的窗口来观察模型的能力。每一次改进都会在我们的反馈循环中产生复合效应，让我们了解到真正发生了哪些变化。在 Sonnet 4.5 上，我们看到了自 Sonnet 3.6（Devin 正式版所使用的模型）以来最大的飞跃：规划性能提升了 18%，端到端评估得分提高了 12%，长达数小时的任务会话也变得更快、更可靠。</p>
+<p>为了实现这些改进，我们不仅需要围绕模型的一些新功能重构 Devin，还必须针对一些我们在前几代模型中从未注意到的新行为进行调整。我们将在下面分享一些我们的观察：</p>
+<h2 id="模型能意识到自己的上下文窗口">模型能意识到自己的上下文窗口</h2>
+<p>Sonnet 4.5 是我们见过的第一个能意识到自身上下文窗口的模型，这一点塑造了它的行为方式。我们观察到，当接近上下文限制时，它会主动总结自己的进展，并更果断地实施修复以完成任务。</p>
+<p>这种“上下文焦虑”实际上可能会损害性能：我们发现，当模型认为自己接近窗口末尾时，即使还有足够的空间，它也会选择走捷径或将任务半途而废。</p>
+<p>为了克服这种行为，我们最终采用了相当激进的提示 (prompting) 方式。即便如此，我们发现仅在对话开始时给出提示是不够的——我们必须在提示的开头和结尾都加上提醒，以防止它过早地结束工作。</p>
+<p>在研究解决这个问题的方法时，我们发现了一个意想不到的技巧，效果很好：<strong>启用 100 万 token 的测试版，但将使用量上限设为 20 万</strong>。这让模型认为自己还有充足的余地，从而表现正常，避免了由焦虑驱动的捷径行为或性能下降。</p>
+<p>这种行为对我们如何围绕上下文管理进行架构设计具有实际意义。在规划 token 预算时，我们现在需要考虑模型自身的意识：了解它何时会自然而然地想要进行总结，以及何时我们需要通过上下文压缩进行干预。</p>
+<p>有趣的是，该模型总是低估自己剩余的 token 数量——而且这些错误的估计非常精确。</p>
+<h2 id="模型会做大量笔记">模型会做大量笔记</h2>
+<p>Sonnet 4.5 最显著的变化之一是，它会通过查阅文档和进行实验，积极地尝试构建关于问题领域的知识。</p>
+<p><strong>为自己写笔记</strong></p>
+<p>无需提示，该模型就会将文件系统视为其内存。它会频繁地撰写（或想要撰写）摘要和笔记（例如 CHANGELOG.md, SUMMARY.md，但不会是 CLAUDE.md 或 AGENTS.md），既是为了方便用户，也是为了自己将来参考。这表明该模型经过训练，倾向于将状态外部化，而不是纯粹依赖上下文。当模型接近其上下文窗口末尾时，这种行为会更加明显。</p>
+<p>当我们看到这一点时，我们对是否有可能移除我们自己的一些内存管理机制、让模型来处理这个问题产生了兴趣。但在实践中，我们发现这些摘要不够全面。例如，它有时会转述任务，却遗漏了重要细节。当我们依赖模型自己的笔记而没有使用我们的压缩和摘要系统时，我们观察到性能下降和特定知识的缺失：模型不知道自己不知道什么（或者将来可能需要知道什么）。通过提示很可能会改善这些笔记的质量。只是不要指望能免费得到一个完美的系统。</p>
+<p>在某些情况下，有点滑稽的是，我们看到智能代理花在写摘要上的 token 比实际解决问题所用的还要多。我们还注意到，模型的努力程度并不均衡：上下文窗口越短，模型生成的摘要 token 往往越多。</p>
+<p>在我们的测试中，我们发现这种行为在某些情况下很有用，但当我们明确指示智能代理使用其先前生成的状态时，其效果不如我们现有的内存系统。</p>
+<p>这是一个有趣的范式，也是模型开发的一个新方向，特别是对于更简单的智能代理架构或围绕子代理委托构建的系统而言。这显然是 Anthropic 的一个新方向：很可能指向一个未来，即模型更具上下文感知能力，并且这将成为多个智能代理相互通信的方式。强化学习 (RL) 的训练尚未完全发展到让这种方式变得可靠的程度，但我们将持续关注其演变。</p>
+<p><strong>通过测试创建反馈循环</strong></p>
+<p>Sonnet 4.5 在编写和执行简短脚本和测试以创建反馈循环方面表现得更为主动，并且在何时使用此功能上展现了良好的判断力。这通常能提高长时间运行任务的可靠性，尽管我们偶尔也看到它在调试时尝试过于“有创意”的变通方法。例如，在编辑一个 React 应用时，我们注意到模型会获取页面的 HTML，以便在过程中检查自己的工作，确保行为是正确的。在另一个案例中，为了修复一个看似无害的、与两个本地服务器试图在同一端口上运行相关的错误，模型最终利用这种行为创建了一个过于复杂的自定义脚本，而不是解决根本问题（终止进程）。</p>
+<h2 id="模型可以并行工作">模型可以并行工作</h2>
+<p>Sonnet 4.5 能通过并行工具执行来高效地最大化每个上下文窗口内的操作——比如一次运行多个 bash 命令，同时读取多个文件等等。模型不会严格地按顺序工作（完成 A，然后是 B，然后是 C），而是在可能的情况下将工作重叠进行。它在自我验证方面也表现出不错的判断力：边工作边检查。</p>
+<p>这一点在 Windsurf 中非常明显，并且是在 Devin 现有并行能力上的一大改进。话虽如此，这里也存在权衡。并行处理会更快地消耗上下文，从而导致我们前面提到的“上下文焦虑”。但是，当模型在空的上下文窗口中运行时，这种更并发的方法会让会话感觉更快、更高效。这是一个微妙的转变，但它影响了我们对架构的思考。</p>
+<p>该模型似乎也经过训练，在上下文窗口的早期阶段会更快地用尽并行工具调用，但随着接近极限时会变得更加谨慎。这向我们表明，它经过训练能够意识到其工具调用将产生多少输出 token。</p>
+<h2 id="我们下一步探索的方向">我们下一步探索的方向</h2>
+<p>这些行为开辟了许多有趣的途径，我们尚未能全部探索。以下是我们渴望继续测试的一些方向：</p>
+<ul>
+<li><strong>子代理和上下文感知的工具调用。</strong> 模型在判断何时外部化状态和创建反馈循环方面的能力有所提高，这表明它可能更有效地处理子代理委托。然而，<a href="https://cognition.ai/blog/dont-build-multi-agents">正如我们所知</a>，在使用子代理时必须非常小心，因为上下文和状态管理会迅速变得复杂。Sonnet 4.5 似乎对适合委托的任务类型有更清晰的认识，这可能使其更具实用性。</li>
+<li><strong>元智能代理提示 (Meta-agent prompting)。</strong> 我们对该模型如何处理关于智能代理工作流程的元层面推理特别感兴趣。早期实验表明，它与验证系统配合得很好——让模型能够对其自身的开发过程进行推理，而不仅仅是执行任务。</li>
+<li><strong>上下文管理模型。</strong> Sonnet 4.5 似乎对如何管理自身上下文有了一些初步的直觉。或许可以训练专门用于智能上下文管理的定制模型，从而实现更快、更好的性能。</li>
+</ul>
+<p>随着我们了解到哪些方法有效（哪些无效），我们会分享更多信息。同时，我们很高兴你能试用搭载了 Sonnet 4.5 的新版 Devin 和 Windsurf。</p>
+<p>标签：</p>
+<ul>
+<li><a href="https://cognition.ai/blog/Announcements/1">公告</a>
+关注我们：</li>
+<li><a href="https://cognition.ai/">Linkedin</a></li>
+<li><a href="https://cognition.ai/">Twitter [ x ]</a></li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#模型能意识到自己的上下文窗口">模型能意识到自己的上下文窗口</a></li>
+    <li><a href="#模型会做大量笔记">模型会做大量笔记</a></li>
+    <li><a href="#模型可以并行工作">模型可以并行工作</a></li>
+    <li><a href="#我们下一步探索的方向">我们下一步探索的方向</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#模型能意识到自己的上下文窗口">模型能意识到自己的上下文窗口</a></li>
+    <li><a href="#模型会做大量笔记">模型会做大量笔记</a></li>
+    <li><a href="#模型可以并行工作">模型可以并行工作</a></li>
+    <li><a href="#我们下一步探索的方向">我们下一步探索的方向</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js"></script>
+  
+  <script defer src="/js/table-7char.js"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
