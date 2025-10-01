@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI代理中的上下文工程与Anthropic团队</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .font-en {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .text-giant {
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 0.9;
+        }
+        
+        .section-card {
+            background: rgba(255, 200, 120, 0.08);
+            border-left: 4px solid rgba(230, 150, 60, 0.6);
+        }
+        
+        .accent-card {
+            background: rgba(245, 220, 180, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .text-giant {
+                font-size: clamp(3rem, 15vw, 6rem);
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900">
+
+    <!-- Header -->
+    <header class="bg-white border-b-4 border-stone-900 py-8 px-6 md:py-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-4">
+                <span class="font-en text-xs uppercase tracking-widest text-stone-500 font-semibold">Anthropic Engineering / October 2025</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-4">
+                AI代理中的<br>上下文工程
+            </h1>
+            <p class="text-xl md:text-2xl font-semibold text-stone-600 mb-6">
+                从提示工程到上下文工程的范式转变
+            </p>
+            <div class="flex flex-wrap gap-4 items-center text-sm">
+                <span class="font-en font-medium"><i class="fa-solid fa-users mr-2"></i>Anthropic Applied AI Team</span>
+                <span class="font-en font-medium"><i class="fa-solid fa-calendar mr-2"></i>2025</span>
+                <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" class="font-en font-medium text-amber-700 hover:text-amber-900"><i class="fa-solid fa-link mr-2"></i>原文链接</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Body: 4+8 Grid -->
+    <main class="max-w-7xl mx-auto py-8 md:py-16 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+            
+            <!-- Visual Anchor Sidebar (4 columns) -->
+            <aside class="md:col-span-4 space-y-8">
+                <div class="sticky top-8">
+                    <!-- Giant Visual Anchor -->
+                    <div class="mb-12">
+                        <div class="text-giant font-black text-transparent" style="
+                            -webkit-text-stroke: 3px rgba(230, 150, 60, 0.4);
+                            text-stroke: 3px rgba(230, 150, 60, 0.4);
+                        ">
+                            06
+                        </div>
+                        <p class="text-xl font-bold mt-4 leading-tight">
+                            核心技术<br>章节构成
+                        </p>
+                        <p class="font-en text-sm text-stone-500 mt-2">Six Major Topics</p>
+                    </div>
+                    
+                    <!-- Quick Navigation -->
+                    <div class="accent-card p-6 space-y-4">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-compass mr-3 text-amber-700"></i>
+                            快速导航
+                        </h3>
+                        <nav class="space-y-3 text-base font-semibold">
+                            <a href="#section1" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>概念区分
+                            </a>
+                            <a href="#section2" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>注意力预算
+                            </a>
+                            <a href="#section3" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>结构方法
+                            </a>
+                            <a href="#section4" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>自我管理
+                            </a>
+                            <a href="#section5" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>长任务技巧
+                            </a>
+                            <a href="#section6" class="block hover:text-amber-700 transition">
+                                <i class="fa-solid fa-arrow-right mr-2 text-xs"></i>实践结论
+                            </a>
+                        </nav>
+                    </div>
+                    
+                    <!-- Key Stats -->
+                    <div class="section-card p-6 mt-8">
+                        <h3 class="text-lg font-bold mb-4 flex items-center">
+                            <i class="fa-solid fa-chart-line mr-3 text-amber-700"></i>
+                            关键洞察
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-3xl font-black text-amber-800">n²</div>
+                                <p class="text-sm font-semibold mt-1">Transformer注意力复杂度</p>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-black text-amber-800">3+</div>
+                                <p class="text-sm font-semibold mt-1">长任务管理核心技术</p>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-black text-amber-800">4:8</div>
+                                <p class="text-sm font-semibold mt-1">最优非对称网格比例</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Core Content Area (8 columns) -->
+            <article class="md:col-span-8 space-y-6">
+                
+                <!-- Overview -->
+                <div class="bg-white p-8 border-l-4 border-amber-600">
+                    <h2 class="text-3xl font-black mb-4 flex items-center">
+                        <i class="fa-solid fa-bullseye mr-4 text-amber-700"></i>
+                        核心概述
+                    </h2>
+                    <p class="text-lg leading-relaxed font-semibold mb-4">
+                        本文由Anthropic应用AI团队撰写，深度探讨了在AI代理系统中"上下文工程"的重要性和实施策略。随着大语言模型能力的提升，传统的提示工程已无法满足复杂、多回合、长期任务的需求。文章指出，在有限的"注意力预算"约束下，如何高效组合和管理上下文信息成为构建高性能AI代理的关键。
+                    </p>
+                    <p class="text-lg leading-relaxed font-semibold">
+                        作者从上下文腐蚀、结构化设计、动态检索、长任务管理等多个维度，系统阐述了上下文工程的技术路径与思维框架，为开发者提供了一套完整的方法论。
+                    </p>
+                </div>
+
+                <!-- Section 1 -->
+                <div id="section1" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">01</span>
+                        上下文工程与提示工程的区别
+                    </h2>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>提示工程的局限：</strong>传统提示工程专注于编写高效指令以优化单次模型输出，但随着AI代理承担多回合、多目标任务，单靠提示已无法保证一致性和效率。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>上下文工程的范畴：</strong>上下文工程关注LLM推理时的整体上下文管理，包括系统提示、工具参数、历史记录、外部数据等多个维度的信息组织。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>动态迭代过程：</strong>上下文工程是动态的，每次推理都需重新选择并传入最优的上下文集合，在明确性和简洁性之间找到平衡点。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>Anthropic的观点：</strong>优质上下文工程不追求极短，但必须保证关键信息准确覆盖，并根据模型性能灵活调整策略。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div id="section2" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">02</span>
+                        上下文腐蚀与有限的注意力预算
+                    </h2>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>上下文窗口限制：</strong>LLM的上下文窗口有限（token数量有限），信息过载会导致"上下文腐蚀"——模型提取关键信息的能力递减，类似人脑短时记忆的衰减。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>注意力机制挑战：</strong>随着上下文长度增加，模型的注意力机制变得稀疏。Transformer架构虽支持任意token间全连接,但上下文增长带来n²级别的关系复杂度。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>训练与推理的鸿沟：</strong>模型主要在较短序列上训练，长距离推理能力天然不足。研究表明，长窗口不等于强性能，随token增加，信息检索和推理能力显著下降。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>工程启示：</strong>每个token都消耗模型"关注力"，工程实践应像"做减法"，不断优化和追踪上下文信号强度。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div id="section3" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">03</span>
+                        有效上下文的结构方法
+                    </h2>
+                    <div class="space-y-5 text-lg leading-relaxed">
+                        <p class="font-bold text-xl text-amber-800">
+                            设计原则：找出最小的高信号token集合，实现目标最大化
+                        </p>
+                        
+                        <div class="bg-white p-6 border-l-4 border-amber-500">
+                            <h3 class="text-xl font-black mb-3">
+                                <i class="fa-solid fa-cog mr-2 text-amber-700"></i>系统提示 System Prompt
+                            </h3>
+                            <p class="font-semibold">
+                                建议结构清晰、语言直接、分区明显（工具指导、输出描述）。兼顾具体性和灵活性，避免极端的死板硬编码或泛泛而谈。使用Markdown或XML等格式做提示分隔。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 border-l-4 border-amber-500">
+                            <h3 class="text-xl font-black mb-3">
+                                <i class="fa-solid fa-wrench mr-2 text-amber-700"></i>工具参数 Tools
+                            </h3>
+                            <p class="font-semibold">
+                                工具必须高效易懂、功能不重叠，输入参数明确描述。冗余工具会使代理决策混乱，每个工具都应有明确的职责边界。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 border-l-4 border-amber-500">
+                            <h3 class="text-xl font-black mb-3">
+                                <i class="fa-solid fa-image mr-2 text-amber-700"></i>实例展示 Few-shot
+                            </h3>
+                            <p class="font-semibold">
+                                多样化而规范的案例比罗列所有边界案例更有效。示例是"给模型看的图片"，应展示理想行为模式而非穷举所有可能。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 border-l-4 border-amber-500">
+                            <h3 class="text-xl font-black mb-3">
+                                <i class="fa-solid fa-clock-rotate-left mr-2 text-amber-700"></i>历史记录管理
+                            </h3>
+                            <p class="font-semibold">
+                                历史记录等组件要控制信息紧凑，不求短但力求信号强。动态上下文检索能力越来越重要，从一次性处理全部数据向"Just In Time"实时检索转变。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div id="section4" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">04</span>
+                        代理的自我管理与混合上下文策略
+                    </h2>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>从嵌入检索到动态加载：</strong>许多应用采用嵌入检索预筛选上下文，但更智能的代理采用"轻量标识+工具动态检索"策略——只维护索引信息（文件名、链接），按需加载上下文。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>类人检索模式：</strong>类似人类通过文件系统、邮件、书签检索信息，代理也按需加载、逐层理解，而非死记硬背所有内容。Claude Code就是通过工具按需检索信息的典范。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>元数据的力量：</strong>代理可自主探查、逐步积累相关上下文，通过文件夹结构、命名习惯、时间戳等元数据提高检索效率。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>混合策略优势：</strong>在法律、金融等领域，混合策略更适合——部分信息预先加载保证速度，动态探索补充深度。关键是"做最简单可行的事情"。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div id="section5" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">05</span>
+                        极长任务的上下文管理技巧
+                    </h2>
+                    <p class="text-lg font-bold mb-6 text-amber-800">
+                        长时间任务需要代理跨越常规上下文窗口，实现长期一致与目标导向。Anthropic提出三种关键技术：
+                    </p>
+                    
+                    <div class="space-y-5">
+                        <div class="bg-gradient-to-r from-amber-50 to-white p-6 border-l-4 border-amber-600">
+                            <h3 class="text-2xl font-black mb-3 flex items-center">
+                                <i class="fa-solid fa-compress mr-3 text-amber-700"></i>
+                                信息压缩 Compaction
+                            </h3>
+                            <p class="text-lg font-semibold leading-relaxed">
+                                将接近窗口极限的对话/数据整理为概要，开启新窗口继续任务。通过高质概要保留关键细节、丢弃无用冗余（如旧工具调用结果），实现任务延续。适用于实时沟通场景。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-amber-50 to-white p-6 border-l-4 border-amber-600">
+                            <h3 class="text-2xl font-black mb-3 flex items-center">
+                                <i class="fa-solid fa-pen-to-square mr-3 text-amber-700"></i>
+                                结构化笔记 Structured Note-taking
+                            </h3>
+                            <p class="text-lg font-semibold leading-relaxed">
+                                代理定时在窗口外记笔记（如NOTES.md），并在后续引用，形成柔性记忆。Claude玩宝可梦时，通过记笔记进行长时间任务管理与策略制定。适用于迭代开发场景。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-amber-50 to-white p-6 border-l-4 border-amber-600">
+                            <h3 class="text-2xl font-black mb-3 flex items-center">
+                                <i class="fa-solid fa-sitemap mr-3 text-amber-700"></i>
+                                子代理架构 Sub-agent Architectures
+                            </h3>
+                            <p class="text-lg font-semibold leading-relaxed">
+                                复杂任务由多个子代理分治，各自保持独立窗口，由主代理协调总计划。子代理做深度技术工作并返回概要，分工实现高效探索与总结。适用于复杂分析场景。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-white p-6">
+                        <p class="text-lg font-bold text-amber-900">
+                            <i class="fa-solid fa-lightbulb mr-2"></i>
+                            这些技术将成为未来有效AI代理的核心构件，不同场景选择不同技术组合。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div id="section6" class="section-card p-8">
+                    <h2 class="text-3xl font-black mb-5 flex items-center">
+                        <span class="font-en text-amber-700 mr-4">06</span>
+                        结论与Anthropic平台实践
+                    </h2>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>范式核心转变：</strong>上下文工程是LLM应用范式的核心转变，标志着从单次优化到系统性管理的进化。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>未来趋势：</strong>"模型越智能、工程越简单"，但上下文依然是"稀缺资源"需慎重配置。智能模型会降低工程复杂度，但不会消除对精细上下文管理的需求。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>实践建议：</strong>推荐通过Anthropic平台工具实践上下文管理、记忆和检索技巧，持续提升代理效果。从小规模实验开始，逐步扩展到复杂场景。
+                        </p>
+                        <p class="font-semibold">
+                            <i class="fa-solid fa-circle text-amber-600 text-xs mr-3"></i>
+                            <strong>持续迭代：</strong>上下文工程是一个持续优化的过程，需要根据实际表现不断调整策略，建立反馈循环。
+                        </p>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Mid-Breaker Section -->
+    <section class="bg-gradient-to-r from-amber-100 to-orange-50 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black mb-10 text-center">
+                核心框架与心智模型
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Framework 1 -->
+                <div class="bg-white p-8 border-t-4 border-amber-600">
+                    <div class="text-5xl font-black text-amber-700 mb-4">01</div>
+                    <h3 class="text-2xl font-black mb-4">最小高信号上下文框架</h3>
+                    <p class="text-base font-semibold leading-relaxed">
+                        始终追求用最少但强信号的信息获取最优结果。各组件明确分工，动态检索和混合加载，注重实时场景与任务特性调整。
+                    </p>
+                </div>
+                
+                <!-- Framework 2 -->
+                <div class="bg-white p-8 border-t-4 border-amber-600">
+                    <div class="text-5xl font-black text-amber-700 mb-4">02</div>
+                    <h3 class="text-2xl font-black mb-4">"有限注意力预算"心智模型</h3>
+                    <p class="text-base font-semibold leading-relaxed">
+                        把LLM看作有有限工作记忆，每个token都消耗"关注力"。工程实践要像"做减法"，针对不同任务规划上下文篇幅与信息流。
+                    </p>
+                </div>
+                
+                <!-- Framework 3 -->
+                <div class="bg-white p-8 border-t-4 border-amber-600">
+                    <div class="text-5xl font-black text-amber-700 mb-4">03</div>
+                    <h3 class="text-2xl font-black mb-4">长任务管理三大技术框架</h3>
+                    <p class="text-base font-semibold leading-relaxed">
+                        信息压缩（高质压缩与记忆）、结构化笔记（持续长期记忆）、子代理（合理分工协调），针对不同场景选择技术组合。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Footer -->
+    <footer class="bg-gray-800 text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                <div>
+                    <h3 class="text-3xl font-black mb-6">关键要点总结</h3>
+                    <div class="space-y-4 text-lg font-semibold">
+                        <p class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-amber-400 mr-3 mt-1"></i>
+                            <span>上下文工程是从提示工程到系统工程的范式转变</span>
+                        </p>
+                        <p class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-amber-400 mr-3 mt-1"></i>
+                            <span>注意力是稀缺资源，需要精心管理每个token的价值</span>
+                        </p>
+                        <p class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-amber-400 mr-3 mt-1"></i>
+                            <span>动态检索和混合策略是未来代理的核心能力</span>
+                        </p>
+                        <p class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-amber-400 mr-3 mt-1"></i>
+                            <span>长任务需要压缩、笔记、子代理三大技术支撑</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-3xl font-black mb-6">行动号召</h3>
+                    <p class="text-lg font-semibold mb-6 leading-relaxed">
+                        上下文工程不是理论概念，而是需要在实践中不断打磨的技艺。建议开发者从小规模实验开始，逐步探索适合自己应用场景的上下文管理策略。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" 
+                           class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 transition font-en">
+                           <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>阅读 Anthropic 原文
+                        </a>
+                        <a href="https://linguista.cn/labs/rosetta/anthropic_context_engineering/" 
+                           class="inline-block bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 transition font-en border border-white/30 rounded">
+                            <i class="fa-solid fa-book-open mr-2"></i>浏览本站相关文章
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer bottom bar -->
+            <div class="mt-12 pt-8 border-t border-white/20 text-sm text-stone-300 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>本页内容用于学习与交流，建议结合原文理解与实践。</span>
+                </div>
+                <div class="flex items-center gap-5 text-lg">
+                    <a href="https://linguista.cn/" class="hover:text-amber-300" title="首页"><i class="fa-solid fa-house"></i><span class="sr-only">首页</span></a>
+                    <a href="https://linguista.cn/essays/" class="hover:text-amber-300" title="文章"><i class="fa-solid fa-feather"></i><span class="sr-only">文章</span></a>
+                    <a href="https://linguista.cn/labs/" class="hover:text-amber-300" title="实验室"><i class="fa-solid fa-flask"></i><span class="sr-only">实验室</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
