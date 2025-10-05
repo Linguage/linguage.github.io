@@ -37,10 +37,12 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动物与幽灵"><meta property="og:description" content=" 作者：Andrej Karpathy 日期：2025年10月2日 原文链接：Karpathy: Animals and Ghosts 我认为这期播客是Sutton对前沿大语言模型研究者们说的“实在话”，他们可能在利用现有模式上有些过度了。或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。
+<meta property="og:title" content="动物与幽灵"><meta property="og:description" content=" 或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。
+Andrej Karpathy在本文中探讨了人工智能领域中“动物”智能与大语言模型（“幽灵”）的差异，反思了学习机制、进化和预训练的本质，并提出动物或许能为AI带来新的灵感和范式。
 "><meta property="og:url" content="https://linguage.github.io/essays/animals-vs-ghosts/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="动物与幽灵"><meta name="twitter:description" content=" 作者：Andrej Karpathy 日期：2025年10月2日 原文链接：Karpathy: Animals and Ghosts 我认为这期播客是Sutton对前沿大语言模型研究者们说的“实在话”，他们可能在利用现有模式上有些过度了。或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="动物与幽灵"><meta name="twitter:description" content=" 或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。
+Andrej Karpathy在本文中探讨了人工智能领域中“动物”智能与大语言模型（“幽灵”）的差异，反思了学习机制、进化和预训练的本质，并提出动物或许能为AI带来新的灵感和范式。
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/essays/animals-vs-ghosts/">
 
@@ -357,13 +359,14 @@
       
 
       
-      <ul>
+      <blockquote>
+<p><em>或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。</em></p></blockquote>
+<p>Andrej Karpathy在本文中探讨了人工智能领域中“动物”智能与大语言模型（“幽灵”）的差异，反思了学习机制、进化和预训练的本质，并提出动物或许能为AI带来新的灵感和范式。</p>
+<ul>
 <li>作者：Andrej Karpathy</li>
 <li>日期：2025年10月2日</li>
 <li>原文链接：<a href="https://karpathy.bearblog.dev/animals-vs-ghosts/">Karpathy: Animals and Ghosts</a></li>
 </ul>
-<blockquote>
-<p><em>我认为这期播客是Sutton对前沿大语言模型研究者们说的“实在话”，他们可能在利用现有模式上有些过度了。或许我们仍然没有足够地“汲取苦涩教训”，除了详尽地构建和优化基准测试之外，很可能还存在更强大的思想和范式。而动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。发挥你的想象力吧。</em></p></blockquote>
 <p>终于有机会听完了这期Dwarkesh与Sutton的播客，既有趣又发人深省。</p>
 <p>首先介绍一下背景，Sutton的《苦涩的教训》(The Bitter Lesson) 已成为前沿大语言模型（LLM）领域的圣经。研究人员经常讨论并质疑某种方法或想法是否足够“汲取了苦涩教训”（即，是否能通过增加计算量而自然受益），以此来判断其是否可行或值得追求。其基本假设是，大语言模型当然非常“汲取了苦涩教训”，只需看看大语言模型的扩展定律即可——将计算量置于x轴，性能指标便会一路上扬。因此，有趣的是，这篇文章的作者Sutton本人却不那么确定大语言模型是否真的“汲取了苦涩教训”。它们是在根本上属于人类的庞大数据集上训练出来的，这些数据既是1）人类生成的，也是2）有限的。当数据耗尽时该怎么办？如何避免人类偏见？所以你看，信奉“苦涩教训”的大语言模型研究者们，反倒被“苦涩教训”的提出者给驳倒了——真够呛！</p>
 <p>从某种意义上说，Dwarkesh（在播客中代表大语言模型研究者的观点）和Sutton有些鸡同鸭讲，因为Sutton心中的架构与大语言模型截然不同，而大语言模型打破了他很多原则。他称自己为“古典主义者”，并援引了艾伦·图灵最初构建“儿童机器”的概念——一个能够通过与世界动态互动从经验中学习的系统。这里没有模仿网页的大规模预训练阶段，也没有监督微调，他指出这在动物界是不存在的（这是一个微妙的观点，但Sutton的看法在根本上是正确的：动物当然会观察演示，但它们的行为并不会被其他动物直接强迫或“遥控操作”）。他提出的另一个重点是，即使你只将预训练视为强化学习微调之前的先验初始化，Sutton也认为这种方法受到了人类偏见的污染，从根本上偏离了轨道，有点像AlphaZero（从未见过人类围棋对局）击败AlphaGo（从人类对局中初始化）一样。在Sutton的世界观里，一切都只是通过强化学习与世界互动，其中奖励函数部分是特定于环境的，但也有内在动机，例如“乐趣”、“好奇心”，以及与世界模型预测质量相关的因素。而且，智能体在测试时默认是始终在学习的，而不是训练一次就部署。总的来说，Sutton对我们与动物界的共同点比我们之间的区别更感兴趣。“如果我们理解了一只松鼠，我们就几乎大功告成了。”</p>
