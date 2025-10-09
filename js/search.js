@@ -25,22 +25,65 @@
   function dbg(){ if (DEBUG) { try { console.debug('[search]', ...arguments); } catch(_){} } }
   let toggleBtn = null;
   let backBtn = null;
+  // 索引加载状态
+  // idle -> loading -> ready | error
+  let indexStatus = 'idle';
+  const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL;
 
   function $(id){ return document.getElementById(id); }
 
   function debounce(fn, delay){ let t=null; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), delay); }; }
 
+  function loadIndexFromCache(){
+    try{
+      const raw = localStorage.getItem(INDEX_CACHE_KEY);
+      if (!raw) return false;
+      const obj = JSON.parse(raw);
+      if (!obj || !Array.isArray(obj.items)) return false;
+      data = obj.items;
+      indexStatus = 'ready';
+      dbg('index cache hit', { size: data.length });
+      return true;
+    }catch(_){ return false; }
+  }
+
+  async function fetchIndexWithTimeout(signal){
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=> ctrl.abort(), 5000); // 5s 超时
+    let res;
+    try{
+      res = await fetch(FETCH_URL, { credentials: 'same-origin', signal: (signal||ctrl.signal) });
+    } finally {
+      clearTimeout(timer);
+    }
+    if (!res.ok) throw new Error('HTTP '+res.status);
+    const json = await res.json();
+    return json;
+  }
+
+  async function prefetchIndex(){
+    if (indexStatus === 'loading' || indexStatus === 'ready') return;
+    indexStatus = 'loading';
+    dbg('index prefetch start');
+    try{
+      const json = await fetchIndexWithTimeout();
+      data = Array.isArray(json) ? json : (json && json.items) || json;
+      if (!Array.isArray(data)) data = [];
+      indexStatus = 'ready';
+      try{ localStorage.setItem(INDEX_CACHE_KEY, JSON.stringify({ items: data, ts: Date.now() })); }catch(_){/* no-op */}
+      dbg('index prefetch done', { size: data.length });
+    }catch(err){
+      indexStatus = 'error';
+      console.error('[search] failed to load index:', FETCH_URL, err);
+    }
+  }
+
   async function ensureData(){
     if (data) return data;
-    try{
-      const res = await fetch(FETCH_URL, { credentials: 'same-origin' });
-      if (!res.ok) throw new Error('HTTP '+res.status);
-      data = await res.json();
-    }catch(err){
-      console.error('[search] failed to load index:', FETCH_URL, err);
-      data = [];
-    }
-    return data;
+    if (indexStatus === 'idle'){ loadIndexFromCache(); }
+    if (data) return data;
+    await prefetchIndex();
+    return data || [];
   }
 
   function buildPageIndex(){
@@ -243,7 +286,12 @@
       + '</div>'
       + '</div>';
 
-    pop.innerHTML = tabsHtml;
+    // 未就绪时在 tabs 下方提示用户“可先使用本页搜索”
+    const loadingBar = (indexStatus === 'loading') ? '<div class="search-popover-info">正在准备全站索引…可先使用【本页】搜索</div>'
+                     : (indexStatus === 'error') ? '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>'
+                     : '';
+
+    pop.innerHTML = tabsHtml + loadingBar;
     pop.hidden = false;
     // 保留 openMobile() 设定的未来时间，避免刚打开就被 onDocClick 误关闭
     lastOpenAt = Math.max(lastOpenAt, Date.now());
@@ -387,6 +435,11 @@
       total = filtered.length;
       items = filtered; // 本页：全部显示
     } else {
+      // 全站/Posts 模式：若索引未就绪，优先提示+空结果，避免长时间卡顿
+      if (indexStatus !== 'ready'){
+        render([], q, 0);
+        return;
+      }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
       const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
@@ -433,6 +486,10 @@
     backBtn = $(BACK_ID);
     dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
+
+    // 页面加载即尝试从缓存填充，并在后台预取最新索引（SWR）
+    loadIndexFromCache();
+    prefetchIndex();
 
     box.addEventListener('compositionstart', ()=> { isComposing = true; dbg('compositionstart'); });
     box.addEventListener('compositionend', ()=> { isComposing = false; dbg('compositionend'); onInput(); });
