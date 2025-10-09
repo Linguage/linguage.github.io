@@ -1,200 +1,405 @@
+// Simple site-wide search with popover results
+// Data source: /index.json produced by Hugo SearchIndex output
 (function(){
-  async function fetchIndex(){
+  const INPUT_ID = 'globalSearchInput';
+  const POPOVER_ID = 'globalSearchPopover';
+  const MAX_RESULTS = 10;
+  const FETCH_URL = '/index.json';
+
+  // modes: all | posts | page
+  let mode = 'all';
+  let data = null;        // site index
+  let pageData = null;    // current page index
+  let box = null;
+  let pop = null;
+  let activeIndex = -1;
+  let isComposing = false;
+
+  function $(id){ return document.getElementById(id); }
+
+  function debounce(fn, delay){ let t=null; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), delay); }; }
+
+  async function ensureData(){
+    if (data) return data;
     try{
-      const res = await fetch('/index.json', { credentials: 'same-origin' });
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      return await res.json();
+      const res = await fetch(FETCH_URL, { credentials: 'same-origin' });
+      if (!res.ok) throw new Error('HTTP '+res.status);
+      data = await res.json();
     }catch(err){
-      console.error('Failed to load search index:', err);
-      return [];
+      console.error('[search] failed to load', err);
+      data = [];
     }
+    return data;
   }
 
-  function getQuery(){
-    const q = new URLSearchParams(location.search).get('q') || '';
-    return q.trim();
-  }
-  function buildFuse(docs){
-    if (typeof Fuse === 'undefined') return null;
-    return new Fuse(docs, {
-      includeScore: true,
-      includeMatches: true,
-      threshold: 0.33,
-      ignoreLocation: true,
-      minMatchCharLength: 2,
-      // 优先 frontmatter（title/description/summary/tags/categories），内容次之
-      keys: [
-        { name: 'title', weight: 0.40 },
-        { name: 'description', weight: 0.30 },
-        { name: 'summary', weight: 0.15 },
-        { name: 'tags', weight: 0.08 },
-        { name: 'categories', weight: 0.05 },
-        { name: 'content', weight: 0.02 }
-      ]
+  function buildPageIndex(){
+    if (pageData) return pageData;
+    const container = document.querySelector('.docs-content .prose') || document.querySelector('main') || document.body;
+    const items = [];
+    // 选取常见块级元素作为索引单元，便于精确跳转
+    const blocks = Array.from(container.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,blockquote,pre,td')); 
+    let lastHeadingText = document.title;
+    blocks.forEach((el, idx) => {
+      const tag = el.tagName.toLowerCase();
+      if (/h[1-6]/.test(tag)) {
+        lastHeadingText = (el.textContent || lastHeadingText).trim() || lastHeadingText;
+      }
+      const text = (el.textContent || '').replace(/\s+/g,' ').trim();
+      if (!text) return;
+      if (!el.id) el.id = `s-${idx+1}`; // 动态生成锚点
+      items.push({
+        title: lastHeadingText,
+        url: (location.pathname + '#' + el.id),
+        section: 'page',
+        date: '',
+        summary: text.slice(0, 200),
+        description: '',
+        tags: [],
+        categories: [],
+        content: text
+      });
     });
+    if (!items.length){
+      const text = (container.textContent || '').replace(/\s+/g,' ').trim();
+      items.push({ title: document.title, url: location.pathname, section: 'page', date: '', summary: text.slice(0,200), description:'', tags:[], categories:[], content: text });
+    }
+    pageData = items;
+    return pageData;
   }
 
-  function highlight(text, indices){
-    if (!text || !indices || !indices.length) return text || '';
-    // 合并重叠索引并构造高亮
-    let out = '';
-    let last = 0;
-    indices.forEach(([start, end]) => {
-      if (start > text.length) return;
-      if (start > last) out += text.slice(last, start);
-      out += '<mark>' + text.slice(start, end + 1) + '</mark>';
-      last = end + 1;
-    });
-    out += text.slice(last);
-    return out;
+  function tokenize(q){
+    return (q || '').toString().toLowerCase().trim().split(/\s+/).filter(Boolean);
   }
 
-  function makeSnippets(doc, matches, q){
-    // 生成最多三行简洁片段：优先 description/summary/content，不对 title 生成片段
-    const sourceOrder = ['description', 'summary', 'content'];
-    const snippets = [];
-    const seen = new Set(); // for de-dup
-    const WINDOW = 140; // 每段字符窗口
+  function escapeRegExp(str){
+    return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  }
 
-    // 将 matches 按字段分组
-    const fieldMatches = {};
-    (matches || []).forEach(m => {
-      const key = m.key || (m.refIndex != null ? 'content' : '');
-      if (!key) return;
-      if (!fieldMatches[key]) fieldMatches[key] = [];
-      fieldMatches[key].push(m);
+  // 构造允许穿插字符的模糊匹配正则，例如 "abc" -> /a.*b.*c/i
+  function fuzzyRegexFromQuery(q){
+    const chars = q.split('').map(ch => escapeRegExp(ch));
+    return new RegExp(chars.join('.*'), 'i');
+  }
+
+  function fuzzyMatchScore(text, q){
+    if (!q) return 0;
+    try{
+      const re = fuzzyRegexFromQuery(q);
+      if (re.test(text)){
+        // 简单给定一个正分作为加权；可按匹配跨度进一步评分
+        return Math.min(15, 5 + Math.floor(Math.max(2, q.length)/1.5));
+      }
+    }catch(_){/* no-op */}
+    return 0;
+  }
+
+  function scoreDoc(doc, qWords, qLower){
+    const title = (doc.title||'').toLowerCase();
+    const summary = (doc.summary||'').toLowerCase();
+    const content = (doc.content||'').toLowerCase();
+    const tags = (doc.tags||[]).join(' ').toLowerCase();
+
+    // page 模式：只按 content 计分，避免标题或其它字段导致“未高亮内容”入选
+    if (mode === 'page'){
+      let s = 0;
+      qWords.forEach(w => { if (content.includes(w)) s += 6; });
+      if (content.includes(qLower)) s += 20; // 整句命中加权
+      s += fuzzyMatchScore(content, qLower);
+      return s;
+    }
+
+    // 其它模式：保留原有多字段计分
+    let score = 0;
+    qWords.forEach(w => {
+      if (title.includes(w)) score += 12;
+      if (summary.includes(w)) score += 6;
+      if (content.includes(w)) score += 2;
+      if (tags.includes(w)) score += 4;
     });
+    if (title.includes(qLower)) score += 20;
+    if (summary.includes(qLower)) score += 10;
+    if (content.includes(qLower)) score += 3;
+    return score;
+  }
 
-    for (const field of sourceOrder){
-      if (snippets.length >= 3) break;
-      const text = (doc[field] || '').toString();
-      if (!text) continue;
-      const ms = fieldMatches[field] || [];
-      if (ms.length){
-        let countFromField = 0;
-        // 使用匹配位置截取上下文并高亮
-        for (const m of ms){
-          if (snippets.length >= 3) break;
-          if (countFromField >= 2) break; // 限制每字段最多2条，降低冗余
-          const idx = (m.indices && m.indices[0]) ? m.indices[0][0] : text.toLowerCase().indexOf(q.toLowerCase());
-          const start = Math.max(0, idx - Math.floor(WINDOW/2));
-          const end = Math.min(text.length, start + WINDOW);
-          const slice = text.slice(start, end);
-          // 调整 indices 到切片相对位置
-          const indices = (m.indices || []).map(([s,e])=>[Math.max(0,s-start), Math.min(end-start-1, e-start)]).filter(([s,e])=>s<=e && s < slice.length);
-          const line = (start>0?'…':'') + highlight(slice, indices) + (end<text.length?'…':'');
-          const norm = line.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().toLowerCase();
-          if (!seen.has(norm)){
-            seen.add(norm);
-            snippets.push(line);
-            countFromField++;
-          }
+  function highlight(text, qWords){
+    if (!text) return '';
+    let t = text;
+    try{
+      qWords.forEach(w => {
+        if (!w) return;
+        const re = new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+        t = t.replace(re, '<mark>$1</mark>');
+      });
+    }catch(_){/* no-op */}
+    return t;
+  }
+
+  function buildSnippet(doc, qWords){
+    const base = doc.summary || doc.description || doc.content || '';
+    const text = base.replace(/\s+/g,' ').trim();
+    if (!text) return '';
+    const lower = text.toLowerCase();
+    let pos = -1;
+    for (const w of qWords){
+      pos = lower.indexOf(w);
+      if (pos >= 0) break;
+    }
+    if (pos < 0) pos = 0;
+    const start = Math.max(0, pos - 40);
+    const end = Math.min(text.length, start + 160);
+    let slice = text.slice(start, end) + (end < text.length ? '…' : '');
+    // 若未匹配到连续词而处于本页模式，则用模糊序列高亮
+    if (mode === 'page' && qWords.length === 1 && lower.indexOf(qWords[0]) < 0){
+      const q = qWords[0];
+      // 简单顺序高亮：按字符依序包裹 <mark>
+      let remaining = q.toLowerCase().split('');
+      let out = '';
+      for (let i=0; i<slice.length; i++){
+        const ch = slice[i];
+        if (remaining.length && ch.toLowerCase() === remaining[0]){
+          out += '<mark>'+ch+'</mark>';
+          remaining.shift();
+        } else {
+          out += ch;
         }
-      } else if (!matches || !matches.length) {
-        // 无匹配信息（如退化到简易过滤），用该字段的起始摘要
-        const cut = text.slice(0, WINDOW);
-        const line = cut + (text.length>WINDOW?'…':'');
-        const norm = line.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().toLowerCase();
-        if (!seen.has(norm)){
-          seen.add(norm);
-          snippets.push(line);
+      }
+      return out;
+    }
+    return highlight(slice, qWords);
+  }
+
+  // 全局：为“本页搜索”提取所在行（按句/换行边界），避免作用域问题
+  function buildLineSnippet(doc, qWords, qLower){
+    const text = (doc.content || '').replace(/\s+/g,' ').trim();
+    if (!text) return '';
+    const idx = text.toLowerCase().indexOf(qLower);
+    if (idx >= 0){
+      let start = 0, end = text.length;
+      for (let i = idx; i >= 0; i--){ if ("。！？!?\.".includes(text[i])){ start = i+1; break; } }
+      for (let i = idx; i < text.length; i++){ if ("。！？!?\.".includes(text[i])){ end = i+1; break; } }
+      let line = text.slice(start, end).trim();
+      if (line.length > 160){
+        // 居中裁剪：尽量包含命中位置
+        const center = idx - start;
+        const half = 80;
+        const s = Math.max(0, center - half);
+        const e = Math.min(line.length, center + half);
+        line = (s>0?'…':'') + line.slice(s, e) + (e<line.length?'…':'');
+      }
+      return highlight(line, [qLower]);
+    }
+    try{
+      const re = fuzzyRegexFromQuery(qLower);
+      const m = text.match(re);
+      if (m && m.index != null){
+        const pos = m.index;
+        let start = 0, end = text.length;
+        for (let i = pos; i >= 0; i--){ if ("。！？!?\.".includes(text[i])){ start = i+1; break; } }
+        for (let i = pos; i < text.length; i++){ if ("。！？!?\.".includes(text[i])){ end = i+1; break; } }
+        let line = text.slice(start, end).trim();
+        if (line.length > 160){
+          const center = pos - start;
+          const half = 80;
+          const s = Math.max(0, center - half);
+          const e = Math.min(line.length, center + half);
+          line = (s>0?'…':'') + line.slice(s, e) + (e<line.length?'…':'');
         }
+        let remaining = qLower.split('');
+        let out = '';
+        for (let i=0; i<line.length; i++){
+          const ch = line[i];
+          if (remaining.length && ch.toLowerCase() === remaining[0]){ out += '<mark>'+ch+'</mark>'; remaining.shift(); }
+          else { out += ch; }
+        }
+        return out;
       }
+    }catch(_){/* no-op */}
+    // 未命中则返回空，避免出现没有高亮的条目
+    return '';
+  }
+  function render(items, q, total){
+    if (!pop) return;
+    const placeholder = mode === 'all' ? '全站搜索…' : (mode === 'posts' ? 'Posts 内部搜索…' : '当前页面搜索…');
+    if (box) box.setAttribute('placeholder', placeholder);
+
+    const tabsHtml = '<div class="search-mode-head">'
+      + '<div class="search-mode-label">搜索选项</div>'
+      + '<div class="search-mode-tabs" role="tablist">'
+      + `<button class="mode-tab ${mode==='all'?'is-active':''}" data-mode="all">全站</button>`
+      + `<button class="mode-tab ${mode==='posts'?'is-active':''}" data-mode="posts">Posts</button>`
+      + `<button class="mode-tab ${mode==='page'?'is-active':''}" data-mode="page">本页</button>`
+      + '</div>'
+      + '</div>';
+
+    pop.innerHTML = tabsHtml;
+    pop.hidden = false;
+    bindQuickEvents();
+
+    if (!q) return;
+
+    const qWords = tokenize(q);
+    const qLower = q.toLowerCase();
+    const modeLabel = mode==='all'?'全站':(mode==='posts'?'Posts':'本页');
+    const header = `<div class="search-popover-header">【${modeLabel}】找到 ${total} 个结果 · 按 ↑/↓ 选择，Enter 打开，Esc 关闭</div>`;
+    let list = '';
+    if (mode === 'page'){
+      const parts = [];
+      items.forEach((it, i)=>{
+        const line = buildLineSnippet(it, qWords, qLower);
+        if (!line || line.indexOf('<mark>') === -1) return; // 仅保留真正命中的行
+        const cls = 'search-item'+(i===activeIndex?' is-active':'');
+        parts.push(`<a class="${cls}" data-index="${i}" href="${it.url}">\
+          <div class="search-item-line">${line}</div>\
+        </a>`);
+      });
+      list = parts.join('');
+    } else {
+      list = items.map((it, i)=>{
+        const cls = 'search-item'+(i===activeIndex?' is-active':'');
+        const snippet = buildSnippet(it, qWords);
+        const meta = [it.section, it.date].filter(Boolean).join(' · ');
+        return `<a class="${cls}" data-index="${i}" href="${it.url}">\
+          <div class="search-item-title">${highlight(it.title, qWords)}</div>\
+          <div class="search-item-meta">${meta}</div>\
+          ${snippet?`<div class="search-item-snippet">${snippet}</div>`:''}\
+        </a>`;
+      }).join('');
     }
-    return snippets.slice(0,3);
+    pop.insertAdjacentHTML('beforeend', header + `<div class="search-results">${list||'<div style=\"padding:12px;\">未找到结果</div>'}</div>`);
   }
 
-  function dedupeByUrl(results){
-    const best = new Map();
-    results.forEach(r => {
-      const doc = r.item || r;
-      const url = doc.url;
-      const score = (typeof r.score === 'number') ? r.score : 1;
-      if (!best.has(url) || score < best.get(url).score){
-        best.set(url, { r, score });
-      }
-    });
-    return Array.from(best.values()).map(x => x.r);
-  }
-
-  function render(results){
-    const box = document.getElementById('results');
-    if(!box) return;
-    if(!results.length){ box.innerHTML = '<p>没有结果。</p>'; return; }
-    const unique = dedupeByUrl(results);
-    box.innerHTML = unique.map(r => {
-      const doc = r.item || r; // fuse result or plain object
-      const date = doc.date ? `<span style="color:var(--muted)">${doc.date}</span>` : '';
-      const meta = `${doc.section||''} ${date}`.trim();
-      const matches = r.matches || [];
-      const q = getQuery();
-      const lines = makeSnippets(doc, matches, q);
-      const body = lines.length ? lines.map(l=>`<div>${l}</div>`).join('') : '';
-      return `
-        <div class="card" style="margin-bottom:12px;">
-          <a href="${doc.url}" class="card-title">${doc.title}</a>
-          ${body ? `<div class="card-desc">${body}</div>` : ''}
-          ${meta ? `<div style="color:var(--muted);font-size:12px;">${meta}</div>` : ''}
-        </div>`;
-    }).join('');
-  }
-
-  function simpleFilter(docs, q){
-    const s = (q || '').toLowerCase();
-    return docs.filter(d => (
-      (d.title||'').toLowerCase().includes(s) ||
-      (d.description||'').toLowerCase().includes(s) ||
-      (d.summary||'').toLowerCase().includes(s) ||
-      (Array.isArray(d.tags) && d.tags.join(' ').toLowerCase().includes(s)) ||
-      (Array.isArray(d.categories) && d.categories.join(' ').toLowerCase().includes(s)) ||
-      (d.content||'').toLowerCase().includes(s)
-    ));
-  }
-
-  async function init(){
-    const input = document.getElementById('q');
-    const docs = await fetchIndex();
-    const fuse = buildFuse(docs);
-
-    function doSearch(q){
-      if(!q){ render([]); return; }
-      let results = [];
-      if (fuse){
-        results = fuse.search(q).slice(0, 50);
-      }else{
-        results = simpleFilter(docs, q).slice(0, 50);
-      }
-      render(results);
-    }
-
-    const initQ = getQuery();
-    if (input){
-      input.value = initQ;
-      input.addEventListener('keydown', (e)=>{
-        if (e.key === 'Enter'){
-          const q = input.value.trim();
-          if (q) {
-            // keep URL in sync
-            const url = new URL(location.href);
-            url.searchParams.set('q', q);
-            history.replaceState(null, '', url.toString());
-          }
-          doSearch(q);
+  function bindQuickEvents(){
+    if (!pop) return;
+    pop.querySelectorAll('[data-mode]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const newMode = btn.getAttribute('data-mode');
+        if (mode === newMode) return;
+        mode = newMode;
+        if (box) { box.focus(); }
+        const q = box ? box.value.trim() : '';
+        if (q){
+          onInput(); // 直接用当前查询按新模式搜索
+        } else {
+          render([], '', 0); // 显示入口 tabs
         }
       });
-      // Optional live search on input
-      input.addEventListener('input', ()=>{
-        const q = input.value.trim();
-        if (!q) render([]);
-      });
-    }
+    });
+  }
 
-    if (initQ) doSearch(initQ);
+  function moveActive(delta){
+    const links = pop ? Array.from(pop.querySelectorAll('.search-item')) : [];
+    if (!links.length) return;
+    activeIndex = (activeIndex + delta + links.length) % links.length;
+    links.forEach((a, i)=> a.classList.toggle('is-active', i===activeIndex));
+    const active = links[activeIndex];
+    if (active && active.scrollIntoView){ active.scrollIntoView({block:'nearest'}); }
+  }
+
+  function openActive(){
+    const a = pop ? pop.querySelector('.search-item.is-active') : null;
+    if (a) { window.location.href = a.getAttribute('href'); }
+  }
+
+  const onInput = debounce(async function(){
+    if (!box) return;
+    const q = box.value.trim();
+    if (!q){ render([], '', 0); return; }
+    const qLower = q.toLowerCase();
+    const qWords = tokenize(q);
+    let items = [];
+    let total = 0;
+    if (mode === 'page'){
+      const docs = buildPageIndex();
+      const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
+        .filter(x => x.s > 0)
+        .sort((a,b)=> b.s - a.s);
+      // 仅保留真正有高亮的行
+      const filtered = [];
+      scored.forEach(x => {
+        const line = buildLineSnippet(x.d, qWords, qLower);
+        if (line && line.indexOf('<mark>') !== -1){ filtered.push(x.d); }
+      });
+      total = filtered.length;
+      items = filtered; // 本页：全部显示
+    } else {
+      const siteDocs = await ensureData();
+      const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
+      const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
+        .filter(x => x.s > 0)
+        .sort((a,b)=> b.s - a.s);
+      total = scored.length;
+      items = scored.slice(0, MAX_RESULTS).map(x => x.d);
+    }
+    activeIndex = items.length ? 0 : -1;
+    render(items, q, total);
+  }, 120);
+
+  function closePopover(){ if (pop){ pop.hidden = true; } }
+
+  function onDocClick(e){
+    if (!pop || pop.hidden) return;
+    const within = e.target.closest('#'+POPOVER_ID) || e.target.closest('#'+INPUT_ID);
+    if (!within) closePopover();
+  }
+
+  function focusHotkey(e){
+    if (e.key === '/' && !(e.ctrlKey||e.metaKey||e.altKey) && document.activeElement !== box){
+      e.preventDefault(); box && box.focus();
+    }
+  }
+
+  function setup(){
+    box = $(INPUT_ID);
+    pop = $(POPOVER_ID);
+    if (!box || !pop) return;
+
+    box.addEventListener('compositionstart', ()=> isComposing = true);
+    box.addEventListener('compositionend', ()=> { isComposing = false; onInput(); });
+    box.addEventListener('input', ()=> { if (!isComposing) onInput(); });
+    box.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape'){ closePopover(); return; }
+      if (e.key === 'ArrowDown'){ e.preventDefault(); moveActive(1); }
+      if (e.key === 'ArrowUp'){ e.preventDefault(); moveActive(-1); }
+      if (e.key === 'Enter'){ const a = pop && pop.querySelector('.search-item.is-active'); if (a){ e.preventDefault(); window.location.href = a.getAttribute('href'); } }
+    });
+
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', focusHotkey);
+
+    // 初始显示快捷入口（聚焦时且为空）
+    box.addEventListener('focus', () => { if (!box.value.trim()){ render([], '', 0); } });
+
+    // 拦截“本页”结果，平滑滚动并高亮
+    pop.addEventListener('click', (e) => {
+      const a = e.target.closest('a.search-item');
+      if (!a) return;
+      try{
+        const u = new URL(a.getAttribute('href'), location.href);
+        const samePage = u.pathname === location.pathname;
+        if (samePage && u.hash){
+          e.preventDefault();
+          closePopover();
+          const id = u.hash.slice(1);
+          const el = document.getElementById(id);
+          if (el){
+            el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+            el.classList.add('search-hit-flash');
+            setTimeout(()=> el.classList.remove('search-hit-flash'), 1200);
+            if (history && history.pushState){ history.pushState(null, '', u.hash); }
+            else { location.hash = u.hash; }
+          } else {
+            // fallback
+            location.href = u.toString();
+          }
+        }
+      }catch(_){/* no-op */}
+    });
   }
 
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  }else{
-    init();
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
   }
 })();

@@ -1,0 +1,74 @@
+/* 顶部搜索栏与弹出结果样式 */
+.site-search { position: relative; flex: 1 1 auto; max-width: 560px; margin: 0 16px; }
+.site-search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted, #6B665F); pointer-events: none; display: inline-flex; align-items: center; justify-content: center; line-height: 0; }
+.site-search-input {
+  width: 100%; height: 36px; padding: 6px 12px 6px 36px;
+  border: 1px solid var(--border, #E6E3DC); border-radius: 18px; outline: none;
+  color: var(--text, #2E2A25);
+}
+.site-search-input::placeholder{ color: var(--muted, #6B665F); }
+.site-search-input:focus{ box-shadow: 0 0 0 3px rgba(15,109,220,0.08); border-color: var(--accent-2, #0F6DDC); }
+
+  .site-search-popover {
+    position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 1000;
+    background: var(--surface, #FCFBF9);
+    border: 1px solid var(--border, #E6E3DC);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    max-height: 70vh;
+    overflow: auto;
+  }
+.search-popover-header { padding: 10px 12px; font-size: 12px; color: var(--muted, #6B665F); border-bottom: 1px solid var(--border, #E6E3DC); }
+.search-results { padding: 6px; }
+.search-item { display: block; padding: 10px 12px; border-radius: 10px; color: inherit; text-decoration: none; }
+.search-item:hover, .search-item.is-active { background: rgba(15,109,220,0.08); }
+.search-item-title { font-weight: 600; margin-bottom: 4px; color: var(--text, #2E2A25); }
+.search-item-meta { font-size: 12px; color: var(--muted, #6B665F); }
+.search-item-snippet { font-size: 13px; color: var(--text, #2E2A25); margin-top: 4px; }
+  /* 本页搜索：仅显示所在行（单行省略） */
+  .search-item-line {
+    font-size: 13px;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* 允许换行，由 line-clamp 限制为单行 */
+  }
+  /* 快捷入口与模式切换 */
+.search-quick-header { padding: 10px 12px; font-size: 12px; color: var(--muted, #6B665F); border-bottom: 1px solid var(--border, #E6E3DC); }
+.search-quick-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; padding: 10px 12px; }
+.search-quick-item:hover { border-color: var(--accent-2, #0F6DDC); box-shadow: 0 0 0 3px rgba(15,109,220,0.08); }
+.mode-tab { appearance: none; background: transparent; border: 1px solid var(--border, #E6E3DC); color: var(--text, #2E2A25); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+.mode-tab.is-active { border-color: var(--accent-2, #0F6DDC); background: rgba(15,109,220,0.08); }
+/* 搜索弹窗：头部“搜索选项”与模式按钮布局 */
+  .site-search-popover .search-mode-head{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; padding: 10px 12px 6px; border-bottom: 1px solid var(--border, #E6E3DC); margin-bottom: 4px; }
+.site-search-popover .search-mode-label{ font-size: 12px; color: var(--muted, #6B665F); }
+.site-search-popover .search-mode-tabs{ display:flex; gap:8px; }
+
+  /* Header actions 区域：搜索固定在 Posts 左侧，并尽量居中利用空间 */
+.header-inner .actions{ display:flex; align-items:center; gap:8px; flex:1 1 auto; min-width:0; justify-content:flex-end; }
+.header-inner .actions{ flex-wrap: nowrap; }
+.actions .posts-btn, .actions .theme-toggle-btn{ flex: 0 0 auto; }
+.actions .theme-toggle-btn{ display: inline-flex; align-items: center; justify-content: center; }
+.actions .posts-btn{ order: 2; }
+.actions .theme-toggle-btn{ order: 3; }
+.actions .site-search{ order: 1; flex: 1 1 auto; width: auto; max-width: none; min-width: 0; margin: 0 8px; }
+
+  @media (max-width: 900px){
+    .site-search{ order: 3; width: 100%; max-width: none; margin: 8px 0 0; }
+    .search-quick-list{ grid-template-columns: 1fr; }
+    /* 移动端覆盖：actions 内保持固定顺序与合适宽度 */
+    .actions .site-search{ order: 0; flex: 1 1 auto; width: auto; min-width: 140px; margin: 0 8px 0 0; }
+    .actions .posts-btn{ order: 1; }
+    .actions .theme-toggle-btn{ order: 2; }
+  }
+
+/* 本页搜索：命中高亮动画 */
+.search-hit-flash{ animation: searchHitFlash 1.2s ease-out 1; outline: 2px solid var(--accent-2, #0F6DDC); outline-offset: 2px; scroll-margin-top: calc(var(--theme-header-height, 56px) + 8px); }
+@keyframes searchHitFlash{
+  0%{ background-color: rgba(15,109,220,0.18); }
+  60%{ background-color: rgba(15,109,220,0.08); }
+  100%{ background-color: transparent; }
+}
