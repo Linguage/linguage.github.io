@@ -4,7 +4,8 @@
   const INPUT_ID = 'globalSearchInput';
   const POPOVER_ID = 'globalSearchPopover';
   const MAX_RESULTS = 10;
-  const FETCH_URL = '/index.json';
+  // 使用相对路径，确保在子路径部署（如 /project/）下可访问
+  const FETCH_URL = 'index.json';
 
   // modes: all | posts | page
   let mode = 'all';
