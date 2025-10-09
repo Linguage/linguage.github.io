@@ -14,9 +14,9 @@
   .site-search-popover {
     position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 1000;
     background: var(--surface, #FCFBF9);
-    border: 1px solid var(--border, #E6E3DC);
+    border: 1.5px solid #CFC8BD; /* 更强分隔，避免与正文混淆 */
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.10); /* 稍加强，形成浮层层次感 */
     max-height: 70vh;
     overflow: auto;
   }
@@ -27,7 +27,9 @@
 .site-search-popover .search-mode-head{
   display:flex; align-items:center; flex-wrap:wrap; gap:10px;
   padding: 10px 12px; border-bottom: 1px solid var(--border, #E6E3DC);
-  margin: 0; background: rgba(15,109,220,0.06); border-top-left-radius: 12px; border-top-right-radius: 12px;
+  margin: 0; background: var(--surface, #FCFBF9); /* 改为不透明，避免滚动时互相干涉 */
+  border-top-left-radius: 12px; border-top-right-radius: 12px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06); /* 轻分隔线，增强层次 */
   position: sticky; top: 0; z-index: 1;
 }
 .site-search-popover .search-mode-label{ font-size: 12px; color: var(--muted, #6B665F); font-weight: 600; letter-spacing: .06em; }
@@ -38,6 +40,12 @@
 .mode-tab:focus-visible{ outline: 2px solid rgba(15,109,220,0.35); outline-offset: 1px; }
 /* 更友好的高亮 */
 .search-item mark{ background: rgba(15,109,220,0.16); color: inherit; border-radius: 3px; padding: 0 .12em; }
+
+/* 深色模式下：使用更适合的暗黄色高亮，保持可读性 */
+:root[data-theme="dark"] .search-item mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]) .search-item mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
+}
   /* 本页搜索：仅显示所在行（单行省略） */
   .search-item-line {
     font-size: 13px;
@@ -78,7 +86,7 @@
   body.mobile-searching .site-search-input{
     height: 40px; border-radius: 20px; padding-left: 48px; padding-right: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   }
-  body.mobile-searching .mobile-search-back{ display: inline-flex; position: absolute; left: 6px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; align-items:center; justify-content:center; border: 1px solid var(--border, #E6E3DC); border-radius: 8px; background: var(--surface, #FCFBF9); }
+  body.mobile-searching .mobile-search-back{ display: inline-flex; position: absolute; left: 6px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; align-items:center; justify-content:center; border: none; border-radius: 50%; background: transparent; box-shadow: none; }
   body.mobile-searching .site-search-icon{ display: none; }
   /* 展开时隐藏右侧按钮（搜索图标/Posts/主题）避免拥挤 */
   body.mobile-searching .actions .search-toggle-btn,
