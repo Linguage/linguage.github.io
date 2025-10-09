@@ -18,6 +18,11 @@
   let activeIndex = -1;
   let isComposing = false;
   let lastOpenAt = 0; // 防止不同浏览器事件顺序导致“刚打开就被关闭”
+  // 渐进加载状态
+  let visibleCount = 0;           // 当前已展示数量（全站/Posts）
+  let lastResults = [];           // 最近一次去重排序后的完整结果
+  let lastTotal = 0;              // 最近一次结果总数
+  let lastQuery = '';             // 最近一次查询串
   // Debug 开关：在本地开发端口 1313 或手动设置 window.DEBUG_SEARCH=true 时输出调试日志
   const DEBUG = (typeof window !== 'undefined' && (
     (window.location && window.location.port === '1313') || (window.DEBUG_SEARCH === true)
@@ -123,6 +128,16 @@
 
   function tokenize(q){
     return (q || '').toString().toLowerCase().trim().split(/\s+/).filter(Boolean);
+  }
+
+  // 规范化 URL 路径用于“文章级”去重与计数（忽略查询与 hash）
+  function normalizeUrlPath(u){
+    try{
+      const url = new URL(u, document.baseURI);
+      return url.pathname;
+    }catch(_){
+      return (u||'').split('#')[0].split('?')[0];
+    }
   }
 
   function escapeRegExp(str){
@@ -303,11 +318,16 @@
     const qWords = tokenize(q);
     const qLower = q.toLowerCase();
     const modeLabel = mode==='all'?'全站':(mode==='posts'?'Posts':'本页');
-    const header = `<div class="search-popover-header">【${modeLabel}】找到 ${total} 个结果 · 按 ↑/↓ 选择，Enter 打开，Esc 关闭</div>`;
+    const pageSize = MAX_RESULTS;
+    // 仅在全站/Posts模式做渐进加载
+    const sliceNeeded = (mode !== 'page');
+    if (sliceNeeded){ if (!visibleCount) visibleCount = pageSize; }
+    const vis = sliceNeeded ? items.slice(0, Math.min(items.length, visibleCount)) : items;
+    const header = `<div class="search-popover-header">【${modeLabel}】显示前 ${vis.length} 条 / 共 ${total} ${mode==='page'?'条命中':'篇结果'} · 按 ↑/↓ 选择，Enter 打开，Esc 关闭</div>`;
     let list = '';
     if (mode === 'page'){
       const parts = [];
-      items.forEach((it, i)=>{
+      vis.forEach((it, i)=>{
         const line = buildLineSnippet(it, qWords, qLower);
         if (!line || line.indexOf('<mark>') === -1) return; // 仅保留真正命中的行
         const cls = 'search-item'+(i===activeIndex?' is-active':'');
@@ -317,7 +337,7 @@
       });
       list = parts.join('');
     } else {
-      list = items.map((it, i)=>{
+      list = vis.map((it, i)=>{
         const cls = 'search-item'+(i===activeIndex?' is-active':'');
         const snippet = buildSnippet(it, qWords);
         const meta = [it.section, it.date].filter(Boolean).join(' · ');
@@ -329,6 +349,23 @@
       }).join('');
     }
     pop.insertAdjacentHTML('beforeend', header + `<div class="search-results">${list||'<div style=\"padding:12px;\">未找到结果</div>'}</div>`);
+
+    // 渐进加载按钮
+    if (sliceNeeded && total > vis.length){
+      const moreHtml = `<div class="search-more"><button id="searchLoadMoreBtn" class="search-more-btn">显示更多</button></div>`;
+      pop.insertAdjacentHTML('beforeend', moreHtml);
+      const moreBtn = pop.querySelector('#searchLoadMoreBtn');
+      if (moreBtn){
+        moreBtn.addEventListener('click', (e)=>{
+          e.preventDefault();
+          visibleCount += pageSize;
+          // 重新渲染使用完整缓存
+          render(lastResults, lastQuery, lastTotal);
+          // 重置活动项到首项
+          activeIndex = 0;
+        });
+      }
+    }
   }
 
   // 顶层：移动端展开/收起（供 setup 与其它逻辑调用）
@@ -443,10 +480,23 @@
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
       const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
-        .filter(x => x.s > 0)
-        .sort((a,b)=> b.s - a.s);
-      total = scored.length;
-      items = scored.slice(0, MAX_RESULTS).map(x => x.d);
+        .filter(x => x.s > 0);
+
+      // 按“文章（规范化路径）”去重：同一文章仅保留最高得分项
+      const bestByPath = new Map();
+      for (const x of scored){
+        const key = normalizeUrlPath(x.d.url || '');
+        const prev = bestByPath.get(key);
+        if (!prev || x.s > prev.s){ bestByPath.set(key, x); }
+      }
+      const unique = Array.from(bestByPath.values()).sort((a,b)=> b.s - a.s);
+      total = unique.length; // 用“文章数”作为总计数
+      items = unique.map(x => x.d); // 不截断，交由 render 做渐进加载
+      // 记录状态供“显示更多”使用
+      lastResults = items;
+      lastTotal = total;
+      lastQuery = q;
+      visibleCount = MAX_RESULTS; // 初始显示量
     }
     activeIndex = items.length ? 0 : -1;
     render(items, q, total);

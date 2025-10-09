@@ -24,6 +24,20 @@
 .search-results { padding: 6px; }
 .search-item { display: block; padding: 10px 12px; border-radius: 10px; color: inherit; text-decoration: none; }
 .search-item:hover, .search-item.is-active { background: rgba(15,109,220,0.08); }
+.search-more{ padding: 8px 12px 12px; display: flex; justify-content: center; }
+.search-more-btn{
+  appearance: none;
+  background: rgba(0,0,0,0.02);
+  border: 1px solid var(--border, #E6E3DC);
+  color: var(--text, #2E2A25);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  line-height: 1;
+}
+.search-more-btn:hover{ background: rgba(0,0,0,0.04); }
+.search-more-btn:focus-visible{ outline: 2px solid rgba(15,109,220,0.35); outline-offset: 1px; }
 .site-search-popover .search-mode-head{
   display:flex; align-items:center; flex-wrap:wrap; gap:10px;
   padding: 10px 12px; border-bottom: 1px solid var(--border, #E6E3DC);
@@ -40,6 +54,8 @@
 .mode-tab:focus-visible{ outline: 2px solid rgba(15,109,220,0.35); outline-offset: 1px; }
 /* 更友好的高亮 */
 .search-item mark{ background: rgba(15,109,220,0.16); color: inherit; border-radius: 3px; padding: 0 .12em; }
+/* 仅显示标题与正文摘要：隐藏元信息（section/date 等） */
+.site-search-popover .search-item-meta{ display: none !important; }
 
 /* 深色模式下：使用更适合的暗黄色高亮，保持可读性 */
 :root[data-theme="dark"] .search-item mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
@@ -56,6 +72,21 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal; /* 允许换行，由 line-clamp 限制为单行 */
+  }
+  /* 站内搜索摘要：桌面两行，移动端三行 */
+  .search-item-snippet{
+    font-size: 13px;
+    color: var(--muted, #6B665F);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2; /* 桌面默认两行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+  @media (max-width: 900px){
+    .search-item-snippet{ line-clamp: 3; -webkit-line-clamp: 3; }
   }
   /* 快捷入口与模式切换 */
 .search-quick-header { padding: 10px 12px; font-size: 12px; color: var(--muted, #6B665F); border-bottom: 1px solid var(--border, #E6E3DC); }
