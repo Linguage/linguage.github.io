@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>信息图网页 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="信息图网页"><meta property="og:description" content="信息图网页管理，旨在提供最优质的阅读体验"><meta property="og:url" content="https://linguage.github.io/labs/static/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="信息图网页"><meta name="twitter:description" content="信息图网页管理，旨在提供最优质的阅读体验"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/labs/static/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  <nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+    <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+    
+    
+      
+        
+        
+          
+          <a href="/" class="crumb-anc">Linguista</a>
+        
+          <span class="crumb-sep">/</span>
+          <a href="/labs/" class="crumb-anc">技术</a>
+        
+        <span class="crumb-sep">/</span>
+      
+      <a href="/labs/static/" class="crumb-sec">信息图网页</a>
+    
+    
+  </nav>
+
+  
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar" aria-label="Sections">
+      
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+
+
+
+
+
+        </nav>
+      
+    </aside>
+
+    
+    <article class="docs-content">
+      <div class="prose">
+        
+        
+        
+          
+        
+        
+          <h1>信息图网页</h1>
+        
+        <div><p>该部分收录直接经过渲染的静态HTML文件，其中多位基于大模型提示词生成的交互式报告，采用的大模型包括Claude Sonnet、 Gemini(Canvas)、 Kimi、DeepSeek等，一方面为了提供充满设计感的阅读体验，另一方面也是为了测试语言模型在前端代码生成方面的能力。</p>
+<p><strong>最后更新</strong>: 2025-10-07</p>
+<hr>
+<h2 id="杂志风格报告">杂志风格报告</h2>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th>杂志风格报告</th>
+          <th>参考内容</th>
+          <th>类别</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Oct. 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/cursor_openai_devday_speech.html">Cursor:智能体时代的编程革命</a></td>
+          <td><a href="https://youtu.be/3KAI__5dUn0?si=tlKHh4R1ZOWby_6R">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/math-discovery-shaped-by-AI-nature.html">人工智能时代下的数学发现</a></td>
+          <td><a href="https://www.nature.com/articles/s41567-025-03042-0.epdf?sharing_token=VzH87Pgi6QmBg-iFzzzmgNRgN0jAjWel9jnR3ZoTv0OXVK6UoUC5QS2UDmISzMElFTU4upqXYyfB5pXP5GgnhOieHJg7u5z3OD9KIwsyycI55NHqhYpfGVOBSlV5gUJBfh3xIUA1W3ZknZRRu-0mNwLNbapB_wUUeMnkWInJ7xA%3D">nature</a></td>
+          <td>AI与科学</td>
+      </tr>
+      <tr>
+          <td>Oct. 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/openai-dev-day-2025.html">OpenAI Dev Day 2025</a></td>
+          <td><a href="https://x.com/dotey/status/1975290767179448426">推文</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/jane-goodall-hope-action-heritage.html">珍·古道尔：希望行动的遗产</a></td>
+          <td><a href="https://www.youtube.com/watch?v=4ST6pqfCTy0">YouTube</a></td>
+          <td>人物纪实</td>
+      </tr>
+      <tr>
+          <td>Oct. 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/scholze-interview-2025.html">Peter Scholze访谈</a></td>
+          <td><a href="https://www.youtube.com/watch?v=_gAe77G_aHw">YouTube</a>/<a href="https://linguista.bearblog.dev/interview-with-mpim-director-peters-cholze/">Linguista</a></td>
+          <td>人物访谈</td>
+      </tr>
+      <tr>
+          <td>Oct. 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/jobs_stanford_2005.html">史蒂夫·乔布斯斯坦福毕业演讲</a></td>
+          <td><a href="https://www.youtube.com/watch?v=UF8uR6Z6KLc">YouTube</a>/<a href="https://linguista.cn/essays/stevejobs-stanford2005/">Linguista</a></td>
+          <td>经典演讲</td>
+      </tr>
+      <tr>
+          <td>Oct. 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/animals-vs-ghosts-magazine.html">Karpathy：动物与幽灵</a></td>
+          <td><a href="https://linguista.cn/essays/animals-vs-ghosts/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/bitter_lesson_magazine.html">Sutton:苦涩教训</a></td>
+          <td><a href="https://linguista.cn/essays/bitter-lesson/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/magazine_style_microcomputer.html">微型计算机：第二次浪潮</a></td>
+          <td><a href="https://technicshistory.com/2025/10/03/microcomputers-the-second-wave-towards-a-mass-market/">博客</a></td>
+          <td>计算机历史</td>
+      </tr>
+      <tr>
+          <td>Oct. 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/zhang_yitang_2025_magazine.html">张益唐：数论与物理学的交汇点</a></td>
+          <td><a href="https://www.bilibili.com/video/BV12unizyEwA/">B站</a></td>
+          <td>人物专访</td>
+      </tr>
+      <tr>
+          <td>Oct. 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/yann_lecun_jepa_harvard_2025.html">Yann LeCun：自监督学习世界模型与AI未来</a></td>
+          <td><a href="https://www.youtube.com/watch?v=yUmDRxV0krg">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-bubble-2025.html">AI泡沫经济：资本黑洞与结构性失衡</a></td>
+          <td><a href="https://www.derekthompson.org/p/this-is-how-the-ai-bubble-will-pop">博客</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/stupid_org.html">愚蠢组织生存指南</a></td>
+          <td><a href="https://www.leadingsapiens.com/surviving-institutional-stupidity/">博客</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/andrew_ng_ai_coding_career_advices_stanford_2025.html">吴恩达CS230: AI编程未来</a></td>
+          <td><a href="https://linguista.bearblog.dev/ai-career-andrew-ng-stanford-cs230-2025/">Linguista</a>/<a href="https://www.youtube.com/watch?v=_NLHFoVNlbg">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/durov_programming_philosophy_magazine.html">Durov编程哲学</a></td>
+          <td><a href="https://linguista.bearblog.dev/lex-with-durov-programming-philosophy-of-telegram/">Linguista</a>/<a href="https://www.youtube.com/watch?v=edNysXAk1m4">YouTube</a></td>
+          <td>人物专访</td>
+      </tr>
+      <tr>
+          <td>Oct. 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/anthropic_context_engineering.html">Anthropic Context Engineering</a></td>
+          <td><a href="https://linguista.cn/labs/rosetta/anthropic_context_engineering/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Oct. 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/fanzeng_life_drama.html">范曾跌宕起伏的争议人生</a></td>
+          <td><a href="https://www.youtube.com/watch?v=TlzT5otXsrU">YouTube</a></td>
+          <td>人物纪实</td>
+      </tr>
+      <tr>
+          <td>Oct. 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/lexfridman_PavelDurov.html">Lex Fridman采访Pavel Durov</a></td>
+          <td><a href="https://www.youtube.com/watch?v=qjPH9njnaVU">YouTube</a></td>
+          <td>人物专访</td>
+      </tr>
+      <tr>
+          <td>Sep. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Andrew_Churchill_hiring.html">Andrew Churchill招聘经验分享</a></td>
+          <td><a href="https://workweave.dev/blog/hiring-only-senior-engineers-is-killing-companies">博客文章</a></td>
+          <td>公司管理</td>
+      </tr>
+      <tr>
+          <td>Sep. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/deepseek-v3-2-report-magazine.html">DeepSeek-V3.2-Exp 深度解析</a></td>
+          <td><a href="https://arxiv.org/abs/2405.04434">Arxiv</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chatgpt_shopping_magazine.html">ChatGPT购物新时代</a></td>
+          <td><a href="https://openai.com/index/buy-it-in-chatgpt/">OpenAI</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai_coding_openai_podcast.html">AI编程未来：Codex与智能代码协作的新时代</a></td>
+          <td><a href="https://www.youtube.com/watch?v=OXOypK7_90c">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td>GPT-5-Codex 技术平权革命 <a href="https://linguage.github.io/articles/gpt-5-codex-kimi-laofan.html">kimi版</a>/<a href="https://linguage.github.io/articles/gpt5-codex-laofan-claude.html">Claude版</a></td>
+          <td><a href="https://www.youtube.com/watch?v=LyFoWMNCUvU">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/yangyx_report_caijing.html">杨永信网戒中心亲历者阿良的高压控制与心理创伤</a></td>
+          <td><a href="https://www.youtube.com/watch?v=fovmRJVb83g">YouTube</a></td>
+          <td>深度调查</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/vibe-coding-guide.html">Tom Blomfield和AI驱动的Vibe Coding实践指南</a></td>
+          <td><a href="https://www.youtube.com/watch?v=BJjsfNO5JTo">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/play2submission.html">牛马游戏：硅谷大厂如何驯服工程师</a></td>
+          <td></td>
+          <td>企业管理</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/vibecoding_guide_dotey.html">VibeCoding Guide-宝玉版</a></td>
+          <td><a href="https://www.youtube.com/watch?v=BJjsfNO5JTo">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 17, 2025</td>
+          <td><a href="https://linguage.github.io/articles/bezos_no_ppt_yes_6_page_memo.html">贝索斯&quot;无PPT&quot;会议文化解读</a></td>
+          <td><a href="https://texttoslides.ai/blog/amazon-not-using-powerpoint">博客</a></td>
+          <td>企业管理</td>
+      </tr>
+      <tr>
+          <td>Sep. 13, 2025</td>
+          <td><a href="https://linguage.github.io/articles/blackberry_story.html">黑莓手机记忆</a></td>
+          <td><a href="https://x.com/iamcheyan/status/1966548345314570311">徹言-推特</a></td>
+          <td>人物纪实</td>
+      </tr>
+      <tr>
+          <td>Sep. 12, 2025</td>
+          <td><a href="https://linguage.github.io/articles/qing_dynasty_xianguan_gaoqian.html">县官杜凤治与清代官场隐秘经济学</a></td>
+          <td><a href="https://linguista.bearblog.dev/qing-dynasty-xianguan-gaoqian/">Linguista</a></td>
+          <td>历史与文化</td>
+      </tr>
+      <tr>
+          <td>Sep. 12, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-agent-tools-anthropic.html">AI智能体工具设计全解析「Anthropic 工程实践」</a></td>
+          <td><a href="https://www.anthropic.com/engineering/writing-tools-for-agents">Anthropic</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 12, 2025</td>
+          <td><a href="https://linguage.github.io/articles/tahoe_magazine.html">太浩湖</a></td>
+          <td><a href="https://linguista.bearblog.dev/tahoe_lake_chronicles/">Linguista</a></td>
+          <td>地理百科</td>
+      </tr>
+      <tr>
+          <td>Sep. 12, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chomsky_foucault_debate.html">诺姆·乔姆斯基与米歇尔·福柯的人性辩论全记录</a></td>
+          <td><a href="https://www.youtube.com/watch?v=3wfNl2L0Gf8">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>Sep. 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liu_zhijun_magazine.html">刘志军的高铁神话：权力崛起与腐败深渊</a></td>
+          <td><a href="https://www.youtube.com/watch?v=sYi2Dw82AOc">YouTube</a></td>
+          <td>人物纪实</td>
+      </tr>
+      <tr>
+          <td>Sep. 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ding_shumiao_magazine.html">高铁一姐丁书苗的传奇崛起</a></td>
+          <td><a href="https://www.youtube.com/watch?v=X7RS6QSJhEM">YouTube</a></td>
+          <td>人物轶事</td>
+      </tr>
+      <tr>
+          <td>Sep. 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai_second_half_magazine.html">AI的下半场</a></td>
+          <td><a href="https://ysymyth.github.io/The-Second-Half/">姚顺雨博客</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai_future_magazine.html">AI的未来:Sam Altman访谈</a></td>
+          <td><a href="https://www.youtube.com/watch?v=6NwK-uq16U8">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/cognition-funding-magazine.html">Cognition：4亿美金融资背后的AI编程革命</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/devin-ai-magazine.html">德文：让AI实习生成为软件团队的无限力量</a></td>
+          <td><a href="https://www.youtube.com/watch?v=7m_xKFqSxTo">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/economist_ai_magazine.html">经济学人：如果人工智能，只是一项&quot;普通&quot;技术呢？</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai_coding_agents_magazine.html">AI编码代理大比拼</a></td>
+          <td><a href="https://www.youtube.com/watch?v=bp5TNTl3bZM">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Sep. 5, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chinese1.html">汉族身份认同及其称谓的历史建构1-古老的源头</a></td>
+          <td></td>
+          <td>历史与文化</td>
+      </tr>
+      <tr>
+          <td>Sep. 5, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chinese2.html">汉族身份认同及其称谓的历史建构2-王朝的烙印</a></td>
+          <td></td>
+          <td>历史与文化</td>
+      </tr>
+      <tr>
+          <td>Sep. 5, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chinese3.html">汉族身份认同及其称谓的历史建构3-他者的凝视</a></td>
+          <td></td>
+          <td>历史与文化</td>
+      </tr>
+      <tr>
+          <td>Sep. 5, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chinese4.html">汉族身份认同及其称谓的历史建构4-现代的重塑</a></td>
+          <td></td>
+          <td>历史与文化</td>
+      </tr>
+      <tr>
+          <td>Aug. 31, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Interaction-as-Intelligence-Deep-Research-With-Human-AI-Partnership.html">交互即智能：深度研究中的人机伙伴关系</a></td>
+          <td><a href="http://arxiv.org/abs/2507.15759">Arxiv</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 31, 2025</td>
+          <td><a href="https://linguage.github.io/articles/escape-to-tokyo-from-beijing.html">从北京到东京的逃离之路</a></td>
+          <td><a href="https://x.com/iamcheyan/status/1779190836405924114">推文-徹言</a></td>
+          <td>人物纪实</td>
+      </tr>
+      <tr>
+          <td>Aug. 31, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Multi-Agent-Design-Optimizing-Agents-with-Better-Prompts-and-Topologies.html">认知可解释推理痕迹研究</a></td>
+          <td><a href="http://arxiv.org/abs/2502.02533">ArXiv</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 31, 2025</td>
+          <td><a href="https://linguage.github.io/articles/wikipedia-gen-relat.html">广义相对论 - 现代物理学的基石</a></td>
+          <td><a href="https://en.wikipedia.org/wiki/General_relativity">YouTube</a></td>
+          <td>物理学</td>
+      </tr>
+      <tr>
+          <td>Aug. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/silicon101-perplexity-chrome.html">从Perplexity收购Chrome看AI浏览器大战</a></td>
+          <td><a href="https://www.youtube.com/watch?v=sdsiJAyO4Fw">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Meta-and-Scale-AI.html">Meta与Scale AI的合作危机</a></td>
+          <td><a href="https://x.com/dotey/status/1961666223063679340">宝玉-推特-TechCrunch</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 30, 2025</td>
+          <td><a href="https://linguage.github.io/articles/karpathy-From-Pre-training-to-Reinforcement-Learning.html">AI时代的三次进化</a></td>
+          <td><a href="https://x.com/karpathy/status/1960803117689397543">Karpathy-推特</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 24, 2025</td>
+          <td><a href="https://linguage.github.io/articles/visual-article-chinese-people-seven-hate.html">中美普通人七大恨对比</a></td>
+          <td><a href="https://linguista.bearblog.dev/comparison-of-the-seven-major-hatreds-of-ordinary-people-in-china-and-the-united-states/">Linuista</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>Aug. 23, 2025</td>
+          <td><a href="https://linguage.github.io/articles/visual-article-how-ai-researchers-accidentally-discovered-that-everything-they-thought-about-learning-was-wrong.html">AI学习理论的革命:彩票假说如何颠覆三百年统计理论</a></td>
+          <td><a href="https://linguage.github.io/articles/wechat-article-how-ai-researchers-accidentally-discovered-that-everything-they-thought-about-learning-was-wrong.html">原文中译稿</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>Aug. 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Technical-development-side-issues.html">技术发展中的节外生枝</a></td>
+          <td><a href="https://linguista.bearblog.dev/technical-development-side-issues/">Linguista</a></td>
+          <td>技术与历史</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/luka-modric-review-outside-the-court.html">卢卡·莫德里奇：大师的灵魂</a></td>
+          <td><a href="https://linguista.bearblog.dev/luka-modric-review-outside-the-court/">Linguista</a></td>
+          <td>体育与娱乐</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/product-thought-krieger.html">Mike Krieger: 产品思维大师班&ndash;从Instagram的诞生到AI的前沿探索</a></td>
+          <td><a href="https://www.youtube.com/watch?v=Tk-EI2yYT3A">YouTube</a></td>
+          <td>产品与设计</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/zhouyijun-chendanqing-time-and-be-oneself.html">周轶君对话陈丹青：时间与做自己</a></td>
+          <td><a href="https://www.bilibili.com/video/BV1e6ZhYFEYn/">Bilibili</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/13yao-xuzhiyuan-luoxiang.html">许知远对话罗翔：法律、道德与自我反思</a></td>
+          <td></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/claudecode-and-the-future-of-ai-coding.html">ClaudeCode：AI编码的未来</a></td>
+          <td><a href="https://www.youtube.com/watch?v=sOvi9Iu1Dq8">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/grok4-release.html">Grok 4: xAI发布</a></td>
+          <td><a href="https://www.youtube.com/watch?v=MtYsUdfZPMA">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/grok4-product-or-engine-of-empire.html">Grok-4：帝国引擎</a></td>
+          <td><a href="https://www.youtube.com/watch?v=EfWnRTBfcfc">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/andrewng-ai-acc-software-building.html">吴恩达：利用AI更快地构建</a></td>
+          <td><a href="https://www.youtube.com/watch?v=RNJCfif1dPY">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liangwendao-trump-king.html">梁文道：特朗普：美国新威权主义</a></td>
+          <td></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/windsurf-AI-driven-future.html">Windsurf：AI驱动开发的未来</a></td>
+          <td><a href="https://www.youtube.com/watch?v=fPTqeSEgTXk">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/fupeng-popmart.html">付鹏：解密“谷子经济学”：Z世代消费新浪潮</a></td>
+          <td><a href="https://www.youtube.com/watch?v=VIcmo6UtxUk">YouTube</a></td>
+          <td>经济与社会</td>
+      </tr>
+      <tr>
+          <td>July 11, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liuzhenyun-one-sentence-against-thousands.html">刘震云：关于“一句顶一万句”</a></td>
+          <td><a href="https://linguista.bearblog.dev/liu-zhenyun-one-sentence-against-thousands/">linguista</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 10, 2025</td>
+          <td><a href="https://linguage.github.io/articles/arc2dia.html">从 Arc 到 Dia：The Browser Company 的转型之路</a></td>
+          <td><a href="https://www.youtube.com/watch?v=210zavw00y4">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/durant-nash-james-2.html">杜兰特访谈-2：篮球效率与比赛未来(Mind the Game)</a></td>
+          <td><a href="https://www.youtube.com/watch?v=QLzftuwX9XM">YouTube</a></td>
+          <td>体育与娱乐</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liangwendao-ando.html">梁文道：安多</a></td>
+          <td><a href="https://www.youtube.com/watch?v=2aM327ibs3Q">YouTube</a></td>
+          <td>影视</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/gezhaoguang-thinking.html">葛兆光：思想的棱镜</a></td>
+          <td><a href="https://www.youtube.com/watch?v=MnnvMQbd_ew">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/kobe-vs-shaq.html">科比与沙克：巅峰与裂痕</a></td>
+          <td><a href="https://www.youtube.com/watch?v=9HO7KxO3nGc">YouTube</a></td>
+          <td>体育与娱乐</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/wangshuo-2025-view-on-writing.html">王朔:2025, 创作见解</a></td>
+          <td><a href="https://www.youtube.com/watch?v=qVatvVqwG7s">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 9, 2025</td>
+          <td><a href="https://linguage.github.io/articles/wangshuo-2025-answer-everything.html">王朔：2025，回答所有</a></td>
+          <td><a href="https://www.youtube.com/watch?v=lhQyuChfkCg">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-native-software-engineer.html">AI原生软件工程师</a></td>
+          <td><a href="https://linguista.bearblog.dev/the-ai-native-software-engineer/">Linguista</a>/<a href="https://addyo.substack.com/p/the-ai-native-software-engineer">原文博客</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/zed-diffustion-model.html">扩散语言模型</a></td>
+          <td><a href="https://www.youtube.com/watch?v=oot4O9wMohw">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/dylan-patel-the-state-of-AI.html">Dylan Patel：AI行业现状深度解析</a></td>
+          <td><a href="https://www.youtube.com/watch?v=I6qQinoY9WM">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chollet-path-to-agi.html">弗朗索瓦·肖莱论我们如何实现AGI</a></td>
+          <td><a href="https://www.youtube.com/embed/5QcCeSsNRks">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 8, 2025</td>
+          <td><a href="https://linguage.github.io/articles/siliconvalley101-us-medicine-price-mystery.html">硅谷101：美国药价之谜</a></td>
+          <td><a href="https://youtu.be/5QcCeSsNRks?si=g1-h45an61NCVTos">YouTube</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/paulgraham-do-great-work.html">保罗·格雷厄姆：如何做出伟大工作</a></td>
+          <td><a href="https://paulgraham.com/greatwork.html">博客</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liangwendao-on-jiangyurong-harvard.html">梁文道：哈佛演讲事件深度分析</a></td>
+          <td><a href="https://www.youtube.com/watch?v=DVyUI51Oi7g">YouTube</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/why-i-deleted-the-second-brain.html">我删除了我的第二大脑</a></td>
+          <td><a href="https://www.joanwestenberg.com/p/i-deleted-my-second-brain">博客</a></td>
+          <td>生活方式</td>
+      </tr>
+      <tr>
+          <td>July 7, 2025</td>
+          <td><a href="https://linguage.github.io/articles/shopify-ai-revolution.html">Shopify的人工智能变革</a></td>
+          <td><a href="https://www.youtube.com/watch?v=u-3IILWQPRM">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/windsurf-ai-driving-coding.html">Windsurf 交互式报告：AI 驱动的编码未来</a></td>
+          <td><a href="https://youtu.be/bVNNvWq6dKo">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liuzhenyun-peking-university-2017.html">刘震云：北京大学演讲（2017）</a></td>
+          <td><a href="https://linguista.bearblog.dev/liu-zhenyun-pekingu/">Linguista</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/coding-agent-amp.html">驾驭编程代理的新兴技能</a></td>
+          <td><a href="https://youtu.be/F_RyElT_gJk">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/lex-447-cursor-team.html">Lex Fridman#447:Cursor团队-AI编程的未来</a></td>
+          <td><a href="https://youtu.be/oFfVt3S51T4">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 6, 2025</td>
+          <td><a href="https://linguage.github.io/articles/liangwendao-cailan-hk.html">梁文道：从蔡澜谈香港与中国内地的差异</a></td>
+          <td></td>
+          <td>人物与社会</td>
+      </tr>
+      <tr>
+          <td>July 5, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ilya-jensenhuang-2023.html">AI 的当下与未来: Ilya Sutskever 与 Jensen Huang 炉边谈话(2023)</a></td>
+          <td><a href="https://www.youtube.com/watch?v=I6qQinoY9WM">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ilya-observation-generalization.html">Ilya Sutskever：关于泛化性的观察(2023)</a></td>
+          <td><a href="https://www.youtube.com/live/AKMuA_TVz3A">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/charlie-munger-last-interview.html">查理·芒格最后的采访</a></td>
+          <td><a href="https://www.youtube.com/watch?v=Gu_iovmjcJs">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/theprimetime-ak-software-changed-again.html">ThePrimeTime vs Andrej Karpathy: 软件正在改变（又一次）</a></td>
+          <td><a href="https://www.youtube.com/watch?v=vDWaKVmqznQ">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/siliconvalley101-kevinkelly.html">凯文·凯利2049预言：未来世界互动解读</a></td>
+          <td><a href="https://www.youtube.com/watch?v=8uHur4G1ZVI">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-coding-agents-investigation.html">现代AI编程助手分析-2025上半年版</a></td>
+          <td><a href="https://linguista.bearblog.dev/ai-coding-agents-investigation/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/the-future-of-programmers-at-the-ai-age.html">AI时代的程序员升格之路</a></td>
+          <td><a href="https://linguista.bearblog.dev/the-future-of-programmers-at-the-ai-age/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 4, 2025</td>
+          <td><a href="https://linguage.github.io/articles/context-engineering-next-generation-hci.html">上下文工程：下一代人机交互范式</a></td>
+          <td><a href="https://linguista.bearblog.dev/context-engineering-next-generation-hci/">Linguista</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/air-conditioner-around-the-world.html">全球清凉鸿沟：空调普及的代价与未来</a></td>
+          <td><a href="https://linguista.bearblog.dev/air-conditioner-around-the-world/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-know-how-dilemma.html">AI困境：专有技术与AI代码生成</a></td>
+          <td><a href="https://linguista.bearblog.dev/ai-know-how-dilemma/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/li-fei-fei-yc-school-2025.html">李飞飞：空间智能是AI的下一个前沿</a></td>
+          <td><a href="https://www.youtube.com/watch?v=_PioN-CpOP0">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 3, 2025</td>
+          <td><a href="https://linguage.github.io/articles/kd-lbj-jnash-p1.html">凯文·杜兰特访谈-1：篮球效率与比赛未来(Mind the Game)</a></td>
+          <td><a href="https://www.youtube.com/watch?v=VUzP2PvXeoY">YouTube</a></td>
+          <td>体育与娱乐</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ivan-zhao-ivs-2025.html">Notion创始人Ivan Zhao：AI开发如酿酒</a></td>
+          <td><a href="https://mp.weixin.qq.com/s/k_-RkRzl5eqX43yewgT9XQ">微信公众号</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Software-engineering-with-LLMs-in2025-reality-check.html">2025年软件工程与AI的现实检验</a></td>
+          <td><a href="https://www.youtube.com/watch?v=EO3_qN_Ynsk">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Unlocking-AI-Potential-andrew-ng-lisa-su.html">解锁AI潜力：吴恩达博士与苏姿丰博士的见解</a></td>
+          <td><a href="https://www.youtube.com/watch?v=ckS-ynViLjY">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/Windsurf-AnshulRamachandran.html">Windsurf创始团队成员：AI时代的软件重塑</a></td>
+          <td><a href="https://www.youtube.com/watch?v=aqQ3b9YjaIU">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/VarunMohan-transition-to-windsurf.html">Windsurf的崛起：从2800万美元转型到30亿美元交易</a></td>
+          <td><a href="https://www.youtube.com/watch?v=9c3oNP8yiKs">YouTube</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/gefei-2019.html">格非：节制需要大智慧（2019，优酷）</a></td>
+          <td><a href="https://www.youtube.com/watch?v=z6ZIHfTKIB4">YouTube</a></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/software-3-period-review.html">软件的三次浪潮：交互式分析</a></td>
+          <td><a href="https://linguista.bearblog.dev/software-3-periods">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/chinese-food-delivery-riders.html">骑行在系统边缘：中国外卖骑手行业分析</a></td>
+          <td><a href="https://linguista.bearblog.dev/riding-on-the-edge/">Linguista</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 2, 2025</td>
+          <td><a href="https://linguage.github.io/articles/supuer-individual-meta-openai.html">人才价值的重估？AI时代的超级个体经济</a></td>
+          <td><a href="https://linguista.bearblog.dev/ai-superstar-economy/">Linguista</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/claude-self-learning.html">Claude 正在学习自我构建：Anthropic 的 Michael Gerstenhaber 访谈</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/claudecode-1.html">AI编程助手背后的核心技术与设计哲学</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/claudecode-cursor-1.html">AI编程工具市场研究报告：Claude Code vs. Cursor</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/claudecode.html">以Claude和Cursor为例，透视代码生成技术的现在与未来</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/CodeAgent.html">两位工程师如何借助 Claude Code 实现15人团队的交付效率</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/ai-agent-pricing.html">AI定价策略分析</a></td>
+          <td><a href="https://bearblog.dev/linguista/dashboard/posts/IYrsdfIecuBHixnKsdDe/">Linguista</a></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/jensen-huang-Transformer8.html">黄仁勋对话Transformer八子</a></td>
+          <td></td>
+          <td>AI技术</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/gauss_biography.html">小传：卡尔·弗里德里希·高斯</a></td>
+          <td></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/test-deepseek_r1.html">存在主义哲学</a></td>
+          <td></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/davinci-style-character.html">达芬奇式人格的诅咒与祝福：多元潜能者生存指南</a></td>
+          <td></td>
+          <td>人物与思想</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/reading-3-period.html">阅读的三个时代</a></td>
+          <td><a href="https://linguista.bearblog.dev/the-evolution-of-reading-3-period/">Linguista</a></td>
+          <td>社会观察</td>
+      </tr>
+      <tr>
+          <td>July 1, 2025</td>
+          <td><a href="https://linguage.github.io/articles/japan90s-vs-china20s.html">日本与中国时空对比：失落年代与数字黎明</a></td>
+          <td><a href="https://linguista.bearblog.dev/jpn1990s-vs-chn2020s/">Linguista</a></td>
+          <td>社会观察</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="教程">教程</h2>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th>内容</th>
+          <th>类别</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Aug 14, 2025</td>
+          <td><a href="https://linguage.github.io/technotes/python_basics_example.html">Python 基础语法示例</a></td>
+          <td>教程</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="卡片">卡片</h2>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th>主题</th>
+          <th>来源</th>
+          <th>类别</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Oct. 9, 2025</td>
+          <td>跨境转账的坑 <a href="https://linguage.github.io/cards/lixiangyu_money_transfer_kimi.html">Kimi</a>/<a href="https://linguage.github.io/cards/lixiangyu_money_transfer_gemini.html">Gmeini</a></td>
+          <td><a href="https://x.com/LiXiang1947/status/1976093390220808453">推文</a></td>
+          <td>社会观察</td>
+      </tr>
+  </tbody>
+</table></div>
+
+        
+        
+        
+
+        
+          <ul>
+            
+          </ul>
+        
+      </div>
+    </article>
+
+    
+    
+    
+    
+      
+    
+    
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <nav class="toc">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#杂志风格报告">杂志风格报告</a></li>
+    <li><a href="#教程">教程</a></li>
+    <li><a href="#卡片">卡片</a></li>
+  </ul>
+</nav>
+        </nav>
+      </aside>
+    
+  </div>
+
+  
+  
+    <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+    <div id="tocDrawer" class="toc-drawer" hidden>
+      <div class="toc-drawer-inner">
+        <div class="toc-drawer-header">
+          <span>目录</span>
+        </div>
+        <nav class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#杂志风格报告">杂志风格报告</a></li>
+    <li><a href="#教程">教程</a></li>
+    <li><a href="#卡片">卡片</a></li>
+  </ul>
+</nav></nav>
+      </div>
+    </div>
+  
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

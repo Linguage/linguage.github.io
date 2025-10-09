@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：022 基本信息 论文编号：022 所属主题：Rail Topic 04 – Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：A Novel Method for Determining Track Irregularity Thresholds on Long-Span High-Speed Railway Bridges 中文标题：一种确定大跨度高速铁路桥梁轨道不平顺阈值的新方法 作者及单位：Ruoyu Li, Shengyang Zhu*, Wanming Zhai, Southwest Jiaotong University, China (西南交通大学) 摘要 本研究提出了一种改进的方法，用于评估大跨度高速铁路桥梁上的轨道不平顺。传统的弦测法(CMM)通常依赖于固定的弦长，并忽略了由静态桥梁变形(SBD)引起的超长波长不平顺。为解决这些局限性，研究开发了一种多弦长方法，结合5米和80米弦长，有效捕捉短波长和长波长不平顺。研究使用包含车体柔性的精细化列车-轨道-桥梁耦合动力学模型，基于乘坐舒适性和安全标准确定CMD阈值。仿真结果识别了敏感波长带，并定义了横向和垂直方向的CMD限制。此外，该方法引入了一种修正机制，用于分离SBD对CMD的影响，允许在不同桥梁变形幅度下进行准确评估。所提出的方法为轨道几何的静态验收提供了更全面的框架，增强了其在复杂大跨度桥梁环境中的适用性。
+关键词 #轨道不平顺 #弦测法 #大跨度桥梁 #高速铁路 #车体柔性 #静态桥梁变形 #列车-轨道-桥梁耦合 #轨道几何验收
+背景与动机 随着无砟轨道系统在大跨度桥梁上的广泛应用，中国高速铁路发展取得了显著进步，列车运行速度可达350公里/小时。然而，这种进步在提高运输效率的同时，也加剧了列车与基础设施之间的动态相互作用，使系统对轨道不平顺和结构变形高度敏感。在这种条件下确保安全稳定运行，需要更精细的方法来评估和控制轨道几何质量。
+传统的弦测法虽然应用广泛，但存在局限性：大多数研究集中在中长波长范围内（通常低于200米），而能够对高速车辆产生显著动态效应的短中波长成分在现有研究中很少受到关注。此外，当前的评估方法往往忽略了垂直桥梁变形的影响，尽管其在长跨度结构中具有重要意义。特别是，无砟轨道长跨度桥梁上与变形相关的不平顺在文献中记载不足，且未充分纳入验收标准。
+研究方法 研究采用了以下主要方法：
+多弦长弦测法框架：在CMM框架内整合多个弦长，以捕捉更广泛波长谱的不平顺。明确考虑无砟轨道长跨度桥梁的静态变形，以反映其对轨道几何偏差的独立贡献。
+柔性车体列车-轨道-桥梁耦合模型：基于列车-轨道-桥梁动力学相互作用理论，开发了详细的耦合动力学模型，明确考虑车体柔性。车体采用铝合金有限元壳结构建模，辅助设备如空调和变压器处理为集中质量。每辆车包括柔性车体、两个转向架、四个轮对和多个悬挂元件。
+动态响应分析与敏感波长识别：通过大量轨道不平顺样本的耦合动力学模型仿真，以车体加速度作为主要评估指标，分析识别显著影响动态响应的敏感波长带。
+多弦长CMD阈值确定：基于识别的敏感波段，使用CMM的传递函数选择合适的弦长，确保所选弦长的有效测量波段共同覆盖整个波长敏感范围。
+静态桥梁变形修正机制：提出修正评估方法，在将总测量CMD与为随机不平顺建立的阈值域进行比较之前，首先分离出SBD的贡献。
+主要结论 研究得出以下主要结论：
+通过车体加速度分析识别出两个敏感波长带（3-12米和70-200米）。使用5米和80米弦长能够有效覆盖这两个波段。
+基于乘坐舒适性和运行安全指标建立了CMD阈值。对于300米跨度桥梁、350公里/小时速度，横向不平顺的推荐限制为8毫米（80米弦长）和1.7毫米（5米弦长），垂直不平顺分别为9毫米和1.8毫米。
+静态桥梁变形显著影响与长弦相关的CMD阈值。当SBD幅度超过60毫米时，80米CMD限制应降低到7毫米；对于100毫米的SBD，限制应降低到4.5毫米。
+该方法通过分离SBD分量后再进行阈值评估，提高了在复杂桥梁变形条件下轨道几何评估的可靠性。
+文章亮点或创新点 多弦长综合测量方法：创新性地结合5米和80米弦长，有效覆盖3-200米的宽波长谱范围，解决了传统单弦长法无法同时捕捉短波长和长波长不平顺的问题。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：022 基本信息 论文编号：022 所属主题：Rail Topic 04 – Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：A Novel Method for Determining Track Irregularity Thresholds on Long-Span High-Speed Railway Bridges 中文标题：一种确定大跨度高速铁路桥梁轨道不平顺阈值的新方法 作者及单位：Ruoyu Li, Shengyang Zhu*, Wanming Zhai, Southwest Jiaotong University, China (西南交通大学) 摘要 本研究提出了一种改进的方法，用于评估大跨度高速铁路桥梁上的轨道不平顺。传统的弦测法(CMM)通常依赖于固定的弦长，并忽略了由静态桥梁变形(SBD)引起的超长波长不平顺。为解决这些局限性，研究开发了一种多弦长方法，结合5米和80米弦长，有效捕捉短波长和长波长不平顺。研究使用包含车体柔性的精细化列车-轨道-桥梁耦合动力学模型，基于乘坐舒适性和安全标准确定CMD阈值。仿真结果识别了敏感波长带，并定义了横向和垂直方向的CMD限制。此外，该方法引入了一种修正机制，用于分离SBD对CMD的影响，允许在不同桥梁变形幅度下进行准确评估。所提出的方法为轨道几何的静态验收提供了更全面的框架，增强了其在复杂大跨度桥梁环境中的适用性。
+关键词 #轨道不平顺 #弦测法 #大跨度桥梁 #高速铁路 #车体柔性 #静态桥梁变形 #列车-轨道-桥梁耦合 #轨道几何验收
+背景与动机 随着无砟轨道系统在大跨度桥梁上的广泛应用，中国高速铁路发展取得了显著进步，列车运行速度可达350公里/小时。然而，这种进步在提高运输效率的同时，也加剧了列车与基础设施之间的动态相互作用，使系统对轨道不平顺和结构变形高度敏感。在这种条件下确保安全稳定运行，需要更精细的方法来评估和控制轨道几何质量。
+传统的弦测法虽然应用广泛，但存在局限性：大多数研究集中在中长波长范围内（通常低于200米），而能够对高速车辆产生显著动态效应的短中波长成分在现有研究中很少受到关注。此外，当前的评估方法往往忽略了垂直桥梁变形的影响，尽管其在长跨度结构中具有重要意义。特别是，无砟轨道长跨度桥梁上与变形相关的不平顺在文献中记载不足，且未充分纳入验收标准。
+研究方法 研究采用了以下主要方法：
+多弦长弦测法框架：在CMM框架内整合多个弦长，以捕捉更广泛波长谱的不平顺。明确考虑无砟轨道长跨度桥梁的静态变形，以反映其对轨道几何偏差的独立贡献。
+柔性车体列车-轨道-桥梁耦合模型：基于列车-轨道-桥梁动力学相互作用理论，开发了详细的耦合动力学模型，明确考虑车体柔性。车体采用铝合金有限元壳结构建模，辅助设备如空调和变压器处理为集中质量。每辆车包括柔性车体、两个转向架、四个轮对和多个悬挂元件。
+动态响应分析与敏感波长识别：通过大量轨道不平顺样本的耦合动力学模型仿真，以车体加速度作为主要评估指标，分析识别显著影响动态响应的敏感波长带。
+多弦长CMD阈值确定：基于识别的敏感波段，使用CMM的传递函数选择合适的弦长，确保所选弦长的有效测量波段共同覆盖整个波长敏感范围。
+静态桥梁变形修正机制：提出修正评估方法，在将总测量CMD与为随机不平顺建立的阈值域进行比较之前，首先分离出SBD的贡献。
+主要结论 研究得出以下主要结论：
+通过车体加速度分析识别出两个敏感波长带（3-12米和70-200米）。使用5米和80米弦长能够有效覆盖这两个波段。
+基于乘坐舒适性和运行安全指标建立了CMD阈值。对于300米跨度桥梁、350公里/小时速度，横向不平顺的推荐限制为8毫米（80米弦长）和1.7毫米（5米弦长），垂直不平顺分别为9毫米和1.8毫米。
+静态桥梁变形显著影响与长弦相关的CMD阈值。当SBD幅度超过60毫米时，80米CMD限制应降低到7毫米；对于100毫米的SBD，限制应降低到4.5毫米。
+该方法通过分离SBD分量后再进行阈值评估，提高了在复杂桥梁变形条件下轨道几何评估的可靠性。
+文章亮点或创新点 多弦长综合测量方法：创新性地结合5米和80米弦长，有效覆盖3-200米的宽波长谱范围，解决了传统单弦长法无法同时捕捉短波长和长波长不平顺的问题。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/" class="crumb-sec">Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览022">IAVSD 2025 论文概览：022</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：022</li>
+<li><strong>所属主题</strong>：Rail Topic 04 – Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测)</li>
+<li><strong>英文标题</strong>：A Novel Method for Determining Track Irregularity Thresholds on Long-Span High-Speed Railway Bridges</li>
+<li><strong>中文标题</strong>：一种确定大跨度高速铁路桥梁轨道不平顺阈值的新方法</li>
+<li><strong>作者及单位</strong>：Ruoyu Li, Shengyang Zhu*, Wanming Zhai, Southwest Jiaotong University, China (西南交通大学)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>本研究提出了一种改进的方法，用于评估大跨度高速铁路桥梁上的轨道不平顺。传统的弦测法(CMM)通常依赖于固定的弦长，并忽略了由静态桥梁变形(SBD)引起的超长波长不平顺。为解决这些局限性，研究开发了一种多弦长方法，结合5米和80米弦长，有效捕捉短波长和长波长不平顺。研究使用包含车体柔性的精细化列车-轨道-桥梁耦合动力学模型，基于乘坐舒适性和安全标准确定CMD阈值。仿真结果识别了敏感波长带，并定义了横向和垂直方向的CMD限制。此外，该方法引入了一种修正机制，用于分离SBD对CMD的影响，允许在不同桥梁变形幅度下进行准确评估。所提出的方法为轨道几何的静态验收提供了更全面的框架，增强了其在复杂大跨度桥梁环境中的适用性。</p>
+<h2 id="关键词">关键词</h2>
+<p>#轨道不平顺 #弦测法 #大跨度桥梁 #高速铁路 #车体柔性 #静态桥梁变形 #列车-轨道-桥梁耦合 #轨道几何验收</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着无砟轨道系统在大跨度桥梁上的广泛应用，中国高速铁路发展取得了显著进步，列车运行速度可达350公里/小时。然而，这种进步在提高运输效率的同时，也加剧了列车与基础设施之间的动态相互作用，使系统对轨道不平顺和结构变形高度敏感。在这种条件下确保安全稳定运行，需要更精细的方法来评估和控制轨道几何质量。</p>
+<p>传统的弦测法虽然应用广泛，但存在局限性：大多数研究集中在中长波长范围内（通常低于200米），而能够对高速车辆产生显著动态效应的短中波长成分在现有研究中很少受到关注。此外，当前的评估方法往往忽略了垂直桥梁变形的影响，尽管其在长跨度结构中具有重要意义。特别是，无砟轨道长跨度桥梁上与变形相关的不平顺在文献中记载不足，且未充分纳入验收标准。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>研究采用了以下主要方法：</p>
+<ol>
+<li>
+<p><strong>多弦长弦测法框架</strong>：在CMM框架内整合多个弦长，以捕捉更广泛波长谱的不平顺。明确考虑无砟轨道长跨度桥梁的静态变形，以反映其对轨道几何偏差的独立贡献。</p>
+</li>
+<li>
+<p><strong>柔性车体列车-轨道-桥梁耦合模型</strong>：基于列车-轨道-桥梁动力学相互作用理论，开发了详细的耦合动力学模型，明确考虑车体柔性。车体采用铝合金有限元壳结构建模，辅助设备如空调和变压器处理为集中质量。每辆车包括柔性车体、两个转向架、四个轮对和多个悬挂元件。</p>
+</li>
+<li>
+<p><strong>动态响应分析与敏感波长识别</strong>：通过大量轨道不平顺样本的耦合动力学模型仿真，以车体加速度作为主要评估指标，分析识别显著影响动态响应的敏感波长带。</p>
+</li>
+<li>
+<p><strong>多弦长CMD阈值确定</strong>：基于识别的敏感波段，使用CMM的传递函数选择合适的弦长，确保所选弦长的有效测量波段共同覆盖整个波长敏感范围。</p>
+</li>
+<li>
+<p><strong>静态桥梁变形修正机制</strong>：提出修正评估方法，在将总测量CMD与为随机不平顺建立的阈值域进行比较之前，首先分离出SBD的贡献。</p>
+</li>
+</ol>
+<h2 id="主要结论">主要结论</h2>
+<p>研究得出以下主要结论：</p>
+<ol>
+<li>
+<p>通过车体加速度分析识别出两个敏感波长带（3-12米和70-200米）。使用5米和80米弦长能够有效覆盖这两个波段。</p>
+</li>
+<li>
+<p>基于乘坐舒适性和运行安全指标建立了CMD阈值。对于300米跨度桥梁、350公里/小时速度，横向不平顺的推荐限制为8毫米（80米弦长）和1.7毫米（5米弦长），垂直不平顺分别为9毫米和1.8毫米。</p>
+</li>
+<li>
+<p>静态桥梁变形显著影响与长弦相关的CMD阈值。当SBD幅度超过60毫米时，80米CMD限制应降低到7毫米；对于100毫米的SBD，限制应降低到4.5毫米。</p>
+</li>
+<li>
+<p>该方法通过分离SBD分量后再进行阈值评估，提高了在复杂桥梁变形条件下轨道几何评估的可靠性。</p>
+</li>
+</ol>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p><strong>多弦长综合测量方法</strong>：创新性地结合5米和80米弦长，有效覆盖3-200米的宽波长谱范围，解决了传统单弦长法无法同时捕捉短波长和长波长不平顺的问题。</p>
+</li>
+<li>
+<p><strong>柔性车体精细化建模</strong>：在列车-轨道-桥梁耦合模型中明确考虑车体柔性，能够准确预测10-40Hz频率范围内的垂直振动，显著提高了乘坐舒适性评估的准确性。</p>
+</li>
+<li>
+<p><strong>静态桥梁变形修正机制</strong>：提出创新的SBD分量分离方法，解决了超长波长（200-400米）桥梁变形对轨道不平顺评估的影响问题。</p>
+</li>
+<li>
+<p><strong>动态阈值确定方法</strong>：基于大量动力学仿真和统计分析，建立了考虑多弦长组合的CMD阈值域，相比传统固定阈值方法更加精确和全面。</p>
+</li>
+<li>
+<p><strong>工程实用性强</strong>：提出的方法直接针对高速铁路大跨度桥梁的工程实际问题，为轨道几何静态验收提供了实用的技术框架。</p>
+</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chord Measurement Method (CMM)</td>
+          <td>弦测法</td>
+      </tr>
+      <tr>
+          <td>Chord-Measured Deviation (CMD)</td>
+          <td>弦测偏差</td>
+      </tr>
+      <tr>
+          <td>Static Bridge Deformation (SBD)</td>
+          <td>静态桥梁变形</td>
+      </tr>
+      <tr>
+          <td>Ballastless track</td>
+          <td>无砟轨道</td>
+      </tr>
+      <tr>
+          <td>Long-span bridge</td>
+          <td>大跨度桥梁</td>
+      </tr>
+      <tr>
+          <td>Train-track-bridge interaction</td>
+          <td>列车-轨道-桥梁相互作用</td>
+      </tr>
+      <tr>
+          <td>Carbody flexibility</td>
+          <td>车体柔性</td>
+      </tr>
+      <tr>
+          <td>Ride comfort</td>
+          <td>乘坐舒适性</td>
+      </tr>
+      <tr>
+          <td>Running safety</td>
+          <td>运行安全</td>
+      </tr>
+      <tr>
+          <td>Wavelength band</td>
+          <td>波长带</td>
+      </tr>
+      <tr>
+          <td>Transfer function</td>
+          <td>传递函数</td>
+      </tr>
+      <tr>
+          <td>Cable-stayed bridge</td>
+          <td>斜拉桥</td>
+      </tr>
+      <tr>
+          <td>Modal superposition method (MSM)</td>
+          <td>模态叠加法</td>
+      </tr>
+      <tr>
+          <td>Sperling index</td>
+          <td>斯佩林指数</td>
+      </tr>
+      <tr>
+          <td>Wheel unloading rate</td>
+          <td>轮重减载率</td>
+      </tr>
+      <tr>
+          <td>Static acceptance</td>
+          <td>静态验收</td>
+      </tr>
+      <tr>
+          <td>Track geometry</td>
+          <td>轨道几何</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-04</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

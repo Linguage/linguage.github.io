@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-056 基本信息 论文编号：paper-056 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Dynamic Performance Analysis of Pantograph–Catenary Interaction in No. 42 Turnout Sections under Different Transition Directions 中文标题：不同过渡方向下42号道岔段受电弓-接触网相互作用的动力性能分析 作者及单位：Wenyan Qi, Shiyu Zhao, Zhong Huang, Jiangwen Wang, Guiming Mei (Southwest Jiaotong University, China) 摘要 本研究研究了电力列车通过42号道岔相关的接触网分支段时受电弓与接触网系统之间的动态相互作用，该道岔段是指为适应高速铁路道岔区域轨道分岔而特别配置的接触网结构。通过数值模拟评估了不同速度和过渡方向（特别是从主线到侧线和从侧线到主线的过渡）下受电弓头的接触力和垂直位移。结果表明，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果还表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。
+关键词 #受电弓-接触网相互作用 #道岔段 #接触网分支段 #接触力 #高速铁路 #动态模拟 #数值模拟 #前后受电弓 #过渡方向 #辅助线 #受流稳定性 #接触力标准偏差 #垂直位移 #冲击载荷 #速度影响
+背景与动机 随着全球高速铁路技术的快速发展，电气化铁路已成为现代铁路运输系统的重要组成部分。受电弓与接触网系统之间的稳定相互作用对于确保列车连续、高效和安全运行至关重要。受电弓通过滑动接触从接触网收集电能，其稳定性和受流质量直接影响列车的供电和运行平稳性。随着列车速度的提高，受电弓与接触网之间的动态相互作用变得越来越复杂，对受电弓-接触网系统的整体性能提出了更高要求。高质量的受电弓-接触网相互作用不仅保证列车安全运行，还能减少受电弓与接触网之间的磨损，从而延长电气化设备的使用寿命。因此，研究受电弓-接触网系统的动态特性具有重要的实际和工程价值。
+研究方法 本研究采用数值模拟方法研究42号道岔段受电弓-接触网系统的动态相互作用。建立了受电弓-接触网系统的数值模型，包括接触网结构、受电弓模型和道岔区域特有的接触网分支段配置。通过有限元方法和模态叠加方法建立接触网的数值模型，模拟受电弓在复杂运行条件下的动态响应。研究重点关注不同速度条件（从低速到高速）和不同过渡方向（主线到侧线、侧线到主线）下的系统性能。通过数值仿真评估受电弓头的接触力、垂直位移等关键参数，分析前后受电弓的性能差异以及辅助线对系统性能的影响。
+主要结论 研究发现，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。这些发现为高速铁路道岔区域受电弓-接触网系统的设计和优化提供了重要的理论依据。
+文章亮点或创新点 道岔段动态相互作用研究：首次系统研究了42号道岔段受电弓-接触网系统的动态相互作用特性，填补了该领域的研究空白 多方向过渡分析：深入分析了不同过渡方向（主线到侧线、侧线到主线）对系统性能的影响，揭示了方向依赖性特征 速度效应量化：建立了速度与接触力特性的定量关系，发现了120km/h为关键速度阈值的规律 前后受电弓对比：系统比较了前后受电弓在道岔段的性能差异，为多受电弓配置提供了理论依据 辅助线优化效果：验证了辅助线在改善过渡过程中的有效性，为工程实践提供了具体的技术方案 专业词汇列表 英文术语 中文翻译 Pantograph-catenary interaction 受电弓-接触网相互作用 Turnout section 道岔段 Catenary line branching section 接触网分支段 Contact force 接触力 High-speed railway 高速铁路 Dynamic simulation 动态模拟 Numerical simulation 数值模拟 Leading and trailing pantographs 前后受电弓 Transition directions 过渡方向 Auxiliary lines 辅助线 Current collection stability 受流稳定性 Contact force standard deviation 接触力标准偏差 Vertical displacement 垂直位移 Impact loads 冲击载荷 Speed effects 速度影响 Dynamic instability 动态不稳定性 Finite element method 有限元方法 Modal superposition 模态叠加 Non-monotonic behavior 非单调行为 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-056 基本信息 论文编号：paper-056 所属主题：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design 英文标题：Dynamic Performance Analysis of Pantograph–Catenary Interaction in No. 42 Turnout Sections under Different Transition Directions 中文标题：不同过渡方向下42号道岔段受电弓-接触网相互作用的动力性能分析 作者及单位：Wenyan Qi, Shiyu Zhao, Zhong Huang, Jiangwen Wang, Guiming Mei (Southwest Jiaotong University, China) 摘要 本研究研究了电力列车通过42号道岔相关的接触网分支段时受电弓与接触网系统之间的动态相互作用，该道岔段是指为适应高速铁路道岔区域轨道分岔而特别配置的接触网结构。通过数值模拟评估了不同速度和过渡方向（特别是从主线到侧线和从侧线到主线的过渡）下受电弓头的接触力和垂直位移。结果表明，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果还表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。
+关键词 #受电弓-接触网相互作用 #道岔段 #接触网分支段 #接触力 #高速铁路 #动态模拟 #数值模拟 #前后受电弓 #过渡方向 #辅助线 #受流稳定性 #接触力标准偏差 #垂直位移 #冲击载荷 #速度影响
+背景与动机 随着全球高速铁路技术的快速发展，电气化铁路已成为现代铁路运输系统的重要组成部分。受电弓与接触网系统之间的稳定相互作用对于确保列车连续、高效和安全运行至关重要。受电弓通过滑动接触从接触网收集电能，其稳定性和受流质量直接影响列车的供电和运行平稳性。随着列车速度的提高，受电弓与接触网之间的动态相互作用变得越来越复杂，对受电弓-接触网系统的整体性能提出了更高要求。高质量的受电弓-接触网相互作用不仅保证列车安全运行，还能减少受电弓与接触网之间的磨损，从而延长电气化设备的使用寿命。因此，研究受电弓-接触网系统的动态特性具有重要的实际和工程价值。
+研究方法 本研究采用数值模拟方法研究42号道岔段受电弓-接触网系统的动态相互作用。建立了受电弓-接触网系统的数值模型，包括接触网结构、受电弓模型和道岔区域特有的接触网分支段配置。通过有限元方法和模态叠加方法建立接触网的数值模型，模拟受电弓在复杂运行条件下的动态响应。研究重点关注不同速度条件（从低速到高速）和不同过渡方向（主线到侧线、侧线到主线）下的系统性能。通过数值仿真评估受电弓头的接触力、垂直位移等关键参数，分析前后受电弓的性能差异以及辅助线对系统性能的影响。
+主要结论 研究发现，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。这些发现为高速铁路道岔区域受电弓-接触网系统的设计和优化提供了重要的理论依据。
+文章亮点或创新点 道岔段动态相互作用研究：首次系统研究了42号道岔段受电弓-接触网系统的动态相互作用特性，填补了该领域的研究空白 多方向过渡分析：深入分析了不同过渡方向（主线到侧线、侧线到主线）对系统性能的影响，揭示了方向依赖性特征 速度效应量化：建立了速度与接触力特性的定量关系，发现了120km/h为关键速度阈值的规律 前后受电弓对比：系统比较了前后受电弓在道岔段的性能差异，为多受电弓配置提供了理论依据 辅助线优化效果：验证了辅助线在改善过渡过程中的有效性，为工程实践提供了具体的技术方案 专业词汇列表 英文术语 中文翻译 Pantograph-catenary interaction 受电弓-接触网相互作用 Turnout section 道岔段 Catenary line branching section 接触网分支段 Contact force 接触力 High-speed railway 高速铁路 Dynamic simulation 动态模拟 Numerical simulation 数值模拟 Leading and trailing pantographs 前后受电弓 Transition directions 过渡方向 Auxiliary lines 辅助线 Current collection stability 受流稳定性 Contact force standard deviation 接触力标准偏差 Vertical displacement 垂直位移 Impact loads 冲击载荷 Speed effects 速度影响 Dynamic instability 动态不稳定性 Finite element method 有限元方法 Modal superposition 模态叠加 Non-monotonic behavior 非单调行为 整理日期：2025-09-03 *整理者：Claude AI prompted by HZL
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/" class="crumb-sec">Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-010-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-013-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-019-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-021-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-056-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-058-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-107-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-112-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-151-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-160-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-165-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-166-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-169-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-172-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-196-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-228-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-257-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-300-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-324-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-327-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-330-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-340-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-348-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-349-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-05---aerodynamics-pantograph-catenary-systems-and-vehicle-design/paper-360-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览paper-056">IAVSD 2025 论文概览：paper-056</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：paper-056</li>
+<li><strong>所属主题</strong>：Rail Topic 05 - Aerodynamics, Pantograph-Catenary Systems, and Vehicle Design</li>
+<li><strong>英文标题</strong>：Dynamic Performance Analysis of Pantograph–Catenary Interaction in No. 42 Turnout Sections under Different Transition Directions</li>
+<li><strong>中文标题</strong>：不同过渡方向下42号道岔段受电弓-接触网相互作用的动力性能分析</li>
+<li><strong>作者及单位</strong>：Wenyan Qi, Shiyu Zhao, Zhong Huang, Jiangwen Wang, Guiming Mei (Southwest Jiaotong University, China)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>本研究研究了电力列车通过42号道岔相关的接触网分支段时受电弓与接触网系统之间的动态相互作用，该道岔段是指为适应高速铁路道岔区域轨道分岔而特别配置的接触网结构。通过数值模拟评估了不同速度和过渡方向（特别是从主线到侧线和从侧线到主线的过渡）下受电弓头的接触力和垂直位移。结果表明，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果还表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。</p>
+<h2 id="关键词">关键词</h2>
+<p>#受电弓-接触网相互作用 #道岔段 #接触网分支段 #接触力 #高速铁路 #动态模拟 #数值模拟 #前后受电弓 #过渡方向 #辅助线 #受流稳定性 #接触力标准偏差 #垂直位移 #冲击载荷 #速度影响</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>随着全球高速铁路技术的快速发展，电气化铁路已成为现代铁路运输系统的重要组成部分。受电弓与接触网系统之间的稳定相互作用对于确保列车连续、高效和安全运行至关重要。受电弓通过滑动接触从接触网收集电能，其稳定性和受流质量直接影响列车的供电和运行平稳性。随着列车速度的提高，受电弓与接触网之间的动态相互作用变得越来越复杂，对受电弓-接触网系统的整体性能提出了更高要求。高质量的受电弓-接触网相互作用不仅保证列车安全运行，还能减少受电弓与接触网之间的磨损，从而延长电气化设备的使用寿命。因此，研究受电弓-接触网系统的动态特性具有重要的实际和工程价值。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究采用数值模拟方法研究42号道岔段受电弓-接触网系统的动态相互作用。建立了受电弓-接触网系统的数值模型，包括接触网结构、受电弓模型和道岔区域特有的接触网分支段配置。通过有限元方法和模态叠加方法建立接触网的数值模型，模拟受电弓在复杂运行条件下的动态响应。研究重点关注不同速度条件（从低速到高速）和不同过渡方向（主线到侧线、侧线到主线）下的系统性能。通过数值仿真评估受电弓头的接触力、垂直位移等关键参数，分析前后受电弓的性能差异以及辅助线对系统性能的影响。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>研究发现，在120km/h以下速度时，接触力保持稳定，前后受电弓之间以及不同过渡方向之间的差异最小。然而，当速度超过120km/h时，从侧线到主线过渡时的接触力标准偏差明显更高，表明动态不稳定性更大。最大接触力随速度呈现明显上升趋势，而最小接触力表现出非单调行为——先降低后增加——突显了复杂的动态相互作用。研究结果表明，辅助线的使用有效平滑了过渡过程，减轻了冲击载荷，提高了受流稳定性，从而支持了高速列车通过道岔区域的安全可靠运行。这些发现为高速铁路道岔区域受电弓-接触网系统的设计和优化提供了重要的理论依据。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>道岔段动态相互作用研究</strong>：首次系统研究了42号道岔段受电弓-接触网系统的动态相互作用特性，填补了该领域的研究空白</li>
+<li><strong>多方向过渡分析</strong>：深入分析了不同过渡方向（主线到侧线、侧线到主线）对系统性能的影响，揭示了方向依赖性特征</li>
+<li><strong>速度效应量化</strong>：建立了速度与接触力特性的定量关系，发现了120km/h为关键速度阈值的规律</li>
+<li><strong>前后受电弓对比</strong>：系统比较了前后受电弓在道岔段的性能差异，为多受电弓配置提供了理论依据</li>
+<li><strong>辅助线优化效果</strong>：验证了辅助线在改善过渡过程中的有效性，为工程实践提供了具体的技术方案</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pantograph-catenary interaction</td>
+          <td>受电弓-接触网相互作用</td>
+      </tr>
+      <tr>
+          <td>Turnout section</td>
+          <td>道岔段</td>
+      </tr>
+      <tr>
+          <td>Catenary line branching section</td>
+          <td>接触网分支段</td>
+      </tr>
+      <tr>
+          <td>Contact force</td>
+          <td>接触力</td>
+      </tr>
+      <tr>
+          <td>High-speed railway</td>
+          <td>高速铁路</td>
+      </tr>
+      <tr>
+          <td>Dynamic simulation</td>
+          <td>动态模拟</td>
+      </tr>
+      <tr>
+          <td>Numerical simulation</td>
+          <td>数值模拟</td>
+      </tr>
+      <tr>
+          <td>Leading and trailing pantographs</td>
+          <td>前后受电弓</td>
+      </tr>
+      <tr>
+          <td>Transition directions</td>
+          <td>过渡方向</td>
+      </tr>
+      <tr>
+          <td>Auxiliary lines</td>
+          <td>辅助线</td>
+      </tr>
+      <tr>
+          <td>Current collection stability</td>
+          <td>受流稳定性</td>
+      </tr>
+      <tr>
+          <td>Contact force standard deviation</td>
+          <td>接触力标准偏差</td>
+      </tr>
+      <tr>
+          <td>Vertical displacement</td>
+          <td>垂直位移</td>
+      </tr>
+      <tr>
+          <td>Impact loads</td>
+          <td>冲击载荷</td>
+      </tr>
+      <tr>
+          <td>Speed effects</td>
+          <td>速度影响</td>
+      </tr>
+      <tr>
+          <td>Dynamic instability</td>
+          <td>动态不稳定性</td>
+      </tr>
+      <tr>
+          <td>Finite element method</td>
+          <td>有限元方法</td>
+      </tr>
+      <tr>
+          <td>Modal superposition</td>
+          <td>模态叠加</td>
+      </tr>
+      <tr>
+          <td>Non-monotonic behavior</td>
+          <td>非单调行为</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

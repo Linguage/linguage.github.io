@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件的三次浪潮：交互式分析</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="软件的三次浪潮：交互式分析">
+<meta property="og:url" content="https://linguage.github.io/articles/software-3-period-review.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="软件的三次浪潮：交互式分析">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/software-3-period-review.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Subtle Accents -->
+    <!-- Application Structure Plan: A thematic, non-linear dashboard. It starts with a hero section, followed by a core interactive three-column comparison of the software eras. A subsequent visual timeline explains the driving forces of change. A dynamic radar chart provides a quantitative comparison. The application then presents a balanced view of the future through a 'Vision vs. Reality' toggle. This structure is chosen to promote active exploration and comparison over passive reading, making the complex concepts more digestible and engaging. -->
+    <!-- Visualization & Content Choices: 
+        - Eras Comparison: Goal: Compare. Method: Three interactive cards updated by filter buttons (HTML/JS). Justification: Allows direct, user-driven comparison of specific attributes, which is more engaging than a static table.
+        - Driving Forces: Goal: Show Change. Method: Horizontal process flow diagram (HTML/CSS/Tailwind). Interaction: Hover effects on key drivers. Justification: Visually represents the causal chain and historical progression more effectively than text alone.
+        - Paradigm Attributes: Goal: Compare. Method: Radar Chart (Chart.js). Interaction: Toggling datasets. Justification: Provides a high-level, multi-dimensional visual summary of the paradigms' characteristics.
+        - Future Outlook: Goal: Organize & Contrast. Method: Toggleable content panes (JS). Justification: Presents the optimistic vision and critical challenges as two sides of the same coin, encouraging balanced consideration.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FDFBF8;
+            color: #38332E;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #C77D4A;
+            border-bottom-color: #C77D4A;
+        }
+        .era-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top-width: 4px;
+        }
+        .era-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+        .facet-button {
+            transition: all 0.3s ease;
+        }
+        .facet-button.active {
+            background-color: #C77D4A;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .driver-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .driver-node:hover {
+            transform: scale(1.05);
+            background-color: #EFEAE6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .future-toggle.active {
+            background-color: #38332E;
+            color: #FDFBF8;
+        }
+        .content-fade-enter {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .content-fade-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
+        }
+        code {
+            background-color: #EFEAE6;
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-slate-800">软件范式演进</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#hero" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">首页</a>
+                        <a href="#comparison" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">范式比较</a>
+                        <a href="#drivers" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">演进动力</a>
+                        <a href="#visualization" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">特征雷达</a>
+                        <a href="#future" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-slate-600">未来图景</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900">软件的三次浪潮</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
+                    探索软件开发从<span class="text-sky-600 font-semibold">确定性指令 (1.0)</span>，到<span class="text-teal-600 font-semibold">数据驱动优化 (2.0)</span>，再到<span class="text-amber-600 font-semibold">生成式语言交互 (3.0)</span>的深刻变革。
+                </p>
+                <div class="mt-8">
+                    <a href="#comparison" class="inline-block bg-[#C77D4A] text-white font-bold py-3 px-8 rounded-full hover:bg-[#B36B3B] transition-colors">开始探索</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">范式核心对比</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-500">
+                        点击下方按钮，从不同维度深入比较三个软件时代的本质差异。这种并列展示旨在揭示每个范式的核心权衡与设计哲学。
+                    </p>
+                </div>
+
+                <div id="facet-controls" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div id="era-1" class="era-card bg-white rounded-lg shadow-md p-6 border-sky-500"></div>
+                    <div id="era-2" class="era-card bg-white rounded-lg shadow-md p-6 border-teal-500"></div>
+                    <div id="era-3" class="era-card bg-white rounded-lg shadow-md p-6 border-amber-500"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="drivers" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">演进的引擎</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-500">
+                        软件范式的转移并非偶然，而是由一系列技术、数据和经济因素共同驱动的。这个流程图展示了催生新时代的关键“催化剂”。将鼠标悬停在每个节点上以了解其详细作用。
+                    </p>
+                </div>
+                
+                <div class="relative w-full overflow-x-auto pb-4">
+                    <div class="flex items-center justify-center min-w-[1000px]">
+                        <div class="driver-node text-center p-4 rounded-lg bg-slate-100 border-2 border-slate-200 w-48" data-driver="sw1">
+                            <h4 class="font-bold text-sky-700">软件 1.0</h4>
+                            <p class="text-sm text-slate-600">显式指令</p>
+                        </div>
+                        
+                        <div class="flex-grow h-1 bg-slate-300 relative mx-4">
+                           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-center">
+                                <div class="driver-node p-2 rounded-md border" data-driver="gpu">
+                                    <h5 class="font-semibold">GPU革命</h5>
+                                </div>
+                                <div class="driver-node p-2 mt-2 rounded-md border" data-driver="imagenet">
+                                    <h5 class="font-semibold">ImageNet效应</h5>
+                                </div>
+                                 <div class="driver-node p-2 mt-2 rounded-md border" data-driver="labeling">
+                                    <h5 class="font-semibold">数据标注产业</h5>
+                                </div>
+                           </div>
+                        </div>
+
+                        <div class="driver-node text-center p-4 rounded-lg bg-slate-100 border-2 border-slate-200 w-48" data-driver="sw2">
+                            <h4 class="font-bold text-teal-700">软件 2.0</h4>
+                            <p class="text-sm text-slate-600">数据驱动</p>
+                        </div>
+
+                        <div class="flex-grow h-1 bg-slate-300 relative mx-4">
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-center">
+                                 <div class="driver-node p-2 rounded-md border" data-driver="transformer">
+                                     <h5 class="font-semibold">Transformer架构</h5>
+                                 </div>
+                                 <div class="driver-node p-2 mt-2 rounded-md border" data-driver="selfsupervision">
+                                     <h5 class="font-semibold">自监督学习</h5>
+                                 </div>
+                                  <div class="driver-node p-2 mt-2 rounded-md border" data-driver="api">
+                                     <h5 class="font-semibold">API经济</h5>
+                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="driver-node text-center p-4 rounded-lg bg-slate-100 border-2 border-slate-200 w-48" data-driver="sw3">
+                            <h4 class="font-bold text-amber-700">软件 3.0</h4>
+                            <p class="text-sm text-slate-600">语言生成</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="driver-details" class="mt-12 min-h-[100px] bg-slate-50 p-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center">
+                    <p class="text-slate-500">将鼠标悬停在上面的驱动因素节点上，查看详细说明。</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="visualization" class="py-16 md:py-24">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">范式特征雷达图</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-500">
+                        这张雷达图从六个关键维度——确定性、适应性、开发速度、调试难度、创造门槛和运行成本——对三个软件范式进行了量化评估。它直观地展示了每个范式所做出的权衡。
+                    </p>
+                </div>
+                 <div class="chart-container">
+                    <canvas id="paradigmRadarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">未来图景：愿景与现实</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-slate-500">
+                        软件3.0的未来激动人心，但也充满了争议。我们在此并列呈现Karpathy的乐观展望与技术社区的审慎批评，为您提供一个平衡的视角来思考这场变革。
+                    </p>
+                </div>
+                
+                <div class="flex justify-center mb-8">
+                    <div class="inline-flex rounded-md shadow-sm" role="group">
+                        <button type="button" id="toggle-vision" class="future-toggle active px-6 py-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700">
+                            🚀 宏大愿景
+                        </button>
+                        <button type="button" id="toggle-reality" class="future-toggle px-6 py-3 text-sm font-medium text-gray-900 bg-white border-t border-b border-r border-gray-200 rounded-r-md hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700">
+                            🧐 现实挑战
+                        </button>
+                    </div>
+                </div>
+
+                <div id="vision-content" class="max-w-4xl mx-auto"></div>
+                <div id="reality-content" class="max-w-4xl mx-auto hidden"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>基于 Andrej Karpathy 的软件演进框架创建的交互式分析报告。</p>
+            <p class="text-sm mt-2">此应用仅为概念演示，所有内容均提炼自源报告。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const appData = {
+                facets: {
+                    coreUnit: {
+                        name: "核心单元",
+                        era1: { title: "显式指令", content: "由人类开发者使用C++、Python等形式化语言编写的确定性代码。每一行都精确定义了程序的行为。" },
+                        era2: { title: "神经网络权重", content: "由优化算法（如梯度下降）在海量数据上训练得到的数百万乃至数十亿个浮点数。对人类不可读、不可直接编写。" },
+                        era3: { title: "自然语言提示词", content: "开发者通过设计结构良好、意图明确的自然语言查询，来引导大型语言模型（LLM）生成期望的输出。" },
+                    },
+                    devProcess: {
+                        name: "开发过程",
+                        era1: { title: "算法设计", content: "将业务需求分解为计算机可执行的算法、数据结构和控制流，进行手工编码、调试和维护。" },
+                        era2: { title: "数据工程与训练", content: "核心工作围绕数据展开：策划、收集、清洗、标注高质量数据集，然后设计模型架构并进行训练、验证。" },
+                        era3: { title: "提示词工程与验证", content: "设计、测试和迭代提示词，编排多个模型或API，并对AI生成的输出进行严格的批判性验证和修正。" },
+                    },
+                    humanSkills: {
+                        name: "核心技能",
+                        era1: { title: "逻辑与语法", content: "精通形式化编程语言、算法设计、数据结构、系统架构和严谨的逻辑思维。" },
+                        era2: { title: "数据科学与基建", content: "具备强大的数据直觉、数据管理能力、统计学知识以及构建和维护数据处理和模型训练流水线的能力。" },
+                        era3: { title: "提示词设计与批判思维", content: "擅长自然语言表达、系统性思考、领域知识以及对AI输出进行快速、准确的真伪和质量判断。" },
+                    },
+                    logic: {
+                        name: "逻辑性质",
+                        era1: { title: "确定性", content: "给定相同输入，总能产生完全相同的输出。行为可预测，逻辑路径明确，易于传统方式的调试。" },
+                        era2: { title: "概率性 (学习)", content: "从数据中学习输入与输出之间的概率关系。行为是统计性的，而非绝对的，存在不确定性。" },
+                        era3: { title: "概率性 (生成)", content: "基于从数据中学到的概率分布来生成全新的、从未见过的内容。行为具有涌现性和创造性，但同样不可靠。" },
+                    },
+                    strengths: {
+                        name: "主要优势",
+                        era1: { title: "精确可控", content: "高度可靠、可验证、可调试。适用于对精确性要求极高的任务关键型系统，如金融、航空。" },
+                        era2: { title: "模式识别", content: "能从复杂、高维度的数据（如图像、语音）中自动学习和识别模式，适应性强，无需人工设计复杂规则。" },
+                        era3: { title: "快速原型与易用性", content: "极大地降低了创造门槛，能快速处理模糊需求，知识广博，是强大的思想催化剂和生产力工具。" },
+                    },
+                    weaknesses: {
+                        name: "核心局限",
+                        era1: { title: "脆弱且昂贵", content: "面对真实世界的模糊性和复杂性时表现脆弱，开发周期长，人力成本高。" },
+                        era2: { title: "黑箱与数据依赖", content: "可解释性差，调试困难，存在静默失败和对抗性攻击风险，且极度依赖昂贵、高质量的标注数据。" },
+                        era3: { title: "幻觉与不可靠", content: "会捏造信息（幻觉），行为不可预测，缺乏长期记忆，存在提示词注入等安全漏洞，推理成本高。" },
+                    }
+                },
+                drivers: {
+                    sw1: '我们最熟悉的软件形态，由人类开发者编写确定性的代码，构成了当今数字世界的基础设施。',
+                    gpu: 'GPU的大规模并行计算架构，将深度学习训练时间从数年缩短至数天，使训练复杂模型成为工程上的可能。',
+                    imagenet: 'ImageNet提供了前所未有的海量、高质量标注数据，成为AI模型的“燃料”，并通过竞赛催化了技术飞速发展。',
+                    labeling: '为满足AI对数据的巨大需求，催生了价值数十亿美元的全球数据标注产业，但也形成了巨大的成本瓶颈。',
+                    sw2: '软件不再由人编写，而是由优化过程在数据集上“编写”而成，核心是学习数据中的模式。',
+                    transformer: '其自注意力机制和并行计算特性，使得模型规模扩展到千亿参数级别成为可能，是LLM的基石。',
+                    selfsupervision: '通过“预测下一个词”等任务，模型能从海量无标签数据中学习，巧妙绕开了2.0时代昂贵的数据标注瓶颈。',
+                    api: '将训练好的大模型作为一种按用量计费的中心化服务，极大地降低了开发者使用先进AI的门槛，创造了新经济模式。',
+                    sw3: '通过自然语言提示词与LLM交互来编程，将人机沟通拉回到了人类最本源的表达方式——语言。',
+                },
+                future: {
+                    vision: `
+                        <div class="space-y-6 text-left">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🦾 “钢铁侠战衣”哲学</h4>
+                                <p class="text-slate-600">AI应作为增强人类能力的强大辅助工具，而非替代品。开发“部分自治应用”，提供“自治滑块”，让用户在人机协作中动态调整AI的介入程度，保持人类的最终决策权。</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🧑‍🎨 开发者：从编码者到指挥家</h4>
+                                <p class="text-slate-600">未来的开发者需精通三种范式，并具备更高层次的技能：提示词工程、系统编排（组合多个AI与传统服务）和对AI输出的批判性验证。角色从代码的创作者转变为智能系统的指挥家。</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🤖 为机器人而建的基础设施</h4>
+                                <p class="text-slate-600">现有数字基础设施需变得“AI可读”。文档应转向Markdown等机器友好格式，服务应采用API优先设计，甚至出现如<code>llm.txt</code>这样专为AI智能体设计的新通信协议。</p>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">⏳ 智能体的十年</h4>
+                                <p class="text-slate-600">构建可靠、安全的AI智能体将是一个漫长、持续迭代的旅程，如同自动驾驶的研发。我们正进入“智能体的十年”，而非“智能体的元年”，需要战略耐心。</p>
+                            </div>
+                        </div>
+                    `,
+                    reality: `
+                        <div class="space-y-6 text-left">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🔧 只是一个新工具，而非替代品</h4>
+                                <p class="text-slate-600">在大量现实场景（如嵌入式系统、关键安全应用）中，软件1.0的确定性仍然不可或缺。新范式更像是工具箱中的新增工具，而非对旧范式的全面替代。</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🚨 可靠性与可调试性危机</h4>
+                                <p class="text-slate-600">LLM倾向于产生“看似合理但实际错误”的输出，且其非确定性使得调试极为困难。审查AI生成的、充满微妙漏洞的代码，可能比自己从头编写更耗费心智。</p>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">📉 人文与社会风险</h4>
+                                <p class="text-slate-600">过度依赖AI可能导致开发者“技能退化”。同时，尽管界面看似民主化，但底层技术的高度中心化加剧了权力集中，并引发了数据偏见、版权侵犯等严重的伦理与法律问题。</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-slate-800">🎭 生产力悖论</h4>
+                                <p class="text-slate-600">表面上AI提升了编码速度，但资深工程师需花费大量精力审查和调试AI生成的平庸甚至错误的代码，角色从创造者异化为“质检员”，可能对净生产力造成负面影响。</p>
+                            </div>
+                        </div>
+                    `
+                },
+                radarChartData: {
+                  labels: ['确定性', '适应性', '开发速度', '调试难度', '创造门槛', '运行成本'],
+                  datasets: [
+                    {
+                      label: '软件 1.0',
+                      data: [10, 2, 4, 3, 4, 3],
+                      backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                      borderColor: 'rgba(59, 130, 246, 1)',
+                      pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                    },
+                    {
+                      label: '软件 2.0',
+                      data: [5, 9, 3, 8, 7, 8],
+                      backgroundColor: 'rgba(13, 148, 136, 0.2)',
+                      borderColor: 'rgba(13, 148, 136, 1)',
+                       pointBackgroundColor: 'rgba(13, 148, 136, 1)',
+                    },
+                    {
+                      label: '软件 3.0',
+                      data: [2, 7, 9, 10, 2, 10],
+                      backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                      borderColor: 'rgba(217, 119, 6, 1)',
+                      pointBackgroundColor: 'rgba(217, 119, 6, 1)',
+                    }
+                  ]
+                }
+            };
+
+            const facetControlsContainer = document.getElementById('facet-controls');
+            const era1Container = document.getElementById('era-1');
+            const era2Container = document.getElementById('era-2');
+            const era3Container = document.getElementById('era-3');
+
+            let activeFacet = 'coreUnit';
+
+            function renderComparison() {
+                const facetData = appData.facets[activeFacet];
+
+                era1Container.innerHTML = `
+                    <h4 class="text-xl font-bold mb-2 text-sky-600">软件 1.0</h4>
+                    <h5 class="text-lg font-semibold mb-3 text-slate-800">${facetData.era1.title}</h5>
+                    <p class="text-slate-600">${facetData.era1.content}</p>`;
+                era2Container.innerHTML = `
+                    <h4 class="text-xl font-bold mb-2 text-teal-600">软件 2.0</h4>
+                    <h5 class="text-lg font-semibold mb-3 text-slate-800">${facetData.era2.title}</h5>
+                    <p class="text-slate-600">${facetData.era2.content}</p>`;
+                era3Container.innerHTML = `
+                    <h4 class="text-xl font-bold mb-2 text-amber-600">软件 3.0</h4>
+                    <h5 class="text-lg font-semibold mb-3 text-slate-800">${facetData.era3.title}</h5>
+                    <p class="text-slate-600">${facetData.era3.content}</p>`;
+                
+                document.querySelectorAll('.facet-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.facet === activeFacet) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            Object.keys(appData.facets).forEach(key => {
+                const facet = appData.facets[key];
+                const button = document.createElement('button');
+                button.className = 'facet-button bg-white text-slate-700 font-medium py-2 px-4 rounded-full shadow-sm border border-slate-200 hover:bg-slate-50';
+                button.textContent = facet.name;
+                button.dataset.facet = key;
+                button.addEventListener('click', () => {
+                    activeFacet = key;
+                    renderComparison();
+                });
+                facetControlsContainer.appendChild(button);
+            });
+
+            renderComparison();
+            
+            const driverDetails = document.getElementById('driver-details');
+            document.querySelectorAll('.driver-node').forEach(node => {
+                node.addEventListener('mouseenter', () => {
+                    const driverKey = node.dataset.driver;
+                    driverDetails.innerHTML = `<p class="text-slate-700">${appData.drivers[driverKey]}</p>`;
+                });
+                 node.addEventListener('mouseleave', () => {
+                    driverDetails.innerHTML = `<p class="text-slate-500">将鼠标悬停在上面的驱动因素节点上，查看详细说明。</p>`;
+                });
+            });
+
+            const radarCtx = document.getElementById('paradigmRadarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: appData.radarChartData,
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: { 
+                                font: { size: 14, family: "'Noto Sans SC', sans-serif" },
+                                color: '#38332E'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                stepSize: 2,
+                                font: { size: 10 }
+                            },
+                            min: 0,
+                            max: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    family: "'Noto Sans SC', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const visionBtn = document.getElementById('toggle-vision');
+            const realityBtn = document.getElementById('toggle-reality');
+            const visionContent = document.getElementById('vision-content');
+            const realityContent = document.getElementById('reality-content');
+
+            visionContent.innerHTML = appData.future.vision;
+            realityContent.innerHTML = appData.future.reality;
+
+            function animateContent(element) {
+                element.classList.add('content-fade-enter');
+                requestAnimationFrame(() => {
+                    element.classList.add('content-fade-enter-active');
+                });
+                element.addEventListener('transitionend', () => {
+                     element.classList.remove('content-fade-enter', 'content-fade-enter-active');
+                }, { once: true });
+            }
+
+            visionBtn.addEventListener('click', () => {
+                visionBtn.classList.add('active');
+                realityBtn.classList.remove('active');
+                visionContent.classList.remove('hidden');
+                realityContent.classList.add('hidden');
+                animateContent(visionContent);
+            });
+
+            realityBtn.addEventListener('click', () => {
+                realityBtn.classList.add('active');
+                visionBtn.classList.remove('active');
+                realityContent.classList.remove('hidden');
+                visionContent.classList.add('hidden');
+                animateContent(realityContent);
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const navLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (navLink) {
+                            navLinks.forEach(link => link.classList.remove('active'));
+                            navLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+        });
+    </script>
+
+</body>
+</html>

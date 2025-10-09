@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring"><meta property="og:description" content="IAVSD2025 Rail Topic 04论文集合，包含20篇轨道系统优化、维护与监测相关研究论文"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring"><meta name="twitter:description" content="IAVSD2025 Rail Topic 04论文集合，包含20篇轨道系统优化、维护与监测相关研究论文"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  <nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+    <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+    
+    
+      
+        
+        
+          
+          <a href="/" class="crumb-anc">Linguista</a>
+        
+          <span class="crumb-sep">/</span>
+          <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+        
+        <span class="crumb-sep">/</span>
+      
+      <a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/" class="crumb-sec">Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring</a>
+    
+    
+  </nav>
+
+  
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar" aria-label="Sections">
+      
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      
+    </aside>
+
+    
+    <article class="docs-content">
+      <div class="prose">
+        
+        
+        
+        
+        <div><h1 id="rail-topic-04-论文汇总">Rail Topic 04 论文汇总</h1>
+<p><strong>生成时间</strong>: Wed Sep  3 12:39:18 CST 2025</p>
+<h2 id="-统计概览">📊 统计概览</h2>
+<ul>
+<li><strong>论文总数</strong>: 20 篇</li>
+<li><strong>原文缺失</strong>: 4 篇</li>
+</ul>
+<h2 id="-论文清单">📋 论文清单</h2>
+<table>
+  <thead>
+      <tr>
+          <th>编号</th>
+          <th>英文标题</th>
+          <th>中文标题</th>
+          <th>作者及单位</th>
+          <th>Overview文档</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>22</td>
+          <td>A Novel Method for Determining Track Irregularity Thresholds on Long-Span High-Speed Railway Bridges</td>
+          <td>一种确定大跨度高速铁路桥梁轨道不平顺阈值的新方法</td>
+          <td>Ruoyu Li, Shengyang Zhu, Wanming Zhai, Southwest J&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/">paper-022-overview</a></td>
+      </tr>
+      <tr>
+          <td>24</td>
+          <td>Trajectory Optimization of 30,000-Ton Large-Scale Heavy-Haul Trainsets with Train-to-Train Communication</td>
+          <td>3万吨大型重载列车列车间通信下的轨迹优化</td>
+          <td>Xiangping Wang, Shengyang Zhu, and Wanming Zhai, S&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>33</td>
+          <td>Prediction and Optimization of Wheel Asymmetrical Wear Under Traction/Braking Conditions</td>
+          <td>牵引/制动工况下车轮不对称磨损预测与优化</td>
+          <td>Yiyang Song, Jinsong Zhou, Zhanfei Zhang, Zegen Wa&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/">paper-033-overview</a></td>
+      </tr>
+      <tr>
+          <td>47</td>
+          <td>Identification of the Lateral Track Irregularities from the Behavior of the Train&rsquo;s Axles on a Surrogate Railway Dynamics Model</td>
+          <td>基于替代铁路动力学模型从列车轴行为识别横向轨道不平顺</td>
+          <td>Malek Chihaoui, Denis Duhamel, Laboratoire Navier,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/">paper-047-overview</a></td>
+      </tr>
+      <tr>
+          <td>69</td>
+          <td>Investigation of Ballast Degradation and Fouling Based on In-Situ Sampling</td>
+          <td>基于现场取样的道砟劣化与污染研究</td>
+          <td>Wenli Jia, Fei Yang, Weile Qiang, Jinzhao Liu, Chi&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>139</td>
+          <td>Explicit Speed-integrated LSTM Network for Non-Stationary Bogie Vibration Representation and Beam Joint Detection Under Varying Speed Conditions</td>
+          <td>变速度工况下非平稳转向架振动表示和梁接头检测的显式速度积分LSTM网络</td>
+          <td>Xiaoguang Ma, Yuanjin Ji, Lihui Ren, Yuejian Chen,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/">paper-139-overview</a></td>
+      </tr>
+      <tr>
+          <td>143</td>
+          <td>Yolov8-pose for Wheel-Rail Lateral Displacement Detection of the Small Radius Curve</td>
+          <td>Yolov8-pose在小半径曲线轮轨横向位移检测中的应用</td>
+          <td>Zhiang Sun, Xinwen Yang, Tongji University, China</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/">paper-143-overview</a></td>
+      </tr>
+      <tr>
+          <td>155</td>
+          <td>Augmented State Functionals: A Proposal to Improve the Accuracy of Neural Networks by Incorporating Physical Knowledge in Data Models</td>
+          <td>增广状态泛函：一种通过在数据模型中融入物理知识提高神经网络精度的建议</td>
+          <td>Ane Oyarzabal, Nere Gil-Negrete, University of Nav&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/">paper-155-overview</a></td>
+      </tr>
+      <tr>
+          <td>197</td>
+          <td>Wheel-flat Identification Study by Means of Experimental Tests in a Railway Closed Circuit</td>
+          <td>铁路封闭回路实验测试的轮扁识别研究</td>
+          <td>Arianna Cavallo, Enkeled Hoxha, Gisella Tomasini, &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/">paper-197-overview</a></td>
+      </tr>
+      <tr>
+          <td>215</td>
+          <td>Direct and Indirect Calculation of the Track Decay Rate Based on the Analytical Method</td>
+          <td>基于解析方法的轨道衰减率直接与间接计算</td>
+          <td>Qiuyong Tian, Yifan Yang, Markus Hecht, Institute &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/">paper-215-overview</a></td>
+      </tr>
+      <tr>
+          <td>217</td>
+          <td>A Neural Network Approach to the Modelization of Railway Couplers</td>
+          <td>铁路车钩建模的神经网络方法</td>
+          <td>Laurens Lanzillo, Francesco Mazzeo, Stefano Melzi,&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/">paper-217-overview</a></td>
+      </tr>
+      <tr>
+          <td>223</td>
+          <td>A Fault Diagnosis Method for Axlebox Bearings of High-Speed Trains Based on Multi-Source Vibration Signal Fusion and Transfer Learning</td>
+          <td>基于多源振动信号融合和迁移学习的高速列车轴箱轴承故障诊断方法</td>
+          <td>Xiao Xu, Dongli Song, Zejun Zheng, Zifan Wang, Sou&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/">paper-223-overview</a></td>
+      </tr>
+      <tr>
+          <td>232</td>
+          <td>Physics-guided Reinforcement Learning for Straddle Monorail Active Suspension with Image-based Beam Joint Detection</td>
+          <td>图像识别梁接头检测的物理引导强化学习用于跨座式单轨主动悬挂</td>
+          <td>Yuanjin Ji, Jian Li, Kaiying Zhang, Jiakang Li, Li&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/">paper-232-overview</a></td>
+      </tr>
+      <tr>
+          <td>249</td>
+          <td>Quantitative Detection of OOR Roughness Level of High-Speed Train Wheels Using On-Site Measured Datasets of Axle Box Acceleration</td>
+          <td>利用现场测量的轴箱加速度数据集定量检测高速列车车轮OOR粗糙度水平</td>
+          <td>Gongquan Tao, Tao Huang, Qinglin Xie, Wentian Xu, &hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/">paper-249-overview</a></td>
+      </tr>
+      <tr>
+          <td>272</td>
+          <td>Torque-Modulation-Based Method for Rapid Identification of Rail Sections with Low Friction Levels</td>
+          <td>基于扭矩调制方法的低摩擦水平钢轨段快速识别</td>
+          <td>Gokul J. Krishnan, Zhen Yang, Zili Li, Rolf Dollev&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/">paper-272-overview</a></td>
+      </tr>
+      <tr>
+          <td>284</td>
+          <td>Optimization Strategy for Rail Grinding to Improve Dynamic Performance of HighSpeed Trains Passing through Turnouts</td>
+          <td>钢轨打磨优化策略以提高高速列车通过道岔的动力性能</td>
+          <td>Chao Chang, East China Jiaotong University, Nancha&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/">paper-284-overview</a></td>
+      </tr>
+      <tr>
+          <td>288</td>
+          <td>Energy-Saving Optimization Strategy for Train Speed Trajectory Based on Improved Non-dominated Genetic Algorithm</td>
+          <td>基于改进非支配遗传算法的列车速度轨迹节能优化策略</td>
+          <td>Jinsong Kang, Xinyue Li, HongZhe Li, Tongji Univer&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/">paper-288-overview</a></td>
+      </tr>
+      <tr>
+          <td>310</td>
+          <td>Trainpulse: A Novel Approach to Predicting Squat Formation Using ForwardFacing Cameras</td>
+          <td>列车脉冲：一种利用前向摄像头预测钢轨蹲踞形成的新方法</td>
+          <td>Roger Lewis, Tomlinson Kate, Artur Gower, Matthew &hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+      <tr>
+          <td>321</td>
+          <td>A Hybrid-Driven Bogie Stress Monitoring Method Based on the Integration of TF-CNN-LSTM</td>
+          <td>基于TF-CNN-LSTM集成的混合驱动转向架应力监测方法</td>
+          <td>Junzuo Liu, Xingwen Wu, School of Mechanical Engin&hellip;</td>
+          <td><a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/">paper-321-overview</a></td>
+      </tr>
+      <tr>
+          <td>335</td>
+          <td>Sensor Fusion for Detection of Rail Bending at 320km/h</td>
+          <td>320公里/小时钢轨弯曲检测的传感器融合</td>
+          <td>Solenne Thevenet, St´ephane Neveu, Marc Ledet, SNC&hellip;</td>
+          <td>文档空缺</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-说明">📝 说明</h2>
+<ul>
+<li><strong>原文缺失</strong>: PDF文件不存在，无法进行处理</li>
+<li>点击文档链接可直接访问相应文件</li>
+</ul>
+<hr>
+<p><em>本文档由脚本自动生成，最后更新时间见上方</em></p>
+</div>
+
+        
+        
+        
+          
+        
+
+        
+          
+        
+      </div>
+    </article>
+
+    
+    
+    
+    
+    
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <nav class="toc">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-统计概览">📊 统计概览</a></li>
+    <li><a href="#-论文清单">📋 论文清单</a></li>
+    <li><a href="#-说明">📝 说明</a></li>
+  </ul>
+</nav>
+        </nav>
+      </aside>
+    
+  </div>
+
+  
+  
+    <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+    <div id="tocDrawer" class="toc-drawer" hidden>
+      <div class="toc-drawer-inner">
+        <div class="toc-drawer-header">
+          <span>目录</span>
+        </div>
+        <nav class="toc"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-统计概览">📊 统计概览</a></li>
+    <li><a href="#-论文清单">📋 论文清单</a></li>
+    <li><a href="#-说明">📝 说明</a></li>
+  </ul>
+</nav></nav>
+      </div>
+    </div>
+  
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

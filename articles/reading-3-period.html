@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读的三个时代</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="阅读的三个时代">
+<meta property="og:url" content="https://linguage.github.io/articles/reading-3-period.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="阅读的三个时代">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/reading-3-period.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Scholarly Neutral -->
+    <!-- Application Structure Plan: The application is designed as a single-page exploratory dashboard. A sticky top navigation allows users to switch between the three reading eras (1.0, 2.0, 3.0). The main content area dynamically updates to display the selected era's information, which is broken down into digestible cards for key traits and accordions for detailed analysis. This non-linear structure encourages exploration over passive reading. The page concludes with two interactive charts for direct comparison and a summary of future recommendations. This design was chosen to transform the dense, linear report into an engaging, user-driven experience, making complex concepts more accessible and comparable through visualization and interaction. -->
+    <!-- Visualization & Content Choices: 1. Goal: Compare cognitive impacts across eras. Viz: Radar Chart (Chart.js). Interaction: Hover tooltips. Justification: A radar chart is ideal for multi-variable comparison between a few categories, providing a clear visual "shape" for each era's cognitive profile. 2. Goal: Show the "Great Reversal" of scarcity. Viz: Stacked Bar Chart (Chart.js). Interaction: Hover tooltips. Justification: This effectively visualizes the dramatic inverse relationship between information scarcity and attention scarcity over time. 3. Goal: Organize detailed text. Viz: HTML/CSS Accordion. Interaction: Click to expand/collapse. Justification: Manages content density, allowing users to progressively disclose information based on interest without overwhelming them initially. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F8F7F2;
+            color: #3D3B30;
+        }
+        .nav-btn {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-btn.active {
+            border-bottom-color: #A45D5D;
+            color: #A45D5D;
+            font-weight: 600;
+        }
+        .era-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .era-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .accordion-title::-webkit-details-marker {
+            display: none;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 600px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 50vh;
+                max-height: 500px;
+            }
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3D3B30] tracking-tight">从羊皮卷到提示词</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">一场关于人类阅读、认知与信息环境的演变探索</p>
+        </header>
+
+        <nav class="sticky top-0 z-10 bg-[#F8F7F2] py-4 mb-8 border-b border-gray-200">
+            <div id="era-nav" class="flex justify-center space-x-4 sm:space-x-8 text-lg">
+                <button data-era="1.0" class="nav-btn pb-2 px-2 active">📖 阅读 1.0</button>
+                <button data-era="2.0" class="nav-btn pb-2 px-2">📱 阅读 2.0</button>
+                <button data-era="3.0" class="nav-btn pb-2 px-2">🤖 阅读 3.0</button>
+            </div>
+        </nav>
+
+        <main id="content-area">
+        </main>
+
+        <section class="py-12 md:py-16 bg-white rounded-2xl shadow-sm mt-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold tracking-tight">时代对比：认知与稀缺性的变迁</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">通过可视化图表，直观感受三大阅读时代在核心认知维度与稀缺资源上的巨大差异。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 px-4 md:px-8">
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4">认知收益与风险雷达图</h3>
+                    <div class="chart-container">
+                        <canvas id="cognitiveChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-4">稀缺性的大反转</h3>
+                     <div class="chart-container">
+                        <canvas id="scarcityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 md:py-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold tracking-tight">导航未来：迎接3.0时代的挑战</h2>
+                <p class="mt-3 text-gray-600 max-w-2xl mx-auto">面对AI带来的机遇与风险，我们需要培养新的素养，并从社会到个人层面采取行动。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-[#A45D5D]">提示词工程能力</h4>
+                    <p class="text-sm text-gray-600 mt-2">学习清晰地表达意图，提出精确问题，这是引导AI产生高质量输出的关键。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-[#A45D5D]">批判性评估能力</h4>
+                    <p class="text-sm text-gray-600 mt-2">保持健康的怀疑精神，主动进行事实核查，审视AI输出中潜在的谬误与偏见。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-[#A45D5D]">伦理意识</h4>
+                    <p class="text-sm text-gray-600 mt-2">理解并关注数据隐私、算法公平、知识产权等AI带来的广泛社会影响。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg text-[#A45D5D]">元认知能力</h4>
+                    <p class="text-sm text-gray-600 mt-2">清醒地判断何时使用AI提升效率，何时必须依赖自身进行深度思考与创造。</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <p class="text-sm text-gray-500">基于“阅读时代变迁调研报告”创建的交互式应用</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const eraData = {
+            "1.0": {
+                title: "稀缺与结构的时代",
+                subtitle: "在纸质媒介中，信息是珍贵的，阅读是一种需要专注与投入的深度认知活动。",
+                icon: "📖",
+                bgColor: "bg-amber-50",
+                textColor: "text-amber-800",
+                characteristics: [
+                    { title: "信息特征", text: "来源稀缺，选择有限，内容结构化、权威化。" },
+                    { title: "核心稀缺", text: "信息的获取权。博学是难以企及的目标。" },
+                    { title: "阅读方式", text: "主动寻求，沉浸式、线性深度阅读。" },
+                    { title: "干扰情况", text: "较少受到杂乱信息干扰，环境相对纯净。" }
+                ],
+                details: [
+                    { title: "古腾堡革命与知识的建筑学", content: "印刷术带来了标准化的、可大规模复制的固定文本，为现代知识体系奠定了物质基础。知识变得稳定、可验证，思想得以大规模交流碰撞。" },
+                    { title: "印刷页面的认知烙印", content: "书籍的线性、固定特性，训练了大脑进行序列化、逻辑化和抽象化的思考。低认知负荷的环境促进了专注与深度阅读，有利于形成长时记忆。" },
+                    { title: "公共领域的崛起", content: "书籍和报刊的流通创造了理性的“公共领域”，公民可就共同话题辩论，形成舆论，监督权力，推动了现代民族国家与社会的形成。" }
+                ]
+            },
+            "2.0": {
+                title: "碎片的洪流与注意力的经济",
+                subtitle: "在社交媒体时代，信息极度丰裕，而人类有限的注意力成为最宝贵的稀缺资源。",
+                icon: "📱",
+                bgColor: "bg-sky-50",
+                textColor: "text-sky-800",
+                characteristics: [
+                    { title: "信息特征", text: "海量、碎片化、去语境化，缺乏结构与完整性。" },
+                    { title: "核心稀缺", text: "人类的注意力。所有平台争夺用户停留时间。" },
+                    { title: "获取方式", text: "被动推送为主，算法“投喂”，而非主动选择。" },
+                    { title: "媒介融合", text: "文本、图片、视频等形态在同一平台融合，差异缩小。" }
+                ],
+                details: [
+                    { title: "无尽滚动的认知后果", content: "碎片化信息削弱了长文阅读能力和耐心，持续的多任务处理导致注意力涣散。思维惰性滋生，批判性思维能力被弱化。" },
+                    { title: "注意力经济", content: "商业模式建立在捕获、维持并变现用户注意力的基础上。平台设计利用心理学技巧，使用户陷入“行为上瘾”，内容生产以“流量”为导向。" },
+                    { title: "算法守门人与信息茧房", content: "算法取代编辑成为信息守门人，根据用户偏好进行推送，容易导致“信息茧房”和“回音室效应”，加剧观点极化和社会撕裂。" }
+                ]
+            },
+            "3.0": {
+                title: "综合与卸载的时代",
+                subtitle: "在大语言模型时代，信息无限生成，人类面临着认知增强与能力退化的双重挑战。",
+                icon: "🤖",
+                bgColor: "bg-indigo-50",
+                textColor: "text-indigo-800",
+                characteristics: [
+                    { title: "信息特征", text: "无限、可塑化、生成式。信息稀缺性彻底消失。" },
+                    { title: "核心稀缺", text: "信任与批判性判断力。真假难辨成常态。" },
+                    { title: "媒介交互", text: "不同信息形态的隔阂彻底消融，可即时相互切换。" },
+                    { title: "能力突破", text: "普通人首次具备快速处理海量、复杂内容的能力。" }
+                ],
+                details: [
+                    { title: "认知卸载的力量与风险", content: "将摘要、分析等高阶思维任务委托给AI，极大地提高了效率，但可能导致人类自身相关认知能力的萎缩和退化（技能退化）。" },
+                    { title: "结构的重生：从被动消费者到主动提示者", content: "用户需转变为主动的提示者，通过精心设计的指令引导AI按需重建信息结构。阅读从单向接收变为人机协作的知识建构过程。" },
+                    { title: "民主化 vs. 欺骗性", content: "AI在推动知识民主化的同时，也带来了“幻觉”（捏造事实）、放大偏见和大规模制造虚假信息的巨大风险，对信任构成严峻挑战。" }
+                ]
+            }
+        };
+
+        const contentArea = document.getElementById('content-area');
+        const nav = document.getElementById('era-nav');
+        let currentEra = '1.0';
+
+        function renderEra(era) {
+            const data = eraData[era];
+            const characteristicsHtml = data.characteristics.map(c => `
+                <div class="era-card ${data.bgColor} p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h4 class="font-bold text-lg ${data.textColor}">${c.title}</h4>
+                    <p class="text-sm text-gray-700 mt-2">${c.text}</p>
+                </div>
+            `).join('');
+            
+            const detailsHtml = data.details.map(d => `
+                <details class="group bg-white rounded-lg p-4 border border-gray-200">
+                    <summary class="accordion-title font-semibold cursor-pointer flex justify-between items-center">
+                        ${d.title}
+                        <span class="text-xl text-gray-400 group-open:rotate-90 transition-transform duration-300 transform">+</span>
+                    </summary>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">${d.content}</p>
+                </details>
+            `).join('');
+
+            contentArea.innerHTML = `
+                <section id="era-${era}" class="py-8 animate-fade-in">
+                    <div class="text-center mb-10">
+                        <span class="text-6xl">${data.icon}</span>
+                        <h2 class="text-3xl font-bold tracking-tight mt-4">${data.title}</h2>
+                        <p class="mt-3 text-gray-600 max-w-2xl mx-auto">${data.subtitle}</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                        ${characteristicsHtml}
+                    </div>
+                    <div class="max-w-4xl mx-auto space-y-4">
+                        <h3 class="text-xl font-semibold text-center mb-4">深度解读</h3>
+                        ${detailsHtml}
+                    </div>
+                </section>
+                <style>
+                    @keyframes fade-in {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    .animate-fade-in {
+                        animation: fade-in 0.5s ease-out forwards;
+                    }
+                </style>
+            `;
+        }
+        
+        nav.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const newEra = e.target.dataset.era;
+                if (newEra !== currentEra) {
+                    currentEra = newEra;
+                    nav.querySelector('.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    renderEra(currentEra);
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEra(currentEra);
+
+            const cognitiveCtx = document.getElementById('cognitiveChart').getContext('2d');
+            new Chart(cognitiveCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['处理深度', '接触广度', '记忆形成', '批判性分析', '综合能力', '技能退化风险'],
+                    datasets: [{
+                        label: '阅读 1.0',
+                        data: [5, 1, 4, 5, 3, 1],
+                        backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                        borderColor: 'rgba(217, 119, 6, 1)',
+                        pointBackgroundColor: 'rgba(217, 119, 6, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: '阅读 2.0',
+                        data: [1, 4, 2, 2, 2, 3],
+                        backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                        borderColor: 'rgba(2, 132, 199, 1)',
+                        pointBackgroundColor: 'rgba(2, 132, 199, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: '阅读 3.0',
+                        data: [3, 5, 1, 2, 5, 5],
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                        borderColor: 'rgba(99, 102, 241, 1)',
+                        pointBackgroundColor: 'rgba(99, 102, 241, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        const values = ['极低', '低', '中', '高', '极高'];
+                                        label += values[context.parsed.r - 1] || context.parsed.r;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 5,
+                            ticks: {
+                                stepSize: 1,
+                                backdropColor: 'transparent',
+                                color: '#9CA3AF'
+                            },
+                             pointLabels: {
+                                font: {
+                                    size: 13
+                                },
+                                color: '#3D3B30'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const scarcityCtx = document.getElementById('scarcityChart').getContext('2d');
+            new Chart(scarcityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['阅读 1.0', '阅读 2.0', '阅读 3.0'],
+                    datasets: [
+                        {
+                            label: '信息稀缺性',
+                            data: [5, 2, 1],
+                            backgroundColor: '#A45D5D',
+                        },
+                        {
+                            label: '注意力稀缺性',
+                            data: [1, 4, 5],
+                            backgroundColor: '#60A5FA',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            stacked: false,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value, index, values) {
+                                    const labels = ['零', '极低', '低', '中', '高', '极高'];
+                                    return labels[value];
+                                }
+                            }
+                        },
+                        y: {
+                            stacked: false,
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                         tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    const value = context.parsed.x;
+                                    const values = ['零', '极低', '低', '中', '高', '极高'];
+                                    label += values[value];
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

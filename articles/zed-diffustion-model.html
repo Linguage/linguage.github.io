@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式报告：扩散语言模型</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="交互式报告：扩散语言模型">
+<meta property="og:url" content="https://linguage.github.io/articles/zed-diffustion-model.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="交互式报告：扩散语言模型">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/zed-diffustion-model.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a fixed sidebar navigation for easy access to different sections. This structure promotes non-linear exploration of the technical content. Key sections include an interactive comparison of model types, a step-by-step visualization of the diffusion process, a hands-on sampling simulator to mimic the live coding demo, and a chart illustrating the core trade-offs. This is more engaging than a simple text document and allows users to learn by doing. -->
+    <!-- Visualization & Content Choices: 
+        - Model Comparison (Autoregressive vs. Non-Autoregressive): Goal: Compare. Method: Side-by-side animated cards. Interaction: Scroll-triggered animations. Justification: Clearly highlights fundamental differences in an easy-to-digest visual format.
+        - Diffusion Process: Goal: Explain process. Method: JS-controlled step-by-step diagram. Interaction: User clicks a button to advance the animation. Justification: Makes the abstract concepts of noising (forward) and denoising (reverse) concrete and memorable.
+        - Quality vs. Speed Trade-off: Goal: Show relationship. Method: Interactive Chart.js bar chart. Interaction: A slider controls the number of generation steps, updating the chart in real-time. Justification: Visually demonstrates the key performance trade-off in an intuitive way.
+        - Sampling Simulator: Goal: Engage/Demonstrate. Method: Interactive text area and JS logic. Interaction: User provides masked text and clicks to see the model "think" and fill in the blanks iteratively. Justification: This is the most powerful tool for understanding the model's iterative and self-correcting nature, directly translating a core concept from the report into a hands-on experience.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f4f5f7;
+            color: #1f2937;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .nav-link.active {
+            color: #3b82f6;
+            border-left-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2563eb;
+        }
+        .token {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            border: 1px solid;
+            min-width: 60px;
+            text-align: center;
+        }
+        .mask-token {
+            background-color: #fee2e2;
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+        .clean-token {
+            background-color: #dbeafe;
+            border-color: #93c5fd;
+            color: #1e40af;
+        }
+        .generated-token {
+            background-color: #d1fae5;
+            border-color: #6ee7b7;
+            color: #065f46;
+        }
+        .sim-mask {
+            background-color: #e0e7ff;
+            color: #4338ca;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="overflow-x-hidden">
+    <div class="flex">
+        <nav id="sidebar" class="hidden lg:block fixed top-0 left-0 h-screen w-64 bg-white shadow-md p-4">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">扩散语言模型</h2>
+            <ul class="space-y-2">
+                <li><a href="#intro" class="nav-link block p-2 font-medium text-gray-600 rounded-md">引言</a></li>
+                <li><a href="#comparison" class="nav-link block p-2 font-medium text-gray-600 rounded-md">核心对比</a></li>
+                <li><a href="#how-it-works" class="nav-link block p-2 font-medium text-gray-600 rounded-md">工作原理</a></li>
+                <li><a href="#tradeoffs" class="nav-link block p-2 font-medium text-gray-600 rounded-md">关键权衡</a></li>
+                <li><a href="#simulation" class="nav-link block p-2 font-medium text-gray-600 rounded-md">采样模拟器</a></li>
+                <li><a href="#optimizations" class="nav-link block p-2 font-medium text-gray-600 rounded-md">关键优化</a></li>
+                <li><a href="#advantages" class="nav-link block p-2 font-medium text-gray-600 rounded-md">优势与挑战</a></li>
+            </ul>
+        </nav>
+        <main class="lg:ml-64 w-full p-4 md:p-8 lg:p-12">
+            
+            <section id="intro" class="min-h-screen flex flex-col justify-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4 text-center">扩散语言模型</h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 text-center">一种全新的文本生成范式，从噪音中创造有序。本报告将带您交互式地探索其核心思想、工作原理与独特优势。</p>
+                    <div class="relative w-full max-w-2xl mx-auto h-0 pb-[56.25%] mb-8 rounded-lg overflow-hidden shadow-lg">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/oot4O9wMohw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="text-center text-blue-500 font-bold animate-bounce">
+                        &#8595; 向下滚动开始探索 &#8595;
+                    </div>
+                </div>
+            </section>
+
+            <section id="comparison" class="py-20">
+                <h2 class="text-3xl font-bold text-center mb-4">核心对比：两种生成范式</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">扩散模型属于非自回归模型，其生成方式与我们熟悉的GPT等自回归模型有着根本性的不同。理解它们的差异是探索扩散模型的第一步。</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold mb-4 text-center">自回归模型 (Autoregressive)</h3>
+                        <div class="text-6xl text-center mb-4">➡️</div>
+                        <p class="text-gray-700 mb-4">像一个作家，逐字逐句地写作。严格按照从左到右的顺序，一个接一个地生成Token。</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">✓</span><span>逻辑连贯性强，生成质量高。</span></li>
+                            <li class="flex items-start"><span class="text-red-500 mr-2 font-bold">✗</span><span>生成速度慢，无法并行处理。</span></li>
+                            <li class="flex items-start"><span class="text-red-500 mr-2 font-bold">✗</span><span>一旦犯错，难以回头修正。</span></li>
+                        </ul>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-semibold mb-4 text-center">非自回归模型 (Non-Autoregressive)</h3>
+                        <div class="text-6xl text-center mb-4">🎨</div>
+                        <p class="text-gray-700 mb-4">像一个画家，先勾勒轮廓再填充细节。并行地生成所有Token，并逐步优化。</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">✓</span><span>生成速度极快，可并行化。</span></li>
+                            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">✓</span><span>能够自我纠正，迭代优化。</span></li>
+                            <li class="flex items-start"><span class="text-red-500 mr-2 font-bold">✗</span><span>早期模型质量控制较难。</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="py-20 bg-white rounded-2xl">
+                <h2 class="text-3xl font-bold text-center mb-4">工作原理：从噪音到文本</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">扩散模型借鉴了物理学中的扩散过程，通过“加噪”和“去噪”两个阶段来生成文本。这是一个将无序变为有序的神奇过程。</p>
+                
+                <div class="card max-w-4xl mx-auto p-8">
+                    <h3 class="text-2xl font-semibold mb-2 text-center">交互式扩散过程</h3>
+                    <p class="text-center text-gray-500 mb-6">点击按钮，观察文本如何在“加噪”和“去噪”之间转换。</p>
+                    <div id="diffusion-viz" class="h-48 flex items-center justify-center p-4 bg-gray-50 rounded-lg mb-6">
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button id="forward-btn" class="btn">开始加噪 (Forward)</button>
+                        <button id="reverse-btn" class="btn" disabled>开始去噪 (Reverse)</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tradeoffs" class="py-20">
+                <h2 class="text-3xl font-bold text-center mb-4">关键权衡：速度 vs 质量</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">扩散模型的性能并非一成不变。我们可以通过调整“去噪步数”在生成速度和文本质量之间做出权衡。更多的步数意味着更精细的打磨，但耗时也更长。</p>
+                <div class="card max-w-4xl mx-auto p-8">
+                     <div class="chart-container">
+                        <canvas id="tradeoffChart"></canvas>
+                    </div>
+                    <div class="mt-8 px-4">
+                        <label for="stepsSlider" class="block text-center font-medium text-gray-700 mb-2">调整去噪步数</label>
+                        <input id="stepsSlider" type="range" min="1" max="20" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-sm text-gray-500 mt-2">
+                            <span>更快</span>
+                            <span id="stepsValue" class="font-bold text-blue-600">10 步</span>
+                             <span>更高质量</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="simulation" class="py-20 bg-gray-50 rounded-2xl">
+                <h2 class="text-3xl font-bold text-center mb-4">采样模拟器</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">亲身体验扩散模型的生成过程！在下面的文本框中输入一个带有 [MASK] 的句子，然后点击“开始生成”，观察模型如何迭代地填充空白并进行自我纠正。</p>
+                <div class="card max-w-4xl mx-auto p-8">
+                    <div id="simulation-input-area" class="mb-4">
+                        <label for="simulation-text" class="block text-lg font-medium text-gray-700 mb-2">输入带掩码的文本:</label>
+                        <div id="simulation-text" contenteditable="true" class="w-full p-3 border border-gray-300 rounded-lg bg-white min-h-[80px]">
+                            <span>The capital of </span><span class="token sim-mask">[MASK]</span><span> is </span><span class="token sim-mask">[MASK]</span><span>.</span>
+                        </div>
+                         <p class="text-xs text-gray-500 mt-2">提示: 您可以直接编辑文本，或点击 <span class="token sim-mask">[MASK]</span> 按钮添加更多掩码。</p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <button id="start-simulation-btn" class="btn">开始生成</button>
+                        <div class="flex items-center space-x-2">
+                            <label for="sim-steps" class="font-medium">迭代步数:</label>
+                            <select id="sim-steps" class="rounded-md border-gray-300">
+                                <option>1</option>
+                                <option>2</option>
+                                <option selected>5</option>
+                                <option>10</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="simulation-output-area" class="mt-6">
+                        <h4 class="text-lg font-medium text-gray-700 mb-2">生成过程:</h4>
+                        <div id="simulation-log" class="p-4 bg-gray-100 rounded-lg min-h-[150px] space-y-2 overflow-y-auto max-h-64 text-sm font-mono">
+                           <!-- Simulation logs will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="optimizations" class="py-20">
+                 <h2 class="text-3xl font-bold text-center mb-4">关键优化策略</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">为了提高效率和质量，研究人员提出了多种优化策略，使扩散模型在实际应用中更具竞争力。</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-2">块扩散 (Block Diffusion)</h3>
+                        <p class="text-gray-600">将长序列分成小块，逐块生成。这极大地提高了处理长文本的效率，并且对缓存友好，是提速的关键技术。</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-2">掩码调度 (Masking Schedules)</h3>
+                        <p class="text-gray-600">动态调整每一步去掩码的Token数量。在生成初期（噪音多）少去一些，后期（上下文清晰）多去一些，以平衡速度与质量。</p>
+                    </div>
+                     <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-2">作为草稿模型 (Draft Model)</h3>
+                        <p class="text-gray-600">在“推测解码”中，利用扩散模型快速生成一个草稿，再由一个更强的模型进行验证，从而为传统自回归模型提速。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advantages" class="py-20 bg-white rounded-2xl">
+                <h2 class="text-3xl font-bold text-center mb-4">优势与挑战</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">扩散模型展现了巨大的潜力，但作为一项新兴技术，它也面临着自身的挑战。</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-green-600">独特优势</h3>
+                        <ul class="space-y-4">
+                            <li class="card p-4"><strong>⚡️ 极高速度:</strong> 并行生成机制使其推理速度远超自回归模型。</li>
+                            <li class="card p-4"><strong>🔄 自我纠正:</strong> 能够在生成过程中迭代优化，修正早期错误。</li>
+                            <li class="card p-4"><strong>🎛️ 可控性强:</strong> 允许更灵活的提示方式和通过外部模型引导生成。</li>
+                            <li class="card p-4"><strong>↔️ 双向上下文:</strong> 同时利用前后文信息，理解更全面。</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-orange-600">当前挑战</h3>
+                        <ul class="space-y-4">
+                            <li class="card p-4"><strong>⚖️ 速度与质量的权衡:</strong> 追求极致速度可能牺牲部分质量，反之亦然。</li>
+                            <li class="card p-4"><strong>⏳ 发展时间尚短:</b> 相比自回归模型，其研究和优化历史较短，潜力尚未完全发掘。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const sidebar = document.getElementById('sidebar');
+            const navLinks = sidebar.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            const vizContainer = document.getElementById('diffusion-viz');
+            const forwardBtn = document.getElementById('forward-btn');
+            const reverseBtn = document.getElementById('reverse-btn');
+            
+            const cleanText = ["The", "cat", "sat", "on", "the", "mat."];
+            let currentStep = 0;
+            const maxSteps = cleanText.length;
+
+            function renderTokens(tokens, state) {
+                vizContainer.innerHTML = '';
+                tokens.forEach(token => {
+                    const el = document.createElement('div');
+                    el.textContent = token;
+                    el.classList.add('token', state);
+                    vizContainer.appendChild(el);
+                });
+            }
+
+            renderTokens(cleanText, 'clean-token');
+
+            forwardBtn.addEventListener('click', () => {
+                if (currentStep < maxSteps) {
+                    currentStep++;
+                    const tokens = [...cleanText];
+                    for(let i=0; i<currentStep; i++){
+                        tokens[i] = '[MASK]';
+                    }
+                    renderTokens(tokens, 'mask-token');
+                    if(currentStep === maxSteps) {
+                        forwardBtn.disabled = true;
+                        reverseBtn.disabled = false;
+                    }
+                }
+            });
+
+            reverseBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    const tokens = [...cleanText];
+                     for(let i=0; i<currentStep; i++){
+                        tokens[i] = '[MASK]';
+                    }
+                    renderTokens(tokens, 'generated-token');
+                     if(currentStep === 0) {
+                        reverseBtn.disabled = true;
+                        forwardBtn.disabled = false;
+                        renderTokens(cleanText, 'clean-token');
+                    }
+                }
+            });
+
+            const tradeoffCtx = document.getElementById('tradeoffChart').getContext('2d');
+            const tradeoffChart = new Chart(tradeoffCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['质量', '速度'],
+                    datasets: [{
+                        label: '性能指标',
+                        data: [80, 40],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.5)',
+                            'rgba(16, 185, 129, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(16, 185, 129, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { max: 100, beginAtZero: true },
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+
+            const stepsSlider = document.getElementById('stepsSlider');
+            const stepsValue = document.getElementById('stepsValue');
+
+            stepsSlider.addEventListener('input', (e) => {
+                const steps = parseInt(e.target.value);
+                stepsValue.textContent = `${steps} 步`;
+                const quality = 20 + steps * 4;
+                const speed = 100 - steps * 3;
+                tradeoffChart.data.datasets[0].data = [quality, speed];
+                tradeoffChart.update();
+            });
+
+
+            const simTextArea = document.getElementById('simulation-text');
+            const startSimBtn = document.getElementById('start-simulation-btn');
+            const simLog = document.getElementById('simulation-log');
+            
+            simTextArea.addEventListener('click', (e) => {
+                if(e.target.classList.contains('sim-mask')) {
+                    const textNode = document.createTextNode(e.target.textContent);
+                    e.target.parentNode.replaceChild(textNode, e.target);
+                }
+            });
+
+
+            const vocabulary = {
+                "capital": ["london", "paris", "delhi", "tokyo", "beijing"],
+                "country": ["france", "india", "japan", "china", "uk"],
+                "is": ["is", "was"],
+                "of": ["of", "for"]
+            };
+
+            const grammar = {
+                "the capital of [MASK] is [MASK].": (m1, m2) => {
+                    const pairs = {"france": "paris", "india": "delhi", "uk": "london", "japan": "tokyo", "china": "beijing"};
+                    if (vocabulary.country.includes(m1) && pairs[m1] === m2) return 10;
+                    if (vocabulary.country.includes(m1) || vocabulary.capital.includes(m2)) return 3;
+                    return 1;
+                }
+            };
+
+            startSimBtn.addEventListener('click', () => {
+                simLog.innerHTML = '';
+                const initialHTML = simTextArea.innerHTML;
+                let tokens = Array.from(simTextArea.childNodes).map(node => {
+                    if (node.nodeType === 3) return node.textContent.trim().split(' ').filter(Boolean);
+                    if (node.nodeType === 1 && node.classList.contains('sim-mask')) return '[MASK]';
+                    return node.textContent.trim().split(' ').filter(Boolean);
+                }).flat();
+                
+                const totalSteps = parseInt(document.getElementById('sim-steps').value);
+                let currentStep = 0;
+
+                function logStep(step, message, currentTokens) {
+                    const p = document.createElement('p');
+                    p.innerHTML = `<span class="font-bold text-blue-600">Step ${step}:</span> ${message} -> <span class="text-gray-800">${currentTokens.join(' ')}</span>`;
+                    simLog.appendChild(p);
+                    simLog.scrollTop = simLog.scrollHeight;
+                }
+                
+                function runStep() {
+                    if (currentStep >= totalSteps || !tokens.includes('[MASK]')) {
+                         logStep(currentStep + 1, "<strong>完成</strong>", tokens);
+                         return;
+                    }
+                    currentStep++;
+                    
+                    let maskIndices = [];
+                    tokens.forEach((t, i) => { if(t === '[MASK]') maskIndices.push(i) });
+                    
+                    if(maskIndices.length === 0) {
+                        logStep(currentStep, "<strong>完成</strong>", tokens);
+                        return;
+                    }
+
+                    let bestCandidate = null;
+                    let maxConfidence = -1;
+                    
+                    const targetMaskIndex = maskIndices[Math.floor(Math.random() * maskIndices.length)];
+
+                    let possibleWords = [...vocabulary.capital, ...vocabulary.country, ...vocabulary.is, ...vocabulary.of];
+                    possibleWords.forEach(word => {
+                        let tempTokens = [...tokens];
+                        tempTokens[targetMaskIndex] = word;
+                        
+                        let confidence = Math.random(); 
+                        if (tempTokens.join(' ').toLowerCase().includes("the capital of") && tempTokens.filter(t => t !== '[MASK]').length > 3){
+                             const m = tempTokens.join(' ').toLowerCase().match(/the capital of (.*) is (.*)\./);
+                             if (m) {
+                                confidence += grammar["the capital of [MASK] is [MASK]."](m[1], m[2]);
+                             }
+                        }
+
+                        if (confidence > maxConfidence) {
+                            maxConfidence = confidence;
+                            bestCandidate = word;
+                        }
+                    });
+
+                    tokens[targetMaskIndex] = `<span class="generated-token">${bestCandidate}</span>`;
+                    logStep(currentStep, `填充最可能的词...`, tokens);
+                    tokens[targetMaskIndex] = bestCandidate;
+
+                    setTimeout(runStep, 1000);
+                }
+                logStep(0, "开始...", tokens);
+                runStep();
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：134 基本信息 论文编号：134 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Effects of Interphase Short-Circuit Fault of Permanent Magnet Traction Motor on the Dynamic Performance of a Direct-Drive Locomotive 中文标题：永磁牵引电机相间短路故障对直驱机车动态性能的影响 作者及单位：Zirui Ye¹, Zaigang Chen¹*, Ziwei Zhou² ¹ State Key laboratory of Rail Transit Vehicle System, Southwest Jiaotong University, China ² Faculty of Transportation Engineering, Kunming University of Science and Technology, China 联系邮箱：[未提供] 摘要 永磁直驱机车采用永磁同步电机（PMSM）作为牵引电机，其中电机产生的电磁转矩直接传递到轮对。作为PMSM中的常见故障，相间短路故障可引起电磁转矩的显著纹波，并导致直驱牵引系统内产生异常振动，从而损害机车运行的安全性和可靠性。为了研究永磁牵引电机相间短路故障下直驱机车的动态性能，本文建立了直驱机车的机电耦合动力学模型。该模型考虑了驱动系统内的完整功率传递路径，包括电机控制系统和机械系统。仿真结果表明，相间短路故障引起的纹波转矩会恶化机车系统的运行条件，并加剧与故障频率相关的关键部件振动。本文的研究结果可为直驱机车的故障诊断和智能运行提供理论指导。
+关键词 #相间短路 #直驱机车 #永磁同步电机 #车辆-轨道耦合模型 #机电耦合 #故障诊断 #动态性能 #转矩纹波
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：134 基本信息 论文编号：134 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Effects of Interphase Short-Circuit Fault of Permanent Magnet Traction Motor on the Dynamic Performance of a Direct-Drive Locomotive 中文标题：永磁牵引电机相间短路故障对直驱机车动态性能的影响 作者及单位：Zirui Ye¹, Zaigang Chen¹*, Ziwei Zhou² ¹ State Key laboratory of Rail Transit Vehicle System, Southwest Jiaotong University, China ² Faculty of Transportation Engineering, Kunming University of Science and Technology, China 联系邮箱：[未提供] 摘要 永磁直驱机车采用永磁同步电机（PMSM）作为牵引电机，其中电机产生的电磁转矩直接传递到轮对。作为PMSM中的常见故障，相间短路故障可引起电磁转矩的显著纹波，并导致直驱牵引系统内产生异常振动，从而损害机车运行的安全性和可靠性。为了研究永磁牵引电机相间短路故障下直驱机车的动态性能，本文建立了直驱机车的机电耦合动力学模型。该模型考虑了驱动系统内的完整功率传递路径，包括电机控制系统和机械系统。仿真结果表明，相间短路故障引起的纹波转矩会恶化机车系统的运行条件，并加剧与故障频率相关的关键部件振动。本文的研究结果可为直驱机车的故障诊断和智能运行提供理论指导。
+关键词 #相间短路 #直驱机车 #永磁同步电机 #车辆-轨道耦合模型 #机电耦合 #故障诊断 #动态性能 #转矩纹波
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/" class="crumb-sec">Rail Topic 02 - Rail Vehicle Dynamics and Control</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-014-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-036-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-037-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-039-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-040-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-044-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-053-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-059-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-060-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-061-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-062-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-065-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-067-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-068-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-077-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-082-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-096-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-100-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-103-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-105-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-116-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-118-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-121-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-128-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-134-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-135-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-138-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-158-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-203-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-220-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-239-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-241-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-243-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-254-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-266-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-270-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-278-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-283-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-293-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-295-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-301-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-304-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-305-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-312-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-320-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-355-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览134">IAVSD 2025 论文概览：134</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：134</li>
+<li><strong>所属主题</strong>：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制)</li>
+<li><strong>英文标题</strong>：Effects of Interphase Short-Circuit Fault of Permanent Magnet Traction Motor on the Dynamic Performance of a Direct-Drive Locomotive</li>
+<li><strong>中文标题</strong>：永磁牵引电机相间短路故障对直驱机车动态性能的影响</li>
+<li><strong>作者及单位</strong>：Zirui Ye¹, Zaigang Chen¹*, Ziwei Zhou²
+<ul>
+<li>¹ State Key laboratory of Rail Transit Vehicle System, Southwest Jiaotong University, China</li>
+<li>² Faculty of Transportation Engineering, Kunming University of Science and Technology, China</li>
+</ul>
+</li>
+<li><strong>联系邮箱</strong>：[未提供]</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>永磁直驱机车采用永磁同步电机（PMSM）作为牵引电机，其中电机产生的电磁转矩直接传递到轮对。作为PMSM中的常见故障，相间短路故障可引起电磁转矩的显著纹波，并导致直驱牵引系统内产生异常振动，从而损害机车运行的安全性和可靠性。为了研究永磁牵引电机相间短路故障下直驱机车的动态性能，本文建立了直驱机车的机电耦合动力学模型。该模型考虑了驱动系统内的完整功率传递路径，包括电机控制系统和机械系统。仿真结果表明，相间短路故障引起的纹波转矩会恶化机车系统的运行条件，并加剧与故障频率相关的关键部件振动。本文的研究结果可为直驱机车的故障诊断和智能运行提供理论指导。</p>
+<h2 id="关键词">关键词</h2>
+<p>#相间短路 #直驱机车 #永磁同步电机 #车辆-轨道耦合模型 #机电耦合 #故障诊断 #动态性能 #转矩纹波</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>直驱牵引采用一种新颖结构，消除了齿轮箱的使用，从而使牵引转矩从永磁牵引电机通过柔性空心联轴器直接传递到轮对。这种设计可以显著提高牵引效率并降低能耗。因此，近年来大功率永磁直驱牵引技术在电力机车中的应用研究逐渐受到关注。电力机车对更大负载和更高速度的需求给永磁直驱技术带来了新的挑战。</p>
+<p>在这种独特结构中，来自牵引系统的内部激励，如谐波转矩或转子振动，可以直接传递到转子轴和轮对，从而影响机车系统的动态特性。通过建立包含转子动态运动和PMSM控制模型的永磁直驱机车机电耦合模型，分析了转子偏心故障条件下机车的机电响应特性。然而，相间短路故障对永磁直驱机车动态响应的影响尚未明确揭示。因此，本文建立了直驱机车机电耦合模型，以研究相间短路故障下机车的动态特性。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本研究采用理论建模和数值仿真相结合的方法：</p>
+<ol>
+<li>
+<p><strong>机电耦合模型建立</strong>：</p>
+<ul>
+<li>建立永磁直驱机车的机电耦合动力学模型</li>
+<li>机械系统包括车体、转向架、牵引电机外壳、转子、联轴器和轮对</li>
+<li>每个部件具有三个自由度：前进运动、垂直浮沉和旋转运动</li>
+<li>轨道系统通过轮轨相互作用与车辆系统耦合</li>
+</ul>
+</li>
+<li>
+<p><strong>电机控制系统建模</strong>：</p>
+<ul>
+<li>基于PMSM控制理论建立电机控制系统</li>
+<li>采用最大转矩每安培（MTPA）策略和弱磁控制策略</li>
+<li>在Matlab/Simulink平台集成相间短路故障模块</li>
+<li>通过设置短路电阻和短路相数等参数实现故障仿真</li>
+</ul>
+</li>
+<li>
+<p><strong>故障仿真分析</strong>：</p>
+<ul>
+<li>仿真条件：机车在直线轨道上以80km/h恒定速度运行</li>
+<li>故障设置：A相和B相之间发生相间短路故障，短路电阻设为0.001Ω</li>
+<li>分析故障对电机电流、转矩、轮对振动和关键部件振动的影响</li>
+<li>提取时域和频域典型结果进行分析</li>
+</ul>
+</li>
+</ol>
+<h2 id="主要结论">主要结论</h2>
+<ol>
+<li>
+<p><strong>电机电流特性变化</strong>：</p>
+<ul>
+<li>相间短路故障后三相电流出现显著畸变</li>
+<li>短路相A和B的振幅明显增加，C相电流先减小后逐渐上升</li>
+<li>故障后出现显著的奇次谐波，如3次和9次倍频</li>
+<li>原有频率的振幅进一步增强</li>
+</ul>
+</li>
+<li>
+<p><strong>电磁转矩波动加剧</strong>：</p>
+<ul>
+<li>正常运行时电机电磁转矩峰峰值约为3500Nm，波动范围约5%</li>
+<li>短路故障后电机转矩波动急剧增加，峰峰值达到36000Nm，波动范围约60%</li>
+<li>故障特征频率的振幅显著增强，特别是基频电流频率的偶数倍频</li>
+</ul>
+</li>
+<li>
+<p><strong>轮对振动响应敏感</strong>：</p>
+<ul>
+<li>轮对纵向和旋转振动加速度的均方根值分别从2.1m/s²和2.8rad/s²增加到7.1m/s²和23.2rad/s²</li>
+<li>频域结果显示，与故障特征相关的频率分量（基频的2次、4次和6次谐波）在相间短路存在时表现突出</li>
+<li>加剧的旋转振动传递到轮轨接触界面，引起轮轨接触力和蠕滑力的波动</li>
+</ul>
+</li>
+<li>
+<p><strong>关键部件振动增强</strong>：</p>
+<ul>
+<li>电机纵向振动加速度的均方根值从0.8m/s²上升到1.6m/s²</li>
+<li>电机纵向振动的固有频率为68Hz，故障导致在两倍固有频率（136Hz）处的振动分量增加</li>
+<li>转向架纵向振动加速度的均方根值从1.2m/s²增加到2.1m/s²</li>
+<li>故障导致与基频电流频率相关的2次和4次谐波分量显著增强</li>
+</ul>
+</li>
+<li>
+<p><strong>安全运行影响</strong>：</p>
+<ul>
+<li>电机相间短路故障可放大牵引系统内部的动态相互作用</li>
+<li>负面影响机车关键部件的动态性能</li>
+<li>威胁机车牵引控制和防滑系统，可能导致轮对空转或踏面擦伤</li>
+<li>损害列车运行的安全性和可靠性</li>
+</ul>
+</li>
+</ol>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li><strong>模型创新</strong>：建立直驱机车机电耦合动力学模型，考虑完整功率传递路径</li>
+<li><strong>故障机制</strong>：揭示相间短路故障对直驱机车动态性能的影响机制</li>
+<li><strong>特征识别</strong>：在机车动态响应频谱图中识别与故障频率相关的特征频率</li>
+<li><strong>安全评估</strong>：评估故障对机车运行安全性和可靠性的影响</li>
+<li><strong>理论指导</strong>：为直驱机车故障诊断和智能运行提供理论基础</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Interphase Short-Circuit</td>
+          <td>相间短路</td>
+      </tr>
+      <tr>
+          <td>Direct-Drive Locomotive</td>
+          <td>直驱机车</td>
+      </tr>
+      <tr>
+          <td>Permanent Magnet Synchronous Motor (PMSM)</td>
+          <td>永磁同步电机</td>
+      </tr>
+      <tr>
+          <td>Vehicle-Track Coupled Model</td>
+          <td>车辆-轨道耦合模型</td>
+      </tr>
+      <tr>
+          <td>Electromechanical Coupling</td>
+          <td>机电耦合</td>
+      </tr>
+      <tr>
+          <td>Torque Ripple</td>
+          <td>转矩纹波</td>
+      </tr>
+      <tr>
+          <td>Fault Diagnosis</td>
+          <td>故障诊断</td>
+      </tr>
+      <tr>
+          <td>Dynamic Performance</td>
+          <td>动态性能</td>
+      </tr>
+      <tr>
+          <td>Maximum Torque Per Ampere (MTPA)</td>
+          <td>最大转矩每安培</td>
+      </tr>
+      <tr>
+          <td>Flux-Weakening Control</td>
+          <td>弱磁控制</td>
+      </tr>
+      <tr>
+          <td>Electromagnetic Torque</td>
+          <td>电磁转矩</td>
+      </tr>
+      <tr>
+          <td>Harmonic Analysis</td>
+          <td>谐波分析</td>
+      </tr>
+      <tr>
+          <td>Vibration Acceleration</td>
+          <td>振动加速度</td>
+      </tr>
+      <tr>
+          <td>Root Mean Square (RMS)</td>
+          <td>均方根</td>
+      </tr>
+      <tr>
+          <td>Wheel-Rail Contact</td>
+          <td>轮轨接触</td>
+      </tr>
+      <tr>
+          <td>Creep Force</td>
+          <td>蠕滑力</td>
+      </tr>
+      <tr>
+          <td>Anti-Slip System</td>
+          <td>防滑系统</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-02</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

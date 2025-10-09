@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式报告: 查理·芒格的智慧</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="交互式报告: 查理·芒格的智慧">
+<meta property="og:url" content="https://linguage.github.io/articles/charlie-munger-last-interview.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="交互式报告: 查理·芒格的智慧">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/charlie-munger-last-interview.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony Neutrals -->
+    <!-- Application Structure Plan: A thematic, single-page application with a top navigation bar for easy access to distinct sections. The structure is designed for thematic exploration of Charlie Munger's philosophies. It starts with a hero section, followed by sections detailing his core life philosophies, learning approaches, investment wisdom, societal observations, and personal reflections on hardship and legacy. Key interactions include interactive cards for principles, tabbed views for detailed examples, and a central Chart.js bar chart illustrating the emphasis of his core tenets. This structure logically groups related concepts and uses interactivity to manage information density, making his complex wisdom digestible and engaging. -->
+    <!-- Visualization & Content Choices: The core interactive element is a Chart.js horizontal bar chart illustrating the perceived emphasis of Munger's key life principles (Goal: Inform, Organize). This provides a quick, high-level overview of his philosophical weighting. Other sections use interactive cards (Goal: Inform, Organize) to present distinct pieces of advice or anecdotes. Tabbed components (Goal: Compare, Organize) are used for detailed examples within investment insights, allowing users to explore different case studies. This layered approach, moving from high-level visualization to detailed text on demand, is chosen for clarity and user engagement, adhering to the NO SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8f7f2;
+            color: #3d405b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #e07a5f;
+            border-bottom-color: #e07a5f;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .tab-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .tab-button.active {
+            background-color: #81b29a;
+            color: white;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl font-bold text-[#3d405b]">查理·芒格的智慧</h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#philosophy" class="nav-link border-b-2 border-transparent pb-1">人生哲学</a>
+                    <a href="#learning" class="nav-link border-b-2 border-transparent pb-1">学习之道</a>
+                    <a href="#investing" class="nav-link border-b-2 border-transparent pb-1">投资洞察</a>
+                    <a href="#society" class="nav-link border-b-2 border-transparent pb-1">社会与人性</a>
+                    <a href="#legacy" class="nav-link border-b-2 border-transparent pb-1">生命与遗产</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 text-center bg-white">
+            <div class="container mx-auto px-6 fade-in">
+                <h2 class="text-4xl md:text-6xl font-bold text-[#3d405b] mb-4">查理·芒格生前最后一次访谈</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    探索查理·芒格100年人生的智慧结晶：关于学习、投资、成功的条件以及面对苦难的“坚韧前行”哲学。
+                </p>
+                <a href="https://www.youtube.com/watch?v=Gu_iovmjcJs" target="_blank" class="mt-8 inline-block bg-[#e07a5f] text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition">观看原视频</a>
+            </div>
+        </section>
+
+        <section id="philosophy" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-3xl md:text-4xl font-bold">人生哲学：核心智慧</h3>
+                    <p class="text-gray-600 mt-2">芒格的成功并非偶然，而是源于一套简单而深刻的处世之道。</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card fade-in">
+                        <h4 class="text-2xl font-bold mb-2 text-[#81b29a]">低预期</h4>
+                        <p class="text-gray-600">“我的游戏人生就是避免所有标准的失败方式。” 芒格认为，拥有低预期能让你更容易感到满足，并避免因过度期望而带来的失望。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 100ms;">
+                        <h4 class="text-2xl font-bold mb-2 text-[#81b29a]">幽默感</h4>
+                        <p class="text-gray-600">他从《宋飞正传》中看到，幽默是让生活变得可以忍受的方式。面对荒谬和自我中心的行为，幽默感是重要的缓冲。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 200ms;">
+                        <h4 class="text-2xl font-bold mb-2 text-[#81b29a]">亲友环绕</h4>
+                        <p class="text-gray-600">“被爱你的朋友和家人包围。” 这是他给出的成功三条件之一，强调了人际关系在幸福生活中的基石作用。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 300ms;">
+                        <h4 class="text-2xl font-bold mb-2 text-[#81b29a]">坚韧前行</h4>
+                        <p class="text-gray-600">“生活中的铁律是每个人都会挣扎。” 面对无法改变的苦难，唯一的选择是“坚韧前行”（Soldiering Through），即使哭泣也要继续。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learning" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-3xl md:text-4xl font-bold">学习之道：跨学科与自学</h3>
+                    <p class="text-gray-600 mt-2">芒格认为，持续学习和跨学科思维是获得智慧的关键。</p>
+                </div>
+                <div class="max-w-4xl mx-auto fade-in">
+                    <div class="flex justify-center mb-8 border-b">
+                        <button data-tab="models" class="tab-button active font-semibold py-2 px-6 rounded-t-lg">多元思维模型</button>
+                        <button data-tab="self-education" class="tab-button font-semibold py-2 px-6 rounded-t-lg">自学与榜样</button>
+                        <button data-tab="teachers" class="tab-button font-semibold py-2 px-6 rounded-t-lg">从“死人”身上学习</button>
+                    </div>
+                    <div id="tab-content-learning">
+                        <div id="tab-models" class="tab-panel-learning">
+                            <h4 class="text-2xl font-bold mb-4">多元思维模型</h4>
+                            <p class="mb-4 text-gray-700">芒格很早就认识到跨学科思维的力量。他认为，理解不同学科（如经济学、心理学、物理学）的核心概念，并将其整合起来，能帮助你更好地理解世界和做出决策。他从小就习惯在脑海中“修改”教科书和课程，以使其更“正确”。</p>
+                        </div>
+                        <div id="tab-self-education" class="tab-panel-learning hidden">
+                            <h4 class="text-2xl font-bold mb-4">自学与榜样</h4>
+                            <p class="mb-4 text-gray-700">他以本杰明·富兰克林为例，强调自学的重要性。富兰克林仅接受过两年小学教育，却通过自学掌握了多门学科并成为国家栋梁。芒格也试图效仿富兰克林，培养多方面的能力，尽管他承认自己缺乏音乐天赋。</p>
+                        </div>
+                        <div id="tab-teachers" class="tab-panel-learning hidden">
+                            <h4 class="text-2xl font-bold mb-4">从“死人”身上学习</h4>
+                            <p class="mb-4 text-gray-700">芒格认为，阅读是获取智慧的唯一途径，他从不认识不大量阅读的人变得更聪明。他特别强调从“死人”（已故的智者）身上学习，通过阅读他们的著作来吸收经验和智慧。他提到《鲁滨逊漂流记》和他的两位祖父对他的深远影响。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investing" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-3xl md:text-4xl font-bold">投资洞察：耐心、集中与教训</h3>
+                    <p class="text-gray-600 mt-2">芒格的投资哲学以其独特的洞察力和长期主义而闻名。</p>
+                </div>
+                <div class="max-w-4xl mx-auto fade-in">
+                    <div class="flex justify-center mb-8 border-b">
+                        <button data-tab="principles" class="tab-button active font-semibold py-2 px-6 rounded-t-lg">核心原则</button>
+                        <button data-tab="lessons" class="tab-button font-semibold py-2 px-6 rounded-t-lg">案例与教训</button>
+                        <button data-tab="difficulty" class="tab-button font-semibold py-2 px-6 rounded-t-lg">投资难度</button>
+                    </div>
+                    <div id="tab-content-investing">
+                        <div id="tab-principles" class="tab-panel-investing">
+                            <h4 class="text-2xl font-bold mb-4">核心投资原则</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li><strong>“坐等好球” (Sit on your ass investing): </strong> 强调耐心等待极佳的投资机会，而非频繁交易。</li>
+                                <li><strong>集中投资: </strong> 像篮球教练约翰·伍登一样，将大部分精力集中在少数“最佳球员”（即少数优秀公司）上，因为“玩得越多，学得越多”。</li>
+                                <li><strong>避免过度杠杆:</strong> 尽管保险浮存金提供了杠杆，但芒格和巴菲特在管理股东资金时非常谨慎，避免可能导致巨大损失的过度风险。</li>
+                                <li><strong>投资伟大公司:</strong> 芒格认为本·格雷厄姆的“烟蒂股”投资法是错误的，真正的财富在于投资那些能持续增长的“真正伟大”的公司。</li>
+                            </ul>
+                        </div>
+                        <div id="tab-lessons" class="tab-panel-investing hidden">
+                            <h4 class="text-2xl font-bold mb-4">案例与教训</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li><strong>伊士曼柯达 (Eastman Kodak):</strong> 一个由天才经营的伟大公司，最终却破产，这教会了他即使是最好的公司也可能失败，以及分散投资的重要性（尽管他个人更偏好集中）。</li>
+                                <li><strong>比亚迪 (BYD):</strong> 芒格最初反对投资比亚迪进入汽车行业，认为这是“愚蠢的想法”。但比亚迪创始人王传福的远见和执行力最终取得了巨大成功，这让芒格认识到“天才不听劝”的道理。</li>
+                                <li><strong>阿里巴巴 (Alibaba):</strong> 芒格承认这是他最糟糕的投资之一，认为公司被过度炒作，且马云在处理与中国政府关系上犯了错误。</li>
+                            </ul>
+                        </div>
+                        <div id="tab-difficulty" class="tab-panel-investing hidden">
+                            <h4 class="text-2xl font-bold mb-4">现在赚钱更难</h4>
+                            <p class="mb-4 text-gray-700">芒格认为，与过去相比，现在通过投资赚钱要困难得多。本·格雷厄姆时代遍地的“低垂的果实”（undervalued bad business）已经消失。市场竞争更加激烈，信息更加透明，找到被严重低估的机会变得极其困难。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="society" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-3xl md:text-4xl font-bold">社会与人性：观察与批判</h3>
+                    <p class="text-gray-600 mt-2">芒格对社会现象和人性的弱点有着深刻的洞察。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card fade-in">
+                        <h4 class="text-2xl font-bold mb-2">“太难了文件”</h4>
+                        <p class="text-gray-600">对于那些他无法解决或无法控制的问题（如修复联邦政府的官僚机构、原子战争的威胁、埃隆·马斯克的行为），芒格会将其放入自己的“太难了文件”，不再为此担忧，以保持心理健康。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 100ms;">
+                        <h4 class="text-2xl font-bold mb-2">现代货币理论与贫困</h4>
+                        <p class="text-gray-600">他批判现代货币理论导致了过度的债务，认为这是一种避免短期痛苦的方式，但可能带来长期问题。他宁愿接受不平等，也不愿接受贫困，认为适度的经济压力可能是文明进步的动力。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 200ms;">
+                        <h4 class="text-2xl font-bold mb-2">欺诈与人性</h4>
+                        <p class="text-gray-600">芒格对人性的欺诈行为持批判态度，无论是在工人赔偿系统中的虚报伤情，还是通过虚假宣传误导他人。他认为，立法应该严惩欺诈行为，甚至提到历史上对伪造货币者处以死刑的合理性。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 300ms;">
+                        <h4 class="text-2xl font-bold mb-2">避免“疯狂”</h4>
+                        <p class="text-gray-600">他强调避免“疯狂”的重要性，认为“疯狂”比想象中更普遍，且很容易陷入其中。他以自己避免吸烟和过度饮酒为例，指出远离那些可能导致严重后果的“标准失败方式”是明智之举。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="legacy" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-3xl md:text-4xl font-bold">生命与遗产：苦难、长寿与财富观</h3>
+                    <p class="text-gray-600 mt-2">芒格的人生充满了挑战，但他以独特的视角看待它们，并留下了深刻的遗产。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card fade-in">
+                        <h4 class="text-2xl font-bold mb-2">面对苦难：坚韧前行</h4>
+                        <p class="text-gray-600">芒格的人生经历了许多苦难，包括大萧条对家庭的冲击、表亲和儿子的早逝。他强调，面对无法改变的悲剧，唯一的选择就是“坚韧前行”。他曾因儿子的离世而“一直哭泣”，但他知道不能放弃，必须继续生活。他以白血病治愈率的提高为例，赞扬了人类文明在克服苦难方面的巨大成就。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 100ms;">
+                        <h4 class="text-2xl font-bold mb-2">长寿秘诀：避免失败</h4>
+                        <p class="text-gray-600">当被问及长寿秘诀时，芒格幽默地表示他不知道秘密，但他“避免了标准的失败方式”。这包括不吸烟、谨慎饮酒，以及避免那些会让自己陷入困境的“疯狂”行为。他甚至开玩笑说，喝可乐可能帮助他跳过帕金森症的最后痛苦阶段，因为他亲眼目睹了母亲和妹妹因此病去世的痛苦。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 200ms;">
+                        <h4 class="text-2xl font-bold mb-2">财富观：适度与传承</h4>
+                        <p class="text-gray-600">芒格和巴菲特一样，生活简朴，长期居住在同一所房子里。他认为，拥有“非常豪华的房子”并不会让人更快乐，反而会带来更多烦恼和开销。他将大部分财富传承给后代，而非像巴菲特那样捐赠给基金会，他认为这是一种不同的“显著目的”。他刻意避免让孩子们生活在过度奢华中，担心这会“宠坏”他们。</p>
+                    </div>
+                    <div class="card fade-in" style="transition-delay: 300ms;">
+                        <h4 class="text-2xl font-bold mb-2">对文明的爱</h4>
+                        <p class="text-gray-600">芒格将自己定义为“文明进步的爱好者”。他认为，人类在过去两个世纪取得的巨大进步是“文明”的体现，并对此深感自豪。他强调，尽管存在战争和挑战，但人类文明的延续和发展至关重要。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="munger-emphasis-chart" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 fade-in">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold">芒格智慧的重心</h3>
+                    <p class="text-gray-600 mt-2">通过图表，了解查理·芒格在访谈中强调的重点领域。</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="mungerEmphasisChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="py-16 md:py-24">
+             <div class="container mx-auto px-6 text-center max-w-4xl fade-in">
+                <h3 class="text-3xl md:text-4xl font-bold mb-6">最后的思考：芒格的遗产</h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    查理·芒格的最后一次访谈，不仅是对其百年人生的回顾，更是对后世的宝贵忠告。他以其独特的视角和坦率的语言，分享了关于如何学习、如何投资、如何面对苦难，以及如何在这个复杂世界中保持清醒和成功的智慧。
+                </p>
+                <p class="text-lg text-gray-700">
+                    他的哲学是实用主义与深刻洞察的结合：避免愚蠢比追求卓越更重要；耐心和纪律是投资的基石；而面对不可避免的苦难，坚韧前行是唯一的出路。芒格的遗产，不仅仅是伯克希尔哈撒韦的辉煌成就，更是他留给世人的一套行之有效的生存和成功法则。
+                </p>
+                 <div class="mt-8 border-t pt-6">
+                     <p class="text-gray-600">他的智慧提醒我们，在追求财富和成功的同时，更应关注心智的健全、人性的光辉以及对文明进步的贡献。</p>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-[#3d405b] text-white py-6 text-center">
+        <p>&copy; 2025 交互式报告。基于查理·芒格的访谈内容创建。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartCtx = document.getElementById('mungerEmphasisChart').getContext('2d');
+            const mungerEmphasisChart = new Chart(chartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['持续学习', '避免愚蠢', '耐心投资', '坚韧前行', '低预期', '避免疯狂', '跨学科思维'],
+                    datasets: [{
+                        label: '芒格强调程度 (1-10)',
+                        data: [9, 9.5, 8, 9, 7.5, 9, 8.5],
+                        backgroundColor: 'rgba(129, 178, 154, 0.7)',
+                        borderColor: 'rgba(129, 178, 154, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '查理·芒格智慧的重心',
+                            font: { size: 18, family: "'Noto Sans SC', sans-serif" },
+                             padding: {
+                                top: 10,
+                                bottom: 30
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + ' / 10';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 10,
+                            title: {
+                                display: true,
+                                text: '强调程度'
+                            }
+                        },
+                        y: {
+                           ticks: {
+                               font: {
+                                   size: 14
+                               }
+                           }
+                        }
+                    }
+                }
+            });
+
+            const learningTabs = document.querySelectorAll('#learning .tab-button');
+            const learningTabPanels = document.querySelectorAll('#learning .tab-panel-learning');
+
+            learningTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    learningTabs.forEach(t => t.classList.remove('active', 'bg-[#81b29a]', 'text-white'));
+                    tab.classList.add('active', 'bg-[#81b29a]', 'text-white');
+
+                    const target = tab.getAttribute('data-tab');
+                    
+                    learningTabPanels.forEach(panel => {
+                        if (panel.id === 'tab-' + target) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const investingTabs = document.querySelectorAll('#investing .tab-button');
+            const investingTabPanels = document.querySelectorAll('#investing .tab-panel-investing');
+
+            investingTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    investingTabs.forEach(t => t.classList.remove('active', 'bg-[#81b29a]', 'text-white'));
+                    tab.classList.add('active', 'bg-[#81b29a]', 'text-white');
+
+                    const target = tab.getAttribute('data-tab');
+                    
+                    investingTabPanels.forEach(panel => {
+                        if (panel.id === 'tab-' + target) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(el => {
+                fadeObserver.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

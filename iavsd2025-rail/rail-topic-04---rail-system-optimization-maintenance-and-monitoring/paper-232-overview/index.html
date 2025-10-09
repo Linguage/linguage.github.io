@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-232 基本信息 论文编号：232 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Physics-Guided Reinforcement Learning for Straddle Monorail Active Suspension with Image-Based Beam Joint Detection 中文标题：图像识别梁接头检测的物理引导强化学习用于跨座式单轨主动悬挂 作者及单位：Yuanjin Ji, Jian Li, Kaiying Zhang, Jiakang Li, Lihui Ren (College of Transportation, Tongji University, China; Institute of Rail Transit, Tongji University, China) 摘要 单轨轨道梁的接头会对车体和框架产生冲击，降低乘坐舒适性并导致轮胎应力不均匀。与具有恒定弹簧和阻尼系数的被动悬挂系统不同，主动悬挂系统采用电子执行器来动态控制刚度和阻尼变量。本文提出了一种基于图像识别的物理引导深度强化学习（DRL）方法，用于实时调整单轨车辆的主动悬挂系统。具体而言，引入了一种结合图像预览信息和物理模型的创新控制策略，以增强悬挂系统对轨道接头冲击的响应。使用实时图像处理技术检测轨道接头的存在和位置，预测潜在的冲击事件。将这些信息与悬挂系统的动态模型集成，实时调整控制策略。此外，将接头位置的先验知识纳入DRL训练过程，以提高对突然冲击的适应性。对于仅有接头存在和位置信息的场景，提出了一种基于预览的预调整控制方法，将强化学习状态空间扩展到包括接头与车辆之间的预测距离。该模型在符合ISO 8608标准的随机路面上进行训练，以优化执行器控制策略。
+关键词 #单轨 #强化学习 #机械工程 #主动悬挂系统 #垂向动力学 #图像识别 #物理引导 #DDPG算法
+背景与动机 单轨因其建设成本低和地形适应性强，被广泛应用于中大型城市轨道交通系统。然而，分段式轨道在梁连接点引入了显著的冲击载荷，导致严重的应力集中。这是行走轮和导向轮等关键部件疲劳失效的主要原因，同时也是间歇性振动的根源，对车辆的稳定性和安全性构成重大挑战。因此，有效减少对转向架的冲击至关重要。
+为确保跨座式单轨系统的长期稳定性和安全性，并提高乘坐平稳性和舒适性，优化悬挂系统的控制策略变得不可或缺。传统的被动悬挂系统具有恒定的弹簧和阻尼系数，难以适应复杂的轨道条件。相比之下，主动悬挂系统能够通过电子执行器动态调整刚度和阻尼参数，提供更好的乘坐舒适性和车辆稳定性。
+研究方法 本文采用了Beam Joint Net (BJNet)图像识别网络结合深度确定性策略梯度（DDPG）算法，称为BJRL，以获得主动悬挂系统的最优动态控制策略。DDPG框架采用Actor-Critic架构，由两个神经网络组成：策略网络（Actor）和Q网络（Critic）。策略网络负责学习悬挂控制策略，将观察到的状态映射到最优控制动作（如ka和ca）。Q网络估计状态-动作对的Q值，表示预期的累积奖励。
+"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-232 基本信息 论文编号：232 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Physics-Guided Reinforcement Learning for Straddle Monorail Active Suspension with Image-Based Beam Joint Detection 中文标题：图像识别梁接头检测的物理引导强化学习用于跨座式单轨主动悬挂 作者及单位：Yuanjin Ji, Jian Li, Kaiying Zhang, Jiakang Li, Lihui Ren (College of Transportation, Tongji University, China; Institute of Rail Transit, Tongji University, China) 摘要 单轨轨道梁的接头会对车体和框架产生冲击，降低乘坐舒适性并导致轮胎应力不均匀。与具有恒定弹簧和阻尼系数的被动悬挂系统不同，主动悬挂系统采用电子执行器来动态控制刚度和阻尼变量。本文提出了一种基于图像识别的物理引导深度强化学习（DRL）方法，用于实时调整单轨车辆的主动悬挂系统。具体而言，引入了一种结合图像预览信息和物理模型的创新控制策略，以增强悬挂系统对轨道接头冲击的响应。使用实时图像处理技术检测轨道接头的存在和位置，预测潜在的冲击事件。将这些信息与悬挂系统的动态模型集成，实时调整控制策略。此外，将接头位置的先验知识纳入DRL训练过程，以提高对突然冲击的适应性。对于仅有接头存在和位置信息的场景，提出了一种基于预览的预调整控制方法，将强化学习状态空间扩展到包括接头与车辆之间的预测距离。该模型在符合ISO 8608标准的随机路面上进行训练，以优化执行器控制策略。
+关键词 #单轨 #强化学习 #机械工程 #主动悬挂系统 #垂向动力学 #图像识别 #物理引导 #DDPG算法
+背景与动机 单轨因其建设成本低和地形适应性强，被广泛应用于中大型城市轨道交通系统。然而，分段式轨道在梁连接点引入了显著的冲击载荷，导致严重的应力集中。这是行走轮和导向轮等关键部件疲劳失效的主要原因，同时也是间歇性振动的根源，对车辆的稳定性和安全性构成重大挑战。因此，有效减少对转向架的冲击至关重要。
+为确保跨座式单轨系统的长期稳定性和安全性，并提高乘坐平稳性和舒适性，优化悬挂系统的控制策略变得不可或缺。传统的被动悬挂系统具有恒定的弹簧和阻尼系数，难以适应复杂的轨道条件。相比之下，主动悬挂系统能够通过电子执行器动态调整刚度和阻尼参数，提供更好的乘坐舒适性和车辆稳定性。
+研究方法 本文采用了Beam Joint Net (BJNet)图像识别网络结合深度确定性策略梯度（DDPG）算法，称为BJRL，以获得主动悬挂系统的最优动态控制策略。DDPG框架采用Actor-Critic架构，由两个神经网络组成：策略网络（Actor）和Q网络（Critic）。策略网络负责学习悬挂控制策略，将观察到的状态映射到最优控制动作（如ka和ca）。Q网络估计状态-动作对的Q值，表示预期的累积奖励。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/iavsd2025-rail/" class="crumb-anc">IAVSD 2025 铁道车辆动力学与仿真</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/" class="crumb-sec">Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-022-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-033-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-047-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-139-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-143-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-155-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-197-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-215-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-217-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-223-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-232-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-249-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-272-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-288-overview/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-321-overview/"></a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="iavsd-2025-论文概览paper-232">IAVSD 2025 论文概览：paper-232</h1>
+<h2 id="基本信息">基本信息</h2>
+<ul>
+<li><strong>论文编号</strong>：232</li>
+<li><strong>所属主题</strong>：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测)</li>
+<li><strong>英文标题</strong>：Physics-Guided Reinforcement Learning for Straddle Monorail Active Suspension with Image-Based Beam Joint Detection</li>
+<li><strong>中文标题</strong>：图像识别梁接头检测的物理引导强化学习用于跨座式单轨主动悬挂</li>
+<li><strong>作者及单位</strong>：Yuanjin Ji, Jian Li, Kaiying Zhang, Jiakang Li, Lihui Ren (College of Transportation, Tongji University, China; Institute of Rail Transit, Tongji University, China)</li>
+</ul>
+<h2 id="摘要">摘要</h2>
+<p>单轨轨道梁的接头会对车体和框架产生冲击，降低乘坐舒适性并导致轮胎应力不均匀。与具有恒定弹簧和阻尼系数的被动悬挂系统不同，主动悬挂系统采用电子执行器来动态控制刚度和阻尼变量。本文提出了一种基于图像识别的物理引导深度强化学习（DRL）方法，用于实时调整单轨车辆的主动悬挂系统。具体而言，引入了一种结合图像预览信息和物理模型的创新控制策略，以增强悬挂系统对轨道接头冲击的响应。使用实时图像处理技术检测轨道接头的存在和位置，预测潜在的冲击事件。将这些信息与悬挂系统的动态模型集成，实时调整控制策略。此外，将接头位置的先验知识纳入DRL训练过程，以提高对突然冲击的适应性。对于仅有接头存在和位置信息的场景，提出了一种基于预览的预调整控制方法，将强化学习状态空间扩展到包括接头与车辆之间的预测距离。该模型在符合ISO 8608标准的随机路面上进行训练，以优化执行器控制策略。</p>
+<h2 id="关键词">关键词</h2>
+<p>#单轨 #强化学习 #机械工程 #主动悬挂系统 #垂向动力学 #图像识别 #物理引导 #DDPG算法</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>单轨因其建设成本低和地形适应性强，被广泛应用于中大型城市轨道交通系统。然而，分段式轨道在梁连接点引入了显著的冲击载荷，导致严重的应力集中。这是行走轮和导向轮等关键部件疲劳失效的主要原因，同时也是间歇性振动的根源，对车辆的稳定性和安全性构成重大挑战。因此，有效减少对转向架的冲击至关重要。</p>
+<p>为确保跨座式单轨系统的长期稳定性和安全性，并提高乘坐平稳性和舒适性，优化悬挂系统的控制策略变得不可或缺。传统的被动悬挂系统具有恒定的弹簧和阻尼系数，难以适应复杂的轨道条件。相比之下，主动悬挂系统能够通过电子执行器动态调整刚度和阻尼参数，提供更好的乘坐舒适性和车辆稳定性。</p>
+<h2 id="研究方法">研究方法</h2>
+<p>本文采用了Beam Joint Net (BJNet)图像识别网络结合深度确定性策略梯度（DDPG）算法，称为BJRL，以获得主动悬挂系统的最优动态控制策略。DDPG框架采用Actor-Critic架构，由两个神经网络组成：策略网络（Actor）和Q网络（Critic）。策略网络负责学习悬挂控制策略，将观察到的状态映射到最优控制动作（如ka和ca）。Q网络估计状态-动作对的Q值，表示预期的累积奖励。</p>
+<p><strong>BJNet图像识别网络</strong>：针对目标检测中的梁接头检测挑战，设计了BJNet，这是一个针对边缘计算优化的轻量级视觉神经网络。BJNet由三层组成：感知层、抽象层和检测层。感知层使用注意力机制和多尺度感受野融合来提高效率，捕获局部和全局图像细节。抽象层采用多通道降维卷积层结合通道残差，提取丰富特征并输出低层和高层特征。检测层使用并行卷积层进行定位和分类，通过非极大值抑制（NMS）优化结果。深度可分离卷积减少了参数和计算负载，同时保持强大的特征提取能力。</p>
+<p><strong>实验验证</strong>：从动态仿真软件和实际车辆中收集转向架相应的加速度和速度数据用于训练。在多个凸起场景下测试模型，分析车辆垂向位移、速度、加速度和振荡抑制时间，以评估稳定性和乘坐舒适性。车体位移表示偏离稳定位置的程度，影响安全性和舒适性。车体速度和加速度反映乘客感知的运动，较高的值会降低舒适性。最小化这三个指标可以提高稳定性和舒适性。稳定时间从凸起结束到完全位移稳定为止测量，表示系统快速恢复的能力。</p>
+<h2 id="主要结论">主要结论</h2>
+<p>本研究引入了一种物理引导的深度强化学习（DRL）方法，以改善单轨车辆在轨道接头冲击下的性能。通过将图像识别与主动悬挂控制相结合，提出的BJRL模型减少了垂向位移、速度、加速度和稳定时间，提高了乘坐舒适性和稳定性。轻量级的BJNet确保了实时性能和低计算需求，使其适合实际使用。</p>
+<p>实验结果表明，BJRL模型在多个凸起路面场景下表现出色，有效抑制了车辆振动，缩短了稳定时间。该模型结合了图像预览信息和物理模型的创新控制策略，显著增强了悬挂系统对轨道接头冲击的响应能力。将接头位置的先验知识纳入DRL训练过程，提高了模型对突然冲击的适应性。</p>
+<p>这些结果证明了基于DRL的主动悬挂系统在有效解决接头引起的冲击方面的潜力，为更安全、更平稳的单轨运营做出了贡献。该方法不仅适用于单轨系统，也为其他轨道交通系统的主动悬挂控制提供了新的思路。</p>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p><strong>物理引导强化学习创新</strong>：首次将物理模型知识引导融入深度强化学习过程，创建了BJRL（Beam Joint Reinforcement Learning）模型，实现了图像识别与主动悬挂控制的创新结合。</p>
+</li>
+<li>
+<p><strong>轻量级BJNet网络设计</strong>：针对车辆边缘计算场景，设计了三层结构的轻量级视觉神经网络，采用注意力机制和多尺度感受野融合，在保证检测精度的同时实现了低计算负载。</p>
+</li>
+<li>
+<p><strong>预览式预调整控制策略</strong>：创新性地提出了基于图像预览信息的预调整控制方法，将强化学习状态空间扩展到包括接头与车辆之间的预测距离，实现了前瞻性的悬挂控制。</p>
+</li>
+<li>
+<p><strong>实际工程应用验证</strong>：结合动态仿真软件和实际车辆测试数据，在多个凸起场景下验证了模型的有效性，为实际工程应用提供了可靠的技术支撑。</p>
+</li>
+</ol>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Straddle Monorail</td>
+          <td>跨座式单轨</td>
+      </tr>
+      <tr>
+          <td>Active Suspension System</td>
+          <td>主动悬挂系统</td>
+      </tr>
+      <tr>
+          <td>Deep Reinforcement Learning (DRL)</td>
+          <td>深度强化学习</td>
+      </tr>
+      <tr>
+          <td>Beam Joint Detection</td>
+          <td>梁接头检测</td>
+      </tr>
+      <tr>
+          <td>Physics-Guided</td>
+          <td>物理引导</td>
+      </tr>
+      <tr>
+          <td>Deep Deterministic Policy Gradient (DDPG)</td>
+          <td>深度确定性策略梯度</td>
+      </tr>
+      <tr>
+          <td>Actor-Critic Architecture</td>
+          <td>Actor-Critic架构</td>
+      </tr>
+      <tr>
+          <td>Image Recognition</td>
+          <td>图像识别</td>
+      </tr>
+      <tr>
+          <td>Edge Computing</td>
+          <td>边缘计算</td>
+      </tr>
+      <tr>
+          <td>Attention Mechanism</td>
+          <td>注意力机制</td>
+      </tr>
+      <tr>
+          <td>Multi-scale Receptive Field</td>
+          <td>多尺度感受野</td>
+      </tr>
+      <tr>
+          <td>Non-Maximum Suppression (NMS)</td>
+          <td>非极大值抑制</td>
+      </tr>
+      <tr>
+          <td>Depthwise Separable Convolution</td>
+          <td>深度可分离卷积</td>
+      </tr>
+      <tr>
+          <td>Vertical Dynamics</td>
+          <td>垂向动力学</td>
+      </tr>
+      <tr>
+          <td>Ride Comfort</td>
+          <td>乘坐舒适性</td>
+      </tr>
+      <tr>
+          <td>Preview Control</td>
+          <td>预览控制</td>
+      </tr>
+      <tr>
+          <td>Stabilization Time</td>
+          <td>稳定时间</td>
+      </tr>
+      <tr>
+          <td>ISO 8608 Standards</td>
+          <td>ISO 8608标准</td>
+      </tr>
+      <tr>
+          <td>Dynamic Simulation</td>
+          <td>动态仿真</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p><em>整理日期：2025-09-03</em>
+*整理者：Claude AI prompted by HZL</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本信息">基本信息</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bifurcations and Chaos in a Model of a Rolling Railway Wheelset • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bifurcations and Chaos in a Model of a Rolling Railway Wheelset"><meta property="og:description" content="滚动铁路轮对模型中的分岔和混沌 摘要 本文通过数值分析研究了在0~180公里/小时速度范围内，悬挂式铁路轮对在直线轨道上滚动时的动力学行为。采用了非线性蠕滑-蠕变力关系，建模轮缘接触为具有&quot;死区&quot;的刚性弹簧。保持其他参数恒定，分析表明轮对系统会出现对称和非对称的周期振荡及混沌运动。研究利用分岔图、时间序列和庞加莱截面等方法，并在最后对混沌区进行了符号动力学分析，揭示系统在不同速度下的动力学复杂性。
+关键词 #分岔 #混沌 #铁路轮对 #蠕滑 #非线性动力学
+"><meta property="og:url" content="https://linguage.github.io/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Bifurcations and Chaos in a Model of a Rolling Railway Wheelset"><meta name="twitter:description" content="滚动铁路轮对模型中的分岔和混沌 摘要 本文通过数值分析研究了在0~180公里/小时速度范围内，悬挂式铁路轮对在直线轨道上滚动时的动力学行为。采用了非线性蠕滑-蠕变力关系，建模轮缘接触为具有&quot;死区&quot;的刚性弹簧。保持其他参数恒定，分析表明轮对系统会出现对称和非对称的周期振荡及混沌运动。研究利用分岔图、时间序列和庞加莱截面等方法，并在最后对混沌区进行了符号动力学分析，揭示系统在不同速度下的动力学复杂性。
+关键词 #分岔 #混沌 #铁路轮对 #蠕滑 #非线性动力学
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/hanstrue/" class="crumb-sec">Hans True论文集</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/hanstrue/paper_summary/bifurcations-chaos-railway-wheelset/">Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/critical-speed-railroad-vehicles/">Does a critical speed for railroad vehicles exist?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/multiple-attractors-critical-parameters/">Multiple Attractors and Critical Parameters and How to Find Them Numerically: The Right, The Wrong and The Gambling Way</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/new-route-chaos-railway-dynamics/">On a New Route to Chaos in Railway Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/nonlinear-dynamics-vehicle-systems/">On the Theory of Nonlinear Dynamics and its Applications in Vehicle Systems Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/parameter-study-hunting-chaos-railway/">Parameter Study of Hunting and Chaos in Railway Vehicle Dynamics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/periodic-biperiodic-chaotic-railway-vehicles/">Periodic, Biperiodic and Chaotic Dynamical Behaviour of Railway Vehicles</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-vehicle-chaos-asymmetric-hunting/">Railway Vehicle Chaos and Asymmetric Hunting</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/railway-freight-wagon-wheelset-dry-friction/">The Dynamics of a Railway Freight Wagon Wheelset With Dry Friction Damping</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/hanstrue/paper_summary/vehicle-track-dynamics-ramp-bridge/">Vehicle-Track Dynamics on a Ramp and on the Bridge: Simulation and Measurements</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+        <h1>Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Carsten Knudsen, Rasmus Feldberg, Hans True</span>
+           · 
+          <span class="meta-date">2025-09-30</span>
+        </div>
+      
+
+      
+      <h2 id="滚动铁路轮对模型中的分岔和混沌">滚动铁路轮对模型中的分岔和混沌</h2>
+<h2 id="摘要">摘要</h2>
+<p>本文通过数值分析研究了在0~180公里/小时速度范围内，悬挂式铁路轮对在直线轨道上滚动时的动力学行为。采用了非线性蠕滑-蠕变力关系，建模轮缘接触为具有&quot;死区&quot;的刚性弹簧。保持其他参数恒定，分析表明轮对系统会出现对称和非对称的周期振荡及混沌运动。研究利用分岔图、时间序列和庞加莱截面等方法，并在最后对混沌区进行了符号动力学分析，揭示系统在不同速度下的动力学复杂性。</p>
+<h2 id="关键词">关键词</h2>
+<p>#分岔 #混沌 #铁路轮对 #蠕滑 #非线性动力学</p>
+<h2 id="背景与动机">背景与动机</h2>
+<p>铁路轮对动力学问题不仅具有重要的工程实际应用背景，也是非线性动力学研究中的重要实例。高速下轮对出现的所谓&quot;摆动&quot;或&quot;蛇行&quot;现象，既影响运行安全也加剧设备磨损。用线性理论难以解释实验观测到的&quot;特征速度&quot;与实际不同的问题，推动了应用更接近实际的非线性动力学理论。论文旨在深入探索轮对在实际工况和关键参数下出现的各类分岔及混沌现象，为后续优化铁路车辆结构和动力学性能提供支持。</p>
+<h2 id="研究方法">研究方法</h2>
+<ul>
+<li>
+<p>建立轮对-轨道系统的非线性动力学模型，速度为主控参数。</p>
+</li>
+<li>
+<p>将轮缘接触等非线性用刚性弹簧带死区建模，蠕滑-蠕变力关系采用Vermeulen &amp; Johnson模型。</p>
+</li>
+<li>
+<p>运用数值积分、路径跟踪和分岔分析等现代动力学数值工具（程序PATH等）计算稳定、周期解及混沌区域，并结合庞加莱截面深入分析混沌行为。</p>
+</li>
+</ul>
+<h2 id="主要结论">主要结论</h2>
+<ul>
+<li>
+<p>轮对系统在临界速度附近首次出现超临界Hopf分岔，进入稳定周期解。</p>
+</li>
+<li>
+<p>随速度升高，系统振幅增大导致轮缘触轨出现，进而诱发混沌运动。</p>
+</li>
+<li>
+<p>系统随速度变化表现出周期对称、非对称振动与多次混沌-周期交替现象。</p>
+</li>
+<li>
+<p>混沌运动以吸引子的非对称为一大特征，能通过符号动力学方法刻画&quot;分层&quot;结构。</p>
+</li>
+<li>
+<p>研究参数改变时的动力学行为，为铁路工程改进提供理论依据。</p>
+</li>
+</ul>
+<h2 id="文章亮点或创新点">文章亮点或创新点</h2>
+<ol>
+<li>
+<p>建立高真实度的非线性轮对动力学模型，系统考虑了轮缘接触与蠕滑作用。</p>
+</li>
+<li>
+<p>采用路径跟踪与符号动力学方法，定量揭示了混沌动力学行为的结构稳定性。</p>
+</li>
+<li>
+<p>揭示系统吸引子的非对称现象及其与轮对磨损的工程实际关联。</p>
+</li>
+</ol>
+<h2 id="深度要点问题问答">深度要点问题问答</h2>
+<p><strong>Q: 这篇论文涉及哪些比较核心的概念？</strong></p>
+<p>A: 这篇论文涉及有核心概念如<strong>分岔</strong>、<strong>混沌</strong>、<strong>蠕滑力</strong>、<strong>Hopf分岔</strong>、<strong>符号动力学</strong>等。
+解析如下：</p>
+<ul>
+<li>
+<p><strong>分岔</strong>：系统稳定性随参数变化发生根本性转变的现象，如轨道速度引起的动力学解转化。</p>
+</li>
+<li>
+<p><strong>混沌</strong>：系统参数超过某阈值后，演化轨迹呈现高度不规律但确定性的复杂行为。</p>
+</li>
+<li>
+<p><strong>蠕滑力</strong>：轮轨接触区域，由轮对微小相对运动引发的切向力，显著影响轨道车辆动力学。</p>
+</li>
+<li>
+<p><strong>符号动力学</strong>：用有限符号序列刻画混沌吸引子的技术，便于描述并分析混沌系统的轨道结构。</p>
+</li>
+</ul>
+<p><strong>Q: 这篇论文试图解决什么问题？</strong></p>
+<p>A: 论文提出非线性动力学建模方法，旨在解决传统线性理论难以解释铁路轮对&quot;蛇行&quot;速度混沌现象的问题。具体来说，它试图解决以下问题：</p>
+<ul>
+<li>
+<p>为什么实际轮对&quot;蛇行&quot;临界速度与线性理论预测不同？</p>
+</li>
+<li>
+<p>轮对在不同速度下为何会出现对称/非对称周期振动甚至混沌？</p>
+</li>
+<li>
+<p>混沌如何产生、表现哪些特征、可否通过低阶模型揭示？</p>
+</li>
+</ul>
+<p>核心优势包括：</p>
+<ul>
+<li>
+<p>建模真实包含轮缘接触与蠕滑非线性效应；</p>
+</li>
+<li>
+<p>能解释实验与理论的差异；</p>
+</li>
+<li>
+<p>数值工具揭示系统混沌分岔的结构稳定性。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中提及了哪些相关的研究？</strong></p>
+<p>A: 论文提及的相关研究主要包括：</p>
+<ul>
+<li>
+<p>Klingel (1883)：最早探讨因轮对构型导致的运动自稳定性，但为线性理论。</p>
+</li>
+<li>
+<p>De Pater (1960)、Matsudaira (1960)、Wickens (1965)：加入动力学因素，研究临界速度。</p>
+</li>
+<li>
+<p>Cooperrider (1971)、Huilgol (1978)：分岔与蛇行现象理论分析。</p>
+</li>
+<li>
+<p>Kaas-Petersen (1986)、Meijaard &amp; De Pater (1989)、Jaschinski (1990)、Knudsen等(1991)：铁路系统混沌动力学和分岔行为的定量研究。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文如何解决这些问题？</strong></p>
+<p>A: 论文提出了以速度为控制参数的非线性动力学建模框架，通过如下关键步骤实现问题求解：</p>
+<ul>
+<li>
+<p>建立完整的数学动力学方程，包含蠕滑非线性和轮缘刚性死区。</p>
+</li>
+<li>
+<p>采用分岔分析方法跟踪随速度变化的系统解，精确捕捉分岔及混沌区域。</p>
+</li>
+<li>
+<p>应用庞加莱截面、符号动力学，揭示混沌运动的轨道分层与动力学机制。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 文中的研究方法所依托的基本假设有哪些？</strong></p>
+<p>A: 论文提出的非线性模型依托的假设有：</p>
+<ul>
+<li>
+<p>轨道理想：刚性、直线、水平，忽略外部扰动。</p>
+</li>
+<li>
+<p>车轮与轮对为刚体，轮对轴刚性相连。</p>
+</li>
+<li>
+<p>轮对与轨道仅在轮轨点发生非线性接触，线性悬挂，无阻尼或偏航刚度。</p>
+</li>
+<li>
+<p>轮缘接触用刚性死区弹簧近似。</p>
+</li>
+<li>
+<p>蠕滑力采用Vermeulen &amp; Johnson理论模型，忽略旋转蠕滑。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 论文做了哪些实验？</strong></p>
+<p>A: 文章专注于数值实验，主要内容包括：</p>
+<ul>
+<li>
+<p>随速度递增，跟踪系统从稳定、周期运动到混沌的整体动力学演化。</p>
+</li>
+<li>
+<p>采用PATH等数值分析工具，绘制分岔图，截面和时序曲线，揭示混沌发生和窗口结构。</p>
+</li>
+<li>
+<p>通过混沌区的符号动力学，定量讨论不同速度区间的吸引子结构及周期轨道数递推。</p>
+</li>
+</ul>
+<hr>
+<p><strong>Q: 有什么可以进一步探索的点？</strong></p>
+<p>A: 尽管在轮对混沌动力学方面取得了一系列新成果，但未来还可进一步探索：</p>
+<ul>
+<li>
+<p>系统参数（轨道结构、摩擦系数、悬挂刚度等）变化对动力学行为的影响；</p>
+</li>
+<li>
+<p>轮轨实际结构及阻尼、三维动力学对分岔和混沌的影响；</p>
+</li>
+<li>
+<p>结合实际观测数据进一步优化和验证非线性模型。</p>
+</li>
+</ul>
+<h2 id="专业词汇列表">专业词汇列表</h2>
+<table>
+  <thead>
+      <tr>
+          <th>英文术语</th>
+          <th>中文翻译</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Bifurcation</td>
+          <td>分岔</td>
+      </tr>
+      <tr>
+          <td>Chaos</td>
+          <td>混沌</td>
+      </tr>
+      <tr>
+          <td>Wheelset</td>
+          <td>轮对</td>
+      </tr>
+      <tr>
+          <td>Creep force</td>
+          <td>蠕滑力</td>
+      </tr>
+      <tr>
+          <td>Hopf bifurcation</td>
+          <td>Hopf分岔</td>
+      </tr>
+      <tr>
+          <td>Symbolic dynamics</td>
+          <td>符号动力学</td>
+      </tr>
+      <tr>
+          <td>Attractor</td>
+          <td>吸引子</td>
+      </tr>
+      <tr>
+          <td>Floquet multiplier</td>
+          <td>Floquet乘子</td>
+      </tr>
+      <tr>
+          <td>Poincare section</td>
+          <td>庞加莱截面</td>
+      </tr>
+      <tr>
+          <td>Symmetric oscillation</td>
+          <td>对称振荡</td>
+      </tr>
+      <tr>
+          <td>Asymmetric oscillation</td>
+          <td>非对称振荡</td>
+      </tr>
+      <tr>
+          <td>Dead band</td>
+          <td>死区</td>
+      </tr>
+      <tr>
+          <td>Spring stiffness</td>
+          <td>弹簧刚度</td>
+      </tr>
+      <tr>
+          <td>Coulomb friction</td>
+          <td>库仑摩擦</td>
+      </tr>
+      <tr>
+          <td>Period doubling</td>
+          <td>倍周期分岔</td>
+      </tr>
+      <tr>
+          <td>Trajectory</td>
+          <td>轨道</td>
+      </tr>
+      <tr>
+          <td>Stability</td>
+          <td>稳定性</td>
+      </tr>
+      <tr>
+          <td>Eigenvalue</td>
+          <td>特征值</td>
+      </tr>
+      <tr>
+          <td>Control parameter</td>
+          <td>控制参数</td>
+      </tr>
+      <tr>
+          <td>Nonlinear system</td>
+          <td>非线性系统</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="文章框架">文章框架</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1. 引言
+</span></span><span style="display:flex;"><span>2. 建模
+</span></span><span style="display:flex;"><span>3. 动力学方程推导
+</span></span><span style="display:flex;"><span>4. 方法与数值实现
+</span></span><span style="display:flex;"><span>5. 数值结果与分析：分岔、周期、混沌与吸引子
+</span></span><span style="display:flex;"><span>6. 混沌区符号动力学详析
+</span></span><span style="display:flex;"><span>7. 结论及展望
+</span></span><span style="display:flex;"><span>8. 参考文献
+</span></span></code></pre></div><h2 id="基本信息">基本信息</h2>
+<ul>
+<li>
+<p><strong>所属主题</strong>：非线性动力学、工程系统动力学、铁路车辆动力学</p>
+</li>
+<li>
+<p><strong>英文标题</strong>：Bifurcations and Chaos in a Model of a Rolling Railway Wheelset</p>
+</li>
+<li>
+<p><strong>中文标题</strong>：滚动铁路轮对模型中的分岔和混沌</p>
+</li>
+<li>
+<p><strong>作者及单位</strong>：Carsten Knudsen, Rasmus Feldberg and Hans True; Physics Laboratory III, Laboratory of Applied Mathematical Physics and Center for Modelling, Nonlinear Dynamics and Irreversible Thermodynamics (MIDIT), The Technical University of Denmark</p>
+</li>
+<li>
+<p><strong>Harvard格式引用</strong>：Knudsen, C., Feldberg, R. &amp; True, H., 1992. Bifurcations and Chaos in a Model of a Rolling Railway Wheelset. Philosophical Transactions: Physical Sciences and Engineering, 338(1651), pp.455-469.</p>
+</li>
+</ul>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#滚动铁路轮对模型中的分岔和混沌">滚动铁路轮对模型中的分岔和混沌</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#滚动铁路轮对模型中的分岔和混沌">滚动铁路轮对模型中的分岔和混沌</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#关键词">关键词</a></li>
+    <li><a href="#背景与动机">背景与动机</a></li>
+    <li><a href="#研究方法">研究方法</a></li>
+    <li><a href="#主要结论">主要结论</a></li>
+    <li><a href="#文章亮点或创新点">文章亮点或创新点</a></li>
+    <li><a href="#深度要点问题问答">深度要点问题问答</a></li>
+    <li><a href="#专业词汇列表">专业词汇列表</a></li>
+    <li><a href="#文章框架">文章框架</a></li>
+    <li><a href="#基本信息">基本信息</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>技术 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术"><meta property="og:description" content="实验性工作记录."><meta property="og:url" content="https://linguage.github.io/labs/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="技术"><meta name="twitter:description" content="实验性工作记录."><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/labs/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link active">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/labs/static/">信息图网页</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/anthropic_context_engineering/">「翻译」Anthropic:为人工智能代理进行有效的上下文工程</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/cognition_report_claude-4-5/">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/git-recover_guide/">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  <nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+    <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+    
+    
+      
+        
+        
+          
+          <a href="/" class="crumb-anc">Linguista</a>
+        
+        <span class="crumb-sep">/</span>
+      
+      <a href="/labs/" class="crumb-sec">技术</a>
+    
+    
+  </nav>
+
+  
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar" aria-label="Sections">
+      
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/labs/static/">信息图网页</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/anthropic_context_engineering/">「翻译」Anthropic:为人工智能代理进行有效的上下文工程</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/rosetta/cognition_report_claude-4-5/">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/git-recover_guide/">Git 历史回退自救手册：reflog 找回与分支指针恢复</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a>
+    
+  
+
+
+
+        </nav>
+      
+    </aside>
+
+    
+    <article class="docs-content">
+      <div class="prose">
+        
+        
+        
+          
+        
+        
+          <h1>技术</h1>
+        
+        <div><p>本专栏展示我在技术上的各种尝试，成功的与失败的。有的是基于Vibe Coding或者古法手工编程，有的是进行一些偏理论方面的探索。</p>
+</div>
+
+        
+        
+        
+          
+        
+
+        
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/static/">信息图网页</a></h3>
+              <div class="summary"><p>该部分收录直接经过渲染的静态HTML文件，其中多位基于大模型提示词生成的交互式报告，采用的大模型包括Claude Sonnet、 Gemini(Canvas)、 Kimi、DeepSeek等，一方面为了提供充满设计感的阅读体验，另一方面也是为了测试语言模型在前端代码生成方面的能力。</p>
+<p><strong>最后更新</strong>: 2025-10-07</p>
+<hr></div>
+            </article>
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/rosetta/anthropic_context_engineering/">「翻译」Anthropic:为人工智能代理进行有效的上下文工程</a></h3>
+              <div class="summary"><p><a href="https://www.anthropic.com/engineering">Anthropic 工程团队</a></p>
+<p>在提示工程（prompt engineering）成为应用人工智能领域关注焦点几年后，一个新术语开始崭露头角：<strong>上下文工程（context engineering）</strong>。使用语言模型进行构建，正逐渐从为提示寻找合适的词语和短语，转变为回答一个更宏观的问题：“什么样的上下文配置最有可能产生我们模型的期望行为？”</p></div>
+            </article>
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/rosetta/cognition_report_claude-4-5/">「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战</a></h3>
+              <div class="summary"><blockquote>
+<p>原文见：<a href="https://cognition.ai/blog/devin-sonnet-4-5-lessons-and-challenges#the-model-is-aware-of-its-context-window">Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges</a></p></blockquote>
+<p>我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。</p>
+<p>2025年9月29日 Cognition 团队</p></div>
+            </article>
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/git-recover_guide/">Git 历史回退自救手册：reflog 找回与分支指针恢复</a></h3>
+              <div class="summary"><p>该指南来自于一次自我感觉<a href="/post/git-incident-2025-09-28/">惊险的经历</a>，</p>
+<blockquote>
+<p>一份精简但可操作的“掉历史”自救清单：当你在 GUI 或命令行误操作后，发现最近提交“消失”时，如何快速定位并安全恢复。</p></blockquote></div>
+            </article>
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/sympy_tutorials/">SymPy 基础入门教程：符号计算核心功能解析</a></h3>
+              <div class="summary"><p>欢迎来到 SymPy 的世界！SymPy 是一个强大的 Python 库，用于进行符号数学运算。与数值计算不同，符号计算处理的是数学表达式本身，而不是它们的具体数值。本教程将带您了解 SymPy 的基本功能，并通过与我们先前讨论的钢轨动力学案例相关联，展示这些功能在实际问题中的应用。</p></div>
+            </article>
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/labs/compressed_sensing_gemini_pro/">构建压缩感知（Compressed Sensing, CS）算法代码</a></h3>
+              <div class="summary"><p>构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。</p></div>
+            </article>
+          
+        
+      </div>
+    </article>
+
+    
+    
+    
+    
+      
+    
+    
+  </div>
+
+  
+  
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>存在主义哲学导论</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="存在主义哲学导论">
+<meta property="og:url" content="https://linguage.github.io/articles/test-deepseek_r1.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="存在主义哲学导论">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/test-deepseek_r1.html">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --accent: #d4af37;
+            --light-accent: #e6c567;
+            --text: #f5f5f5;
+            --card-bg: rgba(30, 30, 30, 0.8);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: var(--darker-bg);
+            padding: 60px 0 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin: 30px 0;
+            padding: 15px 30px;
+            border-left: 3px solid var(--accent);
+            text-align: left;
+            background: rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .author {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: var(--light-accent);
+        }
+
+        /* 核心概念部分 */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .concept-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .concept-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .concept-card p {
+            margin-bottom: 15px;
+        }
+
+        /* 代表人物部分 */
+        .philosophers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .philosopher-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .philosopher-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .philosopher-img {
+            height: 200px;
+            background-size: cover;
+            background-position: top center;
+            position: relative;
+        }
+
+        .philosopher-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(18, 18, 18, 0.9), transparent);
+        }
+
+        .philosopher-info {
+            padding: 25px;
+        }
+
+        .philosopher-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .philosopher-info .dates {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* 重要作品部分 */
+        .works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .work-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .work-card .author {
+            color: var(--light-accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* 页脚 */
+        footer {
+            background: var(--darker-bg);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        /* 装饰元素 */
+        .floating {
+            position: absolute;
+            opacity: 0.1;
+            color: var(--accent);
+            font-size: 5rem;
+            z-index: 1;
+        }
+
+        .floating:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating:nth-child(2) {
+            top: 40%;
+            right: 15%;
+            animation: float 18s infinite ease-in-out;
+            animation-delay: -5s;
+        }
+
+        .floating:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation: float 12s infinite ease-in-out;
+            animation-delay: -8s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body>
+    <header>
+        <div class="floating">?</div>
+        <div class="floating">!</div>
+        <div class="floating">∃</div>
+        
+        <div id="particles-js"></div>
+        
+        <div class="container header-content">
+            <h1>存在主义哲学</h1>
+            <p class="subtitle">探索存在、自由与人类境况</p>
+            
+            <div class="quote">
+                "存在先于本质"
+                <span class="author">— 让-保罗·萨特</span>
+            </div>
+            
+            <div class="quote">
+                "在意识到生命的无意义之后，一个人要么自杀，要么去发现或创造某种意义"
+                <span class="author">— 阿尔贝·加缪</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">存在主义的核心概念</h2>
+            <div class="concepts">
+                <div class="concept-card">
+                    <h3>存在先于本质</h3>
+                    <p>人类首先存在，遭遇自身，涌现于世界——然后才定义自己。我们不是带着预定本质来到世界，而是通过自己的选择创造自我。</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>自由与责任</h3>
+                    <p>存在主义者认为人类拥有绝对自由，但这种自由伴随着沉重的责任。我们不仅对自己负责，也通过自己的选择为全人类定义什么是可能的。</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>荒诞</h3>
+                    <p>人类寻求意义的本能与宇宙的冷漠沉默之间的冲突产生了荒诞感。存在主义承认这种根本的荒诞性，但不将其视为绝望的理由。</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>本真性</h3>
+                    <p>在意识到自由和责任后，个体应过一种"本真"的生活，拒绝社会常规和他人期望，根据自己的价值观做出选择。</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>焦虑</h3>
+                    <p>面对无限自由和随之而来的责任，人类会体验到存在性焦虑。这种焦虑不是需要治疗的病症，而是人类状况的基本特征。</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>死亡意识</h3>
+                    <p>对死亡的意识迫使人类面对生命的有限性，从而激励我们过更有意义、更真实的生活。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--darker-bg);">
+        <div class="container">
+            <h2 class="section-title">存在主义代表人物</h2>
+            <div class="philosophers">
+                <div class="philosopher-card">
+                    <div class="philosopher-img" style="background-image: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTon4v0odKwLq72dWfS68kWf5oUi4eqnf9kT-sdmowZQb0noV-n4ebSmHJDEZxq_JUpRJBXnathbTx7BFkAn8zng');"></div>
+                    <div class="philosopher-info">
+                        <h3>让-保罗·萨特</h3>
+                        <div class="dates">1905-1980</div>
+                        <p>法国哲学家、作家，存在主义主要代表人物。提出"存在先于本质"，强调人的绝对自由和责任。</p>
+                    </div>
+                </div>
+                
+                <div class="philosopher-card">
+                    <div class="philosopher-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Albert_Camus%2C_gagnant_de_prix_Nobel%2C_portrait_en_buste%2C_pos%C3%A9_au_bureau%2C_faisant_face_%C3%A0_gauche%2C_cigarette_de_tabagisme.jpg/500px-Albert_Camus%2C_gagnant_de_prix_Nobel%2C_portrait_en_buste%2C_pos%C3%A9_au_bureau%2C_faisant_face_%C3%A0_gauche%2C_cigarette_de_tabagisme.jpg');"></div>
+                    <div class="philosopher-info">
+                        <h3>阿尔贝·加缪</h3>
+                        <div class="dates">1913-1960</div>
+                        <p>法国作家、哲学家，荒诞哲学代表人物。探索在无意义世界中寻找意义的方式，强调反抗的重要性。</p>
+                    </div>
+                </div>
+                
+                <div class="philosopher-card">
+                    <div class="philosopher-img" style="background-image: url('https://imagepphcloud.thepaper.cn/pph/image/173/545/319.jpg');"></div>
+                    <div class="philosopher-info">
+                        <h3>西蒙娜·德·波伏娃</h3>
+                        <div class="dates">1908-1986</div>
+                        <p>法国作家、存在主义哲学家、女权主义理论家。在《第二性》中应用存在主义分析女性处境。</p>
+                    </div>
+                </div>
+                
+                <div class="philosopher-card">
+                    <div class="philosopher-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/S%C3%B8ren_Kierkegaard_%281813-1855%29_-_%28cropped%29.jpg/500px-S%C3%B8ren_Kierkegaard_%281813-1855%29_-_%28cropped%29.jpg');"></div>
+                    <div class="philosopher-info">
+                        <h3>索伦·克尔凯郭尔</h3>
+                        <div class="dates">1813-1855</div>
+                        <p>丹麦哲学家，存在主义先驱。关注个体在面对上帝时的主观真理和信仰的"跳跃"。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">存在主义重要著作</h2>
+            <div class="works">
+                <div class="work-card">
+                    <h3>《存在与虚无》</h3>
+                    <span class="author">让-保罗·萨特</span>
+                    <p>萨特的主要哲学著作，系统阐述其存在主义思想，包括意识、自由、责任等核心概念。</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>《局外人》</h3>
+                    <span class="author">阿尔贝·加缪</span>
+                    <p>通过主角默尔索的故事展现世界的荒诞性和人与社会的疏离。</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>《第二性》</h3>
+                    <span class="author">西蒙娜·德·波伏娃</span>
+                    <p>开创性的女权主义著作，运用存在主义分析女性在历史和社会中的处境。</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>《恐惧与战栗》</h3>
+                    <span class="author">索伦·克尔凯郭尔</span>
+                    <p>通过亚伯拉罕献祭以撒的故事探讨信仰、伦理与个体的关系。</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>《存在主义是一种人道主义》</h3>
+                    <span class="author">让-保罗·萨特</span>
+                    <p>萨特对存在主义的通俗解释，回应外界对存在主义的批评。</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>《西西弗神话》</h3>
+                    <span class="author">阿尔贝·加缪</span>
+                    <p>探讨荒诞哲学，提出"人必须想象西西弗是快乐的"这一著名观点。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>存在主义哲学导论 | 探索人类存在的意义与自由</p>
+            <p>© 2023 哲学探索 | 本网页仅用于教育目的</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 粒子背景初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 60,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#d4af37"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#d4af37",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+</html>
