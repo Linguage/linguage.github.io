@@ -4,8 +4,8 @@
   const INPUT_ID = 'globalSearchInput';
   const POPOVER_ID = 'globalSearchPopover';
   const MAX_RESULTS = 10;
-  // 使用相对路径，确保在子路径部署（如 /project/）下可访问
-  const FETCH_URL = 'index.json';
+  // 统一索引地址：优先使用模板注入的全局变量；否则基于当前页构造绝对 URL
+  const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString());
 
   // modes: all | posts | page
   let mode = 'all';
@@ -15,6 +15,7 @@
   let pop = null;
   let activeIndex = -1;
   let isComposing = false;
+  let lastOpenAt = 0; // 防止不同浏览器事件顺序导致“刚打开就被关闭”
 
   function $(id){ return document.getElementById(id); }
 
@@ -27,7 +28,7 @@
       if (!res.ok) throw new Error('HTTP '+res.status);
       data = await res.json();
     }catch(err){
-      console.error('[search] failed to load', err);
+      console.error('[search] failed to load index:', FETCH_URL, err);
       data = [];
     }
     return data;
@@ -235,6 +236,7 @@
 
     pop.innerHTML = tabsHtml;
     pop.hidden = false;
+    lastOpenAt = Date.now();
     bindQuickEvents();
 
     if (!q) return;
@@ -340,7 +342,12 @@
 
   function onDocClick(e){
     if (!pop || pop.hidden) return;
-    const within = e.target.closest('#'+POPOVER_ID) || e.target.closest('#'+INPUT_ID);
+    // 打开后的短时间内忽略文档点击，避免某些浏览器的事件顺序导致闪闭
+    if (Date.now() - lastOpenAt < 220) return;
+    // 在输入框、图标容器或弹窗内部点击都不关闭
+    const within = e.target.closest('#'+POPOVER_ID)
+      || e.target.closest('#'+INPUT_ID)
+      || e.target.closest('.site-search');
     if (!within) closePopover();
   }
 
@@ -366,6 +373,7 @@
     });
 
     document.addEventListener('click', onDocClick);
+    document.addEventListener('pointerdown', onDocClick);
     document.addEventListener('keydown', focusHotkey);
 
     // 初始显示快捷入口（聚焦时且为空）
