@@ -4,6 +4,8 @@
   const INPUT_ID = 'globalSearchInput';
   const POPOVER_ID = 'globalSearchPopover';
   const MAX_RESULTS = 10;
+  const TOGGLE_ID = 'searchToggleBtn';
+  const BACK_ID = 'searchBackBtn';
   // 统一索引地址：优先使用模板注入的全局变量；否则基于当前页构造绝对 URL
   const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString());
 
@@ -16,6 +18,13 @@
   let activeIndex = -1;
   let isComposing = false;
   let lastOpenAt = 0; // 防止不同浏览器事件顺序导致“刚打开就被关闭”
+  // Debug 开关：在本地开发端口 1313 或手动设置 window.DEBUG_SEARCH=true 时输出调试日志
+  const DEBUG = (typeof window !== 'undefined' && (
+    (window.location && window.location.port === '1313') || (window.DEBUG_SEARCH === true)
+  ));
+  function dbg(){ if (DEBUG) { try { console.debug('[search]', ...arguments); } catch(_){} } }
+  let toggleBtn = null;
+  let backBtn = null;
 
   function $(id){ return document.getElementById(id); }
 
@@ -236,7 +245,9 @@
 
     pop.innerHTML = tabsHtml;
     pop.hidden = false;
-    lastOpenAt = Date.now();
+    // 保留 openMobile() 设定的未来时间，避免刚打开就被 onDocClick 误关闭
+    lastOpenAt = Math.max(lastOpenAt, Date.now());
+    dbg('render header', { mode, q, total, lastOpenAt });
     bindQuickEvents();
 
     if (!q) return;
@@ -272,10 +283,40 @@
     pop.insertAdjacentHTML('beforeend', header + `<div class="search-results">${list||'<div style=\"padding:12px;\">未找到结果</div>'}</div>`);
   }
 
+  // 顶层：移动端展开/收起（供 setup 与其它逻辑调用）
+  function openMobile(){
+    dbg('openMobile:start', { mm: window.matchMedia && window.matchMedia('(max-width: 900px)').matches, bodyMobile: document.body.classList.contains('mobile-searching') });
+    if (!window.matchMedia('(max-width: 900px)').matches) {
+      dbg('openMobile:ignored due to width');
+      return;
+    }
+    if (!document.body.classList.contains('mobile-searching')){
+      document.body.classList.add('mobile-searching');
+    }
+    lastOpenAt = Date.now() + 450; // 增大保护时间
+    if (pop) { try{ pop.hidden = false; }catch(_){/* no-op */} }
+    try{
+      if (box){
+        box.focus();
+        const q = box.value.trim();
+        if (q){ onInput(); }
+        else { render([], '', 0); }
+      }
+    }catch(_){/* no-op */}
+    dbg('openMobile:end', { lastOpenAt });
+  }
+  function closeMobile(){
+    dbg('closeMobile');
+    document.body.classList.remove('mobile-searching');
+    closePopover();
+    try{ box && box.blur && box.blur(); }catch(_){/* no-op */}
+  }
+
   function bindQuickEvents(){
     if (!pop) return;
     pop.querySelectorAll('[data-mode]').forEach(btn => {
       btn.addEventListener('click', () => {
+        dbg('mode-switch click', {from: mode, to: btn.getAttribute('data-mode')});
         const newMode = btn.getAttribute('data-mode');
         if (mode === newMode) return;
         mode = newMode;
@@ -288,6 +329,26 @@
         }
       });
     });
+
+    // 捕获阶段事件代理：即使 DOM 被重建也能响应；并在最早时机设置保护与阻止冒泡
+    document.addEventListener('click', (e)=>{
+      const t = e.target;
+      if (!t) return;
+      const hitToggle = t.closest && t.closest('#'+TOGGLE_ID);
+      const hitBack = t.closest && t.closest('#'+BACK_ID);
+      if (hitToggle){
+        dbg('delegate toggle(click,capture)');
+        lastOpenAt = Date.now() + 500; // 提前加大保护
+        e.stopPropagation();
+        e.preventDefault();
+        openMobile();
+      } else if (hitBack){
+        dbg('delegate back(click,capture)');
+        e.stopPropagation();
+        e.preventDefault();
+        closeMobile();
+      }
+    }, true);
   }
 
   function moveActive(delta){
@@ -343,12 +404,20 @@
   function onDocClick(e){
     if (!pop || pop.hidden) return;
     // 打开后的短时间内忽略文档点击，避免某些浏览器的事件顺序导致闪闭
-    if (Date.now() - lastOpenAt < 220) return;
+    const delta = Date.now() - lastOpenAt;
+    dbg('doc event', e.type, { delta, popHidden: !!(pop && pop.hidden), mobile: document.body.classList.contains('mobile-searching') });
+    if (delta < 400) { dbg('doc event ignored by guard'); return; }
     // 在输入框、图标容器或弹窗内部点击都不关闭
     const within = e.target.closest('#'+POPOVER_ID)
       || e.target.closest('#'+INPUT_ID)
-      || e.target.closest('.site-search');
-    if (!within) closePopover();
+      || e.target.closest('.site-search')
+      || e.target.closest('#'+TOGGLE_ID)
+      || e.target.closest('#'+BACK_ID);
+    if (!within){
+      dbg('doc event closing popover (outside click)');
+      closePopover();
+      document.body.classList.remove('mobile-searching');
+    }
   }
 
   function focusHotkey(e){
@@ -360,24 +429,36 @@
   function setup(){
     box = $(INPUT_ID);
     pop = $(POPOVER_ID);
+    toggleBtn = $(TOGGLE_ID);
+    backBtn = $(BACK_ID);
+    dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
 
-    box.addEventListener('compositionstart', ()=> isComposing = true);
-    box.addEventListener('compositionend', ()=> { isComposing = false; onInput(); });
-    box.addEventListener('input', ()=> { if (!isComposing) onInput(); });
+    box.addEventListener('compositionstart', ()=> { isComposing = true; dbg('compositionstart'); });
+    box.addEventListener('compositionend', ()=> { isComposing = false; dbg('compositionend'); onInput(); });
+    box.addEventListener('input', ()=> { if (!isComposing) { dbg('input'); onInput(); } });
     box.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape'){ closePopover(); return; }
+      if (e.key === 'Escape'){ dbg('escape close'); closePopover(); document.body.classList.remove('mobile-searching'); return; }
       if (e.key === 'ArrowDown'){ e.preventDefault(); moveActive(1); }
       if (e.key === 'ArrowUp'){ e.preventDefault(); moveActive(-1); }
       if (e.key === 'Enter'){ const a = pop && pop.querySelector('.search-item.is-active'); if (a){ e.preventDefault(); window.location.href = a.getAttribute('href'); } }
     });
 
     document.addEventListener('click', onDocClick);
-    document.addEventListener('pointerdown', onDocClick);
     document.addEventListener('keydown', focusHotkey);
 
     // 初始显示快捷入口（聚焦时且为空）
-    box.addEventListener('focus', () => { if (!box.value.trim()){ render([], '', 0); } });
+    box.addEventListener('focus', () => { dbg('focus', { empty: !box.value.trim() }); if (!box.value.trim()){ render([], '', 0); } });
+
+    // 绑定移动端按钮（仅 click，避免重复与竞态）
+    if (toggleBtn){ toggleBtn.addEventListener('click', (e)=>{ dbg('toggle click'); e.preventDefault(); openMobile(); }); }
+    if (backBtn){ backBtn.addEventListener('click', (e)=>{ dbg('back click'); e.preventDefault(); closeMobile(); }); }
+
+    // 视口变化：放大到桌面时自动收起
+    const mq = window.matchMedia('(min-width: 901px)');
+    function onMediaChange(){ dbg('media change', { desktop: mq.matches }); if (mq.matches){ document.body.classList.remove('mobile-searching'); closePopover(); } }
+    if (mq.addEventListener) mq.addEventListener('change', onMediaChange);
+    else if (mq.addListener) mq.addListener(onMediaChange);
 
     // 拦截“本页”结果，平滑滚动并高亮
     pop.addEventListener('click', (e) => {

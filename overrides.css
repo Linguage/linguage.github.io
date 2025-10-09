@@ -340,7 +340,8 @@ body{ padding-bottom: var(--theme-footer-height); }
 
 /* Header: progressively hide less important items */
 @media (max-width: 1200px){
-  .actions .btn.ghost:not(.posts-cta):not(.posts-btn):not(.theme-toggle-btn){ display: none; }
+  /* 保留 Posts、主题切换 与 新的搜索图标 */
+  .actions .btn.ghost:not(.posts-cta):not(.posts-btn):not(.theme-toggle-btn):not(.search-toggle-btn){ display: none; }
 }
 
 .actions .posts-cta{ background: #161616; color: #fff !important; border: 1px solid #161616; text-decoration: none; transition: background .25s ease, color .25s ease, transform .2s ease; }
@@ -616,7 +617,8 @@ body{ padding-bottom: var(--theme-footer-height); }
     align-items: center;
     gap: 10px;
   }
-  .actions .posts-btn{ margin-left: auto; }
+  /* 由 search.css 控制右侧对齐顺序，不再让 Posts 主动推到最右侧 */
+  .actions .posts-btn{ margin-left: 0; }
 }
 
 /* ============================= */
