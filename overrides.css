@@ -717,28 +717,266 @@ body{ padding-bottom: var(--theme-footer-height); }
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a.is-active,
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a.active,
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="page"],
-:root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="true"]{
-  background: rgba(50,49,44,0.95);
-  color: var(--accent-2);
-  box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+  :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="true"]{
+    background: rgba(50,49,44,0.95);
+    color: var(--accent-2);
+    box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+  }
+  :root[data-theme="dark"] .nav-drawer-item.is-active,
+  :root[data-theme="dark"] .nav-drawer-item.active,
+  :root[data-theme="dark"] .nav-drawer-item[aria-current="page"],
+  :root[data-theme="dark"] .nav-drawer-item[aria-current="true"],
+  :root[data-theme="dark"] .nav-drawer-subitem.is-active,
+  :root[data-theme="dark"] .nav-drawer-subitem.active,
+  :root[data-theme="dark"] .nav-drawer-subitem[aria-current="page"],
+  :root[data-theme="dark"] .nav-drawer-subitem[aria-current="true"]{
+    background: rgba(50,49,44,0.95);
+    color: var(--accent-2);
+    box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+  }
+  :root[data-theme="dark"] .docs-sidebar .docs-nav a.is-active,
+  :root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="page"],
+  :root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="true"],
+  :root[data-theme="dark"] .toc a.is-active{
+    background: rgba(50,49,44,0.95);
+    color: var(--accent-2);
+    box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+  }
+
+/* ========================================= */
+/* Sidebar placeholders only (desktop/tablet) */
+/* Hide functional content but keep columns   */
+/* ========================================= */
+/* 左侧：隐藏标题与导航内容，但保留 <aside.docs-sidebar> 以维持列占位 */
+@media (min-width: 768px){
+  .docs-sidebar .docs-side-title,
+  .docs-sidebar .docs-nav{
+    display: none !important;
+  }
+
+  /* 右侧：去除卡片外观并隐藏内部内容，但保留 <aside.docs-toc> 以维持列占位 */
+  .docs-toc{
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .docs-toc .toc-title,
+  .docs-toc .toc{
+    display: none !important;
+  }
 }
-:root[data-theme="dark"] .nav-drawer-item.is-active,
-:root[data-theme="dark"] .nav-drawer-item.active,
-:root[data-theme="dark"] .nav-drawer-item[aria-current="page"],
-:root[data-theme="dark"] .nav-drawer-item[aria-current="true"],
-:root[data-theme="dark"] .nav-drawer-subitem.is-active,
-:root[data-theme="dark"] .nav-drawer-subitem.active,
-:root[data-theme="dark"] .nav-drawer-subitem[aria-current="page"],
-:root[data-theme="dark"] .nav-drawer-subitem[aria-current="true"]{
-  background: rgba(50,49,44,0.95);
-  color: var(--accent-2);
-  box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+
+/* ========================================= */
+/* Enable drawers & TOC mini button on ALL widths */
+/* Keep templates/JS unchanged; override visibility via CSS */
+/* ========================================= */
+
+/* Show the header nav toggle button on desktop/tablet as well */
+.mobile-nav-btn,
+.mobile-nav-btn--header{
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
 }
-:root[data-theme="dark"] .docs-sidebar .docs-nav a.is-active,
-:root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="page"],
-:root[data-theme="dark"] .docs-sidebar .docs-nav a[aria-current="true"],
-:root[data-theme="dark"] .toc a.is-active{
-  background: rgba(50,49,44,0.95);
-  color: var(--accent-2);
-  box-shadow: inset 0 0 0 1px rgba(249,214,123,0.25);
+
+/* Make nav drawer work across all widths */
+.nav-drawer{
+  position: fixed;
+  left: 0;
+  top: var(--theme-header-height, 64px);
+  bottom: 0;
+  width: min(86%, 360px);
+  z-index: 400;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
+.nav-drawer-inner{ height: 100%; width: 100%; background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
+.nav-drawer-header{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--border); }
+.nav-drawer-title{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color: rgba(107,102,95,.85); font-weight:600; }
+.nav-drawer-close{ border:1px solid var(--border); background:transparent; border-radius:8px; padding:4px 8px; cursor:pointer; }
+.nav-drawer-list{ padding:8px 10px; overflow:auto; display:grid; gap:0; max-height:none; }
+.nav-drawer[hidden]{ display: none !important; }
+.nav-drawer:not([hidden]){ display: block !important; }
+
+/* Make TOC mini button and drawer available on desktop/tablet too */
+.toc-mini-btn{
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--theme-footer-height) + 24px);
+  z-index: 200;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  box-shadow: var(--shadow);
+  display: inline-flex !important;
+}
+.toc-drawer{
+  position: fixed;
+  right: 0;
+  top: var(--theme-header-height);
+  bottom: calc(var(--theme-footer-height) + 8px);
+  width: min(86%, 340px);
+  z-index: 110;
+}
+  .toc-drawer-inner{ height: 100%; background: var(--surface); border-left: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .toc-drawer-header{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--border); font-weight:600; }
+  .toc-drawer-close{ border:1px solid var(--border); background:transparent; border-radius:8px; padding:4px 8px; cursor:pointer; }
+  .toc-drawer .toc{ padding:8px 8px; overflow:auto; }
+  .toc-drawer[hidden]{ display: none !important; }
+  .toc-drawer:not([hidden]){ display: block !important; }
+
+/* ========================================= */
+/* M1: Hoist mobile drawer styles to all widths */
+/* - Remove link underlines, unify typography, spacing, states            */
+/* - Improve inner padding and list gutters                               */
+/* - Define drawer widths: desktop 400px, tablet 340px, mobile min(86%,340)*/
+/* ========================================= */
+
+/* Drawer widths */
+.nav-drawer{ width: 400px !important; }
+@media (max-width: 1200px){ .nav-drawer{ width: 340px !important; } }
+@media (max-width: 900px){ .nav-drawer{ width: min(86%, 340px) !important; } }
+
+/* Drawer inner paddings and list gutters */
+.nav-drawer-inner{ padding: 8px 12px 18px; }
+.nav-drawer-list{ padding: 8px 8px 10px; overflow: auto; }
+
+/* Remove underlines and unify link typography in drawer */
+.nav-drawer a,
+.nav-drawer-item,
+.nav-drawer-subitem,
+.nav-drawer-folder .docs-nav.in-drawer a{
+  text-decoration: none !important;
+  display: block;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  padding: 8px 10px;
+  margin: 0 4px; /* avoid touching panel edges */
+  border-radius: 8px;
+  transition: background .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+/* Subitems indentation and secondary color */
+.nav-drawer-subitem{ padding-left: 24px; color: var(--muted); }
+
+/* Hover and focus states */
+.nav-drawer-item:hover,
+.nav-drawer-subitem:hover,
+.nav-drawer-folder .docs-nav.in-drawer a:hover{
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
+}
+.nav-drawer a:focus-visible{
+  outline: 2px solid var(--border);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+@media (prefers-color-scheme: dark){
+  .nav-drawer-item:hover,
+  .nav-drawer-subitem:hover,
+  .nav-drawer-folder .docs-nav.in-drawer a:hover{
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(245,241,230,0.12);
+  }
+}
+
+/* Active/current states */
+.nav-drawer a.is-active,
+.nav-drawer a.active,
+.nav-drawer a[aria-current="page"],
+.nav-drawer a[aria-current="true"]{
+  background: var(--docs-nav-current-bg, rgba(0,0,0,0.06));
+  box-shadow: inset 0 0 0 1px var(--docs-nav-current-border, rgba(0,0,0,0.08));
+  color: var(--text);
+}
+
+/* Section subtitles: subtle separators and spacing */
+.nav-drawer-subtitle{
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: rgba(107,102,95,.8);
+  text-transform: uppercase;
+  padding: 10px 12px 8px;
+  margin: 6px 2px 4px;
+  border-top: 1px solid var(--border);
+}
+
+/* Hide any stray nav toggle buttons inside breadcrumbs on wide screens */
+@media (min-width: 900px){
+  .breadcrumbs .mobile-nav-btn,
+  .breadcrumbs .mobile-nav-btn--header{ display: none !important; }
+}
+
+/* TOC drawer link styles (match drawer links) */
+.toc-drawer .toc a{
+  text-decoration: none !important;
+  display: block;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  padding: 6px 10px;
+  margin: 0 4px;
+  border-radius: 8px;
+  transition: background .18s ease, color .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+  .toc-drawer .toc a:hover{
+    background: rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+  }
+  @media (prefers-color-scheme: dark){
+    .toc-drawer .toc a:hover{
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(245,241,230,0.12);
+    }
+  }
+
+/* ========================================= */
+/* Fix: remove duplicate divider on tablet    */
+/* Root cause: .nav-drawer-folder had border-top in <=1200px block */
+/* Keep single separator on .nav-drawer-subtitle only              */
+/* ========================================= */
+.nav-drawer-folder{ border-top: none !important; }
+@media (max-width: 1200px){ .nav-drawer-folder{ border-top: none !important; } }
+
+/* ========================================= */
+/* M2: Global backdrop + scroll lock when any drawer is open      */
+/* Applies to ALL widths; no template/JS changes                   */
+/* ========================================= */
+body:has(#navDrawer:not([hidden])),
+body:has(#tocDrawer:not([hidden])){
+  overflow: hidden;
+}
+body:has(#navDrawer:not([hidden]))::after,
+body:has(#tocDrawer:not([hidden]))::after{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.12);
+  -webkit-backdrop-filter: saturate(120%) blur(1px);
+  backdrop-filter: saturate(120%) blur(1px);
+  z-index: 105; /* above content/header (100), below drawers (110/400) */
+  pointer-events: auto; /* block underlying clicks; document listener still closes */
+}
+
+/* ========================================= */
+/* Place hamburger to the LEFT of the logo (all widths) */
+/* Keep structure unchanged; reorder via flex order */
+/* ========================================= */
+.brand{ display: inline-flex; align-items: center; gap: 8px; }
+.brand .mobile-nav-btn--header{ order: 0; margin-left: 0 !important; margin-right: 6px; }
+.brand .brand-avatar-link{ order: 1; }
+.brand .brand-text{ order: 2; }
