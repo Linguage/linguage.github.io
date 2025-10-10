@@ -852,7 +852,7 @@ body{ padding-bottom: var(--theme-footer-height); }
 
 /* Drawer inner paddings and list gutters */
 .nav-drawer-inner{ padding: 8px 12px 18px; }
-.nav-drawer-list{ padding: 8px 8px 10px; overflow: auto; }
+.nav-drawer-list{ padding: 8px 8px 10px; overflow: visible; flex: 0 0 auto; }
 
 /* Remove underlines and unify link typography in drawer */
 .nav-drawer a,
@@ -914,6 +914,13 @@ body{ padding-bottom: var(--theme-footer-height); }
   margin: 6px 2px 4px;
   border-top: 1px solid var(--border);
 }
+
+/* Keep drawer header pinned */
+.nav-drawer-header{ position: sticky; top: 0; background: var(--surface); z-index: 2; }
+
+/* Make section area the only scroller; allow flex shrink */
+.nav-drawer-folder{ flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
+.nav-drawer-folder .docs-nav.in-drawer{ flex: 1 1 auto; overflow: auto; padding: 8px 8px 10px; scrollbar-gutter: stable both-edges; }
 
 /* Hide any stray nav toggle buttons inside breadcrumbs on wide screens */
 @media (min-width: 900px){
