@@ -1,0 +1,51 @@
+[{
+    "title": "「翻译」Anthropic:为人工智能代理进行有效的上下文工程",
+    "url": "/labs/rosetta/anthropic_context_engineering/",
+    "section": "labs",
+    "date": "2025-10-01",
+    "summary": "Anthropic 工程团队\n在提示工程（prompt engineering）成为应用人工智能领域关注焦点几年后，一个新术语开始崭露头角：上下文工程（context engineering）。使用语言模型进行构建，正逐渐从为提示寻找合适的词语和短语，转变为回答一个更宏观的问题：“什么样的上下文配置最有可能产生我们模型的期望行为？”\n",
+    "description": "",
+    "tags": ["Anthropic","Context Engineering","上下文工程","智能代理"],
+    "categories": ["工程实践","智能代理开发"],
+    "content": "Anthropic 工程团队\n在提示工程（prompt engineering）成为应用人工智能领域关注焦点几年后，一个新术语开始崭露头角：上下文工程（context engineering）。使用语言模型进行构建，正逐渐从为提示寻找合适的词语和短语，转变为回答一个更宏观的问题：“什么样的上下文配置最有可能产生我们模型的期望行为？”\n上下文指的是在从大语言模型（LLM）采样时包含的令牌（token）集合。眼下的工程问题是，在 LLM 的固有约束下，优化这些令牌的效用，以持续实现期望的结果。要有效地驾驭 LLM，通常需要在上下文中思考——换句话说：考虑 LLM 在任何给定时间可用的整体状态，以及该状态可能产生的潜在行为。\n在这篇文章中，我们将探讨上下文工程这门新兴的艺术，并为构建可控、有效的代理提供一个更精炼的心智模型。\n上下文工程与提示工程 在 Anthropic，我们将上下文工程视为提示工程的自然演进。提示工程指的是为获得最佳结果而编写和组织 LLM 指令的方法（请参阅我们的文档以获取概述和有用的提示工程策略）。上下文工程则指的是在 LLM 推理过程中，为管理和维护最佳令牌（信息）集合而采取的一系列策略，包括可能出现在提示之外的所有其他信息。\n在早期使用 LLM 进行工程设计的阶段，提示是人工智能工程工作中最重要的部分，因为日常聊天互动之外的大多数用例都需要针对单次分类或文本生成 …"
+  },{
+    "title": "「翻译」Cognition: 为 Claude Sonnet 4.5 重构 Devin：经验与挑战",
+    "url": "/labs/rosetta/cognition_report_claude-4-5/",
+    "section": "labs",
+    "date": "2025-09-30",
+    "summary": " 原文见：Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges\n我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。\n2025年9月29日 Cognition 团队\n",
+    "description": "",
+    "tags": ["Coding Agent","Claude Sonnet 4.5","Devin","Windsurf"],
+    "categories": ["工程实践","智能代理开发"],
+    "content": " 原文见：Rebuilding Devin for Claude Sonnet 4.5: Lessons and Challenges\n我们为 Claude Sonnet 4.5 重构了 Devin。新版本在我们的初级开发人员评估 (Junior Developer Evals) 中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”(Agent Preview) 中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。\n2025年9月29日 Cognition 团队\n我们为 Claude Sonnet 4.5 重构了 Devin。\n新版本在我们的初级开发人员评估中速度提升了 2 倍，表现提高了 12%，现已在“智能代理预览”中提供。对于喜欢旧版 Devin 的用户，该版本仍然可用。\n为什么选择重构，而不是简单地替换成新的 Sonnet 模型就草草了事？因为这个模型的运作方式与众不同——它打破了我们对智能代理应如何构建的固有设想。以下是我们的心得：\n因为 Devin 是一个会规划、执行和迭代的智能代理，而不仅仅是自动补全代码（或充当一个“副驾驶”），所以我们得以用一个独特的窗口来观察模型的能力。每一次改进都会在我们的反馈循环中产生复合效应，让我们了解到真正发生了哪些变化。在 Sonnet 4.5 上，我们看到了自 Sonnet 3.6（Devin 正式版所使用的模型）以 …"
+  },{
+    "title": "Git 历史回退自救手册：reflog 找回与分支指针恢复",
+    "url": "/labs/git-recover_guide/",
+    "section": "labs",
+    "date": "2025-09-28",
+    "summary": "该指南来自于一次自我感觉惊险的经历，\n一份精简但可操作的“掉历史”自救清单：当你在 GUI 或命令行误操作后，发现最近提交“消失”时，如何快速定位并安全恢复。\n",
+    "description": "",
+    "tags": ["Git","数据恢复","分支管理"],
+    "categories": ["技术分享"],
+    "content": "该指南来自于一次自我感觉惊险的经历，\n一份精简但可操作的“掉历史”自救清单：当你在 GUI 或命令行误操作后，发现最近提交“消失”时，如何快速定位并安全恢复。\n典型症状 近期提交不见了：git log 顶端不是你刚做的提交。 工作区回到旧版本：本地文件和远端网站内容明显“时光倒流”。 远端与本地不一致：git status -sb 显示 main...origin/main [ahead N|behind N]。 成因与诱因（简明） 直接成因：分支指针被移到旧提交，或进入分离 HEAD，导致近期提交不在当前分支历史中。 前几天可能埋下的雷： 直接 git checkout \u0026lt;commit\u0026gt; 查看旧版本后继续开发/提交； 用 GUI 的“Checkout/Reset/Restore”类功能回到旧提交但未建保护分支； 偶发 git reset --hard \u0026lt;old\u0026gt;； 未及时推送，远端与本地脱节，引发误判。 今天触发的动作：在 GUI 中对某个旧提交执行了“Checkout/Reset”，把当前分支（例如 main）指针回退了。 本次拯救（摘要） 用 reflog 找到目标提交 \u0026lt;sha\u0026gt;（历史未丢，只是指针偏了）。\n二选一恢复：\n# 安全合并法（推荐） git checkout -b restore-work \u0026lt;sha\u0026gt; git …"
+  },{
+    "title": "SymPy 基础入门教程：符号计算核心功能解析",
+    "url": "/labs/sympy_tutorials/",
+    "section": "labs",
+    "date": "2025-08-19",
+    "summary": "欢迎来到 SymPy 的世界！SymPy 是一个强大的 Python 库，用于进行符号数学运算。与数值计算不同，符号计算处理的是数学表达式本身，而不是它们的具体数值。本教程将带您了解 SymPy 的基本功能，并通过与我们先前讨论的钢轨动力学案例相关联，展示这些功能在实际问题中的应用。\n",
+    "description": "",
+    "tags": ["符号计算"],
+    "categories": ["数学"],
+    "content": "欢迎来到 SymPy 的世界！SymPy 是一个强大的 Python 库，用于进行符号数学运算。与数值计算不同，符号计算处理的是数学表达式本身，而不是它们的具体数值。本教程将带您了解 SymPy 的基本功能，并通过与我们先前讨论的钢轨动力学案例相关联，展示这些功能在实际问题中的应用。\n1. SymPy 是什么？为什么要用它？ 想象一下，您在纸上推导复杂的数学公式，进行微分、积分、化简…… SymPy 就是您在计算机上的“草稿纸”和“数学助手”。它可以帮助您：\n精确地表示数学符号和表达式。 执行符号微分、积分、求和等运算。 化简和变换复杂的数学表达式。 求解方程。 进行矩阵运算。 对于像钢轨动力学这样涉及大量复杂公式推导的问题，手动计算不仅耗时，还容易出错。SymPy 可以自动化这个过程，提高效率和准确性。\n2. 安装与基本设置 如果您还没有安装 SymPy，可以通过 Python 的包管理器 pip 轻松安装：\npip install sympy 在您的 Python 脚本或 Jupyter Notebook 中使用 SymPy 前，首先需要导入它。为了让输出的数学公式更易读（尤其是在 Jupyter 环境中），可以启用 SymPy 的“美观打印” (pretty printing) 功能。\nimport sympy # 导入 SymPy 库 # 初始化美观打印功能 # …"
+  },{
+    "title": "构建压缩感知（Compressed Sensing, CS）算法代码",
+    "url": "/labs/compressed_sensing_gemini_pro/",
+    "section": "labs",
+    "date": "2025-08-19",
+    "summary": "构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。\n",
+    "description": "",
+    "tags": ["压缩感知"],
+    "categories": ["信号处理"],
+    "content": "构建压缩感知（Compressed Sensing, CS）算法代码通常涉及以下几个核心步骤。压缩感知理论指出，如果信号是稀疏的或可压缩的，那么就可以用远少于奈奎斯特采样定理所要求的采样点来精确地重建信号。 以下是构建压缩感知算法代码的一般步骤和关键组成部分： 1. 定义稀疏信号 (Define the Sparse Signal): 生成或获取原始信号 (Generate or Acquire the Original Signal): 这可能是一个图像、音频信号、时间序列数据等。 稀疏表示 (Sparse Representation): 原始信号本身可能不是稀疏的，但可以在某个变换域中变得稀疏。常见的变换包括： 傅里叶变换 (Fourier Transform - FT): 适用于频域稀疏的信号。 离散余弦变换 (Discrete Cosine Transform - DCT): 常用于图像和视频压缩。 小波变换 (Wavelet Transform - WT): 适用于具有局部特征的信号。 自定义字典 (Custom Dictionary): 对于特定类型的信号，可能会有更合适的稀疏基。 在代码中，你需要实现或使用库函数来对原始信号进行这些变换，得到稀疏系数向量 $\\alpha$。通常，只有少数几个 $\\alpha_i$ 的值很大，而其余的接近于零。 2. …"
+  }]
