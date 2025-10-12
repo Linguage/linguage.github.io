@@ -46,6 +46,24 @@
   box-shadow: 0 1px 0 rgba(0,0,0,0.06); /* 轻分隔线，增强层次 */
   position: sticky; top: 0; z-index: 1;
 }
+.search-popover-info{
+  display:flex; align-items:center; gap:10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--muted, #6B665F);
+  background: linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
+  border-bottom: 1px solid var(--border, #E6E3DC);
+}
+.search-popover-info::before{
+  content: "";
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid rgba(15,109,220,0.28);
+  border-top-color: transparent;
+  animation: searchSpinner .9s linear infinite;
+}
+@keyframes searchSpinner {
+  to { transform: rotate(360deg); }
+}
 .site-search-popover .search-mode-label{ font-size: 12px; color: var(--muted, #6B665F); font-weight: 600; letter-spacing: .06em; }
 .site-search-popover .search-mode-tabs{ display:flex; gap:8px; margin-left:auto; flex-wrap:wrap; }
 .mode-tab{ appearance:none; background: rgba(0,0,0,0.02); border:1px solid var(--border, #E6E3DC); color: var(--text, #2E2A25); border-radius: 999px; padding: 5px 10px; font-size: 12px; cursor: pointer; line-height: 1; }
