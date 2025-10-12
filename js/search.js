@@ -7,7 +7,8 @@
   const TOGGLE_ID = 'searchToggleBtn';
   const BACK_ID = 'searchBackBtn';
   // 统一索引地址：优先使用模板注入的全局变量；否则基于当前页构造绝对 URL
-  const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString());
+  const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString()); // full
+  const FETCH_URL_LITE = (window.SEARCH_INDEX_URL_LITE || new URL('index-lite.json', document.baseURI).toString());
   // 分片检索已移除，统一使用单体索引
 
   // modes: all | posts | page
@@ -34,7 +35,9 @@
   // 索引加载状态
   // idle -> loading -> ready | error
   let indexStatus = 'idle';
-  const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL;
+  const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL; // full
+  const INDEX_CACHE_KEY_LITE = 'site_search_index_lite::'+FETCH_URL_LITE;
+  let hasFull = false; // 当前 data 是否为 full 版
   // 无分片相关变量
 
   function $(id){ return document.getElementById(id); }
@@ -43,23 +46,36 @@
 
   function loadIndexFromCache(){
     try{
-      const raw = localStorage.getItem(INDEX_CACHE_KEY);
-      if (!raw) return false;
-      const obj = JSON.parse(raw);
-      if (!obj || !Array.isArray(obj.items)) return false;
-      data = obj.items;
-      indexStatus = 'ready';
-      dbg('index cache hit', { size: data.length });
-      return true;
+      // 优先 full
+      const rawFull = localStorage.getItem(INDEX_CACHE_KEY);
+      if (rawFull){
+        const obj = JSON.parse(rawFull);
+        if (obj && Array.isArray(obj.items)){
+          data = obj.items; hasFull = true; indexStatus = 'ready';
+          dbg('index cache hit (full)', { size: data.length });
+          return true;
+        }
+      }
+      // 其次 lite
+      const rawLite = localStorage.getItem(INDEX_CACHE_KEY_LITE);
+      if (rawLite){
+        const obj = JSON.parse(rawLite);
+        if (obj && Array.isArray(obj.items)){
+          data = obj.items; hasFull = false; indexStatus = 'ready';
+          dbg('index cache hit (lite)', { size: data.length });
+          return true;
+        }
+      }
+      return false;
     }catch(_){ return false; }
   }
 
-  async function fetchIndexWithTimeout(signal){
+  async function fetchIndexWithTimeout(url, signal){
     const ctrl = new AbortController();
     const timer = setTimeout(()=> ctrl.abort(), 5000); // 5s 超时
     let res;
     try{
-      res = await fetch(FETCH_URL, { credentials: 'same-origin', signal: (signal||ctrl.signal) });
+      res = await fetch(url, { credentials: 'same-origin', signal: (signal||ctrl.signal) });
     } finally {
       clearTimeout(timer);
     }
@@ -68,30 +84,48 @@
     return json;
   }
 
-  async function prefetchIndex(){
-    if (indexStatus === 'loading' || indexStatus === 'ready') return;
+  async function prefetchLiteIndex(){
+    if (indexStatus === 'loading' || data) return;
     indexStatus = 'loading';
-    dbg('index prefetch start');
+    dbg('index prefetch LITE start');
     try{
-      const json = await fetchIndexWithTimeout();
-      data = Array.isArray(json) ? json : (json && json.items) || json;
-      if (!Array.isArray(data)) data = [];
+      const json = await fetchIndexWithTimeout(FETCH_URL_LITE);
+      const items = Array.isArray(json) ? json : (json && json.items) || json;
+      data = Array.isArray(items) ? items : [];
+      hasFull = false;
       indexStatus = 'ready';
-      try{ localStorage.setItem(INDEX_CACHE_KEY, JSON.stringify({ items: data, ts: Date.now() })); }catch(_){/* no-op */}
-      dbg('index prefetch done', { size: data.length });
+      try{ localStorage.setItem(INDEX_CACHE_KEY_LITE, JSON.stringify({ items: data, ts: Date.now() })); }catch(_){/* no-op */}
+      dbg('index prefetch LITE done', { size: data.length });
     }catch(err){
       indexStatus = 'error';
-      console.error('[search] failed to load index:', FETCH_URL, err);
+      console.error('[search] failed to load lite index:', FETCH_URL_LITE, err);
+    }
+  }
+
+  async function prefetchIndex(){
+    // full 版预取：可在有 lite 的情况下后台进行
+    if (hasFull) return;
+    dbg('index prefetch FULL start');
+    try{
+      const json = await fetchIndexWithTimeout(FETCH_URL);
+      const items = Array.isArray(json) ? json : (json && json.items) || json;
+      const full = Array.isArray(items) ? items : [];
+      if (full && full.length){
+        data = full; hasFull = true; indexStatus = 'ready';
+        try{ localStorage.setItem(INDEX_CACHE_KEY, JSON.stringify({ items: data, ts: Date.now() })); }catch(_){/* no-op */}
+        dbg('index prefetch FULL done', { size: data.length });
+      }
+    }catch(err){
+      console.error('[search] failed to load full index:', FETCH_URL, err);
     }
   }
 
   // 无分片加载逻辑
 
   async function ensureData(){
+    // 非阻塞：仅返回当前已就绪的数据（full 或 lite），不在此处触发网络
     if (data) return data;
     if (indexStatus === 'idle'){ loadIndexFromCache(); }
-    if (data) return data;
-    await prefetchIndex();
     return data || [];
   }
 
@@ -308,7 +342,7 @@
     // 加载提示
     let loadingBar = '';
     if (indexStatus === 'loading'){
-      loadingBar = '<div class="search-popover-info">正在加载全站索引…可先使用【本页】搜索</div>';
+      loadingBar = '<div class="search-popover-info">正在加载索引…可先使用【本页】搜索</div>';
     } else if (indexStatus === 'error'){
       loadingBar = '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
     }
@@ -482,16 +516,15 @@
       total = filtered.length;
       items = filtered; // 本页：全部显示
     } else {
-      // 全站/Posts 模式（单体索引）
-      if (indexStatus === 'idle' || indexStatus === 'error'){
-        prefetchIndex().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} });
+      // 全站/Posts 模式（两阶段：lite -> full）
+      if (!data) {
+        // 首次：优先加载 lite，完成后自动重跑，并在后台拉取 full
+        prefetchLiteIndex().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); prefetchIndex(); } }catch(_){/* no-op */} });
         render([], q, 0);
         return;
       }
-      if (indexStatus !== 'ready'){
-        render([], q, 0);
-        return;
-      }
+      // 已有数据（可能是 lite 或 full），后台尝试升级 full
+      if (!hasFull) { try{ prefetchIndex().then(()=>{ try{ if (hasFull && box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} }); }catch(_){/* no-op */} }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
       const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
