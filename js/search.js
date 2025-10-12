@@ -8,14 +8,7 @@
   const BACK_ID = 'searchBackBtn';
   // 统一索引地址：优先使用模板注入的全局变量；否则基于当前页构造绝对 URL
   const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString());
-  // 分片：模板注入的每个 Section -> index.json 映射（可选）
-  const RAW_SHARDS = (typeof window !== 'undefined' ? window.SEARCH_SHARDS : null);
-  const RAW_SECTIONS = (typeof window !== 'undefined' ? window.SEARCH_SECTIONS : null);
-  function normSections(x){ if (Array.isArray(x)) return x; if (typeof x === 'string'){ try{ const a = JSON.parse(x); if (Array.isArray(a)) return a; }catch(_){ } } return []; }
-  function normShards(x){ let o = x; if (typeof o === 'string'){ try{ o = JSON.parse(o); }catch(_){ } } if (o && typeof o === 'object' && !Array.isArray(o)){ const out = {}; Object.keys(o).forEach(k=>{ const v = o[k]; out[k] = (typeof v === 'string') ? v.replace(/^\"|\"$/g,'') : v; }); return out; } return null; }
-  const SHARD_SECTIONS = normSections(RAW_SECTIONS);
-  const SHARDS = normShards(RAW_SHARDS);
-  const USE_SHARDS = !!(SHARDS && Object.keys(SHARDS).length);
+  // 分片检索已移除，统一使用单体索引
 
   // modes: all | posts | page
   let mode = 'all';
@@ -42,30 +35,7 @@
   // idle -> loading -> ready | error
   let indexStatus = 'idle';
   const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL;
-  // 分片加载配置与缓存
-  const SHARD_TIMEOUT_MS = 5000;
-  const shardCache = new Map(); // url -> items[]
-  let shardsLoaded = false;
-  // 可取消的分片加载控制
-  let shardLoadSeq = 0; // 递增的加载序号，用于丢弃过期任务
-  let shardAborters = []; // 当前批次的 AbortController 列表
-  const SHARD_CACHE_PREFIX = 'site_search_shard::';
-  // 进度：X/Y 分片
-  let shardTotal = 0;
-  let shardCompleted = 0;
-
-  function loadShardFromStorage(url){
-    try{
-      const raw = localStorage.getItem(SHARD_CACHE_PREFIX+url);
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (obj && Array.isArray(obj.items)) return obj.items;
-    }catch(_){ }
-    return null;
-  }
-  function saveShardToStorage(url, items){
-    try{ localStorage.setItem(SHARD_CACHE_PREFIX+url, JSON.stringify({ items, ts: Date.now() })); }catch(_){ }
-  }
+  // 无分片相关变量
 
   function $(id){ return document.getElementById(id); }
 
@@ -99,8 +69,6 @@
   }
 
   async function prefetchIndex(){
-    // 分片模式：不在页面加载时预取，改为用户首次搜索时懒加载
-    if (USE_SHARDS) { dbg('shards enabled: skip monolithic prefetch'); return; }
     if (indexStatus === 'loading' || indexStatus === 'ready') return;
     indexStatus = 'loading';
     dbg('index prefetch start');
@@ -117,134 +85,10 @@
     }
   }
 
-  async function fetchShardWithTimeout(url, externalSignal){
-    // 始终使用本函数内部的 controller，以保证超时一定生效；
-    // 同时将外部 Abort 信号联动到内部 controller。
-    const ctrl = new AbortController();
-    const onExternalAbort = () => { try{ ctrl.abort(); }catch(_){ } };
-    if (externalSignal) {
-      if (externalSignal.aborted) { ctrl.abort(); }
-      else { try{ externalSignal.addEventListener('abort', onExternalAbort, { once: true }); }catch(_){ } }
-    }
-    const timer = setTimeout(()=> ctrl.abort(), SHARD_TIMEOUT_MS);
-    try{
-      const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
-      if (!res.ok) throw new Error('HTTP '+res.status);
-      const json = await res.json();
-      return Array.isArray(json) ? json : (json && json.items) || json || [];
-    } finally {
-      clearTimeout(timer);
-      if (externalSignal) { try{ externalSignal.removeEventListener('abort', onExternalAbort); }catch(_){ } }
-    }
-  }
-
-  async function loadAllShards(){
-    if (!USE_SHARDS) return;
-    if (shardsLoaded) return;
-    if (indexStatus === 'loading') return; // 已在加载
-    // 取消上一批未完成请求
-    shardAborters.forEach(a=>{ try{ a.abort(); }catch(_){ } });
-    shardAborters = [];
-    indexStatus = 'loading';
-    const seq = ++shardLoadSeq;
-    dbg('shards load start');
-    // 优先使用注入的 SEARCH_SECTIONS；若缺失/为空，则退化为使用 SHARDS 的键集合
-    const effSections = (Array.isArray(SHARD_SECTIONS) && SHARD_SECTIONS.length)
-      ? SHARD_SECTIONS
-      : Object.keys(SHARDS || {});
-    const entries = effSections.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
-    // 优先级排序：常用的放前面
-    const priority = ['post','posts','labs','lab'];
-    entries.sort((a,b)=> (priority.indexOf(a[0])===-1?999:priority.indexOf(a[0])) - (priority.indexOf(b[0])===-1?999:priority.indexOf(b[0])));
-    // 去重 URL
-    const seen = new Set();
-    const targets = [];
-    for (const [sec, u] of entries){ const raw = (typeof u === 'string') ? u.replace(/^\"|\"$/g,'') : u; const url = new URL(raw, document.baseURI).toString(); if (!seen.has(url)){ seen.add(url); targets.push([sec, url]); } }
-
-    // 并发限制 + 增量合并
-    const CONCURRENCY = 3;
-    let idx = 0;
-    let inFlight = 0;
-    let merged = 0;      // 已合并（非空）的分片数
-    let completed = 0;   // 网络完成的分片数（含失败）
-    data = data && Array.isArray(data) ? data : []; // 允许增量填充
-
-    // 初始化进度
-    shardTotal = targets.length;
-    shardCompleted = 0;
-
-    // 先尝试从本地存储命中（SWR）：命中则立即增量渲染，同时仍然进行网络校验
-    targets.forEach(([sec, url]) => {
-      try{
-        const cached = loadShardFromStorage(url);
-        if (cached && Array.isArray(cached) && cached.length){
-          data.push(...cached);
-          try{ if (box && box.value && box.value.trim()) onInput(); }catch(_){ }
-        }
-      }catch(_){/* no-op */}
-    });
-
-    // Strategy C：不再对单体索引做早回退
-
-    const tick = () => {
-      if (seq !== shardLoadSeq) return; // 过期批次
-      while (inFlight < CONCURRENCY && idx < targets.length){
-        const [sec, url] = targets[idx++];
-        const ac = new AbortController();
-        shardAborters.push(ac);
-        inFlight++;
-        (async()=>{
-          try{
-            if (shardCache.has(url)){
-              const items = shardCache.get(url);
-              if (seq === shardLoadSeq && Array.isArray(items)){
-                data.push(...items);
-                merged++;
-                if (indexStatus === 'loading' && merged === 1){ indexStatus = 'partial'; }
-                // 到达即重渲染（若有查询）
-                try{ if (box && box.value.trim()) onInput(); }catch(_){ }
-              }
-            } else {
-              const items = await fetchShardWithTimeout(url, ac.signal);
-              shardCache.set(url, Array.isArray(items) ? items : []);
-              saveShardToStorage(url, Array.isArray(items) ? items : []);
-              if (seq === shardLoadSeq && Array.isArray(items)){
-                data.push(...items);
-                merged++;
-                if (indexStatus === 'loading' && merged === 1){ indexStatus = 'partial'; }
-                try{ if (box && box.value.trim()) onInput(); }catch(_){ }
-              }
-            }
-          }catch(err){ /* 忽略单片失败，后续有回退 */ }
-          finally{
-            inFlight--;
-            completed++;
-            shardCompleted = completed;
-            // 全部完成
-            if (seq === shardLoadSeq && completed >= targets.length){
-              shardsLoaded = true;
-              indexStatus = merged > 0 ? 'ready' : 'error';
-              dbg('shards load done', { shards: targets.length, size: data.length });
-            } else if (idx < targets.length) {
-              tick();
-            } else if (inFlight === 0 && merged === 0) {
-              // 所有失败或为空：标记为错误，不再回退到单体索引
-              indexStatus = 'error';
-              try{ if (box && box.value.trim()) onInput(); }catch(_){ }
-            }
-          }
-        })();
-      }
-    };
-    tick();
-  }
+  // 无分片加载逻辑
 
   async function ensureData(){
     if (data) return data;
-    if (USE_SHARDS){
-      await loadAllShards();
-      return data || [];
-    }
     if (indexStatus === 'idle'){ loadIndexFromCache(); }
     if (data) return data;
     await prefetchIndex();
@@ -461,14 +305,10 @@
       + '</div>'
       + '</div>';
 
-    // 加载提示：支持“部分结果已就绪”的文案
+    // 加载提示
     let loadingBar = '';
     if (indexStatus === 'loading'){
-      const p = shardTotal ? `（已加载 ${Math.min(shardCompleted, shardTotal)} / ${shardTotal} 分片）` : '';
-      loadingBar = `<div class="search-popover-info">${(items&&items.length)?'正在加载更多分片…':'正在准备全站索引…可先使用【本页】搜索'} ${p}</div>`;
-    } else if (indexStatus === 'partial'){
-      const p = shardTotal ? `（已加载 ${Math.min(shardCompleted, shardTotal)} / ${shardTotal} 分片）` : '';
-      loadingBar = `<div class="search-popover-info">正在加载更多分片… ${p}</div>`;
+      loadingBar = '<div class="search-popover-info">正在加载全站索引…可先使用【本页】搜索</div>';
     } else if (indexStatus === 'error'){
       loadingBar = '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
     }
@@ -621,9 +461,6 @@
     if (!box) return;
     const q = box.value.trim();
     if (!q){
-      // 新输入为空：取消旧的分片请求，收起增量渲染
-      shardAborters.forEach(a=>{ try{ a.abort(); }catch(_){ } });
-      shardAborters = [];
       render([], '', 0);
       return;
     }
@@ -645,18 +482,15 @@
       total = filtered.length;
       items = filtered; // 本页：全部显示
     } else {
-      // 全站/Posts 模式
-      if (USE_SHARDS){
-        // 分片模式：即使在 loading/partial 状态，也允许用“已有数据”进行搜索与渲染
-        if (indexStatus === 'idle'){
-          loadAllShards().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} });
-        }
-      } else {
-        // 单索引模式：若索引未就绪，优先提示+空结果，避免长时间卡顿
-        if (indexStatus !== 'ready'){
-          render([], q, 0);
-          return;
-        }
+      // 全站/Posts 模式（单体索引）
+      if (indexStatus === 'idle' || indexStatus === 'error'){
+        prefetchIndex().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} });
+        render([], q, 0);
+        return;
+      }
+      if (indexStatus !== 'ready'){
+        render([], q, 0);
+        return;
       }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
@@ -718,35 +552,9 @@
     dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
 
-    // 页面加载即尝试从缓存填充，并在后台预取最新索引（SWR）
+    // 页面加载：尝试从缓存填充；不再自动预取，第一次搜索时再加载
     loadIndexFromCache();
-    prefetchIndex();
-
-    // 空闲预取：在空闲时预取 1-2 个常用分片以提升首次搜索体验（不触发渲染）
-    try{
-      const idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 1200); };
-      idle(()=>{
-        if (!USE_SHARDS || shardsLoaded) return;
-        const effSections = (Array.isArray(SHARD_SECTIONS) && SHARD_SECTIONS.length)
-          ? SHARD_SECTIONS
-          : Object.keys(SHARDS || {});
-        const entries = effSections.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
-        const priority = ['post','posts','labs','lab'];
-        entries.sort((a,b)=> (priority.indexOf(a[0])===-1?999:priority.indexOf(a[0])) - (priority.indexOf(b[0])===-1?999:priority.indexOf(b[0])));
-        const pre = entries.slice(0, Math.min(2, entries.length));
-        pre.forEach(([sec, u])=>{
-          try{
-            const raw = (typeof u === 'string') ? u.replace(/^\"|\"$/g,'') : u;
-            const url = new URL(raw, document.baseURI).toString();
-            if (shardCache.has(url) || loadShardFromStorage(url)) return;
-            fetchShardWithTimeout(url).then(items=>{
-              shardCache.set(url, Array.isArray(items)?items:[]);
-              saveShardToStorage(url, Array.isArray(items)?items:[]);
-            }).catch(()=>{});
-          }catch(_){ }
-        });
-      });
-    }catch(_){/* no-op */}
+    // 不做空闲预取（遵循“首次搜索时加载”的策略）
 
     box.addEventListener('compositionstart', ()=> { isComposing = true; dbg('compositionstart'); });
     box.addEventListener('compositionend', ()=> { isComposing = false; dbg('compositionend'); onInput(); });
