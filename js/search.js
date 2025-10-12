@@ -8,6 +8,14 @@
   const BACK_ID = 'searchBackBtn';
   // 统一索引地址：优先使用模板注入的全局变量；否则基于当前页构造绝对 URL
   const FETCH_URL = (window.SEARCH_INDEX_URL || new URL('index.json', document.baseURI).toString());
+  // 分片：模板注入的每个 Section -> index.json 映射（可选）
+  const RAW_SHARDS = (typeof window !== 'undefined' ? window.SEARCH_SHARDS : null);
+  const RAW_SECTIONS = (typeof window !== 'undefined' ? window.SEARCH_SECTIONS : null);
+  function normSections(x){ if (Array.isArray(x)) return x; if (typeof x === 'string'){ try{ const a = JSON.parse(x); if (Array.isArray(a)) return a; }catch(_){ } } return []; }
+  function normShards(x){ let o = x; if (typeof o === 'string'){ try{ o = JSON.parse(o); }catch(_){ } } if (o && typeof o === 'object' && !Array.isArray(o)){ const out = {}; Object.keys(o).forEach(k=>{ const v = o[k]; out[k] = (typeof v === 'string') ? v.replace(/^\"|\"$/g,'') : v; }); return out; } return null; }
+  const SHARD_SECTIONS = normSections(RAW_SECTIONS);
+  const SHARDS = normShards(RAW_SHARDS);
+  const USE_SHARDS = !!(SHARDS && Object.keys(SHARDS).length);
 
   // modes: all | posts | page
   let mode = 'all';
@@ -34,6 +42,10 @@
   // idle -> loading -> ready | error
   let indexStatus = 'idle';
   const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL;
+  // 分片加载配置与缓存
+  const SHARD_TIMEOUT_MS = 7000;
+  const shardCache = new Map(); // url -> items[]
+  let shardsLoaded = false;
 
   function $(id){ return document.getElementById(id); }
 
@@ -67,6 +79,8 @@
   }
 
   async function prefetchIndex(){
+    // 分片模式：不在页面加载时预取，改为用户首次搜索时懒加载
+    if (USE_SHARDS) { dbg('shards enabled: skip monolithic prefetch'); return; }
     if (indexStatus === 'loading' || indexStatus === 'ready') return;
     indexStatus = 'loading';
     dbg('index prefetch start');
@@ -83,8 +97,68 @@
     }
   }
 
+  async function fetchShardWithTimeout(url, signal){
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=> ctrl.abort(), SHARD_TIMEOUT_MS);
+    try{
+      const res = await fetch(url, { credentials: 'same-origin', signal: (signal||ctrl.signal) });
+      if (!res.ok) throw new Error('HTTP '+res.status);
+      const json = await res.json();
+      return Array.isArray(json) ? json : (json && json.items) || json || [];
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function loadAllShards(){
+    if (!USE_SHARDS) return;
+    if (shardsLoaded) return;
+    if (indexStatus === 'loading') return; // 已在加载
+    indexStatus = 'loading';
+    dbg('shards load start');
+    const entries = SHARD_SECTIONS.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
+    // 去重 URL
+    const seen = new Set();
+    const targets = [];
+    for (const [sec, u] of entries){ const raw = (typeof u === 'string') ? u.replace(/^\"|\"$/g,'') : u; const url = new URL(raw, document.baseURI).toString(); if (!seen.has(url)){ seen.add(url); targets.push([sec, url]); } }
+    try{
+      const results = await Promise.allSettled(targets.map(([sec, url])=> (async()=>{
+        if (shardCache.has(url)) return { url, items: shardCache.get(url) };
+        const items = await fetchShardWithTimeout(url);
+        shardCache.set(url, Array.isArray(items) ? items : []);
+        return { url, items: shardCache.get(url) };
+      })()));
+      const all = [];
+      results.forEach(r => { if (r.status === 'fulfilled' && Array.isArray(r.value.items)) { all.push(...r.value.items); } });
+      if (all.length === 0){
+        try{
+          const json = await fetchIndexWithTimeout();
+          const arr = Array.isArray(json) ? json : (json && json.items) || json;
+          if (Array.isArray(arr)){
+            data = arr;
+            indexStatus = 'ready';
+            dbg('fallback monolith index used', { size: data.length });
+            return;
+          }
+        }catch(_){ indexStatus = 'error'; }
+      } else {
+        data = all;
+        shardsLoaded = true;
+        indexStatus = 'ready';
+        dbg('shards load done', { shards: targets.length, size: data.length });
+      }
+    }catch(err){
+      indexStatus = 'error';
+      console.error('[search] failed to load shards:', err);
+    }
+  }
+
   async function ensureData(){
     if (data) return data;
+    if (USE_SHARDS){
+      await loadAllShards();
+      return data || [];
+    }
     if (indexStatus === 'idle'){ loadIndexFromCache(); }
     if (data) return data;
     await prefetchIndex();
@@ -472,10 +546,22 @@
       total = filtered.length;
       items = filtered; // 本页：全部显示
     } else {
-      // 全站/Posts 模式：若索引未就绪，优先提示+空结果，避免长时间卡顿
-      if (indexStatus !== 'ready'){
-        render([], q, 0);
-        return;
+      // 全站/Posts 模式
+      if (USE_SHARDS){
+        if (indexStatus !== 'ready'){
+          // 首次触发：并行加载所有分片，完成后自动重试本次查询
+          if (indexStatus === 'idle'){
+            loadAllShards().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} });
+          }
+          render([], q, 0);
+          return;
+        }
+      } else {
+        // 单索引模式：若索引未就绪，优先提示+空结果，避免长时间卡顿
+        if (indexStatus !== 'ready'){
+          render([], q, 0);
+          return;
+        }
       }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
