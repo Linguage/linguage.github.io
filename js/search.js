@@ -50,6 +50,9 @@
   let shardLoadSeq = 0; // 递增的加载序号，用于丢弃过期任务
   let shardAborters = []; // 当前批次的 AbortController 列表
   const SHARD_CACHE_PREFIX = 'site_search_shard::';
+  // 进度：X/Y 分片
+  let shardTotal = 0;
+  let shardCompleted = 0;
 
   function loadShardFromStorage(url){
     try{
@@ -114,16 +117,24 @@
     }
   }
 
-  async function fetchShardWithTimeout(url, signal){
+  async function fetchShardWithTimeout(url, externalSignal){
+    // 始终使用本函数内部的 controller，以保证超时一定生效；
+    // 同时将外部 Abort 信号联动到内部 controller。
     const ctrl = new AbortController();
+    const onExternalAbort = () => { try{ ctrl.abort(); }catch(_){ } };
+    if (externalSignal) {
+      if (externalSignal.aborted) { ctrl.abort(); }
+      else { try{ externalSignal.addEventListener('abort', onExternalAbort, { once: true }); }catch(_){ } }
+    }
     const timer = setTimeout(()=> ctrl.abort(), SHARD_TIMEOUT_MS);
     try{
-      const res = await fetch(url, { credentials: 'same-origin', signal: (signal||ctrl.signal) });
+      const res = await fetch(url, { credentials: 'same-origin', signal: ctrl.signal });
       if (!res.ok) throw new Error('HTTP '+res.status);
       const json = await res.json();
       return Array.isArray(json) ? json : (json && json.items) || json || [];
     } finally {
       clearTimeout(timer);
+      if (externalSignal) { try{ externalSignal.removeEventListener('abort', onExternalAbort); }catch(_){ } }
     }
   }
 
@@ -137,7 +148,11 @@
     indexStatus = 'loading';
     const seq = ++shardLoadSeq;
     dbg('shards load start');
-    const entries = SHARD_SECTIONS.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
+    // 优先使用注入的 SEARCH_SECTIONS；若缺失/为空，则退化为使用 SHARDS 的键集合
+    const effSections = (Array.isArray(SHARD_SECTIONS) && SHARD_SECTIONS.length)
+      ? SHARD_SECTIONS
+      : Object.keys(SHARDS || {});
+    const entries = effSections.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
     // 优先级排序：常用的放前面
     const priority = ['post','posts','labs','lab'];
     entries.sort((a,b)=> (priority.indexOf(a[0])===-1?999:priority.indexOf(a[0])) - (priority.indexOf(b[0])===-1?999:priority.indexOf(b[0])));
@@ -154,6 +169,10 @@
     let completed = 0;   // 网络完成的分片数（含失败）
     data = data && Array.isArray(data) ? data : []; // 允许增量填充
 
+    // 初始化进度
+    shardTotal = targets.length;
+    shardCompleted = 0;
+
     // 先尝试从本地存储命中（SWR）：命中则立即增量渲染，同时仍然进行网络校验
     targets.forEach(([sec, url]) => {
       try{
@@ -165,25 +184,7 @@
       }catch(_){/* no-op */}
     });
 
-    // 若长时间没有任何分片返回，提前回退到单体索引（不阻断后续分片继续到达）
-    const EARLY_FALLBACK_MS = 3500;
-    let earlyFallbackTimer = setTimeout(()=>{
-      if (seq !== shardLoadSeq) return;
-      if (indexStatus === 'loading' && merged === 0){
-        (async()=>{
-          try{
-            const json = await fetchIndexWithTimeout();
-            const arr = Array.isArray(json) ? json : (json && json.items) || json;
-            if (Array.isArray(arr)){
-              data = arr;
-              indexStatus = 'ready';
-              dbg('early fallback monolith index used', { size: data.length });
-              try{ if (box && box.value && box.value.trim()) onInput(); }catch(_){ }
-            }
-          }catch(_){/* ignore */}
-        })();
-      }
-    }, EARLY_FALLBACK_MS);
+    // Strategy C：不再对单体索引做早回退
 
     const tick = () => {
       if (seq !== shardLoadSeq) return; // 过期批次
@@ -218,30 +219,18 @@
           finally{
             inFlight--;
             completed++;
+            shardCompleted = completed;
             // 全部完成
             if (seq === shardLoadSeq && completed >= targets.length){
-              try{ clearTimeout(earlyFallbackTimer); }catch(_){ }
               shardsLoaded = true;
-              indexStatus = 'ready';
+              indexStatus = merged > 0 ? 'ready' : 'error';
               dbg('shards load done', { shards: targets.length, size: data.length });
             } else if (idx < targets.length) {
               tick();
             } else if (inFlight === 0 && merged === 0) {
-              // 所有失败或为空，回退单体索引
-              (async()=>{
-                try{
-                  const json = await fetchIndexWithTimeout();
-                  const arr = Array.isArray(json) ? json : (json && json.items) || json;
-                  if (Array.isArray(arr)){
-                    data = arr;
-                    indexStatus = 'ready';
-                    dbg('fallback monolith index used', { size: data.length });
-                  } else {
-                    indexStatus = 'error';
-                  }
-                }catch(_){ indexStatus = 'error'; }
-                finally{ try{ if (box && box.value.trim()) onInput(); }catch(_){ } }
-              })();
+              // 所有失败或为空：标记为错误，不再回退到单体索引
+              indexStatus = 'error';
+              try{ if (box && box.value.trim()) onInput(); }catch(_){ }
             }
           }
         })();
@@ -475,9 +464,11 @@
     // 加载提示：支持“部分结果已就绪”的文案
     let loadingBar = '';
     if (indexStatus === 'loading'){
-      loadingBar = `<div class="search-popover-info">${(items&&items.length)?'正在加载更多分片…':'正在准备全站索引…可先使用【本页】搜索'}</div>`;
+      const p = shardTotal ? `（已加载 ${Math.min(shardCompleted, shardTotal)} / ${shardTotal} 分片）` : '';
+      loadingBar = `<div class="search-popover-info">${(items&&items.length)?'正在加载更多分片…':'正在准备全站索引…可先使用【本页】搜索'} ${p}</div>`;
     } else if (indexStatus === 'partial'){
-      loadingBar = '<div class="search-popover-info">正在加载更多分片…</div>';
+      const p = shardTotal ? `（已加载 ${Math.min(shardCompleted, shardTotal)} / ${shardTotal} 分片）` : '';
+      loadingBar = `<div class="search-popover-info">正在加载更多分片… ${p}</div>`;
     } else if (indexStatus === 'error'){
       loadingBar = '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
     }
@@ -736,7 +727,10 @@
       const idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 1200); };
       idle(()=>{
         if (!USE_SHARDS || shardsLoaded) return;
-        const entries = SHARD_SECTIONS.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
+        const effSections = (Array.isArray(SHARD_SECTIONS) && SHARD_SECTIONS.length)
+          ? SHARD_SECTIONS
+          : Object.keys(SHARDS || {});
+        const entries = effSections.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
         const priority = ['post','posts','labs','lab'];
         entries.sort((a,b)=> (priority.indexOf(a[0])===-1?999:priority.indexOf(a[0])) - (priority.indexOf(b[0])===-1?999:priority.indexOf(b[0])));
         const pre = entries.slice(0, Math.min(2, entries.length));
