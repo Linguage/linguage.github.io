@@ -46,6 +46,9 @@
   const SHARD_TIMEOUT_MS = 7000;
   const shardCache = new Map(); // url -> items[]
   let shardsLoaded = false;
+  // 可取消的分片加载控制
+  let shardLoadSeq = 0; // 递增的加载序号，用于丢弃过期任务
+  let shardAborters = []; // 当前批次的 AbortController 列表
 
   function $(id){ return document.getElementById(id); }
 
@@ -114,43 +117,86 @@
     if (!USE_SHARDS) return;
     if (shardsLoaded) return;
     if (indexStatus === 'loading') return; // 已在加载
+    // 取消上一批未完成请求
+    shardAborters.forEach(a=>{ try{ a.abort(); }catch(_){ } });
+    shardAborters = [];
     indexStatus = 'loading';
+    const seq = ++shardLoadSeq;
     dbg('shards load start');
     const entries = SHARD_SECTIONS.map(sec => [sec, SHARDS[sec]]).filter(([_, u])=> !!u);
+    // 优先级排序：常用的放前面
+    const priority = ['post','posts','labs','lab'];
+    entries.sort((a,b)=> (priority.indexOf(a[0])===-1?999:priority.indexOf(a[0])) - (priority.indexOf(b[0])===-1?999:priority.indexOf(b[0])));
     // 去重 URL
     const seen = new Set();
     const targets = [];
     for (const [sec, u] of entries){ const raw = (typeof u === 'string') ? u.replace(/^\"|\"$/g,'') : u; const url = new URL(raw, document.baseURI).toString(); if (!seen.has(url)){ seen.add(url); targets.push([sec, url]); } }
-    try{
-      const results = await Promise.allSettled(targets.map(([sec, url])=> (async()=>{
-        if (shardCache.has(url)) return { url, items: shardCache.get(url) };
-        const items = await fetchShardWithTimeout(url);
-        shardCache.set(url, Array.isArray(items) ? items : []);
-        return { url, items: shardCache.get(url) };
-      })()));
-      const all = [];
-      results.forEach(r => { if (r.status === 'fulfilled' && Array.isArray(r.value.items)) { all.push(...r.value.items); } });
-      if (all.length === 0){
-        try{
-          const json = await fetchIndexWithTimeout();
-          const arr = Array.isArray(json) ? json : (json && json.items) || json;
-          if (Array.isArray(arr)){
-            data = arr;
-            indexStatus = 'ready';
-            dbg('fallback monolith index used', { size: data.length });
-            return;
+
+    // 并发限制 + 增量合并
+    const CONCURRENCY = 3;
+    let idx = 0;
+    let inFlight = 0;
+    let received = 0;
+    data = data && Array.isArray(data) ? data : []; // 允许增量填充
+
+    const tick = () => {
+      if (seq !== shardLoadSeq) return; // 过期批次
+      while (inFlight < CONCURRENCY && idx < targets.length){
+        const [sec, url] = targets[idx++];
+        const ac = new AbortController();
+        shardAborters.push(ac);
+        inFlight++;
+        (async()=>{
+          try{
+            if (shardCache.has(url)){
+              const items = shardCache.get(url);
+              if (seq === shardLoadSeq && Array.isArray(items)){
+                data.push(...items);
+                received++;
+                // 到达即重渲染（若有查询）
+                try{ if (box && box.value.trim()) onInput(); }catch(_){ }
+              }
+            } else {
+              const items = await fetchShardWithTimeout(url, ac.signal);
+              shardCache.set(url, Array.isArray(items) ? items : []);
+              if (seq === shardLoadSeq && Array.isArray(items)){
+                data.push(...items);
+                received++;
+                try{ if (box && box.value.trim()) onInput(); }catch(_){ }
+              }
+            }
+          }catch(err){ /* 忽略单片失败，后续有回退 */ }
+          finally{
+            inFlight--;
+            // 全部完成
+            if (seq === shardLoadSeq && received >= targets.length){
+              shardsLoaded = true;
+              indexStatus = 'ready';
+              dbg('shards load done', { shards: targets.length, size: data.length });
+            } else if (idx < targets.length) {
+              tick();
+            } else if (inFlight === 0 && received === 0) {
+              // 所有失败或为空，回退单体索引
+              (async()=>{
+                try{
+                  const json = await fetchIndexWithTimeout();
+                  const arr = Array.isArray(json) ? json : (json && json.items) || json;
+                  if (Array.isArray(arr)){
+                    data = arr;
+                    indexStatus = 'ready';
+                    dbg('fallback monolith index used', { size: data.length });
+                  } else {
+                    indexStatus = 'error';
+                  }
+                }catch(_){ indexStatus = 'error'; }
+                finally{ try{ if (box && box.value.trim()) onInput(); }catch(_){ } }
+              })();
+            }
           }
-        }catch(_){ indexStatus = 'error'; }
-      } else {
-        data = all;
-        shardsLoaded = true;
-        indexStatus = 'ready';
-        dbg('shards load done', { shards: targets.length, size: data.length });
+        })();
       }
-    }catch(err){
-      indexStatus = 'error';
-      console.error('[search] failed to load shards:', err);
-    }
+    };
+    tick();
   }
 
   async function ensureData(){
@@ -527,7 +573,13 @@
   const onInput = debounce(async function(){
     if (!box) return;
     const q = box.value.trim();
-    if (!q){ render([], '', 0); return; }
+    if (!q){
+      // 新输入为空：取消旧的分片请求，收起增量渲染
+      shardAborters.forEach(a=>{ try{ a.abort(); }catch(_){ } });
+      shardAborters = [];
+      render([], '', 0);
+      return;
+    }
     const qLower = q.toLowerCase();
     const qWords = tokenize(q);
     let items = [];
