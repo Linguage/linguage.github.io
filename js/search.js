@@ -38,6 +38,7 @@
   const INDEX_CACHE_KEY = 'site_search_index::'+FETCH_URL; // full
   const INDEX_CACHE_KEY_LITE = 'site_search_index_lite::'+FETCH_URL_LITE;
   let hasFull = false; // 当前 data 是否为 full 版
+  let fullFetchStarted = false; // 是否已触发过 full 预取，避免重复
   // 无分片相关变量
 
   function $(id){ return document.getElementById(id); }
@@ -104,7 +105,8 @@
 
   async function prefetchIndex(){
     // full 版预取：可在有 lite 的情况下后台进行
-    if (hasFull) return;
+    if (hasFull || fullFetchStarted) return;
+    fullFetchStarted = true;
     dbg('index prefetch FULL start');
     try{
       const json = await fetchIndexWithTimeout(FETCH_URL);
@@ -518,13 +520,11 @@
     } else {
       // 全站/Posts 模式（两阶段：lite -> full）
       if (!data) {
-        // 首次：优先加载 lite，完成后自动重跑，并在后台拉取 full
-        prefetchLiteIndex().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); prefetchIndex(); } }catch(_){/* no-op */} });
+        // 首次：优先加载 lite，完成后自动重跑（暂不立刻拉取 full）
+        prefetchLiteIndex().then(()=>{ try{ if (box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} });
         render([], q, 0);
         return;
       }
-      // 已有数据（可能是 lite 或 full），后台尝试升级 full
-      if (!hasFull) { try{ prefetchIndex().then(()=>{ try{ if (hasFull && box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} }); }catch(_){/* no-op */} }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
       const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
@@ -540,6 +540,10 @@
       const unique = Array.from(bestByPath.values()).sort((a,b)=> b.s - a.s);
       total = unique.length; // 用“文章数”作为总计数
       items = unique.map(x => x.d); // 不截断，交由 render 做渐进加载
+      // 触发 full 的条件：查询长度较长或 lite 命中较少
+      if (!hasFull && !fullFetchStarted && (q.length >= 4 || total < 5)){
+        try{ prefetchIndex().then(()=>{ try{ if (hasFull && box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} }); }catch(_){/* no-op */}
+      }
       // 记录状态供“显示更多”使用
       lastResults = items;
       lastTotal = total;
@@ -585,9 +589,14 @@
     dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
 
-    // 页面加载：尝试从缓存填充；不再自动预取，第一次搜索时再加载
+    // 页面加载：尝试从缓存填充；若缓存未命中，空闲且网络较好时预取 LITE
     loadIndexFromCache();
-    // 不做空闲预取（遵循“首次搜索时加载”的策略）
+    try{
+      const idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 800); };
+      const conn = (navigator && (navigator.connection || navigator.mozConnection || navigator.webkitConnection)) || null;
+      const fast = !conn || (conn.effectiveType === '4g' && (!conn.downlink || conn.downlink >= 1.5));
+      idle(()=>{ if (!data && fast) { prefetchLiteIndex(); } });
+    }catch(_){/* no-op */}
 
     box.addEventListener('compositionstart', ()=> { isComposing = true; dbg('compositionstart'); });
     box.addEventListener('compositionend', ()=> { isComposing = false; dbg('compositionend'); onInput(); });
@@ -603,10 +612,10 @@
     document.addEventListener('keydown', focusHotkey);
 
     // 初始显示快捷入口（聚焦时且为空）
-    box.addEventListener('focus', () => { dbg('focus', { empty: !box.value.trim() }); if (!box.value.trim()){ render([], '', 0); } });
+    box.addEventListener('focus', () => { dbg('focus', { empty: !box.value.trim() }); if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } if (!box.value.trim()){ render([], '', 0); } });
 
     // 绑定移动端按钮（仅 click，避免重复与竞态）
-    if (toggleBtn){ toggleBtn.addEventListener('click', (e)=>{ dbg('toggle click'); e.preventDefault(); openMobile(); }); }
+    if (toggleBtn){ toggleBtn.addEventListener('click', (e)=>{ dbg('toggle click'); e.preventDefault(); if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } openMobile(); }); }
     if (backBtn){ backBtn.addEventListener('click', (e)=>{ dbg('back click'); e.preventDefault(); closeMobile(); }); }
 
     // 视口变化：放大到桌面时自动收起
