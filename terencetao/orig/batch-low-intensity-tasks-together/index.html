@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Batch low-intensity tasks together • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251009-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251009-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251009-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Batch low-intensity tasks together"><meta property="og:description" content="中文版本 原博客链接
+Batch low-intensity tasks together It is much easier to try one&rsquo;s hand at many things than to concentrate one&rsquo;s powers on one thing. — Quintilian
+The tasks one is faced with in work can be broadly divided into two categories:
+&ldquo;High-intensity&rdquo; tasks, which are complex and require your full concentration and focus (e.g. writing a research paper; preparing for a class or talk; writing a lengthy, detailed, and careful email; thinking about a mathematical problem; reading a research paper or text), and
+"><meta property="og:url" content="https://linguage.github.io/terencetao/orig/batch-low-intensity-tasks-together/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Batch low-intensity tasks together"><meta name="twitter:description" content="中文版本 原博客链接
+Batch low-intensity tasks together It is much easier to try one&rsquo;s hand at many things than to concentrate one&rsquo;s powers on one thing. — Quintilian
+The tasks one is faced with in work can be broadly divided into two categories:
+&ldquo;High-intensity&rdquo; tasks, which are complex and require your full concentration and focus (e.g. writing a research paper; preparing for a class or talk; writing a lengthy, detailed, and careful email; thinking about a mathematical problem; reading a research paper or text), and
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/terencetao/orig/batch-low-intensity-tasks-together/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/on-the-importance-of-partial-progress/">On the importance of partial progress</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/timeline-of-postdoc-applications-lovely-little-lemmas/">Timeline of postdoc applications | Lovely little lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/what-are-some-useful-but-little-known-features-of-the-tools-used-in-professional-mathematics/">What are some useful, but little-known, features of the tools used in professional mathematics?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/on-time-management/">On time management</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/continually-aim-just-beyond-your-current-range/">Continually aim just beyond your current range</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/orig/batch-low-intensity-tasks-together/">Batch low-intensity tasks together</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/does-one-have-to-be-a-genius-to-do-maths/">Does one have to be a genius to do maths?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/which-universities-should-one-apply-to/">Which universities should one apply to?</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/solving-mathematical-problems/">Solving mathematical problems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/advice-on-gifted-education/">Advice on gifted education</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/on-writing/">On writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/be-considerate-of-your-audience/">Be considerate of your audience</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/talks-are-not-the-same-as-papers/">Talks are not the same as papers</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/make-your-work-available/">Make your work available</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/write-down-what-youve-done/">Write down what you’ve done</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/use-the-wastebasket/">Use the wastebasket</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/dont-prematurely-obsess-on-a-single-big-problem-or-big-theory/">Don’t prematurely obsess on a single “big problem” or “big theory”</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/be-professional-in-your-work/">Be professional in your work</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/be-flexible/">Be flexible</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/be-patient/">Be patient</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/attend-talks-and-conferences-even-those-not-directly-related-to-your-work/">Attend talks and conferences, even those not directly related to your work</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/take-the-initiative/">Take the initiative</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/talk-to-your-advisor/">Talk to your advisor</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/study-at-different-places/">Study at different places</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/think-ahead/">Think ahead</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/be-sceptical-of-your-own-work/">Be sceptical of your own work</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/ask-yourself-dumb-questions-and-answer-them/">Ask yourself dumb questions – and answer them!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/learn-the-power-of-other-mathematicians-tools/">Learn the power of other mathematicians’ tools</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/learn-the-limitations-of-your-tools/">Learn the limitations of your tools</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/dont-be-afraid-to-learn-things-outside-your-field/">Don’t be afraid to learn things outside your field</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/learn-and-relearn-your-field/">Learn and relearn your field</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/dont-base-career-decisions-on-glamour-or-fame/">Don’t base career decisions on glamour or fame</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/enjoy-your-work/">Enjoy your work</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/work-hard/">Work hard</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/theres-more-to-mathematics-than-rigour-and-proofs/">There’s more to mathematics than rigour and proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/theres-more-to-mathematics-than-grades-and-exams-and-methods/">There’s more to mathematics than grades and exams and methods</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/advice-on-mathematics-competitions/">Advice on mathematics competitions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/the-power-and-peril-of-praising-your-kids-new-york-magazine-nymag/">The Power (and Peril) of Praising Your Kids -- New York Magazine - Nymag</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/advice/">advice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/advice-for-students-especially-graduate-students-in-statistics/">Advice for Students --- Especially Graduate Students in Statistics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/ams-notices-of-the-american-mathematical-society/">AMS Notices Of The American Mathematical Society</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/for-potential-phd-students/">For potential Ph.D. students</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/graduate-student-guide/">Graduate Student Guide</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/hamming-advice/">hamming advice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/on-our-duties-as-scientists/">On our duties as scientists</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/the-illustrated-guide-to-a-phd/">The illustrated guide to a Ph.D.</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/the-princeton-companion-to-mathematics/">The Princeton Companion to Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/orig/williams-college-systems-down/">Williams College - Systems Down</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/terencetao/" class="crumb-anc">陶哲轩博客文章-职业建议</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/terencetao/orig/" class="crumb-sec">Terence Tao - Career Advices</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">Batch low-intensity tasks together</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+      
+
+
+
+
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/on-the-importance-of-partial-progress/">On the importance of partial progress</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/timeline-of-postdoc-applications-lovely-little-lemmas/">Timeline of postdoc applications | Lovely little lemmas</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/what-are-some-useful-but-little-known-features-of-the-tools-used-in-professional-mathematics/">What are some useful, but little-known, features of the tools used in professional mathematics?</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/on-time-management/">On time management</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/continually-aim-just-beyond-your-current-range/">Continually aim just beyond your current range</a>
+  
+
+  
+  
+    <a class="depth-0 file-link is-active" href="/terencetao/orig/batch-low-intensity-tasks-together/">Batch low-intensity tasks together</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/does-one-have-to-be-a-genius-to-do-maths/">Does one have to be a genius to do maths?</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/which-universities-should-one-apply-to/">Which universities should one apply to?</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/solving-mathematical-problems/">Solving mathematical problems</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/advice-on-gifted-education/">Advice on gifted education</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/on-writing/">On writing</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/be-considerate-of-your-audience/">Be considerate of your audience</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/talks-are-not-the-same-as-papers/">Talks are not the same as papers</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/make-your-work-available/">Make your work available</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/write-down-what-youve-done/">Write down what you’ve done</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/use-the-wastebasket/">Use the wastebasket</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/dont-prematurely-obsess-on-a-single-big-problem-or-big-theory/">Don’t prematurely obsess on a single “big problem” or “big theory”</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/be-professional-in-your-work/">Be professional in your work</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/be-flexible/">Be flexible</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/be-patient/">Be patient</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/attend-talks-and-conferences-even-those-not-directly-related-to-your-work/">Attend talks and conferences, even those not directly related to your work</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/take-the-initiative/">Take the initiative</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/talk-to-your-advisor/">Talk to your advisor</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/study-at-different-places/">Study at different places</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/think-ahead/">Think ahead</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/be-sceptical-of-your-own-work/">Be sceptical of your own work</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/ask-yourself-dumb-questions-and-answer-them/">Ask yourself dumb questions – and answer them!</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/learn-the-power-of-other-mathematicians-tools/">Learn the power of other mathematicians’ tools</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/learn-the-limitations-of-your-tools/">Learn the limitations of your tools</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/dont-be-afraid-to-learn-things-outside-your-field/">Don’t be afraid to learn things outside your field</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/learn-and-relearn-your-field/">Learn and relearn your field</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/dont-base-career-decisions-on-glamour-or-fame/">Don’t base career decisions on glamour or fame</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/enjoy-your-work/">Enjoy your work</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/work-hard/">Work hard</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/theres-more-to-mathematics-than-rigour-and-proofs/">There’s more to mathematics than rigour and proofs</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/theres-more-to-mathematics-than-grades-and-exams-and-methods/">There’s more to mathematics than grades and exams and methods</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/advice-on-mathematics-competitions/">Advice on mathematics competitions</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/the-power-and-peril-of-praising-your-kids-new-york-magazine-nymag/">The Power (and Peril) of Praising Your Kids -- New York Magazine - Nymag</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/advice/">advice</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/advice-for-students-especially-graduate-students-in-statistics/">Advice for Students --- Especially Graduate Students in Statistics</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/ams-notices-of-the-american-mathematical-society/">AMS Notices Of The American Mathematical Society</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/for-potential-phd-students/">For potential Ph.D. students</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/graduate-student-guide/">Graduate Student Guide</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/hamming-advice/">hamming advice</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/on-our-duties-as-scientists/">On our duties as scientists</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/the-illustrated-guide-to-a-phd/">The illustrated guide to a Ph.D.</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/the-princeton-companion-to-mathematics/">The Princeton Companion to Mathematics</a>
+  
+
+  
+  
+    <a class="depth-0 file-link " href="/terencetao/orig/williams-college-systems-down/">Williams College - Systems Down</a>
+  
+
+
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          
+          
+          <span class="meta-date">2007-07-18</span>
+        </div>
+      
+
+      
+      <p><a href="/terencetao/zh/batch-low-intensity-tasks-together.zh/">中文版本</a>
+<a href="https://terrytao.wordpress.com/career-advice/batch-low-intensity-tasks-together/">原博客链接</a></p>
+<h1 id="batch-low-intensity-tasks-together">Batch low-intensity tasks together</h1>
+<blockquote>
+<p>It is much easier to try one&rsquo;s hand at many things than to concentrate one&rsquo;s powers on one thing.
+— Quintilian</p></blockquote>
+<p>The tasks one is faced with in work can be broadly divided into two categories:</p>
+<p><strong>&ldquo;High-intensity&rdquo; tasks</strong>, which are complex and require your full concentration and focus (e.g. writing a research paper; preparing for a class or talk; writing a lengthy, detailed, and careful email; thinking about a mathematical problem; reading a research paper or text), and</p>
+<p><strong>&ldquo;Low-intensity&rdquo; tasks</strong>, which are routine (but can be time-consuming) and do not require much mental energy (e.g. filling out paperwork; teaching a class or giving a talk that you have already prepared; writing a short email response; errands and appointments; reading email or browsing the web).</p>
+<p>Working with high-intensity requires a rather different &ldquo;mode&rdquo; of thought than with low-intensity tasks. (For instance, I find it can take a good half-hour or so of uninterrupted thinking before I am fully focused on a maths problem, with all the relevant background at my fingertips.) To reduce the mental fatigue of transitioning from one &ldquo;mode&rdquo; to another, I find it useful to batch similar low-intensity tasks together, and to separate them in time (or space) from the high-intensity ones.</p>
+<h2 id="time-based-batching">Time-based Batching</h2>
+<p>For example, you can devote a block of time to clearing a lot of &ldquo;trivial&rdquo; tasks off of your plate. Schedule all the &ldquo;distracting&rdquo; tasks (e.g. office hours and other appointments) in a single day; try to bunch up teaching days; etc. (I found, for instance, that teaching two sections of a large calculus class back to back (e.g. at 9am and then at 10am) led to significant time savings in class preparation (as well as savings in mental energy), when compared to teaching two different classes, or the same class at very different times.)</p>
+<h2 id="space-based-batching">Space-based Batching</h2>
+<p>One can also do this blocking off in space as well as in time. For instance, with regards to keeping track of paperwork, I have one small area of my office for &ldquo;important&rdquo; forms and records that I am likely to need to deal with again in the future, and a larger area in another part of my office for &ldquo;mundane&rdquo; paperwork which have a low (but non-zero) probability of being needed again in the future. I don&rsquo;t organise or file the latter set of papers very much, given how rarely I need to retrieve files from it; it tends to accumulate in a pile, which I sort through (and mostly discard) every few months or so. (But I do make an effort to keep the &ldquo;important&rdquo; forms relatively organised, and to not have them be cluttered by the much larger set of &ldquo;mundane&rdquo; forms.)</p>
+<p>In a somewhat analogous fashion, one can have an &ldquo;out&rdquo; tray for low-priority physical mail, and send them all out at once, rather than making multiple trips to the office mail room in one day. (While doing so, of course, that would be a good time to check one&rsquo;s mailbox, or any other task that requires walking around the department.)</p>
+<h2 id="the-five-minute-tasks-list">The &ldquo;Five Minute Tasks&rdquo; List</h2>
+<p>In another similar fashion, I have found it useful to keep on my blackboard a standing list of &ldquo;five minute tasks&rdquo; that are low-priority, but do not take much time or mental energy to carry out (though some may strictly speaking exceed the five minute threshold), and are good to perform when one has a short break in one&rsquo;s schedule and has only a moderate amount of mental energy and motivation. Examples include:</p>
+<ul>
+<li>Checking a secondary email account, folder, or physical mailbox that is not so time-sensitive that it must be monitored constantly</li>
+<li>Updating one&rsquo;s CV, a web page of yours, or some aspect of your social media profile</li>
+<li>Organising some aspect of your office, computer, phone, or online organisational tools</li>
+<li>Performing minor administrative tasks such as scheduling a meeting or uploading a form</li>
+</ul>
+<p>I have found that once I have such a standing list, it can also be used as a &ldquo;dumping ground&rdquo; for short tasks that one suddenly realises one has to do at some point, but for some reason or another it would not be preferable to do it immediately. These tasks can then be crossed off from the list when one finally has an appropriate moment to spare, which I personally find to be a satisfying experience.</p>
+<h2 id="email-and-web-batching-strategies">Email and Web Batching Strategies</h2>
+<p>With regards to email, an assembly line approach seems to be efficient: wait until it builds up, and then:</p>
+<ol>
+<li>Pass through deleting spam</li>
+<li>Pass through again dealing with easily dealt with emails (ones that need to be read once and discarded or filed, or require a very brief response, or pushed into some sort of &ldquo;pending&rdquo; folder)</li>
+<li>Deal with one or more of the emails that demand a longer response, if you feel that this is an appropriate time to do so</li>
+</ol>
+<p>If you like to browse multiple web sites during the course of the day, I recommend using a <a href="https://en.wikipedia.org/wiki/Feed_aggregator">feed aggregator</a> (I used to use Google Reader for this, until it was discontinued) so that you can do all your browsing at once, so that they do not distract you from your other tasks.</p>
+<h2 id="using-low-intensity-tasks-as-breaks">Using Low-Intensity Tasks as Breaks</h2>
+<p>If one has a batch of tasks that are both low-intensity and low-priority, then it is probably a good idea to set it aside until one really needs a break from more high-intensity work; for instance, if I get too frustrated on an obstacle in my research, I find this to be a good time to go do some accumulated errands or paperwork, or even just to catch up on my email and web browsing. Having some easy tasks of this nature lying around is then handy for killing time in a reasonably productive fashion until one&rsquo;s creative energies return.</p>
+<h2 id="important-caveat">Important Caveat</h2>
+<p>Note that batching only works well for <strong>low-intensity</strong> tasks. A high-intensity task requires so much focus, and exhausts so much of one&rsquo;s mental stamina, that it can be counterproductive or distracting to mix this activity with other low or high intensity tasks.</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#time-based-batching">Time-based Batching</a></li>
+    <li><a href="#space-based-batching">Space-based Batching</a></li>
+    <li><a href="#the-five-minute-tasks-list">The &ldquo;Five Minute Tasks&rdquo; List</a></li>
+    <li><a href="#email-and-web-batching-strategies">Email and Web Batching Strategies</a></li>
+    <li><a href="#using-low-intensity-tasks-as-breaks">Using Low-Intensity Tasks as Breaks</a></li>
+    <li><a href="#important-caveat">Important Caveat</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#time-based-batching">Time-based Batching</a></li>
+    <li><a href="#space-based-batching">Space-based Batching</a></li>
+    <li><a href="#the-five-minute-tasks-list">The &ldquo;Five Minute Tasks&rdquo; List</a></li>
+    <li><a href="#email-and-web-batching-strategies">Email and Web Batching Strategies</a></li>
+    <li><a href="#using-low-intensity-tasks-as-breaks">Using Low-Intensity Tasks as Breaks</a></li>
+    <li><a href="#important-caveat">Important Caveat</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251009-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL = '\/index.json';
+  </script>
+  <script src="/js/search.js?v=20251009-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251009-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
