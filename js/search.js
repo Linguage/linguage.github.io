@@ -344,9 +344,13 @@
     // 加载提示
     let loadingBar = '';
     if (indexStatus === 'loading'){
-      loadingBar = '<div class="search-popover-info">正在加载索引…可先使用【本页】搜索</div>';
+      loadingBar += '<div class="search-popover-info">正在加载索引…可先使用【本页】搜索</div>';
     } else if (indexStatus === 'error'){
-      loadingBar = '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
+      loadingBar += '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
+    }
+    // 后台升级到“全文索引”时追加提示
+    if (!hasFull && data && fullFetchStarted){
+      loadingBar += '<div class="search-popover-info">正在升级全文索引…</div>';
     }
 
     pop.innerHTML = tabsHtml + loadingBar;
