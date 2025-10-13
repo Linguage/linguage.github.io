@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="百年编程语言"><meta property="og:description" content="→ English Version
-百年编程语言 2003年4月
+https://www.paulgraham.com/hundred.html 百年编程语言 2003年4月
 （本文源于在PyCon 2003的主题演讲。）
 很难预测一百年后的生活会是什么样子。我们只能确定几件事。我们知道每个人都会驾驶飞行汽车，区划法律将会放宽以允许建造数百层高的建筑，大部分时间都会是黑暗的，女性都会接受武术训练。在这里，我想聚焦于这个图景中的一个细节。他们会用什么样的编程语言来编写控制那些飞行汽车的软件？
 思考这个问题之所以有价值，并不是因为我们真的能用到这些语言，而是因为，如果我们幸运的话，我们会使用从现在到那个时间点的路径上的语言。
@@ -110,12 +111,10 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
 这将像要求数据结构的特定实现一样，是你对程序进行优化时相当晚才做的事情。版本1通常会忽略从并行计算中获得的任何优势，就像它们会忽略从数据的特定表示中获得的任何优势一样。
 除了特殊类型的应用程序，并行不会渗透到一百年后编写的程序中。如果确实如此，那将是过早优化。
 一百年后会有多少种编程语言？最近似乎有大量的新编程语言。部分原因是更快的硬件使程序员能够在速度和便利性之间做出不同的权衡，取决于应用。如果这是一个真正的趋势，我们一百年后拥有的硬件只会增加它。
-然而一百年后可能只有几种广泛使用的语言。我说这个的部分原因是乐观：似乎，如果你做得很好，你可以制作一种理想的语言来编写慢速版本1，然而通过给编译器正确的优化建议，也能在必要时产生非常快的代码。所以，既然我乐观，我预测尽管它们在可接受和最大效率之间会有巨大差距，一百年后的程序员将拥有能够跨越大部分差距的语言。
-随着这个差距扩大，性能分析器将变得越来越重要。现在对性能分析的关注很少。许多人似乎仍然相信获得快速应用程序的方法是编写生成快速代码的编译器。随着可接受和最大性能之间的差距扩大，获得快速应用程序的方法是拥有一个从可接受到最大的良好指南，这一点将变得越来越清晰。
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/hundred/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="百年编程语言"><meta name="twitter:description" content="→ English Version
-百年编程语言 2003年4月
+https://www.paulgraham.com/hundred.html 百年编程语言 2003年4月
 （本文源于在PyCon 2003的主题演讲。）
 很难预测一百年后的生活会是什么样子。我们只能确定几件事。我们知道每个人都会驾驶飞行汽车，区划法律将会放宽以允许建造数百层高的建筑，大部分时间都会是黑暗的，女性都会接受武术训练。在这里，我想聚焦于这个图景中的一个细节。他们会用什么样的编程语言来编写控制那些飞行汽车的软件？
 思考这个问题之所以有价值，并不是因为我们真的能用到这些语言，而是因为，如果我们幸运的话，我们会使用从现在到那个时间点的路径上的语言。
@@ -171,13 +170,10 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
 这将像要求数据结构的特定实现一样，是你对程序进行优化时相当晚才做的事情。版本1通常会忽略从并行计算中获得的任何优势，就像它们会忽略从数据的特定表示中获得的任何优势一样。
 除了特殊类型的应用程序，并行不会渗透到一百年后编写的程序中。如果确实如此，那将是过早优化。
 一百年后会有多少种编程语言？最近似乎有大量的新编程语言。部分原因是更快的硬件使程序员能够在速度和便利性之间做出不同的权衡，取决于应用。如果这是一个真正的趋势，我们一百年后拥有的硬件只会增加它。
-然而一百年后可能只有几种广泛使用的语言。我说这个的部分原因是乐观：似乎，如果你做得很好，你可以制作一种理想的语言来编写慢速版本1，然而通过给编译器正确的优化建议，也能在必要时产生非常快的代码。所以，既然我乐观，我预测尽管它们在可接受和最大效率之间会有巨大差距，一百年后的程序员将拥有能够跨越大部分差距的语言。
-随着这个差距扩大，性能分析器将变得越来越重要。现在对性能分析的关注很少。许多人似乎仍然相信获得快速应用程序的方法是编写生成快速代码的编译器。随着可接受和最大性能之间的差距扩大，获得快速应用程序的方法是拥有一个从可接受到最大的良好指南，这一点将变得越来越清晰。
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/hundred/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -199,8 +195,6 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -231,12 +225,11 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -258,51 +251,49 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -328,6 +319,7 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
       </nav>
     
 
+    
     
     
     
@@ -3225,9 +3217,21 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/hundred/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/hundred.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/hundred.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/hundred.html
+  </a>
+</div>
+
 <h1 id="百年编程语言">百年编程语言</h1>
 <p>2003年4月</p>
 <p>（本文源于在PyCon 2003的主题演讲。）</p>
@@ -3431,14 +3435,14 @@ Arc的第一个版本就是这种多层次缓慢的极端情况，相应的好�
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

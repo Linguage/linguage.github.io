@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6,631,372"><meta property="og:description" content="→ English Version
-6,631,372 6,631,372 2006年3月，修订于2009年8月
+https://www.paulgraham.com/6631327.html 6,631,372 6,631,372 2006年3月，修订于2009年8月
 几天前，我惊讶地发现我被授予了一项专利。它在2003年颁发，但没有人告诉我。如果不是几个月前访问雅虎时，我碰巧遇到了一个我在90年代末在那里工作时认识的大人物，我现在还不知道这件事。他提到了一个叫做收入循环（Revenue Loop）的东西，这是Viaweb在被他们收购时正在研发的东西。
 这个想法基本上是，你不按文本&quot;相关性&quot;（如搜索引擎当时那样）排序搜索结果，也不按广告商出价（如Overture那样）排序，而是按出价乘以交易数量来排序。通常你会对购物搜索这样做，但事实上，我们方案的一个特点是它会自动检测哪些搜索是购物搜索。
 如果你只按出价排序结果，你可能会使搜索结果变得无用，因为前面的结果可能被那些出价最高的蹩脚网站占据。但如果你按出价乘以交易数量排序，远不是出卖，你得到了一个更好的相关性衡量标准。还有什么比访问网站并购买某物更能表明某人对搜索结果满意呢？
@@ -72,7 +73,7 @@
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/6631327/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="6,631,372"><meta name="twitter:description" content="→ English Version
-6,631,372 6,631,372 2006年3月，修订于2009年8月
+https://www.paulgraham.com/6631327.html 6,631,372 6,631,372 2006年3月，修订于2009年8月
 几天前，我惊讶地发现我被授予了一项专利。它在2003年颁发，但没有人告诉我。如果不是几个月前访问雅虎时，我碰巧遇到了一个我在90年代末在那里工作时认识的大人物，我现在还不知道这件事。他提到了一个叫做收入循环（Revenue Loop）的东西，这是Viaweb在被他们收购时正在研发的东西。
 这个想法基本上是，你不按文本&quot;相关性&quot;（如搜索引擎当时那样）排序搜索结果，也不按广告商出价（如Overture那样）排序，而是按出价乘以交易数量来排序。通常你会对购物搜索这样做，但事实上，我们方案的一个特点是它会自动检测哪些搜索是购物搜索。
 如果你只按出价排序结果，你可能会使搜索结果变得无用，因为前面的结果可能被那些出价最高的蹩脚网站占据。但如果你按出价乘以交易数量排序，远不是出卖，你得到了一个更好的相关性衡量标准。还有什么比访问网站并购买某物更能表明某人对搜索结果满意呢？
@@ -91,7 +92,6 @@
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/6631327/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -113,8 +113,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -145,12 +143,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -172,51 +169,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -242,6 +237,7 @@
       </nav>
     
 
+    
     
     
     
@@ -3139,9 +3135,21 @@
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/6631327/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/6631327.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/6631327.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/6631327.html
+  </a>
+</div>
+
 <h1 id="6631372">6,631,372</h1>
 <p>6,631,372 2006年3月，修订于2009年8月</p>
 <p>几天前，我惊讶地发现我被授予了一项专利。它在2003年颁发，但没有人告诉我。如果不是几个月前访问雅虎时，我碰巧遇到了一个我在90年代末在那里工作时认识的大人物，我现在还不知道这件事。他提到了一个叫做收入循环（Revenue Loop）的东西，这是Viaweb在被他们收购时正在研发的东西。</p>
@@ -3275,14 +3283,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

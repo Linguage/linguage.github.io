@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,20 +55,19 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The Other Road Ahead"><meta property="og:description" content="→ 中文版本
-The Other Road Ahead September 2001
+https://www.paulgraham.com/road.html The Other Road Ahead September 2001
 (This article explains why much of the next generation of software may be server-based, what that will mean for programmers, and why this new kind of software is a great opportunity for startups. It&rsquo;s derived from a talk at BBN Labs.)
 In the summer of 1995, my friend Robert Morris and I decided to start a startup. The PR campaign leading up to Netscape&rsquo;s IPO was running full blast then, and there was a lot of talk in the press about online commerce. At the time there might have been thirty actual stores on the Web, all made by hand. If there were going to be a lot of online stores, there would need to be software for making them, so we decided to write some.
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_en/road/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="The Other Road Ahead"><meta name="twitter:description" content="→ 中文版本
-The Other Road Ahead September 2001
+https://www.paulgraham.com/road.html The Other Road Ahead September 2001
 (This article explains why much of the next generation of software may be server-based, what that will mean for programmers, and why this new kind of software is a great opportunity for startups. It&rsquo;s derived from a talk at BBN Labs.)
 In the summer of 1995, my friend Robert Morris and I decided to start a startup. The PR campaign leading up to Netscape&rsquo;s IPO was running full blast then, and there was a lot of talk in the press about online commerce. At the time there might have been thirty actual stores on the Web, all made by hand. If there were going to be a lot of online stores, there would need to be software for making them, so we decided to write some.
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_en/road/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -89,8 +89,6 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -121,12 +119,11 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -148,51 +145,49 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -218,6 +213,7 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
       </nav>
     
 
+    
     
     
     
@@ -3115,9 +3111,21 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_zh/road/">中文版本</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/road.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/road.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/road.html
+  </a>
+</div>
+
 <h1 id="the-other-road-ahead">The Other Road Ahead</h1>
 <p>September 2001</p>
 <p>(This article explains why much of the next generation of software may be server-based, what that will mean for programmers, and why this new kind of software is a great opportunity for startups. It&rsquo;s derived from a talk at BBN Labs.)</p>
@@ -3448,14 +3456,14 @@ In the summer of 1995, my friend Robert Morris and I decided to start a startup.
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于语言设计的五个问题"><meta property="og:description" content="→ English Version
-关于语言设计的五个问题 2001年5月
+https://www.paulgraham.com/langdes.html 关于语言设计的五个问题 2001年5月
 （这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）
 1. 编程语言是为人设计的。 编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。
 建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。
@@ -89,11 +90,10 @@
 如果你的应用程序解决一些新问题，那就特别好。这将倾向于推动你的语言拥有程序员需要的新特性。我个人对编写一种适合编写基于服务器的应用程序的语言感兴趣。
 [在小组讨论中，Guy Steele也提出了这一点，并补充建议应用程序不应该包括为你语言编写编译器，除非你的语言碰巧是用于编写编译器的。]
 4. 语言必须适合编写一次性程序。 你知道什么是一次性程序：你为某些有限任务快速编写的东西。我认为如果你环顾四周，你会发现很多大的、严肃的程序开始时是一次性程序。如果大多数程序开始时是一次性程序，我不会感到惊讶。所以如果你想制造一种适合一般软件编写的好语言，它必须适合编写一次性程序，因为这是大多数软件的幼虫阶段。
-5. 语法与语义相连。 传统上认为语法和语义是完全分开的。这听起来很震惊，但它们可能不是。我认为你语言中想要的东西可能与你如何表达它有关。
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/langdes/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="关于语言设计的五个问题"><meta name="twitter:description" content="→ English Version
-关于语言设计的五个问题 2001年5月
+https://www.paulgraham.com/langdes.html 关于语言设计的五个问题 2001年5月
 （这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）
 1. 编程语言是为人设计的。 编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。
 建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。
@@ -128,12 +128,10 @@
 如果你的应用程序解决一些新问题，那就特别好。这将倾向于推动你的语言拥有程序员需要的新特性。我个人对编写一种适合编写基于服务器的应用程序的语言感兴趣。
 [在小组讨论中，Guy Steele也提出了这一点，并补充建议应用程序不应该包括为你语言编写编译器，除非你的语言碰巧是用于编写编译器的。]
 4. 语言必须适合编写一次性程序。 你知道什么是一次性程序：你为某些有限任务快速编写的东西。我认为如果你环顾四周，你会发现很多大的、严肃的程序开始时是一次性程序。如果大多数程序开始时是一次性程序，我不会感到惊讶。所以如果你想制造一种适合一般软件编写的好语言，它必须适合编写一次性程序，因为这是大多数软件的幼虫阶段。
-5. 语法与语义相连。 传统上认为语法和语义是完全分开的。这听起来很震惊，但它们可能不是。我认为你语言中想要的东西可能与你如何表达它有关。
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/langdes/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -155,8 +153,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -187,12 +183,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -214,51 +209,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -284,6 +277,7 @@
       </nav>
     
 
+    
     
     
     
@@ -3181,9 +3175,21 @@
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/langdes/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/langdes.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/langdes.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/langdes.html
+  </a>
+</div>
+
 <h1 id="关于语言设计的五个问题">关于语言设计的五个问题</h1>
 <p>2001年5月</p>
 <p>（这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）</p>
@@ -3454,14 +3460,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

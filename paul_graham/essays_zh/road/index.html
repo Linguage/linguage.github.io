@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="另一条道路"><meta property="og:description" content="→ English Version
-另一条道路 2001年9月
+https://www.paulgraham.com/road.html 另一条道路 2001年9月
 （本文解释了为什么下一代软件的大部分可能是基于服务器的，这对程序员意味着什么，以及这种新型软件为什么是创业公司的绝佳机会。本文源自在BBN实验室的一次演讲。）
 1995年夏天，我的朋友Robert Morris和我决定创办一家创业公司。当时，围绕Netscape IPO的公关活动正如火如荼地进行，媒体上有很多关于电子商务的讨论。那时网络上可能只有三十家实际的商店，都是手工制作的。如果将来会有很多在线商店，就需要制作它们的软件，所以我们决定写一些这样的软件。
 在最初的一周左右，我们打算将其制作成一个普通的桌面应用程序。然后有一天我们想到让软件在我们的Web服务器上运行，使用浏览器作为界面。我们尝试重写软件使其在Web上工作，很明显这是正确的方法。如果我们编写的软件在服务器上运行，对用户和我们自己都会容易得多。
@@ -106,11 +107,10 @@
 当你及早发现错误时，你也会得到更少的复合错误。复合错误是两个相互作用的独立错误：你下楼时绊倒，当你伸手抓住栏杆时，它从你手中脱落。在软件中，这种错误是最难发现的，而且往往具有最严重的后果。[5] 传统的&quot;打破一切然后过滤错误&quot;方法本质上会产生很多复合错误。而以一系列小更改发布的软件本质上不会这样。地板不断被清扫干净，任何可能后来卡在什么东西里的松散物体。
 如果你使用一种称为函数式编程的技术，这会有所帮助。函数式编程意味着避免副作用。你更可能在研究论文中看到它，而不是商业软件，但对于基于Web的应用程序，它结果非常有用。将整个程序写成纯函数式代码很难，但你可以用这种方式编写实质性的部分。它使你软件的这些部分更容易测试，因为它们没有状态，在你不断制作和测试小修改的情况下，这非常方便。我用这种风格编写了Viaweb编辑器的大部分，我们使我们的脚本语言RTML成为一种纯函数式语言。
 来自桌面软件业务的人会发现这难以置信，但在Viaweb，错误几乎成了一种游戏。由于大多数发布的错误都涉及边界情况，遇到它们的用户可能是高级用户，他们在测试极限。高级用户对错误更宽容，特别是因为你可能是在添加他们要求的功能时引入了它们的。事实上，因为错误很少，你必须做复杂的事情才能看到它们，高级用户常常为抓住一个而感到自豪。他们会怀着更多是胜利而不是愤怒的精神致电支持，好像他们从我们这里得分了。
-支持 当你能够重现错误时，它改变了你处理客户支持的方法。在大多数软件公司，支持作为让客户感觉更好的方式提供。他们要么是关于一个已知错误打电话给你，要么是他们做错了什么，你必须弄清楚是什么。在任何一种情况下，你都从他们那里学不到太多东西。所以你倾向于将支持电话视为一个令人讨厌的事情，你希望尽可能将其与开发者隔离。
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/road/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="另一条道路"><meta name="twitter:description" content="→ English Version
-另一条道路 2001年9月
+https://www.paulgraham.com/road.html 另一条道路 2001年9月
 （本文解释了为什么下一代软件的大部分可能是基于服务器的，这对程序员意味着什么，以及这种新型软件为什么是创业公司的绝佳机会。本文源自在BBN实验室的一次演讲。）
 1995年夏天，我的朋友Robert Morris和我决定创办一家创业公司。当时，围绕Netscape IPO的公关活动正如火如荼地进行，媒体上有很多关于电子商务的讨论。那时网络上可能只有三十家实际的商店，都是手工制作的。如果将来会有很多在线商店，就需要制作它们的软件，所以我们决定写一些这样的软件。
 在最初的一周左右，我们打算将其制作成一个普通的桌面应用程序。然后有一天我们想到让软件在我们的Web服务器上运行，使用浏览器作为界面。我们尝试重写软件使其在Web上工作，很明显这是正确的方法。如果我们编写的软件在服务器上运行，对用户和我们自己都会容易得多。
@@ -162,12 +162,10 @@
 当你及早发现错误时，你也会得到更少的复合错误。复合错误是两个相互作用的独立错误：你下楼时绊倒，当你伸手抓住栏杆时，它从你手中脱落。在软件中，这种错误是最难发现的，而且往往具有最严重的后果。[5] 传统的&quot;打破一切然后过滤错误&quot;方法本质上会产生很多复合错误。而以一系列小更改发布的软件本质上不会这样。地板不断被清扫干净，任何可能后来卡在什么东西里的松散物体。
 如果你使用一种称为函数式编程的技术，这会有所帮助。函数式编程意味着避免副作用。你更可能在研究论文中看到它，而不是商业软件，但对于基于Web的应用程序，它结果非常有用。将整个程序写成纯函数式代码很难，但你可以用这种方式编写实质性的部分。它使你软件的这些部分更容易测试，因为它们没有状态，在你不断制作和测试小修改的情况下，这非常方便。我用这种风格编写了Viaweb编辑器的大部分，我们使我们的脚本语言RTML成为一种纯函数式语言。
 来自桌面软件业务的人会发现这难以置信，但在Viaweb，错误几乎成了一种游戏。由于大多数发布的错误都涉及边界情况，遇到它们的用户可能是高级用户，他们在测试极限。高级用户对错误更宽容，特别是因为你可能是在添加他们要求的功能时引入了它们的。事实上，因为错误很少，你必须做复杂的事情才能看到它们，高级用户常常为抓住一个而感到自豪。他们会怀着更多是胜利而不是愤怒的精神致电支持，好像他们从我们这里得分了。
-支持 当你能够重现错误时，它改变了你处理客户支持的方法。在大多数软件公司，支持作为让客户感觉更好的方式提供。他们要么是关于一个已知错误打电话给你，要么是他们做错了什么，你必须弄清楚是什么。在任何一种情况下，你都从他们那里学不到太多东西。所以你倾向于将支持电话视为一个令人讨厌的事情，你希望尽可能将其与开发者隔离。
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/road/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -189,8 +187,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -221,12 +217,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -248,51 +243,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -318,6 +311,7 @@
       </nav>
     
 
+    
     
     
     
@@ -3215,9 +3209,21 @@
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/road/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/road.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/road.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/road.html
+  </a>
+</div>
+
 <h1 id="另一条道路">另一条道路</h1>
 <p>2001年9月</p>
 <p>（本文解释了为什么下一代软件的大部分可能是基于服务器的，这对程序员意味着什么，以及这种新型软件为什么是创业公司的绝佳机会。本文源自在BBN实验室的一次演讲。）</p>
@@ -3548,14 +3554,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

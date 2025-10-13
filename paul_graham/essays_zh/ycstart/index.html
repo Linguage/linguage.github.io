@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Y Combinator 的创立故事"><meta property="og:description" content="→ English Version
-Y Combinator 的创立故事 2012年3月
+https://www.paulgraham.com/ycstart.html Y Combinator 的创立故事 2012年3月
 Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直到几天后才注意到。我想我们从来没有能在生日当天记住我们的生日。
 2005年3月11日，杰西卡和我在哈佛广场吃完晚饭走回家。杰西卡当时在一家投资银行工作，但她不太喜欢，所以她面试了波士顿一家风险投资基金的市场总监职位。这家风险投资基金正在做现在看来对风险投资基金来说喜剧性地熟悉的事情：花很长时间做决定。
 与此同时，我一直在告诉杰西卡他们应该改变风险投资业务的所有方面——基本上是现在支撑Y Combinator的理念：投资者应该做更多、更小的投资，他们应该资助黑客而不是西装革履的人，他们应该愿意资助更年轻的创始人，等等。
@@ -79,7 +80,7 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/ycstart/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Y Combinator 的创立故事"><meta name="twitter:description" content="→ English Version
-Y Combinator 的创立故事 2012年3月
+https://www.paulgraham.com/ycstart.html Y Combinator 的创立故事 2012年3月
 Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直到几天后才注意到。我想我们从来没有能在生日当天记住我们的生日。
 2005年3月11日，杰西卡和我在哈佛广场吃完晚饭走回家。杰西卡当时在一家投资银行工作，但她不太喜欢，所以她面试了波士顿一家风险投资基金的市场总监职位。这家风险投资基金正在做现在看来对风险投资基金来说喜剧性地熟悉的事情：花很长时间做决定。
 与此同时，我一直在告诉杰西卡他们应该改变风险投资业务的所有方面——基本上是现在支撑Y Combinator的理念：投资者应该做更多、更小的投资，他们应该资助黑客而不是西装革履的人，他们应该愿意资助更年轻的创始人，等等。
@@ -105,7 +106,6 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/ycstart/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -127,8 +127,6 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -159,12 +157,11 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -186,51 +183,49 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -256,6 +251,7 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
       </nav>
     
 
+    
     
     
     
@@ -3153,9 +3149,21 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/ycstart/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/ycstart.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/ycstart.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/ycstart.html
+  </a>
+</div>
+
 <h1 id="y-combinator-的创立故事">Y Combinator 的创立故事</h1>
 <p>2012年3月</p>
 <p>Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直到几天后才注意到。我想我们从来没有能在生日当天记住我们的生日。</p>
@@ -3295,14 +3303,14 @@ Y Combinator的7岁生日是3月11日。像往常一样，我们太忙了，直�
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

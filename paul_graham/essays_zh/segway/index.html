@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="赛格威的麻烦"><meta property="og:description" content="→ English Version
-赛格威的麻烦 2009年7月
+https://www.paulgraham.com/segway.html 赛格威的麻烦 2009年7月
 赛格威没有实现其最初的承诺，说得客气一点。有几个原因，但一个是人们不想被看到骑着它们。骑赛格威的人看起来像个呆子。
 我的朋友特雷弗·布莱克韦尔建造了自己的赛格威，我们称之为Segwell。他还建造了一个单轮版本，Eunicycle，在你意识到骑手没有踩踏板之前，它看起来就像普通的独轮车。他曾骑着它们去山景城市中心买咖啡。当他骑Eunicycle时，人们对他微笑。但当他骑Segwell时，他们会从车里喊出侮辱的话：&ldquo;太懒了不走路，你他妈的同性恋？&rdquo;
 为什么赛格威会引发这种反应？骑赛格威看起来像呆子的原因是你看起来很自鸣得意。你似乎没有足够努力地工作。
@@ -65,7 +66,7 @@
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/segway/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="赛格威的麻烦"><meta name="twitter:description" content="→ English Version
-赛格威的麻烦 2009年7月
+https://www.paulgraham.com/segway.html 赛格威的麻烦 2009年7月
 赛格威没有实现其最初的承诺，说得客气一点。有几个原因，但一个是人们不想被看到骑着它们。骑赛格威的人看起来像个呆子。
 我的朋友特雷弗·布莱克韦尔建造了自己的赛格威，我们称之为Segwell。他还建造了一个单轮版本，Eunicycle，在你意识到骑手没有踩踏板之前，它看起来就像普通的独轮车。他曾骑着它们去山景城市中心买咖啡。当他骑Eunicycle时，人们对他微笑。但当他骑Segwell时，他们会从车里喊出侮辱的话：&ldquo;太懒了不走路，你他妈的同性恋？&rdquo;
 为什么赛格威会引发这种反应？骑赛格威看起来像呆子的原因是你看起来很自鸣得意。你似乎没有足够努力地工作。
@@ -77,7 +78,6 @@
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/segway/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -99,8 +99,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -131,12 +129,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -158,51 +155,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -228,6 +223,7 @@
       </nav>
     
 
+    
     
     
     
@@ -3125,9 +3121,21 @@
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/segway/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/segway.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/segway.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/segway.html
+  </a>
+</div>
+
 <h1 id="赛格威的麻烦">赛格威的麻烦</h1>
 <p>2009年7月</p>
 <p>赛格威没有实现其最初的承诺，说得客气一点。有几个原因，但一个是人们不想被看到骑着它们。骑赛格威的人看起来像个呆子。</p>
@@ -3253,14 +3261,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

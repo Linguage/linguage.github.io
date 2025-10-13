@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -53,8 +54,7 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="先写一个快速原型"><meta property="og:description" content="原文(English) 原博客链接
-先写一个快速原型 最好的性能改进是从不工作状态到工作状态的转变。 ——约翰·奥斯特豪特
+<meta property="og:title" content="先写一个快速原型"><meta property="og:description" content="原文(English) https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/ 先写一个快速原型 最好的性能改进是从不工作状态到工作状态的转变。 ——约翰·奥斯特豪特
 发现数学问题的解决方案只是战斗的一半。实际上把你发现的论证正式写下来也可能是一项艰巨的任务，特别是当论证很长且没有文献中现有模型可借鉴时。虽然论证的每个细节对作者来说可能都很清楚，但论证的整体结构可能不会立即显而易见。特别是，通常很难在论文的大部分内容已经写完之前就做出关于以下内容的重要决定：
 论证的组织结构，以及 良好符号的选择 到那时，组织或符号的任何更改通常都变得难以实施。（过去很多时候，我在没有充分考虑整体结构的情况下开始写论文，花了很多时间建立一些我认为重要的引理，结果后来意识到实际上并不需要这个引理，从而浪费了大量时间。）
 我发现软件工程中的快速原型技术有助于缓解这些困难。根据这种技术，人们不按线性顺序写论文，也克制住先写最简单或最直接部分的诱惑。相反，人们按照以下顺序写论文。
@@ -69,8 +69,7 @@
 相关阅读 关于应用于阅读论文这一对偶问题的类似技术，请参见此页面。
 "><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="先写一个快速原型"><meta name="twitter:description" content="原文(English) 原博客链接
-先写一个快速原型 最好的性能改进是从不工作状态到工作状态的转变。 ——约翰·奥斯特豪特
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="先写一个快速原型"><meta name="twitter:description" content="原文(English) https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/ 先写一个快速原型 最好的性能改进是从不工作状态到工作状态的转变。 ——约翰·奥斯特豪特
 发现数学问题的解决方案只是战斗的一半。实际上把你发现的论证正式写下来也可能是一项艰巨的任务，特别是当论证很长且没有文献中现有模型可借鉴时。虽然论证的每个细节对作者来说可能都很清楚，但论证的整体结构可能不会立即显而易见。特别是，通常很难在论文的大部分内容已经写完之前就做出关于以下内容的重要决定：
 论证的组织结构，以及 良好符号的选择 到那时，组织或符号的任何更改通常都变得难以实施。（过去很多时候，我在没有充分考虑整体结构的情况下开始写论文，花了很多时间建立一些我认为重要的引理，结果后来意识到实际上并不需要这个引理，从而浪费了大量时间。）
 我发现软件工程中的快速原型技术有助于缓解这些困难。根据这种技术，人们不按线性顺序写论文，也克制住先写最简单或最直接部分的诱惑。相反，人们按照以下顺序写论文。
@@ -87,7 +86,6 @@
 <link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -109,8 +107,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -141,12 +137,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -168,51 +163,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -238,6 +231,7 @@
       </nav>
     
 
+    
     
     
     
@@ -696,15 +690,20 @@
       
       
         <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
-          
-          
+          <span class="meta-author">Terence Tao</span>
+           · 
           <span class="meta-date">2007-05-14</span>
         </div>
       
 
       
       <p><a href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">原文(English)</a>
-<a href="https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/">原博客链接</a></p>
+<div class="link-card" data-url="https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/">
+  <a class="link-card__fallback" href="https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/" target="_blank" rel="noopener">
+    https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/
+  </a>
+</div>
+</p>
 <h1 id="先写一个快速原型">先写一个快速原型</h1>
 <blockquote>
 <p>最好的性能改进是从不工作状态到工作状态的转变。
@@ -885,14 +884,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

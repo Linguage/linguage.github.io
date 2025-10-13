@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Airbnb"><meta property="og:description" content="→ English Version
-Airbnb 主题：Airbnb 2011年3月
+https://www.paulgraham.com/airbnb.html Airbnb 主题：Airbnb 2011年3月
 昨天Fred Wilson发表了一篇关于错过Airbnb的引人注目的文章。风险投资家错过好的初创公司是很常见的事，但一个人在事后很长时间之前公开谈论这件事是极其罕见的。所以那篇文章进一步证明了Fred是多么难得的人物。他可能是我认识的最友好的风险投资家。
 阅读Fred的文章让我回顾了当时我与他的邮件交流，试图说服他投资Airbnb。阅读起来相当有趣。你可以看到Fred的思路在他围绕这笔交易盘旋时的工作方式。
 Fred和Airbnb创始人们慷慨地同意让我发布这封邮件交流（关于对Airbnb具有战略重要性且不是对话重要部分的一句话被编辑删除）。这是一个很少除了参与者能看到的企业生态系统中一个元素的有趣说明：投资者试图说服彼此投资他们的投资组合公司。现在正在发生数百甚至数千次这种类型的对话，但如果曾经有被发布过，我还没有看到。Airbnb团队当时甚至没有看到这些邮件。
@@ -76,7 +77,7 @@ Brian
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/airbnb/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Airbnb"><meta name="twitter:description" content="→ English Version
-Airbnb 主题：Airbnb 2011年3月
+https://www.paulgraham.com/airbnb.html Airbnb 主题：Airbnb 2011年3月
 昨天Fred Wilson发表了一篇关于错过Airbnb的引人注目的文章。风险投资家错过好的初创公司是很常见的事，但一个人在事后很长时间之前公开谈论这件事是极其罕见的。所以那篇文章进一步证明了Fred是多么难得的人物。他可能是我认识的最友好的风险投资家。
 阅读Fred的文章让我回顾了当时我与他的邮件交流，试图说服他投资Airbnb。阅读起来相当有趣。你可以看到Fred的思路在他围绕这笔交易盘旋时的工作方式。
 Fred和Airbnb创始人们慷慨地同意让我发布这封邮件交流（关于对Airbnb具有战略重要性且不是对话重要部分的一句话被编辑删除）。这是一个很少除了参与者能看到的企业生态系统中一个元素的有趣说明：投资者试图说服彼此投资他们的投资组合公司。现在正在发生数百甚至数千次这种类型的对话，但如果曾经有被发布过，我还没有看到。Airbnb团队当时甚至没有看到这些邮件。
@@ -99,7 +100,6 @@ Brian
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/airbnb/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -121,8 +121,6 @@ Brian
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -153,12 +151,11 @@ Brian
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -180,51 +177,49 @@ Brian
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -250,6 +245,7 @@ Brian
       </nav>
     
 
+    
     
     
     
@@ -3147,9 +3143,21 @@ Brian
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/airbnb/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/airbnb.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/airbnb.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/airbnb.html
+  </a>
+</div>
+
 <h1 id="airbnb">Airbnb</h1>
 <p>主题：Airbnb 2011年3月</p>
 <p>昨天Fred Wilson发表了一篇关于错过Airbnb的引人注目的文章。风险投资家错过好的初创公司是很常见的事，但一个人在事后很长时间之前公开谈论这件事是极其罕见的。所以那篇文章进一步证明了Fred是多么难得的人物。他可能是我认识的最友好的风险投资家。</p>
@@ -3401,14 +3409,14 @@ Brian
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾邮件过滤计划"><meta property="og:description" content="→ English Version
-垃圾邮件过滤计划 2002年8月
+https://www.paulgraham.com/spam.html 垃圾邮件过滤计划 2002年8月
 （本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。
 对收件人来说，垃圾邮件很容易识别。如果你雇佣某人阅读你的邮件并丢弃垃圾邮件，他们会毫无困难地做到这一点。我们需要做多少工作，除了人工智能之外，来自动化这个过程？
 我认为我们将能够用相当简单的算法解决这个问题。事实上，我发现你可以使用不比单个词的垃圾邮件概率的贝叶斯组合更多的东西来相当好地过滤现在的垃圾邮件。使用一个稍微调整的（如下所述）贝叶斯过滤器，我们现在在每1000封垃圾邮件中遗漏少于5封，误报率为0。
@@ -73,7 +74,7 @@
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/spam/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="垃圾邮件过滤计划"><meta name="twitter:description" content="→ English Version
-垃圾邮件过滤计划 2002年8月
+https://www.paulgraham.com/spam.html 垃圾邮件过滤计划 2002年8月
 （本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。
 对收件人来说，垃圾邮件很容易识别。如果你雇佣某人阅读你的邮件并丢弃垃圾邮件，他们会毫无困难地做到这一点。我们需要做多少工作，除了人工智能之外，来自动化这个过程？
 我认为我们将能够用相当简单的算法解决这个问题。事实上，我发现你可以使用不比单个词的垃圾邮件概率的贝叶斯组合更多的东西来相当好地过滤现在的垃圾邮件。使用一个稍微调整的（如下所述）贝叶斯过滤器，我们现在在每1000封垃圾邮件中遗漏少于5封，误报率为0。
@@ -93,7 +94,6 @@
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/spam/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -115,8 +115,6 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -147,12 +145,11 @@
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -174,51 +171,49 @@
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -244,6 +239,7 @@
       </nav>
     
 
+    
     
     
     
@@ -3141,9 +3137,21 @@
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/spam/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/spam.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/spam.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/spam.html
+  </a>
+</div>
+
 <h1 id="垃圾邮件过滤计划">垃圾邮件过滤计划</h1>
 <p>2002年8月</p>
 <p>（本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。</p>
@@ -3336,14 +3344,14 @@
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   

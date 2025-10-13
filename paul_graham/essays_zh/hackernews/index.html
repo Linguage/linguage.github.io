@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/styles.css?v=20251012-08" />
   <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
   <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
   
   
   
@@ -54,7 +55,7 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我从Hacker News学到的"><meta property="og:description" content="→ English Version
-我从Hacker News学到的 2009年2月
+https://www.paulgraham.com/hackernews.html 我从Hacker News学到的 2009年2月
 Hacker News上周满两岁了。最初它应该是一个副业项目——一个用来磨练Arc的应用程序，以及现任和未来Y Combinator创始人交流新闻的地方。它已经变得比我预期的更大，占用了我更多的时间，但我不后悔，因为我在工作中学到了很多东西。
 增长 当我们在2007年2月推出时，工作日流量大约是1600个独立日访问者。从那时起增长到大约22,000个。这个增长率比我喜欢的要高一点。我希望网站增长，因为一个至少不缓慢增长的网站可能已经死了。但我不希望它变得像Digg或Reddit那样大——主要是因为这会稀释网站的特色，也是因为我不想把所有时间都花在处理扩展性问题上。
 我已经有够多的问题了。记住，HN的最初动机是测试一种新的编程语言，而且是一种专注于实验语言设计而非性能的语言。每次网站变慢，我就通过回忆McIlroy和Bentley的名言&quot;性能的关键在于优雅，而不是特殊情况的军队&quot;来强化自己，并寻找我能用最少代码消除的瓶颈。到目前为止，我一直能够跟上，从某种意义上说，尽管增长了14倍，性能却一直保持中等水平。我不知道下一步该做什么，但我可能会想出办法。
@@ -92,12 +93,10 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
 我觉得游戏和社交应用程序的令人上瘾性仍然是一个大部分未解决的问题。现在的情况就像1980年代的快克可卡因：我们发明了极其令人上瘾的新东西，但我们还没有进化出保护自己免受它们伤害的方法。我们最终会的，这是我希望接下来专注解决的问题之一。
 注释 [1] 我尝试用平均数和中位数评论分数对用户进行排名，平均数（去掉高分）似乎是对高质量更准确的预测。不过中位数可能是对低质量更准确的预测。
 [2] 我从这个实验中学到的另一件事是，如果你要区分人，你最好确定你做得对。这是快速原型设计不起作用的问题之一。
-确实，这是不在各种类型的人之间歧视的智力上诚实的论点。不这样做的理由不是每个人都一样，而是做错是坏的，做对是难的。
-[3] 当我抓住恶劣的链接劫持帖子时，我用他们复制的任何东西的url替换它。习惯性链接劫持的网站会被禁止。
 "><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/hackernews/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="我从Hacker News学到的"><meta name="twitter:description" content="→ English Version
-我从Hacker News学到的 2009年2月
+https://www.paulgraham.com/hackernews.html 我从Hacker News学到的 2009年2月
 Hacker News上周满两岁了。最初它应该是一个副业项目——一个用来磨练Arc的应用程序，以及现任和未来Y Combinator创始人交流新闻的地方。它已经变得比我预期的更大，占用了我更多的时间，但我不后悔，因为我在工作中学到了很多东西。
 增长 当我们在2007年2月推出时，工作日流量大约是1600个独立日访问者。从那时起增长到大约22,000个。这个增长率比我喜欢的要高一点。我希望网站增长，因为一个至少不缓慢增长的网站可能已经死了。但我不希望它变得像Digg或Reddit那样大——主要是因为这会稀释网站的特色，也是因为我不想把所有时间都花在处理扩展性问题上。
 我已经有够多的问题了。记住，HN的最初动机是测试一种新的编程语言，而且是一种专注于实验语言设计而非性能的语言。每次网站变慢，我就通过回忆McIlroy和Bentley的名言&quot;性能的关键在于优雅，而不是特殊情况的军队&quot;来强化自己，并寻找我能用最少代码消除的瓶颈。到目前为止，我一直能够跟上，从某种意义上说，尽管增长了14倍，性能却一直保持中等水平。我不知道下一步该做什么，但我可能会想出办法。
@@ -135,13 +134,10 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
 我觉得游戏和社交应用程序的令人上瘾性仍然是一个大部分未解决的问题。现在的情况就像1980年代的快克可卡因：我们发明了极其令人上瘾的新东西，但我们还没有进化出保护自己免受它们伤害的方法。我们最终会的，这是我希望接下来专注解决的问题之一。
 注释 [1] 我尝试用平均数和中位数评论分数对用户进行排名，平均数（去掉高分）似乎是对高质量更准确的预测。不过中位数可能是对低质量更准确的预测。
 [2] 我从这个实验中学到的另一件事是，如果你要区分人，你最好确定你做得对。这是快速原型设计不起作用的问题之一。
-确实，这是不在各种类型的人之间歧视的智力上诚实的论点。不这样做的理由不是每个人都一样，而是做错是坏的，做对是难的。
-[3] 当我抓住恶劣的链接劫持帖子时，我用他们复制的任何东西的url替换它。习惯性链接劫持的网站会被禁止。
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/hackernews/">
 
   
-
   
   <script>
     window.MathJax = {
@@ -163,8 +159,6 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-
   
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
@@ -195,12 +189,11 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
           </a>
         
       
+      
       <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
       <span class="brand-text">Linguista</span>
     </div>
-
     
-
     
     <nav class="nav">
       
@@ -222,51 +215,49 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
       
       
     </nav>
-
     
     
-  <div class="actions">
-    
+    <div class="actions">
       
-    
-    
-    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-      </svg>
-    </button>
-    <div class="site-search" role="search">
+        
       
-      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <span class="site-search-icon" aria-hidden="true">
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
           <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
-      </span>
-      <input id="globalSearchInput"
-             class="site-search-input"
-             type="search"
-             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-             aria-label="站内搜索"
-             autocomplete="off"
-             spellcheck="false" />
-      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
     </div>
-    <a href="/post/" class="btn ghost posts-btn">Posts</a>
-    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-  </div>
-  
+    
     
   </div>
 
   
 </header>
+
 
 <aside id="navDrawer" class="nav-drawer" hidden>
   <div class="nav-drawer-inner">
@@ -292,6 +283,7 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
       </nav>
     
 
+    
     
     
     
@@ -3189,9 +3181,21 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
       
       
       
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Paul Graham</span>
+          
+          
+        </div>
+      
 
       
       <p>→ <a href="/paul_graham/essays_en/hackernews/">English Version</a></p>
+<div class="link-card" data-url="https://www.paulgraham.com/hackernews.html">
+  <a class="link-card__fallback" href="https://www.paulgraham.com/hackernews.html" target="_blank" rel="noopener">
+    https://www.paulgraham.com/hackernews.html
+  </a>
+</div>
+
 <h1 id="我从hacker-news学到的">我从Hacker News学到的</h1>
 <p>2009年2月</p>
 <p>Hacker News上周满两岁了。最初它应该是一个副业项目——一个用来磨练Arc的应用程序，以及现任和未来Y Combinator创始人交流新闻的地方。它已经变得比我预期的更大，占用了我更多的时间，但我不后悔，因为我在工作中学到了很多东西。</p>
@@ -3382,14 +3386,14 @@ Hacker News肯定是有用的。我从在HN上读到的东西中学到了很多�
   
   <script src="/script.js?v=20251012-08" defer></script>
   <script>
-    
     window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
     window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
   </script>
-  <script src="/js/search.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
   
   <script defer src="/js/table-7char.js?v=20251012-08"></script>
   
+  <script defer src="/js/linkcard.js?v=20251012-08"></script>
   
   
   
