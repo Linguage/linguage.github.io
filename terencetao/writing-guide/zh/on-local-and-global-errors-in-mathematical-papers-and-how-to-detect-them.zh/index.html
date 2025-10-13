@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251012-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法"><meta property="og:description" content="原文(English) 原博客链接
+关于数学论文中的&quot;局部&quot;与&quot;全局&quot;错误及其检测方法 从形式上说，数学证明由一系列数学陈述和推理（例如&quot;若$A$，则$B$&quot;）组成，以逻辑方式串联起来形成结论。一个简单的例子是线性推理链，如&quot;$A \implies B \implies C \implies D$&quot;，从而得出&quot;$D$&ldquo;这一结论。然而在实践中，证明往往比线性链更复杂，常常呈现出树状结构（或更一般地说，有向无环图的结构），这是因为需要分情况讨论，或者多次重复使用某个假设。诸如反证法或数学归纳法之类的证明方法，可能导致数学论证中出现更复杂的循环和反转。
+不幸的是，并非所有对数学命题的拟议证明都是正确的，因此需要付出一些努力来验证这些拟议证明。广义上说，有两种方式可以表明证明可能失败。首先，可以通过证明证明中的某个步骤（或者可能是几个步骤的集合，见下文）无效来找到对证明的&quot;局部&rdquo;、&ldquo;低层次&quot;或&quot;直接&quot;反驳。例如，如果蕴含关系$B \implies C$为假，那么上述对&rdquo;$D$&ldquo;的拟议证明&rdquo;$A \implies B \implies C \implies D$&ldquo;就是无效的（尽管当然仍有可能通过其他途径证明$D$）。
+有时，低层次错误无法定位到单个步骤，而是定位到几个步骤的集合。例如，如果存在循环论证，其中陈述$A$以$B$作为理由被声称成立，而$B$又以$A$作为理由被声称成立，那么即使两个蕴含关系$A \implies B$和$B \implies A$都为真，推导出$A$和$B$都成立的推理仍然是无效的。（但请注意，存在重要且有效的近似循环论证的例子，例如归纳证明，但这并非当前讨论的主题。）
+另一个无法定位到单个步骤的低层次错误的例子源于歧义性。假设某人声称$A \implies B$和$B \implies C$，因此$A \implies C$。如果所有术语都无歧义地明确定义，这是一个有效的推理。但假设表达式$B$存在歧义，实际上至少有两种不同的解释，比如$B_1$和$B_2$。进一步假设$A \implies B$这一蕴含关系假定前一种解释$B_1$，而$B \implies C$这一蕴含关系假定后一种解释$B_2$，因此我们实际上有$A \implies B_1$和$B_2 \implies C$。在这种情况下，我们不能再有效地推导出$A \implies C$（除非我们能够额外证明$B_1 \implies B_2$）。在这种情况下，在$B$被更明确地定义之前，无法将错误定位到&rdquo;$A \implies B$&ldquo;或&rdquo;$B \implies C$&ldquo;中的任何一个。这个简单的例子说明了在数学论证中精确定义关键术语的重要性。
+在证明中发现错误的另一种方法是获得&quot;高层次&quot;或&quot;全局&quot;的反驳，表明该证明如果有效，将必然推出一个已知或被强烈怀疑为假的进一步结论。这方面最著名（也最强有力）的例子是反例。如果某人拥有对命题$D$的反例，那么他立即知道推理链&rdquo;$A \implies B \implies C \implies D$&ldquo;必定无效，即使无法立即在局部层面 pinpoint 精确的错误所在。因此我们看到，全局错误可以被视为&quot;非构造性&quot;的保证，表明某处必定存在局部错误。
+更微妙一点，可以利用证明本身的结构进行论证。如果像$P$这样的命题可以通过链$A \implies B \implies C \implies D \implies P$来证明，那么这可能意味着一个平行的命题$Q$也可以通过平行的逻辑推理链$A&#39; \implies B&#39; \implies C&#39; \implies D&#39; \implies Q$来证明。但如果某人还拥有对$Q$的反例，那么这意味着在这个平行链中的某处存在缺陷，因此（大概）在原始链中也存在缺陷。这种类型的其他例子包括对某个结论的证明，这些证明神秘地从未以任何实质性的方式使用一个关键假设（例如，对$x^n &#43; y^n = z^n$不存在非平凡整数解的证明，神秘地从未使用$n$严格大于$2$这一假设，或者可以轻易修改以覆盖$n=2$的情况）。
+"><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法"><meta name="twitter:description" content="原文(English) 原博客链接
+关于数学论文中的&quot;局部&quot;与&quot;全局&quot;错误及其检测方法 从形式上说，数学证明由一系列数学陈述和推理（例如&quot;若$A$，则$B$&quot;）组成，以逻辑方式串联起来形成结论。一个简单的例子是线性推理链，如&quot;$A \implies B \implies C \implies D$&quot;，从而得出&quot;$D$&ldquo;这一结论。然而在实践中，证明往往比线性链更复杂，常常呈现出树状结构（或更一般地说，有向无环图的结构），这是因为需要分情况讨论，或者多次重复使用某个假设。诸如反证法或数学归纳法之类的证明方法，可能导致数学论证中出现更复杂的循环和反转。
+不幸的是，并非所有对数学命题的拟议证明都是正确的，因此需要付出一些努力来验证这些拟议证明。广义上说，有两种方式可以表明证明可能失败。首先，可以通过证明证明中的某个步骤（或者可能是几个步骤的集合，见下文）无效来找到对证明的&quot;局部&rdquo;、&ldquo;低层次&quot;或&quot;直接&quot;反驳。例如，如果蕴含关系$B \implies C$为假，那么上述对&rdquo;$D$&ldquo;的拟议证明&rdquo;$A \implies B \implies C \implies D$&ldquo;就是无效的（尽管当然仍有可能通过其他途径证明$D$）。
+有时，低层次错误无法定位到单个步骤，而是定位到几个步骤的集合。例如，如果存在循环论证，其中陈述$A$以$B$作为理由被声称成立，而$B$又以$A$作为理由被声称成立，那么即使两个蕴含关系$A \implies B$和$B \implies A$都为真，推导出$A$和$B$都成立的推理仍然是无效的。（但请注意，存在重要且有效的近似循环论证的例子，例如归纳证明，但这并非当前讨论的主题。）
+另一个无法定位到单个步骤的低层次错误的例子源于歧义性。假设某人声称$A \implies B$和$B \implies C$，因此$A \implies C$。如果所有术语都无歧义地明确定义，这是一个有效的推理。但假设表达式$B$存在歧义，实际上至少有两种不同的解释，比如$B_1$和$B_2$。进一步假设$A \implies B$这一蕴含关系假定前一种解释$B_1$，而$B \implies C$这一蕴含关系假定后一种解释$B_2$，因此我们实际上有$A \implies B_1$和$B_2 \implies C$。在这种情况下，我们不能再有效地推导出$A \implies C$（除非我们能够额外证明$B_1 \implies B_2$）。在这种情况下，在$B$被更明确地定义之前，无法将错误定位到&rdquo;$A \implies B$&ldquo;或&rdquo;$B \implies C$&ldquo;中的任何一个。这个简单的例子说明了在数学论证中精确定义关键术语的重要性。
+在证明中发现错误的另一种方法是获得&quot;高层次&quot;或&quot;全局&quot;的反驳，表明该证明如果有效，将必然推出一个已知或被强烈怀疑为假的进一步结论。这方面最著名（也最强有力）的例子是反例。如果某人拥有对命题$D$的反例，那么他立即知道推理链&rdquo;$A \implies B \implies C \implies D$&ldquo;必定无效，即使无法立即在局部层面 pinpoint 精确的错误所在。因此我们看到，全局错误可以被视为&quot;非构造性&quot;的保证，表明某处必定存在局部错误。
+更微妙一点，可以利用证明本身的结构进行论证。如果像$P$这样的命题可以通过链$A \implies B \implies C \implies D \implies P$来证明，那么这可能意味着一个平行的命题$Q$也可以通过平行的逻辑推理链$A&#39; \implies B&#39; \implies C&#39; \implies D&#39; \implies Q$来证明。但如果某人还拥有对$Q$的反例，那么这意味着在这个平行链中的某处存在缺陷，因此（大概）在原始链中也存在缺陷。这种类型的其他例子包括对某个结论的证明，这些证明神秘地从未以任何实质性的方式使用一个关键假设（例如，对$x^n &#43; y^n = z^n$不存在非平凡整数解的证明，神秘地从未使用$n$严格大于$2$这一假设，或者可以轻易修改以覆盖$n=2$的情况）。
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/terencetao/" class="crumb-anc">陶哲轩博客文章-职业建议</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/terencetao/writing-guide/" class="crumb-sec">陶哲轩的写作建议</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          
+          
+          <span class="meta-date">2019-02-15</span>
+        </div>
+      
+
+      
+      <p><a href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">原文(English)</a>
+<a href="https://terrytao.wordpress.com/advice-on-writing-papers/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">原博客链接</a></p>
+<h1 id="关于数学论文中的局部与全局错误及其检测方法">关于数学论文中的&quot;局部&quot;与&quot;全局&quot;错误及其检测方法</h1>
+<p>从形式上说，数学证明由一系列数学陈述和推理（例如&quot;若$A$，则$B$&quot;）组成，以逻辑方式串联起来形成结论。一个简单的例子是线性推理链，如&quot;$A \implies B \implies C \implies D$&quot;，从而得出&quot;$D$&ldquo;这一结论。然而在实践中，证明往往比线性链更复杂，常常呈现出树状结构（或更一般地说，有向无环图的结构），这是因为需要分情况讨论，或者多次重复使用某个假设。诸如反证法或数学归纳法之类的证明方法，可能导致数学论证中出现更复杂的循环和反转。</p>
+<p>不幸的是，并非所有对数学命题的拟议证明都是正确的，因此需要付出一些努力来验证这些拟议证明。广义上说，有两种方式可以表明证明可能失败。首先，可以通过证明证明中的某个步骤（或者可能是几个步骤的集合，见下文）无效来找到对证明的&quot;局部&rdquo;、&ldquo;低层次&quot;或&quot;直接&quot;反驳。例如，如果蕴含关系$B \implies C$为假，那么上述对&rdquo;$D$&ldquo;的拟议证明&rdquo;$A \implies B \implies C \implies D$&ldquo;就是无效的（尽管当然仍有可能通过其他途径证明$D$）。</p>
+<p>有时，低层次错误无法定位到单个步骤，而是定位到几个步骤的集合。例如，如果存在<strong>循环</strong>论证，其中陈述$A$以$B$作为理由被声称成立，而$B$又以$A$作为理由被声称成立，那么即使两个蕴含关系$A \implies B$和$B \implies A$都为真，推导出$A$和$B$都成立的推理仍然是无效的。（但请注意，存在重要且有效的<strong>近似</strong>循环论证的例子，例如归纳证明，但这并非当前讨论的主题。）</p>
+<p>另一个无法定位到单个步骤的低层次错误的例子源于<strong>歧义性</strong>。假设某人声称$A \implies B$和$B \implies C$，因此$A \implies C$。如果所有术语都无歧义地明确定义，这是一个有效的推理。但假设表达式$B$存在歧义，实际上至少有两种不同的解释，比如$B_1$和$B_2$。进一步假设$A \implies B$这一蕴含关系假定前一种解释$B_1$，而$B \implies C$这一蕴含关系假定后一种解释$B_2$，因此我们实际上有$A \implies B_1$和$B_2 \implies C$。在这种情况下，我们不能再有效地推导出$A \implies C$（除非我们能够额外证明$B_1 \implies B_2$）。在这种情况下，在$B$被更明确地定义之前，无法将错误定位到&rdquo;$A \implies B$&ldquo;或&rdquo;$B \implies C$&ldquo;中的任何一个。这个简单的例子说明了在数学论证中精确定义关键术语的重要性。</p>
+<p>在证明中发现错误的另一种方法是获得&quot;高层次&quot;或&quot;全局&quot;的反驳，表明该证明如果有效，将必然推出一个已知或被强烈怀疑为假的进一步结论。这方面最著名（也最强有力）的例子是<strong>反例</strong>。如果某人拥有对命题$D$的反例，那么他立即知道推理链&rdquo;$A \implies B \implies C \implies D$&ldquo;必定无效，即使无法立即在局部层面 pinpoint 精确的错误所在。因此我们看到，全局错误可以被视为&quot;非构造性&quot;的保证，表明某处必定存在局部错误。</p>
+<p>更微妙一点，可以利用证明本身的结构进行论证。如果像$P$这样的命题可以通过链$A \implies B \implies C \implies D \implies P$来证明，那么这可能意味着一个平行的命题$Q$也可以通过平行的逻辑推理链$A' \implies B' \implies C' \implies D' \implies Q$来证明。但如果某人还拥有对$Q$的反例，那么这意味着在这个平行链中的某处存在缺陷，因此（大概）在原始链中也存在缺陷。这种类型的其他例子包括对某个结论的证明，这些证明神秘地从未以任何实质性的方式使用一个关键假设（例如，对$x^n + y^n = z^n$不存在非平凡整数解的证明，神秘地从未使用$n$严格大于$2$这一假设，或者可以轻易修改以覆盖$n=2$的情况）。</p>
+<p>虽然全局错误比局部错误更缺乏构造性，因此作为&quot;确凿证据&quot;而言不那么令人满意，但它们往往显著地更稳健。局部错误通常可以被修补或绕过，特别是当证明是以容错方式设计时（例如，如果证明通过将困难问题分解为几个严格更简单的部分，这些部分又被分解为更简单的部分，依此类推）。但全局错误往往不仅使拟议的证明本身无效，而且使该证明的所有合理变体也无效。例如，对$D$的反例将自动挫败任何修补无效论证$A \implies B \implies C \implies D$的尝试，而对$B$不蕴含$C$这一更局部的反驳则有可能被绕过。</p>
+<p>（有一个数学笑话：一位数学家正在做讲座，阐述他刚刚声称证明的一个近期困难结果。讲座结束时，另一位数学家站起来断言她找到了对该声称结果的反例。演讲者反驳道：&ldquo;这没关系；我有两个证明这个结果的方法！&ldquo;这里可以非常清楚地看到全局错误和局部错误在影响上的区别。）</p>
+<p>发现全局错误也比发现局部错误快得多，至少当论文遵循既定的数学写作标准时是如此。要在$n$页的论文中发现局部错误，基本上需要逐行阅读该论文的相当一部分内容，而要发现全局错误，通常只需浏览论文以提取其大尺度结构。这有时会导致验证过程中出现一个尴尬的阶段：已经发现了全局错误，但由全局错误预测的局部错误尚未定位。尽管如此，全局错误往往是最严重的错误。</p>
+<p>通常，良好的做法是尝试构建对局部错误具有容错性的证明结构，这样，例如，如果引理17证明中的某个关键步骤失败，论文不会完全崩溃，而是至少包含一些可挽救的独立结果，或者显示出将主要问题简化为更简单问题的过程。相比之下，全局错误无法通过良好的证明结构选择来防御；相反，它们需要良好的证明策略选择，以预见全局陷阱并直接面对它们。</p>
+<p>最后一点结束语：由于错误检测是证明构建的互补活动，这两种活动对严谨性的标准是相互对偶的，这并不奇怪。当构建证明时，人们被期望遵循实际可行的最高严谨性标准，因为单个错误很可能导致整个努力崩溃。但当检测论证中的错误或其他反驳时，使用启发式方法、粗略估计、直觉或其他非严谨手段来定位和描述错误是完全可接受的。这可能意味着对证明的一些反驳并非无懈可击，而是表明要么证明无效，要么某个被接受的数学直觉实际上是不准确的。在某些情况下，后一种可能性是事实，在这种情况下，结果被认为是&quot;悖论性的&rdquo;，但却是真实的。这样的反驳，即使不使论文无效，也常常对于改进对该主题的直觉非常重要。</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents"></nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents"></nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251012-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
+  </script>
+  <script src="/js/search.js?v=20251012-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251012-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

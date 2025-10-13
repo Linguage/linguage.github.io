@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>局部错误 on Linguista</title>
+    <link>https://linguage.github.io/tags/%E5%B1%80%E9%83%A8%E9%94%99%E8%AF%AF/</link>
+    <description>Recent content in 局部错误 on Linguista</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 Feb 2019 22:36:25 +0000</lastBuildDate>
+    <atom:link href="https://linguage.github.io/tags/%E5%B1%80%E9%83%A8%E9%94%99%E8%AF%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</title>
+      <link>https://linguage.github.io/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/</link>
+      <pubDate>Fri, 15 Feb 2019 22:36:25 +0000</pubDate>
+      <guid>https://linguage.github.io/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://linguage.github.io/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/&#34;&gt;原文(English)&lt;/a&gt;&#xA;&lt;a href=&#34;https://terrytao.wordpress.com/advice-on-writing-papers/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/&#34;&gt;原博客链接&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;关于数学论文中的局部与全局错误及其检测方法&#34;&gt;关于数学论文中的&amp;quot;局部&amp;quot;与&amp;quot;全局&amp;quot;错误及其检测方法&lt;/h1&gt;&#xA;&lt;p&gt;从形式上说，数学证明由一系列数学陈述和推理（例如&amp;quot;若$A$，则$B$&amp;quot;）组成，以逻辑方式串联起来形成结论。一个简单的例子是线性推理链，如&amp;quot;$A \implies B \implies C \implies D$&amp;quot;，从而得出&amp;quot;$D$&amp;ldquo;这一结论。然而在实践中，证明往往比线性链更复杂，常常呈现出树状结构（或更一般地说，有向无环图的结构），这是因为需要分情况讨论，或者多次重复使用某个假设。诸如反证法或数学归纳法之类的证明方法，可能导致数学论证中出现更复杂的循环和反转。&lt;/p&gt;&#xA;&lt;p&gt;不幸的是，并非所有对数学命题的拟议证明都是正确的，因此需要付出一些努力来验证这些拟议证明。广义上说，有两种方式可以表明证明可能失败。首先，可以通过证明证明中的某个步骤（或者可能是几个步骤的集合，见下文）无效来找到对证明的&amp;quot;局部&amp;rdquo;、&amp;ldquo;低层次&amp;quot;或&amp;quot;直接&amp;quot;反驳。例如，如果蕴含关系$B \implies C$为假，那么上述对&amp;rdquo;$D$&amp;ldquo;的拟议证明&amp;rdquo;$A \implies B \implies C \implies D$&amp;ldquo;就是无效的（尽管当然仍有可能通过其他途径证明$D$）。&lt;/p&gt;&#xA;&lt;p&gt;有时，低层次错误无法定位到单个步骤，而是定位到几个步骤的集合。例如，如果存在&lt;strong&gt;循环&lt;/strong&gt;论证，其中陈述$A$以$B$作为理由被声称成立，而$B$又以$A$作为理由被声称成立，那么即使两个蕴含关系$A \implies B$和$B \implies A$都为真，推导出$A$和$B$都成立的推理仍然是无效的。（但请注意，存在重要且有效的&lt;strong&gt;近似&lt;/strong&gt;循环论证的例子，例如归纳证明，但这并非当前讨论的主题。）&lt;/p&gt;&#xA;&lt;p&gt;另一个无法定位到单个步骤的低层次错误的例子源于&lt;strong&gt;歧义性&lt;/strong&gt;。假设某人声称$A \implies B$和$B \implies C$，因此$A \implies C$。如果所有术语都无歧义地明确定义，这是一个有效的推理。但假设表达式$B$存在歧义，实际上至少有两种不同的解释，比如$B_1$和$B_2$。进一步假设$A \implies B$这一蕴含关系假定前一种解释$B_1$，而$B \implies C$这一蕴含关系假定后一种解释$B_2$，因此我们实际上有$A \implies B_1$和$B_2 \implies C$。在这种情况下，我们不能再有效地推导出$A \implies C$（除非我们能够额外证明$B_1 \implies B_2$）。在这种情况下，在$B$被更明确地定义之前，无法将错误定位到&amp;rdquo;$A \implies B$&amp;ldquo;或&amp;rdquo;$B \implies C$&amp;ldquo;中的任何一个。这个简单的例子说明了在数学论证中精确定义关键术语的重要性。&lt;/p&gt;&#xA;&lt;p&gt;在证明中发现错误的另一种方法是获得&amp;quot;高层次&amp;quot;或&amp;quot;全局&amp;quot;的反驳，表明该证明如果有效，将必然推出一个已知或被强烈怀疑为假的进一步结论。这方面最著名（也最强有力）的例子是&lt;strong&gt;反例&lt;/strong&gt;。如果某人拥有对命题$D$的反例，那么他立即知道推理链&amp;rdquo;$A \implies B \implies C \implies D$&amp;ldquo;必定无效，即使无法立即在局部层面 pinpoint 精确的错误所在。因此我们看到，全局错误可以被视为&amp;quot;非构造性&amp;quot;的保证，表明某处必定存在局部错误。&lt;/p&gt;&#xA;&lt;p&gt;更微妙一点，可以利用证明本身的结构进行论证。如果像$P$这样的命题可以通过链$A \implies B \implies C \implies D \implies P$来证明，那么这可能意味着一个平行的命题$Q$也可以通过平行的逻辑推理链$A&#39; \implies B&#39; \implies C&#39; \implies D&#39; \implies Q$来证明。但如果某人还拥有对$Q$的反例，那么这意味着在这个平行链中的某处存在缺陷，因此（大概）在原始链中也存在缺陷。这种类型的其他例子包括对某个结论的证明，这些证明神秘地从未以任何实质性的方式使用一个关键假设（例如，对$x^n + y^n = z^n$不存在非平凡整数解的证明，神秘地从未使用$n$严格大于$2$这一假设，或者可以轻易修改以覆盖$n=2$的情况）。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

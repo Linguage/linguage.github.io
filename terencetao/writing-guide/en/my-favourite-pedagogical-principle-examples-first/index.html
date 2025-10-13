@@ -1,0 +1,1596 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My favourite pedagogical principle:examples first! • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251012-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My favourite pedagogical principle:examples first!"><meta property="og:description" content="中文版 原博客链接
+My favourite pedagogical principle: examples first! This post is about a very simple idea that can dramatically improve the readability of just about anything, though I shall restrict my discussion to the question of how to write clearly about mathematics. The idea is more or less there in the title: present examples before you discuss general concepts. Before I go any further, I want to make very clear what the point is here. It is not the extremely obvious point that it is good to illustrate what you are saying with examples. Rather, it is to do with where those examples should appear in the exposition. So the emphasis is on the word “first” rather than on the word “examples”.
+"><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="My favourite pedagogical principle:examples first!"><meta name="twitter:description" content="中文版 原博客链接
+My favourite pedagogical principle: examples first! This post is about a very simple idea that can dramatically improve the readability of just about anything, though I shall restrict my discussion to the question of how to write clearly about mathematics. The idea is more or less there in the title: present examples before you discuss general concepts. Before I go any further, I want to make very clear what the point is here. It is not the extremely obvious point that it is good to illustrate what you are saying with examples. Rather, it is to do with where those examples should appear in the exposition. So the emphasis is on the word “first” rather than on the word “examples”.
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/terencetao/" class="crumb-anc">陶哲轩博客文章-职业建议</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/terencetao/writing-guide/" class="crumb-sec">陶哲轩的写作建议</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">My favourite pedagogical principle:examples first!</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Timothy Gowers</span>
+           · 
+          <span class="meta-date">2007-10-19</span>
+        </div>
+      
+
+      
+      <p><a href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">中文版</a>
+<a href="http://gowers.wordpress.com/2007/10/19/my-favourite-pedagogical-principle-examples-first">原博客链接</a></p>
+<h1 id="my-favourite-pedagogical-principle-examples-first">My favourite pedagogical principle: examples first!</h1>
+<p>This post is about a very simple idea that can dramatically improve the readability of just about anything, though I shall restrict my discussion to the question of how to write clearly about mathematics. The idea is more or less there in the title: present examples before you discuss general concepts. Before I go any further, I want to make very clear what the point is here. It is not the extremely obvious point that it is good to illustrate what you are saying with examples. Rather, it is to do with where those examples should appear in the exposition. So the emphasis is on the word “first” rather than on the word “examples”.</p>
+<p>If this too seems pretty obvious, I invite you to consider how common it is to do the opposite. Open a textbook about some general concept in mathematics — Banach algebras, say — and the chances are very high that it will start with a formal definition of Banach algebras and only then give you a few examples. I myself became consciously aware of the principle as a result of editing the Princeton Companion to Mathematics: over and over again I found that I could make an article clearer by putting the authors’ well-chosen examples earlier in their discussion.</p>
+<p>Why should it be better to do it that way round? Well, if a general definition is at all complex, then you will have quite a lot to hold in your head. This can be difficult, but it is much easier if the various aspects of the definition can be related to an example with which you are familiar. Then the words of the definition cease to be free-floating, so to speak, and instead become labels that you can attach to bits of your mental picture of the example.</p>
+<p>By now the alert reader will have noticed that I have not practised what I have preached. So let’s forget all about the discussion so far and start again, this time doing things properly.</p>
+<p><strong>My favourite pedagogical principle: examples first!</strong></p>
+<p>Which of the following two explanations do you find clearer and easier to read? They are intended to introduce the concept of a field to a reader who knows what a binary operation is and knows basic definitions such as those of commutativity and identity elements.</p>
+<p><em>Explanation 1.</em> A field is a set X together with two binary operations, for which one conventionally uses the notation of addition and multiplication, that has the following properties. Both operations are commutative and associative and have identity elements. Every element of has an inverse under the operation +, and every element other than 0 (the name given to the identity of the operation +) has an inverse under as well. Finally, we have the rule known as the distributive law: for every , and in .</p>
+<p>If we interpret + and to be the usual operations of addition and multiplication, then we readily see that the familiar number systems , and are fields. (If one goes right back to first principles, then these statements cease to be obvious, but we shall take facts such as the commutativity of multiplication of complex numbers as already established.) By contrast, the number systems and are not fields, since there is no additive identity in and not every element of has a multiplicative inverse. Less obvious examples of fields are number fields (subfields of that contain ) such as the field of all complex numbers of the form where and are rational, which is denoted . (All the field properties are very easily verified, with the exception of the existence of multiplicative inverses: but even that is a simple exercise.) Another important source of examples is the collection of finite fields, of which the simplest cases are obtained by taking a prime p and the set of all integers modulo p. (Here again the only field axiom that is not almost trivial to verify is the existence of multiplicative inverses — for that one needs Euclid’s algorithm.)</p>
+<p><em>Explanation 2</em>. The five main number systems, , , , and , though different from each other, have many features in common. For example, if is one of these number systems and and are numbers in , then one can add or multiply x and y together. One may also be able to subtract from or divide by , but this is not always possible, at least if one wants to stay in the same number system. For example, if we are confined to , then we cannot subtract 5 from 3, and if we are confined to then we cannot divide 5 by 3.</p>
+<p>It is noticeable that there are far fewer problems of this kind in , and than there are in and . In these larger number systems subtraction is always possible (as it is in ), and so is division, provided only that one does not try to divide by 0.</p>
+<p>Returning to the properties that these number systems share, we notice that in all five of them addition and multiplication are commutative and associative, and they obey the distributive law: for every , and in the number system in question.</p>
+<p>A field is a mathematical structure that has the basic properties of the larger number systems , and . In other words, it is a set on which two binary operations, which we think of as addition and multiplication and therefore denote using conventional notation for these operations, are defined. These operations must both be commutative and associative, and they must obey the distributive law. Also, both operations must have identities, every element must have an inverse under the additive operation, and every element other than 0 (which is defined more formally as the additive identity) must have an inverse under the multiplicative operation as well. Once we have these inverses, we can easily define subtraction and division: is the sum of and the additive inverse of and is the product of and the multiplicative inverse of .</p>
+<p>Thus, a field is basically an algebraic structure that “behaves like , or ,” in the sense that it has two binary operations that obey the algebraic rules that one observes in those number systems.</p>
+<p>The concept of a field is important because besides , and there are some less obvious examples that play a central role in number theory. Most notable are number fields and finite fields. The former are fields such as , which consists of all complex numbers of the form where and are rational. (In general a number field is a subfield of that contains .) In a number field it tends to be very easy to verify all the field properties, with the exception of the existence of multiplicative inverses: but even that is usually a simple exercise. The simplest examples of finite fields are obtained by taking the set of all integers modulo a prime p. Here again the only field axiom that is not almost trivial to verify is the existence of multiplicative inverses — for that one needs Euclid’s algorithm. <em>End of explanation 2</em>.</p>
+<p>I hope very much that you found the second explanation vastly preferable, or that if you didn’t, then at least you found that it had some quality of speaking directly to the reader that the first explanation lacked. What is the main difference between the two explanations? The content is more or less the same. But there is an important difference in the way that content is organized: in the first explanation the abstract definition of a field is given first and is then followed by some examples, whereas the second starts with the examples (or at least some of them) and uses them as a springboard for a more general discussion. Why should it be an advantage to put the examples first? Well, try to imagine the reaction of a reader who does not know what a field is. At the beginning of the first explanation she [I decided on the sex of the reader by tossing a coin, by the way] is presented with a list that is not related to her previous mathematical experience. Therefore, it is extremely forgettable. Probably she will go on to read about the examples and then look back at the definition to check that it really does apply to them — a clear sign that the order is pedagogically unnatural. By contrast, if she reads the second explanation then the field axioms are describing something, namely her mental picture of a few fields that she already knows. So she has no need to commit anything to memory or to look back on parts of the text that she has not fully understood.</p>
+<p>The comparison may seem unfair because the second explanation was longer, and spent a bit longer discussing the number systems. But that was such a natural thing to do when one started the discussion with the number systems that I think of it as almost a consequence of the policy of putting the examples first.</p>
+<p><strong>Back to the top level of this post.</strong></p>
+<p>And so, which one of those two explanations of the pedagogical principle did you prefer? I hope very much that you preferred the second. It was certainly much easier for me to explain why I think it is better to put examples first when I had an example to use to illustrate what I was talking about. (I’m referring here to the theory that the examples give you a mental picture of the concept that allows you to treat the abstract definition as a set of labels attached to concepts you already know rather than as a set of meaningless words with relationships that you just have to learn off by heart.)</p>
+<p>When this principle occurred to me, I realized that I had sometimes put it into practice, but I had never been fully conscious of what I was doing. Now that I am, I always either put examples first, or make a conscious decision not to (perhaps because I judge that the reader can cope without). If you are not already conscious of what you are doing in this way, then try thinking about it for a while: if this post does not persuade you, then your own experience surely will — both of your own writing and of other people’s.</p>
+<ol>
+<li>Adam Chmaj Says:<br>
+Dear Tim,<br>
+Going back to the previous discussion about different proofs being<br>
+essentially the same, what do you think about this work:<br>
+J. Andreasen, B. Jensen and R. Poulsen, Eight valuation methods<br>
+in financial mathematics: the Black-Scholes formula as an example,<br>
+Math. Sci. 23 (1998), 18-40.</li>
+<li>a small Says:<br>
+Regarding the form of your RSS feed, could you include in it the complete entries? It would make it easier for those who use aggregators (see recent example of T. Tao). Thanks.</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+I’m afraid I need my hand held here. I don’t know what an RSS feed is, or an aggregator …</li>
+<li>Anonymous Says:<br>
+Considering examples first is like doing agriculture, considering general definitions first is like doing philosophy. What do you like more?</li>
+<li>Adam Chmaj Says:<br>
+Natural methods lead to better life. They are based on examples,<br>
+which are used to construct mathematical objects without algebraic<br>
+axioms. T. M. Apostol, Mathematical Analysis, explains it well on page 1:<br>
+“Several-methods are used to introduce real numbers. One method<br>
+starts with the positive integers 1,2,3,… as undefined concepts and<br>
+uses them to build a larger system, the positive rational numbers<br>
+(quotients of positive integers), their negatives, and zero. The rational<br>
+numbers, in turn, are then used to construct the irrational numbers,<br>
+real numbers like \sqrt{2} and \pi which are not rational. The rational<br>
+and irrational numbers together constitute the real-number system. “</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+In reply to Anonymous: I find that some philosophers are far more readable than others. By some strange coincidence the ones who are easiest to read (amongst others, Daniel Dennett and Saul Kripke spring to mind) very often begin their general discussions with extremely well-chosen examples.</li>
+<li><a href="http://www.math.ucla.edu/~tao">Terence Tao</a> Says:<br>
+Dear Tim,
+(Heh, let me try writing this comment following your principle.)
+I read several blogs, online news web pages, and a couple other pages daily. But instead of visiting each of them regularly to check for updates, I instead use <a href="http://www.google.com/reader/view/">Google Reader</a>, which “scrapes” these pages for me and combines (or “aggregates”) them into a single web page so that I can see summaries of all the new articles at once; I find this vastly more convenient. This is possible because all modern web pages with regularly updating content produce something called an “RSS feed”, which is in a format that can be automatically extracted by aggregators such as Google Reader.
+You get to choose exactly what goes into the RSS feed. The WordPress default is to only summarise the first four lines or so of each article. But you can instead place the entire article (or more precisely, the article before any break point you placed to truncate the article) by going to the Options menu in your dashboard, then Reading, then Syndication Feeds, then show “Full Text” instead of “Summary”.</li>
+<li><a href="http://www.math.ucla.edu/~tao">Terence Tao</a> Says:<br>
+Incidentally, returning to the main topic, there is also a dual version of the principle to write examples first, which is to <em>read</em> (or think of) examples first. I think at some point during graduate school I realised that a totally linear approach to reading a maths paper (reading and digesting line n before moving on to line n+1) was usually not the optimal way to understand what the paper was about, because by doing so one had to juggle a number of partly understood and non-internalised concepts, high-level strategies, and low-level tactics in one’s head all at once. Nowadays, when I read the statement of a theorem or lemma, I try to find the simplest case of that statement that is not immediately obvious to me, or is obvious but not by the methods that are going into the current proof, or which I already know to follow from the methods in the proof. In the first two cases I can then go into the guts of the proof with the example in mind and in relatively short order find out the place where something I didn’t know about before is happening; in the third case I can then guess a rough outline of how the proof can go, which greatly facilitates the actual reading of the proof (and in fact in many cases I can skip that proof for the time being and instead focus on other parts of the paper).</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+Terry, you’ve done it again: while I was consciously aware of the principle that a purely linear reading of a paper was a bad idea, I had not clearly enunciated to myself the idea that you’ve just put forward. Maybe if I try to put it into practice I’ll become a more efficient reader of papers (which would not be hard — at the moment if I get through a paper quickly it is usually because for other reasons I have thought to some extent about similar ideas, so it always feels like a happy accident).
+I’m now confused by the earlier request concerning RSS feeds, since I looked at my options and I do seem to be giving the full text, up to the “more …” cutoff. A Small, are you asking for the whole thing, even beyond that point? Or is my RSS feed not in fact doing what I think it is? And while I’m talking about this kind of thing, I’ve been having trouble editing recently: I find that I make changes and click “Save”, only to find that the changes have not been made. In one extreme case, I almost lost the entirety of the above post — I saved it only by the desperate measure of copying a previewed version from a Mozilla window into an emacs window and changing some of the resulting funny symbols. Now I find myself unable to make any further changes — hence the inconsistent fonts. Am I running into some known problem?</li>
+<li><a href="http://quomodocumque.wordpress.com/">JSE</a> Says:<br>
+This point was first brought home to me in an excellent presentation by <a href="http://www4.ncsu.edu/unity/lockers/users/f/felder/public/">Felder</a> and Brent. But what they said was the following: some students respond better to examples followed by general definitions, and others to general definitions followed by examples. The first group is more numerous, but their recommendation was to use both strategies, but to be quite transparent about the choice being made — i.e. one says explicity, “OK, now I’m going to give a couple of examples to give you some idea of what I mean by the word “field,” but never fear, a formal definition will follow” or “OK, let me write down a formal definition, if it seems unmotivated and weird, never fear, examples will follow.” I’ve found this to be very good advice, at least for lecturing. I’m not sure just what I do in mathematical writing. For the PCM article I dealt with this problem by banishing precise definitions altogether!</li>
+<li>Jason Dyer Says:<br>
+I love examples, but not ncessarily as labels for my mental picture. They let me understand the motivation behind a formal definition. Taking your fields example, I don’t necessarily need the example as a concrete analogy; what I do need to know is why the particular properties of a field were chosen and not some other properties. (Your second version does a lovely job of encapsulating this.)
+Also, thank you Terry for mentioning out-of-order reading. I’ve always tended to that but I always felt “bad” for doing so, like I was compensating for not being smart enough or some such.</li>
+<li>Mark Meckes Says:<br>
+I’m teaching abstract algebra for the first time this term, and I realize now that I’ve been following the principle of examples first sometimes, but not consistently. Now that my attention has been drawn to it I’ll try to do so more often. Likewise, I’ll try always reading math papers as Terry suggests, which I have done somtimes but not always.
+Regarding your coin flip to choose the gender of a hypothetical reader, if you want your random choice to reflect gender representation in the general population, then according to <a href="http://www-stat.stanford.edu/~cgates/PERSI/papers/dyn_coin_07.pdf">this paper</a>, you want to make sure you choose female when the same side lands up that started facing up.</li>
+<li>gregknese Says:<br>
+Maybe if writers wrote papers using this pedagogical principle, then readers wouldn’t have to read papers out of order…</li>
+<li>Reid Says:<br>
+Your first example is very misleading (including very poor wording). Quite frankly, I’ve *never* seen a Field defined like that; it’s normally in an ordered list and better defined which makes it *far* easier to read and understand (e.g. Nering).
+Also, I’ve attended classes that have used both styles and have spoken to fellow students on this topic. With *one* exception, we /all/ preferred general first, examples latter. For me, when I get examples first, my first thought is along the lines of, “What are you getting at? Get to the point!”
+This is actually one of my main complaints about Gallian. Namely, that he puts a lot of things in examples that should be listed as definitions/theorems/etc. It is really frustrating when you get to the questions at the end of a chapter and run into things that “weren’t defined”. Yet, when you go back it was, but wasn’t listed as such, and/or was in an example. Quite frankly, I find this just plain lazy on his part.
+Though I’ll concede that example first *might* be more appropriate for first year class(es), in upper level classes, IMO, this is encroaching on an insult to the students intelligence.
+I’ve said it to many people before, and given this applies here, I’ll say it again:
+This is University, playtime’s over, it’s time for some real work.
+i.e. If the student cannot be trusted to understand in a manner which is fundamental to mathematics, they don’t belong in the class and should not be catered to. I know that sounds harsh, but this is the first step on a slippery slope of dumbing down the curriculum which I see going on in a disturbing number of Universities (I’ve actually seen where it leads as well – an embarrassment of a curriculum).</li>
+<li>toomuchcoffeeman Says:<br>
+<em>This is University, playtime’s over, it’s time for some real work.</em>
+<em>i.e. If the student cannot be trusted to understand in a manner which is fundamental to mathematics, they don’t belong in the class and should not be catered to.</em>
+With due respect I think that’s somewhat simplistic, no? At some point one is surely trying to educate one’s audience mathematically, rather than to sieve for the fastest and most confident.
+I think most of us all have subjective views on how slow and cautious a mathematical exposition can get before it becomes tedious, and how terse and high-flown it can be before it becomes intimidating and opaque. My own view is that the latter extreme is too common, but people with other experiences might well take the other view.
+Declaration of interest: I think “Banach algebras” are a perfect example of a definition that is completely uninformative for a novice, and where an approach of initial illustration through examples could be very interesting, if less concise than just getting on with the main definition.</li>
+<li>bbs Says:<br>
+this is my favorite pedagogical principle too. in my view, all subject specific issues aside, it conveys “the right attitude” toward abstraction.
+the point of abstraction is to focus on what a mathematical object “does,” not what it “is.” it is only an accident of language that definitions must begin “a [mathematical object] _is_…”
+if examples do not come first, students are given the idea that the point of a formal, abstract definition is to tell us what something “really is,” and that examples are secondary (or diversions to make weaker students feel less scared of what the abstract thing “really is,” the way plugging in numbers might have made them feel better about basic algebra).
+this is a misconception, and a misunderstanding of how mathematics is actually done. from calculus to quantum groups, examples came first.
+i like to point out to my students that if they look in books other than the course text, they might well find other lists of axioms characterizing the subject matter (vector spaces, or real numbers, or groups, or rings, or fields), but they will always find the same examples. there is a reason why there is no mathematical version of IUPAC that standardizes lists of axioms, or terminology, or symbols for use by the community: the choices we make in what our abstractions “are” don’t matter as much as what the abstractions “do.” the more we put examples first, the better we get this message across.</li>
+<li>James Says:<br>
+It might be the opposite of what you’d expect, but I often find it easier to read non-linearly when the paper is written in a structured Bourbaki-like style. It is the non-structurally written papers that I have to read linearly. Because you have paragraph after paragraph of text, it’s often not clear without reading them which ones you can afford to skip. I think one of the most common errors writers make (including myself, I have to admit) is assuming that people will actually read your paper linearly, rather than skipping around and zooming in on the interesting parts. In a modularly written paper, it doesn’t really matter whether the examples come before or after the definition — it is clear at a glance which is which and the readers can read them in whichever order they want. Of course this doesn’t apply to lectures at all.</li>
+<li><a href="http://aeolist.wordpress.com/">Ponder Stibbons</a> Says:<br>
+<strong>JSE</strong> wrote:<br>
+<em>…their recommendation was to use both strategies, but to be quite transparent about the choice being made — i.e. one says explicity, “OK, now I’m going to give a couple of examples to give you some idea of what I mean by the word “field,” but never fear, a formal definition will follow” or “OK, let me write down a formal definition, if it seems unmotivated and weird, never fear, examples will follow.” I’ve found this to be very good advice, at least for lecturing.</em>
+I concur. I’m much more of an ‘examples first’ person, but I find that I find ‘definitions first’ much less bewildering if it’s done in the way you describe.</li>
+<li>Adam Chmaj Says:<br>
+One of my favourite examples is the one which gives<br>
+a working knowledge of the Riemann integral, i.e.,<br>
+the passage to the limit from Fourier series to the<br>
+Fourier integral.</li>
+<li>Emmanuel Kowalski Says:<br>
+Rather than “examples” only, I find it useful to think of “motivation”, which may be slightly more general and a bit different. When introducing a new type of object (groups, fields, etc), then motivation is naturally associated with examples, but we may also need to motivate properties (say, completeness of a metric space), particular techniques (e.g., why should we learn about representing functors if we want to solve diophantine equations? why can iot be useful to define structures axiomatically?), particular problems (why should we care about the Riemann Hypothesis?), etc.
+I also think examples/motivations are crucial features in spreading various aspects of mathematics within the research community itself; when we need to learn or use some unfamiliar area of mathematics, and all standard references concerning this are written at the level of the specialist and/or with unfamilar terminology without “links” to an outside world, one may well be placed in the situation of staring at a result which answers a given question while being entirely unable to say why this is the case…
+Two further remarks:
+(1) When teaching, the background of the students may be taken into account, and in particular the evolution of their knowledge: after the students understand (say) the usefulness of groups and fields, and start to appreciate their axiomatic definition, it becomes much safer to introduce rings by starting with the similar definition, and then discussing examples. On the other hand, if one goes on to define topological spaces (or measure spaces) after groups and fields, then the style of the axioms is different enough that some motivation becomes very important again.
+(2) Often I think that looking at the history of the object/property/problem can give a useful clue as to how to motivate it, and also whether there is a chance of doing a really good job<br>
+considering the time available. For instance, Galois theory can be grown “organically” by following the history, but it will take an enormous amount of time, and the early versions are likely to be essentially incomprehensible even for the teacher. Seeing the tremendous clarity arising from the more abstract viewpoint is a wonderful experience, but most students would be discouraged before — though it is also clear that by making the student see the problems, and how difficult they seemed for centuries, one could lead them to a proper appreciation of this clarity…<br>
+As another example, a very good motivation for developping algebraic number theory is to try to solve Fermat’s equation the way it was attempted before the theory was well-understood, and exhibit the problem of the failure of unique factorization. But then if ideals have not already been introduced in a basic ring-theory class, it seems hard to grow the motivation for their introduction in a reasonable amount of time.</li>
+<li>Adam Chmaj Says:<br>
+The Riemann Hypothesis is the ultimate professional challenge in<br>
+the algebraic scientific system based on the i^2=-1 definition.<br>
+I doubt that it can be solved by someone who e.g., does not<br>
+understand basic calculus of variations concepts.</li>
+<li>Tal Says:<br>
+Examples first – that’s how it really happened.<br>
+Fields, groups, Banach algebras were all there and were all<br>
+used before they were defined as such.
+Although when studying and teaching I prefer the classical textbook method –<br>
+starting with a definition, and then giving some examples –<br>
+I think that the really important principle is to keep in mind the importance<br>
+of examples, and their roles, not just as “examples”, but also as precursors of the theory and the reason for it.
+When I was an undergraduate I got the impression that mathematics is the following activity:<br>
+“make up some definition of a structure and see what comes out of it”.<br>
+Today I think quite differently (although such an activity can be described as mathematics). Regarding Reid’s comment, this would be more like what I would call “play”.
+However, we do not always have centuries to learn or to teach mathematics as it happened. I find the abstract approach, including definitions first, very concise and clear (and interesting and beautiful).</li>
+<li><a href="http://antimeta.wordpress.com/">Kenny</a> Says:<br>
+I think in cases where the concept is already somewhat familiar to the student, putting the examples first can get in the way. In particular, by giving examples first, students can get the wrong idea of which aspects to generalize – for instance, the examples-first definition of a field might lead students to think that all fields have characteristic 0.
+Of course, if it’s a new topic for the students, then examples first is almost certainly better. But I’d agree with Emmanuel Kowalski – the really general issue here is motivation, rather than examples in particular. But most motivation comes from examples and counterexamples.
+On a related topic, my friend Noah once (approximately) said over tea that for some of the crazy convoluted definitions that mathematicians end up working with, it would be better if people just gave the examples and counterexamples, and then told the reader to come up with the definition, rather than giving the definition itself. In many cases, there’s no way one can follow the definition without knowing exactly the sorts of examples and counterexamples it’s meant to deal with, and once you know, the definition itself isn’t very useful. I suppose it’s still necessary at some point to prove general theorems about the concept, but that can come much later.</li>
+<li>Emmanuel Kowalski Says:<br>
+“Examples getting in the way” is actually often problematic in research also: I think it’s in his memoirs that André Weil mentions that it took him (and others) a long time to embrace the use of the Zariski topology in algebraic geometry because it looked so wildly different from the well-accepted topologies of the time, in particular by being non-Hausdorff.</li>
+<li>Adam Chmaj Says:<br>
+I think it doesn’t hurt to keep our activities in broader perspective.<br>
+E.g., it seems to me that research in mathematics is stimulated mainly<br>
+by neat open problems, e.g., FLT or TGC. However, it would be safe<br>
+if claims of solutions of such questions were either verified by other<br>
+research areas or given alternate proofs.</li>
+<li><a href="http://aeolist.wordpress.com/2007/10/21/predigested-formalisms-spoonfeeding-of/">Predigested Formalisms, Spoonfeeding of « The truth makes me fret.</a> Says:<br>
+[…] just because it’s also about pedagogy and because I have said similar things: Timothy Gowers explains why “examples first” is his favourite pedagogical principle. I couldn’t agree […]</li>
+<li><a href="http://www.math.ucla.edu/~tao">Terence Tao</a> Says:<br>
+Incidentally, regarding the RSS feeds, it seems that your feed (and mine) are now giving full summaries. Perhaps it takes a bit of time for the change to propagate.
+I find, when reading papers, that even just having a single sentence of motivation or examples before plunging into a technical definition, or a single sentence attempting an informal definition before setting up a lengthy example, helps tremendously. (The same is doubly true for listening to mathematical talks.) Even just a promise to explain things more later, after the current necessary technicalities, is reassuring. Any further up-front motivation or explanation beyond that sentence is of course also helpful, but there is a law of diminishing returns and eventually one runs up against the issue of reader impatience mentioned earlier.
+But one fairly cheap thing to do (and which already occurs in many papers) is to present theorems or definitions in their model cases first, before stating the general case. (This also provides a natural place to discuss previous literature and partial results.) The temptation to state Main Theorem 1 in maximal generality on page 1 of a paper, and bury the interesting model cases of that theorem in the final remarks section of the paper, should be resisted.</li>
+<li>Adam Chmaj Says:<br>
+Dear Terry,<br>
+I disagree that presenting theorems in their model cases first<br>
+is fairly cheap. E.g., don’t you think students should first read<br>
+van der Corput’s work on length three arithmetic progressions<br>
+in prime numbers, before diving into the the Green-Tao publication?</li>
+<li>Nicolas B. Says:<br>
+Of course Explanation 1 is vastly superior.<br>
+The examples are useless and can only confuse any mind endowed with a modicum of aesthetic sense.<br>
+Why don’t you immerse yourself in my treatise and emulate my pedagogy?<br>
+Nicolas B.</li>
+<li>Doug Says:<br>
+I am attempting to use, but may be misusing your examples first concept.
+In the following Euclidean geometric representation<br>
+OA=OB=OB1=BC=B1C1<br>
+and<br>
+AB=AB1=OC=OC1<br>
+with<br>
+semicircle of radius OA through B,A,B1 not drawn<br>
+and<br>
+mirror reflection of this semicircle and in-circum-scribing squares not drawn.
+Investigated is E=mc^2 from a dynamic programming perspective in an attempt to understand how Einstein derived this equation.
+| B. _. _. _. _. _. _. _. _ C<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|_____________________ A<br>
+| O<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+|<br>
+| _. _. _. _. _. _. _. _. _ C1<br>
+| B1
+Let OA=a=MAX(a) when MAX(a)=c^2
+Then OA=(1/2)*v^2=(1/2)*MAX(v^2) when v=c as v-&gt;c
+and
+AB=c*sqrt(2) from Pythagorean theorem
+Were the entire circle and both the inscribed and circumscribed squares drawn, then this would be a step in Archimedes attempt to use polygons to determine PI.
+It would seem that:<br>
+1 – Newton’s F=ma is represented by a vector OA.
+2 – Einstein’s E=mc^2 is represented by the area of the square OACBO.
+3 – The force F of Einstein E would be represented by a vector OC.
+4 – That OC=AB in absolute value, with AB as a relative speed or velocity.
+5 – The maximum E occurs at v=c*sqrt(2) or when vectors of force are orthogonal.
+6 – Einstein allowed for 2*OB=BB1=2c as a maximum relative speed or velocity when vectors are in 180 degree opposition.
+Questions:<br>
+a – This geometric representation, working backward from the perspective of dynamic programming concepts [Richard Bellman IEEE “systems analysis and engineering topic”], appears to suggest Einstein was aware that relative speed or velocity could exceed v-&gt;c up to v-&gt;2c?
+b – Is E=m*MAX(a) with MAX(a)=c^2, as a constant extrema, more accurate than E=mc^2, with c as a constant?
+c – Could this geometric representation become a geometric proof?
+d – Are concepts of Euclid, Pythagoras, Archimedes, Newton, Einstein and Bellman unified through this representation?
+Note that I am also using [correctly?] the “amplitwist” concept of Tristan Needham, ‘Visual Complex Analysis’ in visualizing the transformation of the outside of the circle to the inside and vice versa.
+<a href="http://www.usfca.edu/vca/">http://www.usfca.edu/vca/</a></li>
+<li>Adam Chmaj Says:<br>
+Dear Doug,<br>
+What is wrong with this “proof” of E=mc^2:<br>
+<a href="http://www.drphysics.com/syllabus/energy/energy.html">http://www.drphysics.com/syllabus/energy/energy.html</a></li>
+<li><a href="http://www.ma.huji.ac.il/~kalai/">Gil Kalai</a> Says:<br>
+Dear Tim and dear all,
+In the first class of the first year in university we learned the definition of a field as the first thing in linear algebra. In the parallel course in calculus (or “infinitesimal calculus”) the first task was to define the real numbers using Dedekind cuts. So it is fair to say that the only example we had was the field of rational numbers. The main point in both courses was to introduce how rigorous mathematics definitions and proofs should go. (Later in linear algebra another implicit point was that the specific field does not matter much to many of the topics.)
+Real numbers came only a couple weeks later (in the calculus course). While some of us heard about complex numbers they were not defined and considered in our classes until even later. We became familiar with general finite fields or Q(-sqrt 3) much later (not in the first year). I think the example of fields of prime orders was considered in the first few weeks. (But well after fields were defined.)
+So, this is an experience which goes contrary to Tim’s pedagogical advice. Overall, I am not sure that in the context of first year mathematics studies, going first with examples would be better. Developing some of these examples is more difficult than the basic definitions and propositions regarding fields, especially if you insist on rigorous presentation.
+In summary, while I like examples very much and wish always we had more of them, I am not convinced by Tim’s general pedagogical advice (which indeed sounds appealing.) Maybe more examples or some theory supporting the approach can help.</li>
+<li><a href="http://unapologetic.wordpress.com/">John Armstrong</a> Says:<br>
+Doug, if you want to “attempt to understand how Einstein derived this equation”, why don’t you read the book, <em>The Principle of Relativity</em> wherein Einstein himself tries to explain to a general audience how he derived it? I’ll tell you this: it looks nothing like what you’re saying here.</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+I’m planning another post on this question, but a brief answer to Gil’s point is that it isn’t necessary to have a rigorous definition of the reals in order to understand them as an example of a field: you just need to be familiar with the idea that the various binary operations have “obvious” properties. In other words, I think your qualification “especially if you insist on rigorous presentation” is important: I don’t. (In case that is misunderstood, I do of course think that a rigorous presentation of the real numbers is important — all I’m saying is that it’s not important if all you want them for is an example to give people an idea of what a field is before you define it. When I lectured Cambridge undergraduates on fields and gave the reals as an example, well before they had seen them rigorously presented, there wasn’t the slightest hint of anxiety in my audience. I think, incidentally, that I gave the general definition first in that course, so in a way this question is orthogonal to the point at issue. Your remarks make me curious to know whether, before the reals had been rigorously defined in the calculus course, your linear algebra course avoided discussing vector spaces over the reals — that would strike me as a very odd approach.)
+In the next post I’ll see if I can support my case with some more examples, as you suggest, and I’ll also try to come up with more refined advice: I agree with many of the comments here that the examples-first approach should not be applied universally, but I remain convinced that it should be applied much more than it is and will try to specify general circumstances where it should.</li>
+<li>Horace Says:<br>
+What are some other effective pedagogical principles that are not immediately obvious?</li>
+<li><a href="http://unapologetic.wordpress.com/">John Armstrong</a> Says:<br>
+Horace: one of my favorites is that you can teach a lot of interesting theory to low-level classes as long as you don’t say the big scary names. Whenever I teach multivariable calculus, I can communicate the basic ideas of DeRham cohomology as long as I don’t say “DeRham” or “cohomology”.</li>
+<li><a href="http://www.mathandpoker.com/index.php/?p=299">Mathematics and writing</a> Says:<br>
+[…] My favourite pedagogical example: examples first […]</li>
+<li>Gil Kalai Says:<br>
+Well, I double checked and looked at the Hebrew text book (lecture notes) by Amitsur who was also the lecturer of my first year linear algebra course. The book starts with a sentece like:”Let’s examine the properties of the system of real numbers” and then gives the axioms of a field and move directly to describe several other examples: the rationals, a+sqrt 2 b where a and b rationals; integers modulo n with product and multiplication stating that for n prime this is a field; and the complex numbers. So real numbers were taken for granted and plenty of examples were given. One example – the reals was the prototype for the axioms and several others follows immediately afterwards.
+My description above was not so accurate.
+I also looked at the earlier Hebrew text book (again lecture notes) by Levitzki but it started from the notion of groups. So it was a different concept
+BTW Levitzki and Amitsur (who was his Ph. D.) student proved together a beautiful theorem about commutativity of n by n matrices. Take 2n such matrices and look at all (2n)! products for all permutations and sum them up with alternating coefficients according to the sign of the permutation. The theorem sais that you will always get 0.
+(Amitzur later told me that the Cayley Hamilton theorem that f(A) =0 when f is the characteristic polynomial of A, a theorem we learned at the same course, is in a sense the “mother” of the Amitsur-Levitzki identity and all other combinatorial identities for non commutative rings.)</li>
+<li><a href="http://mymaths.blogspot.com/">Beans</a> Says:<br>
+I have yet to study fields formally, but do have a ‘small’ idea about them. As a student, I feel that in some cases definitions are necessary. If your explanations were part of my notes, then in both of them I sort of skimmed/skipped the last part and only recall the word division. (If I am being honest that is!)
+However, I agree that having the example first i.e. the sets X which are fields, enabled me to better relate to the definition because I already know the rules of them sets.
+I am thinking back to my first year and partially agree with you. In my case, in most instances I prefer definitions first, and then examples straight after. I then try to make sense of the defintion with the example in mind. For example, for the formal definition of a limit, I feel it was important to have the definition first and then examples next.
+I think it is up to the lecturer to decide whether examples are necessary before or after. (When we were told about the division algorithm, we were given examples beforehand and the defintion after.) I feel one of my lecturer does this brilliantly.</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+Beans, I think the case of limits is an interesting one, and may depend quite a bit on the aptitude of the student. For students who have difficulty with the concept, perhaps because they are completely unfamiliar with definitions that involve quantifiers, I think it is quite a good idea to give an example, such as the limit of the sequence 1, 1.4, 1.41, 1.414, … being the square root of 2, and then challenge them to say precisely what that means. It is quite likely that they will make guesses that are wrong. For instance, they might say, “It gets closer and closer to the square root of 2,” which suggests the definition that tends to if the sequence is decreasing (or perhaps strictly decreasing). Then one can give examples that show that this is an inadequate definition (for example, by that definition the above sequence would converge to any number greater than or equal to the square root of 2, and the sequence 1,0,1/2,0,1/3,0,… clearly converges to 0 without actually getting closer and closer at each step). After a bit of that one arrives at the right idea, which can either be presented informally first — however close you want to be, eventually you are always at least that close — or expressed straight away as a formal definition.
+Of course, it would be possible to start with the formal definition and then say, “If you think that looks strange, let’s consider some examples that show why it is as it is.” In this case I don’t feel that one way round is significantly better than the other, though in some ways the motivation-first is a better reflection of how one comes up with a definition. And it also does what Deane Yang suggests in the second paragraph of <a href="https://gowers.wordpress.com/2007/10/24/examples-first-ii/#comment-364">this comment</a>.</li>
+<li><a href="http://mymaths.blogspot.com/">beans</a> Says:<br>
+Actually I am sorry but I had confused my notes! The lecturer did precisely what you wrote, but it was with two other functions! I will have to retract my previous statement, since whether or not I prefer examples first depends on the course. Indeed, motivation was the key word. In analysis, in the first lecture this semester, we were given the motivation which set the scene rather nicely. That is the very same thing which I have been desperate for in my applied course.
+Quite strangely, I myself wrote a rather long post about what Deane Yang commented about! I feel that the lecturers tell us a story, and they each have their own unique way of doing so. And as with books, you sometimes prefer one over the other. One fantastic lecturer gives us definitions first and then examples straight after and I follow that. Hmm, I think each theorem, definition etc deserves its own attention. Had the Intermediate Value Theorem not been introduced by a diagram, I would have had great difficulty in understanding and following its proof.</li>
+<li>anon Says:<br>
+But, the ‘closer to the limit’ idea works with upper and lower subsequences. Then one can tie it up by saying that if both these subsequences get ‘closer to the limit’ then the sequence itself is said to converge.<br>
+I wonder if sequences could be taught that way — by first doing LimSup and LimInf and then then limits. That way the student is first introduced to non-decreasing or non-increasing sequences where the ‘closer to the limit’ intuition can work.</li>
+<li>Anonymous Says:<br>
+Reid,
+The fields you’re referring to (i.e. those in an ordered list) seem to be <a href="http://en.wikipedia.org/wiki/Field_%28computer_science%29">these</a>, whereas Tim’s fields are <a href="http://en.wikipedia.org/wiki/Field_%28mathematics%29">those</a>.
+This is one of the many instances where people working in different fields (pun not intended) turn a word of common English (or any other language) into a technical term in different ways that are often unrelated to each other.</li>
+<li><a href="http://www.ma.huji.ac.il/~kalai/">Gil Kalai</a> Says:<br>
+The examples put forward in the discussions: How to teach the concept of a field and the example regarding “how large is your orbit, x?” and several additional examples put forward in the discussion like teaching limits and teaching Sylow’s theorems are excellent examples. Not because they immediately lead you to accept with enthusiasm Tim’s suggestion but because they can be very useful in examining the “examples first” suggestion. When it comes to pedagogical claims or to other forms of advice we are not able to prove things, so our best shot in examining them is to look at them skeptically. (I hope my earlier comment while not enthusiastic did not come across as hostile.) So this is not special to blogs, it is special to moving away from mathematics.
+Regarding ‘fields’ I like the way Amitsur do it basing the definition of a field on trying to examine properties of the real numbers; I see no problem in mentioning Q and C as “positive” examples and N and Z as “negative” examples before giving the formal definition provided the students already know these examples. I am not sure it makes a big difference. If the main objective is to define “fields” and the students need an introduction to the complex numbers I would not suggest to give this example first but to wait after fields are defined.
+Actually my own style/taste of teaching is in the direction of examples-first plenty of preliminary chat, stories, philosophy, non linear development and plenty apropos and even dubious humor. It is perhaps a good pedagogical principle that people should follow, within reason, their taste and style. But I think people should be especially skeptical about transforming their tastes into strong principles.
+Apropos Amitsur, while I do not remember him giving much chat and non linear stories at class I do remember we had many chats in our faculty club (Belgium house) and we even tried once to work on a problem: Take a non Papussian projective space (3-dimensional), say a projective space<br>
+over the Quaternion. Is it possible to find there seven pairs of lines e1, e2, … e7; f1 f2 …f7 so that ei is disjoint from fi for every i and ei intersects fj whenever i and j are different. Such a configuration is impossible for a Papussian projective space (over a field).<br>
+As far as I know, this problem is still open.</li>
+<li><a href="http://unapologetic.wordpress.com/">John Armstrong</a> Says:
+<blockquote>
+<p>I think people should be especially skeptical about transforming their tastes into strong principles.
+I second this. As one much wiser than I has said, “It is my firm belief that it is a mistake to hold firm beliefs.”</p></blockquote>
+</li>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+A quick remark in response to the last two comments. Although for rhetorical purposes I may have made it seem as though I was holding to a certain belief in a dogmatic way, that’s not really the point of what I am saying. I do, as it happens, think that there are many many examples of expositions in the public domain that could be made more accessible if an examples-first approach was used. But, as has already been mentioned, there are two separate (though related) issues that one can distinguish: what is achieved by putting examples first, and is that something that one wants to achieve?
+Although my answer to the second question is very often yes, it’s really my answer to the first question that I’d like to persuade people of. I may even end up writing “Examples first III” to deal with it at greater length, but a brief summary of my view is this. It depends on a distinction between “direct” memory (the sort you’d need to remember digits of , say) and “derived” memory (the sort you’d need to reconstruct a proof of a theorem from one key idea using your years of mathematical training). One of the difficulties of reading mathematics linearly is that you sometimes have to rely on direct memory because you don’t yet have anything from which to derive a memory. This would be true if a proof had steps that appeared to be arbitrary, or a complicated lemma was stated and you didn’t know how it was going to be applied, or a definition was given that turned out later to be exactly what you needed. Putting examples (and other kinds of motivation) first is a way of reducing the reliance of the reader on direct memory, since it sometimes makes it possible to derive the memory instead. (E.g., in the fields example, one could derive the list of axioms, or at least get a long way towards doing so, from the simple idea that they are the properties that hold of addition and multiplication in the rationals.) It’s this factual point that I’m mainly trying to push. (By “factual” I mean that it makes a statement about the world that could be true or false.) The normative point (this is how we ought to present mathematics) is secondary — of course, it’s no secret what my views are here too, but I don’t hold them in a rigid way and can think of situations where presenting examples first would not be helpful.</li>
+<li><a href="http://atdotde.blogspot.com/2007/11/example-for-example.html">Atdotde</a> Says:<br>
+<strong>An example for example</strong>
+Tim Gowers has two very interesting posts on using examples early on in a mathematical exposition of a subject. I can only second that and say that this is my favorite way of understanding mathematical concepts: Try to think through the simplest non-…</li>
+<li>Anonymous Says:<br>
+I can’t be sure, but I think Reid has the same definition in mind; he means that the field axioms be listed out, as in
+(i) a,b in F then a+b in F<br>
+(ii)…etc
+Whether this is put first or second is perhaps neither here nor there; the central thing, from my perspective, is to emphasize that we care about fields because they clarify a lot of things about N, Z, Q, and C (and perhaps even more to the point, they distinguish Z_n from Z_p, both of which can be defined without a recourse to abstraction). This may seem like an obvious statement, but I think a good deal of university mathematics is unfortunately written from the perpsective that this would ‘dumb-down’ the material.
+So I can’t agree with the sentiment that “This is University, playtime’s over, it’s time for some real work.” In my personal experience I have been able to learn math much more quickly (and deeply) if I view it as play, rather than ‘real work.’ In the former instance, the subject itself motivates me; in the second, it’s not the math, but just a desire to impress people or just do what’s expected. And there are easier ways to do these thing than to learn about tensor products, etc. From an even broader viewpoint, surely less sterile math will be developed if people learn in their undergraduate days to pursue abstractions because they are useful and clarifying, rather than pursue the abstractions because someone of authority has written them down.</li>
+<li>Arnold Lebow Says:<br>
+Problems first is even better. A problem can motivate an example and a definition.</li>
+<li><a href="http://numberwarrior.wordpress.com/2008/03/18/mathematics-books-for-non-mathematicians/">Mathematics Books for Non-Mathematicians « The Number Warrior</a> Says:<br>
+[…] I’m reminded of Timothy Gowers and his principle of “examples first”. […]</li>
+<li><a href="http://qchu.wordpress.com/2009/06/27/i-hate-axioms/">I hate axioms « Annoying Precision</a> Says:<br>
+[…] axioms before examples. On this point I agree wholeheartedly with Tim Gowers when he says to put examples first, as I think it places the emphasis on the empirical side of mathematics, as well as on the correct […]</li>
+<li><a href="http://gilkalai.wordpress.com/">Gil</a> Says:<br>
+Oded Goldreich has a different view on examples (at all) His<br>
+“SHORT OPINION NR 1” reads:<br>
+“ON EXAMPLES.<br>
+If a clear explanation is provided, then no examples are needed;<br>
+otherwise no examples will help…”
+<a href="http://www.wisdom.weizmann.ac.il/~oded/etc.txt">http://www.wisdom.weizmann.ac.il/~oded/etc.txt</a>
+<ul>
+<li><a href="https://gowers.wordpress.com/">gowers</a> Says:<br>
+The fallacy, in my view, is a very simple one. If a clear explanation is provided, then no examples are needed, but they certainly help. (Strictly speaking, that’s consistent with what Oded says, but not with his implied conclusion that there’s no point in examples.)
+A different way of disagreeing would be this: examples are often what make a clear explantion clear.</li>
+</ul>
+</li>
+<li>esmeyny Says:<br>
+Of course, I agree, but I have to add the important principle:
+Clearly mark the point where you leave the example and start the general definition (or proof).<br>
+In your example, this would be the point “in other words”, and there should be a paragraph (and properties should be numbered and structured as a list, too).
+I had a professor who would calculate with examples and suddenly claim to have proved the theorem. I started to understand *why* students could have been happy with the introduction of the “definition, theorem, proof” style.</li>
+<li><a href="http://cchao.wordpress.com/2007/07/10/on-writing/">On writing [excerpt from Terry Tao&rsquo;s blog] « (郝成春) Chengchun Hao&rsquo;s HomePage</a> Says:<br>
+[…] Gowers on “writing examples first!” (see also this followup […]</li>
+<li><a href="http://www.unitaryflow.com/">Cristi</a> Says:<br>
+This is a good idea. If we compare with programming techniques (I saw Terry Tao does this sometimes), I would choose “test driven development”. It is good to have an example, a toy model, something on which to test the results and to be inspired with new ideas.</li>
+<li><a href="http://www.parasoft.com/">Wayne Ariola</a> Says:<br>
+We have been exploring TDD for quite sometime. We think it truly increases productivity. Here is a paper we wrote on this topic:
+<a href="http://bit.ly/e1RP2D">http://bit.ly/e1RP2D</a></li>
+<li><a href="http://mathinmybrain.wordpress.com/2010/12/30/on-writing/">On writing « mathTHÍCHinTOÁNmyHỌCbrain</a> Says:<br>
+[…] Gowers on “writing examples first!” (see also this followup […]</li>
+<li>Rajnikant Sinha Says:<br>
+How to read a paper in maths is shortest duration? This vital question is directly related to the intention of the paper author. If the author has good intention, he will write proofs of the theorems in a natural development manner. There will be no gap in the argument, If some gap occurs, the author should supply argument in sufficient detail at the same place with the heading “Reason” like (Reason: ….). Unfortunately, except Euclid, and Rajnikant Sinha, no author in Maths takes the bother to write everything like, in Chemistry, and Biology. Because of riddle-type writing in maths, it is going to become complicated even for so-called experts. The day “write detailed proof” practice is followed in text books and periodicals, there will be a boom in maths learners and research.</li>
+<li><a href="http://www.anthonybonifonte.com/2014/01/31/examples-first-a-math-pedagogy/">Examples First: A Math Pedagogy | Anthony Bonifonte</a> Says:<br>
+[…] <a href="https://gowers.wordpress.com/2007/10/19/my-favourite-pedagogical-principle-examples-first/">https://gowers.wordpress.com/2007/10/19/my-favourite-pedagogical-principle-examples-first/</a> […]</li>
+<li><a href="http://isomorphismes.tumblr.com/">isomorphismes</a> Says:<br>
+You are absolutely, totally right. Along with that I would say “Motivating questions / payoff” as well as the examples up front.</li>
+<li><a href="https://drossbucket.wordpress.com/2017/02/14/examples-first/">Examples first – drossbucket</a> Says:<br>
+[…] the idea I personally like to think about is an approach I call ‘examples first’, after these two blog posts by Timothy Gowers. (The second one has an absolutely epic comment thread – […]</li>
+<li><a href="https://juchengblog.wordpress.com/2017/07/12/how-to-write-a-paper/">How to write a paper – Ju</a> Says:<br>
+[…] Gowers on “writing examples first!” (see also this followup […]</li>
+<li><a href="http://eclipsepromoshop.com/UserProfile/tabid/61/userId/6164/Default.aspx">m88</a> Says:<br>
+<strong>m88</strong>
+My favourite pedagogical principle: examples first! | Gowers&rsquo;s Weblog</li>
+<li><a href="http://tronsr.org/index.php?p=/discussion/1647745/just-want-to-say-hello">Tronsr.org site</a> Says:<br>
+<strong>Tronsr.org site</strong>
+My favourite pedagogical principle: examples first! | Gowers&rsquo;s Weblog</li>
+<li><a href="http://polytropy.com/2021/08/15/on-platos-republic-1/">On Plato’s Republic, 1 « Polytropy</a> Says:<br>
+[…] 2007 blog post of Timothy Gowers recommends not giving definitions until you have shown your listeners some […]</li>
+</ol>
+<hr>
+<p><img src="https://pixel.wp.com/g.gif?blog=1659011&amp;v=wpcom&amp;tz=1&amp;user_id=150621711&amp;post=15&amp;subd=gowers&amp;host=gowers.wordpress.com&amp;ref=&amp;rand=0.41737578499879735" alt=""></p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents"></nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents"></nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251012-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
+  </script>
+  <script src="/js/search.js?v=20251012-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251012-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>

@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Navigating Cities and Understanding Proofs • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251012-08" />
+  <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
+  <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Navigating Cities and Understanding Proofs"><meta property="og:description" content="中文版 原博客链接
+Navigating Cities and Understanding Proofs How proofs are like cities
+Pierre L’Enfant was not a theorist, but a designer, and in particular the designer of the physical layout of Washington D.C.
+Today I want to talk about why some proofs are hard to understand, not hard to discover.
+What do proofs have to do with cities? At first glance they seem to have little in common, but I believe that understanding proofs and navigating cities have a great deal in common. I think that the reason some proofs can be hard to follow is related to why some cities are hard to navigate.
+"><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Navigating Cities and Understanding Proofs"><meta name="twitter:description" content="中文版 原博客链接
+Navigating Cities and Understanding Proofs How proofs are like cities
+Pierre L’Enfant was not a theorist, but a designer, and in particular the designer of the physical layout of Washington D.C.
+Today I want to talk about why some proofs are hard to understand, not hard to discover.
+What do proofs have to do with cities? At first glance they seem to have little in common, but I believe that understanding proofs and navigating cities have a great deal in common. I think that the reason some proofs can be hard to follow is related to why some cities are hard to navigate.
+"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">
+
+  
+
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+
+    
+
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">技术</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+
+    
+    
+  <div class="actions">
+    
+      
+    
+    
+    <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+        <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="site-search" role="search">
+      
+      <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <span class="site-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </span>
+      <input id="globalSearchInput"
+             class="site-search-input"
+             type="search"
+             placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+             aria-label="站内搜索"
+             autocomplete="off"
+             spellcheck="false" />
+      <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+    </div>
+    <a href="/post/" class="btn ghost posts-btn">Posts</a>
+    <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+  </div>
+  
+    
+  </div>
+
+  
+</header>
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">技术</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/terencetao/" class="crumb-anc">陶哲轩博客文章-职业建议</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/terencetao/writing-guide/" class="crumb-sec">陶哲轩的写作建议</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">Navigating Cities and Understanding Proofs</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">On “compilation errors” in mathematical reading, and how to resolve them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them.zh/">数学阅读中的&#34;编译错误&#34;及其解决方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them/">On “local” and “global” errors in mathematical papers, and how to detect them</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-local-and-global-errors-in-mathematical-papers-and-how-to-detect-them.zh/">关于数学论文中的&#34;局部&#34;与&#34;全局&#34;错误及其检测方法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-math-papers-clearly/">How to write math papers clearly</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-math-papers-clearly.zh/">如何清晰地撰写数学论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/on-the-strength-of-theorems/">On the strength of theorems</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/on-the-strength-of-theorems.zh/">论定理的强度</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/maximising-the-results-to-effort-ratio/">Maximising the results-to-effort ratio</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/maximising-the-results-to-effort-ratio.zh/">最大化成果与努力之比</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/implicit-notational-conventions/">Implicit notational conventions</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/implicit-notational-conventions.zh/">隐含的符号约定</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/terencetao/writing-guide/en/navigating-cities-and-understanding-proofs/">Navigating Cities and Understanding Proofs</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">导航城市与理解证明</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-in-your-own-voice/">Write in your own voice</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-in-your-own-voice.zh/">用自己的声音写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/my-favourite-pedagogical-principle-examples-first/">My favourite pedagogical principle:examples first!</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/my-favourite-pedagogical-principle-examples-first.zh/">我最喜欢的教学原则：先举例！</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/take-advantage-of-the-english-language/">Take advantage of the English language</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/take-advantage-of-the-english-language.zh/">善用英语语言</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/dont-overoptimise/">Don’t overoptimise</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/dont-overoptimise.zh/">不要过度优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">Write a rapid prototype first</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-a-rapid-prototype-first.zh/">先写一个快速原型</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/create-lemmas/">Create lemmas</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/create-lemmas.zh/">创建引理</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/proofread-and-double-check-your-paper-before-submission/">Proofread and double-check your paper before submission</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/proofread-and-double-check-your-paper-before-submission.zh/">提交前请仔细校对和检查您的论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-good-notation/">Use good notation</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-good-notation.zh/">使用良好的记法</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/give-appropriate-amounts-of-detail/">Give appropriate amounts of detail</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/give-appropriate-amounts-of-detail.zh/">提供适当程度的细节</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/describe-the-results-accurately/">Describe the results accurately</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/describe-the-results-accurately.zh/">准确描述结果</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/motivate-the-paper/">Motivate the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/motivate-the-paper.zh/">论文的动机</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/organise-the-paper/">Organise the paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/organise-the-paper.zh/">组织论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/write-professionally/">Write professionally</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/write-professionally.zh/">专业写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-to-an-appropriate-journal/">Submit to an appropriate journal</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-to-an-appropriate-journal.zh/">选择合适的期刊投稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">Use the introduction to “sell” the key points of your paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/use-the-introduction-to-sell-the-key-points-of-your-paper.zh/">用引言&#34;推销&#34;论文的关键要点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/submit-a-final-draft-not-a-first-draft/">Submit a final draft, not a first draft</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/submit-a-final-draft-not-a-first-draft.zh/">提交最终稿，而非初稿</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing/">On Writing</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/on-writing.zh/">论写作</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/advice-for-writing-research-papers-and-dissertations/">Advice for Writing Research Papers and Dissertations</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/how-to-write-a-paper/">How to write a paper</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/tips-for-authors-js-milne/">Tips for Authors -- J.S. Milne</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/en/writing-a-research-paper-in-mathematics/">Writing a Research Paper in Mathematics</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/how-to-write-a-paper.zh/">如何撰写论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/writing-a-research-paper-in-mathematics.zh/">撰写数学研究论文</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/advice-for-writing-research-papers-and-dissertations.zh/">撰写研究论文和学位论文的建议</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/terencetao/writing-guide/zh/tips-for-authors-js-milne.zh/">给作者的建议 —— J.S. Milne</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          
+          
+          <span class="meta-date">2011-05-06</span>
+        </div>
+      
+
+      
+      <p><a href="/terencetao/writing-guide/zh/navigating-cities-and-understanding-proofs.zh/">中文版</a>
+<a href="http://rjlipton.wordpress.com/2011/05/06/navigating-cities-and-understanding-proofs">原博客链接</a></p>
+<h1 id="navigating-cities-and-understanding-proofs">Navigating Cities and Understanding Proofs</h1>
+<p><em>How proofs are like cities</em></p>
+<p><a href="https://i0.wp.com/rjlipton.com/wp-content/uploads/2011/05/images.jpeg?ssl=1"><img src="https://i0.wp.com/rjlipton.com/wp-content/uploads/2011/05/images.jpeg?w=150&amp;ssl=1" alt="" title="images"></a></p>
+<p>Pierre L’Enfant was not a theorist, but a designer, and in particular the designer of the physical layout of Washington D.C.</p>
+<p>Today I want to talk about why some proofs are hard to understand, not hard to discover.</p>
+<p>What do proofs have to do with cities? At first glance they seem to have little in common, but I believe that understanding proofs and navigating cities have a great deal in common. I think that the reason some proofs can be hard to follow is related to why some cities are hard to navigate.</p>
+<p>Washington, as in the US capital, has always been difficult for me to get around, with due respect to L’Enfant. I sometimes feel lost in the capital. Its main streets run in a diagonal pattern which is beautiful, but does not help me form a good mental spatial map. I also almost never drive a car around the city: I walk, take the Metro, or take a taxi. The latter have me let someone else do the navigating for me, which means that I can close my eyes and still get where I want to go. This is very pleasant and easy on me, yet does not make me learn the ins and outs of the streets of D.C.</p>
+<p>I think when we read a proof it is like trying to navigate around a city. The layout is critical if we are to be successful in understanding the proof. Also we need to actively interactive with the proof. If you just sit back in a “taxi” and are driven around the proof, say at a talk or lecture, then you are much less likely to really understand the proof.</p>
+<p>Let’s turn to discuss some connections between the understanding of cities and proofs. Perhaps these comments will help us both to write better proofs and to help us to better read proofs.</p>
+<p><strong>Cities And Proofs</strong></p>
+<p><strong>Standard Layout:</strong> For all its size and immense density of people and vehicles and buildings, Manhattan is relatively easy to navigate around. The streets, to a first approximation, are laid out on a rectangular grid: so 41 street is north of 33. The avenues run north and south and are numbered west to east—okay not exactly but close—for example, Sixth Avenue is also the Avenue of the Americas and Ninth is Columbus Avenue. So figuring out a rough location is pretty straightforward, especially if you stay away from the lower part of Manhattan.</p>
+<p><em>What does this mean for a proof?</em> We should, as much as possible, layout our proofs in a standard “grid” manner. Definitions, lemma’s, and proofs should be in as standard a layout as possible. Sometimes this is hard or even impossible, but proofs with “diagonal” structure are much harder to understand and should be avoided.</p>
+<p>Stated another way, with a mixed metaphor: Traffic flow in a proof should be topologically sorted. You might have to refer back to check the source of the next logic step, how Theorem 5 depends on Lemmas 2 and 3, but you should never have to cycle around, where to prove Lemma 3 you need to understand part of the proof of Theorem 5. Another way to say this: the understanding of a lemma should never need to be “deferred” to a later result. When such “deferrence” happens, you have what Jacques Derrida called <a href="http://en.wikipedia.org/wiki/Diff%C3%A9rance">différance</a>, which might be fine in literary theory, but shouldn’t be in math. This last reference is due to Ken, I defer to him on this, and simply add: keep the structure as simple as possible.</p>
+<p><strong>Good Guide Books:</strong> Any city is easier to navigate if their are well written guide books. Ones that explain how to get around, how to locate major landmarks, and how to navigate.</p>
+<p><em>What does this mean for a proof?</em> We should supply a guidebook with our proofs. If a proof is very short or simple, then a guide may be unnecessary. However, for a proof of any complexity having a good overview that explains where you are, where you are going, and how all fits together is invaluable. Terence Tao is a master at this: even some of his deepest theorems have an overview that at least allows you to get your bearings. Here is an overview from one of his papers.</p>
+<blockquote>
+<p>There are three major ingredients. The first is Szemerédi’s theorem, which asserts that any subset of the integers of positive density contains progressions of arbitrary length. The second, which is the main new ingredient of this paper, is a certain transference principle. This allows us to deduce from Szemerédi’s theorem that any subset of a sufficiently pseudorandom set (or measure) of positive relative density contains progressions of arbitrary length. The third ingredient is a recent result of Goldston and Yildirim, which we reproduce here. Using this, one may place (a large fraction of) the primes inside a pseudorandom set of “almost primes” (or more precisely, a pseudorandom measure concentrated on almost primes) with positive relative density.</p></blockquote>
+<p><strong>Districts:</strong> Many cities, even huge ones, have districts or neighborhoods. This modular structure is immensely useful in navigating around. Even Manhattan, for example, has <a href="http://en.wikipedia.org/wiki/List_of_Manhattan_neighborhoods">neighborhoods:</a> TriBeCa, West Village, Washington Heights to name just three out of dozens.</p>
+<p><a href="https://i0.wp.com/rjlipton.com/wp-content/uploads/2011/05/man.png?ssl=1"><img src="https://i0.wp.com/rjlipton.com/wp-content/uploads/2011/05/man.png?w=300&amp;ssl=1" alt="" title="man"></a></p>
+<p><em>What does this mean for a proof?</em> We should structure our proofs to have a neighborhood structure. Proofs that are modular often can be read much more easily. The modules can be understood separately and that helps the reader greatly. Often this modular structure is based on the use of powerful abstraction, which used properly can be very reader friendly. Used properly a highly abstract level proof can be quite clean, simple, and very understandable. Or used poorly the abstract level may hide the key issues that are being argued, and make the proof very hard to understand.</p>
+<p>The next two are things to be avoided.</p>
+<p><strong>Many side streets:</strong> Cities with lots of. dead-end streets, with numbering schemes that jump in unexpected ways, in naming schemes that are strange can be very hard to navigate.</p>
+<p><em>What does this mean for a proof?</em> We should avoid proofs with many side steps and many parts that are unneeded. I believe that side streets in proofs correspond to many cases. The more cases the more complex a proof is, usually. The reason is that we can leave a case out, or argue that case (iii) follows as case (ii), which is false. Lots of cases is a symptom that there is complexity, and that is usually an enemy of understanding.</p>
+<p>Cases cannot always be avoided. In some areas of mathematics, for example finite group theory, special cases abound. One is quite likely to see a theorem like this:</p>
+<blockquote>
+<p><strong>Theorem:</strong> <em>Every group of even order that does not have as a subgroup and has no elements of order where satisfies .</em></p></blockquote>
+<p><strong>Crazy Structure:</strong> Some cities have endearing, but nutty structures. Pittsburgh where CMU is located, is famous for having the property: you may be able to see where you want to get to, but there is no way to get there. The many hills, rivers, and bridges make this happen. You can see where you want to be, but there seems to be no road that leads you there. Of course, there is a way to get there, the way is just hard to discover, and may involve you heading initially away from where you are going. It can be very confusing and makes for difficult navigation.</p>
+<p>In Cleveland there was a road that self-intersects—crosses itself—at least when I was an undergraduate there. Really. Many cities also have roads that change names for no obvious reason, or become one-way at certain times of the day. All of this makes getting around a challenge. Atlanta, where I live, has many roads that are named</p>
+<p>where is a modifier like: way, street, place, and so on.</p>
+<p><em>What does this mean for a proof?</em> We should be careful to avoid crazy structure. We should use logical names, keep notation from changing for no reason. We must avoid circular reasoning, even reasoning that is not circular but appears to be will be quite hard to follow.</p>
+<p>A classic example of this are inductive arguments, which are essential to many areas of mathematics. But an inductive argument can be tricky. There is always the danger that the argument is circular or has some other defects. Be very careful writing them and reading them: be sure the base case is handled properly and that you understand what is being “inducted” on. Some proofs, especially advanced ones, may use a complex measure that is being used to do the induction on. Be sure to follow these carefully.</p>
+<p><strong>Open Problems</strong></p>
+<p>If you are writing or reading a proof look for the above examples to help you, and understand the parts that make the proof hard. Avoid taking proof “taxis” if you really want to understand a proof.</p>
+<p>An open problem: classic proof theory measures complexity by size: longer is harder. But this seems to be a bit naive. Perhaps there is a more reasonable measure of proof complexity. The same applies to much of complexity theory in general: a bigger circuit is more complex, a longer computation is more complex, and so on. Is this the best we can do?</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents"></nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents"></nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251012-08" defer></script>
+  <script>
+    
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
+  </script>
+  <script src="/js/search.js?v=20251012-08" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251012-08"></script>
+  
+  
+  
+  
+  
+  
+</body>
+</html>
