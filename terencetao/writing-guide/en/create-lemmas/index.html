@@ -54,12 +54,12 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Create lemmas"><meta property="og:description" content="中文版本 原博客链接
-Create lemmas Nothing is particularly hard if you divide it into small jobs. — Henry Ford
+Create lemmas Nothing is particularly hard if you divide it into small jobs. (Henry Ford)
 A typical argument in modern mathematics is often quite intricate, requiring many different steps, ingredients, and notation. The authors of the argument, having been intimately involved in all aspects of its construction, often do not realise just how complicated such an argument appears to a reader who is encountering it for the first time (I myself have been guilty of this oversight).
 "><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/en/create-lemmas/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Create lemmas"><meta name="twitter:description" content="中文版本 原博客链接
-Create lemmas Nothing is particularly hard if you divide it into small jobs. — Henry Ford
+Create lemmas Nothing is particularly hard if you divide it into small jobs. (Henry Ford)
 A typical argument in modern mathematics is often quite intricate, requiring many different steps, ingredients, and notation. The authors of the argument, having been intimately involved in all aspects of its construction, often do not realise just how complicated such an argument appears to a reader who is encountering it for the first time (I myself have been guilty of this oversight).
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/en/create-lemmas/">
@@ -1140,32 +1140,36 @@ A typical argument in modern mathematics is often quite intricate, requiring man
 <a href="https://terrytao.wordpress.com/advice-on-writing-papers/create-lemmas/">原博客链接</a></p>
 <h1 id="create-lemmas">Create lemmas</h1>
 <blockquote>
-<p>Nothing is particularly hard if you divide it into small jobs.
-— Henry Ford</p></blockquote>
+<p><em>Nothing is particularly hard if you divide it into small jobs.</em> (<a href="http://en.wikipedia.org/wiki/Henry_Ford">Henry Ford</a>)</p></blockquote>
 <p>A typical argument in modern mathematics is often quite intricate, requiring many different steps, ingredients, and notation. The authors of the argument, having been intimately involved in all aspects of its construction, often do not realise just how complicated such an argument appears to a reader who is encountering it for the first time (I myself have been guilty of this oversight).</p>
 <p>Part of the reason for this is that there is plenty of implicit structure in a paper which is crucial to understanding it properly, and which is known to the authors, but is not readily apparent to the readers. Suppose for instance that part of a paper goes like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>In Section 2, facts A, B, and C are derived, and then used to deduce D.
-</span></span><span style="display:flex;"><span>In Section 3, D is used to derive E.
-</span></span><span style="display:flex;"><span>In Section 4, D, and another fact F, are used to derive G.
-</span></span><span style="display:flex;"><span>In Section 5, E, G, and another fact H, are used to derive I.
-</span></span><span style="display:flex;"><span>...
-</span></span></code></pre></div><p>A reader who is going through this paper one section at a time will try to keep A, B, C, and D all in mind after finishing Section 2, and moving on to later sections. However, facts A, B, and C are never used again; they were instrumental to the argument because they allowed one to establish D, but once D is established, A, B, and C can be safely forgotten. Note, though that <strong>the reader does not know this</strong>. As a consequence, while reading Sections 3, 4, and 5, the reader has to set aside some of his or her mental resources to retain some facts which are of no further use, thus obscuring the structure of the argument and making it more difficult to follow.</p>
-<p>Now one could address this by placing some remarks at the end of Section 2 along the lines of &ldquo;Facts A, B, and C will not be used again in the rest of the paper&rdquo;, or by devoting more thought to <strong>organising</strong> and <strong>motivating</strong> the paper. These are all worthwhile things to do, but a much more elegant solution is simply to encapsulate D as a <strong>lemma</strong>, and to place A, B, C inside the <strong>proof</strong> of that lemma. This conveys several useful structural cues to the reader: firstly, that D is likely to be an important fact to use in later parts of the argument, and secondly, that A, B, and C are not needed elsewhere in the paper and can be safely forgotten. This additional structure will be useful to all readers, but will be especially appreciated by those readers who are already expert in how to prove facts such as D, since they can then glance at the statement of the lemma, readily convince themselves that the lemma is plausible (possibly by using other tools than A, B, and C), and then quickly move on to the next part of the argument. One can also add some remarks &ldquo;for the experts&rdquo; after the proof of a lemma, discussing possible alternate proofs, refinements, special cases, connections to other lemmas in the literature, etc.</p>
-<p>We have seen how &ldquo;folding&rdquo; the argument into lemmas can reduce the complexity of that argument by &ldquo;localising&rdquo; certain facts in the argument. The same method can also be used to localise notation, e.g. some special-purpose notation used to prove D but is not used elsewhere in the paper. The design philosophy here is similar to that of <strong>information hiding</strong> in software engineering. (Other relevant software engineering philosophies for mathematical writing include <strong>structured programming</strong> and <strong>modularity</strong>.)</p>
-<p>Lemmas also provide a good opportunity to explicitly &ldquo;recap&rdquo; all the running hypotheses, assumptions, and notational conventions that have already been introduced in the argument, which can be invaluable to a reader who has misunderstood or forgotten about part of this implied context. (Sometimes, such a recap would be tediously long, in which case a sentence such as &ldquo;Let the notation and assumptions be as above&rdquo; may suffice. When these situations occur, one might wish to formalise all the running assumptions by judiciously introducing some <strong>good notation</strong>.)</p>
+<ul>
+<li>…</li>
+<li>In Section 2, facts A, B, and C are derived, and then used to deduce D.</li>
+<li>In Section 3, D is used to derive E.</li>
+<li>In Section 4, D, and another fact F, are used to derive G.</li>
+<li>In Section 5, E, G, and another fact H, are used to derive I.</li>
+<li>…</li>
+</ul>
+<p>A reader who is going through this paper one section at a time will try to keep A, B, C, and D all in mind after finishing Section 2, and moving on to later sections. However, facts A, B, and C are never used again; they were instrumental to the argument because they allowed one to establish D, but once D is established, A, B, and C can be safely forgotten. Note, though that <em>the reader does not know this</em>. As a consequence, while reading Sections 3, 4, and 5, the reader has to set aside some of his or her mental resources to retain some facts which are of no further use, thus obscuring the structure of the argument and making it more difficult to follow.</p>
+<p>Now one could address this by placing some remarks at the end of Section 2 along the lines of “Facts A, B, and C will not be used again in the rest of the paper”, or by devoting more thought to <a href="/terencetao/writing-guide/en/organise-the-paper/">organising</a> and <a href="/terencetao/writing-guide/en/motivate-the-paper/">motivating</a> the paper. These are all worthwhile things to do, but a much more elegant solution is simply to encapsulate D as a <em>lemma</em>, and to place A, B, C inside the <em>proof</em> of that lemma. This conveys several useful structural cues to the reader: firstly, that D is likely to be an important fact to use in later parts of the argument, and secondly, that A, B, and C are not needed elsewhere in the paper and can be safely forgotten. This additional structure will be useful to all readers, but will be especially appreciated by those readers who are already expert in how to prove facts such as D, since they can then glance at the statement of the lemma, readily convince themselves that the lemma is plausible (possibly by using other tools than A, B, and C), and then quickly move on to the next part of the argument. One can also add some remarks “for the experts” after the proof of a lemma, discussing possible alternate proofs, refinements, special cases, connections to other lemmas in the literature, etc.</p>
+<p>We have seen how “folding” the argument into lemmas can reduce the complexity of that argument by “localising” certain facts in the argument. The same method can also be used to localise notation, e.g. some special-purpose notation used to prove D but is not used elsewhere in the paper. The design philosophy here is similar to that of <a href="http://en.wikipedia.org/wiki/Information_hiding">information hiding</a> in software engineering. (Other relevant software engineering philosophies for mathematical writing include <a href="http://en.wikipedia.org/wiki/Structured_programming">structured programming</a> and <a href="http://en.wikipedia.org/wiki/Modularity_%28programming%29">modularity</a>.)</p>
+<p>Lemmas also provide a good opportunity to explicitly “recap” all the running hypotheses, assumptions, and notational conventions that have already been introduced in the argument, which can be invaluable to a reader who has misunderstood or forgotten about part of this implied context. (Sometimes, such a recap would be tediously long, in which case a sentence such as “Let the notation and assumptions be as above” may suffice. When these situations occur, one might wish to formalise all the running assumptions by judiciously introducing some <a href="/terencetao/writing-guide/en/use-good-notation/">good notation</a>.)</p>
 <p>In some cases, the conclusion of the lemma may only need a portion of these hypotheses; this might be worth stating explicitly within the statement of the lemma, as it can clarify the nature of that lemma, and may also make it more useful for future applications.</p>
-<p>One should write the statement of a lemma in a way that makes it easy to <strong>use</strong>, rather than easy to <strong>prove</strong>. Thus, one should try to make the hypotheses of the lemma natural and easy to verify, and the conclusions of the lemma manifestly useful. Basically, the idea is to push as much of the details of the argument into the lemma as one can, to make the rest of the argument as simple as possible. Also, it may end up that you (or someone else) will eventually find a simpler proof of that lemma, thus reducing the net complexity of the paper markedly (cf. the <strong>object-oriented approach</strong> to software engineering).</p>
-<p>Folding the argument into lemmas also makes it easier to <strong>write a rapid prototype</strong>, as once one finalises the <strong>statement</strong> of the lemma, one can defer the <strong>proof</strong> of the lemma until later.</p>
-<p>In summary, it&rsquo;s almost always a good idea to have plenty of lemmas (and propositions and corollaries too, of course) in an argument; it makes the overall structure of the argument more apparent, it makes the argument easier to follow, and can also provide some useful tools for future work in the area.</p>
-<h2 id="exception-when-to-unify-lemmas">Exception: When to Unify Lemmas</h2>
+<p>One should write the statement of a lemma in a way that makes it easy to <em>use</em>, rather than easy to <em>prove</em>. Thus, one should try to make the hypotheses of the lemma natural and easy to verify, and the conclusions of the lemma manifestly useful. Basically, the idea is to push as much of the details of the argument into the lemma as one can, to make the rest of the argument as simple as possible. Also, it may end up that you (or someone else) will eventually find a simpler proof of that lemma, thus reducing the net complexity of the paper markedly (cf. the <a href="http://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented approach</a> to software engineering).</p>
+<p>Folding the argument into lemmas also makes it easier to <a href="/terencetao/writing-guide/en/write-a-rapid-prototype-first/">write a rapid prototype</a>, as once one finalises the <em>statement</em> of the lemma, one can defer the <em>proof</em> of the lemma until later.</p>
+<p>In summary, it’s almost always a good idea to have plenty of lemmas (and propositions and corollaries too, of course) in an argument; it makes the overall structure of the argument more apparent, it makes the argument easier to follow, and can also provide some useful tools for future work in the area.</p>
 <p>There is however one exception to the above rule. If you have a pair of technical lemmas, neither of which is of much interest in its own right, but only become useful when used together, then they should be unified into single lemma which will be easier for the reader to keep in mind. For instance, suppose your paper contains the following two lemmas:</p>
-<p><strong>Lemma 15.</strong> If Natural Hypothesis A is true, then Technical Statement B is true.</p>
-<p><strong>Lemma 16.</strong> If Technical Statement B is true, then Natural Conclusion C is true.</p>
-<p>If Lemma 16 is the only place where B is used, and Lemma 15 is the only place where B is verified, then it can be better to unify these two lemmas as:</p>
-<p><strong>Lemma 15′.</strong> If Natural Hypothesis A is true, then Natural Conclusion C is true.</p>
-<p>Now, the technical statement B has been encapsulated into the <strong>proof</strong> of Lemma 15′ (which, of course, will be a concatenation of the proofs of Lemma 15 and Lemma 16), and no longer needs to make an appearance outside of this lemma. In some cases it may also be appropriate to insert something like:</p>
-<p><strong>Sublemma 16′.</strong> Under the hypotheses of Lemma 15′, technical condition B is true.</p>
+<blockquote>
+<p><strong>Lemma 15.</strong> If Natural Hypothesis A is true, then Technical Statement B is true.</p></blockquote>
+<blockquote>
+<p><strong>Lemma 16.</strong> If Technical Statement B is true, then Natural Conclusion C is true.</p></blockquote>
+<p>If Lemma 16 is the only place where B is used, and Lemma 15 is the only place where B is verified, then it can be better to unify these two lemmas as</p>
+<blockquote>
+<p><strong>Lemma 15′.</strong> If Natural Hypothesis A is true, then Natural Conclusion C is true.</p></blockquote>
+<p>Now, the technical statement B has been encapsulated into the <em>proof</em> of Lemma 15′ (which, of course, will be a concatenation of the proofs of Lemma 15 and Lemma 16), and no longer needs to make an appearance outside of this lemma. In some cases it may also be appropriate to insert something like</p>
+<blockquote>
+<p><strong>Sublemma 16′.</strong> Under the hypotheses of Lemma 15′, technical condition B is true.</p></blockquote>
 <p>within the proof of Lemma 15′.</p>
 <p>This improves the paper for a number of related reasons:</p>
 <ul>
@@ -1209,11 +1213,7 @@ A typical argument in modern mathematics is often quite intricate, requiring man
       
       <nav class="toc">
         
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#exception-when-to-unify-lemmas">Exception: When to Unify Lemmas</a></li>
-  </ul>
-</nav>
+          <nav id="TableOfContents"></nav>
             
       </nav>
       
@@ -1237,11 +1237,7 @@ A typical argument in modern mathematics is often quite intricate, requiring man
         <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
       </div>
       <nav class="toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#exception-when-to-unify-lemmas">Exception: When to Unify Lemmas</a></li>
-  </ul>
-</nav>
+        <nav id="TableOfContents"></nav>
       </nav>
     </div>
   </div>

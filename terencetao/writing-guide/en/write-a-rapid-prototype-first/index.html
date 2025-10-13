@@ -54,13 +54,13 @@
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Write a rapid prototype first"><meta property="og:description" content="中文版本 原博客链接
-Write a rapid prototype first The best performance improvement is the transition from the nonworking state to the working state. — John Ousterhout
-Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you&rsquo;ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the:
+Write a rapid prototype first The best performance improvement is the transition from the nonworking state to the working state. (John Ousterhout)
+Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you’ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the organisation of the argument, and selection of good notation, until a large part of the paper is already written, at which point any changes in the organisation or in the notation often become painful to implement. (Many times in the past, I have started to write a paper without devoting enough thought to the overall structure, and spent a lot of time establishing some lemmas which I thought were important, only to realise later that one did not actually need the lemma, thus wasting quite a lot of time.)
 "><meta property="og:url" content="https://linguage.github.io/terencetao/writing-guide/en/write-a-rapid-prototype-first/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
 <meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Write a rapid prototype first"><meta name="twitter:description" content="中文版本 原博客链接
-Write a rapid prototype first The best performance improvement is the transition from the nonworking state to the working state. — John Ousterhout
-Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you&rsquo;ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the:
+Write a rapid prototype first The best performance improvement is the transition from the nonworking state to the working state. (John Ousterhout)
+Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you’ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the organisation of the argument, and selection of good notation, until a large part of the paper is already written, at which point any changes in the organisation or in the notation often become painful to implement. (Many times in the past, I have started to write a paper without devoting enough thought to the overall structure, and spent a lot of time establishing some lemmas which I thought were important, only to realise later that one did not actually need the lemma, thus wasting quite a lot of time.)
 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/terencetao/writing-guide/en/write-a-rapid-prototype-first/">
 
@@ -1140,34 +1140,20 @@ Discovering a solution to a mathematical problem is only half of the battle. Act
 <a href="https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/">原博客链接</a></p>
 <h1 id="write-a-rapid-prototype-first">Write a rapid prototype first</h1>
 <blockquote>
-<p>The best performance improvement is the transition from the nonworking state to the working state.
-— John Ousterhout</p></blockquote>
-<p>Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you&rsquo;ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the:</p>
-<ul>
-<li><strong>organisation of the argument</strong>, and</li>
-<li><strong>selection of good notation</strong></li>
-</ul>
-<p>until a large part of the paper is already written, at which point any changes in the organisation or in the notation often become painful to implement. (Many times in the past, I have started to write a paper without devoting enough thought to the overall structure, and spent a lot of time establishing some lemmas which I thought were important, only to realise later that one did not actually need the lemma, thus wasting quite a lot of time.)</p>
-<p>I found that the technique of <strong>rapid prototyping</strong> from software engineering is useful in ameliorating these difficulties. According to this technique, one does not write the paper in linear order, and one also refrains from the temptation of writing the easiest or most straightforward portions first. Instead, one writes the paper in the following order.</p>
-<h2 id="the-rapid-prototyping-process">The Rapid Prototyping Process</h2>
-<h3 id="first-stage-the-skeleton">First Stage: The Skeleton</h3>
-<p>First, one writes a bare-bones &ldquo;skeleton&rdquo; or &ldquo;prototype&rdquo; of the paper as quickly as possible; this prototype has the (approximate) statements of all the key lemmas, propositions, and theorems, as well as all key definitions, but all the proofs are omitted, or sketched in very informal &ldquo;notes to self&rdquo;. At this primary stage of the writing process, the priority is to get the &ldquo;big picture&rdquo; right – the logical organisation of the paper, and some semi-precise descriptions of each important proposition or piece of notation. The fuzzy nature of these descriptions will allow one to easily move parts of the argument around to improve this big picture.</p>
-<h3 id="second-stage-precise-statements">Second Stage: Precise Statements</h3>
-<p>After the organisation is completed to one&rsquo;s satisfaction, the second objective is to write down just enough of the proof so that one can make the statements of all the lemmas, propositions, theorems and definitions precise.</p>
-<h3 id="third-stage-key-arguments">Third Stage: Key Arguments</h3>
-<p>Once this is done, the third objective is to carefully write the key portions of the argument, for instance deducing one key proposition from two previous key lemmas, to make sure that the structure actually works as expected.</p>
-<h3 id="fourth-stage-routine-filling">Fourth Stage: Routine Filling</h3>
-<p>Finally, one fills in all the &ldquo;routine&rdquo; aspects of the paper, such as proofs of standard lemmas, or a quick application of the main theorem. Usually, by this stage, the remaining gaps in the paper are so disconnected that they can be filled out in basically whatever order one pleases. This is also a good time to <strong>write the introduction</strong> and similar <strong>motivational sections</strong>.</p>
-<h2 id="practical-implementation-tips">Practical Implementation Tips</h2>
-<p>Any decisions which do not impact the big picture should be deferred until late in this process. For instance, if you have a small quantity which is probably going to equal <code>x</code> or maybe <code>y</code>, but do not know exactly which it is yet, you could write &ldquo;let <code>???</code>&rdquo; for now, and use <code>???</code> as a placeholder for this quantity until you get to the point in the proof where you figure it out exactly what <code>???</code> should be, and which point you can edit a single line to complete the proof. (Contrast this with writing <code>x</code> in two dozen places in the proof, then discovering much later in the writing process that you have to go back and change <code>x</code> to <code>y</code> (and <code>x^2</code> to <code>y^2</code>, etc.) in those two dozen places. Even with modern search-and-replace tools, this can be an irritatingly time-consuming task.)</p>
-<h2 id="collaboration-benefits">Collaboration Benefits</h2>
-<p>One nice feature of this approach is that it can be divided with a coauthor. For instance one author may write an informal sketch of the proof, with many details omitted, then the other coauthor may tweak the organisation and notation, and then fill in the details, and then the first author might then review the paper and add in some remarks and write the introduction. Many other permutations are possible; it depends very much on the nature of the collaboration. Using version control software (e.g. Subversion) can facilitate this process immensely, and I recommend investing some time in learning how to use such software (e.g. starting with [this link](this link)).</p>
-<h2 id="managing-ideas-during-writing">Managing Ideas During Writing</h2>
-<p>While one is writing one part of the paper, one often gets some good ideas regarding what to do for another part of the paper; e.g. when writing down a lemma, one may have an idea for an example or remark which will illuminate that lemma. When that happens, I do not recommend ignoring that idea, nor do I recommend dropping what you are currently doing to fully flesh out that idea; instead, devote a minute to write down a &ldquo;stub&rdquo; for that idea in the relevant location of your paper (just enough to jog your memory when you return to that location), and then return to what you were doing before, so as not to break your concentration or momentum. That idea can then be safely forgotten about for the moment, and revisited at one&rsquo;s leisure, at a more appropriate stage of the writing process.</p>
-<h2 id="caveats-and-alternatives">Caveats and Alternatives</h2>
-<p>The rapid prototyping strategy is often hard to adhere to perfectly, and I must admit that sometimes (especially for shorter papers) I take a very different approach, writing the &ldquo;easy&rdquo; and &ldquo;fun&rdquo; parts of the paper first (e.g. the introduction, or some simple lemmas), and try to use the momentum generated to then write the rest of the paper quickly. This tends to work well if one is <strong>very</strong> confident as to how the large-scale structure of the paper will be arranged, but I have regretted using this hastier approach when I found, halfway through the writing process, that a radically different organisation would have been much better.</p>
-<h2 id="related-reading">Related Reading</h2>
-<p>For the analogous technique applied to the dual problem of <strong>reading</strong> a paper, see [this page](this page).</p>
+<p><em>The best performance improvement is the transition from the nonworking state to the working state.</em> (<a href="http://en.wikipedia.org/wiki/John_Ousterhout">John Ousterhout</a>)</p></blockquote>
+<p>Discovering a solution to a mathematical problem is only half of the battle. Actually writing down the argument that you’ve discovered formally can also be a daunting task, especially if the argument is lengthy and is not modeled on an existing one in the literature. While every individual detail of the argument may be clear to the author, the overall structure of the argument may not be immediately obvious. In particular, it is often difficult to make the (important) decisions about the <a href="/terencetao/writing-guide/en/organise-the-paper/">organisation of the argument</a>, and <a href="/terencetao/writing-guide/en/use-good-notation/">selection of good notation</a>, until a large part of the paper is already written, at which point any changes in the organisation or in the notation often become painful to implement. (Many times in the past, I have started to write a paper without devoting enough thought to the overall structure, and spent a lot of time establishing some lemmas which I thought were important, only to realise later that one did not actually need the lemma, thus wasting quite a lot of time.)</p>
+<p>I found that the technique of <a href="http://en.wikipedia.org/wiki/Software_prototyping">rapid prototyping</a> from software engineering is useful in ameliorating these difficulties. According to this technique, one does not write the paper in linear order, and one also refrains from the temptation of writing the easiest or most straightforward portions first. Instead, one writes the paper in the following order.</p>
+<ol>
+<li>First, one writes a bare-bones “skeleton” or “prototype” of the paper as quickly as possible; this prototype has the (approximate) statements of all the key lemmas, propositions, and theorems, as well as all key definitions, but all the proofs are omitted, or sketched in very informal “notes to self”. At this primary stage of the writing process, the priority is to get the “big picture” right – the logical organisation of the paper, and some semi-precise descriptions of each important proposition or piece of notation. The fuzzy nature of these descriptions will allow one to easily move parts of the argument around to improve this big picture.</li>
+<li>After the organisation is completed to one’s satisfaction, the second objective is to write down just enough of the proof so that one can make the statements of all the lemmas, propositions, theorems and definitions precise.</li>
+<li>Once this is done, the third objective is to carefully write the key portions of the argument, for instance deducing one key proposition from two previous key lemmas, to make sure that the structure actually works as expected.</li>
+<li>Finally, one fills in all the “routine” aspects of the paper, such as proofs of standard lemmas, or a quick application of the main theorem. Usually, by this stage, the remaining gaps in the paper are so disconnected that they can be filled out in basically whatever order one pleases. This is also a good time to <a href="/terencetao/writing-guide/en/use-the-introduction-to-sell-the-key-points-of-your-paper/">write the introduction</a> and similar <a href="/terencetao/writing-guide/en/motivate-the-paper/">motivational sections</a>.</li>
+</ol>
+<p>Any decisions which do not impact the big picture should be deferred until late in this process. For instance, if you have a small quantity which is probably going to equal or maybe , but do not know exactly which it is yet, you could write “let ” for now, and use as a placeholder for this quantity until you get to the point in the proof where you figure it out exactly what??? should be, and which point you can edit a single line to complete the proof. (Contrast this with writing in two dozen places in the proof, then discovering much later in the writing process that you have to go back and change to (and to , etc.) in those two dozen places. Even with modern search-and-replace tools, this can be an irritatingly time-consuming task.)</p>
+<p>One nice feature of this approach is that it can be divided with a coauthor. For instance one author may write an informal sketch of the proof, with many details omitted, then the other coauthor may tweak the organisation and notation, and then fill in the details, and then the first author might then review the paper and add in some remarks and write the introduction. Many other permutations are possible; it depends very much on the nature of the collaboration. Using version control software (e.g. Subversion) can facilitate this process immensely, and I recommend investing some time in learning how to use such software (e.g. starting with <a href="http://sbseminar.wordpress.com/2008/06/18/subverting-the-system/">this link</a>).</p>
+<p>While one is writing one part of the paper, one often gets some good ideas regarding what to do for another part of the paper; e.g. when writing down a lemma, one may have an idea for an example or remark which will illuminate that lemma. When that happens, I do not recommend ignoring that idea, nor do I recommend dropping what you are currently doing to fully flesh out that idea; instead, devote a minute to write down a “stub” for that idea in the relevant location of your paper (just enough to jog your memory when you return to that location), and then return to what you were doing before, so as not to break your concentration or momentum. That idea can then be safely forgotten about for the moment, and revisited at one’s leisure, at a more appropriate stage of the writing process.</p>
+<p>The rapid prototyping strategy is often hard to adhere to perfectly, and I must admit that sometimes (especially for shorter papers) I take a very different approach, writing the “easy” and “fun” parts of the paper first (e.g. the introduction, or some simple lemmas), and try to use the momentum generated to then write the rest of the paper quickly. This tends to work well if one is <em>very</em> confident as to how the large-scale structure of the paper will be arranged, but I have regretted using this hastier approach when I found, halfway through the writing process, that a radically different organisation would have been much better.</p>
+<p>For the analogous technique applied to the dual problem of <em>reading</em> a paper, see <a href="/terencetao/writing-guide/en/on-compilation-errors-in-mathematical-reading-and-how-to-resolve-them/">this page</a>.</p>
 
       
     </div>
@@ -1204,23 +1190,7 @@ Discovering a solution to a mathematical problem is only half of the battle. Act
       
       <nav class="toc">
         
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#the-rapid-prototyping-process">The Rapid Prototyping Process</a>
-      <ul>
-        <li><a href="#first-stage-the-skeleton">First Stage: The Skeleton</a></li>
-        <li><a href="#second-stage-precise-statements">Second Stage: Precise Statements</a></li>
-        <li><a href="#third-stage-key-arguments">Third Stage: Key Arguments</a></li>
-        <li><a href="#fourth-stage-routine-filling">Fourth Stage: Routine Filling</a></li>
-      </ul>
-    </li>
-    <li><a href="#practical-implementation-tips">Practical Implementation Tips</a></li>
-    <li><a href="#collaboration-benefits">Collaboration Benefits</a></li>
-    <li><a href="#managing-ideas-during-writing">Managing Ideas During Writing</a></li>
-    <li><a href="#caveats-and-alternatives">Caveats and Alternatives</a></li>
-    <li><a href="#related-reading">Related Reading</a></li>
-  </ul>
-</nav>
+          <nav id="TableOfContents"></nav>
             
       </nav>
       
@@ -1244,23 +1214,7 @@ Discovering a solution to a mathematical problem is only half of the battle. Act
         <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
       </div>
       <nav class="toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#the-rapid-prototyping-process">The Rapid Prototyping Process</a>
-      <ul>
-        <li><a href="#first-stage-the-skeleton">First Stage: The Skeleton</a></li>
-        <li><a href="#second-stage-precise-statements">Second Stage: Precise Statements</a></li>
-        <li><a href="#third-stage-key-arguments">Third Stage: Key Arguments</a></li>
-        <li><a href="#fourth-stage-routine-filling">Fourth Stage: Routine Filling</a></li>
-      </ul>
-    </li>
-    <li><a href="#practical-implementation-tips">Practical Implementation Tips</a></li>
-    <li><a href="#collaboration-benefits">Collaboration Benefits</a></li>
-    <li><a href="#managing-ideas-during-writing">Managing Ideas During Writing</a></li>
-    <li><a href="#caveats-and-alternatives">Caveats and Alternatives</a></li>
-    <li><a href="#related-reading">Related Reading</a></li>
-  </ul>
-</nav>
+        <nav id="TableOfContents"></nav>
       </nav>
     </div>
   </div>
