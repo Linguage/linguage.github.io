@@ -1,0 +1,240 @@
+/* Minimal typography enhancements inspired by cs249r_book
+   Scope to main content container to avoid global side effects */
+
+:root {
+  /* Prefer site theme variables if provided */
+  --brand-text: var(--text, #2b2b2b);
+  --brand-muted: var(--muted, #6c757d);
+  --brand-surface: var(--surface, #ffffff);
+  --brand-border: var(--border, #e9ecef);
+  /* Accent from site brand (Linguista/Logo green). Fallback to a deep teal. */
+  --brand-accent: var(--accent, #2E7D6B);
+  /* Soft accent backgrounds (light/dark) */
+  --brand-accent-soft: rgba(46, 125, 107, 0.12);
+  --brand-accent-soft-strong: rgba(46, 125, 107, 0.18);
+  /* Monokai/黑金系 */
+  --gold: #e6db74;
+  --gold-soft: rgba(230, 219, 116, 0.12);
+  --gold-soft-strong: rgba(230, 219, 116, 0.2);
+}
+
+/* Headings */
+/* H1: brand-colored title (frontmatter/page title) */
+.container h1:first-of-type {
+  color: var(--brand-accent);
+}
+
+/* Hero title split coloring */
+/* Reset h1 color on hero to allow split-color spans to take effect */
+.hero .hero-title { color: inherit !important; }
+.hero .hero-title .hero-greeting { color: var(--brand-text, #111) !important; }
+.hero .hero-title .hero-brand { color: var(--brand-accent, #0e6a85) !important; }
+
+html[data-theme="dark"] .hero .hero-title .hero-greeting { color: #f8f8f2; }
+html[data-theme="dark"] .hero .hero-title .hero-brand { color: var(--gold); }
+
+/* H2: panel with soft background (has bottom tint and rounded corners) */
+.container h2 {
+  border: 1px solid rgba(46, 125, 107, 0.45);
+  border-radius: 8px;
+  padding: 10px 12px 10px 16px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--brand-text);
+}
+
+.container h2 a { color: var(--brand-accent, #0e6a85); }
+.container h2 a:visited { color: var(--brand-accent-visited, #094c60); }
+
+html[data-theme="dark"] .container h2 a { color: var(--gold); }
+html[data-theme="dark"] .container h2 a:visited { color: rgba(230,219,116,0.85); }
+
+.container h3 {
+  border-left: 4px solid var(--brand-accent);
+  border-bottom: 1px solid rgba(46, 125, 107, 0.25);
+  padding-left: 14px;
+  padding-bottom: 6px;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--brand-text);
+}
+
+.container h4 {
+  border-left: 3px solid var(--brand-accent);
+  border-bottom: 1px solid rgba(46, 125, 107, 0.2);
+  padding-left: 12px;
+  padding-bottom: 4px;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--brand-text);
+  font-weight: 500;
+}
+
+.container h5 {
+  border-left: 2px solid var(--brand-accent);
+  border-bottom: 1px solid rgba(46, 125, 107, 0.15);
+  padding-left: 10px;
+  padding-bottom: 3px;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--brand-text);
+  font-weight: 500;
+}
+
+.container h6 {
+  border-left: 1px solid var(--brand-accent);
+  border-bottom: 1px solid rgba(46, 125, 107, 0.1);
+  padding-left: 8px;
+  padding-bottom: 2px;
+  margin-top: 0.75rem;
+  margin-bottom: 0.3rem;
+  color: var(--brand-text);
+  font-weight: 500;
+}
+
+/* Blockquote: subtle panel */
+.container blockquote {
+  margin: 30px 0;
+  padding: 20px 25px;
+  border-left: 4px solid var(--brand-muted);
+  background-color: #f8f9fa;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+
+.container blockquote footer {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: var(--brand-muted);
+}
+
+/* Figure captions and table captions alignment/spacing */
+.container .figure-caption,
+.container .caption,
+.container figure figcaption,
+.container .table-caption,
+.container table caption,
+.container .quarto-float-caption-top,
+.container .quarto-float-caption {
+  text-align: left !important;
+  caption-side: top !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.75rem !important;
+  margin-top: 1.0rem !important;
+  color: var(--brand-muted) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Basic table readability tweaks without changing brand */
+.container table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2rem 0;
+  font-size: 0.95rem;
+}
+
+.container table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--brand-border);
+}
+
+.container table td {
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--brand-border);
+  vertical-align: top;
+}
+
+.container table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.container table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* Dark mode adjustments */
+html[data-theme="dark"] .container h2 {
+  border-color: rgba(230, 219, 116, 0.22);
+  color: #f8f8f2;
+}
+
+/* Heading link colors inside H2 */
+.container h2 a { color: var(--brand-accent, #0e6a85); }
+.container h2 a:visited { color: var(--brand-accent-visited, #094c60); }
+
+html[data-theme="dark"] .container h2 a { color: var(--gold); }
+html[data-theme="dark"] .container h2 a:visited { color: rgba(230,219,116,0.85); }
+
+html[data-theme="dark"] .container blockquote {
+  background-color: rgba(230, 219, 116, 0.08);
+  border-left-color: rgba(230, 219, 116, 0.6);
+}
+
+html[data-theme="dark"] .container .figure-caption,
+html[data-theme="dark"] .container .caption,
+html[data-theme="dark"] .container figure figcaption,
+html[data-theme="dark"] .container .table-caption,
+html[data-theme="dark"] .container table caption,
+html[data-theme="dark"] .container .quarto-float-caption-top,
+html[data-theme="dark"] .container .quarto-float-caption {
+  color: #c9ced6 !important;
+}
+
+html[data-theme="dark"] .container table th {
+  background-color: rgba(255,255,255,0.06);
+  border-bottom-color: rgba(230,219,116,0.22);
+}
+
+html[data-theme="dark"] .container table td {
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+html[data-theme="dark"] .container table tbody tr:nth-child(even) {
+  background-color: rgba(255,255,255,0.04);
+}
+
+html[data-theme="dark"] .container table tbody tr:hover {
+  background-color: rgba(255,255,255,0.08);
+}
+
+/* 暗色模式下标题色与边线统一到与链接接近（优先读取站点链接色变量） */
+html[data-theme="dark"] .container h1:first-of-type {
+  color: var(--brand-color, var(--link-color, var(--gold)));
+}
+
+html[data-theme="dark"] .container h3 {
+  border-left-color: var(--gold);
+  border-bottom-color: rgba(230, 219, 116, 0.22);
+  color: #f8f8f2;
+}
+
+html[data-theme="dark"] .container h4 {
+  border-left-color: var(--gold);
+  border-bottom-color: rgba(230, 219, 116, 0.18);
+  color: #f8f8f2;
+}
+
+html[data-theme="dark"] .container h5 {
+  border-left-color: var(--gold);
+  border-bottom-color: rgba(230, 219, 116, 0.14);
+  color: #f8f8f2;
+}
+
+html[data-theme="dark"] .container h6 {
+  border-left-color: var(--gold);
+  border-bottom-color: rgba(230, 219, 116, 0.10);
+  color: #f8f8f2;
+  font-weight: 500;
+}
+
+/* Link color unification limited to prose (light) */
+.prose a { color: var(--link-color, var(--brand-accent, #0e6a85)); }
+.prose a:visited { color: var(--visited-color, var(--brand-accent-visited, #094c60)); }
+/* Dark mode link colors remain黑金，仅在 prose 内作用 */
+html[data-theme="dark"] .prose a { color: var(--gold); }
+html[data-theme="dark"] .prose a:visited { color: rgba(230,219,116,0.85); }
