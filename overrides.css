@@ -714,6 +714,45 @@ body{ padding-bottom: var(--theme-footer-height); }
 :root[data-theme="dark"] .hero .search input[type="search"]::placeholder{
   color: rgba(245,241,230,0.55);
 }
+
+/* ===== Dark mode readability for content (global, all skins) ===== */
+/* Tables */
+:root[data-theme="dark"] .docs-content .prose table thead th,
+:root[data-theme="dark"] .prose table thead th{
+  background-color: rgba(255,255,255,0.06);
+  border-bottom-color: rgba(249,214,123,0.22);
+}
+:root[data-theme="dark"] .docs-content .prose table thead,
+:root[data-theme="dark"] .prose table thead{ background-color: rgba(255,255,255,0.04); }
+:root[data-theme="dark"] .docs-content .prose table td,
+:root[data-theme="dark"] .prose table td{ border-bottom-color: rgba(255,255,255,0.12); }
+:root[data-theme="dark"] .docs-content .prose table tbody tr:nth-child(even),
+:root[data-theme="dark"] .prose table tbody tr:nth-child(even){ background-color: rgba(255,255,255,0.04); }
+:root[data-theme="dark"] .docs-content .prose table tbody tr:hover,
+:root[data-theme="dark"] .prose table tbody tr:hover{ background-color: rgba(255,255,255,0.08); }
+
+/* Blockquotes */
+:root[data-theme="dark"] .docs-content .prose blockquote,
+:root[data-theme="dark"] .prose blockquote{
+  background-color: rgba(249,214,123,0.08);
+  border-left-color: rgba(249,214,123,0.60);
+}
+
+/* System dark fallback before data-theme is set */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]) .docs-content .prose table thead th,
+  :root:not([data-theme]) .prose table thead th{ background-color: rgba(255,255,255,0.06); border-bottom-color: rgba(249,214,123,0.22); }
+  :root:not([data-theme]) .docs-content .prose table thead,
+  :root:not([data-theme]) .prose table thead{ background-color: rgba(255,255,255,0.04); }
+  :root:not([data-theme]) .docs-content .prose table td,
+  :root:not([data-theme]) .prose table td{ border-bottom-color: rgba(255,255,255,0.12); }
+  :root:not([data-theme]) .docs-content .prose table tbody tr:nth-child(even),
+  :root:not([data-theme]) .prose table tbody tr:nth-child(even){ background-color: rgba(255,255,255,0.04); }
+  :root:not([data-theme]) .docs-content .prose table tbody tr:hover,
+  :root:not([data-theme]) .prose table tbody tr:hover{ background-color: rgba(255,255,255,0.08); }
+  :root:not([data-theme]) .docs-content .prose blockquote,
+  :root:not([data-theme]) .prose blockquote{ background-color: rgba(249,214,123,0.08); border-left-color: rgba(249,214,123,0.60); }
+}
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a.is-active,
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a.active,
 :root[data-theme="dark"] .nav-drawer-folder .docs-nav.in-drawer a[aria-current="page"],
