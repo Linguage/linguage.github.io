@@ -1,0 +1,70 @@
+/* Black-Gold Skin (scoped, switchable)
+   Apply only when <html class="skin-gold"> is present. */
+
+html.skin-gold {
+  --gold: #e6db74;
+  --deep-green: #0e6a85;
+  --deep-green-visited: #094c60;
+}
+
+/* Light mode mapping (manual light or system light) */
+html.skin-gold[data-theme="light"] {
+  --accent: var(--deep-green);
+  --accent-2: var(--deep-green);
+  --link-color: var(--deep-green);
+  --visited-color: var(--deep-green-visited);
+}
+@media (prefers-color-scheme: light){
+  html.skin-gold:not([data-theme]){
+    --accent: var(--deep-green);
+    --accent-2: var(--deep-green);
+    --link-color: var(--deep-green);
+    --visited-color: var(--deep-green-visited);
+  }
+}
+
+/* Dark mode mapping (manual dark or system dark) */
+html.skin-gold[data-theme="dark"] {
+  --accent: var(--gold);
+  --accent-2: var(--gold);
+  --link-color: var(--gold);
+  --visited-color: rgba(230,219,116,0.85);
+}
+@media (prefers-color-scheme: dark){
+  html.skin-gold:not([data-theme]){
+    --accent: var(--gold);
+    --accent-2: var(--gold);
+    --link-color: var(--gold);
+    --visited-color: rgba(230,219,116,0.85);
+  }
+}
+
+/* Hero split coloring (scoped to skin only) */
+html.skin-gold .hero .hero-title { color: inherit; }
+html.skin-gold .hero .hero-title .hero-greeting { color: var(--text, #111); }
+html.skin-gold .hero .hero-title .hero-brand { color: var(--link-color); }
+html.skin-gold[data-theme="dark"] .hero .hero-title .hero-greeting { color: #f8f8f2; }
+
+/* H1 in dark: keep white in content area */
+html.skin-gold[data-theme="dark"] .container h1 { color: #f8f8f2; }
+
+/* H2: no background, only subtle border; adapt border color per theme */
+html.skin-gold .container h2 {
+  border: 1px solid rgba(46,125,107,0.45);
+  border-radius: 8px;
+  padding: 10px 12px 10px 16px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+html.skin-gold[data-theme="dark"] .container h2 { border-color: rgba(230,219,116,0.22); color: #f8f8f2; }
+
+/* Links in content area only */
+html.skin-gold .prose a { color: var(--link-color); }
+html.skin-gold .prose a:visited { color: var(--visited-color); }
+
+/* Optional dark readability tweaks */
+html.skin-gold[data-theme="dark"] .container blockquote {
+  background-color: rgba(230,219,116,0.08);
+  border-left-color: rgba(230,219,116,0.6);
+}
+html.skin-gold[data-theme="dark"] .container table th { border-bottom-color: rgba(230,219,116,0.22); }
