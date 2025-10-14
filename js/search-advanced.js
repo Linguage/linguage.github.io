@@ -332,7 +332,7 @@
     const placeholder = mode === 'all' ? '全站搜索…' : (mode === 'posts' ? 'Posts 内部搜索…' : '当前页面搜索…');
     if (box) box.setAttribute('placeholder', placeholder);
 
-    const tabsHtml = '<div class="search-mode-head"'
+    const tabsHtml = '<div class="search-mode-head">'
       + '<div class="search-mode-label">搜索选项</div>'
       + '<div class="search-mode-tabs" role="tablist">'
       + `<button class="mode-tab ${mode==='all'?'is-active':''}" data-mode="all">全站</button>`

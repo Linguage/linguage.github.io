@@ -22,10 +22,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20251012-08" />
-  <link rel="stylesheet" href="/overrides.css?v=20251012-08" />
-  <link rel="stylesheet" href="/css/search.css?v=20251012-08" />
-  <link rel="stylesheet" href="/linkcard.css?v=20251012-08" />
+  <link rel="stylesheet" href="/styles.css?v=20251014-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251014-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251014-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251014-01" />
   
   
   
@@ -3180,7 +3180,7 @@ https://www.paulgraham.com/copy.html 复制你喜欢的东西 2006年7月
     </div>
     
     <section class="comments" aria-label="Comments">
-  <script src="https://giscus.app/client.js"
+  <div id="giscus_thread" class="giscus"
     data-repo="Linguage/Giscus"
     data-repo-id="R_kgDOLxA-eA"
     data-category="Announcements"
@@ -3190,10 +3190,42 @@ https://www.paulgraham.com/copy.html 复制你喜欢的东西 2006年7月
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
-    data-lang="zh-CN"
-    crossorigin="anonymous"
-    async>
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
   </script>
 </section>
   </article>
@@ -3289,16 +3321,16 @@ https://www.paulgraham.com/copy.html 复制你喜欢的东西 2006年7月
 
   
   
-  <script src="/script.js?v=20251012-08" defer></script>
+  <script src="/script.js?v=20251014-01" defer></script>
   <script>
-    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251012-08';
-    window.SEARCH_INDEX_URL = '\/index.json?v=20251012-08';
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251014-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251014-01';
   </script>
-  <script src="/js/search-advanced.js?v=20251012-08" defer></script>
+  <script src="/js/search-advanced.js?v=20251014-01" defer></script>
   
-  <script defer src="/js/table-7char.js?v=20251012-08"></script>
+  <script defer src="/js/table-7char.js?v=20251014-01"></script>
   
-  <script defer src="/js/linkcard.js?v=20251012-08"></script>
+  <script defer src="/js/linkcard.js?v=20251014-01"></script>
   
   
   
