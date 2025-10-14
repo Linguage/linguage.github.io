@@ -1,34 +1,42 @@
 /* Link Card basic styles */
 .link-card {
+  --lc-thumb: 84px;           /* 72/84/96 三档，响应式可覆盖 */
+  --lc-radius: 12px;
+  --lc-gap: 14px;
+  --lc-pad-y: 12px;
+  --lc-pad-x: 14px;
   position: relative;
   border: 1px solid rgba(0,0,0,.08);
-  border-radius: 12px;
-  overflow: hidden;
+  border-radius: var(--lc-radius);
   background: var(--surface, #fff);
-  max-width: 680px;
+  width: 100%;
   margin: 12px 0;
 }
 
 .link-card__inner {
   display: grid;
-  grid-template-columns: 30% 1fr;
-  gap: 12px;
-  padding: 12px;
+  grid-template-columns: var(--lc-thumb) 1fr;
+  gap: var(--lc-gap);
+  align-items: center;
+  padding: var(--lc-pad-y) var(--lc-pad-x);
   color: inherit;
   text-decoration: none;
 }
 
 .link-card__media {
-  width: 100%;
-  aspect-ratio: 1.2/1;
+  width: var(--lc-thumb);
+  height: var(--lc-thumb);
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: calc(var(--lc-radius) - 4px);
   background: #f3f4f6;
+  flex: 0 0 var(--lc-thumb);
 }
 .link-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .link-card__body { min-width: 0; }
@@ -40,19 +48,16 @@
 }
 .link-card__title {
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: var(--text, #111827);
+  line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .link-card__desc {
   color: #374151;
   font-size: 14px;
-  line-height: 1.4;
-  max-height: 3.2em;
-  overflow: hidden;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
 .link-card__fallback {
@@ -77,4 +82,10 @@
   :root:not([data-theme]) .link-card__site{ color: rgba(245,241,230,0.72); }
   :root:not([data-theme]) .link-card__title{ color: var(--text, #f5f1e6); }
   :root:not([data-theme]) .link-card__desc{ color: rgba(245,241,230,0.82); }
+}
+
+/* 极小屏改为竖排（可选） */
+@media (max-width: 360px) {
+  .link-card__inner { grid-template-columns: 1fr; }
+  .link-card__media { width: 100%; height: auto; aspect-ratio: 16/9; }
 }
