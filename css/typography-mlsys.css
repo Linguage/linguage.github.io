@@ -36,6 +36,13 @@ html[data-theme="dark"] .hero .hero-title .hero-brand { color: var(--gold); }
 /* Dark mode: ensure content H1 stays white (avoid green fallback) */
 html[data-theme="dark"] .container h1 { color: #f8f8f2; }
 
+/* Dark mode: prevent legacy theme variables from repainting to green
+   Rebind brand accent to gold within content/hero subtree only */
+html[data-theme="dark"] .container,
+html[data-theme="dark"] .hero {
+  --brand-accent: var(--gold);
+}
+
 /* H2: panel with soft background (has bottom tint and rounded corners) */
 .container h2 {
   border: 1px solid rgba(46, 125, 107, 0.45);
