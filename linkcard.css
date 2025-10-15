@@ -103,3 +103,14 @@
   .link-card__inner { grid-template-columns: 1fr; }
   .link-card__media { width: 100%; height: auto; aspect-ratio: 16/9; }
 }
+
+/* Ensure thumbnail fills box inside prose where global img rules set height:auto */
+.link-card .link-card__media img,
+.docs-content .prose .link-card__media img{
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
