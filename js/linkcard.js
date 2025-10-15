@@ -17,15 +17,16 @@
   }
 
   function createCard({ url, data }) {
-    const { title, description, publisher, image, logo, url: finalUrl } = data || {};
+    const { title, description, publisher, image, logo } = data || {};
     const a = document.createElement('a');
     a.className = 'link-card__inner';
-    a.href = finalUrl || url;
+    // Always prefer the original input URL to avoid being hijacked by stale canonical/og:url
+    a.href = url;
     a.target = '_blank';
     a.rel = 'noopener';
 
     const host = (() => {
-      try { return new URL(finalUrl || url).hostname; } catch { return url; }
+      try { return new URL(url).hostname; } catch { return url; }
     })();
 
     const media = document.createElement('div');
