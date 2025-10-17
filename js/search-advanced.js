@@ -382,11 +382,13 @@
       });
       list = parts.join('');
     } else {
+      const clampStyle = 'display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;white-space:normal;line-height:1.6;max-height:calc(1.6em * 2)';
+      const clampStyleMobile = clampStyle.replace(/2/g,'3');
+      const isMobile = window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
       list = vis.map((it, i)=>{
         const cls = 'search-item'+(i===activeIndex?' is-active':'');
         const snippet = buildSnippet(it, qWords);
-        const meta = [it.section, it.date].filter(Boolean).join(' · ');
-        return `<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="search-item-title">${highlight(it.title, qWords)}</div>          <div class="search-item-meta">${meta}</div>          ${snippet?`<div class="search-item-snippet">${snippet}</div>`:''}        </a>`;
+        return `<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="search-item-title">${highlight(it.title, qWords)}</div>          ${snippet?`<div class=\"search-snippet search-item-snippet\" style=\"${isMobile?clampStyleMobile:clampStyle}\">${snippet}</div>`:''}        </a>`;
       }).join('');
     }
     pop.insertAdjacentHTML('beforeend', header + `<div class="search-results">${list||'<div style="padding:12px;">未找到结果</div>'}</div>`);
@@ -584,6 +586,7 @@
     pop = $(POPOVER_ID);
     toggleBtn = $(TOGGLE_ID);
     backBtn = $(BACK_ID);
+    const pageBtn = document.getElementById('pageSearchBtn');
     dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
 
@@ -615,6 +618,20 @@
     // 绑定移动端按钮（仅 click，避免重复与竞态）
     if (toggleBtn){ toggleBtn.addEventListener('click', (e)=>{ dbg('toggle click'); e.preventDefault(); if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } openMobile(); }); }
     if (backBtn){ backBtn.addEventListener('click', (e)=>{ dbg('back click'); e.preventDefault(); closeMobile(); }); }
+
+    // 页内搜索按钮：跳转到搜索页面，并将当前输入作为 ?q= 传递
+    if (pageBtn){
+      pageBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        dbg('page search btn -> navigate');
+        try{
+          const q = (box && box.value) ? box.value.trim() : '';
+          const dest = new URL('/search/', document.baseURI);
+          if (q) dest.searchParams.set('q', q);
+          window.location.href = dest.toString();
+        }catch(_){ /* fallback */ window.location.href = '/search/'; }
+      });
+    }
 
     // 视口变化：放大到桌面时自动收起
     const mq = window.matchMedia('(min-width: 901px)');

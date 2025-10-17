@@ -33,9 +33,9 @@
     return new Fuse(docs, {
       includeScore: true,
       includeMatches: true,
-      threshold: 0.33,
+      threshold: 0.4,           // 稍微放宽，兼容中文单字检索
       ignoreLocation: true,
-      minMatchCharLength: 2,
+      minMatchCharLength: 1,    // 允许单字匹配（例如“黑”）
       // 优先 frontmatter（title/description/summary/tags/categories），内容次之
       keys: [
         { name: 'title', weight: 0.40 },
@@ -143,7 +143,8 @@
       const matches = r.matches || [];
       const q = getQuery();
       const lines = makeSnippets(doc, matches, q);
-      const body = lines.length ? lines.map(l=>`<div>${l}</div>`).join('') : '';
+      const snippet = lines.join(' … ');
+      const body = snippet ? `<div class="search-snippet">${snippet}</div>` : '';
       return `
         <div class="card" style="margin-bottom:12px;">
           <a href="${doc.url}" class="card-title">${doc.title}</a>

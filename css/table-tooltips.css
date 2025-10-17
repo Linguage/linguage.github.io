@@ -1,0 +1,82 @@
+/* Global table cell clamp tooltip styles */
+
+/* Only visualize tooltip when JS toggles the inline style to display:block */
+.table-tooltip{
+  position: fixed;
+  z-index: 1000;
+  display: none;
+  max-width: min(560px, 72vw);
+  max-height: min(64vh, 520px);
+  overflow: auto;
+  padding: 12px 14px;
+  background: var(--surface, #FCFBF9);
+  color: var(--text, #2E2A25);
+  border: 1px solid var(--border, #E6E3DC);
+  box-shadow: var(--shadow, 0 10px 20px rgba(20,16,12,.06));
+  border-radius: 10px;
+  line-height: 1.6;
+  -webkit-overflow-scrolling: touch;
+  pointer-events: auto;      /* 允许鼠标交互 */
+  user-select: text;         /* 允许选择复制 */
+}
+
+/* Dark mode compatibility using existing CSS vars if present */
+:root[data-theme="dark"] .table-tooltip{
+  background: var(--surface, #22211d);
+  color: var(--text, #f5f1e6);
+  border-color: var(--border, #35322a);
+  box-shadow: var(--shadow, 0 12px 28px rgba(0,0,0,0.55));
+}
+
+/* 内容内元素基础样式，使用主题色系 */
+.table-tooltip a{
+  color: var(--accent-2, #0F6DDC);
+  text-decoration: underline;
+}
+.table-tooltip a:hover{ filter: brightness(1.1); }
+.table-tooltip p{ margin: 0 0 8px; }
+.table-tooltip ul, .table-tooltip ol{ margin: 0 0 8px 1.2em; }
+.table-tooltip code{ background: rgba(0,0,0,0.06); padding: 0 4px; border-radius: 4px; }
+:root[data-theme="dark"] .table-tooltip code{ background: rgba(255,255,255,0.08); }
+
+/* Ensure the clamped container uses 3-line ellipsis behavior (already defined for .adaptive-table td .cell-inner) */
+/* For safety, apply globally to any .cell-inner inside table cells */
+table td .cell-inner{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.6;
+  max-height: calc(1.6em * 3);
+  text-overflow: ellipsis;
+}
+
+/* 被标记为 has-clamp 的单元格：显示为可点击 */
+td.has-clamp{ cursor: pointer; }
+
+/* 展开状态：移除三行限制，允许内容自然流动 */
+td.is-expanded > .cell-inner,
+td.is-expanded .cell-inner{
+  display: block;
+  -webkit-line-clamp: initial;
+  line-clamp: unset;
+  -webkit-box-orient: initial;
+  max-height: none;
+  overflow: visible;
+}
+
+/* 可选的微弱视觉提示（不突兀）*/
+td.has-clamp:not(.is-expanded){
+  position: relative;
+}
+td.has-clamp:not(.is-expanded)::after{
+  content: '';
+  position: absolute;
+  right: 4px; bottom: 4px;
+  width: 6px; height: 6px;
+  border-right: 1.5px solid var(--muted, #6B665F);
+  border-bottom: 1.5px solid var(--muted, #6B665F);
+  transform: rotate(-45deg);
+  opacity: .45;
+}

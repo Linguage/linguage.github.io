@@ -22,13 +22,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20251017-01" />
-  <link rel="stylesheet" href="/overrides.css?v=20251017-01" />
-  <link rel="stylesheet" href="/css/search.css?v=20251017-01" />
-  <link rel="stylesheet" href="/linkcard.css?v=20251017-01" />
-  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-01" />
+  <link rel="stylesheet" href="/styles.css?v=20251017-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251017-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251017-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251017-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-02" />
+  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251017-02" />
   
-  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-02" />
   
   
   
@@ -176,6 +177,7 @@
                aria-label="站内搜索"
                autocomplete="off"
                spellcheck="false" />
+        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
         <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
       </div>
       <a href="/post/" class="btn ghost posts-btn">Posts</a>
@@ -273,11 +275,16 @@
   .search-hero.compact .brand .title{font-size:20px;}
   .search-hero.compact .brand .logo{width:22px;height:22px;}
   /* 搜索框 */
-  .searchbar{width:100%;max-width:720px;display:flex;align-items:center;gap:8px;margin-top:18px;}
+  .searchbar{width:100%;max-width:var(--theme-content-max-width, 880px);display:flex;align-items:center;gap:8px;margin-top:18px;padding:0 16px;}
   .searchbar input#q{width:100%;padding:14px 16px;border:1px solid var(--border,#e5e7eb);border-radius:999px;outline:none;background:var(--surface,#fff);box-shadow:0 1px 2px rgba(0,0,0,.03);} 
-  .searchbar input#q:focus{border-color:var(--primary,#0ea5e9);box-shadow:0 0 0 3px rgba(14,165,233,.15);} 
+  /* 浅色：深绿边框与柔和荧光 */
+  :root[data-theme="light"] .searchbar input#q:focus,
+  :root:not([data-theme]) .searchbar input#q:focus{border-color:var(--accent,#1B5E4A);box-shadow:0 0 0 3px rgba(27,94,74,.18),0 8px 20px rgba(0,0,0,.06);} 
+  /* 深色：黑金边框，背景更暗 */
+  :root[data-theme="dark"] .searchbar input#q{background:rgba(40,39,35,.95);border-color:rgba(245,241,230,.12);color:var(--text,#f5f1e6);box-shadow:0 6px 18px rgba(0,0,0,.35);} 
+  :root[data-theme="dark"] .searchbar input#q:focus{border-color:var(--accent-2,#f9d67b);box-shadow:0 0 0 3px rgba(249,214,123,.25),0 8px 22px rgba(0,0,0,.45);} 
   /* 结果区域 */
-  #results{width:100%;max-width:720px;margin:24px auto 48px;}
+  #results{width:100%;max-width:var(--theme-content-max-width, 880px);margin:24px auto 48px;padding:0 16px;}
   .search-hero.compact + #results{margin-top:8px;}
   /* 结果摘要行数控制：桌面2行，移动3行（多余行隐藏） */
   @media (min-width:768px){
@@ -379,16 +386,17 @@
 
   
   
-  <script src="/script.js?v=20251017-01" defer></script>
+  <script src="/script.js?v=20251017-02" defer></script>
   <script>
-    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-01';
-    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-01';
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-02';
   </script>
-  <script src="/js/search-advanced.js?v=20251017-01" defer></script>
+  <script src="/js/search-advanced.js?v=20251017-02" defer></script>
   
-  <script defer src="/js/table-7char.js?v=20251017-01"></script>
+  <script defer src="/js/table-7char.js?v=20251017-02"></script>
   
-  <script defer src="/js/linkcard.js?v=20251017-01"></script>
+  <script defer src="/js/linkcard.js?v=20251017-02"></script>
+  <script defer src="/js/table-tooltips.js?v=20251017-02"></script>
   
   
   
