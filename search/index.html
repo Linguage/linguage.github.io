@@ -22,13 +22,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
-  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
-  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
-  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
-  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  <link rel="stylesheet" href="/styles.css?v=20251017-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251017-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-01" />
   
-  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-01" />
   
   
   
@@ -58,11 +58,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="website">
-<meta property="og:title" content="搜索"><meta property="og:description" content="在下方输入关键词并回车进行站内搜索。
-"><meta property="og:url" content="https://linguage.github.io/search/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="搜索"><meta property="og:description" content=" Linguista 回车开始搜索 "><meta property="og:url" content="https://linguage.github.io/search/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="搜索"><meta name="twitter:description" content="在下方输入关键词并回车进行站内搜索。
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="搜索"><meta name="twitter:description" content=" Linguista 回车开始搜索 "><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/search/">
 
   
@@ -262,11 +260,68 @@
           
         
         
-          <h1>Search</h1>
         
-        <div class="prose" style="color:var(--muted,#6B665F);">
-          请使用页面顶部的搜索框进行站内搜索。
-        </div>
+          <style>
+  /* 容器与布局 */
+  .search-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;transition:all .25s ease;}
+  .search-hero.compact{align-items:flex-start;min-height:auto;margin:8px 0 12px;}
+  /* 品牌 */
+  .brand{display:flex;align-items:center;gap:10px;user-select:none;}
+  .brand .logo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary,#0ea5e9),#7c3aed);box-shadow:0 2px 8px rgba(0,0,0,.08);} 
+  .brand .title{font-weight:800;font-size:40px;letter-spacing:.5px;color:var(--title, var(--text,#0f172a));}
+  .search-hero.compact .brand{position:sticky;top:8px;left:0;transform-origin:left top;gap:8px;}
+  .search-hero.compact .brand .title{font-size:20px;}
+  .search-hero.compact .brand .logo{width:22px;height:22px;}
+  /* 搜索框 */
+  .searchbar{width:100%;max-width:720px;display:flex;align-items:center;gap:8px;margin-top:18px;}
+  .searchbar input#q{width:100%;padding:14px 16px;border:1px solid var(--border,#e5e7eb);border-radius:999px;outline:none;background:var(--surface,#fff);box-shadow:0 1px 2px rgba(0,0,0,.03);} 
+  .searchbar input#q:focus{border-color:var(--primary,#0ea5e9);box-shadow:0 0 0 3px rgba(14,165,233,.15);} 
+  /* 结果区域 */
+  #results{width:100%;max-width:720px;margin:24px auto 48px;}
+  .search-hero.compact + #results{margin-top:8px;}
+  /* 结果摘要行数控制：桌面2行，移动3行（多余行隐藏） */
+  @media (min-width:768px){
+    .card-desc > div:nth-child(n+3){ display:none; }
+  }
+  @media (max-width:767.98px){
+    .card-desc > div:nth-child(n+4){ display:none; }
+  }
+  @media (max-width:640px){
+    .brand .title{font-size:28px}
+  }
+</style>
+<div id="searchHero" class="search-hero">
+  <div class="brand">
+    <img src="/favicon_io/android-chrome-192x192.png" alt="Linguista" class="logo" width="36" height="36" loading="lazy" decoding="async"/>
+    <div class="title">Linguista</div>
+  </div>
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="搜索关键词后回车" aria-label="站内搜索">
+  </div>
+  <div class="tips" style="margin-top:8px;color:var(--muted,#64748b);font-size:14px;">回车开始搜索</div>
+</div>
+<div id="results" class="prose"></div>
+<script>
+  (function(){
+    function getQ(){ try{ return new URLSearchParams(location.search).get('q')||'' }catch(_){ return '' } }
+    const hero = document.getElementById('searchHero');
+    const results = document.getElementById('results');
+    // 初始：若带 q 参数，则进入紧凑模式
+    if (getQ().trim()) hero.classList.add('compact');
+    // 观察结果区域内容变化：一旦有结果或开始检索，收缩头部
+    const mo = new MutationObserver(()=>{ if (!hero.classList.contains('compact')) hero.classList.add('compact'); });
+    if (results) mo.observe(results,{childList:true,subtree:false});
+    // 当用户在输入框内按下 Enter 时，search.js 会触发检索；这里同步收缩头部
+    const input = document.getElementById('q');
+    if (input){
+      input.addEventListener('keydown',(e)=>{ if (e.key==='Enter') hero.classList.add('compact'); });
+    }
+  })();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+<script src="/js/search.js"></script>
+
+        
       </div>
     </article>
     
@@ -324,16 +379,16 @@
 
   
   
-  <script src="/script.js?v=20251015-02" defer></script>
+  <script src="/script.js?v=20251017-01" defer></script>
   <script>
-    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
-    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-01';
   </script>
-  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  <script src="/js/search-advanced.js?v=20251017-01" defer></script>
   
-  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  <script defer src="/js/table-7char.js?v=20251017-01"></script>
   
-  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  <script defer src="/js/linkcard.js?v=20251017-01"></script>
   
   
   
