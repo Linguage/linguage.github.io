@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧"><meta property="og:description" content="在本模块中，我想与你分享一些构建 Agentic AI 工作流的实用技巧。我希望这些技巧能让你在构建这类系统时，比普通开发者效率高得多。"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧"><meta name="twitter:description" content="在本模块中，我想与你分享一些构建 Agentic AI 工作流的实用技巧。我希望这些技巧能让你在构建这类系统时，比普通开发者效率高得多。"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-01/">「吴恩达 Agentic AI 课程实录」模块1：Agentic AI简介</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-02/">「吴恩达 Agentic AI 课程实录」模块2：反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/">「吴恩达 Agentic AI 课程实录」模块3：工具使用</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/">「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-05/">「吴恩达 Agentic AI 课程实录」模块5：高度自主代理的设计模式</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/lecnotes-zh/" class="crumb-sec">课程视频实录-中译本</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-01/">「吴恩达 Agentic AI 课程实录」模块1：Agentic AI简介</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-02/">「吴恩达 Agentic AI 课程实录」模块2：反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/">「吴恩达 Agentic AI 课程实录」模块3：工具使用</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/">「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-05/">「吴恩达 Agentic AI 课程实录」模块5：高度自主代理的设计模式</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">吴恩达 | Google AI Studio</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="模块4构建-agentic-ai-的实用技巧andrew-ngagentic-ai">模块4：构建 Agentic AI 的实用技巧「Andrew Ng：Agentic AI」</h1>
+<h2 id="41-评估evals">4.1 评估（Evals）</h2>
+<p>在本模块中，我想与你分享一些构建 Agentic AI 工作流的实用技巧。我希望这些技巧能让你在构建这类系统时，比普通开发者效率高得多。</p>
+<p>我发现，在开发一个 Agentic AI 系统时，很难预先知道它在哪里能行得通，又在哪里效果不佳，因此也很难知道应该将精力集中在哪里。所以一个非常普遍的建议是，先尝试构建一个哪怕是粗糙的系统，这样你就可以试用它，观察它，看看在哪些地方它可能还没有达到你期望的效果，从而能够更有针对性地进行进一步的开发。相比之下，我发现花好几周时间坐着理论化和假设如何构建它，有时效果反而不佳。通常更好的做法是，以一种安全、合理、不泄露数据的方式，负责任地快速构建一些东西，这样你就可以观察它，然后利用这个初始原型来确定优先级并尝试进一步的开发。</p>
+<p>让我们从一个例子开始，看看在你构建了一个原型之后可能会发生什么。</p>
+<h4 id="示例一发票处理">示例一：发票处理</h4>
+<p>我想用我们之前见过的发票处理工作流作为第一个例子，其任务是提取四个必需的字段，然后将它们保存到数据库记录中。在构建了这样一个系统之后，你可能会做的一件事是，找几张发票，也许是10或20张，然后过一遍，看看它们的输出，看看哪些处理得好，是否有任何错误。</p>
+<p>假设你检查了20张发票，你发现第一张发票没问题，输出看起来是正确的。对于第二张发票，它可能混淆了发票日期（即发票开具的日期）和发票的到期日。在这个任务中，我们想要提取的是到期日，这样我们才能按时付款。于是，我可能会在一个文档或电子表格中记下，对于第二张发票，日期搞混了。也许第三、第四张发票都没问题，依此类推。但当我过完这些例子后，我发现有很多例子都混淆了日期。</p>
+<p>正是基于对这样一些例子的检查，在这种情况下，你可能会得出结论：一个常见的错误模式是，它在处理日期方面有困难。那样的话，你可能会考虑的一件事，当然是找出如何改进你的系统，让它能更好地提取到期日，但同时，也许也可以编写一个评估（eval）来衡量它提取到期日的准确性。相比之下，如果你发现它错误地提取了开票方地址——谁知道呢，也许你的开票方有不寻常的名字，所以它可能在处理开票方上遇到困难，特别是如果你有国际开票方，他们的名字甚至可能不全是英文字母——那么你可能会转而专注于为开票方地址构建一个评估。</p>
+<p>所以，为什么构建一个粗糙的系统并查看其输出如此有帮助，原因之一是，它甚至能帮助你决定，你最想投入精力去评估的是什么。</p>
+<p>现在，如果你已经决定要修改你的系统，以提高它提取发票到期日的准确性，那么为了跟踪进展，创建一个评估来衡量日期提取的准确性可能是个好主意。实现这一点可能有多种方法，但我来分享一下我可能会怎么做。</p>
+<p>为了创建一个测试集或评估集，我可能会找10到20张发票，并手动写下它们的到期日。所以，也许一张发票的到期日是2025年8月20日，我把它写成标准的“年-月-日”格式。然后，为了便于稍后在代码中进行评估，我可能会在给 LLM 的提示中告诉它，总是将到期日格式化为这种“年-月-日”的格式。这样，我就可以编写代码来提取 LLM 输出的那个日期，也就是到期日，因为那是我们关心的唯一日期。这是一个正则表达式，用于模式匹配，你知道的，四位数的年份，两位数的月份，两位数的日期，然后把它提取出来。接着我就可以直接编写代码来测试提取出的日期是否等于实际日期，也就是我写下的标准答案。</p>
+<p>所以，有了一个包含大约20张发票的评估集，我就可以进行构建和修改，看看随着我调整提示或系统的其他部分，它正确提取日期的百分比是否在希望中上升。</p>
+<p>总结一下我们到目前为止看到的内容：我们构建一个系统，然后查看输出以发现它可能表现不佳的地方，比如到期日错误。然后，为了推动对这个重要输出的改进，我们建立一个小型的评估，比如说只有20个例子，来帮助我们跟踪进展。这让我可以回头去调整提示，尝试不同的算法等等，看看我是否能提升“到期日准确性”这个指标。这就是改进一个 Agentic AI 工作流通常的感觉：查看输出，看哪里错了，如果你知道怎么修复，就直接修复它。但如果你需要一个更长的改进过程，那就建立一个评估，并用它来推动进一步的开发。</p>
+<p>另外需要考虑的一件事是，如果工作了一段时间后，你认为最初的那20个例子不够好，也许它们没有覆盖你想要的所有情况，或者20个例子实在太少，那么你可以随时向评估集中添加更多的例子，以确保它能更好地反映你个人对于系统性能是否足够满意的判断。</p>
+<h4 id="示例二营销文案助手">示例二：营销文案助手</h4>
+<p>这只是一个例子。对于第二个例子，让我们来看构建一个用于为 Instagram 撰写标题的营销文案助手。为了保持简洁，假设我们的营销团队告诉我们，他们希望标题最多不超过10个单词。所以我们会有一张产品图片，比如说一副我们想推广的太阳镜，然后有一个用户查询，比如“请写一个标题来销售这副太阳镜”，接着让一个 LLM 或大型多模态模型来分析图片和查询，并生成对太阳镜的描述。</p>
+<p>一个营销文案助手可能会出错的方式有很多种，但假设你看了输出后发现，生成的文案或文本大体上听起来还行，但有时就是太长了。对于太阳镜的输入，它生成了17个词；对于咖啡机，没问题；对于时尚夹克，没问题；对于蓝衬衫，14个词；对于搅拌机，11个词。所以看起来在这个例子中，LLM 在遵守长度准则方面有困难。</p>
+<p>再次强调，一个营销文案助手可能会出错的地方有很多。但如果你发现它在输出的长度上挣扎，那么你可能会构建一个评估来跟踪这个问题，以便你能做出改进，并确保它在遵守长度准则方面做得越来越好。</p>
+<p>所以，为了创建一个评估来衡量文本长度，你可能会创建一个测试任务集，比如推广一副太阳镜、一台咖啡机等等，也许创建10到20个例子。然后，你会让你的系统处理每一个任务，并编写代码来测量输出的单词数。这是测量一段文本单词数的 Python 代码。最后，你会将生成文本的长度与10个单词的目标限制进行比较。所以，如果单词数小于等于10，那么正确数就加一。</p>
+<p>这个例子与之前的发票处理例子的一个区别是，这里没有每个样本的标准答案。目标就是10，对每个例子都一样。相比之下，对于发票处理的例子，我们必须为每个样本生成一个自定义的目标标签，即发票的正确到期日，然后我们用这个每个样本的标准答案来测试输出。</p>
+<p>我知道我用了一个非常简单的工作流来生成这些标题，但这类评估也可以应用于更复杂的生成工作流。</p>
+<h4 id="示例三研究代理">示例三：研究代理</h4>
+<p>让我谈谈最后一个例子，我们将重温我们一直在研究的研究代理。如果你查看研究代理在不同输入提示下的输出，假设当你要求它写一篇关于黑洞科学最新突破的文章时，你发现它遗漏了一些备受瞩目且新闻报道很多的研究成果。这是一个不理想的结果。或者当你要求它研究在西雅图租房与买房的对比时，它似乎做得很好。或者关于用机器人收割水果，嗯，它没有提到一家领先的设备公司。</p>
+<p>基于这个评估，看起来它有时会遗漏一些人类专家作者会捕捉到的非常重要的观点。于是，我会创建一个评估来衡量它捕捉到最重要观点的频率。</p>
+<p>例如，你可能会想出一些关于黑洞、机器人收割等主题的示例提示。对于每一个主题，都想出，比如说，三到五个“黄金标准”的讨论要点。请注意，这里我们确实有每个样本的标注，因为“黄金标准”的谈话要点，也就是最重要的谈话要点，对于每个例子都是不同的。</p>
+<p>有了这些标准答案的标注，你接下来可能会使用一个“LLM作为评判者”（LLM-as-a-judge）来计算提到了多少个“黄金标准”的谈话要点。一个示例提示可能是：“请确定所提供的文章中出现了五个‘黄金标准’谈话要点中的多少个。” 你会提供提示、文章文本、黄金标准要点等等，然后让它返回一个 JSON 对象，其中包含一个从0到5的分数，以及一个解释。这让你能为你评估集中的每个提示得到一个分数。</p>
+<p>在这个例子中，我使用 LLM 作为评判者来计算提到了多少个谈话要点，因为谈论这些要点的方式多种多样，所以使用正则表达式或简单的模式匹配代码可能效果不佳。这就是为什么你可能会使用 LLM 作为评判者，并将其视为一个稍微主观一些的评估，用来判断比如说，事件视界是否被充分提及。</p>
+<p>这是你如何构建评估的第三个例子。</p>
+<h4 id="评估的两个维度">评估的两个维度</h4>
+<p>为了思考如何为你的应用构建评估，你构建的评估通常必须反映你在应用中看到或担心的任何可能出错的地方。事实证明，广义上讲，评估有两个维度。</p>
+<ul>
+<li><strong>评估方法</strong>：在上面的轴上，是你评估输出的方式。在某些情况下，你通过编写代码进行客观评估；有时你使用 LLM 作为评判者进行更主观的评估。</li>
+<li><strong>标准答案</strong>：在另一个轴上，是看你是否有每个样本的标准答案。
+<ul>
+<li>对于检查发票日期提取，我们编写代码来评估是否得到了实际日期，这有每个样本的标准答案，因为每张发票的实际日期都不同。</li>
+<li>但在我们检查营销文案长度的例子中，每个例子的长度限制都是10，所以那个问题没有每个样本的标准答案。</li>
+<li>相比之下，对于计算“黄金标准”谈话要点，则有每个样本的标准答案，因为每篇文章都有不同的重要谈话要点。但我们使用 LLM 作为评判者来阅读文章，看那些主题是否被充分提及，因为提及这些谈话要点的方式太多了。</li>
+<li>最后一个象限是“LLM作为评判者”且“没有每个样本的标准答案”。我们在用评分标准给图表打分时看到了这一点。这是当我们看咖啡机销售数据可视化时，如果你要求它根据一个评分标准（比如是否有清晰的坐标轴标签等）来创建图表，那么每个图表都使用相同的评分标准，那将是使用 LLM 作为评判者但没有每个样本的标准答案。</li>
+</ul>
+</li>
+</ul>
+<p>我发现这个二乘二的网格，可能是思考你可能为你的应用构建的不同类型评估的一种有用方式。顺便说一下，这些有时也被称为端到端评估，因为一端是输入端，即用户查询提示，另一端是最终输出。所以所有这些都是对整个端到端系统性能的评估。</p>
+<h4 id="总结与技巧">总结与技巧</h4>
+<p>在结束这个视频之前，我想分享一些设计端到端评估的最后几点技巧。</p>
+<ul>
+<li><strong>快速开始</strong>：首先，快速粗糙的评估对于起步来说是可以的。我感觉我看到相当多的团队几乎陷入瘫痪，因为他们认为构建评估是一项需要数周的大工程，所以他们花了比理想中更长的时间才开始。但我认为，就像你迭代一个 agentic 工作流并随着时间的推移让它变得更好一样，你也应该计划着迭代你的评估。所以，如果你先用10、15、20个例子作为你评估的初稿，写一些代码或者尝试提示一个 LLM 作为评判者，总之先做点什么，得到一些可以补充人眼观察输出的指标，然后结合这两者来驱动你的决策。</li>
+<li><strong>迭代改进评估</strong>：随着评估随着时间的推移变得越来越复杂，你就可以把越来越多的信任转移到基于指标的评估上，而不是每次调整某个地方的提示时都需要通读数百个输出。在你经历这个过程时，你很可能也会找到不断改进你评估的方法。所以，如果你一开始有20个例子，你可能会遇到你的评估无法捕捉到你关于哪个系统更好的判断的情况。也许你更新了系统，你看了看觉得这个肯定好多了，但你的评估却未能显示新系统取得了更高的分数。如果是这样，这通常是一个机会，去收集一个更大的评估集，或者改变你评估输出的方式，让它更好地与你关于哪个系统实际上工作得更好的判断相对应。所以你的评估会随着时间的推移而变得更好。</li>
+<li><strong>从评估中获取灵感</strong>：最后，关于利用评估来获得下一步工作灵感方面，许多 agentic 工作流被用来自动化，比如说，人类可以完成的任务。所以我发现对于这类应用，我会寻找那些性能比人类专家差的地方，这通常会给我灵感，让我知道该把精力集中在哪里，或者我应该让我的 agentic 工作流在哪些类型的例子上做得比现在更好。</li>
+</ul>
+<p>我希望在你构建了那个粗糙的系统之后，你能思考一下，在什么时候开始加入一些评估来跟踪系统潜在的有问题的方面是有意义的，并且这会帮助你推动系统的改进。除了帮助你推动改进之外，事实证明，有一种评估方法可以帮助你精确地定位，在你整个 agentic 系统中，哪些组件最值得你关注。因为 agentic 系统通常有很多部分，那么花时间去改进哪个部分会最有成效呢？事实证明，能够做好这一点是推动 agentic 工作流高效开发的一项非常重要的技能。在下一个视频中，我想深入探讨这个主题。那么，让我们进入下一个视频。</p>
+<h2 id="42-错误分析与确定下一步的优先级">4.2 错误分析与确定下一步的优先级</h2>
+<p>假设你已经构建了一个 agentic 工作流，但它的效果还没有达到你的期望——顺便说一句，这在我身上经常发生，我常常会构建一个粗糙的系统，而它的表现不如我所愿。问题是，你应该把精力集中在哪里来让它变得更好？事实证明，agentic 工作流有许多不同的组件，而改进某些组件可能比改进另一些组件要有成果得多。所以，你选择将精力集中在哪里的能力，对你改进系统的速度有着巨大的影响。</p>
+<p>我发现，预测一个团队效率和能力高低的最大因素之一，就是他们是否能够推动一个规范的错误分析流程，来告诉你应该将精力集中在哪里。所以，这是一项重要的技能。让我们来看一看如何进行错误分析。</p>
+<p>在研究代理的例子中，我们在上一个视频中进行了一次错误分析，我们看到它在撰写某些主题的文章时，常常遗漏了人类专家会提到的关键点。所以，现在你发现了这个问题——有时会遗漏关键点——你怎么知道该做什么呢？</p>
+<p>事实证明，在这个工作流的众多不同步骤中，几乎任何一步都可能导致“遗漏关键点”这个问题。例如，也许是第一个 LLM 生成的搜索词不够好，所以它搜索了错误的东西，没有发现正确的文章。或者，也许你用的网络搜索引擎本身就不太好。市面上有多个网络搜索引擎，实际上我自己在我的基础应用中倾向于使用的就有好几个，有些比其他的要好。或者，也许网络搜索没问题，但是当我们把网络搜索结果的列表给 LLM 时，它可能在选择最好的几个来下载方面做得不好。网页获取在这个案例中问题可能较少，假设你能准确地获取网页内容。但在把网页内容扔给 LLM 后，也许 LLM 忽略了我们获取的文档中的一些要点。</p>
+<p>事实证明，有些团队有时看到这种情况，会凭直觉选择其中一个组件来改进，有时这能奏效，但有时这会导致数月的工作却在系统整体性能上收效甚微。所以，与其凭直觉来决定在这么多组件中改进哪一个，我认为进行错误分析以更好地理解工作流中的每一步，要好得多。</p>
+<p>特别是，我经常会检查“轨迹”（traces），也就是每一步之后的中间输出，以便了解哪个组件的性能不佳——比如说，比人类专家在类似情况下会做的要差得多——因为这指出了哪里可能有安全改进的空间。</p>
+<p>让我们来看一个例子。如果我们要求研究代理写一篇关于黑洞科学最新新闻的文章，也许它输出的搜索词是这样的：“黑洞理论 爱因斯坦”、“事件视界望远镜 射电”等等。然后我会让一个人类专家看看这些，判断这些对于撰写关于黑洞科学最新发现的文章来说，是不是合理的网络搜索词。也许在这种情况下，专家说，这些网络搜索看起来还行，和我作为人类会做的差不多。</p>
+<p>然后，我查看网络搜索的输出，看看返回的 URL。网络搜索会返回许多不同的网页，也许返回的一个网页是来自“天文小天才新闻”的《一名小学生声称解开了一个30年之久的黑洞之谜》。这看起来不像是一篇最严谨的、经过同行评审的文章。也许检查完网络搜索返回的所有文章后，你得出结论，它返回了太多的博客或大众媒体类型的文章，而没有足够多的科学文章来撰写你所期望质量的研究报告。</p>
+<p>最好也检查一下其他步骤的输出。也许 LLM 尽其所能找到了最好的五个来源，结果你得到的是“天文小天才新闻”、“太空机器人2000”、“太空趣闻”等等。正是通过查看这些中间输出，你才能对每一步输出的质量有一个概念。</p>
+<p>介绍一些术语，所有中间步骤的整体输出集合通常被称为这次代理运行的“轨迹”（trace）。你在其他资料中可能还会看到一个术语，单一步骤的输出有时被称为“跨度”（span）。这个术语来自计算机可观测性文献，人们试图弄清楚计算机在做什么。在本课程中，我用“轨迹”这个词比较多，用“跨度”这个词会少一些，但你可能在网上看到这两个术语。</p>
+<p>所以，通过阅读轨迹，你开始对哪里可能是最有问题的组件有了一个非正式的感觉。为了更系统地做到这一点，将你的注意力集中在系统表现不佳的案例上是很有用的。也许它写的一些文章很好，输出完全令人满意，那么我会把那些放在一边，试着找出一些例子，在这些例子中，由于某种原因，你的研究代理的最终输出不尽如人意，然后只关注那些例子。这就是我们称之为错误分析的原因之一，因为我们想关注系统出错的案例，我们想通过分析来找出哪些组件对研究代理输出的错误负有最大责任。</p>
+<p>为了让这个过程更严谨，而不是仅仅通过阅读来获得一个非正式的感觉，你实际上可以建立一个电子表格，来更明确地统计错误出在哪里。我所说的“错误”，指的是当一个步骤输出的东西，其表现显著差于一个人类专家在给定类似输入时可能会给出的结果。我经常自己用电子表格来做这件事。</p>
+<p>所以，我可能会建立一个这样的电子表格。对于第一个查询，我会看“黑洞科学的最新发展”。我看到搜索结果中有太多的博客文章、大众媒体文章，没有足够的科学论文。然后基于此，确实，最好的五个来源也不怎么样。但在这里我不会说选择最好的五个来源这一步做得不好，因为如果输入给 LLM 用于选择最好五个来源的都是不严谨的文章，那么我不能责怪这一步没有选出更好的文章，因为它已经尽力了，或者说，在给定同样的选择范围下，它做得和任何人类可能做的差不多好。</p>
+<p>然后你可能会为不同的提示重复这个过程。“在西雅图租房与买房”，也许它错过了一个知名的博客。“用机器人收割水果”，也许在这种情况下，我们看了看然后说：“哦，搜索词太笼统了”，然后搜索结果也不好，等等。然后基于此，我会在我的电子表格中统计我观察到不同组件出错的频率。</p>
+<p>所以在这个例子中，我对搜索词不满意的比例是5%，但我对搜索结果不满意的比例是45%。如果我真的看到这个结果，我可能会仔细检查一下搜索词，确保搜索词真的没问题，并且搜索词选择不佳不是导致搜索结果差的原因。但如果我真的认为搜索词没问题，但搜索结果不行，那么我就会仔细看看我正在使用的网络搜索引擎，以及是否有任何参数可以调整，让它返回更相关或更高质量的结果。正是这类分析告诉我，在这个例子中，我真的应该把注意力集中在修复搜索结果上，而不是这个 agentic 工作流的其他组件上。</p>
+<p>在结束这个视频之前，我发现养成查看轨迹的习惯是很有用的。在你构建了一个 agentic 工作流之后，去看看中间的输出，感受一下它在每一步实际上在做什么，这样你就能更好地理解不同步骤的表现是好是坏。而一个更系统的错误分析，也许用电子表格来做，可以让你收集统计数据或计算出哪个组件最常表现不佳。所以，通过查看哪些组件表现不佳，以及我有哪些能有效改进不同组件的想法，这会让你能够优先处理哪个组件。也许一个组件有问题，但我没有任何改进它的想法，那这可能意味着不要把它放在那么高的优先级。但如果有一个组件产生了很多错误，并且我有如何改进它的想法，那么这将是优先处理该组件的一个很好的理由。</p>
+<p>我只想强调，错误分析对于你决定将精力集中在哪里，是一个非常有帮助的输出。因为在任何复杂的系统中，你可以做的事情太多了。很容易就选择一件事去做，然后花上几周甚至几个月，结果后来发现那并没有给你的整个系统带来性能上的提升。所以，利用错误分析来决定将精力集中在哪里，对于提高你的效率来说，被证明是极其有用的。</p>
+<p>在这个视频中，我们用研究代理的例子讲解了错误分析，但我认为错误分析是如此重要的一个主题，我想和你再看一些其他的例子。那么，让我们进入下一个视频，在那里我们将看到更多的错误分析例子。</p>
+<h2 id="43-更多错误分析示例">4.3 更多错误分析示例</h2>
+<p>我发现，对于许多开发者来说，只有通过看多个例子，你才能练习并磨练出如何进行错误分析的直觉。所以，让我们再看两个例子，我们将看看发票处理和回应客户邮件。</p>
+<h4 id="示例一发票处理-1">示例一：发票处理</h4>
+<p>这是我们用于发票处理的工作流，我们有一个清晰的流程，让一个 agentic 工作流遵循，即识别四个必需的字段，然后将它们记录在数据库中。在本模块的第一个视频的例子中，我们说过系统经常在发票的到期日上犯错。所以我们可以进行错误分析，试图找出这可能是由哪个组件造成的。</p>
+<p>例如，是 PDF 到文本的转换出了错，还是 LLM 从 PDF 到文本组件的输出中提取了错误的日期？</p>
+<p>为了进行错误分析，我会尝试找一些提取日期不正确的例子。和上一个视频一样，关注那些性能不佳的例子是很有用的，这样可以试图找出那些例子出了什么问题。所以，忽略那些日期正确的例子，试着找10到100张日期错误的发票。然后我会仔细检查，试图弄清楚问题的原因是 PDF 到文本转换把日期搞错了，还是 LLM 在给定 PDF 到文本输出的情况下，提取了错误的日期。</p>
+<p>所以，你可能会建立一个像这样的小电子表格，过一遍20张发票，然后统计一下，PDF 到文本转换错误地提取了日期或文本，以至于即使是人类也无法判断到期日是什么的情况有多频繁，相对于 PDF 到文本看起来足够好，但 LLM 在被要求提取日期时，不知何故提取了错误的日期，比如可能把发票日期识别成了发票的到期日。</p>
+<p>在这个例子中，看起来 LLM 的数据提取导致了更多的错误。这告诉我，也许我应该把精力集中在 LLM 数据提取组件上，而不是 PDF 到文本转换上。这一点很重要，因为如果没有这个错误分析，我可以想象一些团队会花上几周甚至几个月的时间来调整 PDF 到文本转换，结果在那个时间之后才发现，这对最终系统的性能并没有产生多大影响。哦，顺便说一下，底部的这些百分比加起来可以不等于100%，因为这些错误不是相互排斥的。</p>
+<h4 id="示例二回应客户邮件">示例二：回应客户邮件</h4>
+<p>最后一个例子，让我们回到用于回应客户邮件的 agentic 工作流。在这个工作流中，LLM 在收到像这样询问订单的客户邮件后，会提取订单详情，从数据库中获取信息，然后起草一份供人工审查的回复。</p>
+<p>同样，我会找一些例子，在这些例子中，由于某种原因，最终的输出不尽人人意，然后试图找出哪里出了问题。一些可能出错的地方包括：</p>
+<ul>
+<li>也许 LLM 写了一个不正确的数据库查询，所以当查询发送到数据库时，它没有成功地提取出客户信息。</li>
+<li>也许数据库的数据本身是损坏的，所以即使 LLM 写了一个完全合适的数据库查询（也许是用 SQL 或其他查询语言），数据库也没有正确的信息。</li>
+<li>也许在给定关于客户订单的正确信息后，LLM 写的邮件不知何故不太对劲。</li>
+</ul>
+<p>所以，我会再次查看几封最终输出不理想的邮件，并试图找出哪里出了问题。也许在第一封邮件中，我们发现 LLM 在查询中请求了错误的表，也就是在创建数据库查询的方式上请求了错误的数据。在第二封邮件中，也许我发现数据库实际上有一个错误，并且在给定那个输入的情况下，LLM 不知何故也写了一封不太理想的邮件，等等。</p>
+<p>在这个例子中，在过了一遍许多邮件之后，也许我发现最常见的错误是 LLM 编写数据库查询（比如说 SQL 查询）以获取相关信息的方式。而数据库大部分是正确的，尽管那里有一点数据错误。并且 LLM 写邮件的方式也有一些错误，也许它在30%的情况下写得不太对。</p>
+<p>这告诉我，最值得我花力气改进的，可能是 LLM 编写查询的方式。第二重要的大概是改进我如何编写最终邮件的提示。像这样的分析可以告诉你，75% 的错误——也许系统在很多事情上都做对了，但在所有它做得不太对的事情中，75% 的问题都来自数据库查询。这是极其有用的信息，可以告诉你应该把精力集中在哪里。</p>
+<p>当我在开发 Agentic AI 工作流时，我经常会使用这种类型的错误分析来告诉我下一步应该把注意力集中在什么上。当你做出了那个决定后，事实证明，为了补充我们在本模块前面谈到的端到端评估，通常评估的不仅仅是整个端到端系统，还有单个组件，这样做是很有用的。因为这可以让你更有效地改进那个，比如说，错误分析让你决定把注意力集中在其上的组件。</p>
+<p>所以，让我们进入下一个视频，学习关于组件级评估。</p>
+<h2 id="44-组件级评估">4.4 组件级评估</h2>
+<p>让我们来看一看如何构建和使用组件级评估。</p>
+<p>在我们研究代理的例子中，我们说过研究代理有时会遗漏关键点。但如果问题出在网络搜索上，如果我们每次更换网络搜索引擎，都需要重新运行整个工作流，那虽然能给我们一个很好的性能指标，但那种评估的成本很高。此外，这是一个相当复杂的工作流，所以即使网络搜索让事情好了一点点，也许其他组件的随机性引入的噪音，会使得更难看出网络搜索质量的微小改进。</p>
+<p>所以，作为只使用端到端评估的替代方案，我会考虑构建一个专门用来衡量网络搜索组件质量的评估。例如，要衡量网络搜索结果的质量，你可能会创建一个“黄金标准”网络资源列表。对于少数几个查询，让一个专家说：“这些是最权威的来源，如果有人在网上搜索，他们真的应该找到这些网页，或者这些网页中的任何一个都是好的。” 然后你可以编写代码来捕捉网络搜索输出中有多少与“黄金标准”网络资源相对应。信息检索领域的标准指标，F1 分数——如果你不知道那是什么意思，别担心细节——但有一些标准指标可以让你衡量，在网络搜索返回的一系列网页中，有多少与专家确定的“黄金标准”网络资源重叠。</p>
+<p>有了这个，你现在就有了评估网络搜索组件质量的方法。所以，当你改变你如何进行网络搜索的参数或超参数时，比如当你换入换出不同的网络搜索引擎——也许试试 Google、Bing、DuckDuckGo、Tavily 和 You.com 等等——或者当你改变结果数量，或者当你改变你要求搜索引擎搜索的日期范围时，这可以让你非常迅速地判断网络搜索组件的质量是否在提升，并且能做出更具增量性的改进。</p>
+<p>当然，在你宣布工作完成之前，最好还是运行一次端到端评估，以确保在调整了你的网络搜索系统一段时间后，你确实在提升整个系统的性能。但在一次次调整这些超参数的过程中，通过只评估一个组件，而不是每次都需要重新运行端到端评估，你可以做得更有效率得多。</p>
+<p>所以，组件级评估可以为特定的错误提供更清晰的信号。它实际上能让你知道你是否在改进网络搜索组件或你正在处理的任何组件，并避免整个端到端系统的复杂性所带来的噪音。如果你在一个项目中，有不同的团队专注于不同的组件，那么让一个团队只拥有自己非常明确的优化指标，而无需担心所有其他组件，也可能更有效率。这让团队能够更快地处理一个更小、更有针对性的问题。</p>
+<p>所以，当你决定要改进一个组件时，可以考虑一下是否值得建立一个组件级别的评估，以及这是否能让你在提升该组件性能方面走得更快。现在，你可能在想的一件事是，如果你决定要改进一个组件，你到底该如何让那个组件工作得更好呢？让我们在下一个视频中看一些这方面的例子。</p>
+<h2 id="45-如何解决你发现的问题">4.5 如何解决你发现的问题</h2>
+<p>一个 agentic 工作流可能包含许多不同类型的组件，因此你用于改进不同组件的工具也会大相径庭。但我想与你分享一些我看到的通用模式。</p>
+<h4 id="改进非-llm-组件">改进非 LLM 组件</h4>
+<p>你 agentic 工作流中的一些组件将是非基于 LLM 的，所以它可能是像网络搜索引擎或文本检索组件（如果那是你 RAG 或检索增强生成系统的一部分），或者是用于代码执行的东西，或者也许是一个单独训练的机器学习模型，比如用于语音识别或在图片中检测人等等。有时这些非基于 LLM 的组件会有你可以调整的参数或超参数。</p>
+<ul>
+<li><strong>网络搜索</strong>：你可以调整像结果数量或你要求搜索引擎考虑的日期范围这样的东西。</li>
+<li><strong>RAG 文本检索</strong>：你可能会改变决定哪些文本片段被认为是相似的相似度阈值，或者块大小（chunk size）。RAG 系统通常会将文本切成更小的块进行匹配，所以这些都是你可以使用的主要超参数。</li>
+<li><strong>人体检测</strong>：你可能会改变检测阈值，即它的敏感度以及它有多大可能宣布发现了人，这将在误报和漏报之间进行权衡。</li>
+</ul>
+<p>如果你没有跟上我刚才讨论的所有超参数的细节，别担心。细节不是那么重要，但通常组件都会有你可以调整的参数。当然，你也可以尝试替换组件。我在我的 agentic 工作流中经常这样做，我会换入不同的 RAG 搜索引擎或换入不同的 RAG 提供商等等，只是为了看看是否有其他提供商可能效果更好。由于非基于 LLM 的组件的多样性，我认为如何改进它的技术会更加多样化，并且取决于该组件具体在做什么。</p>
+<h4 id="改进-llm-组件">改进 LLM 组件</h4>
+<p>对于一个基于 LLM 的组件，这里有一些你可能会考虑的选项。</p>
+<ul>
+<li><strong>改进你的提示</strong>：一个方法是尝试改进你的提示。也许可以尝试添加更明确的指令。或者，如果你知道什么是少样本提示（few-shot prompting），那指的是添加一个或多个具体的例子，即一个输入示例和一个期望的输出。所以，少样本提示（你也可以从一些深度学习的短期课程中学到）是一种技术，可以给你的 LLM 一些例子，希望能帮助它写出性能更好的输出。</li>
+<li><strong>尝试不同的 LLM</strong>：你也可以尝试一个不同的 LLM。使用 AI Suite 或其他工具，尝试多个 LLM 可能相当容易，然后你可以用评估来为你的应用挑选最好的模型。</li>
+<li><strong>分解任务</strong>：有时，如果一个步骤对于一个 LLM 来说太复杂，你可以考虑是否要将任务分解成更小的步骤。或者也许把它分解成一个生成步骤和一个反思步骤。但更普遍的是，如果你在一个步骤内有非常复杂的指令，也许单个 LLM 很难遵循所有这些指令。你可以把任务分解成更小的步骤，这样可能更容易让，比如说，连续两三次的调用准确地执行。</li>
+<li><strong>微调模型</strong>：最后，当其他方法效果不够好时，可以考虑微调一个模型。这通常比其他选项要复杂得多，所以在开发者实现的时间成本上也可能昂贵得多。但如果你有一些数据可以用来微调一个 LLM，那可能会给你带来比单独使用提示好得多的性能。所以我倾向于在真正用尽了其他选项之前，不去微调模型，因为微调通常相当复杂。但对于一些应用，在尝试了所有其他方法后，如果我仍然停留在，比如说，90% 或 95% 的性能，而我真的需要挤出最后那几个百分点的改进，那么有时微调我自己的定制模型是一个很好的技术。我倾向于只在更成熟的应用上这样做，因为它成本很高。</li>
+</ul>
+<h4 id="磨练你对-llm-的直觉">磨练你对 LLM 的直觉</h4>
+<p>事实证明，当你在尝试选择一个 LLM 来使用时，如果你对不同大型语言模型的智能程度或能力有很好的直觉，这对你作为开发者来说是非常有帮助的。一种方法就是尝试很多模型，看看哪个效果最好。但我发现，随着我与不同模型的合作，我开始磨练出关于哪些模型对哪些类型的任务效果最好的直觉。当你磨练出那些直觉时，你在为模型编写好的提示以及为你的任务选择好的模型方面也会更有效率。所以我想与你分享一些关于如何磨练你对哪些模型将对你的应用效果良好的直觉的想法。</p>
+<p>让我们用一个例子来说明这一点，即使用 LLM 来遵循指令以删除或编辑个人可识别信息（PII），也就是移除私密的敏感信息。例如，如果你正在使用一个 LLM 来总结客户电话，那么一个总结可能是：“在2023年7月14日，杰西卡·阿尔瓦雷斯，社会安全号码为 XXX，地址在 YYY，提交了一个业务支持工单，等等。” 这段文本含有很多敏感的、个人可识别的信息。现在，假设我们想从这类总结中移除所有的 PII，因为我们想用这些数据进行下游的统计分析，了解客户来电的原因。为了保护客户信息，我们想在进行下游统计分析之前，剥离掉那些 PII。</p>
+<p>所以你可能会用一些指令来提示一个 LLM，比如：“请识别下面文本中所有 PII 的情况，然后返回编辑后的文本，用‘[已编辑]’等代替。” 事实证明，规模更大的前沿模型在遵循指令方面往往要好得多，而较小的模型在回答简单的、事实性的问题上往往相当不错，但在遵循指令方面就不那么擅长了。</p>
+<p>如果你在一个较小的模型上运行这个提示，比如 OpenWay Llama 3.1 8B 参数模型，那么它可能会生成一个像这样的输出。它说：“识别出的 PII 是社会安全号码和地址”，然后它如下编辑：“……”。它实际上犯了几个错误。它没有正确地遵循指令，它先显示了列表，然后编辑了文本，然后又返回了另一个它不应该返回的列表。在这个 PII 列表中，它漏掉了名字。然后我想它也没有完全编辑掉地址的一部分。所以细节不重要，但它没有完美地遵循这些指令，而且可能漏掉了一点 PII。</p>
+<p>相比之下，如果你使用一个更智能的模型，一个更擅长遵循指令的模型，你可能会得到一个更好的结果，像这样，它实际上正确地列出了所有的 PII，并正确地编辑了所有的 PII。</p>
+<p>所以我发现，随着不同的 LLM 提供商专注于不同的任务，不同的模型确实在不同的任务上表现更好。有些更擅长编码，有些更擅长遵循指令，有些更擅长某些特定领域的事实。如果你能磨练出对哪些模型或多或少更智能，以及它们或多或少能遵循哪种类型的指令的直觉，那么你就能在选择使用哪个模型上做出更好的决定。</p>
+<p>所以分享几个如何做到这一点的技巧：</p>
+<ul>
+<li><strong>经常试用不同的模型</strong>：我鼓励你经常试用不同的模型。每当有新模型发布时，我常常会去试用它，在上面尝试不同的查询，包括闭源的专有模型和开源的模型。我发现有时拥有一个私人的评估集也可能很有帮助，就是你向很多不同模型都问的一系列问题，这可能帮助你校准它们在不同类型任务上的表现。</li>
+<li><strong>阅读他人的提示</strong>：我经常做的另一件事，我希望对你有用，就是我花很多时间阅读别人写的提示。有时人们会在网上公布他们的提示，我常常会去读它们，以了解提示的最佳实践是什么样的。或者我常常会和我朋友们聊天，他们在各种公司，包括一些前沿模型公司，我会和他们分享我的提示，看看他们是怎么提示的。有时我也会去找一些我非常尊敬的人写的开源包，下载那个开源包，然后深入挖掘那个开源包，找到作者们写的提示，为了阅读它，为了磨练我关于如何写好提示的直觉。这是我鼓励你考虑的一个技巧，就是通过阅读大量别人写的提示，这将帮助你自己写得更好。我当然经常这样做，我也鼓励你这样做。这将磨练你关于模型擅长遵循哪种类型的指令，以及何时对不同模型说某些话的直觉。</li>
+<li><strong>在你的工作流中测试</strong>：除了试用模型和阅读别人的提示，如果你在你的 agentic 工作流中尝试很多不同的模型，那也能让你磨练直觉。所以你会看到哪些模型对哪些类型的任务效果最好，无论是通过查看轨迹来获得一个非正式的感觉，还是通过查看组件级或端到端的评估，都可以帮助你评估不同模型在你工作流的不同部分表现如何。然后你开始磨练出不仅是关于性能，也可能是关于使用不同模型的成本和速度权衡的直觉。我倾向于用 AI Suite 来开发我的 agentic 工作流的原因之一，就是因为它使得快速换出和尝试不同模型变得容易。这让我在尝试和评估哪个模型对我的工作流效果最好方面更有效率。</li>
+</ul>
+<p>我们已经谈了很多关于如何提升不同组件的性能，以期提升你端到端系统的整体性能。除了提升输出的质量，你在你的工作流中可能还想做的另一件事，是优化延迟和成本。我发现，对于很多团队来说，当你开始开发时，通常第一件要担心的事就是输出的质量是否足够高。但当系统工作良好并投入生产后，让它运行得更快以及成本更低，通常也很有价值。所以在下一个视频中，让我们来看一些关于为 agentic 工作流提升成本和延迟的想法。</p>
+<h2 id="46-延迟与成本优化">4.6 延迟与成本优化</h2>
+<p>在构建 agentic 工作流时，我常常会建议团队先专注于获得高质量的输出，而只在稍后才去优化成本和延迟。这并不是说成本和延迟不重要，而是我认为让性能或输出质量达到高水平通常是最难的部分，只有当它真的能工作时，才或许该关注其他事情。</p>
+<p>有几次发生在我身上的事是，我的团队构建了一个 agentic 工作流，我们把它交付给用户，然后我们很幸运地有那么多用户使用它，以至于成本真的成了一个问题，然后我们不得不手忙脚乱地把成本降下来。但这是一个好问题，所以我倾向于不那么担心成本。不是说我完全忽略它，只是它在我担心的事情清单上排名较低，直到我们有了那么多用户，以至于我们真的需要降低每个用户的成本。然后是延迟，我倾向于会担心一点，但同样，不如确保输出质量高那么担心。但当你真的到了那个阶段，拥有优化延迟和成本的工具将会很有用。让我们来看一些关于如何做到这一点的想法。</p>
+<h4 id="优化延迟">优化延迟</h4>
+<p>如果你想优化一个 agentic 工作流的延迟，我常常会做的一件事是，对工作流进行基准测试或计时。所以在这个研究代理中，它需要多个步骤，如果我为每个步骤计时，也许 LLM 需要7秒来生成搜索词，网络搜索需要5秒，这个需要3秒，这个需要11秒，然后写最终的文章平均需要18秒。正是通过看这个整体的时间线，我才能知道哪些组件有最大的提速空间。</p>
+<p>在这个例子中，你可能可以尝试多种方法。如果你还没有利用某些步骤的并行性，比如网页获取，也许值得考虑并行执行其中一些操作。或者，如果你发现某些 LLM 步骤耗时太长，比如第一个步骤需要7秒，最后一个 LLM 步骤需要18秒，我也可能会考虑尝试一个更小的、也许智能程度稍低的模型，看看它是否仍然能足够好地工作，或者我是否能找到一个更快的 LLM 提供商。网上有很多不同 LLM 接口的 API，有些公司有专门的硬件，让他们能够更快地提供某些 LLM 服务，所以有时值得尝试不同的 LLM 提供商，看看哪些能最快地返回 token。但至少，做这种类型的计时分析可以让你知道该把降低延迟的重点放在哪些组件上。</p>
+<h4 id="优化成本">优化成本</h4>
+<p>在优化成本方面，一个类似的计算，即你计算每一步的成本，也能让你进行基准测试并决定该关注哪些步骤。许多 LLM 提供商根据输入和输出的长度按 token 收费。许多 API 提供商按 API 调用次数收费，而计算步骤的成本可能根据你如何支付服务器容量以及服务成本而有所不同。</p>
+<p>所以对于这样一个流程，你可能会在这个例子中确定，这个 LLM 步骤的 token 平均花费0.04美分，每次网络搜索 API 可能花费1.6美分，token 花费这么多，API 调用花费这么多，PDF 到文本转换花费这么多，最终文章生成的 token 花费这么多。这也许会再次让你知道，是否有更便宜的组件或更便宜的 LLM 可以使用，看看哪里是优化成本的最大机会。</p>
+<p>我发现这些基准测试练习可以非常清晰地揭示问题，有时它们会明确地告诉我，某些组件根本不值得担心，因为它们对成本或延迟的贡献不大。所以我发现，当成本或延迟成为问题时，通过简单地测量每一步的成本和/或延迟，通常能给你一个基础，让你决定该重点优化哪些组件。</p>
+<p>我们即将结束本模块。我知道我们讲了很多，但感谢你坚持到现在。让我们进入本模块的最后一个视频来做个总结。</p>
+<h2 id="47-开发流程总结">4.7 开发流程总结</h2>
+<p>我们已经讲了很多关于推动一个规范、高效的流程来构建 Agentic AI 系统的技巧。我想通过分享一下经历这个过程的感觉来做个总结。</p>
+<p>当我在构建这些工作流时，我觉得我常常花时间在两大活动上：</p>
+<ol>
+<li><strong>构建</strong>：即编写软件，尝试编写代码来改进我的系统。</li>
+<li><strong>分析</strong>：这有时感觉不像是在取得进展，但我认为它同样重要，即进行分析以帮助我决定下一步该把构建的精力集中在哪里。</li>
+</ol>
+<p>我常常在构建和分析（包括像错误分析这样的事情）之间来回切换。例如，当构建一个新的 agentic 工作流时，我常常会从快速构建一个端到端系统开始，也许甚至是一个粗糙的实现。这让我可以接着开始检查端到端系统的最终输出，或者通读轨迹，来感受一下它在哪里做得好，在哪里做得差。</p>
+<p>仅仅通过看轨迹，有时这会给我一个直观的感觉，让我知道可能想改进哪些单个组件。所以，我可能会去调整一些单个组件，或者继续调整整个端到端系统。随着我的系统开始变得更成熟一些，那么除了手动检查几个输出和通读轨迹之外，我可能会开始构建评估，并拥有一个小的数据集，也许只有10-20个例子，来计算指标，至少是关于端到端性能的指标。这会进一步帮助我对如何改进端到端系统或如何改进单个组件有一个更精细的看法。</p>
+<p>随着它进一步成熟，我的分析可能会变得更加规范，我会开始做错误分析，检查各个组件，并尝试统计单个组件导致不佳输出的频率。这种更严谨的分析会让我能够更专注地决定下一步要处理哪些组件，或者激发改进整个端到端系统的想法。然后最终，当它变得更加成熟，为了推动在组件层面更有效的改进时，那时我也可能会构建组件级的评估。</p>
+<p>所以，构建一个 agentic 系统的工作流常常是来回往复的，它不是一个线性的过程。我们有时会调整端到端系统，然后做一些错误分析，然后改进一下某个组件，接着调整组件级的评估。我倾向于在这两种技术之间来回切换。</p>
+<p>我看到经验较少的团队常常做的是，花大量的时间去构建，而在用错误分析、构建评估等方面进行分析的时间可能远少于理想情况。这并不理想，因为正是这种分析能帮助你真正地把构建的时间花在刀刃上。</p>
+<p>还有一个技巧。实际上有很多工具可以帮助监控轨迹、记录运行时间、计算成本等等。那些工具可能很有用。我有时会用其中的一些，而且 DeepLearning.ai 的不少短期课程合作伙伴都提供那些工具，它们确实很好用。我发现，对于我最终处理的 agentic 工作流来说，大多数 agentic 工作流都非常定制化。所以我最终会自己构建非常定制化的评估，因为我想捕捉到我的系统中那些不正确工作的地方。所以，即使我确实使用了一些那些工具，我最终也还是会构建很多非常适合我特定应用以及我所看到的其中问题的定制化评估。</p>
+<p>感谢你坚持到现在，看完了五分之四的模块。如果你能实现本模块中哪怕是一小部分的想法，我想你在实现 agentic 工作流的成熟度方面，就已经远远领先于绝大多数的开发者了。希望你觉得这些材料有用，我期待在最后一个模块见到你。我们将讨论一些用于构建高度自主代理的更高级的设计模式。我们在本课程的最后一个模块见。</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#41-评估evals">4.1 评估（Evals）</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#42-错误分析与确定下一步的优先级">4.2 错误分析与确定下一步的优先级</a></li>
+    <li><a href="#43-更多错误分析示例">4.3 更多错误分析示例</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#44-组件级评估">4.4 组件级评估</a></li>
+    <li><a href="#45-如何解决你发现的问题">4.5 如何解决你发现的问题</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#46-延迟与成本优化">4.6 延迟与成本优化</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#47-开发流程总结">4.7 开发流程总结</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#41-评估evals">4.1 评估（Evals）</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#42-错误分析与确定下一步的优先级">4.2 错误分析与确定下一步的优先级</a></li>
+    <li><a href="#43-更多错误分析示例">4.3 更多错误分析示例</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#44-组件级评估">4.4 组件级评估</a></li>
+    <li><a href="#45-如何解决你发现的问题">4.5 如何解决你发现的问题</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#46-延迟与成本优化">4.6 延迟与成本优化</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#47-开发流程总结">4.7 开发流程总结</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

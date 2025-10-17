@@ -1,0 +1,1535 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="Andrew Ng: Agentic AI Module 2: Reflection Design Pattern 2.1 Reflection to improve outputs of a task 0:03 The reflection design pattern is something I&#39;ve used in many applications, and it&#39;s surprisingly easy to implement. 0:07 Let&#39;s take a look. 0:08 Just as humans will sometimes reflect their own output and find a way to improve it, so can LLMs. 0:14 For example, I might write an email like this, and if I&#39;m typing quickly, I might end up with a first draft that&#39;s not great. 0:21 And if I read over it, I might say, 0:24 huh, next month isn&#39;t that clear for what dates Tommy might be free for dinner, and there&#39;s such a typo that I had, and also forgot to sign my name. 0:33 And this would let me revise the draft to be more specific in saying, hey, Tommy, are you free for dinner on the 5th to the 7th? 0:40 A similar process lets LLMs also improve their outputs. 0:44 You can prompt an LLM to write the first draft in email, and given email version 1, email v1, you can pass it to maybe the same model, 0:53 the same large language model, but with a different prompt, and tell it to reflect and write an improved second draft to then get you the final output, email v2. 1:02 Here, I have just hard-coded this workflow of prompting the LLMa once, and then prompting them again to reflect and improve, and that gives email v2. 1:12 It turns out that a similar process can be used to improve other types of outputs. 1:18 For example, if you are having an LLM write code, you might prompt an LLM to write code to do a certain task, and it may give you v1 of the code, 1:28 and then pass it to the same LLM or maybe a different LLM to ask it to check for bugs and write an improved second draft of the code. 1:36 Different LLMs have different strengths, and so sometimes I would choose different models for writing the first draft and for reflecting and trying to improve it. 1:46 For example, it turns out reasoning models, sometimes also called thinking models, are pretty good at finding bugs, 1:53 and so I&#39;ll sometimes write the first draft of the code by direct generation, but then use a reasoning model to check for bugs. 2:00 Now, rather than just having an LLM reflect on the code, it turns out that if you can get external feedback, meaning new information from outside the LLM, 2:11 reflection becomes much more powerful. 2:14 In the case of code, one thing you can do is just execute the code to see what the code does, 2:20 and by examining the output, including any error messages of the code, this is incredibly useful information for the LLM to reflect and to find a way to improve his code. 2:30 So in this example, the LLM generated the first draft of the code, but when I run it, it generates a syntax error. 2:36 When you pass this code output and error logs back into the LLM and ask it to reflect on the feedback and write a new draft, 2:44 this gives it a lot of very useful information to come up with a much better version 2 of the code. 2:50 So the reflection design pattern isn&#39;t magic. 2:53 It does not make an LLM always get everything right 100% of the time, but it can often give it maybe a modest bump in performance. 3:01 But one design consideration to keep in mind is reflection is much more powerful when there is new additional external information that you can ingest into the reflection process. 3:13 So in this example, if you can run the code and have that code output or error messages as an additional input to the reflection step, 3:20 that really lets the LLM reflect much more deeply and figure out what may be going wrong, if anything, 3:26 and results in a much better second version of the code than if there wasn&#39;t this external information that you can ingest. 3:32 So one thing to keep in mind, whenever reflection has an opportunity to get additional information, that makes it much more powerful. 3:41 Now with that, let&#39;s go on to the next video where I want to share with you a more systematic comparison of using reflection versus direct generation or something we sometimes call zero shot prompting. 3:54 Let&#39;s go on to the next video. 2.2 why not just direct generation? 0:04 Let&#39;s take a look at why we might prefer to use a reflection workflow rather than just 0:04 prompting an LLM once and having it directly generate the answer and be done with it. 0:09 With direct generation, you just prompt the LLM with an instruction and let it generate an answer. 0:14 So you can ask an LLM to write an essay about black holes and have it just generate the text, 0:19 or have it write the Python functions to calculate 0:22 compound interest and have it just write the code directly. 0:25 The prompt examples you see here are also called zero-shot prompting. 0:31 Let me explain what zero-shot means. In contrast to zero-shot prompting, 0:35 a related approach is to include one or more examples of what you want the output to look like 0:41 in your prompt. And this is known as one-shot prompting, if in the prompt you include 0:45 one example of a desired input-output pair, or two-shot or few-shot prompting, 0:50 depending on how many such examples you include in your prompt. 0:53 And so zero-shot prompting refers to if you include zero examples and if you don&#39;t include 0:57 any examples of the desired outputs that you want. But don&#39;t worry if you aren&#39;t yet familiar 1:02 with these terms. The important thing is that in the examples you see here, you&#39;re just prompting 1:07 the LLM to directly generate an answer in one go, which I&#39;m also calling zero-shot prompting 1:13 because we include zero examples. It turns out that multiple studies have 1:17 shown that reflection improves on the performance of direct generation on a variety of tasks. 1:23 This diagram is adapted from the research paper by Madaan and others, and this shows a range of 1:30 different tasks being implemented with different models and with and without reflection. 1:35 The way to read this diagram is to look at these pairs of adjacent light followed by 1:41 dark-colored bars, where the light bar shows zero-shot prompting and the dark bar 1:46 shows the same model but with reflection. And the colors blue, green, and red show 1:52 experiments run with different models, such as GPT-3.5 and GPT-4. And what you see is, 1:58 for many different applications, the dark bar that is with reflection is quite a bit higher 2:04 than the light bar. But of course, your knowledge may vary depending on your specific application. 2:10 Here are some more examples where reflection might be helpful. 2:14 If you are generating structured data, such as an HTML table, sometimes it may have incorrect 2:20 formatting of the output. So a reflection prompt to validate the HTML code could be helpful. 2:26 If it&#39;s basic HTML, this may not help that much, since LLMs are pretty good at basic HTML. But 2:31 especially if you have more complex structured outputs, like maybe a JSON data structure with 2:36 a lot of nesting, then reflection may be more likely to spot bugs. Or if you ask an LLM to 2:41 generate a sequence of steps that comprise a set of instructions to do something, such as how to 2:45 brew a perfect cup of tea, sometimes the LLM may miss steps and a reflection prompt to ask to check 2:51 instructions for coherence and completeness might help spot errors. Or something that I&#39;ve actually 2:56 worked on was using an LLM to generate domain names, but sometimes the names it generates has 3:01 an unintended meaning or may be really hard to pronounce. And so I&#39;ve used reflection prompts 3:06 to double check if the domain name has any problematic connotations or problematic meanings, 3:11 or if the name is hard to pronounce. And we actually used this at one of my team&#39;s AI fund 3:16 to help brainstorm domain names for startups that we&#39;re working on. I want to show you a couple of 3:21 examples of reflection prompts. For brainstorming domain names, you might ask it to review the 3:26 domain names you suggested, and then ask it to check if each name is easy to pronounce. Check 3:30 if each name might mean something negative in English or other languages, and then output a 3:35 short list of only the names that satisfy these criteria. Or to improve an email, you can write a 3:41 reflection prompt to tell it to review the email first draft, check the tone, verify all fact states 3:46 and promises are accurate. This would make sense in the context of the LLM having been fed a number 3:51 of facts and dates and so on in order to write the email drafts. All this would be provided as part 3:56 of the LLM context. And then based on any problems it may find, write the next draft of the email. 4:02 So some tips for writing reflection prompts. It helps to clearly indicate that you want it to 4:07 review or to reflect on the first draft of the output. And if you can specify a clear set of 4:13 criteria, such as whether the domain name is easy to pronounce and whether it may have negative 4:17 connotations or for email, check the tone and verify the facts. Then that guides the LLM better 4:22 in reflecting and critiquing on the criteria that you care the most about. I found that one of the 4:28 ways I&#39;ve learned to write better prompts is to read a lot of other prompts that other people 4:34 have written. Sometimes I&#39;ll actually download open source software and go and find the prompts 4:40 in a piece of software that I think is especially well done to just go and read the prompts that 4:45 the authors have written. So that I hope you have a sense of how to write a basic reflection prompt 4:51 and that maybe you even try it out in your own work to see if it helps give you better performance. 4:57 In the next video, I&#39;d like to share with you a fun example where we&#39;ll start to look at 5:02 multi-modal inputs and outputs. We&#39;ll have an algorithm reflect 5:06 on an image being generated or a chart being generated. Let&#39;s go take a look. 2.3 chart generation workflow 0:02 In the coding lab that you see in this module, you play with a chart generation workflow where 0:05 you use an agent to generate nice-looking diagrams. It turns out reflection can significantly improve 0:11 the quality of this output. Let&#39;s take a look. In this example, I have data from a coffee machine 0:18 showing when different drinks, such as a latte coffee or hot chocolate or a cappuccino coffee 0:24 and so on, were sold and for what price. And we want to have an agent create a plot 0:29 comparing Q1 or first quarter coffee sales in 2024 and 2025. So one way to do it would be to 0:35 write a prompt that asks an LLM to create a plot comparing Q1 coffee sales in 2024 and 2025 0:41 using the data stored in a spreadsheet as a CSV file or comma-separated values as a spreadsheet 0:48 file. And an LLM might write Python code like this to generate the plot. And with this v1 of the code, 0:55 if you execute it, it may generate a plot like this. When I ran the code to the LLM output, 1:01 it actually generated this the first time. And this is a stacked bar plot, which is not a very 1:07 easy way to visualize things and it just doesn&#39;t look a very good plot. But what you can do is then 1:12 give it v1 of the code as well as the plot that this code generated and feed it into a 1:19 multimodal model that is an LLM that can also accept image inputs and ask it to examine the 1:26 image that was generated by this code and then to critique the image, find a way to come up with 1:31 better visualization, and update the code to just generate a clearer, better plot. Multimodal LLMs 1:37 can use visual reasoning, so it can actually look visually at this figure to find ways to improve it. 1:44 And when I did this, it actually generated a bar graph that isn&#39;t this stacked bar graph, 1:49 but a more regular bar graph that separates out the 2034 and 2035 coffee sales in what I thought 1:54 was a more pleasing and clearer way. When you get to the coding lab, please feel free to mess around 2:00 with the problems and see if you can get maybe even better looking graphs in these. Because 2:05 different LLMs have different strengths and weaknesses, sometimes I&#39;ll use different LLMs 2:09 for the initial generation and for the reflection. So, for example, you may use one LLM to generate 2:14 the initial code, maybe open it as GPT-4o or GPT-5 or some model like that, and just prompt it like a 2:21 prompt like this to write Python code to generate visualization and so on. And then the reflection 2:26 prompts might be something like this, where you tell the LLM to play the role of an expert data 2:31 analyst that provides constructive feedback and then give it the version 1 of the code, 2:36 the part that was generated, maybe also the computational history from how the code was 2:40 generated, and ask it to critique it for specific criteria. Remember, when you give it specific 2:45 criteria like readability, clarity, and completeness, it helps the LLM better figure out what to do. 2:50 And then ask it to write new code to implement your improvements. One thing you may find is that 2:56 sometimes using a reasoning model for reflection may work better than a non-reasoning model. So 3:02 when you&#39;re trying out different models for the initial generation and the reflection, these are 3:07 different configurations that you might toggle or try different combinations of. 3:12 So when you get to the coding lab, I hope you have fun visualizing coffee sales. Now, when you&#39;re 3:17 building an application, one thing you may be wondering is, does reflection actually improve 3:22 performance on your specific application? From various studies, reflection improves performance 3:28 by a little bit on some, by a lot on some others, and maybe barely any at all on some other 3:34 applications. And so it&#39;ll be useful to understand its impact on your application and also give you 3:39 guidance on how to tune either the initial generation or the reflection prompt to try to get 3:45 better performance. In the next video, let&#39;s take a look at evals or evaluations 3:50 for reflection workflow. Let&#39;s go on to the next video. 2.4 Evaluating the impact of reflection 0:04 Reflection often improves the performance of the system, but before I commit to keeping it, 0:04 I would usually want to double check how much it actually improves the performance, because 0:09 it does slow down the system a little bit by needing to take an extra step. 0:13 Let&#39;s take a look at evals for reflection workflows. 0:16 Let&#39;s look at an example of using reflection to improve the database query that an LLM writes 0:23 to fetch data to answer questions. Let&#39;s say you run a retail store, 0:27 and you may get questions like, which color product has the highest total sales? 0:32 To answer a question like this, you might have an LLM generate a database query. 0:36 If you&#39;ve heard of database languages like SQL, SQL, it may generate a query in that type of 0:42 language. But if you&#39;re not familiar with SQL, don&#39;t worry about it. 0:45 But after writing a database query, instead of using that directly to fetch information from 0:51 the database, you may have an LLM, the same or different LLM, reflect on the version one database 0:57 query and update it to maybe an improved one, and then execute that database query against the 1:02 database to fetch information to finally have an LLM answer the question. 1:07 So the question is, does using a second LLM to reflect and improve 1:12 on the database or SQL query actually improve the final output? 1:16 In order to evaluate this, I might collect a set of questions or set of prompts together with 1:23 ground truth answers. So maybe one would be, how many items are sold in May 2025? 1:28 What&#39;s the most expensive item in the inventory? How many styles are carried in my store? 1:33 And I write down for maybe 10, 15 prompts, the ground truth answer. 1:40 Then you can run this workflow without reflection. So without reflection would mean to take the SQL 1:46 query generated by the first LLM and to just see what answer it gives. And with reflection would 1:51 mean to take the database query generated after the second LLM has reflected on it to see what 1:57 answer that fetches from the database. And then we can measure the percentage of correct answers 2:03 from no reflection and with reflection. In this example, no reflection gets the answers 2:08 right 87% of the time, with reflection gets it right 95% of the time. And this would suggest that 2:14 reflection is meaningfully improving the quality of the database queries I&#39;m able to get to pull 2:21 out the correct answer. One thing that developers often end up doing as well is rewrite the reflection 2:26 prompt. So for example, do you want to add to reflection prompt an instruction to make the 2:32 database query run faster or make it clearer? Or you may just have different ideas for how to 2:38 rewrite either the initial generation prompt or the reflection prompt. Once you put in place 2:44 evals like this, you can quickly try out different ideas for these prompts and measure the percentage 2:50 correct your system has as you change the prompts in order to get a sense of which prompts work 2:55 best for your application. So if you&#39;re trying out a lot of prompts, building evals is important. 3:02 It really helps you have a systematic way to choose between the different prompts you might 3:07 be considering. But this example is one of when you can use objective evals because there is a 3:14 right answer. The number of items sold was 1,301 and the answer is either right or wrong. How about 3:21 applications where you need more subjective rather than objective evaluations? In the plotting 3:27 example that we saw in the last video, without reflection we had the stack bar graph, with reflection 3:32 we had this graph. But how do we know which plot is actually better? I know I like the latter one 3:38 better, but with different graphs varying on different dimensions, how do we figure out which 3:43 one is better? And measuring which of these plots is better is more of a subjective criteria rather 3:51 than a purely black and white objective criteria. So for these more subjective criteria, one thing 3:58 you might do is use an LLM as a judge. And maybe a basic approach to do this might be to feed both 4:04 plots into an LLM, a multi-modal LLM that can accept two images as input, and just ask it which image 4:10 is better. It turns out this doesn&#39;t work that well. I&#39;ll share an even better idea in a second. But one 4:16 thing you could do might be to also give it some criteria by which to evaluate the two plots, such 4:21 as clarity, how nice looking they are, and so on. But it turns out that there&#39;s some known issues of 4:26 using LLMs to compare two inputs to tell you which one is better. First, it turns out the answers are 4:32 often not very good. It could be sensitive to the exact wording of the prompt of the LLM as a judge, 4:37 and sometimes the rank ordering doesn&#39;t correspond that well to human expert judgment. And one 4:43 manifestation of this is many LLMs will have a position bias. Many LLMs, it turns out, will often 4:48 pick the first option more often than the second option. And in fact, I&#39;ve worked a lot of LLMs 4:54 where given two choices, whichever choice I present first, it will say the first choice is better. 5:01 And maybe some LLMs prefer the second option, but I think most LLMs prefer the first option. 5:06 Instead of asking an LLMs to compare a pair of inputs, grading with a rubric can give more 5:11 consistent results. So, for example, you might prompt an LLM to tell it, given a single image, 5:18 assess the attached image against the quality rubric, and the rubric or grading criteria may 5:23 have clear criteria like does the plot have a clear title, are the access labels present, 5:27 is it an appropriate chart type, and so on, with a handful of criteria like this. And it turns out 5:32 that instead of asking the LLM to grade something on a scale of 1 to 5, which it tends not to be 5:38 well calibrated on, if you instead give it, say, 5 binary criteria, 5-0-1 criteria, and have it give 5:45 5 binary scores, and you add up those scores to get the number from 1 to 5 or 1 to 10 if you have 5:51 10 binary criteria, that tends to give more consistent results. And so if we&#39;re to gather a 5:58 handful, say 10-15 user queries for different visualizations that the user may want to have 6:04 of the coffee machine sales, then you can have it generate images without reflection or generate 6:11 images with reflection, and use a rubric like this to score each of the images to then check 6:17 the degree to which or whether or not the images generated with reflection are really better than 6:23 the ones without reflection. And then once you&#39;ve built up a set of evals like this, if ever you 6:29 want to change the initial generation prompt or you want to change the reflection prompt, you can 6:33 also rerun this eval to see if, say, updating one of your prompts allows the system to generate images 6:40 that scores more points according to this rubric. And so this too gives you a way to keep on tuning 6:47 your prompts to get better and better performance. What you may find when building evaluations for 6:53 reflection or for other agentic workflows is that when there is an objective criteria, code-based 6:58 evaluation is usually easier to manage. And in the example that we saw with the database query, we 7:04 built up a database of ground truth examples and ground truth outputs and just wrote code to see 7:10 how often the system generated the right answer in a really objective evaluation metric. In contrast, 7:17 for small subjective tasks, you might use an element as a judge but it usually takes a little 7:22 bit more tuning, such as having to think through what rubric you may want to use to get the LLM 7:27 as a judge to be well calibrated or to output reliable evals. So I hope that gives you a sense 7:33 of how to build evals to evaluate reflections or more generally even to evaluate different 7:38 agentic workflows. Knowing how to do evals well is really important for how you build agentic 7:45 workflows effectively and you hear me say more about this in later videos as well. But now that 7:51 you have a sense of how to use reflection, what I hope to do in the next video is a deep dive into 7:57 one aspect of it, which is when you can get additional information from outside and this 8:03 turns out to make reflection work much better. So in the final video of this module, let&#39;s take a 8:08 look at that technique for making your reflection workflows work much better. I&#39;ll see you in the 8:14 next video. 2.5 Using external feedback 0:03 Reflection with external feedback, if you can get it, is much more powerful than reflection 0:05 using the LLM as the only source of feedback. Let&#39;s take a look. 0:09 When I&#39;m building an application, and if I&#39;m just prompt engineering for direct generation 0:14 of a zero-shot prompting, this is what performance might look like over time, 0:18 where initially, as I tune the prompt, the performance improves for a while, 0:21 but then after a while, it sort of plateaus or flattens out, and despite further engineering 0:27 the prompt, it&#39;s just hard to get that much better level of performance. 0:31 So instead of wasting all this time on tuning the prompt, sometimes it&#39;d be better if only 0:35 earlier on in the process, I had started adding reflection, and sometimes that gives a bump in 0:41 performance. Sometimes it&#39;s smaller, sometimes a bigger bump, but that adds complexity. 0:46 But if I had started adding in reflection, maybe at this point in the process, 0:49 and then started tuning the reflection prompt, then maybe I end up with a performance that 0:54 looks like this. But it turns out that if I&#39;m able to get external feedback, 0:58 so that the only source of new information isn&#39;t just an LLM reflecting on the same 1:03 information as it had before, but some new external information, then sometimes, 1:08 as I continue to tune the prompts and tune the external feedback, you end up with 1:12 an even much higher level of performance. So something to consider if you are working 1:17 on prompt engineering, and you feel that your efforts are seeing diminishing returns, 1:23 that you&#39;re tuning a lot of prompts, but it&#39;s just not getting that much better, 1:26 then maybe consider if there&#39;s reflection, or even better, if there&#39;s some external feedback 1:31 you can interject to bump the performance curve off this fattening out red line to maybe 1:36 some higher trajectory of performance improvement. Just as a reminder, we saw earlier, 1:42 one source of feedback for if you&#39;re writing code would be if you were to just execute the code 1:47 and see what output it generates, output or error messages, and feed that output back to the LLM 1:53 to let it have that new information to reflect, and then use that information to write a new 1:58 version of the code. Here are a few more examples of when software codes or tools can create new 2:05 information to help the reflection process. If you&#39;re using LLM to write emails, and it 2:10 sometimes mentions competitors&#39; names, then if you write codes or build a software tool 2:15 to just carry out pattern matching, maybe via regular expression pattern matching to search 2:20 for competitors&#39; names in the output, then whenever you find a competitor&#39;s name, you just feed that 2:25 back to the LLM as a criticism or as input. That&#39;s very useful information to tell it to just rewrite 2:32 the text without mentioning those competitors. Or as another example, you might use web search 2:39 or look at other trusted sources in order to fact-check an essay. So if you&#39;re a research 2:44 agent that says the Taj Mahal was built in 1648, technically the Taj Mahal was actually commissioned 2:51 in 1631, and it was finished in 1648. So maybe this isn&#39;t exactly incorrect, but it doesn&#39;t 2:58 capture the accurate history either. In order to more accurately represent when this beautiful 3:04 building was built, if you do a web search to cuddle the snippet explaining exactly the period 3:11 that the Taj Mahal was built and give that as additional input to your reflection agent, then 3:16 it may be able to use that to write a better version of the text on the history of the Taj Mahal. 3:21 One last example, if you&#39;re using an LLM to write copy, maybe for a blog post or for a research 3:27 paper abstract, but what it writes is sometimes over the word limit. LLMs are still not very good 3:32 at following exact word limits. Then if you implement a word count tool, just write code to 3:37 count the exact number of words, and if it exceeds the word limit, then feed that word count back to 3:44 the LLM and ask it to try again. Then this helps it to more accurately hit the desired length of 3:51 the output you wanted to generate. So in each of these three examples, you can write a piece of 3:57 code to help find additional facts about the initial output to then give those facts, be it 4:04 that you found the competitor&#39;s name or information web search or the exact word count, to feed into 4:09 the reflection LLM in order to help it do a better job thinking about how to improve the output. 4:17 Reflections are powerful too, and I hope you find it useful in a lot of your own work. In the next 4:23 module, we&#39;ll build on this to talk about tool use, where in addition to the handful of tool examples 4:29 you saw, you learn how to systematically get your LLM to call different functions, and this will make 4:35 your agenting applications much more powerful. I hope you enjoyed learning about reflection. 4:41 I&#39;m going to now reflect on what you just learned. I hope to see you in the next video. "><meta property="og:url" content="http://localhost:1355/courses/andrew-ng-agentic-ai/lecture-02/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="Andrew Ng: Agentic AI Module 2: Reflection Design Pattern 2.1 Reflection to improve outputs of a task 0:03 The reflection design pattern is something I&#39;ve used in many applications, and it&#39;s surprisingly easy to implement. 0:07 Let&#39;s take a look. 0:08 Just as humans will sometimes reflect their own output and find a way to improve it, so can LLMs. 0:14 For example, I might write an email like this, and if I&#39;m typing quickly, I might end up with a first draft that&#39;s not great. 0:21 And if I read over it, I might say, 0:24 huh, next month isn&#39;t that clear for what dates Tommy might be free for dinner, and there&#39;s such a typo that I had, and also forgot to sign my name. 0:33 And this would let me revise the draft to be more specific in saying, hey, Tommy, are you free for dinner on the 5th to the 7th? 0:40 A similar process lets LLMs also improve their outputs. 0:44 You can prompt an LLM to write the first draft in email, and given email version 1, email v1, you can pass it to maybe the same model, 0:53 the same large language model, but with a different prompt, and tell it to reflect and write an improved second draft to then get you the final output, email v2. 1:02 Here, I have just hard-coded this workflow of prompting the LLMa once, and then prompting them again to reflect and improve, and that gives email v2. 1:12 It turns out that a similar process can be used to improve other types of outputs. 1:18 For example, if you are having an LLM write code, you might prompt an LLM to write code to do a certain task, and it may give you v1 of the code, 1:28 and then pass it to the same LLM or maybe a different LLM to ask it to check for bugs and write an improved second draft of the code. 1:36 Different LLMs have different strengths, and so sometimes I would choose different models for writing the first draft and for reflecting and trying to improve it. 1:46 For example, it turns out reasoning models, sometimes also called thinking models, are pretty good at finding bugs, 1:53 and so I&#39;ll sometimes write the first draft of the code by direct generation, but then use a reasoning model to check for bugs. 2:00 Now, rather than just having an LLM reflect on the code, it turns out that if you can get external feedback, meaning new information from outside the LLM, 2:11 reflection becomes much more powerful. 2:14 In the case of code, one thing you can do is just execute the code to see what the code does, 2:20 and by examining the output, including any error messages of the code, this is incredibly useful information for the LLM to reflect and to find a way to improve his code. 2:30 So in this example, the LLM generated the first draft of the code, but when I run it, it generates a syntax error. 2:36 When you pass this code output and error logs back into the LLM and ask it to reflect on the feedback and write a new draft, 2:44 this gives it a lot of very useful information to come up with a much better version 2 of the code. 2:50 So the reflection design pattern isn&#39;t magic. 2:53 It does not make an LLM always get everything right 100% of the time, but it can often give it maybe a modest bump in performance. 3:01 But one design consideration to keep in mind is reflection is much more powerful when there is new additional external information that you can ingest into the reflection process. 3:13 So in this example, if you can run the code and have that code output or error messages as an additional input to the reflection step, 3:20 that really lets the LLM reflect much more deeply and figure out what may be going wrong, if anything, 3:26 and results in a much better second version of the code than if there wasn&#39;t this external information that you can ingest. 3:32 So one thing to keep in mind, whenever reflection has an opportunity to get additional information, that makes it much more powerful. 3:41 Now with that, let&#39;s go on to the next video where I want to share with you a more systematic comparison of using reflection versus direct generation or something we sometimes call zero shot prompting. 3:54 Let&#39;s go on to the next video. 2.2 why not just direct generation? 0:04 Let&#39;s take a look at why we might prefer to use a reflection workflow rather than just 0:04 prompting an LLM once and having it directly generate the answer and be done with it. 0:09 With direct generation, you just prompt the LLM with an instruction and let it generate an answer. 0:14 So you can ask an LLM to write an essay about black holes and have it just generate the text, 0:19 or have it write the Python functions to calculate 0:22 compound interest and have it just write the code directly. 0:25 The prompt examples you see here are also called zero-shot prompting. 0:31 Let me explain what zero-shot means. In contrast to zero-shot prompting, 0:35 a related approach is to include one or more examples of what you want the output to look like 0:41 in your prompt. And this is known as one-shot prompting, if in the prompt you include 0:45 one example of a desired input-output pair, or two-shot or few-shot prompting, 0:50 depending on how many such examples you include in your prompt. 0:53 And so zero-shot prompting refers to if you include zero examples and if you don&#39;t include 0:57 any examples of the desired outputs that you want. But don&#39;t worry if you aren&#39;t yet familiar 1:02 with these terms. The important thing is that in the examples you see here, you&#39;re just prompting 1:07 the LLM to directly generate an answer in one go, which I&#39;m also calling zero-shot prompting 1:13 because we include zero examples. It turns out that multiple studies have 1:17 shown that reflection improves on the performance of direct generation on a variety of tasks. 1:23 This diagram is adapted from the research paper by Madaan and others, and this shows a range of 1:30 different tasks being implemented with different models and with and without reflection. 1:35 The way to read this diagram is to look at these pairs of adjacent light followed by 1:41 dark-colored bars, where the light bar shows zero-shot prompting and the dark bar 1:46 shows the same model but with reflection. And the colors blue, green, and red show 1:52 experiments run with different models, such as GPT-3.5 and GPT-4. And what you see is, 1:58 for many different applications, the dark bar that is with reflection is quite a bit higher 2:04 than the light bar. But of course, your knowledge may vary depending on your specific application. 2:10 Here are some more examples where reflection might be helpful. 2:14 If you are generating structured data, such as an HTML table, sometimes it may have incorrect 2:20 formatting of the output. So a reflection prompt to validate the HTML code could be helpful. 2:26 If it&#39;s basic HTML, this may not help that much, since LLMs are pretty good at basic HTML. But 2:31 especially if you have more complex structured outputs, like maybe a JSON data structure with 2:36 a lot of nesting, then reflection may be more likely to spot bugs. Or if you ask an LLM to 2:41 generate a sequence of steps that comprise a set of instructions to do something, such as how to 2:45 brew a perfect cup of tea, sometimes the LLM may miss steps and a reflection prompt to ask to check 2:51 instructions for coherence and completeness might help spot errors. Or something that I&#39;ve actually 2:56 worked on was using an LLM to generate domain names, but sometimes the names it generates has 3:01 an unintended meaning or may be really hard to pronounce. And so I&#39;ve used reflection prompts 3:06 to double check if the domain name has any problematic connotations or problematic meanings, 3:11 or if the name is hard to pronounce. And we actually used this at one of my team&#39;s AI fund 3:16 to help brainstorm domain names for startups that we&#39;re working on. I want to show you a couple of 3:21 examples of reflection prompts. For brainstorming domain names, you might ask it to review the 3:26 domain names you suggested, and then ask it to check if each name is easy to pronounce. Check 3:30 if each name might mean something negative in English or other languages, and then output a 3:35 short list of only the names that satisfy these criteria. Or to improve an email, you can write a 3:41 reflection prompt to tell it to review the email first draft, check the tone, verify all fact states 3:46 and promises are accurate. This would make sense in the context of the LLM having been fed a number 3:51 of facts and dates and so on in order to write the email drafts. All this would be provided as part 3:56 of the LLM context. And then based on any problems it may find, write the next draft of the email. 4:02 So some tips for writing reflection prompts. It helps to clearly indicate that you want it to 4:07 review or to reflect on the first draft of the output. And if you can specify a clear set of 4:13 criteria, such as whether the domain name is easy to pronounce and whether it may have negative 4:17 connotations or for email, check the tone and verify the facts. Then that guides the LLM better 4:22 in reflecting and critiquing on the criteria that you care the most about. I found that one of the 4:28 ways I&#39;ve learned to write better prompts is to read a lot of other prompts that other people 4:34 have written. Sometimes I&#39;ll actually download open source software and go and find the prompts 4:40 in a piece of software that I think is especially well done to just go and read the prompts that 4:45 the authors have written. So that I hope you have a sense of how to write a basic reflection prompt 4:51 and that maybe you even try it out in your own work to see if it helps give you better performance. 4:57 In the next video, I&#39;d like to share with you a fun example where we&#39;ll start to look at 5:02 multi-modal inputs and outputs. We&#39;ll have an algorithm reflect 5:06 on an image being generated or a chart being generated. Let&#39;s go take a look. 2.3 chart generation workflow 0:02 In the coding lab that you see in this module, you play with a chart generation workflow where 0:05 you use an agent to generate nice-looking diagrams. It turns out reflection can significantly improve 0:11 the quality of this output. Let&#39;s take a look. In this example, I have data from a coffee machine 0:18 showing when different drinks, such as a latte coffee or hot chocolate or a cappuccino coffee 0:24 and so on, were sold and for what price. And we want to have an agent create a plot 0:29 comparing Q1 or first quarter coffee sales in 2024 and 2025. So one way to do it would be to 0:35 write a prompt that asks an LLM to create a plot comparing Q1 coffee sales in 2024 and 2025 0:41 using the data stored in a spreadsheet as a CSV file or comma-separated values as a spreadsheet 0:48 file. And an LLM might write Python code like this to generate the plot. And with this v1 of the code, 0:55 if you execute it, it may generate a plot like this. When I ran the code to the LLM output, 1:01 it actually generated this the first time. And this is a stacked bar plot, which is not a very 1:07 easy way to visualize things and it just doesn&#39;t look a very good plot. But what you can do is then 1:12 give it v1 of the code as well as the plot that this code generated and feed it into a 1:19 multimodal model that is an LLM that can also accept image inputs and ask it to examine the 1:26 image that was generated by this code and then to critique the image, find a way to come up with 1:31 better visualization, and update the code to just generate a clearer, better plot. Multimodal LLMs 1:37 can use visual reasoning, so it can actually look visually at this figure to find ways to improve it. 1:44 And when I did this, it actually generated a bar graph that isn&#39;t this stacked bar graph, 1:49 but a more regular bar graph that separates out the 2034 and 2035 coffee sales in what I thought 1:54 was a more pleasing and clearer way. When you get to the coding lab, please feel free to mess around 2:00 with the problems and see if you can get maybe even better looking graphs in these. Because 2:05 different LLMs have different strengths and weaknesses, sometimes I&#39;ll use different LLMs 2:09 for the initial generation and for the reflection. So, for example, you may use one LLM to generate 2:14 the initial code, maybe open it as GPT-4o or GPT-5 or some model like that, and just prompt it like a 2:21 prompt like this to write Python code to generate visualization and so on. And then the reflection 2:26 prompts might be something like this, where you tell the LLM to play the role of an expert data 2:31 analyst that provides constructive feedback and then give it the version 1 of the code, 2:36 the part that was generated, maybe also the computational history from how the code was 2:40 generated, and ask it to critique it for specific criteria. Remember, when you give it specific 2:45 criteria like readability, clarity, and completeness, it helps the LLM better figure out what to do. 2:50 And then ask it to write new code to implement your improvements. One thing you may find is that 2:56 sometimes using a reasoning model for reflection may work better than a non-reasoning model. So 3:02 when you&#39;re trying out different models for the initial generation and the reflection, these are 3:07 different configurations that you might toggle or try different combinations of. 3:12 So when you get to the coding lab, I hope you have fun visualizing coffee sales. Now, when you&#39;re 3:17 building an application, one thing you may be wondering is, does reflection actually improve 3:22 performance on your specific application? From various studies, reflection improves performance 3:28 by a little bit on some, by a lot on some others, and maybe barely any at all on some other 3:34 applications. And so it&#39;ll be useful to understand its impact on your application and also give you 3:39 guidance on how to tune either the initial generation or the reflection prompt to try to get 3:45 better performance. In the next video, let&#39;s take a look at evals or evaluations 3:50 for reflection workflow. Let&#39;s go on to the next video. 2.4 Evaluating the impact of reflection 0:04 Reflection often improves the performance of the system, but before I commit to keeping it, 0:04 I would usually want to double check how much it actually improves the performance, because 0:09 it does slow down the system a little bit by needing to take an extra step. 0:13 Let&#39;s take a look at evals for reflection workflows. 0:16 Let&#39;s look at an example of using reflection to improve the database query that an LLM writes 0:23 to fetch data to answer questions. Let&#39;s say you run a retail store, 0:27 and you may get questions like, which color product has the highest total sales? 0:32 To answer a question like this, you might have an LLM generate a database query. 0:36 If you&#39;ve heard of database languages like SQL, SQL, it may generate a query in that type of 0:42 language. But if you&#39;re not familiar with SQL, don&#39;t worry about it. 0:45 But after writing a database query, instead of using that directly to fetch information from 0:51 the database, you may have an LLM, the same or different LLM, reflect on the version one database 0:57 query and update it to maybe an improved one, and then execute that database query against the 1:02 database to fetch information to finally have an LLM answer the question. 1:07 So the question is, does using a second LLM to reflect and improve 1:12 on the database or SQL query actually improve the final output? 1:16 In order to evaluate this, I might collect a set of questions or set of prompts together with 1:23 ground truth answers. So maybe one would be, how many items are sold in May 2025? 1:28 What&#39;s the most expensive item in the inventory? How many styles are carried in my store? 1:33 And I write down for maybe 10, 15 prompts, the ground truth answer. 1:40 Then you can run this workflow without reflection. So without reflection would mean to take the SQL 1:46 query generated by the first LLM and to just see what answer it gives. And with reflection would 1:51 mean to take the database query generated after the second LLM has reflected on it to see what 1:57 answer that fetches from the database. And then we can measure the percentage of correct answers 2:03 from no reflection and with reflection. In this example, no reflection gets the answers 2:08 right 87% of the time, with reflection gets it right 95% of the time. And this would suggest that 2:14 reflection is meaningfully improving the quality of the database queries I&#39;m able to get to pull 2:21 out the correct answer. One thing that developers often end up doing as well is rewrite the reflection 2:26 prompt. So for example, do you want to add to reflection prompt an instruction to make the 2:32 database query run faster or make it clearer? Or you may just have different ideas for how to 2:38 rewrite either the initial generation prompt or the reflection prompt. Once you put in place 2:44 evals like this, you can quickly try out different ideas for these prompts and measure the percentage 2:50 correct your system has as you change the prompts in order to get a sense of which prompts work 2:55 best for your application. So if you&#39;re trying out a lot of prompts, building evals is important. 3:02 It really helps you have a systematic way to choose between the different prompts you might 3:07 be considering. But this example is one of when you can use objective evals because there is a 3:14 right answer. The number of items sold was 1,301 and the answer is either right or wrong. How about 3:21 applications where you need more subjective rather than objective evaluations? In the plotting 3:27 example that we saw in the last video, without reflection we had the stack bar graph, with reflection 3:32 we had this graph. But how do we know which plot is actually better? I know I like the latter one 3:38 better, but with different graphs varying on different dimensions, how do we figure out which 3:43 one is better? And measuring which of these plots is better is more of a subjective criteria rather 3:51 than a purely black and white objective criteria. So for these more subjective criteria, one thing 3:58 you might do is use an LLM as a judge. And maybe a basic approach to do this might be to feed both 4:04 plots into an LLM, a multi-modal LLM that can accept two images as input, and just ask it which image 4:10 is better. It turns out this doesn&#39;t work that well. I&#39;ll share an even better idea in a second. But one 4:16 thing you could do might be to also give it some criteria by which to evaluate the two plots, such 4:21 as clarity, how nice looking they are, and so on. But it turns out that there&#39;s some known issues of 4:26 using LLMs to compare two inputs to tell you which one is better. First, it turns out the answers are 4:32 often not very good. It could be sensitive to the exact wording of the prompt of the LLM as a judge, 4:37 and sometimes the rank ordering doesn&#39;t correspond that well to human expert judgment. And one 4:43 manifestation of this is many LLMs will have a position bias. Many LLMs, it turns out, will often 4:48 pick the first option more often than the second option. And in fact, I&#39;ve worked a lot of LLMs 4:54 where given two choices, whichever choice I present first, it will say the first choice is better. 5:01 And maybe some LLMs prefer the second option, but I think most LLMs prefer the first option. 5:06 Instead of asking an LLMs to compare a pair of inputs, grading with a rubric can give more 5:11 consistent results. So, for example, you might prompt an LLM to tell it, given a single image, 5:18 assess the attached image against the quality rubric, and the rubric or grading criteria may 5:23 have clear criteria like does the plot have a clear title, are the access labels present, 5:27 is it an appropriate chart type, and so on, with a handful of criteria like this. And it turns out 5:32 that instead of asking the LLM to grade something on a scale of 1 to 5, which it tends not to be 5:38 well calibrated on, if you instead give it, say, 5 binary criteria, 5-0-1 criteria, and have it give 5:45 5 binary scores, and you add up those scores to get the number from 1 to 5 or 1 to 10 if you have 5:51 10 binary criteria, that tends to give more consistent results. And so if we&#39;re to gather a 5:58 handful, say 10-15 user queries for different visualizations that the user may want to have 6:04 of the coffee machine sales, then you can have it generate images without reflection or generate 6:11 images with reflection, and use a rubric like this to score each of the images to then check 6:17 the degree to which or whether or not the images generated with reflection are really better than 6:23 the ones without reflection. And then once you&#39;ve built up a set of evals like this, if ever you 6:29 want to change the initial generation prompt or you want to change the reflection prompt, you can 6:33 also rerun this eval to see if, say, updating one of your prompts allows the system to generate images 6:40 that scores more points according to this rubric. And so this too gives you a way to keep on tuning 6:47 your prompts to get better and better performance. What you may find when building evaluations for 6:53 reflection or for other agentic workflows is that when there is an objective criteria, code-based 6:58 evaluation is usually easier to manage. And in the example that we saw with the database query, we 7:04 built up a database of ground truth examples and ground truth outputs and just wrote code to see 7:10 how often the system generated the right answer in a really objective evaluation metric. In contrast, 7:17 for small subjective tasks, you might use an element as a judge but it usually takes a little 7:22 bit more tuning, such as having to think through what rubric you may want to use to get the LLM 7:27 as a judge to be well calibrated or to output reliable evals. So I hope that gives you a sense 7:33 of how to build evals to evaluate reflections or more generally even to evaluate different 7:38 agentic workflows. Knowing how to do evals well is really important for how you build agentic 7:45 workflows effectively and you hear me say more about this in later videos as well. But now that 7:51 you have a sense of how to use reflection, what I hope to do in the next video is a deep dive into 7:57 one aspect of it, which is when you can get additional information from outside and this 8:03 turns out to make reflection work much better. So in the final video of this module, let&#39;s take a 8:08 look at that technique for making your reflection workflows work much better. I&#39;ll see you in the 8:14 next video. 2.5 Using external feedback 0:03 Reflection with external feedback, if you can get it, is much more powerful than reflection 0:05 using the LLM as the only source of feedback. Let&#39;s take a look. 0:09 When I&#39;m building an application, and if I&#39;m just prompt engineering for direct generation 0:14 of a zero-shot prompting, this is what performance might look like over time, 0:18 where initially, as I tune the prompt, the performance improves for a while, 0:21 but then after a while, it sort of plateaus or flattens out, and despite further engineering 0:27 the prompt, it&#39;s just hard to get that much better level of performance. 0:31 So instead of wasting all this time on tuning the prompt, sometimes it&#39;d be better if only 0:35 earlier on in the process, I had started adding reflection, and sometimes that gives a bump in 0:41 performance. Sometimes it&#39;s smaller, sometimes a bigger bump, but that adds complexity. 0:46 But if I had started adding in reflection, maybe at this point in the process, 0:49 and then started tuning the reflection prompt, then maybe I end up with a performance that 0:54 looks like this. But it turns out that if I&#39;m able to get external feedback, 0:58 so that the only source of new information isn&#39;t just an LLM reflecting on the same 1:03 information as it had before, but some new external information, then sometimes, 1:08 as I continue to tune the prompts and tune the external feedback, you end up with 1:12 an even much higher level of performance. So something to consider if you are working 1:17 on prompt engineering, and you feel that your efforts are seeing diminishing returns, 1:23 that you&#39;re tuning a lot of prompts, but it&#39;s just not getting that much better, 1:26 then maybe consider if there&#39;s reflection, or even better, if there&#39;s some external feedback 1:31 you can interject to bump the performance curve off this fattening out red line to maybe 1:36 some higher trajectory of performance improvement. Just as a reminder, we saw earlier, 1:42 one source of feedback for if you&#39;re writing code would be if you were to just execute the code 1:47 and see what output it generates, output or error messages, and feed that output back to the LLM 1:53 to let it have that new information to reflect, and then use that information to write a new 1:58 version of the code. Here are a few more examples of when software codes or tools can create new 2:05 information to help the reflection process. If you&#39;re using LLM to write emails, and it 2:10 sometimes mentions competitors&#39; names, then if you write codes or build a software tool 2:15 to just carry out pattern matching, maybe via regular expression pattern matching to search 2:20 for competitors&#39; names in the output, then whenever you find a competitor&#39;s name, you just feed that 2:25 back to the LLM as a criticism or as input. That&#39;s very useful information to tell it to just rewrite 2:32 the text without mentioning those competitors. Or as another example, you might use web search 2:39 or look at other trusted sources in order to fact-check an essay. So if you&#39;re a research 2:44 agent that says the Taj Mahal was built in 1648, technically the Taj Mahal was actually commissioned 2:51 in 1631, and it was finished in 1648. So maybe this isn&#39;t exactly incorrect, but it doesn&#39;t 2:58 capture the accurate history either. In order to more accurately represent when this beautiful 3:04 building was built, if you do a web search to cuddle the snippet explaining exactly the period 3:11 that the Taj Mahal was built and give that as additional input to your reflection agent, then 3:16 it may be able to use that to write a better version of the text on the history of the Taj Mahal. 3:21 One last example, if you&#39;re using an LLM to write copy, maybe for a blog post or for a research 3:27 paper abstract, but what it writes is sometimes over the word limit. LLMs are still not very good 3:32 at following exact word limits. Then if you implement a word count tool, just write code to 3:37 count the exact number of words, and if it exceeds the word limit, then feed that word count back to 3:44 the LLM and ask it to try again. Then this helps it to more accurately hit the desired length of 3:51 the output you wanted to generate. So in each of these three examples, you can write a piece of 3:57 code to help find additional facts about the initial output to then give those facts, be it 4:04 that you found the competitor&#39;s name or information web search or the exact word count, to feed into 4:09 the reflection LLM in order to help it do a better job thinking about how to improve the output. 4:17 Reflections are powerful too, and I hope you find it useful in a lot of your own work. In the next 4:23 module, we&#39;ll build on this to talk about tool use, where in addition to the handful of tool examples 4:29 you saw, you learn how to systematically get your LLM to call different functions, and this will make 4:35 your agenting applications much more powerful. I hope you enjoyed learning about reflection. 4:41 I&#39;m going to now reflect on what you just learned. I hope to see you in the next video. "><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
+<link rel="canonical" href="http://localhost:1355/courses/andrew-ng-agentic-ai/lecture-02/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecture/">Lectures</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/">中文讲义</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/guides/">Guides</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/insights/">Insights</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/blog/">Blog</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/agenticai/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/overview/">吴恩达课程：Agentic AI</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">Courses</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/" class="crumb-sec">Andrew Ng: Agentic AI</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecture/">Lectures</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/">中文讲义</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/guides/">Guides</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/insights/">Insights</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/blog/">Blog</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/agenticai/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/overview/">吴恩达课程：Agentic AI</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="andrew-ng-agentic-ai">Andrew Ng: Agentic AI</h1>
+<h1 id="module-2-reflection-design-pattern">Module 2: Reflection Design Pattern</h1>
+<h2 id="21-reflection-to-improve-outputs-of-a-task">2.1 Reflection to improve outputs of a task</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0:03
+</span></span><span style="display:flex;"><span>The reflection design pattern is something I&#39;ve used in many applications, and it&#39;s surprisingly easy to implement.
+</span></span><span style="display:flex;"><span>0:07
+</span></span><span style="display:flex;"><span>Let&#39;s take a look.
+</span></span><span style="display:flex;"><span>0:08
+</span></span><span style="display:flex;"><span>Just as humans will sometimes reflect their own output and find a way to improve it, so can LLMs.
+</span></span><span style="display:flex;"><span>0:14
+</span></span><span style="display:flex;"><span>For example, I might write an email like this, and if I&#39;m typing quickly, I might end up with a first draft that&#39;s not great.
+</span></span><span style="display:flex;"><span>0:21
+</span></span><span style="display:flex;"><span>And if I read over it, I might say,
+</span></span><span style="display:flex;"><span>0:24
+</span></span><span style="display:flex;"><span>huh, next month isn&#39;t that clear for what dates Tommy might be free for dinner, and there&#39;s such a typo that I had, and also forgot to sign my name.
+</span></span><span style="display:flex;"><span>0:33
+</span></span><span style="display:flex;"><span>And this would let me revise the draft to be more specific in saying, hey, Tommy, are you free for dinner on the 5th to the 7th?
+</span></span><span style="display:flex;"><span>0:40
+</span></span><span style="display:flex;"><span>A similar process lets LLMs also improve their outputs.
+</span></span><span style="display:flex;"><span>0:44
+</span></span><span style="display:flex;"><span>You can prompt an LLM to write the first draft in email, and given email version 1, email v1, you can pass it to maybe the same model,
+</span></span><span style="display:flex;"><span>0:53
+</span></span><span style="display:flex;"><span>the same large language model, but with a different prompt, and tell it to reflect and write an improved second draft to then get you the final output, email v2.
+</span></span><span style="display:flex;"><span>1:02
+</span></span><span style="display:flex;"><span>Here, I have just hard-coded this workflow of prompting the LLMa once, and then prompting them again to reflect and improve, and that gives email v2.
+</span></span><span style="display:flex;"><span>1:12
+</span></span><span style="display:flex;"><span>It turns out that a similar process can be used to improve other types of outputs.
+</span></span><span style="display:flex;"><span>1:18
+</span></span><span style="display:flex;"><span>For example, if you are having an LLM write code, you might prompt an LLM to write code to do a certain task, and it may give you v1 of the code,
+</span></span><span style="display:flex;"><span>1:28
+</span></span><span style="display:flex;"><span>and then pass it to the same LLM or maybe a different LLM to ask it to check for bugs and write an improved second draft of the code.
+</span></span><span style="display:flex;"><span>1:36
+</span></span><span style="display:flex;"><span>Different LLMs have different strengths, and so sometimes I would choose different models for writing the first draft and for reflecting and trying to improve it.
+</span></span><span style="display:flex;"><span>1:46
+</span></span><span style="display:flex;"><span>For example, it turns out reasoning models, sometimes also called thinking models, are pretty good at finding bugs,
+</span></span><span style="display:flex;"><span>1:53
+</span></span><span style="display:flex;"><span>and so I&#39;ll sometimes write the first draft of the code by direct generation, but then use a reasoning model to check for bugs.
+</span></span><span style="display:flex;"><span>2:00
+</span></span><span style="display:flex;"><span>Now, rather than just having an LLM reflect on the code, it turns out that if you can get external feedback, meaning new information from outside the LLM,
+</span></span><span style="display:flex;"><span>2:11
+</span></span><span style="display:flex;"><span>reflection becomes much more powerful.
+</span></span><span style="display:flex;"><span>2:14
+</span></span><span style="display:flex;"><span>In the case of code, one thing you can do is just execute the code to see what the code does,
+</span></span><span style="display:flex;"><span>2:20
+</span></span><span style="display:flex;"><span>and by examining the output, including any error messages of the code, this is incredibly useful information for the LLM to reflect and to find a way to improve his code.
+</span></span><span style="display:flex;"><span>2:30
+</span></span><span style="display:flex;"><span>So in this example, the LLM generated the first draft of the code, but when I run it, it generates a syntax error.
+</span></span><span style="display:flex;"><span>2:36
+</span></span><span style="display:flex;"><span>When you pass this code output and error logs back into the LLM and ask it to reflect on the feedback and write a new draft,
+</span></span><span style="display:flex;"><span>2:44
+</span></span><span style="display:flex;"><span>this gives it a lot of very useful information to come up with a much better version 2 of the code.
+</span></span><span style="display:flex;"><span>2:50
+</span></span><span style="display:flex;"><span>So the reflection design pattern isn&#39;t magic.
+</span></span><span style="display:flex;"><span>2:53
+</span></span><span style="display:flex;"><span>It does not make an LLM always get everything right 100% of the time, but it can often give it maybe a modest bump in performance.
+</span></span><span style="display:flex;"><span>3:01
+</span></span><span style="display:flex;"><span>But one design consideration to keep in mind is reflection is much more powerful when there is new additional external information that you can ingest into the reflection process.
+</span></span><span style="display:flex;"><span>3:13
+</span></span><span style="display:flex;"><span>So in this example, if you can run the code and have that code output or error messages as an additional input to the reflection step,
+</span></span><span style="display:flex;"><span>3:20
+</span></span><span style="display:flex;"><span>that really lets the LLM reflect much more deeply and figure out what may be going wrong, if anything,
+</span></span><span style="display:flex;"><span>3:26
+</span></span><span style="display:flex;"><span>and results in a much better second version of the code than if there wasn&#39;t this external information that you can ingest.
+</span></span><span style="display:flex;"><span>3:32
+</span></span><span style="display:flex;"><span>So one thing to keep in mind, whenever reflection has an opportunity to get additional information, that makes it much more powerful.
+</span></span><span style="display:flex;"><span>3:41
+</span></span><span style="display:flex;"><span>Now with that, let&#39;s go on to the next video where I want to share with you a more systematic comparison of using reflection versus direct generation or something we sometimes call zero shot prompting.
+</span></span><span style="display:flex;"><span>3:54
+</span></span><span style="display:flex;"><span>Let&#39;s go on to the next video.
+</span></span></code></pre></div><h2 id="22-why-not-just-direct-generation">2.2 why not just direct generation?</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at why we might prefer to use a reflection workflow rather than just</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>prompting an LLM once <span style="color:#f92672">and</span> having it directly generate the answer <span style="color:#f92672">and</span> be done with it<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>With direct generation, you just prompt the LLM with an instruction <span style="color:#f92672">and</span> let it generate an answer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>So you can ask an LLM to write an essay about black holes <span style="color:#f92672">and</span> have it just generate the text,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> have it write the Python functions to calculate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>compound interest <span style="color:#f92672">and</span> have it just write the code directly<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>The prompt examples you see here are also called zero<span style="color:#f92672">-</span>shot prompting<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>Let me explain what zero<span style="color:#f92672">-</span>shot means<span style="color:#f92672">.</span> In contrast to zero<span style="color:#f92672">-</span>shot prompting,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>a related approach is to include one <span style="color:#f92672">or</span> more examples of what you want the output to look like
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> your prompt<span style="color:#f92672">.</span> And this is known as one<span style="color:#f92672">-</span>shot prompting, <span style="color:#66d9ef">if</span> <span style="color:#f92672">in</span> the prompt you include
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>one example of a desired input<span style="color:#f92672">-</span>output pair, <span style="color:#f92672">or</span> two<span style="color:#f92672">-</span>shot <span style="color:#f92672">or</span> few<span style="color:#f92672">-</span>shot prompting,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>depending on how many such examples you include <span style="color:#f92672">in</span> your prompt<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>And so zero<span style="color:#f92672">-</span>shot prompting refers to <span style="color:#66d9ef">if</span> you include zero examples <span style="color:#f92672">and</span> <span style="color:#66d9ef">if</span> you don<span style="color:#e6db74">&#39;t include</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>any examples of the desired outputs that you want<span style="color:#f92672">.</span> But don<span style="color:#e6db74">&#39;t worry if you aren&#39;</span>t yet familiar
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>with these terms<span style="color:#f92672">.</span> The important thing is that <span style="color:#f92672">in</span> the examples you see here, you<span style="color:#e6db74">&#39;re just prompting</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>the LLM to directly generate an answer <span style="color:#f92672">in</span> one go, which I<span style="color:#e6db74">&#39;m also calling zero-shot prompting</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>because we include zero examples<span style="color:#f92672">.</span> It turns out that multiple studies have
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>shown that reflection improves on the performance of direct generation on a variety of tasks<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>This diagram is adapted from the research paper by Madaan <span style="color:#f92672">and</span> others, <span style="color:#f92672">and</span> this shows a range of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>different tasks being implemented with different models <span style="color:#f92672">and</span> with <span style="color:#f92672">and</span> without reflection<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>The way to read this diagram is to look at these pairs of adjacent light followed by
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>dark<span style="color:#f92672">-</span>colored bars, where the light bar shows zero<span style="color:#f92672">-</span>shot prompting <span style="color:#f92672">and</span> the dark bar
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>shows the same model but with reflection<span style="color:#f92672">.</span> And the colors blue, green, <span style="color:#f92672">and</span> red show
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>experiments run with different models, such as GPT<span style="color:#f92672">-</span><span style="color:#ae81ff">3.5</span> <span style="color:#f92672">and</span> GPT<span style="color:#f92672">-</span><span style="color:#ae81ff">4.</span> And what you see is,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> many different applications, the dark bar that is with reflection is quite a bit higher
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>than the light bar<span style="color:#f92672">.</span> But of course, your knowledge may vary depending on your specific application<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>Here are some more examples where reflection might be helpful<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>If you are generating structured data, such as an HTML table, sometimes it may have incorrect
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>formatting of the output<span style="color:#f92672">.</span> So a reflection prompt to validate the HTML code could be helpful<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>If it<span style="color:#e6db74">&#39;s basic HTML, this may not help that much, since LLMs are pretty good at basic HTML. But</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>especially <span style="color:#66d9ef">if</span> you have more complex structured outputs, like maybe a JSON data structure with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>a lot of nesting, then reflection may be more likely to spot bugs<span style="color:#f92672">.</span> Or <span style="color:#66d9ef">if</span> you ask an LLM to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>generate a sequence of steps that comprise a set of instructions to <span style="color:#66d9ef">do</span> something, such as how to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>brew a perfect cup of tea, sometimes the LLM may miss steps <span style="color:#f92672">and</span> a reflection prompt to ask to check
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>instructions <span style="color:#66d9ef">for</span> coherence <span style="color:#f92672">and</span> completeness might help spot errors<span style="color:#f92672">.</span> Or something that I<span style="color:#e6db74">&#39;ve actually</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>worked on was using an LLM to generate domain names, but sometimes the names it generates has
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>an unintended meaning <span style="color:#f92672">or</span> may be really hard to pronounce<span style="color:#f92672">.</span> And so I<span style="color:#e6db74">&#39;ve used reflection prompts</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>to double check <span style="color:#66d9ef">if</span> the domain name has any problematic connotations <span style="color:#f92672">or</span> problematic meanings,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> <span style="color:#66d9ef">if</span> the name is hard to pronounce<span style="color:#f92672">.</span> And we actually used this at one of my team<span style="color:#e6db74">&#39;s AI fund</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>to help brainstorm domain names <span style="color:#66d9ef">for</span> startups that we<span style="color:#e6db74">&#39;re working on. I want to show you a couple of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>examples of reflection prompts<span style="color:#f92672">.</span> For brainstorming domain names, you might ask it to review the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>domain names you suggested, <span style="color:#f92672">and</span> then ask it to check <span style="color:#66d9ef">if</span> each name is easy to pronounce<span style="color:#f92672">.</span> Check
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> each name might mean something negative <span style="color:#f92672">in</span> English <span style="color:#f92672">or</span> other languages, <span style="color:#f92672">and</span> then output a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>short list of only the names that satisfy these criteria<span style="color:#f92672">.</span> Or to improve an email, you can write a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>reflection prompt to tell it to review the email first draft, check the tone, verify all fact states
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> promises are accurate<span style="color:#f92672">.</span> This would make sense <span style="color:#f92672">in</span> the context of the LLM having been fed a number
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>of facts <span style="color:#f92672">and</span> dates <span style="color:#f92672">and</span> so on <span style="color:#f92672">in</span> order to write the email drafts<span style="color:#f92672">.</span> All this would be provided as part
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>of the LLM context<span style="color:#f92672">.</span> And then based on any problems it may find, write the next draft of the email<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>So some tips <span style="color:#66d9ef">for</span> writing reflection prompts<span style="color:#f92672">.</span> It helps to clearly indicate that you want it to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>review <span style="color:#f92672">or</span> to reflect on the first draft of the output<span style="color:#f92672">.</span> And <span style="color:#66d9ef">if</span> you can specify a clear set of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>criteria, such as whether the domain name is easy to pronounce <span style="color:#f92672">and</span> whether it may have negative
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>connotations <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> email, check the tone <span style="color:#f92672">and</span> verify the facts<span style="color:#f92672">.</span> Then that guides the LLM better
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> reflecting <span style="color:#f92672">and</span> critiquing on the criteria that you care the most about<span style="color:#f92672">.</span> I found that one of the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>ways I<span style="color:#e6db74">&#39;ve learned to write better prompts is to read a lot of other prompts that other people</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>have written<span style="color:#f92672">.</span> Sometimes I<span style="color:#e6db74">&#39;ll actually download open source software and go and find the prompts</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> a piece of software that I think is especially well done to just go <span style="color:#f92672">and</span> read the prompts that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>the authors have written<span style="color:#f92672">.</span> So that I hope you have a sense of how to write a basic reflection prompt
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> that maybe you even try it out <span style="color:#f92672">in</span> your own work to see <span style="color:#66d9ef">if</span> it helps give you better performance<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>In the next video, I<span style="color:#e6db74">&#39;d like to share with you a fun example where we&#39;</span>ll start to look at
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>multi<span style="color:#f92672">-</span>modal inputs <span style="color:#f92672">and</span> outputs<span style="color:#f92672">.</span> We<span style="color:#e6db74">&#39;ll have an algorithm reflect</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>on an image being generated <span style="color:#f92672">or</span> a chart being generated<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s go take a look.</span>
+</span></span></code></pre></div><h2 id="23-chart-generation-workflow">2.3 chart generation workflow</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>In the coding lab that you see <span style="color:#f92672">in</span> this module, you play with a chart generation workflow where
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>you use an agent to generate nice<span style="color:#f92672">-</span>looking diagrams<span style="color:#f92672">.</span> It turns out reflection can significantly improve
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>the quality of this output<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look. In this example, I have data from a coffee machine</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>showing when different drinks, such as a latte coffee <span style="color:#f92672">or</span> hot chocolate <span style="color:#f92672">or</span> a cappuccino coffee
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> so on, were sold <span style="color:#f92672">and</span> <span style="color:#66d9ef">for</span> what price<span style="color:#f92672">.</span> And we want to have an agent create a plot
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>comparing Q1 <span style="color:#f92672">or</span> first quarter coffee sales <span style="color:#f92672">in</span> <span style="color:#ae81ff">2024</span> <span style="color:#f92672">and</span> <span style="color:#ae81ff">2025.</span> So one way to <span style="color:#66d9ef">do</span> it would be to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>write a prompt that asks an LLM to create a plot comparing Q1 coffee sales <span style="color:#f92672">in</span> <span style="color:#ae81ff">2024</span> <span style="color:#f92672">and</span> <span style="color:#ae81ff">2025</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>using the data stored <span style="color:#f92672">in</span> a spreadsheet as a CSV file <span style="color:#f92672">or</span> comma<span style="color:#f92672">-</span>separated values as a spreadsheet
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>file<span style="color:#f92672">.</span> And an LLM might write Python code like this to generate the plot<span style="color:#f92672">.</span> And with this v1 of the code,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> you execute it, it may generate a plot like this<span style="color:#f92672">.</span> When I ran the code to the LLM output,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>it actually generated this the first time<span style="color:#f92672">.</span> And this is a stacked bar plot, which is <span style="color:#f92672">not</span> a very
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>easy way to visualize things <span style="color:#f92672">and</span> it just doesn<span style="color:#e6db74">&#39;t look a very good plot. But what you can do is then</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>give it v1 of the code as well as the plot that this code generated <span style="color:#f92672">and</span> feed it into a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>multimodal model that is an LLM that can also accept image inputs <span style="color:#f92672">and</span> ask it to examine the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>image that was generated by this code <span style="color:#f92672">and</span> then to critique the image, find a way to come up with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>better visualization, <span style="color:#f92672">and</span> update the code to just generate a clearer, better plot<span style="color:#f92672">.</span> Multimodal LLMs
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>can use visual reasoning, so it can actually look visually at this figure to find ways to improve it<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>And when I did this, it actually generated a bar graph that isn<span style="color:#e6db74">&#39;t this stacked bar graph,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>but a more regular bar graph that separates out the <span style="color:#ae81ff">2034</span> <span style="color:#f92672">and</span> <span style="color:#ae81ff">2035</span> coffee sales <span style="color:#f92672">in</span> what I thought
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>was a more pleasing <span style="color:#f92672">and</span> clearer way<span style="color:#f92672">.</span> When you get to the coding lab, please feel free to mess around
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>with the problems <span style="color:#f92672">and</span> see <span style="color:#66d9ef">if</span> you can get maybe even better looking graphs <span style="color:#f92672">in</span> these<span style="color:#f92672">.</span> Because
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>different LLMs have different strengths <span style="color:#f92672">and</span> weaknesses, sometimes I<span style="color:#e6db74">&#39;ll use different LLMs</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> the initial generation <span style="color:#f92672">and</span> <span style="color:#66d9ef">for</span> the reflection<span style="color:#f92672">.</span> So, <span style="color:#66d9ef">for</span> example, you may use one LLM to generate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>the initial code, maybe open it as GPT<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>o <span style="color:#f92672">or</span> GPT<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span> <span style="color:#f92672">or</span> some model like that, <span style="color:#f92672">and</span> just prompt it like a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>prompt like this to write Python code to generate visualization <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> And then the reflection
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>prompts might be something like this, where you tell the LLM to play the role of an expert data
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>analyst that provides constructive feedback <span style="color:#f92672">and</span> then give it the version <span style="color:#ae81ff">1</span> of the code,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>the part that was generated, maybe also the computational history from how the code was
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>generated, <span style="color:#f92672">and</span> ask it to critique it <span style="color:#66d9ef">for</span> specific criteria<span style="color:#f92672">.</span> Remember, when you give it specific
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>criteria like readability, clarity, <span style="color:#f92672">and</span> completeness, it helps the LLM better figure out what to <span style="color:#66d9ef">do</span><span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>And then ask it to write new code to implement your improvements<span style="color:#f92672">.</span> One thing you may find is that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>sometimes using a reasoning model <span style="color:#66d9ef">for</span> reflection may work better than a non<span style="color:#f92672">-</span>reasoning model<span style="color:#f92672">.</span> So
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>when you<span style="color:#e6db74">&#39;re trying out different models for the initial generation and the reflection, these are</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>different configurations that you might toggle <span style="color:#f92672">or</span> try different combinations of<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>So when you get to the coding lab, I hope you have fun visualizing coffee sales<span style="color:#f92672">.</span> Now, when you<span style="color:#e6db74">&#39;re</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>building an application, one thing you may be wondering is, does reflection actually improve
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>performance on your specific application<span style="color:#960050;background-color:#1e0010">?</span> From various studies, reflection improves performance
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>by a little bit on some, by a lot on some others, <span style="color:#f92672">and</span> maybe barely any at all on some other
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>applications<span style="color:#f92672">.</span> And so it<span style="color:#e6db74">&#39;ll be useful to understand its impact on your application and also give you</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>guidance on how to tune either the initial generation <span style="color:#f92672">or</span> the reflection prompt to try to get
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>better performance<span style="color:#f92672">.</span> In the next video, let<span style="color:#e6db74">&#39;s take a look at evals or evaluations</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> reflection workflow<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s go on to the next video.</span>
+</span></span></code></pre></div><h2 id="24-evaluating-the-impact-of-reflection">2.4 Evaluating the impact of reflection</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>Reflection often improves the performance of the system, but before I commit to keeping it,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>I would usually want to double check how much it actually improves the performance, because
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>it does slow down the system a little bit by needing to take an extra step<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at evals for reflection workflows.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s look at an example of using reflection to improve the database query that an LLM writes</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>to fetch data to answer questions<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s say you run a retail store,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> you may get questions like, which color product has the highest total sales<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>To answer a question like this, you might have an LLM generate a database query<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>If you<span style="color:#e6db74">&#39;ve heard of database languages like SQL, SQL, it may generate a query in that type of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>language<span style="color:#f92672">.</span> But <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re not familiar with SQL, don&#39;</span>t worry about it<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>But after writing a database query, instead of using that directly to fetch information from
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>the database, you may have an LLM, the same <span style="color:#f92672">or</span> different LLM, reflect on the version one database
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>query <span style="color:#f92672">and</span> update it to maybe an improved one, <span style="color:#f92672">and</span> then execute that database query against the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>database to fetch information to finally have an LLM answer the question<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>So the question is, does using a second LLM to reflect <span style="color:#f92672">and</span> improve
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>on the database <span style="color:#f92672">or</span> SQL query actually improve the final output<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>In order to evaluate this, I might collect a set of questions <span style="color:#f92672">or</span> set of prompts together with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>ground truth answers<span style="color:#f92672">.</span> So maybe one would be, how many items are sold <span style="color:#f92672">in</span> May <span style="color:#ae81ff">2025</span><span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>What<span style="color:#e6db74">&#39;s the most expensive item in the inventory? How many styles are carried in my store?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>And I write down <span style="color:#66d9ef">for</span> maybe <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">15</span> prompts, the ground truth answer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>Then you can run this workflow without reflection<span style="color:#f92672">.</span> So without reflection would mean to take the SQL
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>query generated by the first LLM <span style="color:#f92672">and</span> to just see what answer it gives<span style="color:#f92672">.</span> And with reflection would
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>mean to take the database query generated after the second LLM has reflected on it to see what
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>answer that fetches from the database<span style="color:#f92672">.</span> And then we can measure the percentage of correct answers
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>from no reflection <span style="color:#f92672">and</span> with reflection<span style="color:#f92672">.</span> In this example, no reflection gets the answers
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>right <span style="color:#ae81ff">87</span><span style="color:#f92672">%</span> of the time, with reflection gets it right <span style="color:#ae81ff">95</span><span style="color:#f92672">%</span> of the time<span style="color:#f92672">.</span> And this would suggest that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>reflection is meaningfully improving the quality of the database queries I<span style="color:#e6db74">&#39;m able to get to pull</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>out the correct answer<span style="color:#f92672">.</span> One thing that developers often end up doing as well is rewrite the reflection
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>prompt<span style="color:#f92672">.</span> So <span style="color:#66d9ef">for</span> example, <span style="color:#66d9ef">do</span> you want to add to reflection prompt an instruction to make the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>database query run faster <span style="color:#f92672">or</span> make it clearer<span style="color:#960050;background-color:#1e0010">?</span> Or you may just have different ideas <span style="color:#66d9ef">for</span> how to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>rewrite either the initial generation prompt <span style="color:#f92672">or</span> the reflection prompt<span style="color:#f92672">.</span> Once you put <span style="color:#f92672">in</span> place
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>evals like this, you can quickly try out different ideas <span style="color:#66d9ef">for</span> these prompts <span style="color:#f92672">and</span> measure the percentage
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>correct your system has as you change the prompts <span style="color:#f92672">in</span> order to get a sense of which prompts work
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>best <span style="color:#66d9ef">for</span> your application<span style="color:#f92672">.</span> So <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re trying out a lot of prompts, building evals is important.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>It really helps you have a systematic way to choose between the different prompts you might
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>be considering<span style="color:#f92672">.</span> But this example is one of when you can use objective evals because there is a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>right answer<span style="color:#f92672">.</span> The number of items sold was <span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">301</span> <span style="color:#f92672">and</span> the answer is either right <span style="color:#f92672">or</span> wrong<span style="color:#f92672">.</span> How about
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>applications where you need more subjective rather than objective evaluations<span style="color:#960050;background-color:#1e0010">?</span> In the plotting
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>example that we saw <span style="color:#f92672">in</span> the last video, without reflection we had the stack bar graph, with reflection
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>we had this graph<span style="color:#f92672">.</span> But how <span style="color:#66d9ef">do</span> we know which plot is actually better<span style="color:#960050;background-color:#1e0010">?</span> I know I like the latter one
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>better, but with different graphs varying on different dimensions, how <span style="color:#66d9ef">do</span> we figure out which
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>one is better<span style="color:#960050;background-color:#1e0010">?</span> And measuring which of these plots is better is more of a subjective criteria rather
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>than a purely black <span style="color:#f92672">and</span> white objective criteria<span style="color:#f92672">.</span> So <span style="color:#66d9ef">for</span> these more subjective criteria, one thing
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>you might <span style="color:#66d9ef">do</span> is use an LLM as a judge<span style="color:#f92672">.</span> And maybe a basic approach to <span style="color:#66d9ef">do</span> this might be to feed both
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>plots into an LLM, a multi<span style="color:#f92672">-</span>modal LLM that can accept two images as input, <span style="color:#f92672">and</span> just ask it which image
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>is better<span style="color:#f92672">.</span> It turns out this doesn<span style="color:#e6db74">&#39;t work that well. I&#39;</span>ll share an even better idea <span style="color:#f92672">in</span> a second<span style="color:#f92672">.</span> But one
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>thing you could <span style="color:#66d9ef">do</span> might be to also give it some criteria by which to evaluate the two plots, such
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>as clarity, how nice looking they are, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> But it turns out that there<span style="color:#e6db74">&#39;s some known issues of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>using LLMs to compare two inputs to tell you which one is better<span style="color:#f92672">.</span> First, it turns out the answers are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>often <span style="color:#f92672">not</span> very good<span style="color:#f92672">.</span> It could be sensitive to the exact wording of the prompt of the LLM as a judge,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> sometimes the rank ordering doesn<span style="color:#e6db74">&#39;t correspond that well to human expert judgment. And one</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>manifestation of this is many LLMs will have a position bias<span style="color:#f92672">.</span> Many LLMs, it turns out, will often
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>pick the first option more often than the second option<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> fact, I<span style="color:#e6db74">&#39;ve worked a lot of LLMs</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>where given two choices, whichever choice I present first, it will say the first choice is better<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>And maybe some LLMs prefer the second option, but I think most LLMs prefer the first option<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>Instead of asking an LLMs to compare a pair of inputs, grading with a rubric can give more
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>consistent results<span style="color:#f92672">.</span> So, <span style="color:#66d9ef">for</span> example, you might prompt an LLM to tell it, given a single image,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>assess the attached image against the quality rubric, <span style="color:#f92672">and</span> the rubric <span style="color:#f92672">or</span> grading criteria may
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>have clear criteria like does the plot have a clear title, are the access labels present,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>is it an appropriate chart type, <span style="color:#f92672">and</span> so on, with a handful of criteria like this<span style="color:#f92672">.</span> And it turns out
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>that instead of asking the LLM to grade something on a scale of <span style="color:#ae81ff">1</span> to <span style="color:#ae81ff">5</span>, which it tends <span style="color:#f92672">not</span> to be
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>well calibrated on, <span style="color:#66d9ef">if</span> you instead give it, say, <span style="color:#ae81ff">5</span> binary criteria, <span style="color:#ae81ff">5</span><span style="color:#f92672">-</span><span style="color:#ae81ff">0</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> criteria, <span style="color:#f92672">and</span> have it give
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> binary scores, <span style="color:#f92672">and</span> you add up those scores to get the number from <span style="color:#ae81ff">1</span> to <span style="color:#ae81ff">5</span> <span style="color:#f92672">or</span> <span style="color:#ae81ff">1</span> to <span style="color:#ae81ff">10</span> <span style="color:#66d9ef">if</span> you have
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> binary criteria, that tends to give more consistent results<span style="color:#f92672">.</span> And so <span style="color:#66d9ef">if</span> we<span style="color:#e6db74">&#39;re to gather a</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>handful, say <span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#ae81ff">15</span> user queries <span style="color:#66d9ef">for</span> different visualizations that the user may want to have
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>of the coffee machine sales, then you can have it generate images without reflection <span style="color:#f92672">or</span> generate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>images with reflection, <span style="color:#f92672">and</span> use a rubric like this to score each of the images to then check
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>the degree to which <span style="color:#f92672">or</span> whether <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> the images generated with reflection are really better than
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>the ones without reflection<span style="color:#f92672">.</span> And then once you<span style="color:#e6db74">&#39;ve built up a set of evals like this, if ever you</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>want to change the initial generation prompt <span style="color:#f92672">or</span> you want to change the reflection prompt, you can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>also rerun this eval to see <span style="color:#66d9ef">if</span>, say, updating one of your prompts allows the system to generate images
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>that scores more points according to this rubric<span style="color:#f92672">.</span> And so this too gives you a way to keep on tuning
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>your prompts to get better <span style="color:#f92672">and</span> better performance<span style="color:#f92672">.</span> What you may find when building evaluations <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>reflection <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> other agentic workflows is that when there is an objective criteria, code<span style="color:#f92672">-</span>based
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>evaluation is usually easier to manage<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> the example that we saw with the database query, we
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>built up a database of ground truth examples <span style="color:#f92672">and</span> ground truth outputs <span style="color:#f92672">and</span> just wrote code to see
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>how often the system generated the right answer <span style="color:#f92672">in</span> a really objective evaluation metric<span style="color:#f92672">.</span> In contrast,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> small subjective tasks, you might use an element as a judge but it usually takes a little
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>bit more tuning, such as having to think through what rubric you may want to use to get the LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>as a judge to be well calibrated <span style="color:#f92672">or</span> to output reliable evals<span style="color:#f92672">.</span> So I hope that gives you a sense
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>of how to build evals to evaluate reflections <span style="color:#f92672">or</span> more generally even to evaluate different
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>agentic workflows<span style="color:#f92672">.</span> Knowing how to <span style="color:#66d9ef">do</span> evals well is really important <span style="color:#66d9ef">for</span> how you build agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>workflows effectively <span style="color:#f92672">and</span> you hear me say more about this <span style="color:#f92672">in</span> later videos as well<span style="color:#f92672">.</span> But now that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>you have a sense of how to use reflection, what I hope to <span style="color:#66d9ef">do</span> <span style="color:#f92672">in</span> the next video is a deep dive into
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>one aspect of it, which is when you can get additional information from outside <span style="color:#f92672">and</span> this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>turns out to make reflection work much better<span style="color:#f92672">.</span> So <span style="color:#f92672">in</span> the final video of this module, let<span style="color:#e6db74">&#39;s take a</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>look at that technique <span style="color:#66d9ef">for</span> making your reflection workflows work much better<span style="color:#f92672">.</span> I<span style="color:#e6db74">&#39;ll see you in the</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>next video<span style="color:#f92672">.</span>
+</span></span></code></pre></div><h2 id="25-using-external-feedback">2.5 Using external feedback</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>Reflection with external feedback, <span style="color:#66d9ef">if</span> you can get it, is much more powerful than reflection
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>using the LLM as the only source of feedback<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>When I<span style="color:#e6db74">&#39;m building an application, and if I&#39;</span>m just prompt engineering <span style="color:#66d9ef">for</span> direct generation
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>of a zero<span style="color:#f92672">-</span>shot prompting, this is what performance might look like over time,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>where initially, as I tune the prompt, the performance improves <span style="color:#66d9ef">for</span> a <span style="color:#66d9ef">while</span>,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>but then after a <span style="color:#66d9ef">while</span>, it sort of plateaus <span style="color:#f92672">or</span> flattens out, <span style="color:#f92672">and</span> despite further engineering
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>the prompt, it<span style="color:#e6db74">&#39;s just hard to get that much better level of performance.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>So instead of wasting all this time on tuning the prompt, sometimes it<span style="color:#e6db74">&#39;d be better if only</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>earlier on <span style="color:#f92672">in</span> the process, I had started adding reflection, <span style="color:#f92672">and</span> sometimes that gives a bump <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>performance<span style="color:#f92672">.</span> Sometimes it<span style="color:#e6db74">&#39;s smaller, sometimes a bigger bump, but that adds complexity.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>But <span style="color:#66d9ef">if</span> I had started adding <span style="color:#f92672">in</span> reflection, maybe at this point <span style="color:#f92672">in</span> the process,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then started tuning the reflection prompt, then maybe I end up with a performance that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>looks like this<span style="color:#f92672">.</span> But it turns out that <span style="color:#66d9ef">if</span> I<span style="color:#e6db74">&#39;m able to get external feedback,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>so that the only source of new information isn<span style="color:#e6db74">&#39;t just an LLM reflecting on the same</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>information as it had before, but some new external information, then sometimes,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>as I <span style="color:#66d9ef">continue</span> to tune the prompts <span style="color:#f92672">and</span> tune the external feedback, you end up with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>an even much higher level of performance<span style="color:#f92672">.</span> So something to consider <span style="color:#66d9ef">if</span> you are working
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>on prompt engineering, <span style="color:#f92672">and</span> you feel that your efforts are seeing diminishing returns,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>that you<span style="color:#e6db74">&#39;re tuning a lot of prompts, but it&#39;</span>s just <span style="color:#f92672">not</span> getting that much better,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>then maybe consider <span style="color:#66d9ef">if</span> there<span style="color:#e6db74">&#39;s reflection, or even better, if there&#39;</span>s some external feedback
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>you can interject to bump the performance curve off this fattening out red line to maybe
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>some higher trajectory of performance improvement<span style="color:#f92672">.</span> Just as a reminder, we saw earlier,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>one source of feedback <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re writing code would be if you were to just execute the code</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> see what output it generates, output <span style="color:#f92672">or</span> error messages, <span style="color:#f92672">and</span> feed that output back to the LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>to let it have that new information to reflect, <span style="color:#f92672">and</span> then use that information to write a new
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>version of the code<span style="color:#f92672">.</span> Here are a few more examples of when software codes <span style="color:#f92672">or</span> tools can create new
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>information to help the reflection process<span style="color:#f92672">.</span> If you<span style="color:#e6db74">&#39;re using LLM to write emails, and it</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>sometimes mentions competitors<span style="color:#e6db74">&#39; names, then if you write codes or build a software tool</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>to just carry out pattern matching, maybe via regular expression pattern matching to search
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> competitors<span style="color:#e6db74">&#39; names in the output, then whenever you find a competitor&#39;</span>s name, you just feed that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>back to the LLM as a criticism <span style="color:#f92672">or</span> as input<span style="color:#f92672">.</span> That<span style="color:#e6db74">&#39;s very useful information to tell it to just rewrite</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>the text without mentioning those competitors<span style="color:#f92672">.</span> Or as another example, you might use web search
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> look at other trusted sources <span style="color:#f92672">in</span> order to fact<span style="color:#f92672">-</span>check an essay<span style="color:#f92672">.</span> So <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re a research</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>agent that says the Taj Mahal was built <span style="color:#f92672">in</span> <span style="color:#ae81ff">1648</span>, technically the Taj Mahal was actually commissioned
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> <span style="color:#ae81ff">1631</span>, <span style="color:#f92672">and</span> it was finished <span style="color:#f92672">in</span> <span style="color:#ae81ff">1648.</span> So maybe this isn<span style="color:#e6db74">&#39;t exactly incorrect, but it doesn&#39;</span>t
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>capture the accurate history either<span style="color:#f92672">.</span> In order to more accurately represent when this beautiful
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>building was built, <span style="color:#66d9ef">if</span> you <span style="color:#66d9ef">do</span> a web search to cuddle the snippet explaining exactly the period
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>that the Taj Mahal was built <span style="color:#f92672">and</span> give that as additional input to your reflection agent, then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>it may be able to use that to write a better version of the text on the history of the Taj Mahal<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>One last example, <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re using an LLM to write copy, maybe for a blog post or for a research</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>paper abstract, but what it writes is sometimes over the word limit<span style="color:#f92672">.</span> LLMs are still <span style="color:#f92672">not</span> very good
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>at following exact word limits<span style="color:#f92672">.</span> Then <span style="color:#66d9ef">if</span> you implement a word count <span style="color:#66d9ef">tool</span>, just write code to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>count the exact number of words, <span style="color:#f92672">and</span> <span style="color:#66d9ef">if</span> it exceeds the word limit, then feed that word count back to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>the LLM <span style="color:#f92672">and</span> ask it to try again<span style="color:#f92672">.</span> Then this helps it to more accurately hit the desired length of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>the output you wanted to generate<span style="color:#f92672">.</span> So <span style="color:#f92672">in</span> each of these three examples, you can write a piece of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>code to help find additional facts about the initial output to then give those facts, be it
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>that you found the competitor<span style="color:#e6db74">&#39;s name or information web search or the exact word count, to feed into</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>the reflection LLM <span style="color:#f92672">in</span> order to help it <span style="color:#66d9ef">do</span> a better job thinking about how to improve the output<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>Reflections are powerful too, <span style="color:#f92672">and</span> I hope you find it useful <span style="color:#f92672">in</span> a lot of your own work<span style="color:#f92672">.</span> In the next
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>module, we<span style="color:#e6db74">&#39;ll build on this to talk about tool use, where in addition to the handful of tool examples</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>you saw, you learn how to systematically get your LLM to call different functions, <span style="color:#f92672">and</span> this will make
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>your agenting applications much more powerful<span style="color:#f92672">.</span> I hope you enjoyed learning about reflection<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>I<span style="color:#e6db74">&#39;m going to now reflect on what you just learned. I hope to see you in the next video.</span>
+</span></span></code></pre></div>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-reflection-to-improve-outputs-of-a-task">2.1 Reflection to improve outputs of a task</a></li>
+    <li><a href="#22-why-not-just-direct-generation">2.2 why not just direct generation?</a></li>
+    <li><a href="#23-chart-generation-workflow">2.3 chart generation workflow</a></li>
+    <li><a href="#24-evaluating-the-impact-of-reflection">2.4 Evaluating the impact of reflection</a></li>
+    <li><a href="#25-using-external-feedback">2.5 Using external feedback</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-reflection-to-improve-outputs-of-a-task">2.1 Reflection to improve outputs of a task</a></li>
+    <li><a href="#22-why-not-just-direct-generation">2.2 why not just direct generation?</a></li>
+    <li><a href="#23-chart-generation-workflow">2.3 chart generation workflow</a></li>
+    <li><a href="#24-evaluating-the-impact-of-reflection">2.4 Evaluating the impact of reflection</a></li>
+    <li><a href="#25-using-external-feedback">2.5 Using external feedback</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

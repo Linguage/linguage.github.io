@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南"><meta property="og:description" content="请用2-3句话回答以下每个问题，以检验您对核心概念的理解。"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/guides/lec-03/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南"><meta name="twitter:description" content="请用2-3句话回答以下每个问题，以检验您对核心概念的理解。"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/guides/lec-03/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-01/">「吴恩达Agentic AI 模块1」智能体AI工作流学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-02/">「吴恩达Agentic AI 模块2」反思设计模式学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/guides/lec-03/">「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-04/">「吴恩达Agentic AI 模块4」Agentic AI 工作流开发与优化学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-05/">「吴恩达Agentic AI 模块5」高度自主智能体AI模式学习指南</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/guides/" class="crumb-sec">学习指南：概念解析与练习</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-01/">「吴恩达Agentic AI 模块1」智能体AI工作流学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-02/">「吴恩达Agentic AI 模块2」反思设计模式学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/guides/lec-03/">「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-04/">「吴恩达Agentic AI 模块4」Agentic AI 工作流开发与优化学习指南</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guides/lec-05/">「吴恩达Agentic AI 模块5」高度自主智能体AI模式学习指南</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Han ZL</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="吴恩达agentic-ai-模块3代理式人工智能工具使用与mcp学习指南">「吴恩达Agentic AI 模块3」代理式人工智能工具使用与MCP学习指南</h1>
+<h2 id="测验">测验</h2>
+<h3 id="简答题">简答题</h3>
+<p>请用2-3句话回答以下每个问题，以检验您对核心概念的理解。</p>
+<ol>
+<li>在大型语言模型（LLM）的背景下，“工具使用”指的是什么？为什么它很重要？</li>
+<li>当一个工具可用时，LLM是否总会选择使用它？请解释其决策过程。</li>
+<li>根据“早期时代”的方法，描述LLM使用工具的完整流程。</li>
+<li>在手动的工具创建方法中，LLM是直接调用函数吗？请解释其背后的机制。</li>
+<li>像AISuite这样的现代库与旧的手动提示方法相比，是如何简化为LLM提供工具的过程的？</li>
+<li>在现代工具使用语法中，JSON模式（JSON schema）扮演什么角色？它通常包含哪些信息？</li>
+<li>为什么说代码执行是LLM一个特别强大的工具？</li>
+<li>与LLM代码执行相关的主要风险是什么？缓解这种风险的最佳实践是什么？</li>
+<li>模型上下文协议（MCP）旨在解决开发者社区面临的什么核心问题？</li>
+<li>什么是MCP客户端和MCP服务器？请举例说明它们如何交互。</li>
+</ol>
+<h3 id="测验答案">测验答案</h3>
+<ol>
+<li><strong>在大型语言模型（LLM）的背景下，“工具使用”指的是什么？为什么它很重要？</strong> “工具使用”是指让LLM自行决定何时请求调用一个函数来执行特定动作、收集信息或完成其他任务。这非常重要，因为就像人类使用工具能完成更多事情一样，为LLM提供工具（即函数）能极大地扩展其能力，使其能够完成仅凭自身训练数据无法完成的任务，例如获取当前时间或查询数据库。</li>
+<li><strong>当一个工具可用时，LLM是否总会选择使用它？请解释其决策过程。</strong> 不，LLM并不会总是使用可用的工具。开发者可以将决策权留给LLM，让它根据具体的用户提示来判断是否需要调用工具。例如，如果向一个拥有“获取当前时间”工具的LLM询问绿茶中的咖啡因含量，它会直接生成答案，而不会调用该工具，因为它判断该工具与问题无关。</li>
+<li><strong>根据“早期时代”的方法，描述LLM使用工具的完整流程。</strong> 该流程包括几个步骤：首先，开发者通过提示告知LLM可用工具及其调用格式。当LLM决定使用工具时，它会生成一个特定格式的文本（如FUNCTION: getCurrentTime）作为请求。然后，开发者编写的代码会捕获并解析这个输出，实际执行相应的函数，并将函数返回的结果反馈给LLM，最后LLM利用这个新信息生成最终的答复。</li>
+<li><strong>在手动的工具创建方法中，LLM是直接调用函数吗？请解释其背后的机制。</strong> 不，LLM不直接调用函数。其机制是，LLM通过生成一种特定格式的文本输出来“请求”调用函数。开发者需要编写代码来监视LLM的输出，当检测到这个预定义的格式时，由开发者的代码来负责解析请求、执行相应的函数，并将结果返回给LLM。</li>
+<li><strong>像AISuite这样的现代库与旧的手动提示方法相比，是如何简化为LLM提供工具的过程的？</strong> 现代库（如AISuite）能自动处理将函数描述给LLM的复杂过程。开发者无需手动编写冗长的提示来解释每个工具的用法，库会自动检查函数的文档字符串（docstring），并生成一个结构化的JSON模式。这个模式清晰地告诉LLM函数的名称、功能和参数，从而实现了工具的无缝集成。</li>
+<li><strong>在现代工具使用语法中，JSON模式（JSON schema）扮演什么角色？它通常包含哪些信息？</strong> JSON模式扮演着向LLM详细描述可用工具的角色。它是一个结构化的数据格式，通常包含函数的名称（name）、功能的详细描述（description，通常从代码的文档字符串中提取）以及函数的参数列表（parameters），包括每个参数的类型和用途。这使得LLM能够准确理解何时以及如何调用该工具。</li>
+<li><strong>为什么说代码执行是LLM一个特别强大的工具？</strong> 代码执行之所以强大，是因为它赋予了LLM极大的灵活性和解决复杂问题的能力。相比于为每个数学运算（加、减、平方根等）创建单独的工具，允许LLM编写并执行代码能让它处理几乎无限种类的计算和逻辑任务。这种通用性使得LLM能够用创新的代码解决方案来应对各种复杂的用户请求。</li>
+<li><strong>与LLM代码执行相关的主要风险是什么？缓解这种风险的最佳实践是什么？</strong> 主要风险在于安全性，LLM可能生成任意甚至有害的代码，例如错误地删除文件（如remove star.py）。缓解此风险的最佳实践是在一个安全的沙盒环境（如Docker或E2B）中运行代码。沙盒环境可以隔离代码的执行，从而降低数据丢失、敏感数据泄露或对系统造成损害的风险。</li>
+<li><strong>模型上下文协议（MCP）旨在解决开发者社区面临的什么核心问题？</strong> MCP旨在解决开发者在将各种工具和数据源（如Slack、GitHub、数据库）集成到其LLM应用中时普遍存在的重复劳动问题。在MCP出现之前，每个应用开发者都需要为同一个数据源编写自定义的封装代码，导致社区总工作量呈 M（应用数）乘以 N（工具数）的规模。MCP通过提供一个标准化的集成协议，将工作量减少到 M 加 N 的规模。</li>
+<li><strong>什么是MCP客户端和MCP服务器？请举例说明它们如何交互。</strong> MCP客户端是需要访问工具或数据的应用程序，而MCP服务器是提供这些工具或数据访问的服务封装层。例如，一个云桌面应用（MCP客户端）在需要获取GitHub仓库信息时，会向GitHub MCP服务器发送请求。服务器接收请求（如“列出最新的拉取请求”），执行相应的操作，并将结果返回给客户端，客户端再将这些信息提供给LLM以生成最终的摘要。</li>
+</ol>
+<h3 id="论文题目建议">论文题目建议</h3>
+<ol>
+<li>比较并对比“早期时代”手动启用工具使用的方法与使用AISuite等现代库的自动化方法。深入探讨开发者工作流程的演变、底层机制的差异以及对应用开发效率的影响。</li>
+<li>结合工具使用的概念，讨论大型语言模型中的“代理式”（Agentic）行为。模型能够决定何时使用哪个工具（包括决定不使用任何工具）的能力，是如何促成其代理特质的？</li>
+<li>深入分析将“代码执行”作为LLM工具的独特优势和重大风险。开发者应如何平衡这一工具的强大功能与保障系统安全性和可靠性的需求？请从技术和实践角度进行论述。</li>
+<li>阐述模型上下文协议（MCP）的原理及其在构建复杂、多工具LLM应用生态系统中的重要性。该协议如何改变应用开发者（客户端）和服务提供商（服务器）之间的互动模式和开发范式？</li>
+<li>设想你正在构建一个课程资料中描述的“日历助手代理”。请详细规划你的开发步骤，从定义必要的工具（如检查日历、创建约会），到实现与LLM的交互循环。在你的规划中，请引用全部五个相关模块（工具定义、创建、语法、代码执行、MCP）中的概念。</li>
+</ol>
+<h3 id="关键术语词汇表">关键术语词汇表</h3>
+<table>
+  <thead>
+      <tr>
+          <th>术语</th>
+          <th>定义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>工具使用 (Tool Use)</td>
+          <td>允许大型语言模型（LLM）自行决定何时请求调用一个函数，以执行特定动作、收集信息或完成其他任务的过程。</td>
+      </tr>
+      <tr>
+          <td>工具 (Tool)</td>
+          <td>提供给LLM的函数或代码，LLM可以请求调用这些函数来扩展其能力。</td>
+      </tr>
+      <tr>
+          <td>代理工作流 (Agentic Workflow)</td>
+          <td>LLM作为一个代理，自主地规划步骤、决策并使用工具来完成复杂任务的一系列流程。</td>
+      </tr>
+      <tr>
+          <td>代码执行 (Code Execution)</td>
+          <td>一种特殊的工具，允许LLM编写代码并请求执行，用于解决数学计算、数据处理等复杂问题，具有高度的灵活性。</td>
+      </tr>
+      <tr>
+          <td>沙盒环境 (Sandbox Environment)</td>
+          <td>一个安全的、隔离的执行环境（如Docker），用于运行由LLM生成的代码，以防止潜在的有害操作对系统造成损害。</td>
+      </tr>
+      <tr>
+          <td>JSON模式 (JSON Schema)</td>
+          <td>一种基于JSON的结构化数据格式，用于向LLM详细描述一个工具（函数），包括其名称、功能描述和参数。</td>
+      </tr>
+      <tr>
+          <td>AISuite</td>
+          <td>一个开源库，它简化了向LLM提供工具的过程，能够自动从函数的文档字符串生成JSON模式，与OpenAI的语法非常相似。</td>
+      </tr>
+      <tr>
+          <td>模型上下文协议 (MCP)</td>
+          <td>由Anthropic提出并被广泛采用的一个标准协议，旨在简化应用程序（客户端）对外部工具和数据源（服务器）的访问，减少开发者的重复集成工作。</td>
+      </tr>
+      <tr>
+          <td>MCP客户端 (MCP Client)</td>
+          <td>遵循MCP标准的应用程序，它消费（使用）由MCP服务器提供的工具或数据资源。</td>
+      </tr>
+      <tr>
+          <td>MCP服务器 (MCP Server)</td>
+          <td>遵循MCP标准的服务，它将对数据源（如GitHub, Slack）的访问封装起来，向MCP客户端提供工具或数据资源。</td>
+      </tr>
+  </tbody>
+</table>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#测验">测验</a>
+      <ul>
+        <li><a href="#简答题">简答题</a></li>
+        <li><a href="#测验答案">测验答案</a></li>
+        <li><a href="#论文题目建议">论文题目建议</a></li>
+        <li><a href="#关键术语词汇表">关键术语词汇表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#测验">测验</a>
+      <ul>
+        <li><a href="#简答题">简答题</a></li>
+        <li><a href="#测验答案">测验答案</a></li>
+        <li><a href="#论文题目建议">论文题目建议</a></li>
+        <li><a href="#关键术语词汇表">关键术语词汇表</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

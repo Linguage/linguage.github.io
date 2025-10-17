@@ -1,0 +1,980 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「吴恩达Agentic AI 模块1简报」Agentic AI工作流 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「吴恩达Agentic AI 模块1简报」Agentic AI工作流"><meta property="og:description" content="本文档综合分析了吴恩达关于“代理式AI工作流”（Agentic AI Workflows）的核心理念与实践方法。代理式AI是一种强大的应用程序构建范式，它将复杂的任务分解为多个步骤，通过迭代、反思和工具使用来执行，从而获得远超传统单次提示方法的性能和成果。"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/insights/lec-01/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「吴恩达Agentic AI 模块1简报」Agentic AI工作流"><meta name="twitter:description" content="本文档综合分析了吴恩达关于“代理式AI工作流”（Agentic AI Workflows）的核心理念与实践方法。代理式AI是一种强大的应用程序构建范式，它将复杂的任务分解为多个步骤，通过迭代、反思和工具使用来执行，从而获得远超传统单次提示方法的性能和成果。"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/insights/lec-01/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/insights/lec-01/">「吴恩达Agentic AI 模块1简报」Agentic AI工作流</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-02/">「吴恩达Agentic AI模块2简报」反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-03/">「吴恩达Agentic AI模块3简报」工具使用与模型上下文协议（MCP）</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-04/">「吴恩达Agentic AI模块4简报」工作流开发与优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-05/">「吴恩达Agentic AI模块5简报」高度自主的智能体AI模式</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/insights/" class="crumb-sec">课程内容简报</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「吴恩达Agentic AI 模块1简报」Agentic AI工作流</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/insights/lec-01/">「吴恩达Agentic AI 模块1简报」Agentic AI工作流</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-02/">「吴恩达Agentic AI模块2简报」反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-03/">「吴恩达Agentic AI模块3简报」工具使用与模型上下文协议（MCP）</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-04/">「吴恩达Agentic AI模块4简报」工作流开发与优化</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights/lec-05/">「吴恩达Agentic AI模块5简报」高度自主的智能体AI模式</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">吴恩达 | Google NotebookLM</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="吴恩达agentic-ai-模块1简报agentic-ai工作流">「吴恩达Agentic AI 模块1简报」Agentic AI工作流</h1>
+<h2 id="概要">概要</h2>
+<p>本文档综合分析了吴恩达关于“代理式AI工作流”（Agentic AI Workflows）的核心理念与实践方法。代理式AI是一种强大的应用程序构建范式，它将复杂的任务分解为多个步骤，通过迭代、反思和工具使用来执行，从而获得远超传统单次提示方法的性能和成果。</p>
+<h3 id="核心要点">核心要点</h3>
+<ol>
+<li>代理式工作流的定义： 与一次性生成结果的模式不同，代理式工作流是一个多步骤过程，AI系统通过规划、执行动作、反思和修正来完成任务。这类似于人类处理复杂问题的方式，例如先写大纲、再做研究、然后起草、最后修改。</li>
+<li>性能的巨大飞跃： 采用代理式工作流带来的性能提升，可能超过模型本身的代际升级。数据显示，为GPT-3.5模型应用代理式工作流后，其在编程基准测试中的表现甚至可以超越未使用该工作流的更强大的GPT-4模型。</li>
+<li>自主性光谱： 代理式系统存在一个从“低自主性”到“高自主性”的光谱。低自主性系统（步骤由工程师预先设定）更易于控制、更可靠，已在商业中广泛应用。高自主性系统（由LLM自行决定步骤）则更具实验性，也更难预测。</li>
+<li>成功的关键技能： 构建高效代理式工作流的两大核心技能是任务分解（将复杂任务拆解为LLM或工具可执行的小步骤）和严格的评估（“Evals”），通过系统化的错误分析和性能追踪来驱动迭代改进。</li>
+<li>四大设计模式： 构建代理式工作流主要依赖四种关键的设计模式：</li>
+</ol>
+<ul>
+<li>反思 (Reflection): 让LLM检查并批判自身的输出，从而进行迭代改进。</li>
+<li>工具使用 (Tool Use): 赋予LLM调用外部函数（如网络搜索、代码执行、数据库查询）的能力。</li>
+<li>规划 (Planning): LLM自主决定完成任务所需的步骤顺序。</li>
+<li>多代理协作 (Multi-Agent Collaboration): 模拟一个团队，让多个具有不同角色的AI代理协同工作。</li>
+</ul>
+<ol start="6">
+<li>广泛的应用价值： 代理式工作流已成功应用于多种场景，包括深度研究报告撰写、客户支持、发票处理和复杂的法律文件分析。对于许多项目而言，没有代理式工作流，其实现将“不可能”。</li>
+</ol>
+<hr>
+<h2 id="1-代理式ai工作流定义与理念">1. 代理式AI工作流：定义与理念</h2>
+<h3 id="11-核心概念超越单次生成">1.1 核心概念：超越单次生成</h3>
+<p>传统的与大型语言模型（LLM）交互的方式是“直接生成”，即用户提供一个提示，LLM一次性地从头到尾生成完整的文本，这如同要求一个人“不使用退格键一次性写完一篇文章”。</p>
+<p>代理式AI工作流则截然不同。它将一个复杂的任务分解为一系列的子任务，并以迭代的方式完成。</p>
+<ul>
+<li>典型流程（以撰写研究报告为例）：
+<ol>
+<li>生成大纲： 首先，让LLM为主题撰写一个初步大纲。</li>
+<li>研究与信息收集： 接着，让LLM决定需要进行哪些网络搜索，并调用搜索API来获取相关网页内容。</li>
+<li>起草初稿： 基于收集到的信息，LLM撰写第一版草稿。</li>
+<li>反思与修订： LLM（或另一个AI代理）阅读初稿，识别需要修改或补充研究的部分。</li>
+<li>人类介入（可选）： 在关键环节（如事实核查），可以设计让AI请求人类审核的步骤。</li>
+<li>最终修订： 综合所有反馈，完成最终报告。</li>
+</ol>
+</li>
+</ul>
+<p>吴恩达指出，这种迭代过程虽然耗时更长，但最终产出的工作成果质量“要好得多”。</p>
+<h3 id="12-代理式-agentic术语的由来">1.2 “代理式 (Agentic)”术语的由来</h3>
+<p>吴恩达创造并推广“代理式 (agentic)”这个形容词，是为了避免AI社区中关于“什么是真正的代理 (agent)”的无谓争论。他认为，与其将系统划分为“是代理”或“不是代理”的二元对立，不如承认系统可以在不同程度上表现出“代理行为”。这一术语的引入，旨在将焦点从定义辩论转移到构建有价值的系统上。</p>
+<h2 id="2-自主性光谱从预定步骤到动态决策">2. 自主性光谱：从预定步骤到动态决策</h2>
+<p>代理式AI系统并非只有一种形态，而是存在于一个从低到高的自主性光谱上。</p>
+<table>
+  <thead>
+      <tr>
+          <th>自主性程度</th>
+          <th>特征</th>
+          <th>优点</th>
+          <th>缺点</th>
+          <th>应用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>低自主性</td>
+          <td>1. 步骤顺序由工程师预先硬编码。<br>2. 工具调用是确定性的。<br>3. LLM的主要作用是生成文本内容。</td>
+          <td>可控性强、结果可预测、可靠性高</td>
+          <td>灵活性差、无法处理未知流程</td>
+          <td>大多数当前商业应用，如发票处理、标准客户问询。</td>
+      </tr>
+      <tr>
+          <td>半自主性</td>
+          <td>1. LLM可以在一定范围内做出决策。<br>2. 可以从预定义的工具集中选择并调用工具。</td>
+          <td>兼具一定的灵活性和可控性。</td>
+          <td>复杂性增加、灵活性差、无法处理未知流程</td>
+          <td>灵活性差、无法处理未知流程</td>
+      </tr>
+      <tr>
+          <td>高自主性</td>
+          <td>1. LLM自主决定完成任务的完整步骤顺序。<br>2. 甚至可以自主编写新的函数或创建新工具。<br>3. 流程是动态且不确定的。</td>
+          <td>极高的灵活性、能处理未知和复杂的任务</td>
+          <td>可控性差、结果难以预测、可靠性较低，更具实验性</td>
+          <td>自动网页浏览、复杂问题解决等前沿研究领域</td>
+      </tr>
+  </tbody>
+</table>
+<p>吴恩达强调，位于“低自主性”一端的应用同样非常有价值，并且是当今许多企业正在构建和部署的系统。</p>
+<h2 id="3-代理式工作流的核心优势">3. 代理式工作流的核心优势</h2>
+<p>代理式工作流不仅仅是为了提升任务完成的可能性，还带来了多方面的显著优势。</p>
+<h3 id="31-性能的巨大提升">3.1 性能的巨大提升</h3>
+<p>代理式工作流能够释放现有模型的更大潜力，其带来的性能提升甚至可能超过模型本身的代际升级。</p>
+<ul>
+<li>编程基准测试 (Human Eval) 数据：
+<ul>
+<li>GPT-3.5 (非代理式): 准确率 40%</li>
+<li>GPT-4 (非代理式): 准确率 67%</li>
+<li>GPT-3.5 (代理式): 准确率远高于非代理式的GPT-3.5，甚至超越非代理式的GPT-4。</li>
+<li>GPT-4 (代理式): 准确率进一步大幅提升。</li>
+</ul>
+</li>
+</ul>
+<p>吴恩达指出：“从一代模型到下一代模型的提升是巨大的，但这种差异仍然没有在上一代模型上实施代理式工作流所带来的差异大。”</p>
+<h3 id="32-并行化处理以提升效率">3.2 并行化处理以提升效率</h3>
+<p>对于需要大量信息收集的任务，代理式工作流可以通过并行处理来显著缩短时间，这比人类的顺序处理方式更高效。</p>
+<ul>
+<li>示例： 在撰写研究报告时，AI可以：
+<ul>
+<li>并行生成搜索词： 同时运行3个LLM实例，为不同的研究角度生成搜索查询。</li>
+<li>并行下载网页： 同时下载所有搜索结果中的9个相关网页。</li>
+<li>整合信息： 将所有下载的内容一次性提供给LLM进行综合分析和撰写。</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-模块化设计带来的灵活性">3.3 模块化设计带来的灵活性</h3>
+<p>代理式工作流的架构天然具有模块化特性，允许开发者轻松地添加、更新或替换其中的组件，以优化整体性能。</p>
+<ul>
+<li>可替换的组件包括：
+<ul>
+<li>工具： 可以更换不同的网络搜索引擎（如Google, Bing, Tavily, u.com），或加入新闻搜索、学术搜索等新工具。</li>
+<li>模型： 可以在工作流的不同步骤尝试使用不同的LLM或LLM提供商，以找到针对特定子任务的最佳模型。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-实际应用场景分析">4. 实际应用场景分析</h2>
+<p>代理式工作流的应用范围广泛，其实现难度取决于任务流程的清晰度。</p>
+<h3 id="41-流程清晰易于实现的应用">4.1 流程清晰、易于实现的应用</h3>
+<p>当业务流程有明确的步骤或标准操作程序（SOP）时，将其编码为代理式工作流相对容易且可靠。</p>
+<ul>
+<li>发票处理：
+<ol>
+<li>输入PDF发票，调用PDF转文本API。</li>
+<li>LLM判断文件是否为发票。</li>
+<li>若是，则提取关键字段（账单方、金额、截止日期等）。</li>
+<li>调用API将提取的信息更新到数据库。</li>
+</ol>
+</li>
+<li>基础客户订单查询：
+<ol>
+<li>输入客户邮件，LLM提取订单详情。</li>
+<li>LLM选择调用订单数据库API，查询订单状态。</li>
+<li>LLM起草回复邮件。</li>
+<li>LLM调用“请求审核”工具，将草稿送交人工审核后发送。</li>
+</ol>
+</li>
+</ul>
+<h3 id="42-流程未知更具挑战性的应用">4.2 流程未知、更具挑战性的应用</h3>
+<p>当处理任务所需的步骤无法预先确定时，系统需要具备规划能力，这使得实现难度和不可预测性都大大增加。</p>
+<ul>
+<li>高级客户服务：
+<ul>
+<li>多重查询： 客户询问“是否有黑色或蓝色的牛仔裤？”，AI需要规划并执行两次库存数据库查询，然后综合结果进行回复。</li>
+<li>复杂逻辑： 客户要求退货，AI需要规划一系列步骤：验证购买记录 -&gt; 检查退货政策（如30天内、未使用） -&gt; 若符合条件，则生成退货标签并更新数据库状态。</li>
+</ul>
+</li>
+</ul>
+<h3 id="43-前沿与实验性应用">4.3 前沿与实验性应用</h3>
+<p>这是当前研究的热点领域，虽然潜力巨大，但可靠性尚不足以用于关键任务。</p>
+<ul>
+<li>计算机使用（Web浏览）：
+<ul>
+<li>任务： 代理被要求查询特定航班的座位情况。</li>
+<li>行为： 代理自主操作网络浏览器，访问航空公司网站，在页面上点击元素、填写表单。当遇到困难时（如网站加载问题），它能自主决定切换到Google Flights等其他网站继续执行任务。</li>
+<li>挑战： 当前的代理在处理网页加载缓慢、理解复杂网页布局方面仍存在困难，可靠性不高。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-任务分解构建工作流的基石">5. 任务分解：构建工作流的基石</h2>
+<p>任务分解是将一个宏大、复杂的任务拆解成一系列离散、可执行步骤的过程，是构建代理式工作流的核心技能。</p>
+<h3 id="51-任务分解的原则">5.1 任务分解的原则</h3>
+<p>分解过程的核心问题是：“这个步骤能否由一个LLM、一段简短的代码、一个函数调用或一个工具来完成？”</p>
+<ul>
+<li>迭代式分解：
+<ol>
+<li>从一个简单的流程开始（例如：写大纲 -&gt; 搜索 -&gt; 写文章）。</li>
+<li>评估结果。如果结果不理想（例如，文章感觉“脱节”），则选择其中一个步骤进行再分解。</li>
+<li>例如，将“写文章”进一步分解为：“写初稿” -&gt; “反思需要修改的部分” -&gt; “修订草稿”。</li>
+<li>持续这个过程，直到每个子步骤都足够简单，并且可以由可用的构建模块可靠地执行。</li>
+</ol>
+</li>
+</ul>
+<h3 id="52-可用的构建模块">5.2 可用的构建模块</h3>
+<p>开发者在设计工作流时，可以调用多种构建模块：</p>
+<ul>
+<li>AI模型：
+<ul>
+<li>大型语言模型（LLM）或多模态模型（LMM）。</li>
+<li>专用AI模型（如PDF转文本、文本转语音）。</li>
+</ul>
+</li>
+<li>软件工具：
+<ul>
+<li>API调用： 网络搜索、获取天气数据、发送邮件、检查日历等。</li>
+<li>信息检索： 从数据库或大型文本库中检索信息（RAG）。</li>
+<li>代码执行： 让LLM编写代码并在本地环境中运行，以执行计算或复杂操作。</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-评估evals驱动性能提升的关键">6. 评估（Evals）：驱动性能提升的关键</h2>
+<p>吴恩达强调，能否推动一个纪律严明的评估流程，是区分高效和低效的代理式工作流开发者的最大预测因素之一。</p>
+<h3 id="61-评估流程">6.1 评估流程</h3>
+<p>评估不应在开发前凭空想象，而应在系统构建后，通过观察实际输出来发现问题。</p>
+<ol>
+<li>构建并观察： 先构建一个初始版本的工作流。</li>
+<li>手动检查错误： 阅读大量输出，寻找不符合预期的行为。例如，发现客户服务代理在回复中“意外地提到了竞争对手”。</li>
+<li>定义评估指标： 针对发现的问题，创建可追踪的评估指标。</li>
+</ol>
+<h3 id="62-评估方法">6.2 评估方法</h3>
+<ul>
+<li>客观标准评估：
+<ul>
+<li>方法： 对于可以明确判断对错的问题，编写代码来进行自动检查。</li>
+<li>示例： 编写一个脚本，搜索输出文本中是否包含一个已知的竞争对手名单，并计算其出现频率。</li>
+</ul>
+</li>
+<li>主观标准评估（LLM as Judge）：
+<ul>
+<li>方法： 对于难以用代码衡量的质量问题（如文章的“思想深度”），使用另一个LLM作为“裁判”来打分。</li>
+<li>示例： 提示一个裁判LLM：“请为以下文章的质量打分，范围从1到5”。</li>
+<li>注意事项： 吴恩达提醒，让LLM在1到5的尺度上直接打分的效果并不理想，后续课程会介绍更可靠的技术。</li>
+</ul>
+</li>
+</ul>
+<h3 id="63-评估的类型">6.3 评估的类型</h3>
+<ul>
+<li>端到端评估： 衡量整个代理工作流最终输出的质量。</li>
+<li>组件级评估： 衡量工作流中单个步骤输出的质量。</li>
+<li>错误分析： 深入检查工作流的中间输出（称为“traces”），以准确定位问题根源。</li>
+</ul>
+<h2 id="7-四大核心代理式设计模式">7. 四大核心代理式设计模式</h2>
+<p>这些设计模式是组合构建模块以形成复杂工作流的常用策略。</p>
+<h3 id="71-反思-reflection">7.1 反思 (Reflection)</h3>
+<p>该模式让LLM检查并改进其自身的输出。</p>
+<ul>
+<li>流程：
+<ol>
+<li>LLM生成一个初步输出（如一段代码）。</li>
+<li>将该输出重新输入给同一个LLM，并附上批判性指令（例如，“请仔细检查这段代码的正确性、风格和效率，并提出建设性批评”）。</li>
+<li>LLM会识别出自身之前输出中的问题或缺陷。</li>
+<li>基于这些批评，LLM生成一个改进后的新版本。</li>
+</ol>
+</li>
+<li>变体： 也可以使用一个专门的“批评家代理”（即一个被提示扮演批评角色的LLM）来完成此任务。</li>
+</ul>
+<h3 id="72-工具使用-tool-use">7.2 工具使用 (Tool Use)</h3>
+<p>赋予LLM调用外部函数或API的能力，以获取信息或执行操作，极大地扩展了其能力范围。</p>
+<ul>
+<li>示例：
+<ul>
+<li>信息获取： 当被问及“根据评测，最好的咖啡机是哪款？”时，LLM可以调用网络搜索工具来查找最新信息。</li>
+<li>精确计算： 当被问及复杂的数学问题时，LLM可以调用代码执行工具来编写并运行代码，得出精确答案。</li>
+<li>应用交互： LLM可以调用API来操作邮件、日历等生产力应用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="73-规划-planning">7.3 规划 (Planning)</h3>
+<p>在该模式下，LLM不再遵循预设的步骤，而是自主决定完成任务所需的行动序列。</p>
+<ul>
+<li>示例 (Hugging GPT)：
+<ul>
+<li>用户请求： “请生成一张女孩读书的图片，姿势与另一张图片中的男孩相同，然后用你的声音描述这张新图片。”</li>
+<li>LLM的规划：
+<ol>
+<li>调用姿态确定模型，分析男孩的姿势。</li>
+<li>调用文本到图像生成模型，生成具有相同姿势的女孩图片。</li>
+<li>调用文本到语音模型，生成对新图片的语音描述。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>特点： 具备规划能力的代理更难控制，更具实验性，但有时能产生令人惊喜的结果。</li>
+</ul>
+<h3 id="74-多代理协作-multi-agent-collaboration">7.4 多代理协作 (Multi-Agent Collaboration)</h3>
+<p>该模式通过模拟一个人类团队，让多个具有不同角色和专长的AI代理协同工作来完成复杂任务。</p>
+<ul>
+<li>示例：
+<ul>
+<li>虚拟软件公司 (ChatDev)： 一个由多个AI代理（如CEO、程序员、测试员、设计师）组成的虚拟团队，能够协同完成软件开发任务。</li>
+<li>营销手册撰写：
+<ol>
+<li>研究员代理： 负责进行在线研究。</li>
+<li>营销员代理： 负责撰写营销文案。</li>
+<li>编辑代理： 负责对文案进行编辑和润色。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>特点： 难以控制，但研究表明，对于某些复杂任务（如撰写传记），多代理协作可以产生更好的结果。</li>
+</ul>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概要">概要</a>
+      <ul>
+        <li><a href="#核心要点">核心要点</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-代理式ai工作流定义与理念">1. 代理式AI工作流：定义与理念</a>
+      <ul>
+        <li><a href="#11-核心概念超越单次生成">1.1 核心概念：超越单次生成</a></li>
+        <li><a href="#12-代理式-agentic术语的由来">1.2 “代理式 (Agentic)”术语的由来</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-自主性光谱从预定步骤到动态决策">2. 自主性光谱：从预定步骤到动态决策</a></li>
+    <li><a href="#3-代理式工作流的核心优势">3. 代理式工作流的核心优势</a>
+      <ul>
+        <li><a href="#31-性能的巨大提升">3.1 性能的巨大提升</a></li>
+        <li><a href="#32-并行化处理以提升效率">3.2 并行化处理以提升效率</a></li>
+        <li><a href="#33-模块化设计带来的灵活性">3.3 模块化设计带来的灵活性</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-实际应用场景分析">4. 实际应用场景分析</a>
+      <ul>
+        <li><a href="#41-流程清晰易于实现的应用">4.1 流程清晰、易于实现的应用</a></li>
+        <li><a href="#42-流程未知更具挑战性的应用">4.2 流程未知、更具挑战性的应用</a></li>
+        <li><a href="#43-前沿与实验性应用">4.3 前沿与实验性应用</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-任务分解构建工作流的基石">5. 任务分解：构建工作流的基石</a>
+      <ul>
+        <li><a href="#51-任务分解的原则">5.1 任务分解的原则</a></li>
+        <li><a href="#52-可用的构建模块">5.2 可用的构建模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-评估evals驱动性能提升的关键">6. 评估（Evals）：驱动性能提升的关键</a>
+      <ul>
+        <li><a href="#61-评估流程">6.1 评估流程</a></li>
+        <li><a href="#62-评估方法">6.2 评估方法</a></li>
+        <li><a href="#63-评估的类型">6.3 评估的类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-四大核心代理式设计模式">7. 四大核心代理式设计模式</a>
+      <ul>
+        <li><a href="#71-反思-reflection">7.1 反思 (Reflection)</a></li>
+        <li><a href="#72-工具使用-tool-use">7.2 工具使用 (Tool Use)</a></li>
+        <li><a href="#73-规划-planning">7.3 规划 (Planning)</a></li>
+        <li><a href="#74-多代理协作-multi-agent-collaboration">7.4 多代理协作 (Multi-Agent Collaboration)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概要">概要</a>
+      <ul>
+        <li><a href="#核心要点">核心要点</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-代理式ai工作流定义与理念">1. 代理式AI工作流：定义与理念</a>
+      <ul>
+        <li><a href="#11-核心概念超越单次生成">1.1 核心概念：超越单次生成</a></li>
+        <li><a href="#12-代理式-agentic术语的由来">1.2 “代理式 (Agentic)”术语的由来</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-自主性光谱从预定步骤到动态决策">2. 自主性光谱：从预定步骤到动态决策</a></li>
+    <li><a href="#3-代理式工作流的核心优势">3. 代理式工作流的核心优势</a>
+      <ul>
+        <li><a href="#31-性能的巨大提升">3.1 性能的巨大提升</a></li>
+        <li><a href="#32-并行化处理以提升效率">3.2 并行化处理以提升效率</a></li>
+        <li><a href="#33-模块化设计带来的灵活性">3.3 模块化设计带来的灵活性</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-实际应用场景分析">4. 实际应用场景分析</a>
+      <ul>
+        <li><a href="#41-流程清晰易于实现的应用">4.1 流程清晰、易于实现的应用</a></li>
+        <li><a href="#42-流程未知更具挑战性的应用">4.2 流程未知、更具挑战性的应用</a></li>
+        <li><a href="#43-前沿与实验性应用">4.3 前沿与实验性应用</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-任务分解构建工作流的基石">5. 任务分解：构建工作流的基石</a>
+      <ul>
+        <li><a href="#51-任务分解的原则">5.1 任务分解的原则</a></li>
+        <li><a href="#52-可用的构建模块">5.2 可用的构建模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-评估evals驱动性能提升的关键">6. 评估（Evals）：驱动性能提升的关键</a>
+      <ul>
+        <li><a href="#61-评估流程">6.1 评估流程</a></li>
+        <li><a href="#62-评估方法">6.2 评估方法</a></li>
+        <li><a href="#63-评估的类型">6.3 评估的类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-四大核心代理式设计模式">7. 四大核心代理式设计模式</a>
+      <ul>
+        <li><a href="#71-反思-reflection">7.1 反思 (Reflection)</a></li>
+        <li><a href="#72-工具使用-tool-use">7.2 工具使用 (Tool Use)</a></li>
+        <li><a href="#73-规划-planning">7.3 规划 (Planning)</a></li>
+        <li><a href="#74-多代理协作-multi-agent-collaboration">7.4 多代理协作 (Multi-Agent Collaboration)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

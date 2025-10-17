@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「Scripts」Module 5: Patterns for Highly Autonomous Agents • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Scripts」Module 5: Patterns for Highly Autonomous Agents"><meta property="og:description" content="```"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecture/lec-05/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「Scripts」Module 5: Patterns for Highly Autonomous Agents"><meta name="twitter:description" content="```"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecture/lec-05/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-01/">「Scripts」Module 1: Introduction to Agentic Workflows</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-02/">「Scripts」Module 2: Reflection Design Pattern</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-03/">「Scripts」Module 3: Tool Use</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-04/">「Scripts」Module 4: Practical Tips for Building Agentic AI</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture/lec-05/">「Scripts」Module 5: Patterns for Highly Autonomous Agents</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/lecture/" class="crumb-sec">课程视频脚本-英文</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「Scripts」Module 5: Patterns for Highly Autonomous Agents</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-01/">「Scripts」Module 1: Introduction to Agentic Workflows</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-02/">「Scripts」Module 2: Reflection Design Pattern</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-03/">「Scripts」Module 3: Tool Use</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-04/">「Scripts」Module 4: Practical Tips for Building Agentic AI</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture/lec-05/">「Scripts」Module 5: Patterns for Highly Autonomous Agents</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Andrew Ng</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <h1 id="module-5-patterns-for-highly-autonomous-agents">Module 5: Patterns for Highly Autonomous Agents</h1>
+<h2 id="51-planning-workflows">5.1 Planning workflows</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>Welcome to this final module where you learn about design patterns that lets you build
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>highly autonomous agents, where you don<span style="color:#e6db74">&#39;t need to hard code in advance the sequence of steps to take,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>but it can be more flexible <span style="color:#f92672">and</span> decide <span style="color:#66d9ef">for</span> itself what steps it wants to take to accomplish a task<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>We<span style="color:#e6db74">&#39;ll talk about the planning design pattern and then later in this module,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>how to build multi<span style="color:#f92672">-</span>agent systems<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s dive in.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>Suppose you run a sunglasses retail store <span style="color:#f92672">and</span> have information on what sunglasses are <span style="color:#f92672">in</span> your
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>inventory stored <span style="color:#f92672">in</span> a database<span style="color:#f92672">.</span> You might want a customer service agent to be able to answer
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>questions like, <span style="color:#66d9ef">do</span> you have any round sunglasses <span style="color:#f92672">in</span> stock<span style="color:#960050;background-color:#1e0010">?</span> They<span style="color:#e6db74">&#39;re under $100. This is a fairly</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>complex query because you have to look through the product descriptions to see what sunglasses
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>are round, then look at what is <span style="color:#f92672">in</span> stock, <span style="color:#f92672">and</span> then finally see what<span style="color:#e6db74">&#39;s under $100 in order to tell the</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>customer, yes, we have classic sunglasses<span style="color:#f92672">.</span> How <span style="color:#66d9ef">do</span> you build an agent to answer a broad range of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>customer queries like this <span style="color:#f92672">and</span> many others<span style="color:#960050;background-color:#1e0010">?</span> In order to <span style="color:#66d9ef">do</span> so, we<span style="color:#e6db74">&#39;re going to give LLM</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>a set of tools to let it get item descriptions, such as look up <span style="color:#66d9ef">if</span> different glasses are round,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>check inventory, maybe process item returns, which is <span style="color:#f92672">not</span> needed <span style="color:#66d9ef">for</span> this query,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>but we need it <span style="color:#66d9ef">for</span> other queries, get item price, check past transactions, process item sale,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> In order to let an LLM figure out what<span style="color:#e6db74">&#39;s the right sequence of tools to use to respond to</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>the customer request, you might then write a prompt like this<span style="color:#f92672">.</span> You have access to the following tools
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> give it a description of each of the, say, six tools <span style="color:#f92672">or</span> even more tools that the LLM has,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> to then tell it to <span style="color:#66d9ef">return</span> a step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step plan to carry out the user<span style="color:#e6db74">&#39;s request. In this case,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>to answer this particular query, a reasonable plan that an LLM might output might be to first
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>use get item descriptions to check the different descriptions to find the round sunglasses,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then use check inventory to see <span style="color:#66d9ef">if</span> they<span style="color:#e6db74">&#39;re in stock, and use get item price to see if the</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span><span style="color:#f92672">-</span>stock results are less than <span style="color:#f92672">$</span><span style="color:#ae81ff">100.</span> After an LLM outputs this plan with three steps, what we can <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>is then take the step one text, that is this text written here <span style="color:#f92672">in</span> red, <span style="color:#f92672">and</span> <span style="color:#66d9ef">pass</span> that to an LLM,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>maybe with additional context about what are the tools with your user query, with additional
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>background context, <span style="color:#f92672">and</span> <span style="color:#66d9ef">pass</span> an LLM to carry out step one<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, hopefully the LLM will
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>choose to call the get item descriptions to get the appropriate descriptions of items,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> the output of that first step can let it select which are the round sunglasses,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> that output of step one is then passed together with the step two instructions, that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>would be these instructions that I have here <span style="color:#f92672">in</span> blue, to an LLM to then execute the second step
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>of the plan<span style="color:#f92672">.</span> Hopefully it will then take the two pairs of round sunglasses we found on the previous
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>slide <span style="color:#f92672">and</span> check the inventory, <span style="color:#f92672">and</span> the output of that second step is then used to another LLM call,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>where you have the output of the second step as well as the instructions of what to <span style="color:#66d9ef">do</span> <span style="color:#66d9ef">for</span> step
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>three<span style="color:#f92672">.</span> Pass the LLM to have it get the item price, <span style="color:#f92672">and</span> finally this output is fed back to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>the LLM one last time to generate the final answer <span style="color:#66d9ef">for</span> the user<span style="color:#f92672">.</span> In this slide, I<span style="color:#e6db74">&#39;ve simplified a lot</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>of details a little bit<span style="color:#f92672">.</span> The actual plan typically written by the LLM is more detailed than these
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>simple one<span style="color:#f92672">-</span>line instructions, but the basic workflow is to have an LLM write out multiple
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>steps of a plan, <span style="color:#f92672">and</span> then task it to execute each step of the plan <span style="color:#f92672">in</span> turn with some appropriate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>surrounding context about what is the task, what are the tools available, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> And the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>exciting thing about using an LLM to plan this way is that we did <span style="color:#f92672">not</span> have to decide <span style="color:#f92672">in</span> advance
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>what is the sequence <span style="color:#f92672">in</span> which to call tools <span style="color:#f92672">in</span> order to answer a fairly complex customer request<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>If a customer were to make a different request, such as I would like to <span style="color:#66d9ef">return</span> the gold frame
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>glasses that I had purchased but <span style="color:#f92672">not</span> the metal frame ones, then you can imagine an LLM similarly
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>being able to come up with a different plan to figure out based on what they had purchased previously,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>which glasses they had bought based on get item descriptions, where the gold frame ones they want
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>to <span style="color:#66d9ef">return</span>, <span style="color:#f92672">and</span> then maybe call process item <span style="color:#66d9ef">return</span><span style="color:#f92672">.</span> So with an agent that can plan like this, it can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>carry out a much wider range of tasks that can require calling many different tools <span style="color:#f92672">in</span> many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>different orders<span style="color:#f92672">.</span> One more example of planning, let<span style="color:#e6db74">&#39;s take a look at an email assistant. If you</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>want to be to tell your assistant, so please reply to that email invitation from Bob <span style="color:#f92672">in</span> New York,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>tell him to attend <span style="color:#f92672">and</span> archive his email<span style="color:#f92672">.</span> Then an email assistant may be given tools like this to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>search email, move an email, delete an email, <span style="color:#f92672">and</span> send an email<span style="color:#f92672">.</span> And you might write an assistant
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>prompt saying you have access to the following tools, <span style="color:#f92672">and</span> again please <span style="color:#66d9ef">return</span> the step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step plan<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>In this <span style="color:#66d9ef">case</span>, maybe the LLM will say the steps <span style="color:#66d9ef">for</span> this are to use search email to find the email from
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>Bob that mentioned dinner <span style="color:#f92672">and</span> New York, <span style="color:#f92672">and</span> then generate <span style="color:#f92672">and</span> send an email to confirm attendance,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then lastly move that email to the archive folder<span style="color:#f92672">.</span> Given this plan, which looks a reasonable
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>one, you would then again task an LLM step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step to carry out this plan<span style="color:#f92672">.</span> So the text from the first
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>step, shown here <span style="color:#f92672">in</span> red, will be fed to the LLM with additional background context, <span style="color:#f92672">and</span> hopefully
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>it<span style="color:#e6db74">&#39;ll trigger search email. Then the output of that can be given to an LLM again with the step</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>two instructions to send an appropriate response<span style="color:#f92672">.</span> And then finally, assuming the email was sent
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>successfully, you can take that output <span style="color:#f92672">and</span> have the LLM execute the third step of moving the email
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>from Bob into the archive folder<span style="color:#f92672">.</span> The planning design pattern is already used successfully
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> many highly agentic coding systems, where <span style="color:#66d9ef">if</span> you ask it to write a piece of software to build
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>some fairly complex application, it might actually come up with a plan to build this component, build
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>this component, to almost form a checklist, <span style="color:#f92672">and</span> then <span style="color:#66d9ef">do</span> those steps one at a time to build a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>decently complex piece of software<span style="color:#f92672">.</span> For many other applications, the use of planning is still
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>maybe more experimental<span style="color:#f92672">.</span> It<span style="color:#e6db74">&#39;s not in very widespread use. And one of the challenges of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>planning is it makes the system sometimes a little bit hard to control, because you as a developer,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>you don<span style="color:#e6db74">&#39;t really know at runtime what plan it will come up with. And so I think outside highly</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>agentic coding systems, where it actually works really well, adoption of planning is still growing
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> other sectors<span style="color:#f92672">.</span> But this is exciting technology, <span style="color:#f92672">and</span> I think it will keep getting better <span style="color:#f92672">and</span> we<span style="color:#e6db74">&#39;ll</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>see it <span style="color:#f92672">in</span> more <span style="color:#f92672">and</span> more applications<span style="color:#f92672">.</span> The cool thing about building agents that can plan <span style="color:#66d9ef">for</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>themselves is you don<span style="color:#e6db74">&#39;t need to hard code in advance the exact sequence of steps an LLM may</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>take to carry out a complex task<span style="color:#f92672">.</span> Now, I know that <span style="color:#f92672">in</span> this video, I<span style="color:#e6db74">&#39;ve gone over the planning process</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>at a fairly high level, with it all putting a list of steps <span style="color:#f92672">and</span> then tasking an LLM to carry
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>out the steps of the plan one step at a time<span style="color:#f92672">.</span> But how does this actually work<span style="color:#960050;background-color:#1e0010">?</span> In the next video,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>we<span style="color:#e6db74">&#39;ll take a deeper dive to look further into the guts of what these plans actually look like,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> how the strings together to have an LLM plan <span style="color:#f92672">and</span> execute the plan <span style="color:#66d9ef">for</span> you<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at that in the next video.</span>
+</span></span></code></pre></div><h2 id="52-creating-and-executing-llm-plans">5.2 Creating and executing LLM plans</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>In this video, we<span style="color:#e6db74">&#39;ll look in detail at how to prompt an LLM to generate a plan,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> how to read, interpret, <span style="color:#f92672">and</span> execute that plan<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s dive in.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>This is a plan that you saw <span style="color:#f92672">in</span> the previous video <span style="color:#66d9ef">for</span> the customer service agents,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> I have presented this plan at a high level using simple text descriptions<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at how you can get an LLM to write very clear plans that go a little bit</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>beyond these simple high<span style="color:#f92672">-</span>level text descriptions<span style="color:#f92672">.</span> It turns out that many developers will ask an LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>to format the plan it once executed <span style="color:#f92672">in</span> JSON format, because this allows downstream code
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>to parse what exactly are the steps of the plan <span style="color:#f92672">in</span> relatively clear <span style="color:#f92672">and</span> unambiguous ways,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> all of the leading LLMs are pretty good at generating JSON outputs at this point<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>So the system prompt might say something like this<span style="color:#f92672">.</span> You have access to the following tools,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then create a step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step plan <span style="color:#f92672">in</span> JSON format, <span style="color:#f92672">and</span> you might describe the JSON format
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> enough detail with the goal of getting it to output a plan like that shown here on the right<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>So <span style="color:#f92672">in</span> this JSON output, it creates a list where the first list item has clear keys <span style="color:#f92672">and</span> values
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>that say step one of the plan has the following description, <span style="color:#f92672">and</span> it should use the following <span style="color:#66d9ef">tool</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>with the following arguments parsed to that <span style="color:#66d9ef">tool</span><span style="color:#f92672">.</span> Then after that, step two of the plan
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>is to carry out this task, <span style="color:#f92672">and</span> then use this <span style="color:#66d9ef">tool</span>, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> So this JSON format, as opposed to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>writing the plan <span style="color:#f92672">in</span> English, allows downstream code to more clearly parse out exactly what are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>the steps of the plan so that it can be reliably executed one step at a time<span style="color:#f92672">.</span> Instead of JSON,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>I also see some developers use XML, where you can use XML delimiters<span style="color:#f92672">.</span> You use XML tags
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>to clearly specify what are the steps of the plan <span style="color:#f92672">and</span> what step number it is<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>Some developers, I feel like fewer developers, will use markdown, which is just sometimes
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>slightly more ambiguous <span style="color:#f92672">in</span> terms of how we parse it, <span style="color:#f92672">and</span> I think plain text is maybe the least
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>reliable of these options<span style="color:#f92672">.</span> But I think either JSON, which I<span style="color:#e6db74">&#39;m showing here, or XML would be</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>good options <span style="color:#66d9ef">for</span> how to ask the LLM to format a plan unambiguously<span style="color:#f92672">.</span> So that<span style="color:#e6db74">&#39;s it. By opening</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>plans <span style="color:#f92672">in</span> JSON, you can then parse it <span style="color:#f92672">and</span> have downstream workflows execute different steps of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>the plan more systematically<span style="color:#f92672">.</span> Now, <span style="color:#f92672">in</span> terms of getting LLMs to plan, it turns out there<span style="color:#e6db74">&#39;s one</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>other really neat idea that lets an LLM output very complex plans <span style="color:#f92672">and</span> get them executed reliably,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> that<span style="color:#e6db74">&#39;s to let them write code and to have code express the plan.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at this in the next video.</span>
+</span></span></code></pre></div><h2 id="53-planning-with-code-execution">5.3 Planning with code execution</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>Planning with code execution is the idea that, instead of asking an LLM to output a plan <span style="color:#f92672">in</span>,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>say, JSON format to execute one step at a time, why <span style="color:#f92672">not</span> have the LLM just try to write code <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>that code can capture multiple steps of the plan, like call this function, then call this function,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>then call this function, <span style="color:#f92672">and</span> by executing code generated by the LLM, we can actually carry out
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>fairly complex plans<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look at when you might want to use this technique.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s say you want to build a system to answer questions about coffee machine sales based on</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>a spreadsheet with data like this of previous sales<span style="color:#f92672">.</span> You might have an LLM with a set of tools
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>like these to get column max, to look at a certain column <span style="color:#f92672">and</span> get the maximum value,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>so there<span style="color:#e6db74">&#39;s a whole answer, what&#39;</span>s the most expensive coffee, <span style="color:#f92672">or</span> get column mean, filter
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>rows, get column min, get column median, sum rows, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> So these are examples of a range of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>tools you might give an LLM to process this spreadsheet <span style="color:#f92672">or</span> these rows <span style="color:#f92672">and</span> columns of data
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> different ways<span style="color:#f92672">.</span> Now, <span style="color:#66d9ef">if</span> a user were to ask which month had the highest sales of hot chocolate,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>it turns out that you can answer this query using these tools, but it<span style="color:#e6db74">&#39;s pretty complicated.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>You<span style="color:#e6db74">&#39;d have to use filter rows to extract transactions in January for hot chocolate,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>then <span style="color:#66d9ef">do</span> stats on that, <span style="color:#f92672">and</span> then repeat <span style="color:#66d9ef">for</span> February, figure out stats on that,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>then repeat <span style="color:#66d9ef">for</span> March, repeat <span style="color:#66d9ef">for</span> April, repeat <span style="color:#66d9ef">for</span> May, all the way through December,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then take the max, <span style="color:#f92672">and</span> so you can actually string it together with a pretty complicated
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>process using these tools, but it<span style="color:#e6db74">&#39;s not such a great solution. But worse, whether someone to</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>ask how many unique transactions were there last week, well, these tools are insufficient to get
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>that answer, so you may end up creating a new <span style="color:#66d9ef">tool</span>, get unique entries, <span style="color:#f92672">or</span> you may run into
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>another query, what were the amounts of last five transactions, then you have to create yet another
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">tool</span> to get the data to answer that query<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> practice, I<span style="color:#e6db74">&#39;ve seen teams, when they run across</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>more <span style="color:#f92672">and</span> more queries, end up creating more <span style="color:#f92672">and</span> more <span style="color:#f92672">and</span> more <span style="color:#f92672">and</span> more tools to try to give the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>other enough tools to cover all the range of things someone may ask about a dataset like this<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>So this approach is brittle, inefficient, <span style="color:#f92672">and</span> I<span style="color:#e6db74">&#39;ve seen teams continuously dealing with edge cases</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> trying to create more tools, but it turns out there is a better way, which is <span style="color:#66d9ef">if</span> you were
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>to prompt LLM to say, please write code to solve the user<span style="color:#e6db74">&#39;s query and return your answer as Python</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>code, maybe delimited with these beginning <span style="color:#f92672">and</span> ending execute Python XML tags, then LLM can just
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>write code to load the spreadsheet into a data processing library, here it<span style="color:#e6db74">&#39;s using the pandas</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>library, <span style="color:#f92672">and</span> then here it actually is coming up with a plan<span style="color:#f92672">.</span> The plan is, after loading the CSV,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>first it has to ensure the date column is parsed a certain way, then sort by the date, select the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>last five transactions, show just the price column, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> But these are the steps one, two, three,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> four, <span style="color:#f92672">and</span> five, say, of the plan<span style="color:#f92672">.</span> Because a programming language like Python, <span style="color:#f92672">and</span> <span style="color:#f92672">in</span> this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>example, also with the pandas data processing library imported, because this has many built<span style="color:#f92672">-</span><span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>functions, hundreds <span style="color:#f92672">or</span> even thousands of functions, <span style="color:#f92672">and</span> moreover, these are functions that the LLM has
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>seen a lot of data on how to call when<span style="color:#f92672">.</span> By letting your LLM write code, it can choose from
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>these hundreds <span style="color:#f92672">or</span> thousands of relevant functions that it<span style="color:#e6db74">&#39;s already seen a lot of data on when to</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>use, so this lets it string together different choices of functions to call from this very large
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>library <span style="color:#f92672">in</span> order to come up with a plan <span style="color:#66d9ef">for</span> answering a fairly complex query like this<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>Just one more example<span style="color:#f92672">.</span> If someone were to ask, how many unique transactions last week<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>Well, you can come up with a plan to read the CSV file, parse the date column, define the time
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>window, filter rows, drop duplicate rows, <span style="color:#f92672">and</span> count<span style="color:#f92672">.</span> The details of this aren<span style="color:#e6db74">&#39;t important, but hopefully</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>what you can see is, <span style="color:#66d9ef">if</span> you read the comments here, the LLM is roughly coming up with a four<span style="color:#f92672">-</span>step plan
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> is expressing each of the steps <span style="color:#f92672">in</span> code that you can then just execute, <span style="color:#f92672">and</span> this will get the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>user their answer<span style="color:#f92672">.</span> So <span style="color:#66d9ef">for</span> applications where the task can plausibly be done by writing code, letting
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>an LLM express its plan <span style="color:#f92672">in</span> software code that you can just execute <span style="color:#66d9ef">for</span> the LLM can be a very powerful
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>way to let it write rich plans<span style="color:#f92672">.</span> And of course, the caveat that I mentioned <span style="color:#f92672">in</span> the module on <span style="color:#66d9ef">tool</span> use
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>to consider <span style="color:#66d9ef">if</span> you need to find a safe execution environment like a sandbox to run the code, that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>also applies<span style="color:#f92672">.</span> Although I know that even though it<span style="color:#e6db74">&#39;s probably not the best practice, I also know a lot of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>developers that don<span style="color:#e6db74">&#39;t use a sandbox. Lastly, it turns out that planning with code works well.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>From this diagram adapted from a research paper by Xinyao Wang <span style="color:#f92672">and</span> others, you can see that <span style="color:#66d9ef">for</span> many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>different models <span style="color:#66d9ef">for</span> the tasks that they examined, code as action <span style="color:#f92672">in</span> which the LLM is invited to write
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>code <span style="color:#f92672">and</span> take actions through code, that is superior to having it write JSON <span style="color:#f92672">and</span> then translate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>JSON into action <span style="color:#f92672">or</span> text<span style="color:#f92672">.</span> And you also see a trend that writing code outperforms having the LLM write
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>a plan <span style="color:#f92672">in</span> JSON, <span style="color:#f92672">and</span> writing a plan <span style="color:#f92672">in</span> JSON is also a bit better than writing a plan <span style="color:#f92672">in</span> just plain text<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>Now, of course, there are applications where you might want to give your custom tools to an LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>to use, <span style="color:#f92672">and</span> so writing code isn<span style="color:#e6db74">&#39;t for every single application. But when it does apply, it can be a</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>very powerful way <span style="color:#66d9ef">for</span> an LLM to express a plan<span style="color:#f92672">.</span> So that wraps up the section on planning<span style="color:#f92672">.</span> Today, one of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>the most powerful uses of Agentic AI that plans is highly agentic software coders<span style="color:#f92672">.</span> It turns out that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> you ask one of the highly agentic software coding assistance tools to write a complex piece
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>of software <span style="color:#66d9ef">for</span> you, it may come up with a detailed plan to build this component of software first,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>then build a second component, build a third, maybe even plan to test out the components as
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>going along<span style="color:#f92672">.</span> And then it forms a checklist that then goes through to execute one step at a time<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>And so it actually works really well <span style="color:#66d9ef">for</span> building increasingly complex pieces of software<span style="color:#f92672">.</span> For other
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>applications, I think the use of planning is still growing <span style="color:#f92672">and</span> developing<span style="color:#f92672">.</span> One of the disadvantages
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>of planning is that because the developer doesn<span style="color:#e6db74">&#39;t tell the system what exactly to do, it&#39;</span>s a little
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>bit harder to control it, <span style="color:#f92672">and</span> you don<span style="color:#e6db74">&#39;t really know in advance what will happen at runtime. But giving</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>up some of this control, it does significantly increase the range of things that the model may
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>decide to try out<span style="color:#f92672">.</span> So this important technology is kind of cutting edge, doesn<span style="color:#e6db74">&#39;t feel completely</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>mature outside of maybe agentic coding where it works well, although I<span style="color:#e6db74">&#39;m sure there&#39;</span>s still a lot
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>of room to grow<span style="color:#f92672">.</span> But hopefully you enjoy using it <span style="color:#f92672">in</span> some of your applications someday<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>That wraps up planning<span style="color:#f92672">.</span> There<span style="color:#e6db74">&#39;s one last design pattern I hope to share with you in this module,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>which is how to build multi<span style="color:#f92672">-</span>agent systems<span style="color:#f92672">.</span> We have <span style="color:#f92672">not</span> just one agent, but many of them
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>working <span style="color:#f92672">in</span> collaboration to complete the task <span style="color:#66d9ef">for</span> you<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look at that in the next video.</span>
+</span></span></code></pre></div><h2 id="54-multi-agent-workflows">5.4 Multi-agent workflows</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>We<span style="color:#e6db74">&#39;ve talked a lot about how to build a single agent to complete tasks for you.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>In a multi<span style="color:#f92672">-</span>agent <span style="color:#f92672">or</span> multi<span style="color:#f92672">-</span>agentic workflow, we instead have a collection of multiple agents
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>collaborate to <span style="color:#66d9ef">do</span> things <span style="color:#66d9ef">for</span> you<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>When some people hear <span style="color:#66d9ef">for</span> the first time about multi<span style="color:#f92672">-</span>agent systems, they wonder, why <span style="color:#66d9ef">do</span> I
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>need multiple agents<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>It<span style="color:#e6db74">&#39;s just the same LLM that I&#39;</span>m prompting over <span style="color:#f92672">and</span> over, <span style="color:#f92672">or</span> just one computer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>Why <span style="color:#66d9ef">do</span> I need multiple agents<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>I find that one useful analogy is, even though I may <span style="color:#66d9ef">do</span> things on a single computer, we <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>decompose work <span style="color:#f92672">in</span> a single computer into maybe multiple processes <span style="color:#f92672">or</span> multiple threads<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>And as a developer, thinking, even though it<span style="color:#e6db74">&#39;s one CPU on a computer, say, thinking</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>about how to take work <span style="color:#f92672">and</span> decompose it into multiple processes <span style="color:#f92672">and</span> multi<span style="color:#f92672">-</span>computer programs
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>to run, that makes it easier <span style="color:#66d9ef">for</span> me as a developer to write code<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> a similar way too, <span style="color:#66d9ef">if</span> you have a complex task to carry out, sometimes, instead of thinking
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>about how to hire one person to <span style="color:#66d9ef">do</span> it <span style="color:#66d9ef">for</span> you, you might think about hiring a team of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>a few people to <span style="color:#66d9ef">do</span> different pieces of the task <span style="color:#66d9ef">for</span> you<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>And so <span style="color:#f92672">in</span> practice, I found that <span style="color:#66d9ef">for</span> many developers of agentic systems, having this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>mental framework of <span style="color:#f92672">not</span> asking, what<span style="color:#e6db74">&#39;s the one person I might hire to do something, but</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>instead, would it make sense to hire people with three <span style="color:#f92672">or</span> four different roles to <span style="color:#66d9ef">do</span> this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>overall task <span style="color:#66d9ef">for</span> me, that helps give another way to take a complex thing <span style="color:#f92672">and</span> decompose
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>it into sub<span style="color:#f92672">-</span>tasks <span style="color:#f92672">and</span> to build <span style="color:#66d9ef">for</span> those individual sub<span style="color:#f92672">-</span>tasks one at a time<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at some examples of how this works.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>Take the task of creating marketing assets, say you want to market sunglasses<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>Can you come up with a marketing brochure <span style="color:#66d9ef">for</span> that<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>You might need a researcher on your team to look at trends on sunglasses <span style="color:#f92672">and</span> what competitors
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>are offering<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>You might also have a graphic designer on your team to render charts <span style="color:#f92672">or</span> nice<span style="color:#f92672">-</span>looking
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>graphics of your sunglasses<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>And then also a writer to take the research, take the graphic assets <span style="color:#f92672">and</span> put it all together
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>into a nice<span style="color:#f92672">-</span>looking brochure<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>Or to write a research article, you might want a researcher to <span style="color:#66d9ef">do</span> online research, a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>statistician to calculate statistics, a lead writer, <span style="color:#f92672">and</span> then an editor to come up with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>a polished report<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>Or to prepare a legal <span style="color:#66d9ef">case</span>, real law firms will often have associates, paralegals, maybe
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>an investigator<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>And we naturally, because of the way human teams <span style="color:#66d9ef">do</span> work, can think of different ways
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>that complex tasks can be broken down into different individuals with different roles<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>So these are examples of when a complex task were already naturally decomposed into sub<span style="color:#f92672">-</span>tasks
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>that different people with different skills can carry out<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>Take the example of creating marketing assets<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>Look into detail into what a researcher, graphic designer, <span style="color:#f92672">and</span> writer might <span style="color:#66d9ef">do</span><span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>A researcher might have the task of analyzing market trends <span style="color:#f92672">and</span> researching competitors<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>And when designing the research agents, one question to keep <span style="color:#f92672">in</span> mind is what are the tools
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>that the researcher may need <span style="color:#f92672">in</span> order to come up with a research report on market trends
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> what competitors are doing<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>So one natural <span style="color:#66d9ef">tool</span> that an agentic researcher might need to use would be web search<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>Because as a human researcher, asked to <span style="color:#66d9ef">do</span> these tasks might need to search online <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>order to come up with their report<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>Or <span style="color:#66d9ef">for</span> a graphic designer agent, they might be tasked with creating visualizations <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>artwork<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>And so what are the tools that an agentic software graphic designer might need<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>Well, they may need image generation <span style="color:#f92672">and</span> manipulation APIs<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>Or maybe, similar to what you saw with the coffee machine example, maybe it needs code
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>execution to generate charts<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>And lastly, the writer has transformed the research into report text <span style="color:#f92672">and</span> marketing copy<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, they don<span style="color:#e6db74">&#39;t need any tools other than what an LLM can already do to generate</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>text<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>In this <span style="color:#f92672">and</span> the next video, I<span style="color:#e6db74">&#39;m going to use these purple boxes to denote an agent.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>And the way you build individual agents is by prompting an LLM to play the role of a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>researcher <span style="color:#f92672">or</span> a graphic designer <span style="color:#f92672">or</span> a writer, depending on which agent it is part of<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>So <span style="color:#66d9ef">for</span> example, <span style="color:#66d9ef">for</span> the research agents, you might prompt it to say, you are a research
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>agent, expert at analyzing market trends <span style="color:#f92672">and</span> competitors, carry out online research to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>analyze market trends <span style="color:#66d9ef">for</span> the sunglasses product <span style="color:#f92672">and</span> give a summary as well of what competitors
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>are doing<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>So that would allow you to build a researcher agent<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>And similarly, by prompting an LLM to act as a graphic designer with the appropriate
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>tools <span style="color:#f92672">and</span> to act as a writer, that<span style="color:#e6db74">&#39;s how you can build a graphic designer as well as</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>a writer agent<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>Having built these three agents, one way to have them work together to generate your final
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>reports would be to use a simple linear audit workflow <span style="color:#f92672">or</span> a linear plan <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span><span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>So <span style="color:#66d9ef">if</span> you want to create a summer marketing campaign <span style="color:#66d9ef">for</span> sunglasses, you might give that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>prompt to the research agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>The research agent then writes a report that says, here are the current sunglasses trends
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> competitive offerings<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>This research report can then be fed to the graphic designer that looks at the data the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>research has found <span style="color:#f92672">and</span> creates a few data visualizations <span style="color:#f92672">and</span> artwork options<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>All these assets can then be passed to the writer that then takes the research <span style="color:#f92672">and</span> the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>graphic output <span style="color:#f92672">and</span> writes the final marketing brochure<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>The advantage of building a multi<span style="color:#f92672">-</span>agent workflow <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span> is when designing a researcher
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> graphic designer <span style="color:#f92672">or</span> writer, you can focus on one thing at a time<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>So I can spend some time building maybe the best graphic designer agents I can, <span style="color:#66d9ef">while</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>maybe my collaborators are building research agents <span style="color:#f92672">and</span> writer agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> the end, we string it all together to come up with this multi<span style="color:#f92672">-</span>agent system<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> some cases, I<span style="color:#e6db74">&#39;m seeing developers start to reuse some agents as well.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>So having built a graphic designer <span style="color:#66d9ef">for</span> marketing brochures, maybe I<span style="color:#e6db74">&#39;ll think about if I can</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>build a more general graphic designer that can help me write marketing brochures as well
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>as social media posts, as well as help me illustrate online webpages<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>So by coming up with what are the agents you might hire to <span style="color:#66d9ef">do</span> a task, <span style="color:#f92672">and</span> this will sometimes
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>correspond to who are the types of human employees you might hire to <span style="color:#66d9ef">do</span> a task<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>You can come up with a workflow like this with maybe even building agents that you could
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>choose to reuse <span style="color:#f92672">in</span> other applications as well<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>Now, what you see here is a linear plan where one agent, the researcher does his work, then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>the graphic designer, <span style="color:#f92672">and</span> then the writer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>With agents, you can also, as an alternative to a linear plan, you can also have agents
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>interact with each other <span style="color:#f92672">in</span> more complex ways<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>Let me illustrate with an example of planning using multiple agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>So previously, you saw how we may give an LLM a set of tools that we can call to carry
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>out different tasks<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>In what I want to show you, we will instead give an LLM the option to call on different
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>agents to ask the different agents to help complete different tasks<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>So <span style="color:#f92672">in</span> detail, you might write a prompt like you<span style="color:#e6db74">&#39;re a marketing manager, have the following</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>team of agents to work with, <span style="color:#f92672">and</span> then give a description of the agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>And this is very much similar to what we<span style="color:#e6db74">&#39;re doing with planning and using tools, except</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>the tools, the green boxes, are replaced with agents, these purple boxes that the LLM can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>call on<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>You can also ask it to <span style="color:#66d9ef">return</span> a step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step plan to carry out the user<span style="color:#e6db74">&#39;s request.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, the LLM may ask the researcher to research current sunglasses trends <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>then report back<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>Then it will ask the graphic designer to create the images <span style="color:#f92672">and</span> then report back, then ask
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>the writer to create a report, <span style="color:#f92672">and</span> then maybe the LLM will choose to review <span style="color:#f92672">or</span> reflect on
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> improve the report one final time<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>In executing this plan, you would then take the step one text of the researcher, carry
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>out research, then <span style="color:#66d9ef">pass</span> that to the graphic designer, <span style="color:#66d9ef">pass</span> it to the writer, <span style="color:#f92672">and</span> then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>maybe <span style="color:#66d9ef">do</span> one final reflection step, <span style="color:#f92672">and</span> then you<span style="color:#e6db74">&#39;d be done.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>One interesting view of this workflow is as <span style="color:#66d9ef">if</span> you have these three agents up here, but
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>this LLM on the left is actually like a fourth agent that<span style="color:#e6db74">&#39;s a marketing manager, that is</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>a manager of a marketing team, that is setting direction <span style="color:#f92672">and</span> then delegating tasks to the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>researcher, the graphic designer, <span style="color:#f92672">and</span> the writer agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>So this becomes actually a collection of four agents <span style="color:#66d9ef">for</span> a marketing manager agent coordinating
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>the work of the researcher, the graphic designer, <span style="color:#f92672">and</span> the writer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>In this video, you saw two communication patterns<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>One was a linear one where your agents took actions one at a time until you got to the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>end<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>And the second had a marketing manager coordinating the activity of a few other agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>It turns out that one of the key design decisions you may end up having to make when building
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>multi<span style="color:#f92672">-</span>agentic systems is what is the communication pattern between your different agents<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>This is an area of hard research <span style="color:#f92672">and</span> there are multiple patterns emerging, but <span style="color:#f92672">in</span> the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>next video, I want to show you what are some of the most common communication patterns
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> getting your agents to work with each other<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s go see that in the next video.</span>
+</span></span></code></pre></div><h2 id="55-communication-patterns-for-multi-agent-systems">5.5 Communication patterns for multi-agent systems</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0:01
+</span></span><span style="display:flex;"><span>When you have a team of people working together, the patterns by which they communicate can be
+</span></span><span style="display:flex;"><span>0:06
+</span></span><span style="display:flex;"><span>quite complex. And in fact, designing an organizational chart is actually pretty
+</span></span><span style="display:flex;"><span>0:10
+</span></span><span style="display:flex;"><span>complex to try to figure out what&#39;s the best way for people to communicate, to collaborate.
+</span></span><span style="display:flex;"><span>0:16
+</span></span><span style="display:flex;"><span>It turns out, designing communication patterns for multi-agent systems is also quite complex.
+</span></span><span style="display:flex;"><span>0:22
+</span></span><span style="display:flex;"><span>But let me show you some of the most common design patterns I see used by different teams today.
+</span></span><span style="display:flex;"><span>0:26
+</span></span><span style="display:flex;"><span>In a marketing team with a linear plan, where first a researcher worked, then a graphic designer,
+</span></span><span style="display:flex;"><span>0:31
+</span></span><span style="display:flex;"><span>then a writer, the communication pattern was linear. The researcher would communicate with
+</span></span><span style="display:flex;"><span>0:36
+</span></span><span style="display:flex;"><span>the graphic designer, and in both the research and the graphic designer, maybe pass the outputs to
+</span></span><span style="display:flex;"><span>0:40
+</span></span><span style="display:flex;"><span>the writer. And so there&#39;s a very linear communication pattern. This is one of the
+</span></span><span style="display:flex;"><span>0:46
+</span></span><span style="display:flex;"><span>two most common communication plans that I see being used today. The second of the two most
+</span></span><span style="display:flex;"><span>0:51
+</span></span><span style="display:flex;"><span>common communication plans would be similar to what you saw in this example, with planning using
+</span></span><span style="display:flex;"><span>0:58
+</span></span><span style="display:flex;"><span>multiple agents, where there is a manager that communicates with a number of team members and
+</span></span><span style="display:flex;"><span>1:05
+</span></span><span style="display:flex;"><span>coordinates their work. So in this example, the marketing manager decides to call on the researcher
+</span></span><span style="display:flex;"><span>1:10
+</span></span><span style="display:flex;"><span>to do some work. Then if you think of the marketing manager as getting the report back, and then
+</span></span><span style="display:flex;"><span>1:15
+</span></span><span style="display:flex;"><span>sending it to the graphic designer, getting a report back, and then sending it to the writer, this would be a
+</span></span><span style="display:flex;"><span>1:20
+</span></span><span style="display:flex;"><span>hierarchical communication pattern. If you&#39;re actually implementing a hierarchical communication
+</span></span><span style="display:flex;"><span>1:25
+</span></span><span style="display:flex;"><span>pattern, it&#39;ll probably be simpler to have the researcher pass the report back to the marketing
+</span></span><span style="display:flex;"><span>1:29
+</span></span><span style="display:flex;"><span>manager, rather than the researcher pass the results directly to the graphic designer and to
+</span></span><span style="display:flex;"><span>1:34
+</span></span><span style="display:flex;"><span>the writer. But so this type of hierarchy is also a pretty common way to plan the communication
+</span></span><span style="display:flex;"><span>1:40
+</span></span><span style="display:flex;"><span>patterns, where you have one manager coordinating the work of a number of other agents. And just to
+</span></span><span style="display:flex;"><span>1:45
+</span></span><span style="display:flex;"><span>share with you some more advanced and less frequently used, but nonetheless sometimes used in
+</span></span><span style="display:flex;"><span>1:50
+</span></span><span style="display:flex;"><span>practice communication patterns, one would be a deeper hierarchy, where same as before, if you have
+</span></span><span style="display:flex;"><span>1:56
+</span></span><span style="display:flex;"><span>a marketing manager send tasks to the researcher, graphic designer, writer, but maybe the researcher has
+</span></span><span style="display:flex;"><span>2:01
+</span></span><span style="display:flex;"><span>themselves two other agents that they call on, such as a web researcher and a fact checker. Maybe the
+</span></span><span style="display:flex;"><span>2:07
+</span></span><span style="display:flex;"><span>graphic designer just works by themselves, whereas the writer has an initial style writer and a citation
+</span></span><span style="display:flex;"><span>2:13
+</span></span><span style="display:flex;"><span>checker. So this would be a hierarchical organization of agents, in which some agents
+</span></span><span style="display:flex;"><span>2:19
+</span></span><span style="display:flex;"><span>might themselves call other sub-agents. And I also see this used in some applications, but this is
+</span></span><span style="display:flex;"><span>2:25
+</span></span><span style="display:flex;"><span>much more complex than a one-level hierarchy, so used less often today. And then one final pattern
+</span></span><span style="display:flex;"><span>2:31
+</span></span><span style="display:flex;"><span>that is quite challenging to execute, but I see a few experimental projects use it, is the all-to-all
+</span></span><span style="display:flex;"><span>2:38
+</span></span><span style="display:flex;"><span>communication pattern. So in this pattern, anyone is allowed to talk to anyone else at any time. And
+</span></span><span style="display:flex;"><span>2:44
+</span></span><span style="display:flex;"><span>the way you implement this is you prompt all four of your agents, in this case, to tell them that
+</span></span><span style="display:flex;"><span>2:50
+</span></span><span style="display:flex;"><span>there are three other agents they could decide to call on. And whenever one of your agents decides
+</span></span><span style="display:flex;"><span>2:55
+</span></span><span style="display:flex;"><span>to send a message to another agent, that message gets added to the receiver agent&#39;s contacts. And
+</span></span><span style="display:flex;"><span>3:02
+</span></span><span style="display:flex;"><span>then a receiver agent can think for a while and decide when to get back to that first agent. And
+</span></span><span style="display:flex;"><span>3:07
+</span></span><span style="display:flex;"><span>so if you can all collaborate in a crowd and talk to each other for a while until, say, each of them
+</span></span><span style="display:flex;"><span>3:13
+</span></span><span style="display:flex;"><span>declares that it is done with this task, and then it starts talking. And maybe when everyone thinks
+</span></span><span style="display:flex;"><span>3:18
+</span></span><span style="display:flex;"><span>it&#39;s done, or maybe when the writer concludes it&#39;s good enough, that&#39;s when you generate the final
+</span></span><span style="display:flex;"><span>3:22
+</span></span><span style="display:flex;"><span>output. In practice, I find the results of all-to-all communication patterns a bit hard to predict.
+</span></span><span style="display:flex;"><span>3:27
+</span></span><span style="display:flex;"><span>So some applications don&#39;t need high control. You can run it and see what you get. If the marketing
+</span></span><span style="display:flex;"><span>3:32
+</span></span><span style="display:flex;"><span>brochure isn&#39;t good, maybe that&#39;s okay. You just run it again and see if you get a different result.
+</span></span><span style="display:flex;"><span>3:37
+</span></span><span style="display:flex;"><span>But I think for applications where you&#39;re willing to tolerate a little bit of chaos and
+</span></span><span style="display:flex;"><span>3:41
+</span></span><span style="display:flex;"><span>unpredictability, I do see some developers using this communication pattern. So that, I hope,
+</span></span><span style="display:flex;"><span>3:47
+</span></span><span style="display:flex;"><span>conveys some of the richness of multi-agent systems. Today, there are quite a lot of software
+</span></span><span style="display:flex;"><span>3:54
+</span></span><span style="display:flex;"><span>frameworks as well that support easily building multi-agent systems. And they also make implementing
+</span></span><span style="display:flex;"><span>4:00
+</span></span><span style="display:flex;"><span>some of these communication patterns relatively easy. So maybe if you use your own multi-agent system,
+</span></span><span style="display:flex;"><span>4:06
+</span></span><span style="display:flex;"><span>you&#39;ll find some of these frameworks hopeful for exploring these different
+</span></span><span style="display:flex;"><span>4:09
+</span></span><span style="display:flex;"><span>communication patterns as well. And so that now brings us to the final video
+</span></span><span style="display:flex;"><span>4:17
+</span></span><span style="display:flex;"><span>of this module and of this course. Let&#39;s go on to the final video to wrap up.
+</span></span></code></pre></div><h2 id="56-conclusion">5.6 Conclusion</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>Welcome to the final video of this course<span style="color:#f92672">.</span> It feels like we<span style="color:#e6db74">&#39;ve been through a lot together,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>just you <span style="color:#f92672">and</span> me, <span style="color:#f92672">and</span> we<span style="color:#e6db74">&#39;ve gone through a lot of topics in Agentic AI. Let&#39;</span>s take a look<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>In the first module, we talked about what are the applications you can build with Agentic AI
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>that just were <span style="color:#f92672">not</span> possible before<span style="color:#f92672">.</span> And we started then to look at key design patterns,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>including the reflection design pattern, which is a simple way to sometimes give your application a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>nice performance boost, <span style="color:#f92672">and</span> then <span style="color:#66d9ef">tool</span> use <span style="color:#f92672">or</span> function calling, which expands what your LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>application can <span style="color:#66d9ef">do</span>, with code execution being one important <span style="color:#66d9ef">case</span> of that<span style="color:#f92672">.</span> And then we spent a lot of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>time talking about evaluations, as well as error analysis, <span style="color:#f92672">and</span> how to drive a disciplined process
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>of building, as well as analyzing, to be efficient <span style="color:#f92672">in</span> how you keep on improving the performance of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>your agentic AI system<span style="color:#f92672">.</span> This fourth module is some of the material that I think you will find
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>most useful as you keep building Agentic AI systems, I hope, <span style="color:#66d9ef">for</span> a long time<span style="color:#f92672">.</span> And then <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>this module, we talk about planning <span style="color:#f92672">and</span> multi<span style="color:#f92672">-</span>agent systems that can let you build much more powerful,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>although sometimes harder to control, <span style="color:#f92672">and</span> harder to predict <span style="color:#f92672">in</span> advanced types of systems<span style="color:#f92672">.</span> So with
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>the skills you learn from this course, I think you now know how to build a lot of cool, exciting
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>Agentic AI applications<span style="color:#f92672">.</span> When my team, <span style="color:#f92672">or</span> I see other teams as well, interview people <span style="color:#66d9ef">for</span> jobs,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>I find interviews often try to assess whether <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> candidates have pretty much the skills you<span style="color:#e6db74">&#39;re</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>learning about <span style="color:#f92672">in</span> this course<span style="color:#f92672">.</span> And so I hope that this course will also open up new professional
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>opportunities <span style="color:#66d9ef">for</span> you, <span style="color:#f92672">and</span> you just will <span style="color:#66d9ef">do</span> more<span style="color:#f92672">.</span> Whether you<span style="color:#e6db74">&#39;re doing these things for fun, or for</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>professional practical settings, I think you<span style="color:#e6db74">&#39;ll enjoy this new set of things you can now build.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>So, just to wrap up, I want to thank you again <span style="color:#66d9ef">for</span> spending all this time with me,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> I hope you will take these skills, use them responsibly, <span style="color:#f92672">and</span> just go build cool stuff<span style="color:#f92672">.</span>
+</span></span></code></pre></div>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#51-planning-workflows">5.1 Planning workflows</a></li>
+    <li><a href="#52-creating-and-executing-llm-plans">5.2 Creating and executing LLM plans</a></li>
+    <li><a href="#53-planning-with-code-execution">5.3 Planning with code execution</a></li>
+    <li><a href="#54-multi-agent-workflows">5.4 Multi-agent workflows</a></li>
+    <li><a href="#55-communication-patterns-for-multi-agent-systems">5.5 Communication patterns for multi-agent systems</a></li>
+    <li><a href="#56-conclusion">5.6 Conclusion</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#51-planning-workflows">5.1 Planning workflows</a></li>
+    <li><a href="#52-creating-and-executing-llm-plans">5.2 Creating and executing LLM plans</a></li>
+    <li><a href="#53-planning-with-code-execution">5.3 Planning with code execution</a></li>
+    <li><a href="#54-multi-agent-workflows">5.4 Multi-agent workflows</a></li>
+    <li><a href="#55-communication-patterns-for-multi-agent-systems">5.5 Communication patterns for multi-agent systems</a></li>
+    <li><a href="#56-conclusion">5.6 Conclusion</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

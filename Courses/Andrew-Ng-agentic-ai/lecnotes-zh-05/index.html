@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1355&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251015-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251015-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251015-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251015-02" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251015-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="模块五：高度自主代理的设计模式「Andrew Ng：Agentic AI」 5.1 规划工作流 欢迎来到最后一个模块，在这里你将学习一些设计模式，让你能够构建高度自主的代理。在使用这些模式时，你无需预先硬编码要采取的步骤顺序，代理可以更灵活地自行决定要采取哪些步骤来完成任务。我们将讨论规划设计模式，以及在本模块后面部分，如何构建多代理系统。让我们开始吧。
+示例一：零售客户服务 假设你经营一家太阳镜零售店，并且你的库存中有哪些太阳镜的信息都存储在数据库中。你可能希望有一个客户服务代理能够回答像“你们有库存的圆形太阳镜吗？价格在100美元以下”这样的问题。这是一个相当复杂的查询，因为你必须查看产品描述，看哪些太阳镜是圆形的，然后查看哪些有库存，最后再看哪些价格低于100美元，才能告诉顾客：“是的，我们有经典款太阳镜。” 你如何构建一个能回答像这样以及许多其他各种客户查询的代理呢？
+为了做到这一点，我们将给 LLM 一套工具，让它能够：
+获取商品描述（比如查找不同的眼镜是否是圆形的） 检查库存 处理商品退货（这个查询不需要，但其他查询可能需要） 获取商品价格 检查过去的交易记录 处理商品销售等等。 为了让 LLM 弄清楚响应客户请求应该使用什么正确的工具顺序，你可能会写一个这样的提示：“你可以使用以下工具&hellip;”，然后给它每个工具（比如说六个或更多工具）的描述，接着告诉它“返回一个执行用户请求的逐步计划”。
+在这种情况下，为了回答这个特定的查询，一个 LLM 可能输出的合理计划可能是：
+首先，使用 get_item_descriptions 检查不同的描述以找到圆形太阳镜。 然后，使用 check_inventory 查看它们是否有库存。 再使用 get_item_price 查看有库存的结果是否低于100美元。 在 LLM 输出了这个包含三个步骤的计划之后，我们可以将第一步的文本（即这里用红色写的文本）传递给一个 LLM，可能还会附加上下文，比如有哪些工具、你的用户查询是什么、以及其他背景信息，然后让 LLM 执行第一步。在这种情况下，希望 LLM 会选择调用 get_item_descriptions 来获取相应的商品描述，该步骤的输出能让它选出哪些是圆形太阳镜。
+然后，第一步的输出会连同第二步的指令（即我这里用蓝色标出的指令）一起传递给一个 LLM，以执行计划的第二步。希望它会接着处理我们在上一张幻灯片中找到的两副圆形太阳镜并检查库存。
+第二步的输出随后会用于另一次 LLM 调用，其中包含了第二步的输出以及第三步要做什么的指令。将这些传递给 LLM，让它获取商品价格，最后这个输出会最后一次反馈给 LLM，以生成给用户的最终答案。
+在这张幻灯片中，我稍微简化了很多细节。LLM 实际编写的计划通常比这些简单的一行指令更详细，但基本的工作流程是，让一个 LLM 写出一个包含多个步骤的计划，然后让它在适当的上下文（比如任务是什么、有哪些可用工具等）中，依次执行计划的每一步。
+使用 LLM 以这种方式进行规划的激动人心之处在于，我们不必预先决定调用工具的顺序，就能回答一个相当复杂的客户请求。如果客户提出一个不同的请求，比如“我想退回我购买的金色镜框眼镜，而不是金属镜框的”，那么你可以想象一个 LLM 同样能够想出一个不同的计划，根据他们之前购买的记录，通过 get_item_descriptions 找出他们买了哪些眼镜，哪些是他们想退回的金色镜框眼镜，然后可能调用 process_item_return。所以，有了一个能像这样进行规划的代理，它就能执行更广泛的任务，这些任务可能需要以许多不同的顺序调用许多不同的工具。
+示例二：邮件助手 再看一个规划的例子，让我们来看一个邮件助手。如果你想告诉你的助手：“请回复纽约的 Bob 发来的那封邮件邀请，告诉他我会参加，并把他的邮件归档。” 那么，一个邮件助手可能会被赋予像这样的工具：搜索邮件、移动邮件、删除邮件和发送邮件。你可能会写一个助手提示，说：“你可以使用以下工具，&hellip;请返回逐步的计划。” 在这种情况下，LLM 可能会说，完成这个任务的步骤是：
+使用 search_email 找到 Bob 发来的那封提到“晚餐”和“纽约”的邮件。 然后生成并发送一封邮件以确认参加。 最后将那封邮件移动到归档文件夹。 鉴于这个计划看起来是合理的，你接下来会再次让一个 LLM 按部就班地执行这个计划。所以，第一步的文本（这里用红色显示）会被连同额外的背景上下文一起提供给 LLM，希望它会触发 search_email。然后，该操作的输出可以再次连同第二步的指令一起提供给一个 LLM，以发送一个适当的回复。最后，假设邮件已成功发送，你可以取那个输出，让 LLM 执行第三步，将 Bob 的邮件移动到归档文件夹。
+"><meta property="og:url" content="http://localhost:1355/courses/andrew-ng-agentic-ai/lecnotes-zh-05/"><meta property="og:image" content="http://localhost:1355/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="模块五：高度自主代理的设计模式「Andrew Ng：Agentic AI」 5.1 规划工作流 欢迎来到最后一个模块，在这里你将学习一些设计模式，让你能够构建高度自主的代理。在使用这些模式时，你无需预先硬编码要采取的步骤顺序，代理可以更灵活地自行决定要采取哪些步骤来完成任务。我们将讨论规划设计模式，以及在本模块后面部分，如何构建多代理系统。让我们开始吧。
+示例一：零售客户服务 假设你经营一家太阳镜零售店，并且你的库存中有哪些太阳镜的信息都存储在数据库中。你可能希望有一个客户服务代理能够回答像“你们有库存的圆形太阳镜吗？价格在100美元以下”这样的问题。这是一个相当复杂的查询，因为你必须查看产品描述，看哪些太阳镜是圆形的，然后查看哪些有库存，最后再看哪些价格低于100美元，才能告诉顾客：“是的，我们有经典款太阳镜。” 你如何构建一个能回答像这样以及许多其他各种客户查询的代理呢？
+为了做到这一点，我们将给 LLM 一套工具，让它能够：
+获取商品描述（比如查找不同的眼镜是否是圆形的） 检查库存 处理商品退货（这个查询不需要，但其他查询可能需要） 获取商品价格 检查过去的交易记录 处理商品销售等等。 为了让 LLM 弄清楚响应客户请求应该使用什么正确的工具顺序，你可能会写一个这样的提示：“你可以使用以下工具&hellip;”，然后给它每个工具（比如说六个或更多工具）的描述，接着告诉它“返回一个执行用户请求的逐步计划”。
+在这种情况下，为了回答这个特定的查询，一个 LLM 可能输出的合理计划可能是：
+首先，使用 get_item_descriptions 检查不同的描述以找到圆形太阳镜。 然后，使用 check_inventory 查看它们是否有库存。 再使用 get_item_price 查看有库存的结果是否低于100美元。 在 LLM 输出了这个包含三个步骤的计划之后，我们可以将第一步的文本（即这里用红色写的文本）传递给一个 LLM，可能还会附加上下文，比如有哪些工具、你的用户查询是什么、以及其他背景信息，然后让 LLM 执行第一步。在这种情况下，希望 LLM 会选择调用 get_item_descriptions 来获取相应的商品描述，该步骤的输出能让它选出哪些是圆形太阳镜。
+然后，第一步的输出会连同第二步的指令（即我这里用蓝色标出的指令）一起传递给一个 LLM，以执行计划的第二步。希望它会接着处理我们在上一张幻灯片中找到的两副圆形太阳镜并检查库存。
+第二步的输出随后会用于另一次 LLM 调用，其中包含了第二步的输出以及第三步要做什么的指令。将这些传递给 LLM，让它获取商品价格，最后这个输出会最后一次反馈给 LLM，以生成给用户的最终答案。
+在这张幻灯片中，我稍微简化了很多细节。LLM 实际编写的计划通常比这些简单的一行指令更详细，但基本的工作流程是，让一个 LLM 写出一个包含多个步骤的计划，然后让它在适当的上下文（比如任务是什么、有哪些可用工具等）中，依次执行计划的每一步。
+使用 LLM 以这种方式进行规划的激动人心之处在于，我们不必预先决定调用工具的顺序，就能回答一个相当复杂的客户请求。如果客户提出一个不同的请求，比如“我想退回我购买的金色镜框眼镜，而不是金属镜框的”，那么你可以想象一个 LLM 同样能够想出一个不同的计划，根据他们之前购买的记录，通过 get_item_descriptions 找出他们买了哪些眼镜，哪些是他们想退回的金色镜框眼镜，然后可能调用 process_item_return。所以，有了一个能像这样进行规划的代理，它就能执行更广泛的任务，这些任务可能需要以许多不同的顺序调用许多不同的工具。
+示例二：邮件助手 再看一个规划的例子，让我们来看一个邮件助手。如果你想告诉你的助手：“请回复纽约的 Bob 发来的那封邮件邀请，告诉他我会参加，并把他的邮件归档。” 那么，一个邮件助手可能会被赋予像这样的工具：搜索邮件、移动邮件、删除邮件和发送邮件。你可能会写一个助手提示，说：“你可以使用以下工具，&hellip;请返回逐步的计划。” 在这种情况下，LLM 可能会说，完成这个任务的步骤是：
+使用 search_email 找到 Bob 发来的那封提到“晚餐”和“纽约”的邮件。 然后生成并发送一封邮件以确认参加。 最后将那封邮件移动到归档文件夹。 鉴于这个计划看起来是合理的，你接下来会再次让一个 LLM 按部就班地执行这个计划。所以，第一步的文本（这里用红色显示）会被连同额外的背景上下文一起提供给 LLM，希望它会触发 search_email。然后，该操作的输出可以再次连同第二步的指令一起提供给一个 LLM，以发送一个适当的回复。最后，假设邮件已成功发送，你可以取那个输出，让 LLM 执行第三步，将 Bob 的邮件移动到归档文件夹。
+"><meta name="twitter:image" content="http://localhost:1355/img/Linguista_imresizer.png">
+<link rel="canonical" href="http://localhost:1355/courses/andrew-ng-agentic-ai/lecnotes-zh-05/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecture/">Lectures</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/">中文讲义</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/guides/">Guides</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/insights/">Insights</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/blog/">Blog</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/agenticai/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/overview/">吴恩达课程：Agentic AI</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">Courses</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/" class="crumb-sec">Andrew Ng: Agentic AI</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current"></span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecture/">Lectures</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/">中文讲义</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/guides/">Guides</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/insights/">Insights</a>
+    
+  
+    
+    
+    
+    
+      
+      <a class="depth-0 section-link " href="/courses/andrew-ng-agentic-ai/blog/">Blog</a>
+    
+  
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/agenticai/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/guide-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/insights-lec05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-01/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-02/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-03/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-04/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture-05/"></a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/overview/">吴恩达课程：Agentic AI</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      
+      <h1 id="模块五高度自主代理的设计模式andrew-ngagentic-ai">模块五：高度自主代理的设计模式「Andrew Ng：Agentic AI」</h1>
+<h2 id="51-规划工作流">5.1 规划工作流</h2>
+<p>欢迎来到最后一个模块，在这里你将学习一些设计模式，让你能够构建高度自主的代理。在使用这些模式时，你无需预先硬编码要采取的步骤顺序，代理可以更灵活地自行决定要采取哪些步骤来完成任务。我们将讨论规划设计模式，以及在本模块后面部分，如何构建多代理系统。让我们开始吧。</p>
+<h4 id="示例一零售客户服务">示例一：零售客户服务</h4>
+<p>假设你经营一家太阳镜零售店，并且你的库存中有哪些太阳镜的信息都存储在数据库中。你可能希望有一个客户服务代理能够回答像“你们有库存的圆形太阳镜吗？价格在100美元以下”这样的问题。这是一个相当复杂的查询，因为你必须查看产品描述，看哪些太阳镜是圆形的，然后查看哪些有库存，最后再看哪些价格低于100美元，才能告诉顾客：“是的，我们有经典款太阳镜。” 你如何构建一个能回答像这样以及许多其他各种客户查询的代理呢？</p>
+<p>为了做到这一点，我们将给 LLM 一套工具，让它能够：</p>
+<ul>
+<li>获取商品描述（比如查找不同的眼镜是否是圆形的）</li>
+<li>检查库存</li>
+<li>处理商品退货（这个查询不需要，但其他查询可能需要）</li>
+<li>获取商品价格</li>
+<li>检查过去的交易记录</li>
+<li>处理商品销售等等。</li>
+</ul>
+<p>为了让 LLM 弄清楚响应客户请求应该使用什么正确的工具顺序，你可能会写一个这样的提示：“你可以使用以下工具&hellip;”，然后给它每个工具（比如说六个或更多工具）的描述，接着告诉它“返回一个执行用户请求的逐步计划”。</p>
+<p>在这种情况下，为了回答这个特定的查询，一个 LLM 可能输出的合理计划可能是：</p>
+<ol>
+<li>首先，使用 <code>get_item_descriptions</code> 检查不同的描述以找到圆形太阳镜。</li>
+<li>然后，使用 <code>check_inventory</code> 查看它们是否有库存。</li>
+<li>再使用 <code>get_item_price</code> 查看有库存的结果是否低于100美元。</li>
+</ol>
+<p>在 LLM 输出了这个包含三个步骤的计划之后，我们可以将第一步的文本（即这里用红色写的文本）传递给一个 LLM，可能还会附加上下文，比如有哪些工具、你的用户查询是什么、以及其他背景信息，然后让 LLM 执行第一步。在这种情况下，希望 LLM 会选择调用 <code>get_item_descriptions</code> 来获取相应的商品描述，该步骤的输出能让它选出哪些是圆形太阳镜。</p>
+<p>然后，第一步的输出会连同第二步的指令（即我这里用蓝色标出的指令）一起传递给一个 LLM，以执行计划的第二步。希望它会接着处理我们在上一张幻灯片中找到的两副圆形太阳镜并检查库存。</p>
+<p>第二步的输出随后会用于另一次 LLM 调用，其中包含了第二步的输出以及第三步要做什么的指令。将这些传递给 LLM，让它获取商品价格，最后这个输出会最后一次反馈给 LLM，以生成给用户的最终答案。</p>
+<p>在这张幻灯片中，我稍微简化了很多细节。LLM 实际编写的计划通常比这些简单的一行指令更详细，但基本的工作流程是，让一个 LLM 写出一个包含多个步骤的计划，然后让它在适当的上下文（比如任务是什么、有哪些可用工具等）中，依次执行计划的每一步。</p>
+<p>使用 LLM 以这种方式进行规划的激动人心之处在于，我们不必预先决定调用工具的顺序，就能回答一个相当复杂的客户请求。如果客户提出一个不同的请求，比如“我想退回我购买的金色镜框眼镜，而不是金属镜框的”，那么你可以想象一个 LLM 同样能够想出一个不同的计划，根据他们之前购买的记录，通过 <code>get_item_descriptions</code> 找出他们买了哪些眼镜，哪些是他们想退回的金色镜框眼镜，然后可能调用 <code>process_item_return</code>。所以，有了一个能像这样进行规划的代理，它就能执行更广泛的任务，这些任务可能需要以许多不同的顺序调用许多不同的工具。</p>
+<h4 id="示例二邮件助手">示例二：邮件助手</h4>
+<p>再看一个规划的例子，让我们来看一个邮件助手。如果你想告诉你的助手：“请回复纽约的 Bob 发来的那封邮件邀请，告诉他我会参加，并把他的邮件归档。” 那么，一个邮件助手可能会被赋予像这样的工具：搜索邮件、移动邮件、删除邮件和发送邮件。你可能会写一个助手提示，说：“你可以使用以下工具，&hellip;请返回逐步的计划。” 在这种情况下，LLM 可能会说，完成这个任务的步骤是：</p>
+<ol>
+<li>使用 <code>search_email</code> 找到 Bob 发来的那封提到“晚餐”和“纽约”的邮件。</li>
+<li>然后生成并发送一封邮件以确认参加。</li>
+<li>最后将那封邮件移动到归档文件夹。</li>
+</ol>
+<p>鉴于这个计划看起来是合理的，你接下来会再次让一个 LLM 按部就班地执行这个计划。所以，第一步的文本（这里用红色显示）会被连同额外的背景上下文一起提供给 LLM，希望它会触发 <code>search_email</code>。然后，该操作的输出可以再次连同第二步的指令一起提供给一个 LLM，以发送一个适当的回复。最后，假设邮件已成功发送，你可以取那个输出，让 LLM 执行第三步，将 Bob 的邮件移动到归档文件夹。</p>
+<h4 id="总结">总结</h4>
+<p>规划设计模式已经在许多高度 agentic 的编码系统中成功使用。如果你要求它编写一个软件来构建某个相当复杂的应用，它实际上可能会想出一个计划来先构建这个组件，再构建那个组件，几乎形成一个清单，然后一步步地执行这些步骤，来构建一个相当复杂的软件。</p>
+<p>对于许多其他应用，规划的使用可能仍然更具实验性，尚未被非常广泛地使用。规划的挑战之一是，它有时会让系统有点难以控制，因为作为开发者，你并不知道在运行时它会想出什么样的计划。所以我认为，除了在高度 agentic 的编码系统中（它在那里确实工作得很好），规划在其他领域的采用仍在增长。但这是一项激动人心的技术，我认为它会不断进步，我们将在越来越多的应用中看到它。</p>
+<p>构建能够自己规划的代理的酷炫之处在于，你不需要预先硬编码 LLM 为完成一个复杂任务可能采取的确切步骤顺序。现在，我知道在这个视频中，我以一个相当高的层次讲解了规划过程，即列出步骤列表，然后让一个 LLM 一步步地执行计划。但这到底是如何工作的呢？在下一个视频中，我们将更深入地探讨，看看这些计划的内部到底是什么样的，以及如何将它们串联起来，让一个 LLM 为你规划并执行计划。让我们在下一个视频中看一看。</p>
+<h2 id="52-创建和执行-llm-计划">5.2 创建和执行 LLM 计划</h2>
+<p>在这个视频中，我们将详细探讨如何提示一个 LLM 来生成一个计划，以及如何读取、解释和执行那个计划。让我们开始吧。</p>
+<p>这是你在上一个视频中看到的客户服务代理的计划，我用简单的文本描述以一个较高的层次呈现了这个计划。让我们来看一看，你如何能让一个 LLM 写出非常清晰的、超越这些简单高层次文本描述的计划。</p>
+<p>事实证明，许多开发者会要求一个 LLM 以 JSON 格式来格式化它想要执行的计划，因为这能让下游的代码以相对清晰和明确的方式解析出计划的具体步骤是什么，而且目前所有领先的 LLM 都非常擅长生成 JSON 输出。</p>
+<p>所以，系统提示可能会这样说：“你可以使用以下工具&hellip;”，然后“以 JSON 格式创建一个逐步的计划”，你可能会足够详细地描述这个 JSON 格式，目的是让它输出一个像右边这里展示的计划。</p>
+<p>在这个 JSON 输出中，它创建了一个列表，列表的第一个项目有清晰的键和值，说明计划的第一步有如下描述，并且应该使用如下工具，并向该工具传递如下参数。然后，计划的第二步是执行这个任务，然后使用这个工具，等等。所以，这种 JSON 格式，相对于用英语写计划，能让下游代码更清晰地解析出计划的确切步骤，以便能够可靠地一步步执行。</p>
+<p>除了 JSON，我也看到一些开发者使用 XML，你可以使用 XML 分隔符，用 XML 标签来清晰地指定计划的步骤是什么以及步骤编号。有些开发者，我感觉比较少，会使用 Markdown，它在解析方面有时会稍微模糊一些，而我认为纯文本可能是这些选项中最不可靠的。但我认为，要么是 JSON（我这里展示的），要么是 XML，都会是要求 LLM 以明确的方式格式化计划的好选择。</p>
+<p>就是这样。通过以 JSON 格式打开计划，你就可以解析它，并让下游的工作流更有系统地执行计划的不同步骤。</p>
+<p>现在，在让 LLM 进行规划方面，事实证明还有一个非常巧妙的想法，能让一个 LLM 输出非常复杂的计划并可靠地执行它们，那就是让它们编写代码，并让代码来表达计划。让我们在下一个视频中看一看这个。</p>
+<h2 id="53-通过代码执行进行规划">5.3 通过代码执行进行规划</h2>
+<p>通过代码执行进行规划，这个想法是，与其要求一个 LLM 以，比如说，JSON 格式输出一个计划来一步步执行，为什么不让 LLM 直接尝试编写代码呢？这些代码可以包含计划的多个步骤，比如调用这个函数，然后调用那个函数，再调用这个函数。通过执行 LLM 生成的代码，我们实际上可以执行相当复杂的计划。让我们来看一看你可能想在什么时候使用这个技术。</p>
+<p>假设你想构建一个系统，根据一个包含像这样过往销售数据的电子表格，来回答关于咖啡机销售的问题。你可能会给一个 LLM 一套工具，比如：</p>
+<ul>
+<li><code>get_column_max</code>: 查看某一列并获取最大值（这样可以回答“最贵的咖啡是什么？”）</li>
+<li><code>get_column_mean</code></li>
+<li><code>filter_rows</code></li>
+<li><code>get_column_min</code></li>
+<li><code>get_column_median</code></li>
+<li><code>sum_rows</code>
+等等。这些是你可能给一个 LLM 的一系列工具，用来以不同方式处理这个电子表格或这些行列数据。</li>
+</ul>
+<p>现在，如果一个用户问：“哪个月份的热巧克力销量最高？” 事实证明，你可以用这些工具来回答这个查询，但这相当复杂。你必须用 <code>filter_rows</code> 来提取一月份热巧克力的交易，然后对它做统计，然后对二月重复这个过程，算出统计数据，然后对三月、四月、五月，一直到十二月都重复一遍，然后取最大值。所以你实际上可以用一个相当复杂的过程，把这些工具串联起来，但这并不是一个很好的解决方案。</p>
+<p>更糟糕的是，如果有人问：“上周有多少笔独立交易？” 嗯，这些工具不足以得到那个答案，所以你可能最终会创建一个新工具 <code>get_unique_entries</code>。或者你可能会遇到另一个查询：“最后五笔交易的金额是多少？” 那你就得再创建一个工具来获取数据以回答那个查询。在实践中，我看到一些团队，当他们遇到越来越多的查询时，最终会创建越来越多的工具，试图给 LLM 足够多的工具来覆盖某人可能对这样一个数据集提出的所有问题。所以这种方法是脆弱、低效的，我看到一些团队不断地处理边缘情况并试图创建更多的工具。</p>
+<p>但事实证明，有一种更好的方法，那就是如果你提示 LLM 说：“请编写代码来解决用户的查询，并将你的答案以 Python 代码的形式返回”，也许用 <code>&lt;execute_python&gt;</code> 和 <code>&lt;/execute_python&gt;</code> 这些 XML 标签来界定，那么 LLM 就可以直接编写代码，将电子表格加载到一个数据处理库中（这里它使用的是 pandas 库），然后它实际上是在构思一个计划。这个计划是，在加载了 CSV 文件之后，首先它必须确保日期列以某种方式被解析，然后按日期排序，选择最后五笔交易，只显示价格列，等等。但这些就是计划的第一、二、三、四、五步。</p>
+<p>因为像 Python 这样的编程语言，在这个例子中还导入了 pandas 数据处理库，它有许多内置的函数，成百上千甚至上万个函数。而且，这些是 LLM 在何时调用方面已经看过大量数据的函数。通过让你的 LLM 编写代码，它可以从这成百上千个它已经看过大量数据知道何时使用的相关函数中进行选择，这让它能够将不同选择的函数调用串联起来，从而为回答像这样相当复杂的查询想出一个计划。</p>
+<p>再举一个例子。如果有人问：“上周有多少笔独立交易？” 嗯，它可以想出一个计划：读取 CSV 文件、解析日期列、定义时间窗口、筛选行、删除重复行、然后计数。这个的细节不重要，但希望你能看到的是，如果你读这里的注释，LLM 大致上是在想出一个四步计划，并用你可以直接执行的代码来表达每一步，这将为用户得到他们的答案。</p>
+<p>所以，对于那些任务可以合理地通过编写代码来完成的应用，让一个 LLM 用你可以为它执行的软件代码来表达它的计划，可以是一种非常强大的方式，让它能够编写丰富的计划。当然，我在关于工具使用的模块中提到的那个警告，即考虑是否需要找到一个安全的执行环境（如沙箱）来运行代码，这里也适用。尽管我知道，即使这可能不是最佳实践，我也知道很多开发者不使用沙箱。</p>
+<p>最后，事实证明，用代码进行规划效果很好。从这张改编自王新宇（Xinyao Wang）等人研究论文的图中，你可以看到，对于他们研究的任务，在许多不同的模型上，“代码即行动”（即邀请 LLM 编写代码并通过代码采取行动）都优于让它编写 JSON 然后将 JSON 转换为行动或文本。你也看到了一个趋势，即编写代码优于让 LLM 以 JSON 编写计划，而以 JSON 编写计划也比以纯文本编写计划要好一些。</p>
+<p>当然，有些应用你可能想给你的自定义工具让 LLM 使用，所以编写代码并不适用于每一个应用。但当它适用时，它可以是 LLM 表达计划的一种非常强大的方式。</p>
+<p>这就结束了关于规划的部分。今天，规划型 Agentic AI 最强大的用途之一是高度 agentic 的软件编码器。事实证明，如果你要求一个高度 agentic 的软件编码辅助工具为你编写一个复杂的软件，它可能会想出一个详细的计划，先构建软件的这个组件，然后构建第二个组件，第三个，甚至可能计划在进行过程中测试这些组件。然后它形成一个清单，接着按部就班地执行。所以它在构建日益复杂的软件方面实际上工作得非常好。</p>
+<p>对于其他应用，我认为规划的使用仍在增长和发展中。规划的一个缺点是，因为开发者不告诉系统具体要做什么，所以控制它有点难，而且你事先并不知道运行时会发生什么。但放弃一些这种控制，确实显著地增加了模型可能决定尝试的事情的范围。所以这项重要的技术有点前沿，在 agentic 编码（它在那里工作得很好）之外，感觉还不完全成熟，尽管我确定还有很大的发展空间。但希望你有一天能在你的一些应用中享受使用它。</p>
+<p>这就结束了规划部分。在本模块中，我希望与你分享最后一个设计模式，那就是如何构建多代理系统。我们不是只有一个代理，而是有多个代理协同工作来为你完成任务。让我们在下一个视频中看一看。</p>
+<h2 id="54-多代理工作流">5.4 多代理工作流</h2>
+<p>我们已经谈了很多关于如何构建单个代理来为你完成任务。在一个多代理或多 agentic 工作流中，我们转而让多个代理集合协作来为你做事。</p>
+<p>有些人第一次听说多代理系统时会想，我为什么需要多个代理？它不就是我一遍遍提示的同一个 LLM，或者只是一台电脑吗？我为什么需要多个代理？</p>
+<p>我发现一个有用的类比是，即使我可能在一台电脑上做事，我们也会把一台电脑上的工作分解成多个进程或多个线程。作为一名开发者，思考如何将工作分解成多个进程和多个计算机程序来运行——即使电脑上只有一个 CPU——这让我作为开发者更容易编写代码。同样地，如果你有一个复杂的任务要执行，有时，与其思考如何雇佣一个人来为你做，你可能会思考雇佣一个由几个人组成的团队，来为你完成任务的不同部分。</p>
+<p>所以在实践中，我发现对于许多 agentic 系统的开发者来说，拥有这样的心智框架——不是问“我可能雇佣哪一个人来做某事”，而是“雇佣三四个不同角色的人来为我完成这个整体任务是否有意义”——这有助于提供另一种方式，将一个复杂的事情分解成子任务，并一次一个地为那些独立的子任务进行构建。</p>
+<p>让我们来看一些这是如何工作的例子。</p>
+<ul>
+<li><strong>创建营销材料</strong>：以创建营销材料为例，假设你想推广太阳镜，你能为此制作一份营销手册吗？你可能需要团队里有一个研究员，来研究太阳镜的趋势和竞争对手提供什么。你可能还需要团队里有一个平面设计师，来渲染图表或你的太阳镜的好看图形。然后还需要一个写手，来把研究成果和图形资产整合在一起，制作成一份漂亮的宣传册。</li>
+<li><strong>撰写研究文章</strong>：或者，要写一篇研究文章，你可能需要一个研究员做在线研究，一个统计学家计算统计数据，一个主笔，然后一个编辑来完成一份润色过的报告。</li>
+<li><strong>准备法律案件</strong>：或者，要准备一个法律案件，真正的律师事务所通常会有助理、律师助理，也许还有一个调查员。</li>
+</ul>
+<p>我们很自然地，因为人类团队的工作方式，可以想到各种复杂任务被分解给具有不同角色的不同个体的方式。所以这些例子说明了，复杂任务已经被自然地分解成了可以由具有不同技能的不同人来执行的子任务。</p>
+<p>让我们以创建营销材料为例，详细看看研究员、平面设计师和写手可能会做什么。</p>
+<ul>
+<li><strong>研究员</strong>：研究员的任务可能是分析市场趋势和研究竞争对手。在设计研究代理时，需要记住的一个问题是，研究员可能需要哪些工具，才能就市场趋势和竞争对手的情况拿出一份研究报告。所以，一个 agentic 研究员可能需要使用的一个自然工具就是网络搜索。因为一个人类研究员，被要求做这些任务时，可能需要在线搜索才能完成他们的报告。</li>
+<li><strong>平面设计师</strong>：对于一个平面设计师代理，他们的任务可能是创作可视化图表和艺术作品。那么，一个 agentic 软件平面设计师可能需要哪些工具呢？嗯，他们可能需要图像生成和处理的 API。或者也许，类似于你在咖啡机例子中看到的，它可能需要代码执行来生成图表。</li>
+<li><strong>写手</strong>：最后，写手将研究成果转化为报告文本和营销文案。在这种情况下，除了 LLM 已经能做的生成文本的功能外，他们不需要任何工具。</li>
+</ul>
+<p>在这个和下一个视频中，我将用这些紫色的框来表示一个代理。你构建单个代理的方式，就是提示一个 LLM 扮演研究员、平面设计师或写手的角色，取决于它是哪个代理的一部分。</p>
+<p>例如，对于研究代理，你可能会提示它说：“你是一个研究代理，擅长分析市场趋势和竞争对手。请进行在线研究，为太阳镜产品分析市场趋势，并总结竞争对手的情况。” 这将让你能够构建一个研究员代理。同样地，通过提示一个 LLM 扮演一个带有适当工具的平面设计师，以及扮演一个写手，你就可以构建一个平面设计师代理和一个写手代理。</p>
+<p>在构建了这三个代理之后，一种让它们协同工作以生成你最终报告的方式，是使用一个简单的线性顺序工作流，或者说，在这种情况下，一个线性计划。所以，如果你想为太阳镜创建一个夏季营销活动，你可能会把那个提示给研究代理。研究代理然后写一份报告说：“这是当前的太阳镜趋势和竞争产品。” 这份研究报告可以接着被提供给平面设计师，它查看研究发现的数据，并创作一些数据可视化图表和艺术作品选项。所有这些资产可以接着被传递给写手，它接着将研究成果和图形输出整合起来，撰写最终的营销手册。</p>
+<p>在这种情况下，构建一个多代理工作流的优势是，在设计研究员、平面设计师或写手时，你可以一次只专注于一件事。所以我可以花些时间来构建我能做的最好的平面设计师代理，而也许我的合作者正在构建研究员代理和写手代理。最后，我们将它们串联起来，得到这个多代理系统。在某些情况下，我看到开发者们也开始复用一些代理。所以，为营销手册构建了一个平面设计师之后，也许我会考虑是否能构建一个更通用的平面设计师，既能帮我写营销手册，也能写社交媒体帖子，还能帮我为网页配图。所以，通过想出你可能雇佣哪些代理来完成一个任务——这有时会对应于你可能雇佣哪类人类员工来完成一个任务——你可以想出像这样的一个工作流，甚至可能构建出你可以在其他应用中选择复用的代理。</p>
+<p>现在，你在这里看到的是一个线性计划，即一个代理（研究员）完成他的工作，然后是平面设计师，然后是写手。对于代理，作为线性计划的替代方案，你也可以让代理以更复杂的方式相互交互。</p>
+<p>让我用一个使用多个代理进行规划的例子来说明。之前，你看到了我们如何可能给一个 LLM 一套它可以调用来执行不同任务的工具。在我将要向你展示的内容中，我们将转而给一个 LLM 调用不同代理的选项，请求不同的代理帮助完成不同的任务。</p>
+<p>具体来说，你可能会写一个提示，比如：“你是一个营销经理，有以下代理团队可以合作”，然后给出代理的描述。这与我们用规划和使用工具所做的非常相似，只不过工具（绿色的框）被替换成了代理（这些紫色的框），LLM 可以调用它们。你也可以要求它返回一个执行用户请求的逐步计划。在这种情况下，LLM 可能会：</p>
+<ol>
+<li>要求研究员研究当前的太阳镜趋势并报告。</li>
+<li>然后它会要求平面设计师创作图像并报告。</li>
+<li>接着要求写手创建一份报告。</li>
+<li>然后也许 LLM 会选择最后一次审查或反思并改进报告。</li>
+</ol>
+<p>在执行这个计划时，你会接着取第一步研究员的文本，执行研究，然后把它传递给平面设计师，再传递给写手，然后可能做最后一次反思步骤，然后就完成了。</p>
+<p>对这个工作流一个有趣的看法是，就好像你上面有这三个代理，但左边的这个 LLM 实际上就像第四个代理，一个营销经理，它是一个营销团队的管理者，负责设定方向，然后将任务委派给研究员、平面设计师和写手代理。所以这实际上变成了一个由四个代理组成的集合，一个营销经理代理协调着研究员、平面设计师和写手的工作。</p>
+<p>在这个视频中，你看到了两种沟通模式。一种是线性的，你的代理一次只执行一个动作，直到你到达终点。第二种有一个营销经理协调着其他几个代理的活动。事实证明，在构建多 agentic 系统时，你可能最终必须做出的关键设计决策之一，就是你不同代理之间的沟通模式是什么。这是一个艰难的研究领域，并且正在涌现多种模式，但在下一个视频中，我想向你展示一些让你的代理相互合作的最常见的沟通模式。让我们在下一个视频中看看。</p>
+<h2 id="55-多代理系统的沟通模式">5.5 多代理系统的沟通模式</h2>
+<p>当你有一个团队的人一起工作时，他们沟通的模式可能相当复杂。实际上，设计一个组织结构图是相当复杂的，需要试图找出人们沟通、协作的最佳方式。事实证明，为多代理系统设计沟通模式也相当复杂。但让我向你展示一些我今天看到的不同团队使用的最常见的设计模式。</p>
+<h4 id="1-线性模式">1. 线性模式</h4>
+<p>在一个带有线性计划的营销团队中，首先是研究员工作，然后是平面设计师，然后是写手，其沟通模式是线性的。研究员会与平面设计师沟通，然后研究员和平面设计师或许都会把他们的输出传递给写手。所以这是一个非常线性的沟通模式。这是我今天看到正在使用的两种最常见的沟通计划之一。</p>
+<h4 id="2-层级模式">2. 层级模式</h4>
+<p>两种最常见的沟通计划中的第二种，类似于你在这个例子中看到的，即使用多个代理进行规划，其中有一个管理者与一些团队成员沟通并协调他们的工作。所以在这个例子中，营销经理决定调用研究员来做一些工作。然后，如果你把营销经理想象成接收报告，然后把它发送给平面设计师，再接收报告，然后发送给写手，这将是一种层级式的沟通模式。如果你真的在实现一个层级式的沟通模式，让研究员把报告传回给营销经理，可能会比让研究员直接把结果传递给平面设计师和写手更简单。所以这种类型的层级结构也是一种相当常见的规划沟通模式的方式，即你有一个管理者协调着其他一些代理的工作。</p>
+<h4 id="3-深度层级模式">3. 深度层级模式</h4>
+<p>为了与你分享一些更高级、使用频率较低，但有时在实践中仍会使用的沟通模式，一种是更深的层级结构。和之前一样，如果你有一个营销经理向研究员、平面设计师、写手发送任务，但也许研究员自己有两个其他的代理可以调用，比如一个网络研究员和一个事实核查员。也许平面设计师就自己工作，而写手有一个初稿风格写手和一个引文检查员。这将是一个代理的层级组织，其中一些代理可能自己会调用其他的子代理。我也看到这在一些应用中使用，但这比一层层级结构要复杂得多，所以今天用得比较少。</p>
+<h4 id="4-全连接模式">4. 全连接模式</h4>
+<p>最后一个模式，执行起来相当有挑战性，但我看到一些实验性的项目在使用它，那就是全连接（all-to-all）的沟通模式。在这种模式中，任何人都可以在任何时候与任何其他人交谈。你实现这个的方式是，你提示你所有的四个代理（在这个例子中），告诉它们还有另外三个代理它们可以决定调用。每当你的一个代理决定向另一个代理发送消息时，那条消息就会被添加到接收方代理的上下文中。然后接收方代理可以思考一会儿，并决定何时回复第一个代理。所以，如果它们都能在一个群体中协作，互相交谈一会儿，直到，比如说，它们中的每一个都宣布自己完成了这个任务，然后它停止交谈。也许当每个人都认为完成了，或者也许当写手断定已经足够好了，那时你才生成最终的输出。</p>
+<p>在实践中，我发现全连接沟通模式的结果有点难以预测。所以有些应用不需要高度的控制，你可以运行它，看看会得到什么。如果营销手册不好，也许没关系，你再运行一次，看看是否会得到不同的结果。但我认为，对于那些你愿意容忍一点混乱和不可预测性的应用，我确实看到一些开发者在使用这种沟通模式。</p>
+<p>所以，我希望这传达了多代理系统的一些丰富性。今天，也有相当多的软件框架支持轻松地构建多代理系统，它们也使得实现其中一些沟通模式相对容易。所以，也许如果你使用你自己的多代理系统，你会发现一些这些框架对于探索这些不同的沟通模式很有帮助。</p>
+<p>这就把我们带到了本模块和本课程的最后一个视频。让我们进入最后一个视频做个总结。</p>
+<h2 id="56-结论">5.6 结论</h2>
+<p>欢迎来到本课程的最后一个视频。感觉我们一起经历了很多，就你和我，我们在 Agentic AI 领域探讨了许多主题。让我们回顾一下。</p>
+<ul>
+<li>在第一个模块中，我们谈到了你可以用 Agentic AI 构建哪些以前不可能实现的应用。然后我们开始看关键的设计模式。</li>
+<li>我们探讨了反思设计模式，这是一个简单的方法，有时能给你的应用带来不错的性能提升。</li>
+<li>然后是工具使用或函数调用，它扩展了你的 LLM 应用能做的事情，其中代码执行是一个重要的特例。</li>
+<li>接着我们花了很多时间讨论评估以及错误分析，以及如何推动一个规范的构建与分析流程，从而高效地不断提升你的 agentic AI 系统的性能。这第四个模块中的一些材料，我认为在你持续构建 Agentic AI 系统的过程中，你会发现它们是最有用的，我希望会是这样很长一段时间。</li>
+<li>然后在这个模块中，我们谈到了规划和多代理系统，它们能让你构建更强大，尽管有时更难控制、更难预先预测的系统类型。</li>
+</ul>
+<p>所以，凭借你从本课程学到的技能，我想你现在知道如何构建很多酷炫、激动人心的 Agentic AI 应用了。当我的团队，或者我看到其他团队，面试求职者时，我发现面试官常常试图评估候选人是否具备你在这门课程中学到的大部分技能。所以我希望这门课程也能为你开启新的职业机会，并且你会做得更多。无论你是为了好玩，还是为了专业的实际应用场景而做这些事，我想你会享受你现在可以构建的这一系列新事物。</p>
+<p>最后，我想再次感谢你花这么多时间和我在一起。我希望你能带着这些技能，负责任地使用它们，然后去创造一些酷炫的东西。</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#51-规划工作流">5.1 规划工作流</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#52-创建和执行-llm-计划">5.2 创建和执行 LLM 计划</a></li>
+    <li><a href="#53-通过代码执行进行规划">5.3 通过代码执行进行规划</a></li>
+    <li><a href="#54-多代理工作流">5.4 多代理工作流</a></li>
+    <li><a href="#55-多代理系统的沟通模式">5.5 多代理系统的沟通模式</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#56-结论">5.6 结论</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#51-规划工作流">5.1 规划工作流</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#52-创建和执行-llm-计划">5.2 创建和执行 LLM 计划</a></li>
+    <li><a href="#53-通过代码执行进行规划">5.3 通过代码执行进行规划</a></li>
+    <li><a href="#54-多代理工作流">5.4 多代理工作流</a></li>
+    <li><a href="#55-多代理系统的沟通模式">5.5 多代理系统的沟通模式</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#56-结论">5.6 结论</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251015-02" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251015-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251015-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251015-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251015-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251015-02"></script>
+  
+  
+  
+  
+  
+</body>
+</html>
