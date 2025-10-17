@@ -271,6 +271,10 @@
   .brand{display:flex;align-items:center;gap:10px;user-select:none;}
   .brand .logo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary,#0ea5e9),#7c3aed);box-shadow:0 2px 8px rgba(0,0,0,.08);} 
   .brand .title{font-weight:800;font-size:40px;letter-spacing:.5px;color:var(--title, var(--text,#0f172a));}
+  /* 主题配色：与头部搜索框一致 */
+  :root[data-theme="light"] .search-hero .brand .title,
+  :root:not([data-theme]) .search-hero .brand .title{ color: var(--accent, #1B5E4A); }
+  :root[data-theme="dark"] .search-hero .brand .title{ color: var(--accent-2, #f9d67b); }
   .search-hero.compact .brand{position:sticky;top:8px;left:0;transform-origin:left top;gap:8px;}
   .search-hero.compact .brand .title{font-size:20px;}
   .search-hero.compact .brand .logo{width:22px;height:22px;}
