@@ -1,0 +1,1662 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「Scripts」Module 1: Introduction to Agentic Workflows • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251017-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251017-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-01" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-01" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Scripts」Module 1: Introduction to Agentic Workflows"><meta property="og:description" content="```"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecture/lec-01/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「Scripts」Module 1: Introduction to Agentic Workflows"><meta name="twitter:description" content="```"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecture/lec-01/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture/lec-01/">「Scripts」Module 1: Introduction to Agentic Workflows</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-02/">「Scripts」Module 2: Reflection Design Pattern</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-03/">「Scripts」Module 3: Tool Use</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-04/">「Scripts」Module 4: Practical Tips for Building Agentic AI</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-05/">「Scripts」Module 5: Patterns for Highly Autonomous Agents</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/lecture/" class="crumb-sec">课程视频脚本-英文</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「Scripts」Module 1: Introduction to Agentic Workflows</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecture/lec-01/">「Scripts」Module 1: Introduction to Agentic Workflows</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-02/">「Scripts」Module 2: Reflection Design Pattern</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-03/">「Scripts」Module 3: Tool Use</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-04/">「Scripts」Module 4: Practical Tips for Building Agentic AI</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecture/lec-05/">「Scripts」Module 5: Patterns for Highly Autonomous Agents</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Andrew Ng</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="andrew-ng-agentic-ai">Andrew Ng: Agentic AI</h1>
+<h1 id="module-1-introduction-to-agentic-workflows">Module 1: Introduction to Agentic Workflows</h1>
+<h2 id="10-introduction">1.0 Introduction</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0:02
+</span></span><span style="display:flex;"><span>Welcome to this course on Agentic AI. When I coined the term agentic to describe what I saw
+</span></span><span style="display:flex;"><span>0:05
+</span></span><span style="display:flex;"><span>as an important and rapidly growing trend in how people were building on-base applications,
+</span></span><span style="display:flex;"><span>0:10
+</span></span><span style="display:flex;"><span>what I did not realize was that a bunch of marketers would get hold of this term
+</span></span><span style="display:flex;"><span>0:14
+</span></span><span style="display:flex;"><span>and use it as a sticker and put this on almost everything in sight. And that has caused hype
+</span></span><span style="display:flex;"><span>0:20
+</span></span><span style="display:flex;"><span>on Agentic AI to skyrocket. The good news though is that ignoring the hype, the number of truly
+</span></span><span style="display:flex;"><span>0:27
+</span></span><span style="display:flex;"><span>valuable and useful applications built using Agentic AI has also grown very rapidly, even if
+</span></span><span style="display:flex;"><span>0:33
+</span></span><span style="display:flex;"><span>not quite as rapidly as the hype. And in this course, what I&#39;d like to do is show you best
+</span></span><span style="display:flex;"><span>0:38
+</span></span><span style="display:flex;"><span>practices for building Agentic AI applications. And this will open up a lot of new opportunities
+</span></span><span style="display:flex;"><span>0:44
+</span></span><span style="display:flex;"><span>to you in terms of what you can now build. Today, agentic workflows are being used to build
+</span></span><span style="display:flex;"><span>0:49
+</span></span><span style="display:flex;"><span>applications like customer support agents, or to do deep research to help write deeply insightful
+</span></span><span style="display:flex;"><span>0:55
+</span></span><span style="display:flex;"><span>research reports, or to process tricky legal documents, or to look at patient input and render
+</span></span><span style="display:flex;"><span>1:02
+</span></span><span style="display:flex;"><span>or to suggest possible medical diagnoses. On many of my teams, a lot of the projects we built just
+</span></span><span style="display:flex;"><span>1:08
+</span></span><span style="display:flex;"><span>would be impossible without agentic workflows. And so knowing how to build applications with them
+</span></span><span style="display:flex;"><span>1:14
+</span></span><span style="display:flex;"><span>is one of the most important and valuable skills in AI today. It turns out that one of the biggest
+</span></span><span style="display:flex;"><span>1:20
+</span></span><span style="display:flex;"><span>differences I&#39;ve seen between people that really know how to build agentic workflows compared to
+</span></span><span style="display:flex;"><span>1:24
+</span></span><span style="display:flex;"><span>people that are less effective at it is the ability to drive a disciplined development process,
+</span></span><span style="display:flex;"><span>1:30
+</span></span><span style="display:flex;"><span>specifically one focused on evals and error analysis. And in this course, I&#39;ll tell you what
+</span></span><span style="display:flex;"><span>1:35
+</span></span><span style="display:flex;"><span>that means and show you what allows you to be really good at building these agentic workflows.
+</span></span><span style="display:flex;"><span>1:41
+</span></span><span style="display:flex;"><span>Being able to do this is one of the most important skills in AI today and will open up a lot more
+</span></span><span style="display:flex;"><span>1:46
+</span></span><span style="display:flex;"><span>opportunities, be it job opportunities or opportunities to just build amazing software
+</span></span><span style="display:flex;"><span>1:51
+</span></span><span style="display:flex;"><span>yourself. With that, let&#39;s go on to the next video to dive more into what are agentic workflows.
+</span></span></code></pre></div><h2 id="11-what-is-an-agentic-ai">1.1 What is an agentic AI</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>So what is Agentic AI <span style="color:#f92672">and</span> why are Agentic AI workflows so powerful<span style="color:#960050;background-color:#1e0010">?</span> Let<span style="color:#e6db74">&#39;s take a look.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>The way that many of us use large language models <span style="color:#f92672">or</span> LLMs today is by prompting it to say,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>write an essay <span style="color:#66d9ef">for</span> us on a certain topic X<span style="color:#f92672">.</span> And I think of that as akin to going to a human,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, going to an AI <span style="color:#f92672">and</span> asking it to please type out an essay <span style="color:#66d9ef">for</span> me by writing
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>from the first word to the last word all <span style="color:#f92672">in</span> one go <span style="color:#f92672">and</span> without ever using backspace<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>It turns out that we as people, we don<span style="color:#e6db74">&#39;t do our best writing like that by being forced to write</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> this completely linear order <span style="color:#f92672">and</span> nor <span style="color:#66d9ef">do</span> AI models<span style="color:#f92672">.</span> But despite the difficulty of being
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>constrained to write <span style="color:#f92672">in</span> this way, our LLMs <span style="color:#66d9ef">do</span> surprisingly well<span style="color:#f92672">.</span> In contrast, with an agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>workflow, this is what the process might look like<span style="color:#f92672">.</span> You may ask it to first write an essay
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>outline on a certain topic, then ask <span style="color:#66d9ef">if</span> it needs to <span style="color:#66d9ef">do</span> any web research<span style="color:#f92672">.</span> And after doing some web
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>research <span style="color:#f92672">and</span> maybe downloading some web pages, then to write the first draft <span style="color:#f92672">and</span> then to read
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>the first draft <span style="color:#f92672">and</span> see what parts need revision <span style="color:#f92672">or</span> more research <span style="color:#f92672">and</span> then revise the draft <span style="color:#f92672">and</span> so
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>on<span style="color:#f92672">.</span> And this type of workflow is more akin to doing some thinking <span style="color:#f92672">and</span> some research <span style="color:#f92672">and</span> then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>doing some revision <span style="color:#f92672">and</span> then doing some more thinking <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> And with this iterative
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>process, it turns out that an agentic workflow can take longer, but it delivers a much better
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>work product<span style="color:#f92672">.</span> So an agentic AI workflow is a process where an LLM based app executes multiple
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>steps to complete a task<span style="color:#f92672">.</span> In this example, you might use an LLM to write the first essay outline
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then you might use an LLM to decide what search terms to type into a web search engine <span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>really what search terms to call a web search API with <span style="color:#f92672">in</span> order to get back relevant web pages<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>Based on that, you can feed the downloaded web pages into an LLM to have it write the first draft
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then maybe use another LLM to reflect <span style="color:#f92672">and</span> decide what needs more revision<span style="color:#f92672">.</span> And then depending
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>on how you design this workflow, perhaps you may even add a human <span style="color:#f92672">in</span> the loop step where the LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>has the option to request human review, maybe of some key facts<span style="color:#f92672">.</span> And based on that, it may then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>revise the draft <span style="color:#f92672">and</span> this process results <span style="color:#f92672">in</span> a much better work output<span style="color:#f92672">.</span> One of the key skills
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>you learn <span style="color:#f92672">in</span> this course is how to take a complex task like writing an essay <span style="color:#f92672">and</span> breaking it down
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>into smaller steps <span style="color:#66d9ef">for</span> agentic workflows to execute one step at a time to then get the work output
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>that you want<span style="color:#f92672">.</span> And knowing how to decompose the task into steps <span style="color:#f92672">and</span> how to build the components
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>to execute the individual steps well turns out to be a tricky but important skill that will
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>determine your ability to build agentic workflows <span style="color:#66d9ef">for</span> a huge range of exciting applications<span style="color:#f92672">.</span> In this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>course, a running example that we<span style="color:#e6db74">&#39;ll use and something that you build alongside me is a research</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>agent<span style="color:#f92672">.</span> So here<span style="color:#e6db74">&#39;s an example of what it will look like. You can enter a research topic like how do I</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>build a new rocket company to compete with SpaceX<span style="color:#f92672">.</span> I don<span style="color:#e6db74">&#39;t personally want to compete with SpaceX,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>but <span style="color:#66d9ef">if</span> you want to, you can try asking a research agent to help your background research<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>So this agent starts with planning out what research to use, including calling a web search
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>engine to download some web pages, <span style="color:#f92672">and</span> then to synthesize <span style="color:#f92672">and</span> rank findings, draft an outline,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>have an editor<span style="color:#f92672">-</span>to<span style="color:#f92672">-</span>agent review <span style="color:#66d9ef">for</span> coherence, <span style="color:#f92672">and</span> then finally generate a comprehensive
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>markdown report, which it has done here, building a new rocket company to compete with SpaceX
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>with an intro, background, findings, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> I think it points out appropriately that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>this is going to be a tough startup to build, so I<span style="color:#e6db74">&#39;m not personally planning to do this, but if</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>you want to tackle something like this, maybe a research agent like this could help you with some
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>initial research<span style="color:#f92672">.</span> And by finding <span style="color:#f92672">and</span> downloading multiple sources <span style="color:#f92672">and</span> deeply thinking about it,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>this actually ends up with a much more thoughtful report than just prompting an LLM to write an essay
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> you would<span style="color:#f92672">.</span> One of the reasons I<span style="color:#e6db74">&#39;m excited about this is because in my work, I&#39;</span>ve ended up
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>building quite a few specialized research agents, be it <span style="color:#f92672">in</span> legal documents <span style="color:#66d9ef">for</span> conflict legal
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>compliance, <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> some healthcare sectors, <span style="color:#f92672">or</span> some business product research areas<span style="color:#f92672">.</span> And so I hope
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>that working through this example, you <span style="color:#f92672">not</span> only learn how to build agentic workflows <span style="color:#66d9ef">for</span> many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>other applications, but that some of the ideas <span style="color:#f92672">in</span> building research agents will be directly useful
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>to you <span style="color:#66d9ef">if</span> you ever need to build a custom research agent yourself<span style="color:#f92672">.</span> Now, one of the often discussed
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>areas of AI agents is how autonomous are they<span style="color:#960050;background-color:#1e0010">?</span> What you just saw here was a relatively complex,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>highly autonomous Agentic AI workflow, but there are also other simpler workflows that are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>incredibly valuable<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s go on to the next video to talk about the degree to which agentic</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>workflows can be autonomous, <span style="color:#f92672">and</span> does it give you a framework to think about how
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>you might go about building different applications <span style="color:#f92672">and</span> how easy <span style="color:#f92672">or</span> difficult they might be<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>See you <span style="color:#f92672">in</span> the next video<span style="color:#f92672">.</span>
+</span></span></code></pre></div><h2 id="12-degrees-of-autonomy">1.2 Degrees of autonomy</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>Agents can be autonomous to different degrees<span style="color:#f92672">.</span> A few years ago, I noticed within the AI community
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>that there was a growing controversial debate about what is an agent, <span style="color:#f92672">and</span> some people are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>writing a paper saying I built an agent, <span style="color:#f92672">and</span> others will say, no, that<span style="color:#e6db74">&#39;s not really a true</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>agent<span style="color:#f92672">.</span> And I felt this debate was unnecessary, which is why I started using the term agentic,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>because I thought <span style="color:#66d9ef">if</span> we use it as an adjective rather than a binary, it<span style="color:#e6db74">&#39;s either an agent or not,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>then we<span style="color:#e6db74">&#39;re going to have to acknowledge that systems can be agentic to different degrees.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>And let<span style="color:#e6db74">&#39;s just call it all agentic and move on with the real work of building these systems</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>rather than debating, you know, is this sufficiently autonomous to be an agent <span style="color:#f92672">or</span> <span style="color:#f92672">not</span><span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>I remember when I prepared a talk on agentic reasoning, one of my team members actually
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>came to me <span style="color:#f92672">and</span> said, hey, Andrew, we don<span style="color:#e6db74">&#39;t need yet another word. You know, we have agent,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>why are you making up another word, agentic<span style="color:#960050;background-color:#1e0010">?</span> But I decided to use it anyway<span style="color:#f92672">.</span> And then later on,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>wrote an article <span style="color:#f92672">in</span> a given newsletter, The Batch, <span style="color:#f92672">and</span> then also posted on social media,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>saying that instead of arguing over which word to include <span style="color:#f92672">or</span> exclude as being a true agent,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>let<span style="color:#e6db74">&#39;s acknowledge that different degrees to which systems can be agentic. And I think this helped</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>move past the debate on what is a true agent <span style="color:#f92672">and</span> let us just focus on actually building them<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>Some agents can be less autonomous<span style="color:#f92672">.</span> So take the example of writing an essay about black holes<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>You can have a relatively simple agent to come up with a few web search terms <span style="color:#f92672">or</span> web search queries<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>Then you can hard code <span style="color:#f92672">in</span> that you call a web search engine, fetch some web pages,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then use that to write an essay<span style="color:#f92672">.</span> And this is an example of a less autonomous agent
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>with a fully deterministic sequence of steps<span style="color:#f92672">.</span> And this will work okay<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>In terms of notational convention, throughout this course, I<span style="color:#e6db74">&#39;ll use the red color,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>as you see here on the left, to denote the user input, such as a user query <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> <span style="color:#f92672">in</span> later examples, maybe the input document into an agentic workflow<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>The gray boxes denote calls to an LLM, <span style="color:#f92672">and</span> the green boxes, like the web search <span style="color:#f92672">and</span> the web
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>fetch boxes that you see here, indicate steps where other software is being used to carry out
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>an action, such as a web search API call <span style="color:#f92672">or</span> executing code to fetch the contents of a website<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>Then an agent can be more autonomous, where, given a request to write an essay about black holes,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>perhaps you let the LLM decide, does it want to <span style="color:#66d9ef">do</span> a web search, <span style="color:#f92672">or</span> does it want to search
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>recent news sources, <span style="color:#f92672">or</span> does it want to search <span style="color:#66d9ef">for</span> recent research papers on the website archive<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>Based on that, maybe <span style="color:#f92672">in</span> this example, the LLM, <span style="color:#f92672">not</span> the human engineer, but the LLM chooses,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, to call a web search engine, <span style="color:#f92672">and</span> then after that, you may let the LLM decide
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>how many web pages does it want to fetch, <span style="color:#f92672">or</span> <span style="color:#66d9ef">if</span> it fetches the PDF, does it need to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>call a function, <span style="color:#f92672">or</span> also call a <span style="color:#66d9ef">tool</span>, to convert the PDF to text<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>And <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>, maybe it fetches its top few web pages, then it can write an essay,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>decide whether to reflect <span style="color:#f92672">and</span> improve, <span style="color:#f92672">and</span> maybe even go back to fetch more web pages,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then to finally produce an output<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>And so even <span style="color:#66d9ef">for</span> this example of a research agent, we can see that some agents can be
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>less autonomous, with a linear sequence of steps to be executed, determined by a programmer,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> some can be more autonomous, where you trust the LLM to make more decisions,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> the exact sequence of steps that happens may be even determined by the LLM, rather than
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> advance by the programmer<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>So <span style="color:#66d9ef">for</span> less autonomous systems, you will usually have all the steps predetermined <span style="color:#f92672">in</span> advance,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> any functions it calls, like web search, <span style="color:#f92672">and</span> we<span style="color:#e6db74">&#39;ll call that tool use, as you learn</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> the third module <span style="color:#f92672">in</span> this course, might be hard<span style="color:#f92672">-</span>coded by the human engineer, by you
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> me, <span style="color:#f92672">and</span> most of the autonomy is <span style="color:#f92672">in</span> what text the LLM generates<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>At the end of the spectrum would be highly autonomous agents, where the agent makes many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>decisions autonomously, including, <span style="color:#66d9ef">for</span> example, deciding what is the sequence of steps it
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>will carry out <span style="color:#f92672">in</span> order to write the essay<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>And there<span style="color:#e6db74">&#39;s some highly autonomous agents that can even write new functions, or sometimes</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>create new tools that it can then execute<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>And somewhere <span style="color:#f92672">in</span> between are semi<span style="color:#f92672">-</span>autonomous agents, where it can make some decisions,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>choose tools, but the tools are usually more predefined<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>As you look at different examples <span style="color:#f92672">in</span> this course, you learn how to build applications
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>anywhere on this spectrum of less to more highly autonomous, <span style="color:#f92672">and</span> you find that there
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>are tons of applications <span style="color:#f92672">in</span> the less autonomous end of the spectrum that are very valuable
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>being built <span style="color:#66d9ef">for</span> tons of businesses today, <span style="color:#f92672">and</span> at the same time, there are also applications
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>being worked on at the more highly autonomous end of the spectrum, but those are usually
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>less easily controllable, a little bit more unpredictable, <span style="color:#f92672">and</span> also a lot of active research
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>as well to figure out how to build these more highly autonomous agents<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>And with that, let<span style="color:#e6db74">&#39;s go on to the next video to dive deeper into this and to hear about</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>some of the benefits of using agents <span style="color:#f92672">and</span> why they allow us to <span style="color:#66d9ef">do</span> things that just were
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">not</span> possible with earlier generations of base applications<span style="color:#f92672">.</span>
+</span></span></code></pre></div><h2 id="13-benefits-of-agentic-workflows">1.3 Benefits of agentic workflows</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>I think the one biggest benefit of agentic workflows is that it allows you to <span style="color:#66d9ef">do</span> many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>tasks effectively that just previously were <span style="color:#f92672">not</span> possible<span style="color:#f92672">.</span> But there are other benefits as well,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>including parallelism that lets you <span style="color:#66d9ef">do</span> certain things quite fast, as well as modularity that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>lets you combine the best of three components from many different places to build an effective
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>workflow<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look. My team collected some data on a coding benchmark that tests the</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>ability of different LLMs to write code to carry out certain tasks<span style="color:#f92672">.</span> The benchmark used <span style="color:#f92672">in</span> this <span style="color:#66d9ef">case</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>is called Human Eval, <span style="color:#f92672">and</span> it turns out that GPT <span style="color:#ae81ff">3.5</span>, this is a model that the first publicly
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>available version of Chat GPT was based on, <span style="color:#66d9ef">if</span> asked to write the code directly, to just type
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>out the computer program, gets <span style="color:#ae81ff">40</span><span style="color:#f92672">%</span> right on this benchmark<span style="color:#f92672">.</span> This is a positive k<span style="color:#f92672">-</span>metric<span style="color:#f92672">.</span> GPT <span style="color:#ae81ff">4</span> is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>a much better model<span style="color:#f92672">.</span> Its performance leaps to <span style="color:#ae81ff">67</span><span style="color:#f92672">%</span> with this also non<span style="color:#f92672">-</span>agentic workflow<span style="color:#f92672">.</span> But it turns
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>out that as large as the improvement was from GPT <span style="color:#ae81ff">3.5</span> to GPT <span style="color:#ae81ff">4</span>, that improvement is dwarfed by what
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>you can achieve by wrapping GPT <span style="color:#ae81ff">3.5</span> within an agentic workflow<span style="color:#f92672">.</span> Using different agentic techniques,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>which you<span style="color:#e6db74">&#39;ll learn about later in this course, you can prompt GPT 3.5 to write code and then maybe</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>reflect on the code <span style="color:#f92672">and</span> figure out <span style="color:#66d9ef">if</span> you can improve it<span style="color:#f92672">.</span> And using techniques like that, you can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>actually get GPT <span style="color:#ae81ff">3.5</span> to get much higher levels of performance<span style="color:#f92672">.</span> And similarly, GPT <span style="color:#ae81ff">4</span> used <span style="color:#f92672">in</span> the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>context of an agentic workflow also does much better<span style="color:#f92672">.</span> So even with today<span style="color:#e6db74">&#39;s best LLMs, an agentic</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>workflow lets you get much better performance<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> fact, what we saw <span style="color:#f92672">in</span> this example was the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>improvement from one generation of model to another, which is huge, is still <span style="color:#f92672">not</span> as big a difference
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>as implementing an agentic workflow on the previous generation of model<span style="color:#f92672">.</span> Another benefit of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>using agentic workflows is that they can parallelize some tasks <span style="color:#f92672">and</span> thus <span style="color:#66d9ef">do</span> certain things much faster
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>than a human<span style="color:#f92672">.</span> For example, <span style="color:#66d9ef">if</span> you ask an agentic workflow to write an essay about black holes, you
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>might be able to have three LLMs run <span style="color:#f92672">in</span> parallel to generate ideas <span style="color:#66d9ef">for</span> web search terms to type
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>into the search engine<span style="color:#f92672">.</span> Based on the first web search, it may identify, say, three top results to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>fetch<span style="color:#f92672">.</span> And based on the second web search, it may identify a second set of web pages to fetch <span style="color:#f92672">and</span> so
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>on<span style="color:#f92672">.</span> And it turns out that whereas a human doing this research would have to read these nine web
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>pages sequentially <span style="color:#f92672">or</span> one at a time, when you<span style="color:#e6db74">&#39;re using an agentic workflow, you can actually</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>parallelize all nine web page downloads <span style="color:#f92672">and</span> then finally feed all these things into an LLM to write
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>an essay<span style="color:#f92672">.</span> So even though agentic workflows <span style="color:#66d9ef">do</span> take longer than truly non<span style="color:#f92672">-</span>agentic workflows <span style="color:#f92672">or</span> by
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>direct generation by just prompting a single time, <span style="color:#66d9ef">if</span> you were to compare this type of agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>workflow to how a human would have to go about the task, the ability to parallelize downloading lots
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>of web pages can actually let it <span style="color:#66d9ef">do</span> certain tasks much faster than the non<span style="color:#f92672">-</span>parallel sequential way
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>that a single human might process this data<span style="color:#f92672">.</span> To build on this example, it turns out one of the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>things I often <span style="color:#66d9ef">do</span> when building agentic workflows is look at the individual components like the LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> add <span style="color:#f92672">or</span> swap out components<span style="color:#f92672">.</span> So <span style="color:#66d9ef">for</span> example, maybe I look at the web search engine I use up
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>here <span style="color:#f92672">and</span> I might decide that I want to soften a new web search engine<span style="color:#f92672">.</span> When building agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>workflows, there are actually multiple web search engines including Google, which you can access
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>by a server, as well as others like Bing, DuckDuckGo, Tavily, u<span style="color:#f92672">.</span>com<span style="color:#f92672">.</span> There are actually quite a lot of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>options <span style="color:#66d9ef">for</span> web search engines designed <span style="color:#66d9ef">for</span> LLMs to use<span style="color:#f92672">.</span> Or maybe instead of just doing three web
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>searches, maybe on this step we can swap <span style="color:#f92672">in</span> a new news search engine so we can find out what<span style="color:#e6db74">&#39;s the</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>latest news on recent breakthroughs on black hole science<span style="color:#f92672">.</span> And lastly, instead of using the same LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> all of the different steps, I will often try out different large language models <span style="color:#f92672">and</span> maybe try
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">01</span>
+</span></span><span style="display:flex;"><span>out different LLM providers to see which one gives the best result <span style="color:#66d9ef">for</span> different steps of this system<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>So to summarize, the main reason I use agentic workflows is it just gives much better performance
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>on many different applications<span style="color:#f92672">.</span> But <span style="color:#f92672">in</span> addition, it can also paralyze some tasks that humans would
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>otherwise have to <span style="color:#66d9ef">do</span> sequentially<span style="color:#f92672">.</span> And the modular design of many agentic workflows also lets us
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>add <span style="color:#f92672">or</span> update tools <span style="color:#f92672">and</span> sometimes swap out models<span style="color:#f92672">.</span> We<span style="color:#e6db74">&#39;ve talked a lot about the key components of</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>building agentic workflows<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s now take a look at a range of Agentic AI applications to give you</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>a sense of the sorts of things people are already building <span style="color:#f92672">and</span> the sorts of things
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>you<span style="color:#e6db74">&#39;ll build yourself. Let&#39;</span>s go on to the next video<span style="color:#f92672">.</span>
+</span></span></code></pre></div><h2 id="14-agentic-ai-applications">1.4 Agentic AI applications</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>Let<span style="color:#e6db74">&#39;s take a look at some examples of Agentic AI applications.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>One task that many businesses carry out is invoice processing<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>So given an invoice like this, you might want to write software to extract the most important
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>fields, which <span style="color:#66d9ef">for</span> this application, let<span style="color:#e6db74">&#39;s say is the biller, that would be tech flow solutions,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>the biller address, the amount due, which is <span style="color:#f92672">$</span><span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">000</span>, <span style="color:#f92672">and</span> the due date, which looks like it is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>August <span style="color:#ae81ff">20</span>th, <span style="color:#ae81ff">2025.</span> So <span style="color:#f92672">in</span> many finance departments, maybe a human would look at invoices <span style="color:#f92672">and</span> identify
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>the most important fields, who <span style="color:#66d9ef">do</span> we need to pay by when, <span style="color:#f92672">and</span> record these <span style="color:#f92672">in</span> a database to make
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>sure that payment is issued <span style="color:#f92672">in</span> time<span style="color:#f92672">.</span> If you were to implement this with an agentic workflow,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>you might <span style="color:#66d9ef">do</span> so like this<span style="color:#f92672">.</span> You write input an invoice, then call a PDF to text conversion API
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>to turn the PDF into maybe formatted text, such as markdown text <span style="color:#66d9ef">for</span> the LLM to ingest<span style="color:#f92672">.</span> Then the LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>will look at the PDF <span style="color:#f92672">and</span> figure out, is this actually an invoice <span style="color:#f92672">or</span> is this some other type
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>of document that they should just ignore<span style="color:#960050;background-color:#1e0010">?</span> And <span style="color:#66d9ef">if</span> it is an invoice, then it will pull up the required
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>fields as well as use an API <span style="color:#f92672">or</span> use a <span style="color:#66d9ef">tool</span> to update the database <span style="color:#f92672">in</span> order to save the most
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>important fields <span style="color:#f92672">in</span> the database records<span style="color:#f92672">.</span> So one aspect of this agentic workflow is that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>there is a clear process to follow, is identify the required fields <span style="color:#f92672">and</span> record <span style="color:#f92672">in</span> the database<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>Tasks like these with a clear process you want followed tend to be maybe easier <span style="color:#66d9ef">for</span> agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>workflows to carry out because it leads to a relatively step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step way to reliably carry
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>out this task<span style="color:#f92672">.</span> Here<span style="color:#e6db74">&#39;s another example, maybe just a little bit harder. So if you want to build an</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>agent to respond to basic customer order inquiries, then the steps might be to extract the key
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>information, so figure out what exactly did the customer order, what<span style="color:#e6db74">&#39;s the customer&#39;</span>s name, then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>look up the relevant customer records, <span style="color:#f92672">and</span> then finally draft a response <span style="color:#66d9ef">for</span> human to review before
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>the email response is sent to the customer<span style="color:#f92672">.</span> So again, there<span style="color:#e6db74">&#39;s a clear process here and we</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>will implement this step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step, where we take the email, feed it to an LLM to verify <span style="color:#f92672">or</span> to extract
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>the order details, <span style="color:#f92672">and</span> assuming the customer email is about an order, the LLM might then choose to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>call an order<span style="color:#e6db74">&#39;s database to then pull up that information. That information then goes to the LLM</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>to then draft an email response, <span style="color:#f92672">and</span> the LLM might choose to use a request review <span style="color:#66d9ef">tool</span> that, say, puts
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>this draft email from the LLM into queue <span style="color:#66d9ef">for</span> humans to review, so they can then be sent out after a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>human has reviewed <span style="color:#f92672">and</span> approved it<span style="color:#f92672">.</span> So customer order inquiry agents like these are being built
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> deployed <span style="color:#f92672">in</span> many businesses today<span style="color:#f92672">.</span> To look at a more challenging example, <span style="color:#66d9ef">if</span> you want to build a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>customer service agent to respond <span style="color:#f92672">not</span> just to questions about an order they place, but to respond
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>to a more general set of questions, anything a customer may ask, <span style="color:#f92672">and</span> maybe the customer will ask,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">do</span> you have any black jeans <span style="color:#f92672">or</span> blue jeans<span style="color:#960050;background-color:#1e0010">?</span> And to answer this question, you need to maybe make
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>multiple API calls to your database to first check the inventory <span style="color:#66d9ef">for</span> black jeans, then check inventory
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> blue jeans, <span style="color:#f92672">and</span> then respond to the customer<span style="color:#f92672">.</span> So this is an example of a more challenging query,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>where given a user input, you actually have to plan out what is the sequence of database queries
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>to check <span style="color:#66d9ef">for</span> inventory<span style="color:#f92672">.</span> Or <span style="color:#66d9ef">if</span> a user asks, I<span style="color:#e6db74">&#39;d like to return the beach towel I bought, then to answer</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>this, maybe we need to verify that the customer actually bought a beach towel, <span style="color:#f92672">and</span> then double
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>check the <span style="color:#66d9ef">return</span> policy<span style="color:#f92672">.</span> Maybe our set returns only <span style="color:#ae81ff">30</span> days within the date of purchase, <span style="color:#f92672">and</span> only the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>towel was unused<span style="color:#f92672">.</span> And <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">return</span> is allowed, then have the agent issue a <span style="color:#66d9ef">return</span> packing slip, <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>also set the database record to <span style="color:#66d9ef">return</span> pending<span style="color:#f92672">.</span> So <span style="color:#f92672">in</span> this example, <span style="color:#66d9ef">if</span> the required steps to process
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">48</span>
+</span></span><span style="display:flex;"><span>the customer requests are <span style="color:#f92672">not</span> known ahead of time, then it results <span style="color:#f92672">in</span> a more challenging process,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>where the LLM base application has to decide <span style="color:#66d9ef">for</span> itself that these are the three steps needed <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>order to respond appropriately to this task<span style="color:#f92672">.</span> But you learn about some of the latest work on how to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>approach this type of problem too<span style="color:#f92672">.</span> And to give one last example of maybe an especially difficult
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>type of agent to build, there<span style="color:#e6db74">&#39;s a lot of work on computer use by agents, in which agents will</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>attempt to use a web browser <span style="color:#f92672">and</span> read a web page to figure out how to carry out a complex task<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>In this example, I<span style="color:#e6db74">&#39;ve asked an agent to check whether seats are available on two specific United</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>Airlines flights from San Francisco to Washington DC, <span style="color:#f92672">or</span> the DCA airport<span style="color:#f92672">.</span> The agent has access to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>a web browser they can use to carry out this task<span style="color:#f92672">.</span> And <span style="color:#f92672">in</span> the video here, you can see it navigating
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>the United website independently, clicking on page elements <span style="color:#f92672">and</span> filling <span style="color:#f92672">in</span> the text fields on the page
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>to carry out the search that I requested<span style="color:#f92672">.</span> As it works, the agent reasons over the content of the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>page to figure out the actions it needs to take to complete the task, <span style="color:#f92672">and</span> what it should <span style="color:#66d9ef">do</span> next<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>In this <span style="color:#66d9ef">case</span>, there<span style="color:#e6db74">&#39;s some trouble checking flights on the United site, and instead decides to</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">02</span>
+</span></span><span style="display:flex;"><span>navigate to the Google Flights website to search <span style="color:#66d9ef">for</span> available flights<span style="color:#f92672">.</span> On the Google Flight, you
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>see here it finds several flight options that match the user<span style="color:#e6db74">&#39;s query, and the agent then picks one and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>is taken back to the United website, where it looks like it<span style="color:#e6db74">&#39;s now on the correct web page, and so is</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>able to determine that yes, there are seats available on the flights that I asked about<span style="color:#f92672">.</span> So computer use
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>is an exciting cutting<span style="color:#f92672">-</span>edge area of research right now, <span style="color:#f92672">and</span> many companies are trying to get computer
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>use agents to work<span style="color:#f92672">.</span> While the agent you saw here did eventually figure out the answer, I often see
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>agents having trouble using web browsers well<span style="color:#f92672">.</span> For example, <span style="color:#66d9ef">if</span> a web page is slow to load, an agent
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>may fail to understand what<span style="color:#e6db74">&#39;s going on, and many web pages are still beyond agents&#39;</span> abilities to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>pause <span style="color:#f92672">or</span> to read accurately<span style="color:#f92672">.</span> But I think computer use agents, even though <span style="color:#f92672">not</span> yet reliable enough
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>to use mission<span style="color:#f92672">-</span>critical applications today, are an exciting <span style="color:#f92672">and</span> important area of future development<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>So when I<span style="color:#e6db74">&#39;m considering building Agentic AI workflows, the tasks that are easier will tend to be ones</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>where there is a clear step<span style="color:#f92672">-</span>by<span style="color:#f92672">-</span>step process, <span style="color:#f92672">or</span> <span style="color:#66d9ef">if</span> a business already has a standard procedure, a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>standard offering procedure to follow, <span style="color:#f92672">and</span> then it can be quite a lot of work to take that procedure
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> codify it up <span style="color:#f92672">in</span> an AI agent, but that tends to lead to easier implementations<span style="color:#f92672">.</span> One thing that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>makes it easier is <span style="color:#66d9ef">if</span> you are using text<span style="color:#f92672">-</span>only assets, because LLM<span style="color:#f92672">/</span>language models have
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>grown up really processing text, <span style="color:#f92672">and</span> <span style="color:#66d9ef">if</span> you need to process other input modalities, it may well be
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>doable, but it maybe gets a little bit harder<span style="color:#f92672">.</span> And on the harder end of the spectrum, <span style="color:#66d9ef">if</span> the steps are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">not</span> known ahead of time of what<span style="color:#e6db74">&#39;s needed to carry out a task, like you saw for the more advanced</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>customer service agent, then the agent may need to plan <span style="color:#f92672">or</span> solve as you go, <span style="color:#f92672">and</span> this tends to be
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>harder <span style="color:#f92672">and</span> more unpredictable <span style="color:#f92672">and</span> less reliable<span style="color:#f92672">.</span> And then as mentioned, <span style="color:#66d9ef">if</span> it needs to accept rich
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>multi<span style="color:#f92672">-</span>modal inputs such as sound, vision, audio, that also tends to be less reliable than the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>only header process text<span style="color:#f92672">.</span> So I hope that gives you a sense of the types of applications you might build
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>with agentic workflows<span style="color:#f92672">.</span> When implementing one of these things yourself, one of the most important
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>skills is to look at a complex workflow <span style="color:#f92672">and</span> figure out what are the individual steps so you can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>implement an agentic workflow to execute those steps one at a time<span style="color:#f92672">.</span> In the next video, we<span style="color:#e6db74">&#39;ll talk</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>about task decomposition, that is, given a complex thing you want to <span style="color:#66d9ef">do</span>, like write a research report
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> have a customer agent get back to customers, how <span style="color:#66d9ef">do</span> you <span style="color:#66d9ef">break</span> that down into discrete steps
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>to try to implement an agentic workflow<span style="color:#960050;background-color:#1e0010">?</span> Let<span style="color:#e6db74">&#39;s go see that in the next video.</span>
+</span></span></code></pre></div><h2 id="15-task-decomposition-identifying-the-steps-in-a-workflow">1.5 Task decomposition: Identifying the steps in a workflow</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>People <span style="color:#f92672">and</span> businesses <span style="color:#66d9ef">do</span> a lot of stuff<span style="color:#f92672">.</span> How <span style="color:#66d9ef">do</span> you take this useful stuff that we <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> <span style="color:#66d9ef">break</span> it down into discrete steps <span style="color:#66d9ef">for</span> the agentic workflow to follow<span style="color:#960050;background-color:#1e0010">?</span> Let<span style="color:#e6db74">&#39;s take a look.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>Take the example of building a research agent<span style="color:#f92672">.</span> If you want an AI system to write an essay on
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>a topic X, one thing you could <span style="color:#66d9ef">do</span> is prompt an LLM to have it generate an output directly<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>But <span style="color:#66d9ef">if</span> you were to <span style="color:#66d9ef">do</span> this <span style="color:#66d9ef">for</span> topics that you want deeply researched,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>you may find that the LLM output covers only the surface level points, <span style="color:#f92672">or</span> maybe covers only the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>obvious facts, but doesn<span style="color:#e6db74">&#39;t go as deep into the subject as you want it to. In this case, you</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>might then reflect on how you as a human would write an essay on a certain topic<span style="color:#f92672">.</span> Would you just
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>sit down <span style="color:#f92672">and</span> start writing, <span style="color:#f92672">or</span> would you take multiple steps, such as first write an essay
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>outline, <span style="color:#f92672">and</span> then search the rep, <span style="color:#f92672">and</span> then based on the input from the web search, write the essay<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>As I take a task <span style="color:#f92672">and</span> decompose it into steps, one question I<span style="color:#e6db74">&#39;m always asking myself is,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> I look at these steps one, two, <span style="color:#f92672">and</span> three, can each of them be done either by an LLM, <span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>by a short piece of code, <span style="color:#f92672">or</span> by a function call, <span style="color:#f92672">or</span> by a <span style="color:#66d9ef">tool</span><span style="color:#f92672">.</span> In this <span style="color:#66d9ef">case</span>, I think an LLM can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>maybe write a decent outline on many topics that I would want it to help me think through<span style="color:#f92672">.</span> So,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>say probably okay on the first step, <span style="color:#f92672">and</span> then I know how to use an LLM to generate search terms
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>to search the web<span style="color:#f92672">.</span> So, I would say the second step is also doable, <span style="color:#f92672">and</span> then based on web search,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>I think an LLM could input the web search results <span style="color:#f92672">and</span> write an essay<span style="color:#f92672">.</span> And so, this would be a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>reasonable first attempt at an agentic workflow <span style="color:#66d9ef">for</span> writing an essay that goes deeper than just
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>direct generation<span style="color:#f92672">.</span> But <span style="color:#66d9ef">if</span> I were to then implement this agentic workflow <span style="color:#f92672">and</span> look at the results,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>maybe you find that the results still aren<span style="color:#e6db74">&#39;t good enough. It&#39;</span>s still <span style="color:#f92672">not</span> yet as deeply thoughtful<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>Maybe the essays feel a little bit disjointed<span style="color:#f92672">.</span> This has actually happened to me<span style="color:#f92672">.</span> I once built
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>a research agent using this workflow, but when I read the output, it felt a bit disjointed<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>You know, the start of the article didn<span style="color:#e6db74">&#39;t feel completely consistent with the middle,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>didn<span style="color:#e6db74">&#39;t feel completely consistent with the end. In this case, what you might do is then reflect</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>on how you would change the workflow <span style="color:#66d9ef">if</span> you as a human found that the essay is a little bit
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>disjointed<span style="color:#f92672">.</span> One thing you could <span style="color:#66d9ef">do</span> is take the third step <span style="color:#f92672">and</span> further decompose, write the essay
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>into additional steps<span style="color:#f92672">.</span> So, instead of writing the essay on one go, you might instead have it
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>write the first draft, <span style="color:#f92672">and</span> then consider what parts need revision, <span style="color:#f92672">and</span> then revise the draft<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">32</span>
+</span></span><span style="display:flex;"><span>And this would be how I as a human might go about it, to <span style="color:#f92672">not</span> just write the final essay at my first
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>attempt, but write the first draft <span style="color:#f92672">and</span> then read over it, which is another step that the LLM is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>pretty decent at<span style="color:#f92672">.</span> And then based on my own critique of my own essay, I<span style="color:#e6db74">&#39;ll revise the draft.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>So to recap, I started off with direct generation, just one step, decided it wasn<span style="color:#e6db74">&#39;t good enough,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> so broke that down into three steps, <span style="color:#f92672">and</span> then maybe decided that still isn<span style="color:#e6db74">&#39;t good enough,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> took one of the steps <span style="color:#f92672">and</span> further broken it down <span style="color:#f92672">or</span> decomposed it into three more steps,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>resulting <span style="color:#f92672">in</span> this more complex, richer process <span style="color:#66d9ef">for</span> generating an essay<span style="color:#f92672">.</span> And depending on how
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>satisfied you are with the results of this process, you may choose to even modify this essay
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>generation process further<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s look at the second example of how to decompose complex tasks</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>into smaller steps<span style="color:#f92672">.</span> Take the example of responding to basic customer order inquiries<span style="color:#f92672">.</span> The first step
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>that a human customer specialization might carry out might be to first extract the key information,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>such as who is this email from, what did they order, <span style="color:#f92672">and</span> what is the order number<span style="color:#f92672">.</span> And these
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span>are things that an LLM could <span style="color:#66d9ef">do</span><span style="color:#f92672">.</span> So I could just say, let<span style="color:#e6db74">&#39;s have an LLM do that. The second step</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>would be to then find the relevant customer records<span style="color:#f92672">.</span> So to write <span style="color:#f92672">and</span> generate the relevant
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>database queries to pull up the order of what the customer had ordered <span style="color:#f92672">and</span> when I shipped <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>I think an LLM with the ability to call a function to query the orders database should be able to <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>that<span style="color:#f92672">.</span> And lastly, having pulled up the customer record <span style="color:#f92672">or</span> the customer order record, I might then
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>write <span style="color:#f92672">and</span> send a response back to the customer<span style="color:#f92672">.</span> And I think with the information we pulled up,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>this third step is also doable with an LLM <span style="color:#66d9ef">if</span> I give the option to call an API to send an email<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>So this would be another example of taking a task of responding to customer email <span style="color:#f92672">and</span> breaking it
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>down into three individual steps where I can look at each of these steps <span style="color:#f92672">and</span> say, yep, I think an LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> one LLM with the ability to call a function to query a database <span style="color:#f92672">or</span> send an email should be able
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>to <span style="color:#66d9ef">do</span> that<span style="color:#f92672">.</span> Just one last example <span style="color:#66d9ef">for</span> the invoice processing<span style="color:#f92672">.</span> After a PDF invoice has been converted
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>to text, the first step is to pull out the required information, the name of the biller, the address,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>the due date, the amount due, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> And now I should be able to <span style="color:#66d9ef">do</span> that<span style="color:#f92672">.</span> And then <span style="color:#66d9ef">if</span> I want to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>check that the information was extracted <span style="color:#f92672">and</span> save it <span style="color:#f92672">in</span> a new database entry, then I think an LLM
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>should be able to help me call a function to update the database record<span style="color:#f92672">.</span> And so to implement this,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>we implement an agentic workflow to carry out basically these two steps<span style="color:#f92672">.</span> When building agentic
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>workflows, I think of myself as having a number of building blocks<span style="color:#f92672">.</span> One important building block
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>would be large language models <span style="color:#f92672">or</span> maybe large multimodal models <span style="color:#66d9ef">if</span> I want to try to process
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>images <span style="color:#f92672">or</span> audio as well<span style="color:#f92672">.</span> And LLMs are good at generating text, deciding what to call,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>maybe extracting information<span style="color:#f92672">.</span> For some highly specialized tasks, I might also use some other
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>AI models, such as an AI model <span style="color:#66d9ef">for</span> converting a PDF to text <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> text<span style="color:#f92672">-</span>to<span style="color:#f92672">-</span>speech <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> image
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">38</span>
+</span></span><span style="display:flex;"><span>analysis<span style="color:#f92672">.</span> In addition to AI models, I also have access to a number of software tools, including
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>different APIs that I can call to <span style="color:#66d9ef">do</span> voice search, to get maybe real<span style="color:#f92672">-</span>time weather data,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>to send emails, check calendar, <span style="color:#f92672">and</span> so on<span style="color:#f92672">.</span> And I might also have tools to retrieve information,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">57</span>
+</span></span><span style="display:flex;"><span>to pull up data from a database, <span style="color:#f92672">or</span> to invent RAG <span style="color:#f92672">or</span> retrieval augmented generation,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>where I can look up a large text database <span style="color:#f92672">and</span> find the most relevant text<span style="color:#f92672">.</span> Or I might also
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">07</span>
+</span></span><span style="display:flex;"><span>have tools to execute code<span style="color:#f92672">.</span> And this is a <span style="color:#66d9ef">tool</span> that lets an LLM write code <span style="color:#f92672">and</span> then run the code
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>on your computer to <span style="color:#66d9ef">do</span> a huge range of things<span style="color:#f92672">.</span> In <span style="color:#66d9ef">case</span> some of these tools seem a bit foreign to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span>you, don<span style="color:#e6db74">&#39;t worry about it. We&#39;</span>ll go through the most important tools <span style="color:#f92672">in</span> much greater detail <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>a later module<span style="color:#f92672">.</span> But I think of a lot of my work when I<span style="color:#e6db74">&#39;m building an agent workflow as looking at</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>the work that the person <span style="color:#f92672">or</span> business is doing <span style="color:#f92672">and</span> then trying to figure out with these building
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>blocks, how can I sequence these building blocks together <span style="color:#f92672">in</span> order to carry out the tasks that I
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>want my system to carry out<span style="color:#f92672">.</span> And this is why having a good understanding of what building
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>blocks are available, which I hope you have a better sense of by the end of this course as well,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>will allow you to better envision what agentic workflows you can build by combining these
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>building blocks together<span style="color:#f92672">.</span> So to summarize, one of the key skills <span style="color:#f92672">in</span> building agentic workflows is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>to look at a bunch of stuff that maybe someone does <span style="color:#f92672">and</span> to identify the discrete steps that
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">06</span>
+</span></span><span style="display:flex;"><span>it could be implemented with<span style="color:#f92672">.</span> And when I<span style="color:#e6db74">&#39;m looking at the individual discrete steps,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>one question I<span style="color:#e6db74">&#39;m always asking myself is, can this step be implemented with either an</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>LLM <span style="color:#f92672">or</span> with one of the tools such as an API <span style="color:#f92672">or</span> a function call that I have access to<span style="color:#960050;background-color:#1e0010">?</span> And <span style="color:#f92672">in</span> <span style="color:#66d9ef">case</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>the answer is no, I<span style="color:#e6db74">&#39;ll then often ask myself, how would I as a human do this step? And is it</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>possible to decompose this further <span style="color:#f92672">or</span> <span style="color:#66d9ef">break</span> this down into even smaller steps that then maybe is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>more amenable to implementation with an LLM <span style="color:#f92672">or</span> with one of the software tools that I have<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>So I hope this gives you a rough sense of how to think about task decomposition<span style="color:#f92672">.</span> In <span style="color:#66d9ef">case</span> you feel
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>like you don<span style="color:#e6db74">&#39;t fully have it yet, don&#39;</span>t worry about it<span style="color:#f92672">.</span> We<span style="color:#e6db74">&#39;ll go through many more examples</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> this course <span style="color:#f92672">and</span> you have a much better understanding of this by the end of this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>course<span style="color:#f92672">.</span> But it turns out that as you build agentic workflows, you find that often you
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>build an initial task decomposition, initial agentic workflow, <span style="color:#f92672">and</span> then you want to keep
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>on iterating <span style="color:#f92672">and</span> improving on it quite a few times until it delivers the level of performance
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>that you want<span style="color:#f92672">.</span> And to drive this improvement process, which I found important <span style="color:#66d9ef">for</span> many
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>projects, one of the key skills is to know how to evaluate your agentic workflow<span style="color:#f92672">.</span> So <span style="color:#f92672">in</span> the next
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>video, we<span style="color:#e6db74">&#39;ll talk about evaluations or evals and discrete key components, how you can build,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">and</span> then also keep on improving your workflows to get the performance
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>that you want<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s talk about evals in the next video.</span>
+</span></span></code></pre></div><h2 id="16-evaluations-agentic-evals">1.6 Evaluations agentic (evals)</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0:04
+</span></span><span style="display:flex;"><span>I&#39;ve worked with many different teams on building agentic workflows, and I&#39;ve found that one
+</span></span><span style="display:flex;"><span>0:05
+</span></span><span style="display:flex;"><span>of the biggest predictors for whether someone is able to do it really well versus be less
+</span></span><span style="display:flex;"><span>0:10
+</span></span><span style="display:flex;"><span>efficient at it is whether or not they&#39;re able to drive a really disciplined evaluation
+</span></span><span style="display:flex;"><span>0:16
+</span></span><span style="display:flex;"><span>process.
+</span></span><span style="display:flex;"><span>0:17
+</span></span><span style="display:flex;"><span>So, your ability to drive evals for your agentic workflow makes a huge difference in your ability
+</span></span><span style="display:flex;"><span>0:23
+</span></span><span style="display:flex;"><span>to build them effectively.
+</span></span><span style="display:flex;"><span>0:26
+</span></span><span style="display:flex;"><span>In this video, we&#39;ll take a quick overview of how to build evals, and this is a subject
+</span></span><span style="display:flex;"><span>0:30
+</span></span><span style="display:flex;"><span>that we&#39;ll actually go into much deeper in a later module in this course.
+</span></span><span style="display:flex;"><span>0:35
+</span></span><span style="display:flex;"><span>So, let&#39;s take a look.
+</span></span><span style="display:flex;"><span>0:37
+</span></span><span style="display:flex;"><span>After building an agentic workflow like this one for responding to customer order inquiries,
+</span></span><span style="display:flex;"><span>0:43
+</span></span><span style="display:flex;"><span>it turns out that it&#39;s very difficult to know in advance what are the things that could
+</span></span><span style="display:flex;"><span>0:47
+</span></span><span style="display:flex;"><span>go wrong.
+</span></span><span style="display:flex;"><span>0:48
+</span></span><span style="display:flex;"><span>And so, rather than trying to build evaluations in advance, what I recommend is you just look
+</span></span><span style="display:flex;"><span>0:53
+</span></span><span style="display:flex;"><span>for the outputs and manually look for things that you wish it was doing better.
+</span></span><span style="display:flex;"><span>1:00
+</span></span><span style="display:flex;"><span>For example, maybe you read a lot of outputs and find that it is unexpectedly mentioning
+</span></span><span style="display:flex;"><span>1:05
+</span></span><span style="display:flex;"><span>your competitors more than it should.
+</span></span><span style="display:flex;"><span>1:08
+</span></span><span style="display:flex;"><span>Many businesses don&#39;t want their agents to mention competitors because it just creates
+</span></span><span style="display:flex;"><span>1:12
+</span></span><span style="display:flex;"><span>an awkward situation.
+</span></span><span style="display:flex;"><span>1:14
+</span></span><span style="display:flex;"><span>And if you read some of these outputs, maybe you find that it sometimes says, I&#39;m glad
+</span></span><span style="display:flex;"><span>1:17
+</span></span><span style="display:flex;"><span>you shopped with us.
+</span></span><span style="display:flex;"><span>1:18
+</span></span><span style="display:flex;"><span>We&#39;re much better than our competitor, ComproCo.
+</span></span><span style="display:flex;"><span>1:21
+</span></span><span style="display:flex;"><span>Or maybe sometimes they say, sure, it should be fun.
+</span></span><span style="display:flex;"><span>1:23
+</span></span><span style="display:flex;"><span>Unlike RivalCo, we make returns easy.
+</span></span><span style="display:flex;"><span>1:25
+</span></span><span style="display:flex;"><span>And you may look at this and go, gee, I really don&#39;t want this to mention competitors.
+</span></span><span style="display:flex;"><span>1:30
+</span></span><span style="display:flex;"><span>This is an example of a problem that is really hard to anticipate in advance of building
+</span></span><span style="display:flex;"><span>1:36
+</span></span><span style="display:flex;"><span>this agentic workflow.
+</span></span><span style="display:flex;"><span>1:37
+</span></span><span style="display:flex;"><span>So, the best practice is really to build it first and then examine it to figure out where
+</span></span><span style="display:flex;"><span>1:42
+</span></span><span style="display:flex;"><span>it is not yet satisfactory, and then to find ways to evaluate as well as improve the system
+</span></span><span style="display:flex;"><span>1:47
+</span></span><span style="display:flex;"><span>to eliminate the ways that it is still not yet satisfactory.
+</span></span><span style="display:flex;"><span>1:51
+</span></span><span style="display:flex;"><span>Assuming your business considers it an error or a mistake to mention competitors
+</span></span><span style="display:flex;"><span>1:57
+</span></span><span style="display:flex;"><span>in this way, then as you work on eliminating these competitor mentions, one way to track
+</span></span><span style="display:flex;"><span>2:02
+</span></span><span style="display:flex;"><span>progress is to add an evaluation or an eval to track how often this error occurs.
+</span></span><span style="display:flex;"><span>2:08
+</span></span><span style="display:flex;"><span>So, if you have a named list of competitors like ComproCo, RivalCo, the other co, then
+</span></span><span style="display:flex;"><span>2:14
+</span></span><span style="display:flex;"><span>you can actually write code to just search in your own output for how often it mentions
+</span></span><span style="display:flex;"><span>2:20
+</span></span><span style="display:flex;"><span>these competitors by name and count up as a number, as a fraction of the overall responses,
+</span></span><span style="display:flex;"><span>2:26
+</span></span><span style="display:flex;"><span>how frequently it mistakenly mentions competitors.
+</span></span><span style="display:flex;"><span>2:29
+</span></span><span style="display:flex;"><span>One nice thing about the problem of competitor mentions is it&#39;s an objective metric, meaning
+</span></span><span style="display:flex;"><span>2:35
+</span></span><span style="display:flex;"><span>either the competitor was mentioned or not.
+</span></span><span style="display:flex;"><span>2:38
+</span></span><span style="display:flex;"><span>And for objective criteria, you can write code to check for how often this specific
+</span></span><span style="display:flex;"><span>2:44
+</span></span><span style="display:flex;"><span>error occurs.
+</span></span><span style="display:flex;"><span>2:46
+</span></span><span style="display:flex;"><span>But because LLMs output free text, there are also going to be criteria by which you want
+</span></span><span style="display:flex;"><span>2:51
+</span></span><span style="display:flex;"><span>to evaluate this output that may be more subjective and where it&#39;s harder to just write code
+</span></span><span style="display:flex;"><span>2:57
+</span></span><span style="display:flex;"><span>to output a black and white score.
+</span></span><span style="display:flex;"><span>2:59
+</span></span><span style="display:flex;"><span>In this case, using a LLM as a judge is a common technique to evaluate the output.
+</span></span><span style="display:flex;"><span>3:05
+</span></span><span style="display:flex;"><span>So, for example, if you&#39;re building a research agent to do research on different topics,
+</span></span><span style="display:flex;"><span>3:10
+</span></span><span style="display:flex;"><span>then you can use another LLM and prompt it to maybe, say, assign the following essay
+</span></span><span style="display:flex;"><span>3:16
+</span></span><span style="display:flex;"><span>a quality score between 1 and 5, where 1 is the worst and 5 is the best essay.
+</span></span><span style="display:flex;"><span>3:21
+</span></span><span style="display:flex;"><span>Here, I&#39;m using a Python expression to mean copy-paste the generated essay into this.
+</span></span><span style="display:flex;"><span>3:27
+</span></span><span style="display:flex;"><span>So, you can prompt the LLM to read the essay and assign it a quality score.
+</span></span><span style="display:flex;"><span>3:32
+</span></span><span style="display:flex;"><span>Then I&#39;m going to ask the research agent to write a number of different research reports,
+</span></span><span style="display:flex;"><span>3:37
+</span></span><span style="display:flex;"><span>for example, on recent developments in black hole science or using robots to harvest fruit.
+</span></span><span style="display:flex;"><span>3:43
+</span></span><span style="display:flex;"><span>And then in this example, maybe the judge LLM assigns the essay on black holes a score
+</span></span><span style="display:flex;"><span>3:48
+</span></span><span style="display:flex;"><span>of 3, the essay on robot harvesting a score of 4, and as you work on improving your research
+</span></span><span style="display:flex;"><span>3:54
+</span></span><span style="display:flex;"><span>agent, hopefully you see these scores go up over time.
+</span></span><span style="display:flex;"><span>3:58
+</span></span><span style="display:flex;"><span>It turns out, by the way, that LLMs are actually not that good at these 1 to 5 scale ratings.
+</span></span><span style="display:flex;"><span>4:03
+</span></span><span style="display:flex;"><span>You can give it a shot, but I personally tend not to use this technique that much myself.
+</span></span><span style="display:flex;"><span>4:08
+</span></span><span style="display:flex;"><span>But in a later module, you&#39;ll learn some better techniques to have an LLM output more accurate
+</span></span><span style="display:flex;"><span>4:13
+</span></span><span style="display:flex;"><span>scores than asking it to output scores on a 1 to 5 scale, although some people will
+</span></span><span style="display:flex;"><span>4:17
+</span></span><span style="display:flex;"><span>do this, maybe an initial cut as an LLM as judge type of eval.
+</span></span><span style="display:flex;"><span>4:22
+</span></span><span style="display:flex;"><span>Just to give a preview of some of the Agentic AI evals you&#39;ll learn about later in this course,
+</span></span><span style="display:flex;"><span>4:28
+</span></span><span style="display:flex;"><span>you&#39;ve already heard me talk about how you can write codes to evaluate objective criteria,
+</span></span><span style="display:flex;"><span>4:33
+</span></span><span style="display:flex;"><span>such as did it mention a competitor or not, or use an LLM as a judge for more subjective
+</span></span><span style="display:flex;"><span>4:37
+</span></span><span style="display:flex;"><span>criteria such as what&#39;s the quality of this essay.
+</span></span><span style="display:flex;"><span>4:39
+</span></span><span style="display:flex;"><span>But later, you learn about two major types of evals.
+</span></span><span style="display:flex;"><span>4:42
+</span></span><span style="display:flex;"><span>One is end-to-end, where you measure the output quality of the entire agent, as well as component
+</span></span><span style="display:flex;"><span>4:48
+</span></span><span style="display:flex;"><span>level evals, where you might measure the quality of the output of a single step in the agentic
+</span></span><span style="display:flex;"><span>4:53
+</span></span><span style="display:flex;"><span>workflow.
+</span></span><span style="display:flex;"><span>4:54
+</span></span><span style="display:flex;"><span>It turns out that these are useful for driving different parts of your development process.
+</span></span><span style="display:flex;"><span>4:58
+</span></span><span style="display:flex;"><span>One thing I do a lot as well is just examine the intermediate outputs, or sometimes we
+</span></span><span style="display:flex;"><span>5:03
+</span></span><span style="display:flex;"><span>call these the traces of the LLM, in order to understand where it is falling short of
+</span></span><span style="display:flex;"><span>5:09
+</span></span><span style="display:flex;"><span>my expectations.
+</span></span><span style="display:flex;"><span>5:10
+</span></span><span style="display:flex;"><span>And we call this error analysis, where we just read through the intermediate outputs
+</span></span><span style="display:flex;"><span>5:14
+</span></span><span style="display:flex;"><span>of every single step to try to spot opportunities for improvement.
+</span></span><span style="display:flex;"><span>5:17
+</span></span><span style="display:flex;"><span>And it turns out being able to do evals and error analysis is a really key skill.
+</span></span><span style="display:flex;"><span>5:22
+</span></span><span style="display:flex;"><span>So we have much more to say about this in the fourth module in this course.
+</span></span><span style="display:flex;"><span>5:27
+</span></span><span style="display:flex;"><span>We&#39;re nearly to the end of this first module.
+</span></span><span style="display:flex;"><span>5:29
+</span></span><span style="display:flex;"><span>Before moving on, I just want to share with you what I think are the most important design
+</span></span><span style="display:flex;"><span>5:33
+</span></span><span style="display:flex;"><span>patterns for building agentic workflows.
+</span></span><span style="display:flex;"><span>5:35
+</span></span><span style="display:flex;"><span>Let&#39;s go take a look at that in the next video.
+</span></span></code></pre></div><h2 id="17-agentic-design-patterns">1.7 Agentic design patterns</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>We build agentic workflows by taking building blocks <span style="color:#f92672">and</span> putting them together to sequence
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">04</span>
+</span></span><span style="display:flex;"><span>out these complex workflows<span style="color:#f92672">.</span> In this video, I<span style="color:#e6db74">&#39;d like to share with you a few of the key design</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>patterns, which are patterns <span style="color:#66d9ef">for</span> how you can think about combining these building blocks into more
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>complex workflows<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s take a look. I think four key design patterns for building agentic</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>workflows are reflection, two<span style="color:#f92672">-</span>use, planning, <span style="color:#f92672">and</span> multi<span style="color:#f92672">-</span>agent collaboration<span style="color:#f92672">.</span> Let me briefly go over
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>what they mean, <span style="color:#f92672">and</span> then we<span style="color:#e6db74">&#39;ll actually go through most of these in-depth latent discourse as well.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>The first of the major design patterns is reflection<span style="color:#f92672">.</span> So I might go to an LLM agent <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>ask it to write code, <span style="color:#f92672">and</span> it turns out that an LLM might then generate code like this<span style="color:#f92672">.</span> It defines
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">45</span>
+</span></span><span style="display:flex;"><span>here a Python function to <span style="color:#66d9ef">do</span> a certain task<span style="color:#f92672">.</span> I could then construct a prompt that looks like this<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>I can say, here<span style="color:#e6db74">&#39;s code intended for a certain task, and then copy-paste whatever the LLM had</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">55</span>
+</span></span><span style="display:flex;"><span>just output back into this prompt<span style="color:#f92672">.</span> And then I ask it to check the code carefully <span style="color:#66d9ef">for</span> correctness,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>style, <span style="color:#f92672">and</span> efficiency, <span style="color:#f92672">and</span> give constructive criticism<span style="color:#f92672">.</span> And it turns out that the same LLM model
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>prompted this way may be able to point out some problems with the code<span style="color:#f92672">.</span> And <span style="color:#66d9ef">if</span> I then take this
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>critique <span style="color:#f92672">and</span> feed it back to the model to say, looks like this is a bug, could you change the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>code to fix it<span style="color:#960050;background-color:#1e0010">?</span> Then it may actually come with a better version of the code<span style="color:#f92672">.</span> To give a preview of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">tool</span> use, <span style="color:#66d9ef">if</span> you<span style="color:#e6db74">&#39;re able to run the code and see where the code fails, then feeding that back to</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>the LLM can also cause it to be able to iterate <span style="color:#f92672">and</span> generate a much better, say, v3 version <span style="color:#ae81ff">3</span> of the
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>code<span style="color:#f92672">.</span> So reflection is a common design pattern where you can ask the LLM to examine its own outputs
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">41</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span> maybe bring <span style="color:#f92672">in</span> some external sources of information, such as run the code <span style="color:#f92672">and</span> see <span style="color:#66d9ef">if</span> it
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>generates any error messages, <span style="color:#f92672">and</span> use that as feedback to iterate again <span style="color:#f92672">and</span> come up with a better
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>version of its output<span style="color:#f92672">.</span> And this design pattern isn<span style="color:#e6db74">&#39;t magic. It does not result in everything</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>working <span style="color:#ae81ff">100</span><span style="color:#f92672">%</span> of the time<span style="color:#f92672">.</span> But sometimes it can be a nice bump <span style="color:#f92672">in</span> the performance of your system<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>Now, I<span style="color:#e6db74">&#39;ve drawn this as if it was a single LLM that I&#39;</span>m prompting, but to foreshadow multi<span style="color:#f92672">-</span>agent
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>workflows, you can also imagine instead of having the same model critique itself, you can imagine
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>having a critique agent<span style="color:#f92672">.</span> And all that is, is an LLM that<span style="color:#e6db74">&#39;s been prompted with instructions like,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>your role is to critique code, here<span style="color:#e6db74">&#39;s code intended for a task, check the code carefully, and so on.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>And the second critique agent, maybe point out errors <span style="color:#f92672">or</span> run unit tests<span style="color:#f92672">.</span> And by having two
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">31</span>
+</span></span><span style="display:flex;"><span>simulated agents where each agent is just an LLM prompted to take on a certain persona,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>you can have them go back <span style="color:#f92672">and</span> forth to iterate to get a better output<span style="color:#f92672">.</span> In addition to reflection
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>pattern, the second important design pattern is <span style="color:#66d9ef">tool</span> use<span style="color:#f92672">.</span> Where today, LLMs can be given tools,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">49</span>
+</span></span><span style="display:flex;"><span>meaning functions that they can call <span style="color:#f92672">in</span> order to get work done<span style="color:#f92672">.</span> For example, <span style="color:#66d9ef">if</span> you ask an LLM,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>what<span style="color:#e6db74">&#39;s the best coffee maker according to reviewers, and you give it a web search tool,</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>then it can actually search the internet to find much better answers<span style="color:#f92672">.</span> Or a code execution <span style="color:#66d9ef">tool</span><span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>If you ask a math question like, <span style="color:#66d9ef">if</span> I invest <span style="color:#f92672">$</span><span style="color:#ae81ff">100</span> <span style="color:#f92672">in</span> compound interest, what <span style="color:#66d9ef">do</span> I have at the end<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">08</span>
+</span></span><span style="display:flex;"><span>It can then write code <span style="color:#f92672">and</span> execute code to compute an answer<span style="color:#f92672">.</span> Today, different developers
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>have given LLMs many different tools <span style="color:#66d9ef">for</span> everything from math <span style="color:#f92672">or</span> data analysis to gather information
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>by fetching things from the web <span style="color:#f92672">or</span> <span style="color:#66d9ef">for</span> various databases, to interface with productivity apps
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>like email, calendar, <span style="color:#f92672">and</span> so on, as well as to process images <span style="color:#f92672">and</span> much more<span style="color:#f92672">.</span> And the ability
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>of an LLM to decide what tools to use, meaning what functions to call, that lets the model get a lot
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">37</span>
+</span></span><span style="display:flex;"><span>more done<span style="color:#f92672">.</span> The third of the four design patterns is planning<span style="color:#f92672">.</span> This is an example from a paper
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">43</span>
+</span></span><span style="display:flex;"><span>called Hugging GPT, <span style="color:#f92672">in</span> which <span style="color:#66d9ef">if</span> you ask a system to please generate an image where a girl is reading
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">51</span>
+</span></span><span style="display:flex;"><span>a book <span style="color:#f92672">and</span> a pose is the same as a boy <span style="color:#f92672">in</span> the image, then please describe the new image <span style="color:#f92672">in</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>your voice<span style="color:#f92672">.</span> Then a model can automatically decide that to carry out this task, it first needs to
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>find a pose determination model to figure out the pose of the boy<span style="color:#f92672">.</span> Then to pose the image,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>to generate a picture of a girl <span style="color:#f92672">and</span> image the text, <span style="color:#f92672">and</span> then finally text the speech<span style="color:#f92672">.</span> And so
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> planning, an LLM decides what is the sequence of actions it needs to take<span style="color:#f92672">.</span> In this <span style="color:#66d9ef">case</span>, it is
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>a sequence of API calls so that it can then carry out the right sequence of steps <span style="color:#f92672">in</span> the right order
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> order to carry out the task<span style="color:#f92672">.</span> So rather than the developer hard coding the sequence of steps
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">in</span> advance, this actually lets the LLM decide what are the steps to take<span style="color:#f92672">.</span> Agents that plan today are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>harder to control <span style="color:#f92672">and</span> somewhat more experimental, but sometimes they can give really delightful
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>results<span style="color:#f92672">.</span> And then finally, multi<span style="color:#f92672">-</span>agent workflows<span style="color:#f92672">.</span> Just as a human manager might hire a number of
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>others to work together on a complex project, <span style="color:#f92672">in</span> some cases it might make sense <span style="color:#66d9ef">for</span> you to hire
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">52</span>
+</span></span><span style="display:flex;"><span>a set of multiple agents, maybe each of which specializes <span style="color:#f92672">in</span> a different role, <span style="color:#f92672">and</span> have them
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>:<span style="color:#ae81ff">58</span>
+</span></span><span style="display:flex;"><span>work together to accomplish a complex task<span style="color:#f92672">.</span> The picture you see here on the left is taken from a
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">03</span>
+</span></span><span style="display:flex;"><span>project called ChatDev, which is a software framework created by Chen Qian <span style="color:#f92672">and</span> collaborators<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">09</span>
+</span></span><span style="display:flex;"><span>In ChatDev, multiple agents with different roles, like chief executive officer, programmer, tester,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>designer, <span style="color:#f92672">and</span> so on, collaborate together as <span style="color:#66d9ef">if</span> they were a virtual software company <span style="color:#f92672">and</span> can
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>collaboratively complete a range of software development tasks<span style="color:#f92672">.</span> Let<span style="color:#e6db74">&#39;s consider another example.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>If you want to write a marketing brochure, maybe you think of hiring a team of three people, such
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>as a researcher to <span style="color:#66d9ef">do</span> online research, a marketer to write the marketing text, <span style="color:#f92672">and</span> then finally an
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>editor to edit <span style="color:#f92672">and</span> polish the text<span style="color:#f92672">.</span> And so <span style="color:#f92672">in</span> a similar way, you might consider building a multi<span style="color:#f92672">-</span>agent
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">47</span>
+</span></span><span style="display:flex;"><span>workflow <span style="color:#f92672">in</span> which you have a simulated research agent, a simulated marketer agent, <span style="color:#f92672">and</span> a simulated
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>editor agent that then come together to carry out this task <span style="color:#66d9ef">for</span> you<span style="color:#f92672">.</span> Multi<span style="color:#f92672">-</span>agent workflows are
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">00</span>
+</span></span><span style="display:flex;"><span>more difficult to control since you don<span style="color:#e6db74">&#39;t always know ahead of time what the agents will do, but</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">05</span>
+</span></span><span style="display:flex;"><span>research has shown that they can result <span style="color:#f92672">in</span> better outcomes <span style="color:#66d9ef">for</span> many complex tasks, including things
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>like writing biographies <span style="color:#f92672">or</span> deciding on chess moves to make <span style="color:#f92672">in</span> the game<span style="color:#f92672">.</span> You learn more about
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>multi<span style="color:#f92672">-</span>agent workflows later <span style="color:#f92672">in</span> this course as well<span style="color:#f92672">.</span> And so with that, I hope you have a sense of what
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">21</span>
+</span></span><span style="display:flex;"><span>agentic workflows can <span style="color:#66d9ef">do</span>, as well as of what are the key challenges of finding building blocks <span style="color:#f92672">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>putting them together, maybe via these design patterns, <span style="color:#f92672">in</span> order to implement an agentic workflow<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">33</span>
+</span></span><span style="display:flex;"><span>And of course, also developing eval so you can see how well your system is doing <span style="color:#f92672">and</span> keep on improving
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">39</span>
+</span></span><span style="display:flex;"><span>on it<span style="color:#f92672">.</span> In the next module, I<span style="color:#e6db74">&#39;d like to share with you a deep dive into the first of these design</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>patterns, that is reflection, <span style="color:#f92672">and</span> you find that it<span style="color:#e6db74">&#39;s a maybe surprisingly simple to implement</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">53</span>
+</span></span><span style="display:flex;"><span>technique that can give the performance of your system sometimes a very nice bump<span style="color:#f92672">.</span> So let<span style="color:#e6db74">&#39;s go on</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>:<span style="color:#ae81ff">59</span>
+</span></span><span style="display:flex;"><span>to the next module to learn about the reflection design pattern<span style="color:#f92672">.</span>
+</span></span></code></pre></div>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#10-introduction">1.0 Introduction</a></li>
+    <li><a href="#11-what-is-an-agentic-ai">1.1 What is an agentic AI</a></li>
+    <li><a href="#12-degrees-of-autonomy">1.2 Degrees of autonomy</a></li>
+    <li><a href="#13-benefits-of-agentic-workflows">1.3 Benefits of agentic workflows</a></li>
+    <li><a href="#14-agentic-ai-applications">1.4 Agentic AI applications</a></li>
+    <li><a href="#15-task-decomposition-identifying-the-steps-in-a-workflow">1.5 Task decomposition: Identifying the steps in a workflow</a></li>
+    <li><a href="#16-evaluations-agentic-evals">1.6 Evaluations agentic (evals)</a></li>
+    <li><a href="#17-agentic-design-patterns">1.7 Agentic design patterns</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#10-introduction">1.0 Introduction</a></li>
+    <li><a href="#11-what-is-an-agentic-ai">1.1 What is an agentic AI</a></li>
+    <li><a href="#12-degrees-of-autonomy">1.2 Degrees of autonomy</a></li>
+    <li><a href="#13-benefits-of-agentic-workflows">1.3 Benefits of agentic workflows</a></li>
+    <li><a href="#14-agentic-ai-applications">1.4 Agentic AI applications</a></li>
+    <li><a href="#15-task-decomposition-identifying-the-steps-in-a-workflow">1.5 Task decomposition: Identifying the steps in a workflow</a></li>
+    <li><a href="#16-evaluations-agentic-evals">1.6 Evaluations agentic (evals)</a></li>
+    <li><a href="#17-agentic-design-patterns">1.7 Agentic design patterns</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251017-01" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-01';
+  </script>
+  <script src="/js/search-advanced.js?v=20251017-01" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251017-01"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251017-01"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

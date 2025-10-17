@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「吴恩达 Agentic AI 课程实录」模块3：工具使用 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251017-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251017-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-01" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-01" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「吴恩达 Agentic AI 课程实录」模块3：工具使用"><meta property="og:description" content="在本模块中，你将学习大型语言模型（LLM）的工具使用，这意味着让你的 LLM 决定何时可能需要请求调用一个函数来执行某些操作、收集一些信息或做其他事情。就像我们人类使用工具能比徒手做更多的事情一样，LLM 在获得工具后也能做更多的事情。不过，我们给 LLM 的工具不是锤子、扳手和钳子，而是函数，让它能够请求调用，从而完"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「吴恩达 Agentic AI 课程实录」模块3：工具使用"><meta name="twitter:description" content="在本模块中，你将学习大型语言模型（LLM）的工具使用，这意味着让你的 LLM 决定何时可能需要请求调用一个函数来执行某些操作、收集一些信息或做其他事情。就像我们人类使用工具能比徒手做更多的事情一样，LLM 在获得工具后也能做更多的事情。不过，我们给 LLM 的工具不是锤子、扳手和钳子，而是函数，让它能够请求调用，从而完"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-01/">「吴恩达 Agentic AI 课程实录」模块1：Agentic AI简介</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-02/">「吴恩达 Agentic AI 课程实录」模块2：反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/">「吴恩达 Agentic AI 课程实录」模块3：工具使用</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/">「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-05/">「吴恩达 Agentic AI 课程实录」模块5：高度自主代理的设计模式</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/lecnotes-zh/" class="crumb-sec">课程视频实录-中译本</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「吴恩达 Agentic AI 课程实录」模块3：工具使用</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-01/">「吴恩达 Agentic AI 课程实录」模块1：Agentic AI简介</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-02/">「吴恩达 Agentic AI 课程实录」模块2：反思设计模式</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-03/">「吴恩达 Agentic AI 课程实录」模块3：工具使用</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-04/">「吴恩达 Agentic AI 课程实录」模块4：构建 Agentic AI 的实用技巧</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/lecnotes-zh/lec-05/">「吴恩达 Agentic AI 课程实录」模块5：高度自主代理的设计模式</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">吴恩达 | Google AI Studio</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="模块3工具使用andrew-ngagentic-ai">模块3：工具使用「Andrew Ng：Agentic AI」</h1>
+<h2 id="31-什么是工具">3.1 什么是工具？</h2>
+<p>在本模块中，你将学习大型语言模型（LLM）的工具使用，这意味着让你的 LLM 决定何时可能需要请求调用一个函数来执行某些操作、收集一些信息或做其他事情。就像我们人类使用工具能比徒手做更多的事情一样，LLM 在获得工具后也能做更多的事情。不过，我们给 LLM 的工具不是锤子、扳手和钳子，而是函数，让它能够请求调用，从而完成更多任务。让我们来看一看。</p>
+<p>如果你问一个可能在数月前训练好的 LLM：“现在几点了？” 那个训练好的模型并不知道确切的时间，所以它很可能会回答：“抱歉，我无法获取当前时间。” 但是，如果你编写一个函数并让 LLM 能够访问这个函数，那么它就能给出一个更有用的答案。</p>
+<p>当我们让 LLM 调用函数，或者更准确地说，让 LLM 请求调用函数时，这就是我们所说的“工具使用”，而工具就是我们提供给 LLM、可供其请求调用的函数。</p>
+<p>具体来说，工具使用是这样工作的。在这个例子中，我将把上一张幻灯片中展示的 <code>getCurrentTime</code> 函数提供给 LLM。当你接着提示它“现在几点了？”时，LLM 可以决定调用 <code>getCurrentTime</code> 函数。该函数将返回当前时间，这个时间随后会作为对话历史的一部分反馈给 LLM，最后 LLM 就可以输出，比如说，“现在是下午3点20分”。</p>
+<p>所以，步骤顺序是：首先有输入提示。在这种情况下，LLM 查看可用的工具集（本例中只有一个工具），并决定调用该工具。这个工具是一个函数，它会返回一个值，该值被反馈给 LLM，然后 LLM 最终生成它的输出。</p>
+<p>现在，工具使用的一个重要方面是，我们可以让 LLM 自行决定是否使用任何工具。所以在同样的设置下，如果我问它：“绿茶里有多少咖啡因？” LLM 不需要知道当前时间来回答这个问题，所以它可以直接生成答案：“绿茶通常含有这么多咖啡因”，并且它在这样做的时候没有调用 <code>getCurrentTime</code> 函数。</p>
+<p>在我的幻灯片中，我将使用 LLM 上方带有虚线框的这个标记，来表示我们正在向 LLM 提供一组工具，供其在认为合适时选择使用。这与你在之前视频中看到的一些例子相反，在那些例子中，我作为开发者硬编码了，例如，在研究代理的某个特定点上总是进行网络搜索。相比之下，<code>getCurrentTime</code> 函数的调用并不是硬编码的，而是由 LLM 自行决定是否要请求调用 <code>getCurrentTime</code> 函数。再次强调，我们将使用这个虚线框标记来表示我们何时向 LLM 提供一个或多个工具，由 LLM 来决定它想调用哪些工具（如果有的话）。</p>
+<p>这里还有一些工具使用可能帮助基于 LLM 的应用生成更好答案的例子：</p>
+<ul>
+<li><strong>网络搜索</strong>：如果你问它：“你能找一些在加州山景城附近的意大利餐厅吗？” 如果它有一个网络搜索工具，那么 LLM 可能会选择调用一个网络搜索引擎来查询“加州山景城附近的餐厅”，并使用获取到的结果来生成输出。</li>
+<li><strong>数据库查询</strong>：如果你经营一家零售店，并且希望能够回答像“给我看看购买了白色太阳镜的顾客”这样的问题，如果你的 LLM 被赋予了访问查询数据库工具的权限，那么它可能会在销售表中查找哪些条目是销售了一副白色太阳镜的，然后用这个信息来生成输出。</li>
+<li><strong>计算</strong>：最后，如果你想进行利率计算：“如果我存入500美元，利率为5%，10年后我会得到多少钱？” 如果你恰好有一个利率计算工具，那么它就可以调用利率计算函数来计算出结果。或者，事实证明，你稍后会看到的一种方法是，让 LLM 编写代码，比如写一个这样的数学表达式，然后对它求值，这将是另一种让 LLM 计算出正确答案的方式。</li>
+</ul>
+<p>因此，作为开发者，你需要思考你希望应用真正做什么样的事情，然后创建所需的函数或工具，并将它们提供给 LLM，让它能够使用适当的工具来完成任务，比如餐厅推荐器、零售问答系统或金融助手可能需要做的事情。所以，根据你的应用，你可能需要实现并向你的 LLM 提供不同的工具。</p>
+<p>到目前为止，我们看过的大多数例子都只向 LLM 提供了一个工具或一个函数。但在许多用例中，你会希望向 LLM 提供多个工具或多个函数，供其选择调用哪一个（或不调用）。例如，如果你正在构建一个日历助手代理，你可能希望它能够满足这样的请求：“请在我的日历上找一个周四的空闲时段，并与 Alice 安排一个约会。”</p>
+<p>在这个例子中，我们可能会向 LLM 提供一个用于“安排约会”（即发送日历邀请）的工具或函数，一个用于“检查日历”以查看我何时有空的工具，以及一个用于“删除约会”（如果它想取消现有的日历条目）的工具。因此，给定这些指令，LLM 首先会决定，在可用的不同工具中，它可能应该首先使用“检查日历”。所以它会调用一个 <code>check_calendar</code> 函数，该函数将返回我周四的空闲时间。基于这些信息（它们会被反馈给 LLM），它然后可以决定下一步是选择一个时间段，比如说下午3点，然后调用 <code>make_appointment</code> 函数来向 Alice 发送一个日历邀请，并将其添加到我的日历中。该操作的输出（希望是一个确认日历条目已成功发送的通知）被反馈给 LLM，最后，LLM 可能会告诉我：“你与 Alice 的约会已经安排在周四下午3点。”</p>
+<p>能够让你的 LLM 访问工具是一件非常重要的事情。它将使你的应用变得更加强大。在下一个视频中，我们将看一看如何编写函数，如何创建工具，然后将它们提供给你的 LLM。让我们进入下一个视频。</p>
+<h2 id="32-创建一个工具">3.2 创建一个工具</h2>
+<p>一个 LLM 决定调用函数的过程，一开始可能看起来有点神秘，因为 LLM 被训练的目的只是生成输出文本或输出文本的 token。那么这是如何工作的呢？在这个视频中，我想与你一步步地走过，让一个 LLM 能够调用函数的过程到底是什么样的。让我们来看一看。</p>
+<p>所以，工具只是 LLM 可以请求执行的代码或函数，就像我们在上一个视频中看到的 <code>getCurrentTime</code> 函数一样。现在，当今领先的 LLM 都被直接训练来使用工具，但我想和你一起走一遍，如果你必须自己编写提示来告诉它何时使用工具，那会是什么样子。这是我们在 LLM 被直接训练来使用工具之前的早期时代必须做的事情。尽管我们现在不再完全这样做，但这希望能让你更好地理解这个过程，我们将在下一个视频中讲解更现代的语法。</p>
+<p>如果你已经实现了这个 <code>getCurrentTime</code> 函数，那么为了把这个工具给 LLM，你可能会写一个像这样的提示。你可能会告诉它：“LLM，你可以访问一个名为 <code>getCurrentTime</code> 的工具。要使用它，我希望你打印出以下文本：全大写的 <code>FUNCTION</code>，然后打印出 <code>getCurrentTime</code>。如果我看到这个文本，即全大写的 <code>FUNCTION</code> 和 <code>getCurrentTime</code>，我就知道你想让我为你调用 <code>getCurrentTime</code> 函数。”</p>
+<p>当一个用户问：“现在几点了？” LLM 就会意识到它需要调用或请求调用 <code>getCurrentTime</code> 函数。所以 LLM 就会输出它被告知的内容，它会输出“FUNCTION: getCurrentTime”。现在，我必须已经写好代码来检查 LLM 的输出，看是否存在这个全大写的 <code>FUNCTION</code>。如果存在，那么我需要提取出 <code>getCurrentTime</code> 这个参数，来弄清楚 LLM 想调用哪个函数。然后我需要编写代码来实际调用 <code>getCurrentTime</code> 函数，并提取出输出，比如说，是早上8点。然后，是开发者编写的代码，也就是我的代码，必须把早上8点这个时间反馈给 LLM，作为对话历史的一部分。当然，对话历史包括了最初的用户提示、请求是函数调用的事实等等。最后，LLM 在知道了之前发生的一切——用户提问，它请求函数调用，然后我调用了函数并返回了早上8点——之后，最终可以查看所有这些信息并生成最终的回复，即“现在是早上8点”。</p>
+<p>所以要明确一点，为了调用一个函数，LLM 并不直接调用函数。相反，它会以一种特定的格式输出一些内容，比如这样，来告诉我需要为 LLM 调用这个函数，然后告诉 LLM 它请求的函数输出了什么。</p>
+<p>在这个例子中，我们只给了 LLM 一个函数，但你可以想象，如果我们给了它三四个函数，我们可以告诉它输出全大写的 <code>FUNCTION</code>，然后是它想调用的函数名，甚至可能还有这些函数的一些参数。实际上，现在让我们来看一个稍微复杂一点的例子，其中 <code>getCurrentTime</code> 函数接受一个时区作为参数，用于获取你想要的那个时区的当前时间。</p>
+<p>对于第二个例子，我写了一个函数，用于获取指定时区的当前时间，这里的时区是 <code>getCurrentTime</code> 函数的输入参数。所以为了让 LLM 使用这个工具来回答问题，比如“新西兰现在几点了？”（因为我的阿姨在那里，所以在给她打电话之前，我确实会查一下新西兰的时间），为了让 LLM 使用这个工具，你可能会修改系统提示，说：“你可以使用 <code>getCurrentTime</code> 工具来获取特定时区的时间。要使用它，请输出如下内容：<code>getCurrentTime</code>，然后包含时区。” 这是一个简化的提示，在实践中，你可能会在提示中加入更多细节，告诉它函数是什么，如何使用等等。</p>
+<p>在这个例子中，LLM 会意识到它需要获取新西兰的时间，所以它会生成这样的输出：“FUNCTION: getCurrentTime(Pacific/Auckland)”。这是新西兰的时区，因为奥克兰是新西兰的一个主要城市。然后，我必须编写代码来搜索 LLM 的输出中是否出现了这个全大写的 <code>FUNCTION</code>，如果出现了，我就需要提取出要调用的函数。最后，我将调用 <code>getCurrentTime</code> 并传入指定的参数，这个参数是由 LLM 生成的，即 <code>Pacific/Auckland</code>，也许返回的是早上4点。然后像往常一样，我把这个信息反馈给 LLM，LLM 输出：“新西兰现在是早上4点。”</p>
+<p>总结一下，让 LLM 使用工具的过程如下：</p>
+<ol>
+<li><strong>提供工具</strong>：你必须向 LLM 提供工具，即实现函数，然后告诉 LLM 它是可用的。</li>
+<li><strong>LLM 请求调用</strong>：当 LLM 决定调用一个工具时，它会生成一个特定的输出，让你知道你需要为 LLM 调用这个函数。</li>
+<li><strong>执行并返回结果</strong>：然后你调用函数，得到它的输出，把你刚刚调用的函数的输出反馈给 LLM。</li>
+<li><strong>LLM 继续执行</strong>：LLM 接着用这个信息来决定下一步做什么，在我们这个视频的例子中，就是直接生成最终的输出，但有时它甚至可能决定下一步是去调用另一个工具，然后这个过程继续。</li>
+</ol>
+<p>现在，事实证明，这种全大写 <code>FUNCTION</code> 的语法有点笨拙。这是我们在 LLM 被原生训练或自己知道如何请求调用工具之前所做的事情。对于现代的 LLM，你不需要告诉它输出全大写的 <code>FUNCTION</code>，然后去搜索全大写的 <code>FUNCTION</code> 等等。相反，LLM 被训练来使用一种特定的语法，来非常清楚地请求它何时想要调用一个工具。在下一个视频中，我想与你分享，让 LLM 请求调用工具的现代语法到底是什么样的。让我们进入下一个视频。</p>
+<h2 id="33-工具语法">3.3 工具语法</h2>
+<p>让我们来看一看如何编写代码，让你的 LLM 能够调用工具。这是我们旧的、不带时区参数的 <code>getCurrentTime</code> 函数。让我向你展示如何使用 AI Suite 开源库来让你的 LLM 调用工具。顺便说一下，技术上讲，正如你在上一个视频中看到的，LLM 并不调用工具，LLM 只是请求你调用工具。但在构建 agentic 工作流的开发者中，我们许多人偶尔会直接说“LLM 调用工具”，尽管技术上并非如此，但这只是一个更简短的说法。</p>
+<p>这里的语法与 OpenAI 调用这些 LLM 的语法非常相似，只不过在这里，我使用的是 AI Suite 库，这是一个我和一些朋友开发的开源包，它使得调用多个 LLM 提供商变得容易。所以代码语法是这样的，如果这对你来说看起来很多，别担心，你会在编码实验中看到更多。但简而言之，这与 OpenAI 的语法非常相似，你写 <code>response = client.chat.completions.create</code>，然后选择模型，在这种情况下，我们使用 OpenAI 的模型 GPT-4o，<code>messages=messages</code>，假设你已经把想传递给 LLM 的消息放进了一个数组里，然后你会写 <code>tools=</code>，后面跟着一个你希望 LLM 能够访问的工具列表。在这种情况下，只有一个工具，就是 <code>getCurrentTime</code>。</p>
+<p>然后，别太担心 <code>max_turns</code> 这个参数。包含这个参数是因为，在一个工具调用返回后，LLM 可能会决定调用另一个工具，而在那个工具调用返回后，LLM 可能又会决定调用再一个工具。所以 <code>max_turns</code> 只是一个上限，限制你希望 LLM 在停止之前连续请求工具多少次，以避免可能出现的无限循环。在实践中，除非你的代码在做一些异常雄心勃勃的事情，否则你几乎永远不会达到这个限制。所以我不担心 <code>max_turns</code> 参数，我通常只把它设置为5，但在实践中，它影响不大。</p>
+<p>事实证明，使用 AI Suite，<code>getCurrentTime</code> 函数会自动以一种适当的方式被描述给 LLM，使得 LLM 知道何时调用它。所以，你不需要手动编写一个长长的提示来告诉 LLM <code>getCurrentTime</code> 是做什么的，AI Suite 中的这个语法会自动完成。为了让它看起来不那么神秘，它的工作方式是，它实际上会查看与 <code>getCurrentTime</code> 相关联的文档字符串（docstring），也就是 <code>getCurrentTime</code> 中的这些注释，以便弄清楚如何向 LLM 描述这个函数。</p>
+<p>所以，为了说明这是如何工作的，这里再次是那个函数，这里是使用 AI Suite 调用 LLM 的代码片段。在幕后，这会创建一个详细描述该函数的 JSON schema。右边的这个东西，就是实际传递给 LLM 的内容。具体来说，它会提取函数名，即 <code>getCurrentTime</code>，然后还有函数的描述，这个描述是从文档字符串中提取出来的，用来告诉 LLM 这个函数是做什么的，这让它能够决定何时调用它。有些 API 要求你手动构建这个 JSON schema，然后再把这个 JSON schema 传递给 LLM，但 AI Suite 包会自动为你完成这个工作。</p>
+<p>来看一个稍微复杂一点的例子，如果你有这个更复杂的 <code>getCurrentTime</code> 工具，它还有一个输入的 <code>time_zone</code> 参数，那么 AI Suite 会创建这个更复杂的 JSON schema。和之前一样，它会提取出函数名 <code>getCurrentTime</code>，从文档字符串中提取出描述，然后还会识别出参数是什么，并根据左边这里显示的文档向 LLM 描述它们，这样当它生成调用工具的函数参数时，它就知道参数应该是像 <code>America/New_York</code> 或 <code>Pacific/Auckland</code> 或其他时区这样的东西。</p>
+<p>所以，如果你执行左下角的这段代码片段，它将使用 OpenAI 的 GPT-4o 模型，看 LLM 是否想调用这个函数，如果想，它就会调用这个函数，从函数中获取输出，将输出反馈给 LLM，最多这样做五轮，然后返回响应。请注意，如果 LLM 请求调用 <code>getCurrentTime</code> 函数，AI Suite 或这个 <code>client</code> 会为你调用 <code>getCurrentTime</code>，所以你不需要自己显式地去做。所有这些都在你必须编写的这一个函数调用中完成了。需要注意的是，其他一些 LLM 接口的实现中，你必须手动完成那一步，但对于这个特定的包，所有这些都封装在这个 <code>client.chat.completions.create</code> 函数调用中了。</p>
+<p>所以，你现在知道了如何让一个 LLM 调用函数了。我希望你在实验中玩得开心，当你为 LLM 提供几个函数，然后 LLM 决定去现实世界中采取行动，去获取更多信息来满足你的请求时，这真的很神奇。如果你以前没有玩过这个，我想你会觉得这非常酷。</p>
+<p>事实证明，在所有你可以给 LLM 的工具中，有一个有点特殊，那就是代码执行工具。它被证明非常强大。如果你能告诉一个 LLM：“你可以编写代码，我会有一个工具为你执行那些代码”，因为代码可以做很多事情，所以当我们给一个 LLM 编写和执行代码的灵活性时，这被证明是给予 LLM 的一个极其强大的工具。所以代码执行是特殊的。让我们在下一个视频中讨论 LLM 的代码执行工具。</p>
+<h2 id="34-代码执行">3.4 代码执行</h2>
+<p>在我参与过的几个 agentic 应用中，我给了 LLM 编写代码来执行我希望它完成的任务的选项。有好几次，我真的对它为了解决我的各种任务而生成的代码解决方案的巧妙之处感到惊讶和欣喜。所以，如果你不怎么使用代码执行，我想你可能会对它能让你的 LLM 应用做什么感到惊讶和欣喜。让我们来看一看。</p>
+<p>让我们以构建一个可以输入数学应用题并为你解答的应用为例。你可能会创建一些工具，用来做加法、减法、乘法和除法。如果有人说：“请计算13.2加18.9”，那么它会触发加法工具，然后给你正确的答案。但如果现在有人输入：“2的平方根是多少？” 嗯，一种方法是为平方根写一个新的工具，但接着可能又需要一个新的东西来做指数运算。实际上，如果你看看你现代科学计算器上的按钮数量，你难道要为每一个按钮以及我们想在数学计算中做的更多事情都创建一个单独的工具吗？</p>
+<p>所以，与其试图一个接一个地实现工具，另一种方法是让它编写并执行代码。要告诉 LLM 编写代码，你可能会写一个像这样的提示：“编写代码来解决用户的查询。将你的答案以 Python 代码的形式返回，并用 <code>&lt;execute_python&gt;</code> 和 <code>&lt;/execute_python&gt;</code> 标签界定。” 所以，给定一个像“2的平方根是多少”这样的查询，LLM 可能会生成这样的输出。然后你可以使用模式匹配，例如正则表达式，来寻找开始和结束的 <code>execute_python</code> 标签，并提取出中间的代码。所以在这里，你得到了绿色框中显示的两行代码，然后你可以为 LLM 执行这段代码，并得到输出，在这种情况下是 1.4142 等等。最后，这个数值答案被传回给 LLM，它就可以为原始问题写一个格式优美的答案。</p>
+<p>你可以用几种不同的方式为 LLM 执行代码。一种是使用 Python 的 <code>exec</code> 函数。这是一个内置的 Python 函数，它会执行你传入的任何代码。这对于让你的 LLM 真正编写代码并让你执行这些代码来说非常强大，尽管这有一些安全隐患，我们稍后会在这个视频中看到。还有一些工具可以让你在更安全的沙箱环境中运行代码。当然，2的平方根是一个相对简单的例子。一个 LLM 也可以准确地编写代码来做，例如，利率计算，并解决比这难得多的数学计算问题。</p>
+<p>对这个想法的一个改进，你在我们关于反思的部分中已经有所了解，那就是如果代码执行失败——比如说，LLM 出于某种原因生成的代码不完全正确——那么将那个错误信息传回给 LLM，让它反思并可能修改它的代码，再试一两次。这有时也能让它得到一个更准确的答案。</p>
+<p>现在，运行 LLM 生成的任意代码确实有很小的可能会导致不好的事情发生。最近，我的一个团队成员正在使用一个高度 agentic 的编码器，它竟然选择在一个项目目录内执行 <code>rm *.py</code>（删除所有 .py 文件）。所以这实际上是一个真实的例子。最终那个 agentic 编码器确实道歉了，它说：“是的，那确实是对的，那是一个极其愚蠢的错误。” 我想我很高兴这个 agentic 编码器真的很抱歉，但它已经删除了一堆 Python 文件。幸运的是，团队成员在 GitHub 仓库里有备份，所以没有造成真正的损害，但如果这段错误地删除了一堆文件的任意代码在没有备份的情况下被执行了，那就不太好了。</p>
+<p>所以，代码执行的最佳实践是在沙箱环境中运行它。在实践中，任何单行代码的风险都不是那么高。所以如果我坦率地说，许多开发者会直接执行来自 LLM 的代码，而不会做太多检查。但如果你想更安全一点，那么最佳实践是创建一个沙箱，这样如果 LLM 生成了糟糕的代码，数据丢失或敏感数据泄露等的风险就会降低。像 Docker 或 E2B 这样的沙箱环境（E2B 是一个轻量级的沙箱环境）可以降低任意代码以损害你的系统或环境的方式被执行的风险。</p>
+<p>事实证明，代码执行是如此重要，以至于许多 LLM 的训练者实际上会做一些特殊的工作，来确保代码执行在他们的应用上能良好运行。但我希望，当你把这个作为你可以提供给 LLM 的又一个工具时，能让你的应用变得更加强大。</p>
+<p>到目前为止，在我们讨论的内容中，你必须一个一个地创建工具并将它们提供给你的 LLM。事实证明，许多不同的团队正在构建类似的工具，并且不得不做所有这些构建函数并将它们提供给 LLM 的工作。但最近出现了一个名为 MCP（模型上下文协议）的新标准，它使得开发者更容易地获得一大套可供 LLM 使用的工具。这是一个越来越重要的协议，越来越多的团队正在使用它来开发基于 LLM 的应用。让我们在下一个视频中了解一下 MCP。</p>
+<h2 id="35-mcp">3.5 MCP</h2>
+<p>MCP，即模型上下文协议（Model Context Protocol），是 Anthropic 提出的一个标准，但现在已被许多其他公司和许多开发者采纳，作为一种让 LLM 访问更多上下文和更多工具的方式。有许多开发者正在围绕 MCP 生态系统进行开发，因此了解这一点将让你为你的应用获得更多的资源。让我们来看一看。</p>
+<p>这是 MCP 试图解决的痛点。如果一个开发者正在编写一个应用，想要与来自 Slack、Google Drive 和 GitHub 的数据集成，或者访问来自 Postgres 数据库的数据，那么他们可能必须编写代码来包装 Slack 的 API，以提供函数给应用；编写代码来包装 Google Drive 的 API，以解析给应用；对于其他这些工具或数据源也类似。然后，在开发者社区中一直发生的情况是，如果一个不同的团队在构建一个不同的应用，那么他们也会自己与 Slack、Google Drive、GitHub 等进行集成。所以许多开发者都在为这些类型的数据源构建自定义的包装器。因此，如果有 M 个应用正在开发，而市面上有 N 个工具，那么社区完成的总工作量就是 M 乘以 N。</p>
+<p>MCP 所做的是，为应用获取工具和数据源提出了一个标准，这样社区需要完成的总工作量现在是 M 加 N，而不是 M 乘以 N。MCP 的初始设计非常关注如何为 LLM 提供更多上下文，或者如何获取数据。所以很多初始的工具都是只获取数据的。如果你阅读 MCP 的文档，它将这些称为“资源”（resources）。但 MCP 既提供了对数据的访问，也提供了应用可能想调用的更通用的函数。</p>
+<p>事实证明，有许多 MCP 客户端（clients），这些是想要访问工具或数据的应用；也有许多 MCP 服务器（servers），这些通常是软件包装器，它们提供对 Slack、GitHub 或 Google Drive 中数据的访问，或者允许你在这些不同类型的资源上执行操作。所以今天，MCP 客户端（消费工具或资源的应用）和 MCP 服务器（提供工具和资源的服务）的列表正在迅速增长。我希望你会发现构建自己的 MCP 客户端很有用，你的应用也许有一天会成为一个 MCP 客户端。如果你想为其他开发者提供资源，也许你有一天也可以构建自己的 MCP 服务器。</p>
+<p>让我给你看一个使用 MCP 客户端的快速例子。这是一个云桌面应用，它已经连接到了一个 GitHub MCP 服务器。所以当我输入这个查询：“总结这个 URL 处的 GitHub 仓库中的 readme.md 文件”（这实际上是一个 AI Suite 的仓库），这个应用（它是一个 MCP 客户端）就会使用 GitHub MCP 服务器，并发出请求：“请从这个仓库的 AI Suite 中获取 readme.md 文件”。然后它得到这个响应，内容很长。所有这些都被反馈到 LLM 的上下文中，然后 LLM 生成这个 markdown 文件的摘要。</p>
+<p>现在让我输入另一个请求：“最新的拉取请求（pull requests）是什么？” 这反过来又导致 LLM 使用 MCP 服务器发出一个不同的请求，即“列出拉取请求”。这是 GitHub 的 MCP 服务器提供的另一个工具。所以它发出这个请求，带有仓库名 AI Suite，排序方式为更新时间，列出20个等等。然后它给出这个响应，这个响应被反馈给 LLM，LLM 接着写出这个关于该仓库最新拉取请求的漂亮的文本摘要。</p>
+<p>MCP 是一个重要的标准。如果你想了解更多，DeepLearning.ai 也有一个短期课程，专门更深入地讲解 MCP 协议，如果你感兴趣的话，可以在完成本课程后去看看。我希望这个视频能让你简要地了解它为什么有用，以及为什么现在许多开发者都在按照这个标准进行构建。</p>
+<p>这把我们带到了关于工具使用的最后一个视频。我希望通过让你的 LLM 访问工具，你能构建出更强大的 agentic 应用。在下一个模块中，我们将讨论评估和错误分析。事实证明，我所看到的，区分那些能非常好地执行 agentic 工作流的人和那些效率不高的团队的事情之一，就是你推动一个规范的评估流程的能力。在下一组视频中，我认为这可能是整个课程中最重要的一个模块，我希望能与你分享一些关于如何使用评估来推动 agentic 工作流开发的最佳实践。期待在下一个模块见到你。</p>
+
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-什么是工具">3.1 什么是工具？</a></li>
+    <li><a href="#32-创建一个工具">3.2 创建一个工具</a></li>
+    <li><a href="#33-工具语法">3.3 工具语法</a></li>
+    <li><a href="#34-代码执行">3.4 代码执行</a></li>
+    <li><a href="#35-mcp">3.5 MCP</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-什么是工具">3.1 什么是工具？</a></li>
+    <li><a href="#32-创建一个工具">3.2 创建一个工具</a></li>
+    <li><a href="#33-工具语法">3.3 工具语法</a></li>
+    <li><a href="#34-代码执行">3.4 代码执行</a></li>
+    <li><a href="#35-mcp">3.5 MCP</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251017-01" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-01';
+  </script>
+  <script src="/js/search-advanced.js?v=20251017-01" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251017-01"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251017-01"></script>
+  
+  
+  
+  
+  
+</body>
+</html>

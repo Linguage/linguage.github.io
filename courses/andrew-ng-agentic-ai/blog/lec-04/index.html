@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>「吴恩达Agentic AI 模块4」5个反直觉的开发原则 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251017-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251017-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251017-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251017-01" />
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251017-01" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「吴恩达Agentic AI 模块4」5个反直觉的开发原则"><meta property="og:description" content="构建高效的AI智能体（Agentic AI）工作流是一项复杂的挑战。许多开发团队投入数周甚至数月，却发现自己陷入了低效的“埋头构建、缺少分析”的循环，最终成果寥寥。这种困境的根源，往往不是技术能力不足，而是一种低效的开发原则。"><meta property="og:url" content="https://linguage.github.io/courses/andrew-ng-agentic-ai/blog/lec-04/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="「吴恩达Agentic AI 模块4」5个反直觉的开发原则"><meta name="twitter:description" content="构建高效的AI智能体（Agentic AI）工作流是一项复杂的挑战。许多开发团队投入数周甚至数月，却发现自己陷入了低效的“埋头构建、缺少分析”的循环，最终成果寥寥。这种困境的根源，往往不是技术能力不足，而是一种低效的开发原则。"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/courses/andrew-ng-agentic-ai/blog/lec-04/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-01/">「吴恩达Agentic AI 模块1」4个颠覆性观点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-02/">「吴恩达Agentic AI 模块2」反思设计模式, 让AI自我修正</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-03/">「吴恩达Agentic AI 模块3」关于AI如何使用“工具”：五个真相</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/blog/lec-04/">「吴恩达Agentic AI 模块4」5个反直觉的开发原则</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-05/">「吴恩达Agentic AI 模块5」4个自主AI智能体构建模式:从指令执行者到战略家</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+<nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+  <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+  
+  
+  
+    
+    
+      
+      
+      
+      
+      <a href="/" class="crumb-anc">Linguista</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/" class="crumb-anc">课程资料</a>
+    
+      <span class="crumb-sep">/</span>
+      
+      
+      
+      <a href="/courses/andrew-ng-agentic-ai/" class="crumb-anc">吴恩达：Agentic AI 课程资料</a>
+    
+    <span class="crumb-sep">/</span>
+  
+  
+  
+  
+  
+  <a href="/courses/andrew-ng-agentic-ai/blog/" class="crumb-sec">课程主题博客</a>
+  
+  <span class="crumb-sep">/</span>
+  <span class="crumb-current">「吴恩达Agentic AI 模块4」5个反直觉的开发原则</span>
+</nav>
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-01/">「吴恩达Agentic AI 模块1」4个颠覆性观点</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-02/">「吴恩达Agentic AI 模块2」反思设计模式, 让AI自我修正</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-03/">「吴恩达Agentic AI 模块3」关于AI如何使用“工具”：五个真相</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/courses/andrew-ng-agentic-ai/blog/lec-04/">「吴恩达Agentic AI 模块4」5个反直觉的开发原则</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/courses/andrew-ng-agentic-ai/blog/lec-05/">「吴恩达Agentic AI 模块5」4个自主AI智能体构建模式:从指令执行者到战略家</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+      
+      
+        
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Han ZL</span>
+           · 
+          <span class="meta-date">2025-10-17</span>
+        </div>
+      
+
+      
+      <blockquote>
+<p>吴恩达分享的一套强大且反直觉的开发“操作系统”。这套理念的核心是：用严谨的分析来驱动迭代，而非凭直觉盲目构建。采纳这套方法论，是精英AI团队的战略优势，能帮你避免在无法提升性能的功能上浪费数月时间，从而大幅提升开发流程的效率与成功率。</p></blockquote>
+<div class="link-card" data-url="https://learn.deeplearning.ai/courses/agentic-ai/">
+  <a class="link-card__fallback" href="https://learn.deeplearning.ai/courses/agentic-ai/" target="_blank" rel="noopener">
+    https://learn.deeplearning.ai/courses/agentic-ai/
+  </a>
+</div>
+
+<h1 id="吴恩达agentic-ai-模块45个反直觉的开发原则">「吴恩达Agentic AI 模块4」5个反直觉的开发原则</h1>
+<h2 id="引言">引言</h2>
+<p>构建高效的AI智能体（Agentic AI）工作流是一项复杂的挑战。许多开发团队投入数周甚至数月，却发现自己陷入了低效的“埋头构建、缺少分析”的循环，最终成果寥寥。这种困境的根源，往往不是技术能力不足，而是一种低效的开发原则。</p>
+<p>本文旨在揭示由吴恩达（Andrew Ng）分享的一套强大且反直觉的开发“操作系统”。这套理念的核心是：用严谨的分析来驱动迭代，而非凭直觉盲目构建。采纳这套方法论，是精英AI团队的战略优势，能帮你避免在无法提升性能的功能上浪费数月时间，从而大幅提升开发流程的效率与成功率。</p>
+<h2 id="五个反直觉的开发原则">五个反直觉的开发原则</h2>
+<p>以下五个核心开发原则挑战了我们惯常的开发直觉，但它们环环相扣，共同构成了一个高效构建AI智能体的迭代循环。</p>
+<h3 id="1-先快速搭建再求完美">1. 先快速搭建，再求完美</h3>
+<p>我们通常倾向于在动手前进行详尽的规划，但这在AI智能体开发中可能适得其反。吴恩达的建议是，与其花费数周去构思一个完美的系统，不如先快速构建一个“粗糙但可用”的原型。需要强调的是，“快速粗糙”不等于“不负责任”。这个初始原型必须以安全、合理的方式构建，从一开始就确保数据隐私和安全。</p>
+<p>这个初始系统的目的不是为了完美无瑕，而是为了快速暴露工作流中的薄弱环节。它的核心价值在于产生失败案例——这些失败案例正是你进行分析的宝贵原材料，这自然引出了我们的下一条原则。</p>
+<blockquote>
+<p>&ldquo;I find that it&rsquo;s sometimes less useful to sit around for too many weeks theorizing and hypothesizing how to build it. It&rsquo;s often better to just build a quick system&hellip;&rdquo;</p></blockquote>
+<blockquote>
+<p>“我发现，有时坐在那里，花太多时间理论化和假设性地思考如何构建系统，比直接构建一个快速原型更有用。通常，直接构建一个快速原型会更好。&quot;</p></blockquote>
+<h3 id="2-从足够好的评估开始">2. 从“足够好”的评估开始</h3>
+<p>许多团队在“评估”（evals）环节感到不知所措，认为必须建立庞大而全面的测试集，这种想法常导致项目停滞。吴恩达的建议是，让第一步原型中出现的失败来指导你构建评估。</p>
+<p>这个过程应该是：首先，运行你的初始原型，观察其输出，发现它在哪些方面表现不佳。例如，在一个处理发票的系统中，你运行了20张发票后，发现系统经常将“开票日期”误认为“付款截止日期”。然后，针对这一个具体问题，创建一个小型的评估集（比如10到20个案例），专门追踪系统在区分日期上的准确率。这种迭代式的评估方法能有效避免“分析瘫痪”，让你立即开始衡量和驱动改进。</p>
+<blockquote>
+<p>&ldquo;I see quite a lot of teams that are almost paralyzed because they think building evals is this massive multi-week effort, and so they take longer than would be ideal to get started.&rdquo;</p></blockquote>
+<blockquote>
+<p>“我看到很多团队因为认为构建评估是一项巨大的多周努力，而几乎瘫痪。因此，他们比理想的要慢得多才能开始。&quot;</p></blockquote>
+<h3 id="3-让错误分析而非直觉指引你">3. 让错误分析而非直觉指引你</h3>
+<p>拥有一个小型评估集来追踪关键失败后，下一步是系统性地找出失败的根本原因。一个团队开发效率的高低，很大程度上取决于他们是否拥有严谨的错误分析流程。依赖直觉决定修复方向，往往是低效的根源。</p>
+<p>吴恩达用一个“研究型智能体”（research agent）的例子生动地说明了这一点。假设智能体生成的报告“遗漏了关键要点”，问题出在哪？是“生成搜索词”环节太差，是“网络搜索结果”质量不高，还是“筛选信源”的步骤出了问题？数据驱动的方法是，使用电子表格等简单工具，对一批失败案例进行追踪，统计每个中间组件的出错频率。例如，你可能会发现“搜索词生成”只有5%的情况下不理想，但“搜索结果”在45%的情况下都质量堪忧。这个数据明确告诉你，当前最值得投入精力的环节是改进网络搜索，而不是其他。</p>
+<blockquote>
+<p>&quot; I found that one of the biggest predictors for how efficient and how good a team is, is whether or not they&rsquo;re able to drive a disciplined error analysis process to tell you where to focus your efforts.&quot;</p></blockquote>
+<blockquote>
+<p>“我发现，一个团队的效率和质量很大程度上取决于他们是否能够通过系统性错误分析来指导你的努力方向。&quot;</p></blockquote>
+<h3 id="4-想写好提示词去读别人的">4. 想写好提示词？去读别人的</h3>
+<p>提升提示词工程（Prompt Engineering）能力不仅仅是学习理论。吴恩达分享了一个出人意料但极其有效的实践技巧：花时间去阅读和分析其他优秀开发者编写的提示词。</p>
+<p>他本人就有这样的习惯——主动阅读知名开源软件包中的提示词，并与同行交流，从中学习最佳实践和巧妙构思。通过大量观摩高质量的范例，你可以更快地培养出编写高效提示词的直觉和能力。这远比自己闭门造车要有效得多，能让你站在巨人的肩膀上进行创新。</p>
+<h3 id="5-先追求质量成本和延迟是甜蜜的烦恼">5. 先追求质量，成本和延迟是“甜蜜的烦恼”</h3>
+<p>在开发初期，团队很容易陷入对成本（cost）和延迟（latency）的过度担忧中。然而，吴恩达的战略建议是：首要任务是确保智能体系统能产生高质量的输出。成本与延迟的优化，是之后才需要解决的问题。</p>
+<p>核心逻辑在于，让系统有效工作是整个项目中最困难、最核心的部分。只有当你的系统足够优秀，吸引了大量用户时，高昂的运营成本和响应延迟才会真正成为一个需要解决的问题。换句话说，这是一个因成功而产生的“甜蜜的烦恼”。因此，你应该在系统质量得到保证之后，再将精力转向这些优化工作。</p>
+<blockquote>
+<p>&ldquo;&hellip;we were fortunate enough to have so many users use it that the cost actually became a problem&hellip; But that&rsquo;s a good problem to have, so I tend to worry about cost, usually less.&rdquo;</p></blockquote>
+<blockquote>
+<p>“我们很幸运地有这么多用户使用它，以至于运营成本实际上成为一个问题&hellip;但这是一个好的问题，所以我通常不担心成本，通常很少担心。&quot;</p></blockquote>
+<h2 id="结论">结论</h2>
+<p>贯穿上述所有技巧的核心思想是：构建卓越的AI系统需要一个严谨、迭代且数据驱动的分析过程，而这个过程往往与我们的第一直觉相悖。经验不足的团队花费大量时间去“构建”，而精英团队则将更多时间投入到“分析”中，以确保每一次构建都精准有效。从快速原型到迭代评估，再到严格的错误分析，这个分析驱动的循环是区分高效与低效团队的根本所在。</p>
+<p>现在，不妨停下来思考一下：审视你当前的AI项目，哪一条反直觉的建议最能帮你突破瓶颈？</p>
+      
+    </div>
+    
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-label="On this page">
+      
+      <div class="toc-title">On this page</div>
+      
+      <nav class="toc">
+        
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#五个反直觉的开发原则">五个反直觉的开发原则</a>
+      <ul>
+        <li><a href="#1-先快速搭建再求完美">1. 先快速搭建，再求完美</a></li>
+        <li><a href="#2-从足够好的评估开始">2. 从“足够好”的评估开始</a></li>
+        <li><a href="#3-让错误分析而非直觉指引你">3. 让错误分析而非直觉指引你</a></li>
+        <li><a href="#4-想写好提示词去读别人的">4. 想写好提示词？去读别人的</a></li>
+        <li><a href="#5-先追求质量成本和延迟是甜蜜的烦恼">5. 先追求质量，成本和延迟是“甜蜜的烦恼”</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+            
+      </nav>
+      
+      
+    </aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+  <div id="tocDrawer" class="toc-drawer" hidden>
+    <div class="toc-drawer-inner">
+      <div class="toc-drawer-header">
+        <span>目录</span>
+        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
+      </div>
+      <nav class="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#五个反直觉的开发原则">五个反直觉的开发原则</a>
+      <ul>
+        <li><a href="#1-先快速搭建再求完美">1. 先快速搭建，再求完美</a></li>
+        <li><a href="#2-从足够好的评估开始">2. 从“足够好”的评估开始</a></li>
+        <li><a href="#3-让错误分析而非直觉指引你">3. 让错误分析而非直觉指引你</a></li>
+        <li><a href="#4-想写好提示词去读别人的">4. 想写好提示词？去读别人的</a></li>
+        <li><a href="#5-先追求质量成本和延迟是甜蜜的烦恼">5. 先追求质量，成本和延迟是“甜蜜的烦恼”</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论">结论</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </div>
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251017-01" defer></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251017-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251017-01';
+  </script>
+  <script src="/js/search-advanced.js?v=20251017-01" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251017-01"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251017-01"></script>
+  
+  
+  
+  
+  
+</body>
+</html>
