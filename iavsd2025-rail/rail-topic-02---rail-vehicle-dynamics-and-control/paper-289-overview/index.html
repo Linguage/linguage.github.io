@@ -59,51 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-289 基本信息 论文编号：289 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Comparison of Train-single/double Line Track-Subgrade Spatial Coupled Dynamics Models Using Green&rsquo;s Function Method 中文标题：基于格林函数法的列车-单/双线轨道-路基空间耦合动力学模型比较 作者及单位：Sen Zhang¹, Yu Sun¹*, Liming Zhu¹ (¹南京工业大学交通运输工程学院，中国南京) 摘要 双线路基和单线路基结构是铁路基础设施的两种典型形式。目前，由于双线高速铁路的复杂性，对其路基动力响应的研究相当有限。本文基于频域格林函数法(GFM)，对双线和单线高速列车运行引起的路基动力特性进行了比较分析。首先介绍了列车-轨道-路基(TTS)系统的建模策略和数值求解方法。然后讨论了典型路基动力响应沿纵向、横向和垂直方向的分布，并进一步研究了随机轨道不平顺对路基振动分布的影响。
-关键词 #列车-轨道-路基相互作用 #双线和单线 #路基动力学 #格林函数法 #有限元模型 #迭代求解
-背景与动机 如今，无砟轨道广泛应用于高速铁路轨道结构，如CRTS I、II和III型板式无砟轨道。同时，作为支撑其上部列车-轨道系统的基础设施结构，路基正受到越来越多的关注。目前已有众多数值模型用于研究TTS系统的动力响应，但这些模型主要集中于单线路基模型。然而，中国超过90%的高速铁路是双线路基结构。鉴于双线系统和单线系统之间的结构差异，基于单线路基模型的仿真可能无法准确反映列车在双线上的实际运行条件。
-随着&quot;四纵四横&quot;高速铁路网的全面完成和&quot;八纵八横&quot;网络的不断完善，双向运行列车已成为高速铁路的基本运行模式。因此，迫切需要研究双线高速铁路下的路基动力响应，特别是在同时考虑精度和效率的情况下。
-近年来，格林函数法因其高效率同时保证精度而受到广泛关注，并被广泛用于分析TTS动力相互作用。然而，以往的研究忽略了轮轨横向力对系统动力学的影响，只考虑了单线情况，这可能在检查TTS系统的动力学特性时导致计算误差。
-研究方法 本文采用理论建模、数值仿真和对比分析相结合的方法：
-系统分割策略：采用分割策略将TTS系统分为列车-轨道(TR)子系统和轨道-路基(TS)子系统，两者通过垂直和横向扣件力相互连接。
-TR子系统建模：开发时域三维(3D)模型模拟TR子系统动力学。在该模型中，每辆车被建模为七个刚体，包括一个车体、两个转向架和四个轮对。考虑这些刚体的垂直、横向、侧滚、偏航和俯仰运动，总共35个自由度。钢轨建模为离散支撑的伯努利-欧拉梁，考虑其垂直、横向和侧滚运动。
-TS子系统建模：将TS子系统视为承受垂直和横向扣件力的线性动态系统，采用频域GFM模型建模其动力响应。在该模型中，任何观测点的频域响应可视为所有扣件位置频域扣件力与这些扣件力和观测点之间传递函数(即频域格林函数)乘积的叠加。
-格林函数确定：针对CRTS III板式轨道，考虑其周期性、对称性和衰减特性，通过对具有对称约束或反对称约束的1/4结构有限元模型进行谐波响应分析，获得频域格林函数。
-有限元模型建立：开发了双线轨道-路基-路堤模型(DTSEM)和单线轨道-路基-路堤模型(STSEM)。CRTS III板式轨道由轨道板、自密实混凝土和混凝土基础组成，而路基包括表层、底层和路堤。
-迭代求解模型：采用迭代求解模型求解整个系统。在每个迭代步骤中，垂直和横向扣件力被视为外部载荷。使用频域GFM求解TS子系统的动力学，从而确定轨道板位移和速度。
-随机不平顺分析：为分析随机轨道不平顺对TS子系统的影响，采用100个轨道不平顺样本来观察路基动力响应的统计分布。
-主要结论 模型适用性差异：在传统TTS动力学研究中，STSEM被广泛使用但存在一定局限性。对比分析表明，虽然STSEM能够充分代表路基加速度的动力学特性，但由于轨道结构差异，无法考虑左侧轨道-路基约束的影响。
-位移和应力分布不对称性：STSEM无法准确捕获车辆侧路基位移和应力的不对称分布，导致高估车辆侧轨道板内侧的位移和应力响应。而DTSEM能够更准确地反映路基位移和应力的&quot;左低右高&quot;不对称分布模式。
-量化差异：在车辆侧轨道板左边缘，STSEM计算的垂直路基应力平均值比DTSEM高10.5%。
-相邻轨道影响：单侧列车运行会影响相邻轨道的动力学特性，特别是对其下方的路基位移和应力产生显著动态扰动。
-加速度响应一致性：两种轨道模型获得的垂直路基加速度结果基本一致，有无轨道不平顺条件下都显示出相当的结果。不平顺条件下的加速度幅值明显高于无不平顺条件。
-结构周期性影响：结构周期性对沿X方向的路基位移分布有显著影响，而对路基加速度的影响可以忽略不计。
-深度衰减规律：路基位移大致随深度线性减小，加速度在轨道截面处随深度迅速减小，而在轨道中心截面处呈现缓慢线性下降。
-随机不平顺主导性：路基加速度主要受随机轨道不平顺影响，而轨道类型对其影响较小。
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-289 基本信息 论文编号：289 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Comparison of Train-single/double Line Track-Subgrade Spatial …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-289 基本信息 论文编号：289 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Comparison of Train-single/double Line Track-Subgrade Spatial Coupled Dynamics Models Using Green&rsquo;s Function Method 中文标题：基于格林函数法的列车-单/双线轨道-路基空间耦合动力学模型比较 作者及单位：Sen Zhang¹, Yu Sun¹*, Liming Zhu¹ (¹南京工业大学交通运输工程学院，中国南京) 摘要 双线路基和单线路基结构是铁路基础设施的两种典型形式。目前，由于双线高速铁路的复杂性，对其路基动力响应的研究相当有限。本文基于频域格林函数法(GFM)，对双线和单线高速列车运行引起的路基动力特性进行了比较分析。首先介绍了列车-轨道-路基(TTS)系统的建模策略和数值求解方法。然后讨论了典型路基动力响应沿纵向、横向和垂直方向的分布，并进一步研究了随机轨道不平顺对路基振动分布的影响。
-关键词 #列车-轨道-路基相互作用 #双线和单线 #路基动力学 #格林函数法 #有限元模型 #迭代求解
-背景与动机 如今，无砟轨道广泛应用于高速铁路轨道结构，如CRTS I、II和III型板式无砟轨道。同时，作为支撑其上部列车-轨道系统的基础设施结构，路基正受到越来越多的关注。目前已有众多数值模型用于研究TTS系统的动力响应，但这些模型主要集中于单线路基模型。然而，中国超过90%的高速铁路是双线路基结构。鉴于双线系统和单线系统之间的结构差异，基于单线路基模型的仿真可能无法准确反映列车在双线上的实际运行条件。
-随着&quot;四纵四横&quot;高速铁路网的全面完成和&quot;八纵八横&quot;网络的不断完善，双向运行列车已成为高速铁路的基本运行模式。因此，迫切需要研究双线高速铁路下的路基动力响应，特别是在同时考虑精度和效率的情况下。
-近年来，格林函数法因其高效率同时保证精度而受到广泛关注，并被广泛用于分析TTS动力相互作用。然而，以往的研究忽略了轮轨横向力对系统动力学的影响，只考虑了单线情况，这可能在检查TTS系统的动力学特性时导致计算误差。
-研究方法 本文采用理论建模、数值仿真和对比分析相结合的方法：
-系统分割策略：采用分割策略将TTS系统分为列车-轨道(TR)子系统和轨道-路基(TS)子系统，两者通过垂直和横向扣件力相互连接。
-TR子系统建模：开发时域三维(3D)模型模拟TR子系统动力学。在该模型中，每辆车被建模为七个刚体，包括一个车体、两个转向架和四个轮对。考虑这些刚体的垂直、横向、侧滚、偏航和俯仰运动，总共35个自由度。钢轨建模为离散支撑的伯努利-欧拉梁，考虑其垂直、横向和侧滚运动。
-TS子系统建模：将TS子系统视为承受垂直和横向扣件力的线性动态系统，采用频域GFM模型建模其动力响应。在该模型中，任何观测点的频域响应可视为所有扣件位置频域扣件力与这些扣件力和观测点之间传递函数(即频域格林函数)乘积的叠加。
-格林函数确定：针对CRTS III板式轨道，考虑其周期性、对称性和衰减特性，通过对具有对称约束或反对称约束的1/4结构有限元模型进行谐波响应分析，获得频域格林函数。
-有限元模型建立：开发了双线轨道-路基-路堤模型(DTSEM)和单线轨道-路基-路堤模型(STSEM)。CRTS III板式轨道由轨道板、自密实混凝土和混凝土基础组成，而路基包括表层、底层和路堤。
-迭代求解模型：采用迭代求解模型求解整个系统。在每个迭代步骤中，垂直和横向扣件力被视为外部载荷。使用频域GFM求解TS子系统的动力学，从而确定轨道板位移和速度。
-随机不平顺分析：为分析随机轨道不平顺对TS子系统的影响，采用100个轨道不平顺样本来观察路基动力响应的统计分布。
-主要结论 模型适用性差异：在传统TTS动力学研究中，STSEM被广泛使用但存在一定局限性。对比分析表明，虽然STSEM能够充分代表路基加速度的动力学特性，但由于轨道结构差异，无法考虑左侧轨道-路基约束的影响。
-位移和应力分布不对称性：STSEM无法准确捕获车辆侧路基位移和应力的不对称分布，导致高估车辆侧轨道板内侧的位移和应力响应。而DTSEM能够更准确地反映路基位移和应力的&quot;左低右高&quot;不对称分布模式。
-量化差异：在车辆侧轨道板左边缘，STSEM计算的垂直路基应力平均值比DTSEM高10.5%。
-相邻轨道影响：单侧列车运行会影响相邻轨道的动力学特性，特别是对其下方的路基位移和应力产生显著动态扰动。
-加速度响应一致性：两种轨道模型获得的垂直路基加速度结果基本一致，有无轨道不平顺条件下都显示出相当的结果。不平顺条件下的加速度幅值明显高于无不平顺条件。
-结构周期性影响：结构周期性对沿X方向的路基位移分布有显著影响，而对路基加速度的影响可以忽略不计。
-深度衰减规律：路基位移大致随深度线性减小，加速度在轨道截面处随深度迅速减小，而在轨道中心截面处呈现缓慢线性下降。
-随机不平顺主导性：路基加速度主要受随机轨道不平顺影响，而轨道类型对其影响较小。
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-289 基本信息 论文编号：289 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Comparison of Train-single/double Line Track-Subgrade Spatial …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-289-overview/">
 
   

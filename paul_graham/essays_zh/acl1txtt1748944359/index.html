@@ -59,29 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ANSI Common Lisp 简介"><meta property="og:description" content="→ English Version
-ANSI Common Lisp 简介 ANSI Common Lisp 简介
-（这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。）
-介绍 John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之外，Lisp是仍在使用的最古老的语言。[1] 更值得注意的是，它仍然处于编程语言技术的前沿。了解Lisp的程序员会告诉你，这种语言有某种独特之处。
-Lisp的独特之处部分在于它被设计为可进化的。你可以使用Lisp来定义新的Lisp操作符。当新的抽象变得流行时（例如面向对象编程），事实证明在Lisp中实现它们总是很容易的。像DNA这样的语言不会过时。
-新工具 为什么学习Lisp？因为它让你做其他语言做不到的事情。如果你只是想写一个返回小于n的数字之和的函数，在Lisp和C中看起来会非常相似：
-; Lisp (defun sum (n) (let ((s 0)) (dotimes (i n s) (incf s i)))) /* C */ int sum(int n){ int i, s = 0; for(i = 0; i &lt; n; i&#43;&#43;) s &#43;= i; return(s); } 如果你只需要做这样的简单事情，你使用哪种语言并不重要。假设相反，你想写一个函数，它接受一个数字n，并返回一个将n加到其参数上的函数：
-; Lisp (defun addn (n) #&#39;(lambda (x) (&#43; x n))) addn在C中是什么样的？你根本写不出来。
-你可能会想知道，什么时候有人会想做这样的事情？编程语言教会你不要渴望它们不能提供的东西。你必须用一种语言思考才能用其编写程序，很难渴望你无法描述的东西。当我开始编写程序时——使用Basic——我不想念递归，因为我不知道有这样的东西。我用Basic思考。我只能构想迭代算法，为什么要想念递归？
-如果你不怀念词法闭包（这就是前面例子中制作的东西），暂时相信Lisp程序员一直使用它们。很难找到任何长度的Common Lisp程序不利用闭包。到第112页，你自己也会使用它们。而闭包只是我们在其他语言中找不到的抽象之一。
-"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/acl1txtt1748944359/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="ANSI Common Lisp 简介"><meta property="og:description" content="→ English Version ANSI Common Lisp 简介 ANSI Common Lisp 简介 （这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。） 介绍 John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之 …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/acl1txtt1748944359/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="ANSI Common Lisp 简介"><meta name="twitter:description" content="→ English Version
-ANSI Common Lisp 简介 ANSI Common Lisp 简介
-（这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。）
-介绍 John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之外，Lisp是仍在使用的最古老的语言。[1] 更值得注意的是，它仍然处于编程语言技术的前沿。了解Lisp的程序员会告诉你，这种语言有某种独特之处。
-Lisp的独特之处部分在于它被设计为可进化的。你可以使用Lisp来定义新的Lisp操作符。当新的抽象变得流行时（例如面向对象编程），事实证明在Lisp中实现它们总是很容易的。像DNA这样的语言不会过时。
-新工具 为什么学习Lisp？因为它让你做其他语言做不到的事情。如果你只是想写一个返回小于n的数字之和的函数，在Lisp和C中看起来会非常相似：
-; Lisp (defun sum (n) (let ((s 0)) (dotimes (i n s) (incf s i)))) /* C */ int sum(int n){ int i, s = 0; for(i = 0; i &lt; n; i&#43;&#43;) s &#43;= i; return(s); } 如果你只需要做这样的简单事情，你使用哪种语言并不重要。假设相反，你想写一个函数，它接受一个数字n，并返回一个将n加到其参数上的函数：
-; Lisp (defun addn (n) #&#39;(lambda (x) (&#43; x n))) addn在C中是什么样的？你根本写不出来。
-你可能会想知道，什么时候有人会想做这样的事情？编程语言教会你不要渴望它们不能提供的东西。你必须用一种语言思考才能用其编写程序，很难渴望你无法描述的东西。当我开始编写程序时——使用Basic——我不想念递归，因为我不知道有这样的东西。我用Basic思考。我只能构想迭代算法，为什么要想念递归？
-如果你不怀念词法闭包（这就是前面例子中制作的东西），暂时相信Lisp程序员一直使用它们。很难找到任何长度的Common Lisp程序不利用闭包。到第112页，你自己也会使用它们。而闭包只是我们在其他语言中找不到的抽象之一。
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="ANSI Common Lisp 简介"><meta name="twitter:description" content="→ English Version ANSI Common Lisp 简介 ANSI Common Lisp 简介 （这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。） 介绍 John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之 …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/acl1txtt1748944359/">
 
   

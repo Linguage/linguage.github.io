@@ -59,41 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-236 基本信息 论文编号：236 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Semi-Active Secondary Suspension with Model Predictive Control to Improve Ride Comfort 中文标题：采用模型预测控制的半主动二系悬挂以提高乘坐舒适性 作者及单位：Alexander Posseckert (德国航空航天中心系统动力学与控制研究所，德国) 摘要 本文提出了一种基于模型预测控制(MPC)的半主动悬挂控制策略。明确考虑了轨道不平顺对车体动力学的影响。所开发的控制器应用于配备半主动二系悬挂部件的 quarter-car 车辆模型。基于包含真实测量轨道数据的现实场景进行了多项仿真，并与采用纯被动二系悬挂的参考案例进行比较。结果根据EN12299标准进行评估，显示出乘坐舒适性的显著改善。
-关键词 #铁路车辆 #乘坐舒适性 #半主动悬挂 #模型预测控制
-背景与动机 2024年12月，德国联邦数字和交通部发布了关于2040年德国交通预测的报告。与2030年的预测相比，铁路运输的客运量将增加63%。为了实现这一交通转型，重新激活目前废弃的铁路线路在将农村地区重新连接到公共交通网络方面发挥着重要作用。从机车车辆角度来看，相关的挑战已经在文献中讨论。铁路运输在重新激活线路上被接受的另一个关键方面是提供可靠和舒适的服务。
-就乘坐舒适性而言，大多数配备被动悬挂部件的传统铁路车辆在当前铁路网络中提供了令人满意的舒适度水平。然而，在已经废弃了几十年的低质量铁路线路上，情况可能不再如此。提高乘坐舒适性而不增加轨道维护成本的一个有效选择是在二系悬挂中使用主动或半主动部件。主动二系悬挂能够实现乘坐舒适性的最大改善，但同时也需要最多的能量，并且根据实际应用，需要高性能执行器。一个有前景的替代方案是使用半主动减振器。
-研究方法 本文采用理论建模和数值仿真相结合的方法：
-车辆建模：建立了考虑轨道不平顺的 quarter-car 车辆模型，重点关注与舒适性相关的垂直动力学。自由度包括车体垂直位移z_cb和转向架垂直位移z_bg。
-半主动悬挂建模：半主动减振器的阻尼比不是固定的，而是在闭环配置中修改。将阻尼力分解为标称阻尼力d_0和非恒定力F(t)，半主动减振器行为建模为一阶系统。
-被动性约束：半主动悬挂的特征是减振器只耗散能量。为了保证这一点，必须满足非线性被动性约束：d_ss(t)(z_cb-z_bg)(ż_cb-ż_bg) ≥ 0。这被转化为混合动力系统的二进制状态约束。
-模型预测控制：将系统转换为离散形式，使用零阶保持方法。MPC通过在特定控制范围内确定控制变量的最优序列来最小化预测范围内的成本函数J。
-混合整数二次规划：由于被动性约束产生的整数不等式，优化问题被归类为混合整数二次规划(MIQP)，使用Yalmip建立并借助Gurobi求解器求解。
-主要结论 控制效果：使用半主动MPC实现了0.17的舒适度指数N_MVz，比被动悬挂车辆改善23%。即使在定位信号叠加噪声的情况下，舒适度指数仍为0.18，比被动系统改善18%。
-频率范围重点：工作重点放在4Hz至20Hz的激励频率范围。这有两个原因：首先，根据EN12299，该频率范围内的振动加权最重；其次，模型以1×10^-3s的采样时间离散化，以最小化离散化误差。
-定位精度要求：为了预测未来的系统行为，半主动MPC需要当前的列车位置。初步信息显示，定位信号叠加PSD为1×10^-4 WHz^-1的白噪声时，最大定位误差为1.5m，标准偏差为0.31m。
-计算挑战：主要挑战是求解优化问题的时间消耗。混合整数规划问题被归类为NP完全问题。对于需要长预测范围的应用，需要研究加速计算时间的技术。
-应用前景：半主动MPC作为铁路车辆的乘坐舒适性控制器显示出有希望的结果。然而，在预测范围长度和MIQP计算时间之间存在权衡。对于实时应用，需要减少计算时间。
-文章亮点或创新点 首次将模型预测控制应用于铁路车辆半主动二系悬挂系统 明确考虑轨道不平顺信息，实现预览功能 将半主动约束转化为混合整数二次规划问题 基于真实测量轨道数据验证控制效果 为铁路车辆舒适性控制提供了新的技术路径 专业词汇列表 英文术语 中文翻译 Semi-Active Suspension 半主动悬挂 Model Predictive Control (MPC) 模型预测控制 Ride Comfort 乘坐舒适性 Quarter-Car Model 四分之一车辆模型 Track Irregularities 轨道不平顺 Passiveity Constraint 被动性约束 Mixed-Integer Quadratic Program (MIQP) 混合整数二次规划 Damping Ratio 阻尼比 Prediction Horizon 预测范围 Control Horizon 控制范围 State Space Representation 状态空间表示 Binary State 二进制状态 Hybrid Dynamical System 混合动力系统 Zero-Order Hold Method 零阶保持方法 Weighting Matrices 权重矩阵 Cost Function 成本函数 Optimization Problem 优化问题 EN12299 Standard EN12299标准 Frequency Weighting 频率加权 Track Geometry Quality 轨道几何质量 Branch Lines 支线铁路 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-236 基本信息 论文编号：236 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Semi-Active Secondary Suspension with Model Predictive Control to …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-236 基本信息 论文编号：236 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Semi-Active Secondary Suspension with Model Predictive Control to Improve Ride Comfort 中文标题：采用模型预测控制的半主动二系悬挂以提高乘坐舒适性 作者及单位：Alexander Posseckert (德国航空航天中心系统动力学与控制研究所，德国) 摘要 本文提出了一种基于模型预测控制(MPC)的半主动悬挂控制策略。明确考虑了轨道不平顺对车体动力学的影响。所开发的控制器应用于配备半主动二系悬挂部件的 quarter-car 车辆模型。基于包含真实测量轨道数据的现实场景进行了多项仿真，并与采用纯被动二系悬挂的参考案例进行比较。结果根据EN12299标准进行评估，显示出乘坐舒适性的显著改善。
-关键词 #铁路车辆 #乘坐舒适性 #半主动悬挂 #模型预测控制
-背景与动机 2024年12月，德国联邦数字和交通部发布了关于2040年德国交通预测的报告。与2030年的预测相比，铁路运输的客运量将增加63%。为了实现这一交通转型，重新激活目前废弃的铁路线路在将农村地区重新连接到公共交通网络方面发挥着重要作用。从机车车辆角度来看，相关的挑战已经在文献中讨论。铁路运输在重新激活线路上被接受的另一个关键方面是提供可靠和舒适的服务。
-就乘坐舒适性而言，大多数配备被动悬挂部件的传统铁路车辆在当前铁路网络中提供了令人满意的舒适度水平。然而，在已经废弃了几十年的低质量铁路线路上，情况可能不再如此。提高乘坐舒适性而不增加轨道维护成本的一个有效选择是在二系悬挂中使用主动或半主动部件。主动二系悬挂能够实现乘坐舒适性的最大改善，但同时也需要最多的能量，并且根据实际应用，需要高性能执行器。一个有前景的替代方案是使用半主动减振器。
-研究方法 本文采用理论建模和数值仿真相结合的方法：
-车辆建模：建立了考虑轨道不平顺的 quarter-car 车辆模型，重点关注与舒适性相关的垂直动力学。自由度包括车体垂直位移z_cb和转向架垂直位移z_bg。
-半主动悬挂建模：半主动减振器的阻尼比不是固定的，而是在闭环配置中修改。将阻尼力分解为标称阻尼力d_0和非恒定力F(t)，半主动减振器行为建模为一阶系统。
-被动性约束：半主动悬挂的特征是减振器只耗散能量。为了保证这一点，必须满足非线性被动性约束：d_ss(t)(z_cb-z_bg)(ż_cb-ż_bg) ≥ 0。这被转化为混合动力系统的二进制状态约束。
-模型预测控制：将系统转换为离散形式，使用零阶保持方法。MPC通过在特定控制范围内确定控制变量的最优序列来最小化预测范围内的成本函数J。
-混合整数二次规划：由于被动性约束产生的整数不等式，优化问题被归类为混合整数二次规划(MIQP)，使用Yalmip建立并借助Gurobi求解器求解。
-主要结论 控制效果：使用半主动MPC实现了0.17的舒适度指数N_MVz，比被动悬挂车辆改善23%。即使在定位信号叠加噪声的情况下，舒适度指数仍为0.18，比被动系统改善18%。
-频率范围重点：工作重点放在4Hz至20Hz的激励频率范围。这有两个原因：首先，根据EN12299，该频率范围内的振动加权最重；其次，模型以1×10^-3s的采样时间离散化，以最小化离散化误差。
-定位精度要求：为了预测未来的系统行为，半主动MPC需要当前的列车位置。初步信息显示，定位信号叠加PSD为1×10^-4 WHz^-1的白噪声时，最大定位误差为1.5m，标准偏差为0.31m。
-计算挑战：主要挑战是求解优化问题的时间消耗。混合整数规划问题被归类为NP完全问题。对于需要长预测范围的应用，需要研究加速计算时间的技术。
-应用前景：半主动MPC作为铁路车辆的乘坐舒适性控制器显示出有希望的结果。然而，在预测范围长度和MIQP计算时间之间存在权衡。对于实时应用，需要减少计算时间。
-文章亮点或创新点 首次将模型预测控制应用于铁路车辆半主动二系悬挂系统 明确考虑轨道不平顺信息，实现预览功能 将半主动约束转化为混合整数二次规划问题 基于真实测量轨道数据验证控制效果 为铁路车辆舒适性控制提供了新的技术路径 专业词汇列表 英文术语 中文翻译 Semi-Active Suspension 半主动悬挂 Model Predictive Control (MPC) 模型预测控制 Ride Comfort 乘坐舒适性 Quarter-Car Model 四分之一车辆模型 Track Irregularities 轨道不平顺 Passiveity Constraint 被动性约束 Mixed-Integer Quadratic Program (MIQP) 混合整数二次规划 Damping Ratio 阻尼比 Prediction Horizon 预测范围 Control Horizon 控制范围 State Space Representation 状态空间表示 Binary State 二进制状态 Hybrid Dynamical System 混合动力系统 Zero-Order Hold Method 零阶保持方法 Weighting Matrices 权重矩阵 Cost Function 成本函数 Optimization Problem 优化问题 EN12299 Standard EN12299标准 Frequency Weighting 频率加权 Track Geometry Quality 轨道几何质量 Branch Lines 支线铁路 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-236 基本信息 论文编号：236 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Semi-Active Secondary Suspension with Model Predictive Control to …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-236-overview/">
 
   

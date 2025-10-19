@@ -59,25 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-284 基本信息 论文编号：284 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Optimization Strategy for Rail Grinding to Improve Dynamic Performance of High Speed Trains Passing through Turnouts 中文标题：钢轨打磨优化策略以提高高速列车通过道岔的动力性能 作者及单位：Chao Chang (East China Jiaotong University, China; CRRC Changchun Railway Vehicles Co., Ltd., China) 摘要 高速列车在通过磨损道岔时经常出现过大的车体横向加速度（CLA）和摆动。钢轨打磨是一种有效的解决方案，但当前做法缺乏精确的策略。本研究开发了一个由混合智能算法驱动的打磨策略模型（GSM）来解决这个问题。分析磨损钢轨轮廓，并使用GA-BP-NSGA III、车辆-道岔耦合动力学模型和NURBS理论优化目标轮廓。GSM集成了NRBO、Transformer、BiGRU和KELM，达到98%的训练准确率和97%的测试准确率。应用后，钢轨轮廓偏差控制在0.2毫米内，解决了CLA问题并提高了打磨效率和车辆稳定性。
-关键词 #道岔维护 #钢轨打磨策略 #钢轨磨损 #混合智能算法 #轮轨接触优化
-背景与动机 随着高速铁路技术的快速发展，列车运行速度和载重能力显著增加。虽然这一进展显著提高了运输效率，但同时也加剧了道岔钢轨磨损——这是高速铁路运营中需要迫切关注的关键技术挑战。渐进式钢轨磨损恶化了轮轨接触相互作用，可能在高速列车通过道岔时诱发过大的车体横向加速度（CLA）和不良摆动，从而影响运行稳定性和乘客舒适度。
-当前，国内外学者对钢轨磨损进行了全面研究，主要集中在三个方面：磨损模型优化、实验研究和动态仿真。在磨损模型开发方面，Ignesti等建立了基于FASTSIM的轮轨轮廓磨损演化数值模型，Bobyr等开发了用于钢轨磨损率预测的ANSYS摩擦学模型。在实验研究方面，Olofsson等进行了双盘试验研究磨损状态转换和摩擦系数，Zhang等将二维建模与现场观测结合分析地铁钢轨焊接形成。在动态仿真方面，Sebes等应用半赫兹接触算法模拟道岔磨损，Kassa等结合动态软件与现场数据进行车辆-道岔相互作用分析。
-钢轨打磨有效减轻钢轨磨损，相关策略研究取得显著进展，但实际应用面临限制：现有轮廓优化未充分考虑打磨车辆效率（导致测量轮廓与目标轮廓之间差距大），现场操作仍依赖手动磨损轮廓比较和策略制定。
-研究方法 本研究针对磨损道岔钢轨轮廓，解决过大的CLA和车体摆动问题，具有两个关键创新：减少打磨深度同时保持最佳轮轨接触的优化轮廓；以及用于实时精确解决方案的混合智能算法驱动的打磨策略模型（GSM）。
-研究过程如下：
-收集高速列车通过时的CLA和磨损道岔钢轨轮廓，分析过大CLA和摆动的原因。 通过GA-BP-NSGA III、车辆-道岔动力学模型、NURBS理论和打磨效率优化目标打磨轮廓，平衡接触质量和减少深度。 验证并应用优化轮廓，然后将不同磨损轮廓的打磨策略分类整合到其中。 使用NRBO、Transformer、BiGRU和KELM开发GSM，用于实时策略生成和提高效率。 现场数据分析：在司机舱安装便携式振动分析仪，收集列车以300公里/小时直向通过道岔时的CLA数据。分析表明，列车连续三天通过道岔尖轨时的CLA超过二级限值，车体在道岔通过过程中的主要振动频率为2.0 Hz，表明存在明显的低频摆动。
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-284 基本信息 论文编号：284 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Optimization Strategy for Rail Grinding to …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-284 基本信息 论文编号：284 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Optimization Strategy for Rail Grinding to Improve Dynamic Performance of High Speed Trains Passing through Turnouts 中文标题：钢轨打磨优化策略以提高高速列车通过道岔的动力性能 作者及单位：Chao Chang (East China Jiaotong University, China; CRRC Changchun Railway Vehicles Co., Ltd., China) 摘要 高速列车在通过磨损道岔时经常出现过大的车体横向加速度（CLA）和摆动。钢轨打磨是一种有效的解决方案，但当前做法缺乏精确的策略。本研究开发了一个由混合智能算法驱动的打磨策略模型（GSM）来解决这个问题。分析磨损钢轨轮廓，并使用GA-BP-NSGA III、车辆-道岔耦合动力学模型和NURBS理论优化目标轮廓。GSM集成了NRBO、Transformer、BiGRU和KELM，达到98%的训练准确率和97%的测试准确率。应用后，钢轨轮廓偏差控制在0.2毫米内，解决了CLA问题并提高了打磨效率和车辆稳定性。
-关键词 #道岔维护 #钢轨打磨策略 #钢轨磨损 #混合智能算法 #轮轨接触优化
-背景与动机 随着高速铁路技术的快速发展，列车运行速度和载重能力显著增加。虽然这一进展显著提高了运输效率，但同时也加剧了道岔钢轨磨损——这是高速铁路运营中需要迫切关注的关键技术挑战。渐进式钢轨磨损恶化了轮轨接触相互作用，可能在高速列车通过道岔时诱发过大的车体横向加速度（CLA）和不良摆动，从而影响运行稳定性和乘客舒适度。
-当前，国内外学者对钢轨磨损进行了全面研究，主要集中在三个方面：磨损模型优化、实验研究和动态仿真。在磨损模型开发方面，Ignesti等建立了基于FASTSIM的轮轨轮廓磨损演化数值模型，Bobyr等开发了用于钢轨磨损率预测的ANSYS摩擦学模型。在实验研究方面，Olofsson等进行了双盘试验研究磨损状态转换和摩擦系数，Zhang等将二维建模与现场观测结合分析地铁钢轨焊接形成。在动态仿真方面，Sebes等应用半赫兹接触算法模拟道岔磨损，Kassa等结合动态软件与现场数据进行车辆-道岔相互作用分析。
-钢轨打磨有效减轻钢轨磨损，相关策略研究取得显著进展，但实际应用面临限制：现有轮廓优化未充分考虑打磨车辆效率（导致测量轮廓与目标轮廓之间差距大），现场操作仍依赖手动磨损轮廓比较和策略制定。
-研究方法 本研究针对磨损道岔钢轨轮廓，解决过大的CLA和车体摆动问题，具有两个关键创新：减少打磨深度同时保持最佳轮轨接触的优化轮廓；以及用于实时精确解决方案的混合智能算法驱动的打磨策略模型（GSM）。
-研究过程如下：
-收集高速列车通过时的CLA和磨损道岔钢轨轮廓，分析过大CLA和摆动的原因。 通过GA-BP-NSGA III、车辆-道岔动力学模型、NURBS理论和打磨效率优化目标打磨轮廓，平衡接触质量和减少深度。 验证并应用优化轮廓，然后将不同磨损轮廓的打磨策略分类整合到其中。 使用NRBO、Transformer、BiGRU和KELM开发GSM，用于实时策略生成和提高效率。 现场数据分析：在司机舱安装便携式振动分析仪，收集列车以300公里/小时直向通过道岔时的CLA数据。分析表明，列车连续三天通过道岔尖轨时的CLA超过二级限值，车体在道岔通过过程中的主要振动频率为2.0 Hz，表明存在明显的低频摆动。
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-284 基本信息 论文编号：284 所属主题：Rail Topic 04 - Rail System Optimization, Maintenance and Monitoring (轨道系统优化、维护与监测) 英文标题：Optimization Strategy for Rail Grinding to …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-04---rail-system-optimization-maintenance-and-monitoring/paper-284-overview/">
 
   

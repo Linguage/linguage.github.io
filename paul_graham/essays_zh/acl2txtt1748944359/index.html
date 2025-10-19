@@ -59,31 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="欢迎来到Lisp"><meta property="og:description" content="→ English Version
-欢迎来到Lisp 本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。
-2.1 形式 对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&gt;作为toplevel提示符。这就是我们在这里要使用的。
-最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，
-&gt; 1 1 &gt; 系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。
-当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：
-&gt; (&#43; 2 3) 5 在表达式(&#43; 2 3)中，&#43;被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 &#43; 3，但在Lisp中，我们将&#43;运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(&#43; 2 3)。这被称为前缀表示法，因为运算符在前。
-这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用&#43;两次，2 &#43; 3 &#43; 4，而在Lisp中我们只需添加另一个参数：(&#43; 2 3 4)
-我们通常使用&#43;的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，&#43;可以接受任意数量的参数，包括无参数：
-&gt; (&#43;) 0 &gt; (&#43; 2) 2 &gt; (&#43; 2 3) 5 &gt; (&#43; 2 3 4) 9 &gt; (&#43; 2 3 4 5) 14 因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：
-&gt; (/ (- 7 1) (- 4 2)) 3 用英语来说，这是七减一，除以四减二。
-"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="欢迎来到Lisp"><meta property="og:description" content="→ English Version 欢迎来到Lisp 本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。 2.1 形式 对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它 …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="欢迎来到Lisp"><meta name="twitter:description" content="→ English Version
-欢迎来到Lisp 本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。
-2.1 形式 对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&gt;作为toplevel提示符。这就是我们在这里要使用的。
-最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，
-&gt; 1 1 &gt; 系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。
-当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：
-&gt; (&#43; 2 3) 5 在表达式(&#43; 2 3)中，&#43;被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 &#43; 3，但在Lisp中，我们将&#43;运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(&#43; 2 3)。这被称为前缀表示法，因为运算符在前。
-这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用&#43;两次，2 &#43; 3 &#43; 4，而在Lisp中我们只需添加另一个参数：(&#43; 2 3 4)
-我们通常使用&#43;的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，&#43;可以接受任意数量的参数，包括无参数：
-&gt; (&#43;) 0 &gt; (&#43; 2) 2 &gt; (&#43; 2 3) 5 &gt; (&#43; 2 3 4) 9 &gt; (&#43; 2 3 4 5) 14 因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：
-&gt; (/ (- 7 1) (- 4 2)) 3 用英语来说，这是七减一，除以四减二。
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="欢迎来到Lisp"><meta name="twitter:description" content="→ English Version 欢迎来到Lisp 本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。 2.1 形式 对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它 …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/">
 
   

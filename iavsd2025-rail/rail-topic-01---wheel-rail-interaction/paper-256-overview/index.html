@@ -59,37 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：256 基本信息 论文编号：256 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Assessing the Results of Simplified Non-Hertzian Contact Algorithms 中文标题：评估简化非赫兹接触算法的结果 作者及单位：Edwin Vollebregt 联系邮箱：未提供 摘要 本文提出了评估轮轨接触力建模简化算法的方法，这些算法通常通过以一种或另一种方式简化完整接触模型来工作。每种方法都提出了有希望的结果，但这些结果通常限于孤立案例，关于不同方法比较性能的有限结果。我们结合并扩展了之前提出的两种基准测试方法，即专注于将轮轨接触嵌入多体动力学模拟的曼彻斯特接触基准，以及评估赫兹情况下切向蠕滑力的统计方法。扩展内容包括评估局部量，如接触斑形状、接触应力和摩擦功率分布。结果比较了Kpec和Analyn用于法向问题，以及比较了Fastrip和Fastsim（使用抛物线和椭圆牵引边界）用于切向问题。确定了原始Fastrip方法表现不佳的测试案例，并提出了新的改进Fastrip算法，其性能优于现有的Fastrip和Fastsim方法。
-关键词 #非赫兹接触 #简化算法 #基准测试 #接触力学 #算法比较
-背景与动机 轮轨接触在铁路中起着重要作用，影响整个车辆系统动力学，例如曲线通过、稳定性和脱轨。蠕滑力进一步表明了控制磨损和损伤现象的底层剪切应力或切向牵引力。在时域模拟过程中，需要解决数百万或数十亿个接触问题，这需要快速的算法，这些算法在接触力方面必须足够精确，如果可能的话，在接触应力的空间分布方面也必须足够精确。
-关于法向接触问题，赫兹方法长期以来一直是车辆系统动力学的首选方法，因为其简单性、优雅性和计算速度。近年来，注意力转向了考虑轮轨剖面非赫兹特性的方法，产生非椭圆接触形状。不同的策略被用于近似完整有限元或边界元方法的结果，例如假设滚动方向上接触压力为半椭球分布、横向方向上长度和最大压力可变的半赫兹方法、假设实际接触斑形状与虚拟相互穿透区域相似的虚拟相互穿透方法，以及使用多个椭圆或具有不同半轴的两个半椭圆来近似实际接触斑的分析方法。
-然而，这些结果通常限于孤立案例，关于不同方法比较性能的有限结果。目前未知这些策略和方法在接触斑形状和大小以及压力分布方面如何相互比较。
-研究方法 本研究提出了一种系统的非赫兹接触算法评估框架：
-测试案例生成：
-法向问题测试集：包含1920个案例，考虑不同的车轮和钢轨剖面、横向位置、偏航角和滚动角以及不同载荷 切向问题测试集：包含9600个案例，考虑不同的接触斑形状和蠕滑组合 参数设置：S1002轮对UIC60钢轨，垂直力10kN，摩擦系数轨距面0.20，轨顶0.30 评估指标开发：
-E分数：测量接触区域与赫兹椭圆形状的紧凑性对应关系 差异面积：使用重叠和差异面积来表征接触斑形状差异 接触压力指标：最大、平均和rms压力值，压力差异统计 切向应力指标：粘着和滑动区域大小，切向牵引力分布 算法比较框架：
-法向问题：比较Kpec（虚拟相互穿透法）和Analyn（局部曲率法） 切向问题：比较Fastrip和Fastsim（抛物线和椭圆牵引边界） 参考标准：以CONTACT软件作为基准参考 改进Fastrip算法：
-基于椭圆牵引边界和灵活性值混合 添加斜率减少和下降摩擦 扩展到非椭圆接触斑 解决原始Fastrip方法中允许超过库仑最大值的切向牵引力的缺陷 主要结论 法向接触算法比较：
-整体精度：Kpec和Analyn方法与CONTACT相比具有相似的精度，在大多数情况下表现相当好 接触斑形状：Kpec通常比CONTACT产生更多的椭圆形状，而Analyn在强非椭圆情况下表现更好 压力分布：Kpec平均比CONTACT低24N/mm²，最大压力差异在某些情况下超过1060N/mm² 切向接触算法比较：
-粘着区域估计：Fastsim倾向于显著高估粘着区域，椭圆牵引边界仅略逊于抛物线边界 切向牵引力表示：椭圆边界在表示切向牵引力方面做得更好，建议在使用Fastsim时优先选择椭圆边界 Fastrip改进：改进的Fastrip方法在蠕滑力、粘着和滑动区域以及切向牵引力分布方面表现最佳 评估指标有效性：
-E分数：有效测量接触斑与椭圆形状的偏差，分数低于0.95表示明显的不对称或歪斜 差异面积：比面积差异更稳健的形状差异测量方法 统计评估：提供了算法性能的全面量化比较 算法选择建议：
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：256 基本信息 论文编号：256 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Assessing the Results of Simplified Non-Hertzian Contact Algorithms 中文标题：评估简化非赫兹接触算法的结果  …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：256 基本信息 论文编号：256 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Assessing the Results of Simplified Non-Hertzian Contact Algorithms 中文标题：评估简化非赫兹接触算法的结果 作者及单位：Edwin Vollebregt 联系邮箱：未提供 摘要 本文提出了评估轮轨接触力建模简化算法的方法，这些算法通常通过以一种或另一种方式简化完整接触模型来工作。每种方法都提出了有希望的结果，但这些结果通常限于孤立案例，关于不同方法比较性能的有限结果。我们结合并扩展了之前提出的两种基准测试方法，即专注于将轮轨接触嵌入多体动力学模拟的曼彻斯特接触基准，以及评估赫兹情况下切向蠕滑力的统计方法。扩展内容包括评估局部量，如接触斑形状、接触应力和摩擦功率分布。结果比较了Kpec和Analyn用于法向问题，以及比较了Fastrip和Fastsim（使用抛物线和椭圆牵引边界）用于切向问题。确定了原始Fastrip方法表现不佳的测试案例，并提出了新的改进Fastrip算法，其性能优于现有的Fastrip和Fastsim方法。
-关键词 #非赫兹接触 #简化算法 #基准测试 #接触力学 #算法比较
-背景与动机 轮轨接触在铁路中起着重要作用，影响整个车辆系统动力学，例如曲线通过、稳定性和脱轨。蠕滑力进一步表明了控制磨损和损伤现象的底层剪切应力或切向牵引力。在时域模拟过程中，需要解决数百万或数十亿个接触问题，这需要快速的算法，这些算法在接触力方面必须足够精确，如果可能的话，在接触应力的空间分布方面也必须足够精确。
-关于法向接触问题，赫兹方法长期以来一直是车辆系统动力学的首选方法，因为其简单性、优雅性和计算速度。近年来，注意力转向了考虑轮轨剖面非赫兹特性的方法，产生非椭圆接触形状。不同的策略被用于近似完整有限元或边界元方法的结果，例如假设滚动方向上接触压力为半椭球分布、横向方向上长度和最大压力可变的半赫兹方法、假设实际接触斑形状与虚拟相互穿透区域相似的虚拟相互穿透方法，以及使用多个椭圆或具有不同半轴的两个半椭圆来近似实际接触斑的分析方法。
-然而，这些结果通常限于孤立案例，关于不同方法比较性能的有限结果。目前未知这些策略和方法在接触斑形状和大小以及压力分布方面如何相互比较。
-研究方法 本研究提出了一种系统的非赫兹接触算法评估框架：
-测试案例生成：
-法向问题测试集：包含1920个案例，考虑不同的车轮和钢轨剖面、横向位置、偏航角和滚动角以及不同载荷 切向问题测试集：包含9600个案例，考虑不同的接触斑形状和蠕滑组合 参数设置：S1002轮对UIC60钢轨，垂直力10kN，摩擦系数轨距面0.20，轨顶0.30 评估指标开发：
-E分数：测量接触区域与赫兹椭圆形状的紧凑性对应关系 差异面积：使用重叠和差异面积来表征接触斑形状差异 接触压力指标：最大、平均和rms压力值，压力差异统计 切向应力指标：粘着和滑动区域大小，切向牵引力分布 算法比较框架：
-法向问题：比较Kpec（虚拟相互穿透法）和Analyn（局部曲率法） 切向问题：比较Fastrip和Fastsim（抛物线和椭圆牵引边界） 参考标准：以CONTACT软件作为基准参考 改进Fastrip算法：
-基于椭圆牵引边界和灵活性值混合 添加斜率减少和下降摩擦 扩展到非椭圆接触斑 解决原始Fastrip方法中允许超过库仑最大值的切向牵引力的缺陷 主要结论 法向接触算法比较：
-整体精度：Kpec和Analyn方法与CONTACT相比具有相似的精度，在大多数情况下表现相当好 接触斑形状：Kpec通常比CONTACT产生更多的椭圆形状，而Analyn在强非椭圆情况下表现更好 压力分布：Kpec平均比CONTACT低24N/mm²，最大压力差异在某些情况下超过1060N/mm² 切向接触算法比较：
-粘着区域估计：Fastsim倾向于显著高估粘着区域，椭圆牵引边界仅略逊于抛物线边界 切向牵引力表示：椭圆边界在表示切向牵引力方面做得更好，建议在使用Fastsim时优先选择椭圆边界 Fastrip改进：改进的Fastrip方法在蠕滑力、粘着和滑动区域以及切向牵引力分布方面表现最佳 评估指标有效性：
-E分数：有效测量接触斑与椭圆形状的偏差，分数低于0.95表示明显的不对称或歪斜 差异面积：比面积差异更稳健的形状差异测量方法 统计评估：提供了算法性能的全面量化比较 算法选择建议：
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：256 基本信息 论文编号：256 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Assessing the Results of Simplified Non-Hertzian Contact Algorithms 中文标题：评估简化非赫兹接触算法的结果  …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-256-overview/">
 
   

@@ -59,39 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-213 基本信息 论文编号：213 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Simulation of the Wheel–Rail Contact Temperature Induced by Braking 中文标题：制动引起的轮轨接触温度仿真 作者及单位：Yifan Yang, Qiuyong Tian, Claudio Colao, Markus Hecht (柏林工业大学土地与海洋运输系统研究所，德国) 摘要 高摩擦力对于轮轨间传递制动力至关重要。然而，不利条件会降低粘着，导致车轮滑行或抱死以及严重损伤如轮平。本文采用一种混合仿真方法研究此现象，该方法集成了货车-轨道相互作用模型与三维有限元热分析。该模型考虑了温度相关的材料特性，预测车轮抱死导致表面温度迅速累积至近1000°C。这种极端温度超过了马氏体-奥氏体转变值，可能引发表面损伤如轮平。
-关键词 #制动 #轮轨接触 #滑行 #热分析 #温度 #有限元法
-背景与动机 高摩擦力对于轮轨间传递牵引力和制动力至关重要。然而，轮轨界面的摩擦系数是可变的，由于外部影响因素如潮湿天气（如雨雪）和第三介质层（如油）的影响，会降低到较低水平。此外，货车有时只是部分装载，但仍承受高制动力。在这些条件下，降低的法向载荷和摩擦系数显著增加了轮轨滑行的风险。制动产生的力矩必须由接触斑处的切向蠕滑力产生的相应力矩来平衡。然而，最大可用粘着力受到法向接触力和轮轨摩擦系数的限制，最大粘着制动力矩为μF_nR。如果所需制动力矩超过此限制，粘着就会丧失，接触从滚动转变为滑动，导致车轮滑行甚至完全抱死。这种现象在低粘着或部分装载情况下很可能发生，其中较低的法向力进一步降低了粘着能力。
-研究方法 本文提出了一种混合仿真方法来评估制动条件下的轮轨接触温度。整体仿真流程包括：
-车辆-轨道相互作用模型：基于多体动力学理论开发三维货车-轨道相互作用模型，有效捕捉轮对在制动过程中的关键动态响应特征，包括载荷传递和车轮抱死现象，特别是在低粘着条件下。
-有限元接触模型：采用考虑材料塑性有限元接触模型获得轮轨接触应力。
-热传递分析：使用商业有限元软件Abaqus建立考虑温度相关材料特性的热传递模型，模型理想化为1/9圆周车轮扇区，证明这种建模方法可以在保持可接受精度的同时大幅减少计算时间。
-摩擦热计算：进入车轮的实时接触摩擦热可以通过公式q(t)=p(t)V(t)μ(t)ξη计算，其中p表示轮轨接触应力；μ是轮轨间摩擦系数；V表示制动过程中车轮前进速度；ξ项表示轮轨蠕滑率；η是传热到车轮的比率。
-冷却效应：考虑冷轨冷却效应，在接触斑内应用对流边界条件，同时包括对流和辐射引起的表面热损失。
-主要结论 正常制动温度：在正常制动条件下，轮轨接触界面产生的热量可以忽略不计。满载货车从100 km/h初速度开始完全停车的制动仿真表明，踏面峰值温度仅达到约60°C，然后随着列车减速而逐渐消散。
-低粘着条件下的温度：在低粘着条件下（摩擦系数0.11，轴载13.5吨），蠕滑率急剧增加，导致车轮抱死和摩擦热的严重连续累积。峰值踏面温度在全轮轨滑行期间达到近1000°C。
-车轮抱死的危害：车轮抱死导致温度以强烈的非线性——几乎指数方式持续快速上升。这种极端温度显著超过了马氏体-奥氏体转变温度（670-700°C），可能引发表面损伤如轮平。
-动态响应特征：在低粘着制动过程中，前导轮对（1和3）的载荷始终高于各自转向架中的 trailing 轮对（2和4），这是制动过程中典型的载荷传递现象。车轮2和4表现出快速、不受控制的蠕滑率上升，分别在10.5秒和9秒时达到100%并抱死。
-热损伤机理：轮轨滑动接触产生的极端高温会导致材料相变，从而引发车轮表面损伤。这解释了为什么在低粘着条件下制动容易产生轮平缺陷。
-文章亮点或创新点 提出了集成车辆-轨道相互作用模型与三维有限元热分析的混合仿真方法 建立了考虑温度相关材料特性的轮轨接触热传递模型 揭示了车轮抱死导致表面温度迅速累积至近1000°C的极端现象 验证了极端温度超过马氏体-奥氏体转变值引发表面损伤的机理 为理解和预防车轮滑动损伤提供了理论依据和仿真工具 专业词汇列表 英文术语 中文翻译 Wheel-Rail Contact 轮轨接触 Braking 制动 Slip/Slide 滑行/滑动 Thermal Analysis 热分析 Finite Element Method (FEM) 有限元法 Adhesion 粘着 Friction Coefficient 摩擦系数 Wheel Lock-up 车轮抱死 Wheel Flat 轮平 Contact Patch 接触斑 Creepage 蠕滑率 Heat Transfer 热传递 Temperature-Dependent Material Properties 温度相关材料特性 Martensite-Austenite Transformation 马氏体-奥氏体转变 Multibody Dynamics 多体动力学 Load Transfer 载荷传递 Third-Body Layer 第三介质层 Convective Boundary Condition 对流边界条件 Thermal Accumulation 热累积 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：paper-213 基本信息 论文编号：213 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Simulation of the Wheel–Rail Contact Temperature Induced by Braking …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-213 基本信息 论文编号：213 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Simulation of the Wheel–Rail Contact Temperature Induced by Braking 中文标题：制动引起的轮轨接触温度仿真 作者及单位：Yifan Yang, Qiuyong Tian, Claudio Colao, Markus Hecht (柏林工业大学土地与海洋运输系统研究所，德国) 摘要 高摩擦力对于轮轨间传递制动力至关重要。然而，不利条件会降低粘着，导致车轮滑行或抱死以及严重损伤如轮平。本文采用一种混合仿真方法研究此现象，该方法集成了货车-轨道相互作用模型与三维有限元热分析。该模型考虑了温度相关的材料特性，预测车轮抱死导致表面温度迅速累积至近1000°C。这种极端温度超过了马氏体-奥氏体转变值，可能引发表面损伤如轮平。
-关键词 #制动 #轮轨接触 #滑行 #热分析 #温度 #有限元法
-背景与动机 高摩擦力对于轮轨间传递牵引力和制动力至关重要。然而，轮轨界面的摩擦系数是可变的，由于外部影响因素如潮湿天气（如雨雪）和第三介质层（如油）的影响，会降低到较低水平。此外，货车有时只是部分装载，但仍承受高制动力。在这些条件下，降低的法向载荷和摩擦系数显著增加了轮轨滑行的风险。制动产生的力矩必须由接触斑处的切向蠕滑力产生的相应力矩来平衡。然而，最大可用粘着力受到法向接触力和轮轨摩擦系数的限制，最大粘着制动力矩为μF_nR。如果所需制动力矩超过此限制，粘着就会丧失，接触从滚动转变为滑动，导致车轮滑行甚至完全抱死。这种现象在低粘着或部分装载情况下很可能发生，其中较低的法向力进一步降低了粘着能力。
-研究方法 本文提出了一种混合仿真方法来评估制动条件下的轮轨接触温度。整体仿真流程包括：
-车辆-轨道相互作用模型：基于多体动力学理论开发三维货车-轨道相互作用模型，有效捕捉轮对在制动过程中的关键动态响应特征，包括载荷传递和车轮抱死现象，特别是在低粘着条件下。
-有限元接触模型：采用考虑材料塑性有限元接触模型获得轮轨接触应力。
-热传递分析：使用商业有限元软件Abaqus建立考虑温度相关材料特性的热传递模型，模型理想化为1/9圆周车轮扇区，证明这种建模方法可以在保持可接受精度的同时大幅减少计算时间。
-摩擦热计算：进入车轮的实时接触摩擦热可以通过公式q(t)=p(t)V(t)μ(t)ξη计算，其中p表示轮轨接触应力；μ是轮轨间摩擦系数；V表示制动过程中车轮前进速度；ξ项表示轮轨蠕滑率；η是传热到车轮的比率。
-冷却效应：考虑冷轨冷却效应，在接触斑内应用对流边界条件，同时包括对流和辐射引起的表面热损失。
-主要结论 正常制动温度：在正常制动条件下，轮轨接触界面产生的热量可以忽略不计。满载货车从100 km/h初速度开始完全停车的制动仿真表明，踏面峰值温度仅达到约60°C，然后随着列车减速而逐渐消散。
-低粘着条件下的温度：在低粘着条件下（摩擦系数0.11，轴载13.5吨），蠕滑率急剧增加，导致车轮抱死和摩擦热的严重连续累积。峰值踏面温度在全轮轨滑行期间达到近1000°C。
-车轮抱死的危害：车轮抱死导致温度以强烈的非线性——几乎指数方式持续快速上升。这种极端温度显著超过了马氏体-奥氏体转变温度（670-700°C），可能引发表面损伤如轮平。
-动态响应特征：在低粘着制动过程中，前导轮对（1和3）的载荷始终高于各自转向架中的 trailing 轮对（2和4），这是制动过程中典型的载荷传递现象。车轮2和4表现出快速、不受控制的蠕滑率上升，分别在10.5秒和9秒时达到100%并抱死。
-热损伤机理：轮轨滑动接触产生的极端高温会导致材料相变，从而引发车轮表面损伤。这解释了为什么在低粘着条件下制动容易产生轮平缺陷。
-文章亮点或创新点 提出了集成车辆-轨道相互作用模型与三维有限元热分析的混合仿真方法 建立了考虑温度相关材料特性的轮轨接触热传递模型 揭示了车轮抱死导致表面温度迅速累积至近1000°C的极端现象 验证了极端温度超过马氏体-奥氏体转变值引发表面损伤的机理 为理解和预防车轮滑动损伤提供了理论依据和仿真工具 专业词汇列表 英文术语 中文翻译 Wheel-Rail Contact 轮轨接触 Braking 制动 Slip/Slide 滑行/滑动 Thermal Analysis 热分析 Finite Element Method (FEM) 有限元法 Adhesion 粘着 Friction Coefficient 摩擦系数 Wheel Lock-up 车轮抱死 Wheel Flat 轮平 Contact Patch 接触斑 Creepage 蠕滑率 Heat Transfer 热传递 Temperature-Dependent Material Properties 温度相关材料特性 Martensite-Austenite Transformation 马氏体-奥氏体转变 Multibody Dynamics 多体动力学 Load Transfer 载荷传递 Third-Body Layer 第三介质层 Convective Boundary Condition 对流边界条件 Thermal Accumulation 热累积 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：paper-213 基本信息 论文编号：213 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Simulation of the Wheel–Rail Contact Temperature Induced by Braking …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-213-overview/">
 
   

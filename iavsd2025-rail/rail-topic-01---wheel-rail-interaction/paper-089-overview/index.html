@@ -59,37 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：089 基本信息 论文编号：089 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations 中文标题：铁路车辆动力学模拟中轮轨接触模型的鲁棒性问题 作者及单位：孙宇* 南京工业大学交通运输工程学院，南京211816，中国 联系邮箱：sunyu.9003@163.com 摘要 在铁路车辆动力学模拟中，轮轨接触算法的鲁棒性问题可能导致人为的轮轨冲击，从而影响模拟结果的准确性。本文研究了车辆动力学模拟中由轮轨接触算法引起的数值鲁棒性问题现象。首先，介绍了轮轨接触算法中鲁棒性问题的表现形式及其对车辆动力学模拟结果和轮轨运营安全评估的影响。然后，讨论了导致轮轨接触模型缺乏鲁棒性的三个常见因素。最后，提出了相应的缓解策略来解决这些问题。
-关键词 #轮轨接触 #车辆动力学模拟 #算法鲁棒性 #赫兹接触 #非赫兹接触
-背景与动机 轮轨接触计算是铁路车辆动力学模拟的关键问题，显著影响计算精度、效率和鲁棒性。已经开发了各种轮轨接触模型用于铁路车辆动力学模拟。这些模型在离线计算中的计算精度和效率已经得到广泛讨论。接触算法的鲁棒性对于铁路车辆动力学模拟获得可靠结果至关重要。然而，轮轨接触模型的鲁棒性问题相对受到较少关注。
-在动力学计算中的轮轨力分析中，经常出现&quot;尖峰状&quot;冲击，这通常是由于轮轨接触算法的算法鲁棒性不足造成的。当尖峰变得显著时，它们可能破坏主要信号，导致重大的计算误差。本研究主要关注铁路车辆动力学模拟中轮轨算法的鲁棒性问题，特别强调其典型表现、对动力学模拟计算结果的影响、根本原因以及接触模型改进的潜在方法。
-研究方法 本研究采用系统性的方法分析轮轨接触模型的鲁棒性问题：
-问题识别与分析：
-通过数值模拟识别鲁棒性问题的典型表现 分析不同接触模型（赫兹模型、KP模型、RNHM模型等）的计算结果 评估鲁棒性问题对车辆动力学行为的影响 案例研究：
-地铁车辆小半径曲线工况（赫兹接触模型） 高速列车直线运行工况（KP模型，磨损轮型） 不同轮轨型廓组合的对比分析 根本原因分析：
-分析轮轨Y方向曲率的影响 研究初始接触点位置的影响 探讨接触斑横向边界位置的影响 改进策略提出：
-针对每个根本原因提出相应的解决方案 验证改进策略的有效性 主要结论 鲁棒性问题的表现：
-轮轨接触力的不连续变化导致人为冲击效应 高频振荡影响高频振动分析和安全评估的可靠性 关键安全指标（如卸载率和脱轨系数）可能被高估 根本原因：
-Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易产生波动 初始接触点位置：在某些特殊情况下，接触点位置可能发生不连续变化 接触斑横向边界位置：接触斑的横向边界也可能表现出不连续变化 改进策略：
-曲率处理：排除曲率或采用适当的平滑技术 接触点依赖：避免依赖初始接触点，使用全局接触参数 边界位置：避免依赖接触斑横向边界，使用整个接触斑的积分特性 模型选择建议：
-推荐使用更鲁棒的MKP模型替代KP模型 采用加权平均接触角而非局部接触角 使用基于整个接触斑特性的全局接触参数 文章亮点或创新点 问题系统性分析：首次系统性地分析了轮轨接触模型鲁棒性问题的表现形式和根本原因 三因素识别：识别了导致鲁棒性问题的三个关键因素（曲率、接触点、边界位置） 案例验证：通过多个实际案例验证了鲁棒性问题对车辆动力学模拟的影响 实用解决方案：提出了具体可行的改进策略和模型选择建议 安全评估影响：揭示了鲁棒性问题对车辆安全评估可靠性的重要影响 专业词汇列表 英文术语 中文翻译 Robustness Issues 鲁棒性问题 Wheel-Rail Contact Models 轮轨接触模型 Vehicle Dynamics Simulations 车辆动力学模拟 Algorithmic Robustness 算法鲁棒性 Hertzian Contact 赫兹接触 Non-Hertzian Contact 非赫兹接触 Pseudo-Impact Effects 伪冲击效应 Contact Forces 接触力 High-Frequency Oscillations 高频振荡 Unloading Rate 卸载率 Derailment Coefficient 脱轨系数 Contact Patch 接触斑 Initial Contact Point 初始接触点 Curvature Fluctuations 曲率波动 Contact Boundary 接触边界 Planar Contact Approach 平面接触方法 Conformal Contact Model 共形接触模型 Kik-Piotrowski (KP) Model KP模型 RNHM Model RNHM模型 Boussinesq-Cerruti Formula Boussinesq-Cerruti公式 Wheel Profile 轮型 Rail Profile 轨型 Lateral Displacement 横向位移 Normal Interpenetration 法向贯入量 Contact Angle 接触角 Creepages 蠕变率 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：089 基本信息 论文编号：089 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations 中 …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：089 基本信息 论文编号：089 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations 中文标题：铁路车辆动力学模拟中轮轨接触模型的鲁棒性问题 作者及单位：孙宇* 南京工业大学交通运输工程学院，南京211816，中国 联系邮箱：sunyu.9003@163.com 摘要 在铁路车辆动力学模拟中，轮轨接触算法的鲁棒性问题可能导致人为的轮轨冲击，从而影响模拟结果的准确性。本文研究了车辆动力学模拟中由轮轨接触算法引起的数值鲁棒性问题现象。首先，介绍了轮轨接触算法中鲁棒性问题的表现形式及其对车辆动力学模拟结果和轮轨运营安全评估的影响。然后，讨论了导致轮轨接触模型缺乏鲁棒性的三个常见因素。最后，提出了相应的缓解策略来解决这些问题。
-关键词 #轮轨接触 #车辆动力学模拟 #算法鲁棒性 #赫兹接触 #非赫兹接触
-背景与动机 轮轨接触计算是铁路车辆动力学模拟的关键问题，显著影响计算精度、效率和鲁棒性。已经开发了各种轮轨接触模型用于铁路车辆动力学模拟。这些模型在离线计算中的计算精度和效率已经得到广泛讨论。接触算法的鲁棒性对于铁路车辆动力学模拟获得可靠结果至关重要。然而，轮轨接触模型的鲁棒性问题相对受到较少关注。
-在动力学计算中的轮轨力分析中，经常出现&quot;尖峰状&quot;冲击，这通常是由于轮轨接触算法的算法鲁棒性不足造成的。当尖峰变得显著时，它们可能破坏主要信号，导致重大的计算误差。本研究主要关注铁路车辆动力学模拟中轮轨算法的鲁棒性问题，特别强调其典型表现、对动力学模拟计算结果的影响、根本原因以及接触模型改进的潜在方法。
-研究方法 本研究采用系统性的方法分析轮轨接触模型的鲁棒性问题：
-问题识别与分析：
-通过数值模拟识别鲁棒性问题的典型表现 分析不同接触模型（赫兹模型、KP模型、RNHM模型等）的计算结果 评估鲁棒性问题对车辆动力学行为的影响 案例研究：
-地铁车辆小半径曲线工况（赫兹接触模型） 高速列车直线运行工况（KP模型，磨损轮型） 不同轮轨型廓组合的对比分析 根本原因分析：
-分析轮轨Y方向曲率的影响 研究初始接触点位置的影响 探讨接触斑横向边界位置的影响 改进策略提出：
-针对每个根本原因提出相应的解决方案 验证改进策略的有效性 主要结论 鲁棒性问题的表现：
-轮轨接触力的不连续变化导致人为冲击效应 高频振荡影响高频振动分析和安全评估的可靠性 关键安全指标（如卸载率和脱轨系数）可能被高估 根本原因：
-Y方向轮轨曲率：曲率与轮轨型廓函数的二阶导数相关，容易产生波动 初始接触点位置：在某些特殊情况下，接触点位置可能发生不连续变化 接触斑横向边界位置：接触斑的横向边界也可能表现出不连续变化 改进策略：
-曲率处理：排除曲率或采用适当的平滑技术 接触点依赖：避免依赖初始接触点，使用全局接触参数 边界位置：避免依赖接触斑横向边界，使用整个接触斑的积分特性 模型选择建议：
-推荐使用更鲁棒的MKP模型替代KP模型 采用加权平均接触角而非局部接触角 使用基于整个接触斑特性的全局接触参数 文章亮点或创新点 问题系统性分析：首次系统性地分析了轮轨接触模型鲁棒性问题的表现形式和根本原因 三因素识别：识别了导致鲁棒性问题的三个关键因素（曲率、接触点、边界位置） 案例验证：通过多个实际案例验证了鲁棒性问题对车辆动力学模拟的影响 实用解决方案：提出了具体可行的改进策略和模型选择建议 安全评估影响：揭示了鲁棒性问题对车辆安全评估可靠性的重要影响 专业词汇列表 英文术语 中文翻译 Robustness Issues 鲁棒性问题 Wheel-Rail Contact Models 轮轨接触模型 Vehicle Dynamics Simulations 车辆动力学模拟 Algorithmic Robustness 算法鲁棒性 Hertzian Contact 赫兹接触 Non-Hertzian Contact 非赫兹接触 Pseudo-Impact Effects 伪冲击效应 Contact Forces 接触力 High-Frequency Oscillations 高频振荡 Unloading Rate 卸载率 Derailment Coefficient 脱轨系数 Contact Patch 接触斑 Initial Contact Point 初始接触点 Curvature Fluctuations 曲率波动 Contact Boundary 接触边界 Planar Contact Approach 平面接触方法 Conformal Contact Model 共形接触模型 Kik-Piotrowski (KP) Model KP模型 RNHM Model RNHM模型 Boussinesq-Cerruti Formula Boussinesq-Cerruti公式 Wheel Profile 轮型 Rail Profile 轨型 Lateral Displacement 横向位移 Normal Interpenetration 法向贯入量 Contact Angle 接触角 Creepages 蠕变率 整理日期：2025-09-02 *整理者：Claude AI prompted by HZL
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：089 基本信息 论文编号：089 所属主题：Rail Topic 01 – Wheel-Rail Interaction (轮轨相互作用) 英文标题：Robustness Issues of Wheel-Rail Contact Models in Railway Vehicle Dynamics Simulations 中 …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-01---wheel-rail-interaction/paper-089-overview/">
 
   

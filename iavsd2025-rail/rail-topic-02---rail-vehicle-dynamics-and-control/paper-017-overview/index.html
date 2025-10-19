@@ -59,27 +59,9 @@
   
 <meta property="og:site_name" content="Linguista">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：017 基本信息 论文编号：017 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Rail Vehicle Dynamics and Track Irregularity Monitoring Using Artificial Intelligence 中文标题：基于人工智能的轨道车辆动力学与轨道不平顺监测 作者及单位：Philipp Leibner, Fabio Boehm, Michael Ebbers, Christian Schindler, Raphael Pfaff Institute for Rail Vehicles, RWTH Aachen University, Aachen, Germany 联系邮箱：philipp.leibner@ifs.rwth-aachen.de 摘要 为提高基础设施可靠性并减少车辆停机时间，基于状态的维护（CBM）近年来在铁路领域日益受到重视。使用车载传感器系统对铁路车辆和轨道进行连续监测是实现有效CBM的关键推动因素。大多数现有关于监测系统的研究试图解决特定问题，例如从轴箱加速度估计轨道不平顺。这些方法通常需要定制传感器设置，并且难以扩展。在这项工作中，提出了一种统一的、数据驱动的方法，使用深度学习（DL）来估计更广泛的动态铁路车辆量。通过利用多体仿真（MBS）和实际测量数据，训练时间卷积网络（TCN）来从有限的加速度传感器组预测轨道不平顺、轮轨力和车辆加速度。结果表明，TCN能够准确预测来自轴箱或车体加速度的各种物理量。开发的框架为使用支持AI的铁路车辆数字孪生进行CBM开辟了新的可能性，并且可以减少车辆上永久必要的传感器数量。
-关键词 #轨道车辆动力学 #轨道不平顺 #人工智能 #监测 #仿真
-背景与动机 近年来，状态监测应用在铁路领域变得越来越受欢迎，以实现从纠正性和预防性维护策略向基于状态的维护（CBM）的转变。CBM预期通过早期检测或预测故障来减少车辆停机时间和基础设施故障，从而实现更具成本效益和可持续性的维护。为了实现铁路车辆和轨道的CBM，需要传感器来收集必要数据并评估当前部件或资产健康状态。
-一些现代铁路车辆已经配备了车载传感器，如加速度传感器，这些传感器可用于检测脱轨或转向架或悬挂系统的潜在损坏。然而，这些传感器的全部潜力尚未被充分利用。目前，研究人员和工程师正试图使用这些或类似的传感器设置来估计轨道几何形状和轮轨力，或检测轨道缺陷。从更广泛的角度来看，长期目标通常是创建铁路车辆和轨道的数字孪生，以反映其物理特性和当前部件状态。
-该领域的基础方法通常基于回归分析、卡尔曼滤波或人工神经网络等技术。然而，现有研究和应用通常一次只专注于解决一个特定问题，比如从加速度数据检测故障减震器或轨道不平顺。这导致了一系列方法的集合，这些方法在实践中实现和维护 collectively 复杂，甚至可能需要不同的传感器配置。
-研究方法 本研究开发了一个基于人工智能的统一监测框架，能够同时预测多种动态物理量。研究方法包括：
-整体方法框架：
-使用多体仿真（MBS）生成大量车辆测量数据集 训练针对时间序列数据优化的人工神经网络 仅基于轴箱加速度（ABA）预测各种动态量 预测输出包括车体加速度、轮轨力和轨道不平顺 多体仿真建模：
-选择瑞士联邦铁路（SBB）的Intercity-Neigezug（ICN）摆式列车作为研究对象 使用刚体建模车辆和轨道，轨枕采用独立体 使用FASTSIM进行切向接触计算和法向接触的离散弹性接触斑搜索 包含实际测量的轨道布局、速度和倾斜轮廓 模拟340公里轨道，包括三种不同特性的线路 考虑不同摩擦系数（0.05到0.45）以适应各种粘着条件 神经网络架构：
-"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+<meta property="og:title" content="Linguista"><meta property="og:description" content="IAVSD 2025 论文概览：017 基本信息 论文编号：017 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Rail Vehicle Dynamics and Track Irregularity Monitoring Using Artificial …"><meta property="og:url" content="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
   <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：017 基本信息 论文编号：017 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Rail Vehicle Dynamics and Track Irregularity Monitoring Using Artificial Intelligence 中文标题：基于人工智能的轨道车辆动力学与轨道不平顺监测 作者及单位：Philipp Leibner, Fabio Boehm, Michael Ebbers, Christian Schindler, Raphael Pfaff Institute for Rail Vehicles, RWTH Aachen University, Aachen, Germany 联系邮箱：philipp.leibner@ifs.rwth-aachen.de 摘要 为提高基础设施可靠性并减少车辆停机时间，基于状态的维护（CBM）近年来在铁路领域日益受到重视。使用车载传感器系统对铁路车辆和轨道进行连续监测是实现有效CBM的关键推动因素。大多数现有关于监测系统的研究试图解决特定问题，例如从轴箱加速度估计轨道不平顺。这些方法通常需要定制传感器设置，并且难以扩展。在这项工作中，提出了一种统一的、数据驱动的方法，使用深度学习（DL）来估计更广泛的动态铁路车辆量。通过利用多体仿真（MBS）和实际测量数据，训练时间卷积网络（TCN）来从有限的加速度传感器组预测轨道不平顺、轮轨力和车辆加速度。结果表明，TCN能够准确预测来自轴箱或车体加速度的各种物理量。开发的框架为使用支持AI的铁路车辆数字孪生进行CBM开辟了新的可能性，并且可以减少车辆上永久必要的传感器数量。
-关键词 #轨道车辆动力学 #轨道不平顺 #人工智能 #监测 #仿真
-背景与动机 近年来，状态监测应用在铁路领域变得越来越受欢迎，以实现从纠正性和预防性维护策略向基于状态的维护（CBM）的转变。CBM预期通过早期检测或预测故障来减少车辆停机时间和基础设施故障，从而实现更具成本效益和可持续性的维护。为了实现铁路车辆和轨道的CBM，需要传感器来收集必要数据并评估当前部件或资产健康状态。
-一些现代铁路车辆已经配备了车载传感器，如加速度传感器，这些传感器可用于检测脱轨或转向架或悬挂系统的潜在损坏。然而，这些传感器的全部潜力尚未被充分利用。目前，研究人员和工程师正试图使用这些或类似的传感器设置来估计轨道几何形状和轮轨力，或检测轨道缺陷。从更广泛的角度来看，长期目标通常是创建铁路车辆和轨道的数字孪生，以反映其物理特性和当前部件状态。
-该领域的基础方法通常基于回归分析、卡尔曼滤波或人工神经网络等技术。然而，现有研究和应用通常一次只专注于解决一个特定问题，比如从加速度数据检测故障减震器或轨道不平顺。这导致了一系列方法的集合，这些方法在实践中实现和维护 collectively 复杂，甚至可能需要不同的传感器配置。
-研究方法 本研究开发了一个基于人工智能的统一监测框架，能够同时预测多种动态物理量。研究方法包括：
-整体方法框架：
-使用多体仿真（MBS）生成大量车辆测量数据集 训练针对时间序列数据优化的人工神经网络 仅基于轴箱加速度（ABA）预测各种动态量 预测输出包括车体加速度、轮轨力和轨道不平顺 多体仿真建模：
-选择瑞士联邦铁路（SBB）的Intercity-Neigezug（ICN）摆式列车作为研究对象 使用刚体建模车辆和轨道，轨枕采用独立体 使用FASTSIM进行切向接触计算和法向接触的离散弹性接触斑搜索 包含实际测量的轨道布局、速度和倾斜轮廓 模拟340公里轨道，包括三种不同特性的线路 考虑不同摩擦系数（0.05到0.45）以适应各种粘着条件 神经网络架构：
-"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Linguista"><meta name="twitter:description" content="IAVSD 2025 论文概览：017 基本信息 论文编号：017 所属主题：Rail Topic 02 – Rail Vehicle Dynamics and Control (轨道车辆动力学与控制) 英文标题：Rail Vehicle Dynamics and Track Irregularity Monitoring Using Artificial …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
 <link rel="canonical" href="https://linguage.github.io/iavsd2025-rail/rail-topic-02---rail-vehicle-dynamics-and-control/paper-017-overview/">
 
   
