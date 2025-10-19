@@ -228,7 +228,7 @@
       return Math.floor((hit / englishTokens.length) * 12);
     }
 
-    // page 模式：只按 content 计分，避免标题或其它字段导致“未高亮内容”入选
+    // page 模式：只按 content 计分，避免标题或其它字段导致“未高亮内容”入选（仅作回退使用）
     if (mode === 'page'){
       let s = 0;
       // 英文整词优先：边界命中高权重
@@ -236,7 +236,6 @@
       qWords.forEach(w => { if (content.includes(w)) s += 6; });
       if (content.includes(qLower)) s += 20; // 整句命中加权
       s += fuzzyMatchScore(content, qLower);
-      s += coverageBonus();
       return s;
     }
 
@@ -536,14 +535,25 @@
     let total = 0;
     if (mode === 'page'){
       const docs = buildPageIndex();
-      const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
-        .filter(x => x.s > 0)
-        .sort((a,b)=> b.s - a.s);
-      // 仅保留真正有高亮的行
+      let rankedDocs = [];
+      if (window.SearchCore){
+        try{
+          rankedDocs = window.SearchCore.rankAndDedupe(docs, q, { mode: 'page' });
+        }catch(_){ rankedDocs = []; }
+      }
+      if (!rankedDocs.length){
+        // 回退到旧评分逻辑
+        const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
+          .filter(x => x.s > 0)
+          .sort((a,b)=> b.s - a.s)
+          .map(x => x.d);
+        rankedDocs = scored;
+      }
+      // 仅保留真正有高亮的行（行级摘要存在 <mark>）
       const filtered = [];
-      scored.forEach(x => {
-        const line = buildLineSnippet(x.d, qWords, qLower);
-        if (line && line.indexOf('<mark>') !== -1){ filtered.push(x.d); }
+      rankedDocs.forEach(d => {
+        const line = buildLineSnippet(d, qWords, qLower);
+        if (line && line.indexOf('<mark>') !== -1){ filtered.push(d); }
       });
       total = filtered.length;
       items = filtered; // 本页：全部显示
@@ -557,19 +567,25 @@
       }
       const siteDocs = await ensureData();
       const docs = (mode === 'posts') ? siteDocs.filter(d => (d.section||'') === 'post') : siteDocs;
-      const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) }))
-        .filter(x => x.s > 0);
-
-      // 按“文章（规范化路径）”去重：同一文章仅保留最高得分项
-      const bestByPath = new Map();
-      for (const x of scored){
-        const key = normalizeUrlPath(x.d.url || '');
-        const prev = bestByPath.get(key);
-        if (!prev || x.s > prev.s){ bestByPath.set(key, x); }
+      if (window.SearchCore){
+        try{
+          const ranked = window.SearchCore.rankAndDedupe(docs, q, { mode: (mode==='posts'?'posts':'all') });
+          items = ranked;
+          total = items.length;
+        }catch(_){ items = []; total = 0; }
+      } else {
+        // 回退到旧评分逻辑
+        const scored = docs.map(d => ({ d, s: scoreDoc(d, qWords, qLower) })).filter(x => x.s > 0);
+        const bestByPath = new Map();
+        for (const x of scored){
+          const key = normalizeUrlPath(x.d.url || '');
+          const prev = bestByPath.get(key);
+          if (!prev || x.s > prev.s){ bestByPath.set(key, x); }
+        }
+        const unique = Array.from(bestByPath.values()).sort((a,b)=> b.s - a.s);
+        total = unique.length;
+        items = unique.map(x => x.d);
       }
-      const unique = Array.from(bestByPath.values()).sort((a,b)=> b.s - a.s);
-      total = unique.length; // 用“文章数”作为总计数
-      items = unique.map(x => x.d); // 不截断，交由 render 做渐进加载
       // 触发 full 的条件：查询长度较长或 lite 命中较少
       if (!hasFull && !fullFetchStarted && (q.length >= 4 || total < 5)){
         try{ prefetchIndex().then(()=>{ try{ if (hasFull && box && box.value.trim() === q){ onInput(); } }catch(_){/* no-op */} }); }catch(_){/* no-op */}

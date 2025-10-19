@@ -63,11 +63,55 @@
       const url = (typeof window !== 'undefined' && window.SEARCH_INDEX_URL) || '/index.json';
       const res = await fetch(url, { credentials: 'same-origin' });
       if(!res.ok) throw new Error('HTTP '+res.status);
-      return await res.json();
+      const json = await res.json();
+      const items = Array.isArray(json) ? json : (json && json.items) || json;
+      return Array.isArray(items) ? items : [];
     }catch(err){
       console.error('Failed to load search index:', err);
       return [];
     }
+  }
+
+  // === English whole-word helpers (top-level scope) ===
+  function isEnglishLike(q){
+    const s = (q||'').trim();
+    if (s.length < 2) return false;
+    return /^[A-Za-z][A-Za-z0-9'\- ]*$/.test(s);
+  }
+  function escapeRegExp(str){ return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function wordBoundaryRegex(word){ return new RegExp('\\b'+escapeRegExp(word)+'\\b','i'); }
+  function findIndices(text, word){
+    const out = []; if (!text||!word) return out;
+    try{
+      const re = new RegExp('\\b'+escapeRegExp(word)+'\\b','ig');
+      let m; while((m = re.exec(text))){ out.push([m.index, m.index + word.length - 1]); if (re.lastIndex === m.index) re.lastIndex++; }
+    }catch(_){/* no-op */}
+    return out;
+  }
+  function wholeWordResults(docs, q){
+    const parts = (q||'').trim().split(/\s+/).filter(w=>w.length>1);
+    if (!parts.length) return [];
+    const res = [];
+    docs.forEach(doc=>{
+      const fields = ['title','description','summary','content','tags','categories'];
+      let matched = false; const matches = [];
+      for (const w of parts){
+        const re = wordBoundaryRegex(w);
+        for (const key of fields){
+          const val = Array.isArray(doc[key]) ? doc[key].join(' ') : (doc[key]||'');
+          if (typeof val !== 'string') continue;
+          if (re.test(val)){
+            matched = true;
+            if (key === 'title' || key === 'description' || key === 'summary' || key === 'content'){
+              const idxs = findIndices(val, w);
+              if (idxs.length){ matches.push({ key, indices: idxs }); }
+            }
+          }
+        }
+      }
+      if (matched){ res.push({ item: doc, score: 0.05, matches }); }
+    });
+    return res;
   }
 
   function getQuery(){
@@ -151,13 +195,31 @@
           }
         }
       } else if (!matches || !matches.length) {
-        // 无匹配信息（如退化到简易过滤），用该字段的起始摘要
-        const cut = text.slice(0, WINDOW);
-        const line = cut + (text.length>WINDOW?'…':'');
-        const norm = line.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().toLowerCase();
-        if (!seen.has(norm)){
-          seen.add(norm);
-          snippets.push(line);
+        // 无匹配信息：做“展示层”的轻量高亮（不影响检索逻辑）
+        const lower = text.toLowerCase();
+        const qLower = (q || '').toLowerCase();
+        const idx = qLower ? lower.indexOf(qLower) : -1;
+        if (idx >= 0){
+          const start = Math.max(0, idx - Math.floor(WINDOW/2));
+          const end = Math.min(text.length, start + WINDOW);
+          const slice = text.slice(start, end);
+          const relStart = Math.max(0, idx - start);
+          const relEnd = Math.min(slice.length - 1, relStart + qLower.length - 1);
+          const line = (start>0?'…':'') + highlight(slice, [[relStart, relEnd]]) + (end<text.length?'…':'');
+          const norm = line.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+          if (!seen.has(norm)){
+            seen.add(norm);
+            snippets.push(line);
+          }
+        } else {
+          // 仍无命中，回退到起始摘要
+          const cut = text.slice(0, WINDOW);
+          const line = cut + (text.length>WINDOW?'…':'');
+          const norm = line.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+          if (!seen.has(norm)){
+            seen.add(norm);
+            snippets.push(line);
+          }
         }
       }
     }
@@ -220,23 +282,18 @@
     function doSearch(q){
       if(!q){ render([]); return; }
       let results = [];
+      if (window.SearchCore){
+        try{
+          const ranked = window.SearchCore.rankAndDedupe(docs, q, { mode: 'all' });
+          results = ranked.slice(0, 50).map(d=>({ item: d, score: 0.01 }));
+          render(results);
+          return;
+        }catch(_){ /* fallthrough */ }
+      }
+      // 核心不可用时的回退：Fuse 模糊 或 简单过滤
       if (fuse){
-        // 1) 英文整词优先
-        if (isEnglishLike(q)){
-          try{ results = wholeWordResults(docs, q).slice(0, 50); }catch(_){ results = []; }
-        }
-        // 2) 回退 Fuse 模糊结果，并与整词结果合并去重（整词优先 score 更低）
-        const fuzzy = fuse.search(q).slice(0, 50);
-        const combined = [...results, ...fuzzy];
-        // 去重（保留 score 更低的项，即整词优先）
-        const seen = new Map();
-        combined.forEach(r=>{
-          const doc = r.item || r; const url = doc.url;
-          const sc = (typeof r.score === 'number') ? r.score : 1;
-          if (!seen.has(url) || sc < seen.get(url).score){ seen.set(url, { item: doc, score: sc, matches: r.matches||[] }); }
-        });
-        results = Array.from(seen.values());
-      }else{
+        results = fuse.search(q).slice(0, 50);
+      } else {
         results = simpleFilter(docs, q).slice(0, 50);
       }
       render(results);

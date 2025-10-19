@@ -90,13 +90,20 @@
 .mode-tab:focus-visible{ outline: 2px solid rgba(15,109,220,0.35); outline-offset: 1px; }
 /* 更友好的高亮 */
 .search-item mark{ background: rgba(15,109,220,0.16); color: inherit; border-radius: 3px; padding: 0 .12em; }
+/* 搜索页卡片高亮与头部一致 */
+#results mark,
+.card .card-desc mark{ background: rgba(15,109,220,0.16); color: inherit; border-radius: 3px; padding: 0 .12em; }
 /* 仅显示标题与正文摘要：隐藏元信息（section/date 等） */
 .site-search-popover .search-item-meta{ display: none !important; }
 
 /* 深色模式下：使用更适合的暗黄色高亮，保持可读性 */
 :root[data-theme="dark"] .search-item mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
+:root[data-theme="dark"] #results mark,
+:root[data-theme="dark"] .card .card-desc mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme]) .search-item mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
+  :root:not([data-theme]) #results mark,
+  :root:not([data-theme]) .card .card-desc mark{ background: rgba(249,214,123,0.32); color: var(--text, #f5f1e6); }
 }
   /* 本页搜索：仅显示所在行（单行省略） */
   .search-item-line {
