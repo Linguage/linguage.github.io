@@ -11,6 +11,52 @@
             const arr = Array.isArray(r.value) ? r.value : (r.value && r.value.items) || [];
             if (Array.isArray(arr)) docs.push(...arr);
           }
+
+  // 判断是否为英文查询（允许空格/连字符/撇号），用于整词优先
+  function isEnglishLike(q){
+    const s = (q||'').trim();
+    if (s.length < 2) return false;
+    return /^[A-Za-z][A-Za-z0-9'\- ]*$/.test(s);
+  }
+  function escapeRegExp(str){ return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function wordBoundaryRegex(word){
+    return new RegExp('\\b'+escapeRegExp(word)+'\\b','i');
+  }
+  function findIndices(text, word){
+    const out = []; if (!text||!word) return out;
+    try{
+      const re = new RegExp('\\b'+escapeRegExp(word)+'\\b','ig');
+      let m; while((m = re.exec(text))){ out.push([m.index, m.index + word.length - 1]); if (re.lastIndex === m.index) re.lastIndex++; }
+    }catch(_){}
+    return out;
+  }
+  // 生成“整词优先”的结果；多词时任一词匹配即可（OR），避免过严
+  function wholeWordResults(docs, q){
+    const parts = q.trim().split(/\s+/).filter(w=>w.length>1);
+    if (!parts.length) return [];
+    const res = [];
+    docs.forEach(doc=>{
+      const fields = ['title','description','summary','content','tags','categories'];
+      let matched = false; const matches = [];
+      for (const w of parts){
+        const re = wordBoundaryRegex(w);
+        for (const key of fields){
+          const val = Array.isArray(doc[key]) ? doc[key].join(' ') : (doc[key]||'');
+          if (typeof val !== 'string') continue;
+          if (re.test(val)){
+            matched = true;
+            // 仅对较长字段生成 indices 以便高亮
+            if (key === 'title' || key === 'description' || key === 'summary' || key === 'content'){
+              const idxs = findIndices(val, w);
+              if (idxs.length){ matches.push({ key, indices: idxs }); }
+            }
+          }
+        }
+      }
+      if (matched){ res.push({ item: doc, score: 0.05, matches }); }
+    });
+    return res;
+  }
         });
         return docs;
       }
@@ -175,7 +221,21 @@
       if(!q){ render([]); return; }
       let results = [];
       if (fuse){
-        results = fuse.search(q).slice(0, 50);
+        // 1) 英文整词优先
+        if (isEnglishLike(q)){
+          try{ results = wholeWordResults(docs, q).slice(0, 50); }catch(_){ results = []; }
+        }
+        // 2) 回退 Fuse 模糊结果，并与整词结果合并去重（整词优先 score 更低）
+        const fuzzy = fuse.search(q).slice(0, 50);
+        const combined = [...results, ...fuzzy];
+        // 去重（保留 score 更低的项，即整词优先）
+        const seen = new Map();
+        combined.forEach(r=>{
+          const doc = r.item || r; const url = doc.url;
+          const sc = (typeof r.score === 'number') ? r.score : 1;
+          if (!seen.has(url) || sc < seen.get(url).score){ seen.set(url, { item: doc, score: sc, matches: r.matches||[] }); }
+        });
+        results = Array.from(seen.values());
       }else{
         results = simpleFilter(docs, q).slice(0, 50);
       }

@@ -207,19 +207,48 @@
     const summary = (doc.summary||'').toLowerCase();
     const content = (doc.content||'').toLowerCase();
     const tags = (doc.tags||[]).join(' ').toLowerCase();
+    // 英文整词边界检测函数
+    function hasWordBoundary(text, w){
+      if (!w || w.length < 2) return false;
+      if (!/^[a-z0-9'\-]+$/i.test(w)) return false;
+      try{ return new RegExp('\\b'+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i').test(text); }catch(_){ return false; }
+    }
+
+    // 英文多词覆盖度与“全包含”加权
+    function coverageBonus(){
+      if (!qWords || qWords.length === 0) return 0;
+      // 仅在英文风格 token 上计算覆盖（允许 ' 和 -）
+      const englishTokens = qWords.filter(w => /^[a-z0-9'\-]+$/i.test(w) && w.length >= 2);
+      if (englishTokens.length < 2) return 0;
+      const allText = `${title} ${summary} ${content} ${tags}`;
+      let hit = 0;
+      englishTokens.forEach(w => { if (hasWordBoundary(allText, w) || allText.includes(w)) hit++; });
+      if (hit === englishTokens.length) return 36; // 全包含强力提升
+      // 按覆盖比例给小幅提升，避免误杀
+      return Math.floor((hit / englishTokens.length) * 12);
+    }
 
     // page 模式：只按 content 计分，避免标题或其它字段导致“未高亮内容”入选
     if (mode === 'page'){
       let s = 0;
+      // 英文整词优先：边界命中高权重
+      qWords.forEach(w => { if (hasWordBoundary(content, w)) s += 22; });
       qWords.forEach(w => { if (content.includes(w)) s += 6; });
       if (content.includes(qLower)) s += 20; // 整句命中加权
       s += fuzzyMatchScore(content, qLower);
+      s += coverageBonus();
       return s;
     }
 
     // 其它模式：保留原有多字段计分
     let score = 0;
     qWords.forEach(w => {
+      // 整词边界优先（英文）
+      if (hasWordBoundary(title, w)) score += 30;
+      if (hasWordBoundary(summary, w)) score += 16;
+      if (hasWordBoundary(content, w)) score += 10;
+      if (hasWordBoundary(tags, w)) score += 12;
+      // 子串次之
       if (title.includes(w)) score += 12;
       if (summary.includes(w)) score += 6;
       if (content.includes(w)) score += 2;
@@ -228,6 +257,7 @@
     if (title.includes(qLower)) score += 20;
     if (summary.includes(qLower)) score += 10;
     if (content.includes(qLower)) score += 3;
+    score += coverageBonus();
     return score;
   }
 
