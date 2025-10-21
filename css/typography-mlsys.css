@@ -45,12 +45,35 @@ html[data-theme="dark"] .hero {
 
 /* H2: panel with soft background (has bottom tint and rounded corners) */
 .container h2 {
-  border: 1px solid rgba(46, 125, 107, 0.45);
-  border-radius: 8px;
-  padding: 10px 12px 10px 16px;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: 100%;
+  margin: 2.4rem 0 1.2rem;
   color: var(--brand-text);
+  font-weight: 600;
+  text-align: center;
+}
+
+.container h2::before,
+.container h2::after {
+  content: "";
+  flex: 1 1 120px;
+  min-width: 80px;
+  max-width: 240px;
+  height: 6px;
+  background: var(--brand-accent, #2E7D6B);
+  opacity: 0.88;
+}
+
+.container h2::before {
+  clip-path: polygon(0 40%, 82% 40%, 82% 0, 100% 50%, 82% 100%, 82% 60%, 0 60%);
+}
+
+.container h2::after {
+  clip-path: polygon(18% 40%, 100% 40%, 100% 60%, 18% 60%, 18% 100%, 0 50%, 18% 0);
 }
 
 .container h2 a { color: var(--brand-accent, #0e6a85); }
