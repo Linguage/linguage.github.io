@@ -62,22 +62,34 @@ html[data-theme="dark"] .hero {
   content: "";
   flex: 1 1 120px;
   min-width: 80px;
-  max-width: 240px;
-  height: 6px;
-  background: var(--brand-accent, #2E7D6B);
-  opacity: 0.88;
+  max-width: 220px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(46,125,107,0.55) 25%, rgba(46,125,107,0.95) 50%, rgba(46,125,107,0.55) 75%, transparent 100%);
+  position: relative;
 }
 
 .container h2::before {
-  clip-path: polygon(0 40%, 82% 40%, 82% 0, 100% 50%, 82% 100%, 82% 60%, 0 60%);
+  transform: translateY(-4px);
 }
 
 .container h2::after {
-  clip-path: polygon(18% 40%, 100% 40%, 100% 60%, 18% 60%, 18% 100%, 0 50%, 18% 0);
+  transform: translateY(4px);
 }
 
 .container h2 a { color: var(--brand-accent, #0e6a85); }
 .container h2 a:visited { color: var(--brand-accent-visited, #094c60); }
+
+html[data-theme="dark"] .container h2::before,
+html[data-theme="dark"] .container h2::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(230,219,116,0.35) 20%, rgba(230,219,116,0.9) 50%, rgba(230,219,116,0.35) 80%, transparent 100%);
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]) .container h2::before,
+  :root:not([data-theme]) .container h2::after {
+    background: linear-gradient(90deg, transparent 0%, rgba(230,219,116,0.35) 20%, rgba(230,219,116,0.9) 50%, rgba(230,219,116,0.35) 80%, transparent 100%);
+  }
+}
 
 html[data-theme="dark"] .container h2 a { color: var(--gold); }
 html[data-theme="dark"] .container h2 a:visited { color: rgba(230,219,116,0.85); }

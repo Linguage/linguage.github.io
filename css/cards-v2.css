@@ -1,0 +1,49 @@
+/* Cards v2: stable placeholder-first, then image fill. */
+:root{
+  /* 占位纯色：与卡片背景一致，这样在无图时不突兀 */
+  --ac2-media-bg: var(--ac-bg, var(--surface, #ffffff));
+}
+
+/* Base */
+.ac2-card{ border:1px solid var(--ac-border, rgba(15,23,42,0.12)); border-radius:14px; background:var(--ac-bg, var(--surface, #fff)); color:var(--ac-fg, #111827); box-shadow:var(--ac-shadow, none); display:flex; gap:12px; align-items:stretch; padding:14px; }
+.ac2-card .ac2-body{ flex: 1 1 auto; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+.ac2-card .ac2-title{ font-weight:700; margin:0; }
+.ac2-card .ac2-desc{ line-height:1.6; margin:0; color: var(--ac-sub, rgba(15,23,42,0.65)); }
+
+/* Media block */
+.ac2-card .ac2-illu{ display:block; width:100%; }
+.ac2-card .ac2-fig{
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: var(--ac2-media-bg);
+  /* 如需占位图，可在短码上设置 --placeholder-image */
+  background-image: var(--placeholder-image, none);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Ratio path: 采用 ::before 百分比占位（更稳妥的兼容性），仅在 .has-ratio 时生效 */
+.ac2-card.has-ratio .ac2-fig::before{ content: ""; display:block; padding-top: var(--percent, 0%); }
+
+/* Fixed-height fallback path */
+.ac2-card:not(.has-ratio) .ac2-fig{ min-height: var(--height, 220px); }
+
+/* Image fill */
+.ac2-card .ac2-img{ position:absolute; inset:0; width:100%; height:100%; object-fit: var(--fit, cover); z-index:1; display:block; }
+
+/* Variants (layout) */
+.ac2-illust.variant-small{ flex-direction: column; }
+.ac2-illust.variant-medium{ flex-direction: column; }
+.ac2-illust.variant-medium .ac2-illu{ order:2; margin-top:12px; }
+.ac2-illust.variant-medium .ac2-body{ order:1; }
+.ac2-illust.variant-large{ flex-direction: row; }
+.ac2-illust.variant-large .ac2-illu{ flex: 0 0 46%; margin-right:12px; }
+
+/* Image card */
+.ac2-image{ padding:0; }
+.ac2-image .ac2-fig{ border-radius: 18px; }
+.ac2-image .ac2-caption{ position:absolute; left:16px; right:16px; bottom:16px; display:flex; flex-direction:column; gap:6px; padding:14px 16px; border-radius:14px; background: color-mix(in srgb, var(--ac-caption-bg, rgba(255,255,255,0.92)) 84%, transparent); color: var(--ac-caption-fg, #111827); backdrop-filter: blur(12px); box-shadow: 0 10px 24px rgba(15,23,42,0.16); opacity: 0; transform: translateY(10px); transition: opacity .24s ease, transform .24s ease; pointer-events: none; }
+.ac2-image:hover .ac2-caption, .ac2-image:focus-within .ac2-caption{ opacity:1; transform: translateY(0); pointer-events:auto; }
