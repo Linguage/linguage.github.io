@@ -1,0 +1,2899 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>书签 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251024-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251024-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251024-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251024-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251024-01" />
+  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251024-01" />
+  <link rel="stylesheet" href="/css/sociallink.css?v=20251024-01" />
+  <link rel="stylesheet" href="/css/social-popup.css?v=20251024-01" />
+  
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = { corePlugins: { preflight: false } };
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251024-01" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="书签"><meta property="og:description" content=" Builder Kevin Weil 直面 OpenAI 前线的产品更新心得。 Builder Christopher Petregal 分享面向开发者的 AI 产品构建经验。 Builder Nan Yu 解析 Linear 团队在 AI 时代的产品实践。 Builder Raiza Martin 回顾 NotebookLM 打造知识助手的心得。 …"><meta property="og:url" content="https://linguage.github.io/bookmarks/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="书签"><meta name="twitter:description" content=" Builder Kevin Weil 直面 OpenAI 前线的产品更新心得。 Builder Christopher Petregal 分享面向开发者的 AI 产品构建经验。 Builder Nan Yu 解析 Linear 团队在 AI 时代的产品实践。 Builder Raiza Martin 回顾 NotebookLM 打造知识助手的心得。 …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/bookmarks/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/paul_graham/" class="nav-link ">Paul Graham</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+          
+            <a href="/about/" class="nav-link ">关于我</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/paul_graham/">Paul Graham</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/about/">关于我</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  <nav aria-label="Breadcrumb" class="breadcrumbs" style="margin:14px 0 8px;">
+    <button id="mobileNavBtn" class="mobile-nav-btn" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+    
+    
+      
+        
+        
+          
+          <a href="/" class="crumb-anc">首页</a>
+        
+        <span class="crumb-sep">/</span>
+      
+      <a href="/bookmarks/" class="crumb-sec">书签</a>
+    
+    
+  </nav>
+
+  
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar" aria-label="Sections">
+      
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+
+
+
+
+
+        </nav>
+      
+    </aside>
+
+    
+    <article class="docs-content">
+      <div class="prose">
+        
+        
+        
+          
+        
+        
+          <h1>书签</h1>
+        
+        <div><div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=scsW6_2SPC4">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/scsW6_2SPC4/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Kevin Weil</div>
+    <div class="text-sm opacity-85">直面 OpenAI 前线的产品更新心得。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=qq3x23MfxkI">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/qq3x23MfxkI/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Christopher Petregal</div>
+    <div class="text-sm opacity-85">分享面向开发者的 AI 产品构建经验。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=nTr21kgCFF4">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/nTr21kgCFF4/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Nan Yu</div>
+    <div class="text-sm opacity-85">解析 Linear 团队在 AI 时代的产品实践。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=sOyFpSW1Vls">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/sOyFpSW1Vls/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Raiza Martin</div>
+    <div class="text-sm opacity-85">回顾 NotebookLM 打造知识助手的心得。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=3-wVLpHGstQ">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/3-wVLpHGstQ/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Josh Woodward</div>
+    <div class="text-sm opacity-85">Google Labs 的实验性产品洞察与路线。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=IPmt8b-qLgk">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/IPmt8b-qLgk/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">Builder</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Amanda Askell</div>
+    <div class="text-sm opacity-85">深入理解 Claude 个性与对话设计理念。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@OpenAI">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/MopgmVAFV9BqlzOJ-UINtmutvEPcNe5IbKMmP_4vZZo3vnJXcZGtybUBsXaEVxkmxKyGqX9R=s160-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">官方</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">OpenAI</div>
+    <div class="text-sm opacity-85">获取最新的模型发布与产品更新。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@anthropic-ai">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/yU7Nw3k_ILrMExwbT_2cs3ubHJ5YoXjyoa18DaQhvSctZ3yDsM4uS5gYT13PTvz_2Scjyzm5=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">官方</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Anthropic</div>
+    <div class="text-sm opacity-85">Claude 与安全研究团队的官方发布。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=1O27hf17BaY&amp;list=PLqYmG7hTraZBiUr6_Qf8YTS2Oqy3OGZEj">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/1O27hf17BaY/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">官方</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Google DeepMind Podcast</div>
+    <div class="text-sm opacity-85">直击 DeepMind 的研究者访谈与案例。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@LennysPodcast">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/yhPVwBD7A8sepX4nopjSZtGIzvMepgj_Z6D9p5zVDmFXmdzMiUTwF7viR0TNdAxIsZx-ZEmH8w=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Lenny&#39;s Podcast</div>
+    <div class="text-sm opacity-85">产品管理顶级播客，洞见 AI 与增长策略。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@PeterYangYT">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/ytc/AIdro_l_IF4JX1ajdmCWycvhMs0EJiDfUtKdy6uWDgMp=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Peter Yang</div>
+    <div class="text-sm opacity-85">前 Instagram PM 谈产品、AI 与社区。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@EveryInc">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/VQZpIyC7ZEaA6u3BFeRJmClu7Yw39Q_KzPvwiET7xM_w36-LELWtY4ROTuJRBkXtX9PfzVN-WKs=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">AI and I</div>
+    <div class="text-sm opacity-85">探讨 AI 如何改变创业与商业模式。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@RedpointAI">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/vdMrb-yV8hcfFA1C8FSnKIYIM9kkk0PrIbPk5ok8LU0deLYgZGmGZFrHudTxkuqf8wGo3gNJ3g=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Unsupervised Learning</div>
+    <div class="text-sm opacity-85">红点资本视角的 AI 创业与投资动态。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/XN-lOEnNyDGPNK6RN9uLsAEz7TtLgorZoOlrar6uSIW1W4CEb02oW3IZcn1IYdduiAmufGnksQ=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Training Data</div>
+    <div class="text-sm opacity-85">红杉资本出品的 AI 创业案例访谈。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=TmWcsvjJG7E&amp;list=PLmYVYFmFwGm3txxUduawn7i53C5rDjjd7">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/TmWcsvjJG7E/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Minus One</div>
+    <div class="text-sm opacity-85">创业者视角剖析 AI 产品落地的挑战。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=8Je9HzxYfm8&amp;list=PLM4u6XbiXf5rnUvH5NLdV_It2QLgbHBDZ&amp;index=2">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/8Je9HzxYfm8/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">AI &#43; a16z</div>
+    <div class="text-sm opacity-85">a16z 团队的 AI 投资观点与案例分析。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=l8fG5DcjucA&amp;list=PLMKa0PxGwad7jf8hwwX8w5FHitXZ1L_h1">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/l8fG5DcjucA/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">No Priors</div>
+    <div class="text-sm opacity-85">面向技术创始人的 AI 讨论节目。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@LatentSpacePod">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/4JuXB-PHVGhzv_tjCYmybSjOzhs6F6z_z6Ul1QOzKgxRgY1zZzQ1Qpod0Eq2jiSVi8grrV8B_g=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Latent Space</div>
+    <div class="text-sm opacity-85">面向 AI 工程师的深度访谈节目。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@lexfridman">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/ytc/AIdro_lTDHUWmWTwAxlC5xoUExD7JipgMxyfq0NV1kp9=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Lex Fridman Podcast</div>
+    <div class="text-sm opacity-85">MIT 研究员主持的长篇对话，覆盖 AI 前沿。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=kWcPg8t1kJ4&amp;list=PLd7-bHaQwnthaNDpZ32TtYONGVk95-fhF">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/kWcPg8t1kJ4/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">播客</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Dwarkesh Podcast</div>
+    <div class="text-sm opacity-85">高质量技术访谈，涵盖 AI、物理与经济学。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@AIDailyBrief">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/kWYy6T8SdHO-V11KgFDU6OjOJ6nESl5M5CEthnpi9bWjBvK6oickZC1hPs8sB5K69D_TKAQkqQ=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">资讯</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">The AI Daily Brief</div>
+    <div class="text-sm opacity-85">AI 行业的每日重点资讯精选。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=ShYKkPPhOoc&amp;list=PLQ-uHSnFig5Ob4XXhgSK26Smb4oRhzFmK">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/ShYKkPPhOoc/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">资讯</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Lightcone Podcast</div>
+    <div class="text-sm opacity-85">YC 出品的创业与 AI 实战讨论。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=BJjsfNO5JTo&amp;list=PLQ-uHSnFig5M9fW16o2l35jrfdsxGknNB">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/BJjsfNO5JTo/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大会</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">YC Startup School</div>
+    <div class="text-sm opacity-85">YC 创业学校分享会，涵盖工具与运营。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=U-fMsbY-kHY">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/U-fMsbY-kHY/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大会</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">AI Engineers World Fair</div>
+    <div class="text-sm opacity-85">AI 工程师全球盛会，聚焦实战经验。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=v9JBMnxuPX8&amp;list=PLOhHNjZItNnMEqGLRWkKjaMcdSJptkR08">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/v9JBMnxuPX8/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大会</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Sequoia AI Ascent</div>
+    <div class="text-sm opacity-85">红杉资本 AI 峰会，洞悉投融资趋势。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=ONIexChUpuw&amp;list=PLcoWp8pBTM3CYTQho8i-a_lzx4cq7-ePh">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/ONIexChUpuw/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大会</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Stripe Sessions</div>
+    <div class="text-sm opacity-85">Stripe 技术分享，聚焦支付与 AI 创新。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/watch?v=5q8YAUTYAyk&amp;list=PLXDU_eVOJTx6rKQR1JEIktXodeHUawC_T">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://i.ytimg.com/vi/5q8YAUTYAyk/hqdefault.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大会</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Figma Config</div>
+    <div class="text-sm opacity-85">Figma 设计大会的生成式设计工具演示。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@rileybrownai">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/zNDpuD0G4EICvGQkGuc4X9vZ1k0EUjt0Rb-4dc9BZCvtZqO7soq4GUGECso4OaJTIaKuwlsV4A=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">教程</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Riley Brown</div>
+    <div class="text-sm opacity-85">亲手操作各类 AI 工具的实战教程。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@GregIsenberg">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/WKbhmycl1en0LZ8966GmaqtSYpoFV3RQnxy9F6f5PA0Wqk6NA-PICjgGLgbSFx2zPFgaZtygnA=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">教程</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Greg Isenberg</div>
+    <div class="text-sm opacity-85">从创业者视角拆解 AI 增长策略。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@rasmic">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/8lW6eq6BSpnYiaCyC8jhov1ThDyLoZCH5Rwu_aowpJe_VuJgdJRb_png-ow9XPplBtckJytgsFE=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">教程</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Ras Mic</div>
+    <div class="text-sm opacity-85">深度测评各种生成式 AI 工具与工作流。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@realmckaywrigley">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/SZkzYsJjXz81gtW_yXAbewL4Vg5dbaP5sbqa0kFpigDRCl-lqnogyFyreJx2ZYL7urxK_S3A=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">教程</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Mckay Wrigley</div>
+    <div class="text-sm opacity-85">演示如何快速构建 AI 应用与助手。</div>
+    
+  </div>
+</div>
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<a class="illustcard-link block no-underline text-[inherit]" href="https://youtube.com/@AndrejKarpathy">
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://yt3.googleusercontent.com/ytc/AIdro_n9Z1D_cuTjmEG0PikuJnGaDNiAbrXTJERsJmB8=s176-c-k-c0x00ffffff-no-rj" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    <div class="text-xs px-2 py-0.5 rounded-full border w-fit opacity-80">大师</div>
+    <div class="font-sans font-semibold text-lg md:text-xl">Andrej Karpathy</div>
+    <div class="text-sm opacity-85">深度学习权威分享基础设施与前沿课程。</div>
+    
+  </div>
+</div>
+</a>
+
+</div>
+</div>
+
+        
+        
+        
+
+        
+          <ul>
+            
+          </ul>
+        
+      </div>
+    </article>
+
+    
+    
+    
+    
+    
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <nav class="toc">
+          <nav id="TableOfContents"></nav>
+        </nav>
+      </aside>
+    
+  </div>
+
+  
+  
+    <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+    <div id="tocDrawer" class="toc-drawer" hidden>
+      <div class="toc-drawer-inner">
+        <div class="toc-drawer-header">
+          <span>目录</span>
+        </div>
+        <nav class="toc"><nav id="TableOfContents"></nav></nav>
+      </div>
+    </div>
+  
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251024-01" defer></script>
+  <script defer src="/js/search-core.js?v=20251024-01"></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251024-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251024-01';
+  </script>
+  <script src="/js/search-advanced.js?v=20251024-01" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251024-01"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251024-01"></script>
+  <script defer src="/js/table-tooltips.js?v=20251024-01"></script>
+  <script defer src="/js/social-popup.js?v=20251024-01"></script>
+  
+  
+  
+  
+  <div id="social-popup-overlay" aria-hidden="true">
+  <div class="social-popup-card" role="dialog" aria-modal="true" aria-labelledby="social-popup-title" aria-describedby="social-popup-desc">
+    <button class="social-popup-close" type="button" aria-label="关闭">×</button>
+    <img class="social-popup-image" src="" alt="" />
+    <div class="social-popup-title" id="social-popup-title"></div>
+    <div class="social-popup-desc" id="social-popup-desc"></div>
+  </div>
+</div>
+
+  
+</body>
+</html>
