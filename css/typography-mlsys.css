@@ -45,7 +45,7 @@ html[data-theme="dark"] .hero {
 
 /* H2: panel with soft background (has bottom tint and rounded corners) */
 
-.container h2 {
+:is(.container, .prose) h2 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ html[data-theme="dark"] .hero {
   color: var(--heading-h2-color, #14532d);
 }
 
-.container h2 .anchor-link {
+:is(.container, .prose) h2 .anchor-link {
   position: absolute;
   top: 50%;
   right: clamp(16px, 3vw, 48px);
@@ -71,13 +71,13 @@ html[data-theme="dark"] .hero {
   transition: opacity .2s ease, color .2s ease;
 }
 
-.container h2:hover .anchor-link,
-.container h2 .anchor-link:focus {
+:is(.container, .prose) h2:hover .anchor-link,
+:is(.container, .prose) h2 .anchor-link:focus {
   opacity: 1;
   color: var(--heading-h2-color, #14532d);
 }
 
-.container h2::after {
+:is(.container, .prose) h2::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -89,7 +89,7 @@ html[data-theme="dark"] .hero {
   border-radius: 999px;
 }
 
-.container h2::before {
+:is(.container, .prose) h2::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -101,27 +101,39 @@ html[data-theme="dark"] .hero {
   opacity: 0.85;
 }
 
-.container h2 a { color: var(--brand-accent, #0e6a85); }
-.container h2 a:visited { color: var(--brand-accent-visited, #094c60); }
+:is(.container, .prose) h2 a { color: var(--brand-accent, #0e6a85); }
+:is(.container, .prose) h2 a:visited { color: var(--brand-accent-visited, #094c60); }
 
-html[data-theme="dark"] .container h2 {
+html[data-theme="dark"] :is(.container, .prose) h2 {
   --heading-h2-color: rgba(230,219,116,1);
   color: var(--heading-h2-color);
 }
 
-html[data-theme="dark"] .container h2 a { color: var(--gold); }
-html[data-theme="dark"] .container h2 a:visited { color: rgba(230,219,116,0.85); }
+html[data-theme="dark"] .prose h2,
+html[data-theme="dark"] .container h2 {
+  color: rgba(230,219,116,1);
+}
+
+html[data-theme="dark"] :is(.container, .prose) h2 a { color: var(--gold); }
+html[data-theme="dark"] :is(.container, .prose) h2 a:visited { color: rgba(230,219,116,0.85); }
 
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme]) .container h2 {
+  :root:not([data-theme]) :is(.container, .prose) h2 {
     --heading-h2-color: rgba(230,219,116,1);
     color: var(--heading-h2-color);
   }
 }
 
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme]) .container h2 a { color: var(--gold); }
-  :root:not([data-theme]) .container h2 a:visited { color: rgba(230,219,116,0.85); }
+  :root:not([data-theme]) :is(.container, .prose) h2 a { color: var(--gold); }
+  :root:not([data-theme]) :is(.container, .prose) h2 a:visited { color: rgba(230,219,116,0.85); }
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]) .prose h2,
+  :root:not([data-theme]) .container h2 {
+    color: rgba(230,219,116,1);
+  }
 }
 
 .container h3 {
