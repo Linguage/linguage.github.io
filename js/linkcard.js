@@ -16,6 +16,23 @@
     return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   }
 
+  function renderCard(el, url, data) {
+    el.innerHTML = '';
+    el.appendChild(createCard({ url, data }));
+    el.classList.add('link-card--ready');
+  }
+
+  function renderPlaceholder(el, url) {
+    const host = (() => {
+      try { return new URL(url).hostname; } catch { return url; }
+    })();
+    renderCard(el, url, {
+      title: host,
+      description: url,
+      publisher: host
+    });
+  }
+
   function createCard({ url, data }) {
     const { title, description, publisher, image, logo } = data || {};
     const a = document.createElement('a');
@@ -98,11 +115,11 @@
 
     const titleEl = document.createElement('div');
     titleEl.className = 'link-card__title text-base font-semibold text-[var(--lc-title,#111827)] line-clamp-2 transition-colors duration-150 group-hover/link-card:text-[var(--lc-title-hover,#0f172a)]';
-    titleEl.textContent = title || '';
+    titleEl.textContent = title || host;
 
     const descEl = document.createElement('div');
     descEl.className = 'link-card__desc text-sm text-[var(--lc-desc,rgba(55,65,81,0.88))] line-clamp-2';
-    descEl.textContent = description || '';
+    descEl.textContent = description || url;
 
     body.appendChild(siteEl);
     body.appendChild(titleEl);
@@ -121,12 +138,12 @@
       const res = await fetch(API + encodeURIComponent(url));
       const json = await res.json();
       if (json && json.status === 'success' && json.data) {
-        el.innerHTML = '';
-        el.appendChild(createCard({ url, data: json.data }));
-        el.classList.add('link-card--ready');
+        renderCard(el, url, json.data);
+      } else {
+        renderPlaceholder(el, url);
       }
     } catch (e) {
-      // 失败时保留 fallback 超链接
+      renderPlaceholder(el, url);
     }
   }
 
