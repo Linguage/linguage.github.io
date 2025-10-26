@@ -19,44 +19,94 @@
   function createCard({ url, data }) {
     const { title, description, publisher, image, logo } = data || {};
     const a = document.createElement('a');
-    a.className = 'link-card__inner';
+    const host = (() => {
+      try { return new URL(url).hostname; } catch { return url; }
+    })();
+
+    a.className = [
+      'link-card__inner',
+      'group/link-card',
+      'flex',
+      'flex-col',
+      'gap-4',
+      'px-4',
+      'py-3',
+      'transition-colors',
+      'duration-150',
+      'sm:flex-row',
+      'sm:items-center'
+    ].join(' ');
     // Always prefer the original input URL to avoid being hijacked by stale canonical/og:url
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener';
 
-    const host = (() => {
-      try { return new URL(url).hostname; } catch { return url; }
-    })();
-
     const media = document.createElement('div');
-    media.className = 'link-card__media';
+    media.className = [
+      'link-card__media',
+      'grid',
+      'place-items-center',
+      'relative',
+      'h-[84px]',
+      'w-[84px]',
+      'flex-shrink-0',
+      'overflow-hidden',
+      'rounded-xl',
+      'bg-[var(--lc-media-bg,rgba(15,23,42,0.06))]',
+      'sm:h-[84px]',
+      'sm:w-[84px]'
+    ].join(' ');
     const img = document.createElement('img');
     img.alt = '';
     // 固定尺寸，避免 CLS；与 CSS 方形缩略图匹配
     img.width = 84; img.height = 84;
+    img.className = 'block h-full w-full object-cover object-center transition-transform duration-200 group-hover/link-card:scale-[1.02]';
 
     const primary = (image && image.url) ? image.url : (logo && logo.url ? logo.url : '');
     const fallFavicon = faviconFromHost(host);
+
+    if (primary) {
+      img.addEventListener('load', () => {
+        media.style.background = 'transparent';
+      });
+    }
+
+    const applyFallbackBackground = () => {
+      media.style.removeProperty('background');
+    };
+
     img.src = primary || fallFavicon || placeholderSVG(host[0]);
     img.onerror = function () {
       // 第一次失败，尝试 favicon；若已是 favicon 再失败，换占位 SVG
       if (this.dataset.state !== 'favicon') {
         this.dataset.state = 'favicon';
+        applyFallbackBackground();
         this.src = fallFavicon || placeholderSVG(host[0]);
       } else {
+        applyFallbackBackground();
         this.src = placeholderSVG(host[0]);
       }
     };
     media.appendChild(img);
 
     const body = document.createElement('div');
-    body.className = 'link-card__body';
-    body.innerHTML = `
-      <div class="link-card__site">${publisher || host}</div>
-      <div class="link-card__title">${title || ''}</div>
-      <div class="link-card__desc">${description || ''}</div>
-    `;
+    body.className = 'link-card__body min-w-0 flex flex-col gap-2';
+
+    const siteEl = document.createElement('div');
+    siteEl.className = 'link-card__site text-xs uppercase tracking-wide text-[var(--lc-site,rgba(107,114,128,0.78))]';
+    siteEl.textContent = publisher || host;
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'link-card__title text-base font-semibold text-[var(--lc-title,#111827)] line-clamp-2 transition-colors duration-150 group-hover/link-card:text-[var(--lc-title-hover,#0f172a)]';
+    titleEl.textContent = title || '';
+
+    const descEl = document.createElement('div');
+    descEl.className = 'link-card__desc text-sm text-[var(--lc-desc,rgba(55,65,81,0.88))] line-clamp-2';
+    descEl.textContent = description || '';
+
+    body.appendChild(siteEl);
+    body.appendChild(titleEl);
+    body.appendChild(descEl);
 
     a.appendChild(media);
     a.appendChild(body);

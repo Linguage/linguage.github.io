@@ -33,7 +33,21 @@
   
   <script>
     window.tailwind = window.tailwind || {};
-    tailwind.config = { corePlugins: { preflight: false } };
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
   </script>
   <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
   
@@ -152,6 +166,10 @@
           
         
           
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
             <a href="/about/" class="nav-link ">关于我</a>
           
         
@@ -225,6 +243,9 @@
           
         
           <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
           
         
           <a class="nav-drawer-item" href="/about/">关于我</a>
@@ -3140,8 +3161,16 @@
 
       
       <p>→ <a href="/paul_graham/essays_en/gba/">English Version</a></p>
-<div class="link-card" data-url="https://www.paulgraham.com/gba.html">
-  <a class="link-card__fallback" href="https://www.paulgraham.com/gba.html" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://www.paulgraham.com/gba.html"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://www.paulgraham.com/gba.html"
+    target="_blank"
+    rel="noopener"
+  >
     https://www.paulgraham.com/gba.html
   </a>
 </div>

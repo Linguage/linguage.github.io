@@ -33,7 +33,21 @@
   
   <script>
     window.tailwind = window.tailwind || {};
-    tailwind.config = { corePlugins: { preflight: false } };
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
   </script>
   <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
   
@@ -152,6 +166,10 @@
           
         
           
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
             <a href="/about/" class="nav-link ">关于我</a>
           
         
@@ -225,6 +243,9 @@
           
         
           <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
           
         
           <a class="nav-drawer-item" href="/about/">关于我</a>
@@ -437,20 +458,44 @@
               <h3 style="margin:0 0 6px 0;"><a href="/labs/static/">杂志社</a></h3>
               <div class="summary"><p>该部分收录直接经过渲染的静态HTML文件，其中多位基于大模型提示词生成的交互式报告，采用的大模型包括Claude Sonnet、 Gemini(Canvas)、 Kimi、DeepSeek等，一方面为了提供充满设计感的阅读体验，另一方面也是为了测试语言模型在前端代码生成方面的能力。</p>
 <p><strong>最后更新</strong>: 2025-10-16</p>
-<div class="link-card" data-url="https://linguage.github.io/articles/AI_capital_bubble_silicon_valley_101.html">
-  <a class="link-card__fallback" href="https://linguage.github.io/articles/AI_capital_bubble_silicon_valley_101.html" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://linguage.github.io/articles/AI_capital_bubble_silicon_valley_101.html"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://linguage.github.io/articles/AI_capital_bubble_silicon_valley_101.html"
+    target="_blank"
+    rel="noopener"
+  >
     https://linguage.github.io/articles/AI_capital_bubble_silicon_valley_101.html
   </a>
 </div>
 
-<div class="link-card" data-url="https://linguage.github.io/articles/steve_jobs_monopoly_90s.html">
-  <a class="link-card__fallback" href="https://linguage.github.io/articles/steve_jobs_monopoly_90s.html" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://linguage.github.io/articles/steve_jobs_monopoly_90s.html"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://linguage.github.io/articles/steve_jobs_monopoly_90s.html"
+    target="_blank"
+    rel="noopener"
+  >
     https://linguage.github.io/articles/steve_jobs_monopoly_90s.html
   </a>
 </div>
 
-<div class="link-card" data-url="https://linguage.github.io/articles/tim_content_guide.html">
-  <a class="link-card__fallback" href="https://linguage.github.io/articles/tim_content_guide.html" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://linguage.github.io/articles/tim_content_guide.html"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://linguage.github.io/articles/tim_content_guide.html"
+    target="_blank"
+    rel="noopener"
+  >
     https://linguage.github.io/articles/tim_content_guide.html
   </a>
 </div></div>

@@ -33,7 +33,21 @@
   
   <script>
     window.tailwind = window.tailwind || {};
-    tailwind.config = { corePlugins: { preflight: false } };
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
   </script>
   <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
   
@@ -152,6 +166,10 @@
           
         
           
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
             <a href="/about/" class="nav-link ">关于我</a>
           
         
@@ -225,6 +243,9 @@
           
         
           <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
           
         
           <a class="nav-drawer-item" href="/about/">关于我</a>
@@ -476,8 +497,16 @@
 <p><em>动物可能是一个很好的灵感来源。内在动机、乐趣、好奇心、赋能、多智能体自我博弈、文化。</em></p></blockquote>
 <p>Andrej Karpathy在本文中探讨了人工智能领域中“动物”智能与大语言模型（“幽灵”）的差异，反思了学习机制、进化和预训练的本质，并提出动物或许能为AI带来新的灵感和范式。</p>
 <p><img src="https://ts1.tc.mm.bing.net/th/id/R-C.5b6ee267317d44b17842e771033bc7f4?rik=U6xjpiLj2AM6Mw&amp;riu=http%3a%2f%2fn.sinaimg.cn%2fsinakd20117%2f762%2fw1000h562%2f20230516%2f61f2-929bc75cae6683aec311ff02b0528b5e.jpg&amp;ehk=YX8liBBPYwNpcJkyffP6ne%2b5uHTTJzeDIJnnV%2f%2fKEPM%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt=""></p>
-<div class="link-card" data-url="https://karpathy.bearblog.dev/animals-vs-ghosts/">
-  <a class="link-card__fallback" href="https://karpathy.bearblog.dev/animals-vs-ghosts/" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://karpathy.bearblog.dev/animals-vs-ghosts/"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://karpathy.bearblog.dev/animals-vs-ghosts/"
+    target="_blank"
+    rel="noopener"
+  >
     https://karpathy.bearblog.dev/animals-vs-ghosts/
   </a>
 </div>

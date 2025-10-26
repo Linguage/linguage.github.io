@@ -33,7 +33,21 @@
   
   <script>
     window.tailwind = window.tailwind || {};
-    tailwind.config = { corePlugins: { preflight: false } };
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
   </script>
   <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
   
@@ -152,6 +166,10 @@
           
         
           
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
             <a href="/about/" class="nav-link ">关于我</a>
           
         
@@ -225,6 +243,9 @@
           
         
           <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
           
         
           <a class="nav-drawer-item" href="/about/">关于我</a>
@@ -429,8 +450,16 @@
 <p>海明威：是的，他们有更多的钱。</p></blockquote>
 <p>本文是 P. W. Anderson 1972年8月4日发表在《科学》杂志上的<a href="https://www.science.org/doi/10.1126/science.177.4047.393">经典文章</a>。文章揭示了随着系统内部元素数量和复杂度的增加，整体将展现出前所未有的新性质，而且这些性质无法通过对单个部分的还原推理简单获得——整体不仅仅是部分之和。</p>
 <p><img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.57CYZEEkNt2jUuyBtSiF5wHaJ9?cb=12&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3s" alt=""></p>
-<div class="link-card" data-url="https://www.science.org/doi/10.1126/science.177.4047.393">
-  <a class="link-card__fallback" href="https://www.science.org/doi/10.1126/science.177.4047.393" target="_blank" rel="noopener">
+<div
+  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+  data-url="https://www.science.org/doi/10.1126/science.177.4047.393"
+>
+  <a
+    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+    href="https://www.science.org/doi/10.1126/science.177.4047.393"
+    target="_blank"
+    rel="noopener"
+  >
     https://www.science.org/doi/10.1126/science.177.4047.393
   </a>
 </div>
