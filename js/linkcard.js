@@ -1,5 +1,8 @@
 (function () {
   const API = 'https://api.microlink.io/?audio=false&video=false&screenshot=false&palette=false&meta=true&url=';
+  const MAX_PARALLEL = 4;
+  const MAX_RETRIES = 3;
+  const RETRY_BASE_DELAY = 600;
 
   function faviconFromHost(host) {
     if (!host) return '';
@@ -31,6 +34,36 @@
       description: url,
       publisher: host
     });
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function fetchMetadataWithRetry(url) {
+    let lastError;
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      try {
+        const res = await fetch(API + encodeURIComponent(url));
+        if (!res.ok) {
+          lastError = new Error(`HTTP ${res.status}`);
+        } else {
+          const json = await res.json();
+          if (json && json.status === 'success' && json.data) {
+            return json.data;
+          }
+          lastError = new Error((json && (json.error?.code || json.status)) || 'microlink_error');
+        }
+      } catch (error) {
+        lastError = error;
+      }
+
+      if (attempt < MAX_RETRIES - 1) {
+        await sleep(RETRY_BASE_DELAY * (attempt + 1));
+      }
+    }
+
+    throw lastError;
   }
 
   function createCard({ url, data }) {
@@ -135,20 +168,35 @@
     if (!url) return;
 
     try {
-      const res = await fetch(API + encodeURIComponent(url));
-      const json = await res.json();
-      if (json && json.status === 'success' && json.data) {
-        renderCard(el, url, json.data);
-      } else {
-        renderPlaceholder(el, url);
-      }
+      const data = await fetchMetadataWithRetry(url);
+      renderCard(el, url, data);
     } catch (e) {
       renderPlaceholder(el, url);
     }
   }
 
   function init() {
-    document.querySelectorAll('.link-card').forEach(enhance);
+    const elements = Array.from(document.querySelectorAll('.link-card'));
+    if (!elements.length) return;
+
+    let cursor = 0;
+    let active = 0;
+
+    const next = () => {
+      if (cursor >= elements.length) return;
+      while (active < MAX_PARALLEL && cursor < elements.length) {
+        const el = elements[cursor++];
+        active++;
+        enhance(el)
+          .catch(() => {})
+          .finally(() => {
+            active--;
+            next();
+          });
+      }
+    };
+
+    next();
   }
 
   if (document.readyState === 'loading') {
