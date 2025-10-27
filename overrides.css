@@ -1097,3 +1097,41 @@ html[data-theme="dark"] .mini-title{ color: rgba(230,219,116,1) !important; }
 .iconcard-mini .mini-media-thumb{ font-size:2.25rem; border-radius: inherit; background: var(--surface, transparent); display:grid; place-items:center; }
 .iconcard-mini .mini-desc,
 .iconcard-mini .mini-title{ width:var(--mini-size); }
+
+/* ========================================= */
+/* Sibling prev/next cards                    */
+/* ========================================= */
+.sibling-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0 6px;
+}
+
+.sibling-card{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+.sibling-card:hover,
+.sibling-card:focus-visible{ border-color: rgba(0,0,0,.12); box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+
+.sibling-card-arrow{ color: var(--muted); font-size: 18px; line-height: 1; }
+.sibling-card-main{ display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sibling-card-title{ font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sibling-card-meta{ color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Make the next card content right-aligned to mirror layout */
+.sibling-card.next .sibling-card-main{ align-items: flex-end; text-align: right; }
+
+@media (max-width: 900px){
+  .sibling-cards{ grid-template-columns: 1fr; }
+}
