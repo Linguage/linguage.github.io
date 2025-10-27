@@ -1129,8 +1129,10 @@ html[data-theme="dark"] .mini-title{ color: rgba(230,219,116,1) !important; }
 .sibling-card-title{ font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sibling-card-meta{ color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Make the next card content right-aligned to mirror layout */
-.sibling-card.next .sibling-card-main{ align-items: flex-end; text-align: right; }
+  /* Make the next card content right-aligned to mirror layout */
+  .sibling-card.next .sibling-card-main{ margin-left: auto; align-items: flex-end; text-align: right; }
+  .sibling-card.next .sibling-card-title,
+  .sibling-card.next .sibling-card-meta{ text-align: right; }
 
 @media (max-width: 900px){
   .sibling-cards{ grid-template-columns: 1fr; }
