@@ -203,9 +203,11 @@ function syncGiscusTheme(theme){
 
 function updateThemeToggleIcon(){
   if (!themeToggleBtn) return;
-  const manual = document.documentElement.dataset.theme || null;
+  const root = document.documentElement;
+  const manual = root.dataset.themeManual === 'true';
+  const manualTheme = manual ? (root.dataset.theme || null) : null;
   const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
-  const effectiveDark = manual ? manual === 'dark' : prefersDark;
+  const effectiveDark = manual ? manualTheme === 'dark' : prefersDark;
   themeToggleBtn.textContent = effectiveDark ? THEME_ICON_DARK : THEME_ICON_LIGHT;
   themeToggleBtn.setAttribute('aria-label','切换主题');
   themeToggleBtn.setAttribute('title','切换主题');
@@ -213,13 +215,25 @@ function updateThemeToggleIcon(){
 
 function applyThemePreference(theme){
   const root = document.documentElement;
-  if (theme === 'light' || theme === 'dark'){
-    root.dataset.theme = theme;
+  const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
+  const manual = (theme === 'light' || theme === 'dark');
+  const effective = manual ? theme : (prefersDark ? 'dark' : 'light');
+
+  if (effective === 'dark'){
+    root.dataset.theme = 'dark';
+  } else if (manual){
+    root.dataset.theme = 'light';
   } else {
     delete root.dataset.theme;
   }
+
+  if (manual){
+    root.dataset.themeManual = 'true';
+  } else {
+    delete root.dataset.themeManual;
+  }
+
   updateThemeToggleIcon();
-  const effective = theme || ((themeMediaQuery && themeMediaQuery.matches) ? 'dark' : 'light');
   // Map site theme to giscus theme names
   const giscusTheme = effective === 'dark' ? 'dark' : 'light';
   syncGiscusTheme(giscusTheme);
@@ -237,12 +251,14 @@ function setThemePreference(theme){
 }
 
 function toggleThemePreference(){
-  const manual = document.documentElement.dataset.theme || null;
+  const root = document.documentElement;
+  const manual = root.dataset.themeManual === 'true';
+  const manualTheme = manual ? (root.dataset.theme || null) : null;
   const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
   let next;
   if (!manual){
     next = prefersDark ? 'light' : 'dark';
-  } else if (manual === 'dark'){
+  } else if (manualTheme === 'dark'){
     next = 'light';
   } else {
     // 当前是手动浅色。优先切到深色，若系统偏好深色则回到系统模式即可达成同样效果。
