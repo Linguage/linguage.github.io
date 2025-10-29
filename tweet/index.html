@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>tweet • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251027-02" />
+  <link rel="stylesheet" href="/overrides.css?v=20251027-02" />
+  <link rel="stylesheet" href="/css/search.css?v=20251027-02" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251027-02" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251027-02" />
+  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251027-02" />
+  <link rel="stylesheet" href="/css/sociallink.css?v=20251027-02" />
+  <link rel="stylesheet" href="/css/social-popup.css?v=20251027-02" />
+  
+  <style>:root{ --theme-breadcrumbs-height: 0px; }</style>
+  
+  
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251027-02" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="website">
+<meta property="og:title" content="tweet"><meta property="og:description" content="the blog contents."><meta property="og:url" content="https://linguage.github.io/tweet/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="tweet"><meta name="twitter:description" content="the blog contents."><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/tweet/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-99PGBGJH4S');
+  </script>
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+          
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
+            <a href="/about/" class="nav-link ">关于我</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
+          
+        
+          <a class="nav-drawer-item" href="/about/">关于我</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/tweet/tweets-2025-09-01_10-26/">推文精选（2025-09-01~10-26）</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+  
+  
+  
+
+  
+  <div class="docs-layout">
+    
+    <aside class="docs-sidebar" aria-label="Sections">
+      
+        <div class="docs-side-title">Documentation</div>
+        <nav class="docs-nav">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/tweet/tweets-2025-09-01_10-26/">推文精选（2025-09-01~10-26）</a>
+    
+  
+
+
+
+        </nav>
+      
+    </aside>
+
+    
+    <article class="docs-content">
+      <div class="prose">
+        
+        
+        
+        
+        
+
+        
+        
+        
+          
+        
+
+        
+          
+            <article style="margin: 0 0 18px 0;">
+              <h3 style="margin:0 0 6px 0;"><a href="/tweet/tweets-2025-09-01_10-26/">推文精选（2025-09-01~10-26）</a></h3>
+              <div class="summary"><div class="tweetcal collapsed pos-right">
+  <style>
+    .tweetcal{font-size:14px;color:#0f172a}
+    .tweetcal.pos-right{position:fixed;top:80px;right:28px;z-index:9999;width:auto;}
+    .tweetcal .cal-box{position:fixed; top:132px; right:20px; z-index:10000; border:1px solid rgba(15,23,42,0.12); border-radius:12px; padding:12px; background:#ffffff;width:340px;max-height:calc(100vh - 144px);overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,0.15)}
+    .tweetcal h3{margin:2px 0 8px; font-weight:700; font-size:15px;color:#0f172a}
+    .tweetcal .controls{display:flex; align-items:center; gap:8px; margin:4px 0 8px}
+    .tweetcal .controls button{border:1px solid rgba(15,23,42,0.2); background:#f8fafc; color:#0f172a; padding:4px 8px; border-radius:8px; cursor:pointer}
+    .tweetcal .controls button:hover{background:#e2e8f0}
+    .tweetcal .controls button:disabled{opacity:0.5;cursor:not-allowed}
+    .tweetcal .controls select{flex:1; padding:4px 8px; border:1px solid rgba(15,23,42,0.2); border-radius:8px; background:#f8fafc; color:#0f172a}
+    .tweetcal .month{margin-top:6px}
+    .tweetcal .month > div:first-child{font-weight:600;margin:8px 0 6px;color:#0f172a}
+    .tweetcal .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px}
+    .tweetcal .dow{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:6px; font-size:12px; color:#64748b}
+    .tweetcal .cell{display:block; width:100%; aspect-ratio:1/1; border-radius:6px; background:#e5e7eb; text-decoration:none}
+     
+    .tweetcal .cell.lvl-0{background:#e6f4ea}
+    .tweetcal .cell.lvl-1{background:#cdeccd}
+    .tweetcal .cell.lvl-2{background:#a5d6a7}
+    .tweetcal .cell.lvl-3{background:#81c784}
+    .tweetcal .cell.lvl-4{background:#66bb6a}
+    .tweetcal .cell.lvl-5{background:#2e7d32}
+    .tweetcal .legend{display:flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; color:#64748b}
+    .tweetcal .legend i{display:inline-block; width:14px; height:14px; border-radius:4px}
+    .tweetcal .tc-toggle{position:fixed;top:80px;right:28px;z-index:9999;display:inline-flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid rgba(15,23,42,0.15); border-radius:999px; background:#ffffff; color:#0f172a; cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-weight:500}
+    .tweetcal .tc-toggle:hover{box-shadow:0 4px 12px rgba(0,0,0,0.15);transform:translateY(-1px)}
+    .tweetcal.collapsed .cal-box{display:none}
+    .tweetcal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.25);z-index:9998}
+    .tweetcal-overlay.active{display:block}
+    html.dark .tweetcal,html[data-theme="dark"] .tweetcal{color:#f1f5f9}
+    html.dark .tweetcal .cal-box,html[data-theme="dark"] .tweetcal .cal-box{background:#1e293b;border-color:rgba(148,163,184,0.2)}
+    html.dark .tweetcal h3,html[data-theme="dark"] .tweetcal h3{color:#f1f5f9}
+    html.dark .tweetcal .controls button,html[data-theme="dark"] .tweetcal .controls button{background:#334155;color:#f1f5f9;border-color:rgba(148,163,184,0.3)}
+    html.dark .tweetcal .controls button:hover,html[data-theme="dark"] .tweetcal .controls button:hover{background:#475569}
+    html.dark .tweetcal .controls select,html[data-theme="dark"] .tweetcal .controls select{background:#334155;color:#f1f5f9;border-color:rgba(148,163,184,0.3)}
+    html.dark .tweetcal .month > div:first-child,html[data-theme="dark"] .tweetcal .month > div:first-child{color:#f1f5f9}
+    html.dark .tweetcal .dow,html[data-theme="dark"] .tweetcal .dow{color:#94a3b8}
+     
+    html.dark .tweetcal .cell.lvl-0,html[data-theme="dark"] .tweetcal .cell.lvl-0{background:#3a3422}
+    html.dark .tweetcal .cell.lvl-1,html[data-theme="dark"] .tweetcal .cell.lvl-1{background:#59461a}
+    html.dark .tweetcal .cell.lvl-2,html[data-theme="dark"] .tweetcal .cell.lvl-2{background:#8a6b1d}
+    html.dark .tweetcal .cell.lvl-3,html[data-theme="dark"] .tweetcal .cell.lvl-3{background:#b3861f}
+    html.dark .tweetcal .cell.lvl-4,html[data-theme="dark"] .tweetcal .cell.lvl-4{background:#d4a72c}
+    html.dark .tweetcal .cell.lvl-5,html[data-theme="dark"] .tweetcal .cell.lvl-5{background:#f2c94c}
+    html.dark .tweetcal .legend,html[data-theme="dark"] .tweetcal .legend{color:#94a3b8}
+     
+    .tweetcal .legend i.lvl-1{background:#cdeccd}
+    .tweetcal .legend i.lvl-2{background:#a5d6a7}
+    .tweetcal .legend i.lvl-3{background:#81c784}
+    .tweetcal .legend i.lvl-4{background:#66bb6a}
+    .tweetcal .legend i.lvl-5{background:#2e7d32}
+    html.dark .tweetcal .legend i.lvl-1,html[data-theme="dark"] .tweetcal .legend i.lvl-1{background:#59461a}
+    html.dark .tweetcal .legend i.lvl-2,html[data-theme="dark"] .tweetcal .legend i.lvl-2{background:#8a6b1d}
+    html.dark .tweetcal .legend i.lvl-3,html[data-theme="dark"] .tweetcal .legend i.lvl-3{background:#b3861f}
+    html.dark .tweetcal .legend i.lvl-4,html[data-theme="dark"] .tweetcal .legend i.lvl-4{background:#d4a72c}
+    html.dark .tweetcal .legend i.lvl-5,html[data-theme="dark"] .tweetcal .legend i.lvl-5{background:#f2c94c}
+    html.dark .tweetcal .tc-toggle,html[data-theme="dark"] .tweetcal .tc-toggle{background:#1e293b;color:#f1f5f9;border-color:rgba(148,163,184,0.3)}
+    html.dark .tweetcal .tc-toggle:hover,html[data-theme="dark"] .tweetcal .tc-toggle:hover{background:#334155}
+    @media (max-width:768px){
+      .tweetcal.pos-right{top:68px; right:12px}
+      .tweetcal .tc-toggle{top:68px; right:12px; padding:6px 10px; font-size:13px}
+      .tweetcal .cal-box{top:112px; right:8px; width:calc(100vw - 16px); max-width:360px}
+    }
+  </style>
+
+  <div class="tweetcal-overlay"></div>
+
+  <button class="tc-toggle" type="button" aria-expanded="false">📅 推文日历</button>
+  <div class="cal-box" data-b64="W3siZGF0ZSI6IjIwMjUtMDktMDEiLCJjb3VudCI6MTR9LHsiZGF0ZSI6IjIwMjUtMDktMDIiLCJjb3VudCI6MTF9LHsiZGF0ZSI6IjIwMjUtMDktMDMiLCJjb3VudCI6MTV9LHsiZGF0ZSI6IjIwMjUtMDktMDQiLCJjb3VudCI6N30seyJkYXRlIjoiMjAyNS0wOS0wNSIsImNvdW50IjoxNn0seyJkYXRlIjoiMjAyNS0wOS0wNiIsImNvdW50IjoxfSx7ImRhdGUiOiIyMDI1LTA5LTA3IiwiY291bnQiOjZ9LHsiZGF0ZSI6IjIwMjUtMDktMDgiLCJjb3VudCI6NTN9LHsiZGF0ZSI6IjIwMjUtMDktMDkiLCJjb3VudCI6Mjl9LHsiZGF0ZSI6IjIwMjUtMDktMTAiLCJjb3VudCI6MTN9LHsiZGF0ZSI6IjIwMjUtMDktMTEiLCJjb3VudCI6Mjd9LHsiZGF0ZSI6IjIwMjUtMDktMTIiLCJjb3VudCI6MTJ9LHsiZGF0ZSI6IjIwMjUtMDktMTMiLCJjb3VudCI6MTB9LHsiZGF0ZSI6IjIwMjUtMDktMTQiLCJjb3VudCI6MTJ9LHsiZGF0ZSI6IjIwMjUtMDktMTUiLCJjb3VudCI6MTJ9LHsiZGF0ZSI6IjIwMjUtMDktMTYiLCJjb3VudCI6MTZ9LHsiZGF0ZSI6IjIwMjUtMDktMTciLCJjb3VudCI6Mjl9LHsiZGF0ZSI6IjIwMjUtMDktMTgiLCJjb3VudCI6OH0seyJkYXRlIjoiMjAyNS0wOS0xOSIsImNvdW50IjoxM30seyJkYXRlIjoiMjAyNS0wOS0yMCIsImNvdW50Ijo2fSx7ImRhdGUiOiIyMDI1LTA5LTIxIiwiY291bnQiOjI0fSx7ImRhdGUiOiIyMDI1LTA5LTIyIiwiY291bnQiOjI1fSx7ImRhdGUiOiIyMDI1LTA5LTIzIiwiY291bnQiOjI1fSx7ImRhdGUiOiIyMDI1LTA5LTI0IiwiY291bnQiOjIxfSx7ImRhdGUiOiIyMDI1LTA5LTI1IiwiY291bnQiOjl9LHsiZGF0ZSI6IjIwMjUtMDktMjYiLCJjb3VudCI6MTd9LHsiZGF0ZSI6IjIwMjUtMDktMjciLCJjb3VudCI6NTJ9LHsiZGF0ZSI6IjIwMjUtMDktMjgiLCJjb3VudCI6MzB9LHsiZGF0ZSI6IjIwMjUtMDktMjkiLCJjb3VudCI6Mjh9LHsiZGF0ZSI6IjIwMjUtMDktMzAiLCJjb3VudCI6Mjd9LHsiZGF0ZSI6IjIwMjUtMTAtMDEiLCJjb3VudCI6MjZ9LHsiZGF0ZSI6IjIwMjUtMTAtMDIiLCJjb3VudCI6OH0seyJkYXRlIjoiMjAyNS0xMC0wMyIsImNvdW50IjozNn0seyJkYXRlIjoiMjAyNS0xMC0wNCIsImNvdW50IjoyN30seyJkYXRlIjoiMjAyNS0xMC0wNSIsImNvdW50Ijo0N30seyJkYXRlIjoiMjAyNS0xMC0wNiIsImNvdW50IjoyOH0seyJkYXRlIjoiMjAyNS0xMC0wNyIsImNvdW50IjoxM30seyJkYXRlIjoiMjAyNS0xMC0wOCIsImNvdW50IjoyOX0seyJkYXRlIjoiMjAyNS0xMC0wOSIsImNvdW50IjoyMX0seyJkYXRlIjoiMjAyNS0xMC0xMCIsImNvdW50IjoyOH0seyJkYXRlIjoiMjAyNS0xMC0xMSIsImNvdW50Ijo0OX0seyJkYXRlIjoiMjAyNS0xMC0xMiIsImNvdW50Ijo0fSx7ImRhdGUiOiIyMDI1LTEwLTEzIiwiY291bnQiOjI0fSx7ImRhdGUiOiIyMDI1LTEwLTE0IiwiY291bnQiOjM0fSx7ImRhdGUiOiIyMDI1LTEwLTE1IiwiY291bnQiOjMxfSx7ImRhdGUiOiIyMDI1LTEwLTE2IiwiY291bnQiOjUyfSx7ImRhdGUiOiIyMDI1LTEwLTE3IiwiY291bnQiOjc3fSx7ImRhdGUiOiIyMDI1LTEwLTE4IiwiY291bnQiOjgwfSx7ImRhdGUiOiIyMDI1LTEwLTE5IiwiY291bnQiOjczfSx7ImRhdGUiOiIyMDI1LTEwLTIwIiwiY291bnQiOjU5fSx7ImRhdGUiOiIyMDI1LTEwLTIxIiwiY291bnQiOjkxfSx7ImRhdGUiOiIyMDI1LTEwLTIyIiwiY291bnQiOjg1fSx7ImRhdGUiOiIyMDI1LTEwLTIzIiwiY291bnQiOjM3fSx7ImRhdGUiOiIyMDI1LTEwLTI0IiwiY291bnQiOjM5fSx7ImRhdGUiOiIyMDI1LTEwLTI1IiwiY291bnQiOjQ1fV0=">
+    <div class="controls" aria-label="month controls">
+      <button class="prev" title="上个月">←</button>
+      <select class="month-select" title="选择月份"></select>
+      <button class="next" title="下个月">→</button>
+    </div>
+    <div class="months"></div>
+    <div class="legend" aria-hidden="true">
+      <span>少</span>
+      <i class="lvl-1"></i><i class="lvl-2"></i><i class="lvl-3"></i><i class="lvl-4"></i><i class="lvl-5"></i>
+      <span>多</span>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    
+    const calBox = document.currentScript.previousElementSibling;
+    if(!calBox) return;
+    const root = calBox.parentElement; 
+    const toggleBtn = root.querySelector('.tc-toggle');
+    const overlay = root.querySelector('.tweetcal-overlay');
+    
+    toggleBtn.addEventListener('click', ()=>{
+      const collapsed = root.classList.toggle('collapsed');
+      toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+      if(overlay){
+        if(collapsed){
+          overlay.classList.remove('active');
+        } else {
+          overlay.classList.add('active');
+        }
+      }
+    });
+    
+    if(overlay){
+      overlay.addEventListener('click', ()=>{
+        root.classList.add('collapsed');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('active');
+      });
+    }
+
+    const b64 = calBox.getAttribute('data-b64') || '';
+    let data = [];
+    try{ data = JSON.parse(atob(b64)); }catch(e){ data = []; }
+    
+    const byMonth = new Map();
+    let maxCount = 0;
+    for(const {date,count} of data){
+      if(!date) continue;
+      const m = date.slice(0,7);
+      if(!byMonth.has(m)) byMonth.set(m, new Map());
+      byMonth.get(m).set(date, (byMonth.get(m).get(date)||0) + (count||0));
+      if(count>maxCount) maxCount = Math.max(maxCount, count||0);
+    }
+    const monthsEl = root.querySelector('.months');
+    const level = (c)=>{
+      if(c<=0) return 0;
+      if(maxCount<=1) return 3; 
+      const r = c/maxCount;
+      if(r>0.8) return 5; if(r>0.6) return 4; if(r>0.4) return 3; if(r>0.2) return 2; return 1;
+    };
+    
+    const months = Array.from(byMonth.keys()).sort();
+    let idx = months.length ? months.length-1 : 0; 
+    const select = calBox.querySelector('.month-select');
+    const prevBtn = calBox.querySelector('.prev');
+    const nextBtn = calBox.querySelector('.next');
+    select.innerHTML = months.map((m,i)=>`<option value="${i}">${m}</option>`).join('');
+    select.value = String(idx);
+
+    function renderMonth(){
+      monthsEl.innerHTML = '';
+      const m = months[idx];
+      if(!m) return;
+      const dayMap = byMonth.get(m);
+      const [y, mm] = m.split('-').map(x=>parseInt(x,10));
+      const first = new Date(y, mm-1, 1);
+      const lastDay = new Date(y, mm, 0).getDate();
+      const weekStart = (first.getDay()+6)%7; 
+      const wrap = document.createElement('div');
+      wrap.className = 'month';
+      const title = document.createElement('div');
+      title.textContent = m;
+      wrap.appendChild(title);
+      const dow = document.createElement('div');
+      dow.className = 'dow';
+      for(const s of ['一','二','三','四','五','六','日']){ const el=document.createElement('div'); el.textContent=s; dow.appendChild(el); }
+      wrap.appendChild(dow);
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+      for(let i=0;i<weekStart;i++){ const pad=document.createElement('span'); grid.appendChild(pad); }
+      for(let d=1; d<=lastDay; d++){
+        const ds = `${y}-${String(mm).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const c = (dayMap && dayMap.get(ds))||0;
+        const a = document.createElement('a');
+        a.href = `#d-${ds}`;
+        a.className = `cell lvl-${level(c)}`;
+        a.title = `${ds}: ${c}`;
+        grid.appendChild(a);
+      }
+      wrap.appendChild(grid);
+      monthsEl.appendChild(wrap);
+      select.value = String(idx);
+      prevBtn.disabled = idx<=0;
+      nextBtn.disabled = idx>=months.length-1;
+    }
+    renderMonth();
+    prevBtn.addEventListener('click', ()=>{ if(idx>0){ idx--; renderMonth(); } });
+    nextBtn.addEventListener('click', ()=>{ if(idx<months.length-1){ idx++; renderMonth(); } });
+    select.addEventListener('change', ()=>{ idx = parseInt(select.value,10)||0; renderMonth(); });
+  })();
+  </script>
+</div>
+
+<p><a id="d-2025-10-25"></a></p></div>
+            </article>
+          
+        
+      </div>
+    </article>
+
+    
+    
+    
+    
+    
+      <aside class="docs-toc" aria-label="On this page">
+        <div class="toc-title">On this page</div>
+        <nav class="toc">
+          <nav id="TableOfContents"></nav>
+        </nav>
+      </aside>
+    
+  </div>
+
+  
+  
+    <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
+    <div id="tocDrawer" class="toc-drawer" hidden>
+      <div class="toc-drawer-inner">
+        <div class="toc-drawer-header">
+          <span>目录</span>
+        </div>
+        <nav class="toc"><nav id="TableOfContents"></nav></nav>
+      </div>
+    </div>
+  
+  
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251027-02" defer></script>
+  <script defer src="/js/search-core.js?v=20251027-02"></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251027-02';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251027-02';
+  </script>
+  <script src="/js/search-advanced.js?v=20251027-02" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251027-02"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251027-02"></script>
+  <script defer src="/js/table-tooltips.js?v=20251027-02"></script>
+  <script defer src="/js/social-popup.js?v=20251027-02"></script>
+  
+  
+  
+  
+  <div id="social-popup-overlay" aria-hidden="true">
+  <div class="social-popup-card" role="dialog" aria-modal="true" aria-labelledby="social-popup-title" aria-describedby="social-popup-desc">
+    <button class="social-popup-close" type="button" aria-label="关闭">×</button>
+    <img class="social-popup-image" src="" alt="" />
+    <div class="social-popup-title" id="social-popup-title"></div>
+    <div class="social-popup-desc" id="social-popup-desc"></div>
+  </div>
+</div>
+
+  
+</body>
+</html>
