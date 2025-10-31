@@ -1,0 +1,1576 @@
+<!doctype html>
+<html lang="zh-CN" class="skin-gold">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1988&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>做一个网站 • Linguista</title>
+  <script>
+    (function(){
+      try{
+        var key = 'theme';
+        var stored = window.localStorage ? localStorage.getItem(key) : null;
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
+        if (theme){
+          document.documentElement.dataset.theme = theme;
+        } else {
+          delete document.documentElement.dataset.theme;
+        }
+      }catch(err){   }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20251029-01" />
+  <link rel="stylesheet" href="/overrides.css?v=20251029-01" />
+  <link rel="stylesheet" href="/css/search.css?v=20251029-01" />
+  <link rel="stylesheet" href="/linkcard.css?v=20251029-01" />
+  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251029-01" />
+  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251029-01" />
+  <link rel="stylesheet" href="/css/sociallink.css?v=20251029-01" />
+  <link rel="stylesheet" href="/css/social-popup.css?v=20251029-01" />
+  
+  <style>:root{ --theme-breadcrumbs-height: 0px; }</style>
+  
+  
+  <script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+      corePlugins: {
+        preflight: false
+      },
+      safelist: [
+        'group/link-card',
+        'sm:flex-row',
+        'sm:items-center',
+        'h-[84px]',
+        'w-[84px]',
+        'sm:h-[84px]',
+        'sm:w-[84px]',
+        'line-clamp-2'
+      ]
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
+  
+  <link rel="stylesheet" href="/css/skin-gold.css?v=20251029-01" />
+  
+  
+  
+  
+  <style>
+    :root{
+      
+      
+      
+      
+      
+      
+    }
+  </style>
+  
+  
+  
+  
+
+<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  
+  
+<meta property="og:site_name" content="Linguista">
+<meta property="og:type" content="article">
+<meta property="og:title" content="做一个网站"><meta property="og:description" content="做一个网站一直是我的梦想，但在之前这是颇为费力的事情，一方面我并非程序员出身，虽有一些编程经验，但对于工程性质的网站工作一无所知。2024年年初，我开始了解使用 Hugo 构建博客网站，但我所能进行的改动并不多，似乎每一行代码都与其它某个功能勾连交错，牵一发而动全身。 "><meta property="og:url" content="http://localhost:1988/tests/make-a-website/"><meta property="og:image" content="http://localhost:1988/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
+  <meta property="og:image:height" content="400">
+<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="做一个网站"><meta name="twitter:description" content="做一个网站一直是我的梦想，但在之前这是颇为费力的事情，一方面我并非程序员出身，虽有一些编程经验，但对于工程性质的网站工作一无所知。2024年年初，我开始了解使用 Hugo 构建博客网站，但我所能进行的改动并不多，似乎每一行代码都与其它某个功能勾连交错，牵一发而动全身。 "><meta name="twitter:image" content="http://localhost:1988/img/Linguista_imresizer.png">
+<link rel="canonical" href="http://localhost:1988/tests/make-a-website/">
+
+  
+  
+  <script>
+    window.MathJax = {
+      loader: { load: ['[tex]/ams'] },
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        packages: { '[+]': ['ams'] },
+        macros: {
+          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
+          oiint: '\\unicodeInt{x222F}',
+          oiiint: '\\unicodeInt{x2230}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  
+  
+</head>
+<body>
+  
+  
+  
+  
+  
+<header class="site-header">
+  
+  <div class="container header-inner">
+    
+    <div class="brand">
+      
+        
+          <a href="/" class="brand-avatar-link" aria-label="Linguista">
+            <picture>
+              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
+            </picture>
+          </a>
+        
+      
+      
+      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
+      <span class="brand-text">Linguista</span>
+    </div>
+    
+    
+    <nav class="nav">
+      
+      
+      
+        
+          
+            <a href="/labs/" class="nav-link ">工坊</a>
+          
+        
+          
+            <a href="/essays/" class="nav-link ">经典</a>
+          
+        
+          
+            <a href="/courses/" class="nav-link ">课程资料</a>
+          
+        
+          
+            <a href="/bookmarks/" class="nav-link ">书签</a>
+          
+        
+          
+            <a href="/about/" class="nav-link ">关于我</a>
+          
+        
+      
+      
+    </nav>
+    
+    
+    <div class="actions">
+      
+        
+      
+      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="site-search" role="search">
+        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="site-search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <input id="globalSearchInput"
+               class="site-search-input"
+               type="search"
+               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
+               aria-label="站内搜索"
+               autocomplete="off"
+               spellcheck="false" />
+        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
+        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
+      </div>
+      <a href="/post/" class="btn ghost posts-btn">Posts</a>
+      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
+    </div>
+    
+    
+  </div>
+
+  
+</header>
+
+
+<aside id="navDrawer" class="nav-drawer" hidden>
+  <div class="nav-drawer-inner">
+    
+    
+    <div class="nav-drawer-header">
+      <div class="nav-drawer-title">Menu</div>
+      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
+    </div>
+    
+      <nav class="nav-drawer-list" aria-label="Mobile Primary">
+        
+        
+          <a class="nav-drawer-item" href="/labs/">工坊</a>
+          
+        
+          <a class="nav-drawer-item" href="/essays/">经典</a>
+          
+        
+          <a class="nav-drawer-item" href="/courses/">课程资料</a>
+          
+        
+          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
+          
+        
+          <a class="nav-drawer-item" href="/about/">关于我</a>
+          
+        
+      </nav>
+    
+
+    
+    
+    
+    
+      <div class="nav-drawer-folder">
+        <div class="nav-drawer-subtitle">Section</div>
+        <nav class="docs-nav in-drawer" aria-label="Current Section">
+          
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/tests/linkcard-manual-demo/">手工 Link Card Demo</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/tests/make-a-website/">做一个网站</a>
+    
+  
+
+
+
+        </nav>
+      </div>
+    
+  </div>
+</aside>
+
+  
+  
+  
+  <main class="container">
+    
+
+
+
+
+
+
+
+
+<div class="docs-layout">
+  
+  <aside class="docs-sidebar" aria-label="Sections">
+    
+    <div class="docs-side-title">
+      Documentation
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <nav class="docs-nav">
+      
+      
+      
+      
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link " href="/tests/linkcard-manual-demo/">手工 Link Card Demo</a>
+    
+  
+    
+    
+    
+      
+      <a class="depth-0 file-link is-active" href="/tests/make-a-website/">做一个网站</a>
+    
+  
+
+
+
+      
+      
+    </nav>
+    
+    
+    
+    
+  </aside>
+
+  
+  <article class="docs-content">
+    
+    <div class="prose">
+      
+      
+        
+        
+        
+        
+          
+            
+          
+          <figure class="post-cover" style="margin:0 0 24px;">
+            <img src="/img/anthropic_website_style.png" alt="一个网站" loading="lazy" style="width:100%;height:auto;border-radius:12px;">
+            <figcaption style="color:var(--muted);font-size:13px;margin-top:8px;text-align:center;">一个网站</figcaption>
+          </figure>
+        
+      
+
+      
+      
+      
+      
+        
+      
+      
+        <h1>做一个网站</h1>
+      
+      
+
+      
+      
+      
+      
+      
+      
+        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
+          <span class="meta-author">Han</span>
+           · 
+          <span class="meta-date">2025-10-21</span>
+        </div>
+      
+
+      
+      <p>做一个网站一直是我的梦想，但在之前这是颇为费力的事情，一方面我并非程序员出身，虽有一些编程经验，但对于工程性质的网站工作一无所知。2024年年初，我开始了解使用 Hugo 构建博客网站，但我所能进行的改动并不多，似乎每一行代码都与其它某个功能勾连交错，牵一发而动全身。</p>
+<p>我在初期更新博客的欲望并不强烈，虽然Hugo的官方推荐了丰富的主题可选，我也选了比较满意的一款，</p>
+<div class="tweet-embed " style="position:relative;height:650px;overflow:hidden;border-radius:12px;border:1px solid #e5e7eb;">
+  <iframe
+    src="https://twitframe.com/show?url=https%3A%2F%2Fx.com%2FAztecaAlpaca%2Fstatus%2F1962805882426925322&amp;theme=dark&amp;lang=zh-cn&amp;dnt=1"
+    title="Tweet"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+  ></iframe>
+  
+</div>
+
+<h2 id="占位演示">占位演示</h2>
+
+<div class="social-links">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+    
+  
+  
+  
+    
+  
+  <a class="social-item" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" style="--social-icon-bg: #000">
+    <span class="social-icon" style="--social-icon-foreground: white; --social-icon-filter: brightness(0) invert(1)">
+      <img alt="X / Twitter" src="/img/icons/x.svg" loading="lazy" decoding="async" />
+    </span>
+    <div>
+      <div class="social-label">X / Twitter</div>
+      <div class="social-desc">日常更新与短想法</div>
+    </div>
+  </a>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+    
+  
+  
+  
+    
+  
+  <a class="social-item" href="https://github.com/Linguage" target="_blank" rel="noopener" style="--social-icon-bg: #24292e">
+    <span class="social-icon" style="--social-icon-foreground: white; --social-icon-filter: brightness(0) invert(1)">
+      <img alt="GitHub" src="/img/icons/github.svg" loading="lazy" decoding="async" />
+    </span>
+    <div>
+      <div class="social-label">GitHub</div>
+      <div class="social-desc">代码与项目</div>
+    </div>
+  </a>
+
+
+</div>
+
+
+
+
+<div class="social-icons" style="display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;margin:8px 0 2px;">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <a class="row-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" style="--ri-size:48px; --ri-radius:12px; --ri-scale:0.74; --ri-filter:brightness(0) invert(1); --ri-bg:#000">
+      <img src="/img/icons/x.svg" alt="" loading="lazy" decoding="async" />
+    </a>
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <a class="row-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" style="--ri-size:48px; --ri-radius:12px; --ri-scale:0.74; --ri-filter:brightness(0) invert(1); --ri-bg:#24292e">
+      <img src="/img/icons/github.svg" alt="" loading="lazy" decoding="async" />
+    </a>
+  
+
+</div>
+
+<h4 id="illustcard--small--11">IllustCard · small · 1:1</h4>
+<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-1">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[1/1] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29.jpg/250px-Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29.jpg" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-2 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-base md:text-lg">小卡片（含图）</div>
+    <div class="text-sm opacity-85">说明两行内</div>
+    
+  </div>
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-1">
+    <div class="relative m-0 leading-none text-[0] bg-[var(--surface)] overflow-hidden ">
+      
+        <div class="relative w-full aspect-[1/1] overflow-hidden">
+          
+            <div class="absolute inset-0"></div>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-2 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-base md:text-lg">小卡片（占位）</div>
+    <div class="text-sm opacity-85">说明两行内</div>
+    
+  </div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-1">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[1/1] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="/img/Linguista_imresizer.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-2 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-base md:text-lg">小卡片（含图）</div>
+    <div class="text-sm opacity-85">说明两行内</div>
+    
+  </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[2/1] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="/img/Linguista_imresizer.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-lg md:text-xl">中卡片（含图）</div>
+    <div class="text-sm opacity-85">支持在说明里放链接，比如访问
+<a href="/docs/">文档首页</a> 或 <a href="https://example.com">外部站点</a>。</div>
+    <a class="text-sm underline underline-offset-2" href="/docs/getting-started/">开始使用</a>
+  </div>
+</div>
+
+
+<h4 id="illustcard--medium--21">IllustCard · medium · 2:1</h4>
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[2/1] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="/img/Linguista_imresizer.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-lg md:text-xl">中卡片（含图）</div>
+    <div class="text-sm opacity-85">说明三行内摘要</div>
+    
+  </div>
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col items-stretch ">
+  <div class="flex-none w-full order-2">
+    <div class="relative m-0 leading-none text-[0] bg-[var(--surface)] overflow-hidden ">
+      
+        <div class="relative w-full aspect-[2/1] overflow-hidden">
+          
+            <div class="absolute inset-0"></div>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="flex-none w-full order-1 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-lg md:text-xl">中卡片（占位）</div>
+    <div class="text-sm opacity-85">说明三行内摘要</div>
+    
+  </div>
+</div>
+
+
+</div>
+<h4 id="illustcard--large--11">IllustCard · large · 1:1</h4>
+<div class="grid grid-cols-1 gap-6">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col md:flex-row items-stretch ">
+  <div class="w-full md:basis-[46%] md:shrink-0 order-1">
+    <div class="relative m-0 leading-none text-[0] bg-transparent overflow-hidden ">
+      
+        <div class="relative w-full aspect-[3/2] overflow-hidden">
+          
+            <img class="absolute inset-0 w-full h-full m-0 object-cover object-center" src="https://pbs.twimg.com/media/G4AaCc1WAAA373e?format=jpg&amp;name=4096x4096" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="w-full md:basis-[54%] md:grow order-2 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-xl md:text-2xl">专题：设计系统（含图）</div>
+    <div class="text-sm opacity-85">深入阐释设计系统的构成与落地方法，示例与最佳实践详解。</div>
+    
+  </div>
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="rounded-2xl overflow-hidden bg-[var(--surface)] flex flex-col md:flex-row items-stretch ">
+  <div class="w-full md:basis-[46%] md:shrink-0 order-1">
+    <div class="relative m-0 leading-none text-[0] bg-[var(--surface)] overflow-hidden ">
+      
+        <div class="relative w-full aspect-[1/1] overflow-hidden">
+          
+            <div class="absolute inset-0"></div>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="w-full md:basis-[54%] md:grow order-2 flex flex-col justify-center gap-2 p-4 illustcard-glass backdrop-blur-md rounded-xl">
+    
+    <div class="font-sans font-semibold text-xl md:text-2xl">专题：占位（无图）</div>
+    <div class="text-sm opacity-85">深入阐释设计系统的构成与落地方法，示例与最佳实践详解。</div>
+    
+  </div>
+</div>
+
+
+</div>
+<h4 id="imagecard--medium--21">ImageCard · medium · 2:1</h4>
+<div class="grid grid-cols-2 gap-4">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="group block rounded-2xl overflow-hidden variant-medium">
+  <figure class="relative block m-0 leading-none text-[0] bg-transparent overflow-hidden rounded-t-2xl">
+    
+      <div class="relative w-full aspect-[2/1] overflow-hidden rounded-t-2xl">
+        
+          <img class="absolute -inset-px w-full h-full m-0 object-cover object-center" src="https://static.wixstatic.com/media/343a2a_6fc954439c894ff5ac3e70056f1b6af7~mv2.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+        
+      </div>
+    
+    
+      <figcaption class="absolute inset-x-4 bottom-4 imagecard-overlay rounded-xl p-3 backdrop-blur-md shadow-xl opacity-0 group-hover:opacity-100 transition">
+        <div class="font-semibold">主题可视化调试（含图）</div>
+        <div class="text-sm opacity-90">借助实时配色工具，所见即所得。</div>
+      </figcaption>
+    
+  </figure>
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="group block rounded-2xl overflow-hidden variant-medium">
+  <figure class="relative block m-0 leading-none text-[0] bg-transparent overflow-hidden rounded-t-2xl">
+    
+      <div class="relative w-full aspect-[2/1] overflow-hidden rounded-t-2xl">
+        
+          <img class="absolute -inset-px w-full h-full m-0 object-cover object-center" src="https://static.wixstatic.com/media/343a2a_6fc954439c894ff5ac3e70056f1b6af7~mv2.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+        
+      </div>
+    
+    
+      <figcaption class="absolute inset-x-4 bottom-4 imagecard-overlay rounded-xl p-3 backdrop-blur-md shadow-xl opacity-0 group-hover:opacity-100 transition">
+        <div class="font-semibold">主题可视化调试（占位）</div>
+        <div class="text-sm opacity-90">借助实时配色工具，所见即所得。</div>
+      </figcaption>
+    
+  </figure>
+</div>
+
+</div>
+<h4 id="imagecard--large--169">ImageCard · large · 16:9</h4>
+<div class="grid grid-cols-1 gap-6">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="group block rounded-2xl overflow-hidden variant-large">
+  <figure class="relative block m-0 leading-none text-[0] bg-transparent overflow-hidden rounded-t-2xl">
+    
+      <div class="relative w-full aspect-[16/9] overflow-hidden rounded-t-2xl">
+        
+          <img class="absolute -inset-px w-full h-full m-0 object-cover object-center" src="https://static.wixstatic.com/media/343a2a_6fc954439c894ff5ac3e70056f1b6af7~mv2.png" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+        
+      </div>
+    
+    
+      <figcaption class="absolute inset-x-4 bottom-4 imagecard-overlay rounded-xl p-3 backdrop-blur-md shadow-xl opacity-0 group-hover:opacity-100 transition">
+        <div class="font-semibold">Hero 展示（含图）</div>
+        <div class="text-sm opacity-90"><p>Base44 是一个 无代码（no-code）+ 人工智能驱动的应用生成平台。用户可以用自然语言描述想要的应用，平台自动生成前端、后端、数据库、认证机制等。</p>
+<p>它类似于“如果你能描述，就能构建”——把构建软件的工程量，从敲代码改为“写句子” + “选样式”。</p>
+<p>此外，平台还整合了 UI 设计、数据库、用户认证、部署等模块，减少用户不得不去手动搭建基础设施的环节。</p>
+</div>
+      </figcaption>
+    
+  </figure>
+</div>
+
+</div>
+<div class="grid grid-cols-1 gap-6">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="group block rounded-2xl overflow-hidden variant-medium">
+  <figure class="relative block m-0 leading-none text-[0] bg-transparent overflow-hidden rounded-t-2xl">
+    
+      <img class="block w-full h-auto m-0 object-cover object-center" src="https://pbs.twimg.com/media/G39bcRaWgAAUfr_?format=jpg&amp;name=4096x4096" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+    
+    
+      <figcaption class="absolute inset-x-4 bottom-4 imagecard-overlay rounded-xl p-3 backdrop-blur-md shadow-xl opacity-0 group-hover:opacity-100 transition">
+        <div class="font-semibold">主题可视化调试</div>
+        <div class="text-sm opacity-90">在覆盖层说明里放链接：
+<a href="/tools/theme-live-preview/#usage">使用指南</a>、
+<a href="https://github.com/xxx/yyy">仓库</a>。</div>
+      </figcaption>
+    
+  </figure>
+</div>
+
+</div>
+      
+    </div>
+    
+    
+    
+
+
+<div class="sibling-cards">
+  
+
+  
+  <a class="sibling-card next" href="/tests/linkcard-manual-demo/" aria-label="下一篇：手工 Link Card Demo">
+    <div class="sibling-card-main">
+      <div class="sibling-card-title">手工 Link Card Demo</div>
+      <div class="sibling-card-meta">
+        
+        
+        <span class="meta-date">2025-10-31</span>
+      </div>
+    </div>
+    <div class="sibling-card-arrow">›</div>
+  </a>
+  
+</div>
+
+
+    <section class="comments" aria-label="Comments">
+  <div id="giscus_thread" class="giscus"
+    data-repo="Linguage/Giscus"
+    data-repo-id="R_kgDOLxA-eA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLxA-eM4Ce06R"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme-light="light"
+    data-theme-dark="dark"
+    data-lang="zh-CN">
+  </div>
+  <script>
+    (function(){
+      try{
+        const el = document.getElementById('giscus_thread');
+        if (!el) return;
+        
+        let saved = null;
+        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
+        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
+        
+        el.setAttribute('data-theme', theme);
+        
+        const s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.setAttribute('data-repo', el.dataset.repo || '');
+        s.setAttribute('data-repo-id', el.dataset.repoId || '');
+        s.setAttribute('data-category', el.dataset.category || 'General');
+        s.setAttribute('data-category-id', el.dataset.categoryId || '');
+        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
+        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
+        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
+        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
+        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
+        s.setAttribute('data-theme', theme);
+        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
+        s.setAttribute('crossorigin','anonymous');
+        s.async = true;
+        el.parentNode.insertBefore(s, el.nextSibling);
+      }catch(_){   }
+    })();
+  </script>
+</section>
+  </article>
+
+  
+  
+  
+    
+  
+  
+    
+    <aside class="docs-toc" aria-hidden="true"></aside>
+  
+</div>
+
+
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+
+
+
+
+
+
+
+  </main>
+  
+  
+  
+  <footer class="site-footer">
+  
+  <div class="container footer-inner">
+    
+    <div>
+      
+        
+          © 2025 Linguista
+        
+      
+    </div>
+    
+    
+    
+    <nav class="footer-nav social-links" aria-label="Social links">
+      
+      
+      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
+      </a>
+      
+      
+      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
+      </a>
+      
+      
+      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
+      
+    </nav>
+    
+  </div>
+  
+</footer>
+
+  
+  
+  <script src="/script.js?v=20251029-01" defer></script>
+  <script defer src="/js/search-core.js?v=20251029-01"></script>
+  <script>
+    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251029-01';
+    window.SEARCH_INDEX_URL = '\/index.json?v=20251029-01';
+  </script>
+  <script src="/js/search-advanced.js?v=20251029-01" defer></script>
+  
+  <script defer src="/js/table-7char.js?v=20251029-01"></script>
+  
+  <script defer src="/js/linkcard.js?v=20251029-01"></script>
+  <script defer src="/js/table-tooltips.js?v=20251029-01"></script>
+  <script defer src="/js/social-popup.js?v=20251029-01"></script>
+  
+  
+  
+  
+  <div id="social-popup-overlay" aria-hidden="true">
+  <div class="social-popup-card" role="dialog" aria-modal="true" aria-labelledby="social-popup-title" aria-describedby="social-popup-desc">
+    <button class="social-popup-close" type="button" aria-label="关闭">×</button>
+    <img class="social-popup-image" src="" alt="" />
+    <div class="social-popup-title" id="social-popup-title"></div>
+    <div class="social-popup-desc" id="social-popup-desc"></div>
+  </div>
+</div>
+
+  
+</body>
+</html>

@@ -19,9 +19,38 @@
     return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   }
 
+  function applySizing(el) {
+    try {
+      const ds = el.dataset || {};
+      const media = el.querySelector('.link-card__media');
+      if (!media) return;
+      const raw = ds.size || '84';
+      const size = Math.max(24, Math.min(parseInt(String(raw).replace('px', ''), 10) || 84, 320));
+      const ratioStr = ds.ratio || '1:1';
+      const m = String(ratioStr).match(/^(\d+)\s*[:/]\s*(\d+)$/);
+      let w = 1, h = 1;
+      if (m) { w = parseInt(m[1], 10) || 1; h = parseInt(m[2], 10) || 1; }
+      media.style.width = `${size}px`;
+      if (w === h) {
+        media.style.height = `${size}px`;
+        media.style.removeProperty('aspect-ratio');
+      } else if ('aspectRatio' in media.style) {
+        media.style.removeProperty('height');
+        media.style.aspectRatio = `${w} / ${h}`;
+      } else {
+        media.style.height = `${Math.round(size * (h / w))}px`;
+      }
+      const img = media.querySelector('img');
+      if (img) {
+        img.width = size;
+        img.height = (w === h) ? size : Math.round(size * (h / w));
+      }
+    } catch (_) {}
+  }
+
   function renderCard(el, url, data) {
     el.innerHTML = '';
-    el.appendChild(createCard({ url, data }));
+    el.appendChild(createCard({ url, data, ds: el.dataset }));
     el.classList.add('link-card--ready');
   }
 
@@ -66,11 +95,43 @@
     throw lastError;
   }
 
-  function createCard({ url, data }) {
-    const { title, description, publisher, image, logo } = data || {};
+  function createCard({ url, data, ds }) {
+  const { title, description, publisher, image, logo } = data || {};
     const a = document.createElement('a');
     const host = (() => {
       try { return new URL(url).hostname; } catch { return url; }
+    })();
+
+    // Options from data-* overrides
+    const layout = (ds && (ds.layout || ds.Layout)) || 'h';
+    const mediaPos = (() => {
+      const mp = ds && (ds.mediaPos || ds.media_pos);
+      if (mp) return String(mp).toLowerCase();
+      // derive from layout when not provided
+      return layout === 'v' ? 'top' : 'left';
+    })();
+    const size = (() => {
+      const raw = (ds && ds.size) || 84;
+      const n = parseInt(String(raw).replace('px', ''), 10);
+      return isNaN(n) ? 84 : Math.max(24, Math.min(n, 320));
+    })();
+    const ratioStr = (ds && ds.ratio) || '1:1';
+    const ratio = (() => {
+      const m = String(ratioStr).match(/^(\d+)\s*[:/]\s*(\d+)$/);
+      if (!m) return { w: 1, h: 1 };
+      const w = parseInt(m[1], 10) || 1;
+      const h = parseInt(m[2], 10) || 1;
+      return { w, h };
+    })();
+
+    const flowClasses = (() => {
+      switch (mediaPos) {
+        case 'right': return ['sm:flex-row-reverse', 'sm:items-center'];
+        case 'bottom': return ['sm:flex-col-reverse'];
+        case 'top': return ['sm:flex-col'];
+        case 'left':
+        default: return ['sm:flex-row', 'sm:items-center'];
+      }
     })();
 
     a.className = [
@@ -83,12 +144,11 @@
       'py-3',
       'transition-colors',
       'duration-150',
-      'sm:flex-row',
-      'sm:items-center'
+      ...flowClasses
     ].join(' ');
     // Always prefer the original input URL to avoid being hijacked by stale canonical/og:url
     a.href = url;
-    a.target = '_blank';
+  a.target = (ds && ds.target) || '_blank';
     a.rel = 'noopener';
 
     const media = document.createElement('div');
@@ -97,22 +157,34 @@
       'grid',
       'place-items-center',
       'relative',
-      'h-[84px]',
-      'w-[84px]',
       'flex-shrink-0',
       'overflow-hidden',
       'rounded-xl',
-      'bg-[var(--lc-media-bg,rgba(15,23,42,0.06))]',
-      'sm:h-[84px]',
-      'sm:w-[84px]'
+      'bg-[var(--lc-media-bg,rgba(15,23,42,0.06))]'
     ].join(' ');
+    // Set size/ratio via inline styles to avoid depending on Tailwind class generation
+    media.style.width = `${size}px`;
+    if (ratio.w === ratio.h) {
+      media.style.height = `${size}px`;
+    } else if ('aspectRatio' in media.style) {
+      media.style.aspectRatio = `${ratio.w} / ${ratio.h}`;
+    } else {
+      // Fallback: compute height from ratio
+      media.style.height = `${Math.round(size * (ratio.h / ratio.w))}px`;
+    }
     const img = document.createElement('img');
     img.alt = '';
-    // 固定尺寸，避免 CLS；与 CSS 方形缩略图匹配
-    img.width = 84; img.height = 84;
+    // Provide width/height to mitigate CLS (best-effort)
+    img.width = size; img.height = (ratio.w === ratio.h) ? size : Math.round(size * (ratio.h / ratio.w));
     img.className = 'block h-full w-full object-cover object-center transition-transform duration-200 group-hover/link-card:scale-[1.02]';
 
-    const primary = (image && image.url) ? image.url : (logo && logo.url ? logo.url : '');
+    // Manual overrides from dataset
+    const manualImage = ds && ds.image;
+    const manualTitle = ds && ds.title;
+    const manualDesc = ds && ds.desc;
+    const manualSite = ds && ds.site;
+
+    const primary = manualImage || ((image && image.url) ? image.url : (logo && logo.url ? logo.url : ''));
     const fallFavicon = faviconFromHost(host);
 
     if (primary) {
@@ -139,20 +211,20 @@
     };
     media.appendChild(img);
 
-    const body = document.createElement('div');
+  const body = document.createElement('div');
     body.className = 'link-card__body min-w-0 flex flex-col gap-2';
 
     const siteEl = document.createElement('div');
     siteEl.className = 'link-card__site text-xs uppercase tracking-wide text-[var(--lc-site,rgba(107,114,128,0.78))]';
-    siteEl.textContent = publisher || host;
+  siteEl.textContent = manualSite || publisher || host;
 
     const titleEl = document.createElement('div');
     titleEl.className = 'link-card__title text-base font-semibold text-[var(--lc-title,#111827)] line-clamp-2 transition-colors duration-150 group-hover/link-card:text-[var(--lc-title-hover,#0f172a)]';
-    titleEl.textContent = title || host;
+  titleEl.textContent = manualTitle || title || host;
 
     const descEl = document.createElement('div');
     descEl.className = 'link-card__desc text-sm text-[var(--lc-desc,rgba(55,65,81,0.88))] line-clamp-2';
-    descEl.textContent = description || url;
+  descEl.textContent = manualDesc || description || url;
 
     body.appendChild(siteEl);
     body.appendChild(titleEl);
@@ -186,6 +258,8 @@
       if (cursor >= elements.length) return;
       while (active < MAX_PARALLEL && cursor < elements.length) {
         const el = elements[cursor++];
+        // Always apply sizing from dataset (works for fetch and manual modes)
+        applySizing(el);
         active++;
         enhance(el)
           .catch(() => {})
