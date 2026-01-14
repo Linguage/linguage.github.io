@@ -1,3420 +1,484 @@
-<!doctype html>
-<html lang="zh-CN" class="skin-gold">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Laundry • Linguista</title>
-  <script>
-    (function(){
-      try{
-        var key = 'theme';
-        var stored = window.localStorage ? localStorage.getItem(key) : null;
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
-        if (theme){
-          document.documentElement.dataset.theme = theme;
-        } else {
-          delete document.documentElement.dataset.theme;
-        }
-      }catch(err){   }
-    })();
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20251029-01" />
-  <link rel="stylesheet" href="/overrides.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/search.css?v=20251029-01" />
-  <link rel="stylesheet" href="/linkcard.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/sociallink.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/social-popup.css?v=20251029-01" />
-  
-  <style>:root{ --theme-breadcrumbs-height: 0px; }</style>
-  
-  
-  <script>
-    window.tailwind = window.tailwind || {};
-    tailwind.config = {
-      corePlugins: {
-        preflight: false
-      },
-      safelist: [
-        'group/link-card',
-        'sm:flex-row',
-        'sm:items-center',
-        'h-[84px]',
-        'w-[84px]',
-        'sm:h-[84px]',
-        'sm:w-[84px]',
-        'line-clamp-2'
-      ]
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
-  
-  <link rel="stylesheet" href="/css/skin-gold.css?v=20251029-01" />
-  
-  
-  
-  
-  <style>
-    :root{
-      
-      
-      
-      
-      
-      
-    }
-  </style>
-  
-  
-  
-  
-
-<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
-<link rel="manifest" href="/favicon_io/site.webmanifest">
-
-  
-  
-<meta property="og:site_name" content="Linguista">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Laundry"><meta property="og:description" content="→ 中文版本 https://www.paulgraham.com/laundry.html Laundry A Version 1.0 October 2004 As E. B. White said, “good writing is rewriting.” I didn’t realize this when I was in school. In …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_en/laundry/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
-  <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="Laundry"><meta name="twitter:description" content="→ 中文版本 https://www.paulgraham.com/laundry.html Laundry A Version 1.0 October 2004 As E. B. White said, “good writing is rewriting.” I didn’t realize this when I was in school. In …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
-<link rel="canonical" href="https://linguage.github.io/paul_graham/essays_en/laundry/">
-
-  
-  
-  <script>
-    window.MathJax = {
-      loader: { load: ['[tex]/ams'] },
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$','$$'], ['\\[','\\]']],
-        processEscapes: true,
-        packages: { '[+]': ['ams'] },
-        macros: {
-          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
-          oiint: '\\unicodeInt{x222F}',
-          oiiint: '\\unicodeInt{x2230}'
-        }
-      },
-      options: {
-        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
-      }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-99PGBGJH4S');
-  </script>
-</head>
-<body>
-  
-  
-  
-  
-  
-<header class="site-header">
-  
-  <div class="container header-inner">
-    
-    <div class="brand">
-      
-        
-          <a href="/" class="brand-avatar-link" aria-label="Linguista">
-            <picture>
-              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
-            </picture>
-          </a>
-        
-      
-      
-      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
-      <span class="brand-text">Linguista</span>
-    </div>
-    
-    
-    <nav class="nav">
-      
-      
-      
-        
-          
-            <a href="/labs/" class="nav-link ">工坊</a>
-          
-        
-          
-            <a href="/essays/" class="nav-link ">经典</a>
-          
-        
-          
-            <a href="/courses/" class="nav-link ">课程资料</a>
-          
-        
-          
-            <a href="/bookmarks/" class="nav-link ">书签</a>
-          
-        
-          
-            <a href="/about/" class="nav-link ">关于我</a>
-          
-        
-      
-      
-    </nav>
-    
-    
-    <div class="actions">
-      
-        
-      
-      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-      <div class="site-search" role="search">
-        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <span class="site-search-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </span>
-        <input id="globalSearchInput"
-               class="site-search-input"
-               type="search"
-               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-               aria-label="站内搜索"
-               autocomplete="off"
-               spellcheck="false" />
-        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
-        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
-      </div>
-      <a href="/post/" class="btn ghost posts-btn">Posts</a>
-      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-    </div>
-    
-    
-  </div>
-
-  
-</header>
-
-
-<aside id="navDrawer" class="nav-drawer" hidden>
-  <div class="nav-drawer-inner">
-    
-    
-    <div class="nav-drawer-header">
-      <div class="nav-drawer-title">Menu</div>
-      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
-    </div>
-    
-      <nav class="nav-drawer-list" aria-label="Mobile Primary">
-        
-        
-          <a class="nav-drawer-item" href="/labs/">工坊</a>
-          
-        
-          <a class="nav-drawer-item" href="/essays/">经典</a>
-          
-        
-          <a class="nav-drawer-item" href="/courses/">课程资料</a>
-          
-        
-          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
-          
-        
-          <a class="nav-drawer-item" href="/about/">关于我</a>
-          
-        
-      </nav>
-    
-
-    
-    
-    
-    
-      <div class="nav-drawer-folder">
-        <div class="nav-drawer-subtitle">Section</div>
-        <nav class="docs-nav in-drawer" aria-label="Current Section">
-          
-
-
-
-
-
-
-
-
-
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/6631327/">6,631,372</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fundraising/">A Fundraising Survival Guide</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/revolution/">A Local Revolution?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ycombinator/">A New Venture Animal</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/spam/">A Plan for Spam</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/own/">A Project of One&#39;s Own</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/mit/">A Student&#39;s Guide to Startups</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/venturecapital/">A Unified Theory of VC Suckage</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/bias/">A Way to Detect Bias</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/word/">A Word to the Resourceful</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ace/">Ace</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/addiction/">Addiction</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/credentials/">After Credentials</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ladder/">After the Ladder</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/airbnb/">Airbnb</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/alien/">Alien Truth</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/unions/">An Alternative Theory of Unions</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/nft/">An NFT That Saves Lives</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/apple/">Apple&#39;s Mistake</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/softwarepatents/">Are Software Patents Evil?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/good/">Be Good</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/avg/">Beating the Averages</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/before/">Before the Startup</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/noob/">Being a Noob</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/popular/">Being Popular</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/better/">Better Bayesian Filtering</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/smart/">Beyond Smart</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/swan/">Black Swan Farming</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/polls/">Bradley&#39;s Ghost</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/name/">Change Your Name</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/cities/">Cities and Ambition</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/conformism/">Conformism</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/control/">Control</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/copy/">Copy What You Like</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/cred/">Coronavirus and Credibility</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/corpdev/">Corpdev</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/divergence/">Could VC be a Casualty of the Recession?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/newideas/">Crazy New Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/aord/">Default Alive or Default Dead?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/desres/">Design and Research</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/distraction/">Distraction</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ds/">Do Things that Don&#39;t Scale</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/donate/">Donate Unrestricted</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/early/">Early</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/earnest/">Earnest</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ineq/">Economic Inequality</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fp/">Fashionable Problems</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fn/">Fierce Nerds</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ffb/">Filters that Fight Back</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/5founders/">Five Founders</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/langdes/">Five Questions about Language Design</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/foundermode/">Founder Mode</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ambitious/">Frighteningly Ambitious Startup Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/sun/">General and Surprising</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/procrastination/">Good and Bad Procrastination</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/goodwriting/">Good Writing</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/gh/">Great Hackers</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hp/">Hackers and Painters</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fh/">Haters</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/kids/">Having Kids</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/heresy/">Heresy</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hiresfund/">High Resolution Fundraising</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hiring/">Hiring is Obsolete</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/head/">Holding a Program in One&#39;s Head</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/goodart/">How Art Can Be Good</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/die/">How Not to Die</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/richnow/">How People Get Rich Now</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/angelinvesting/">How to Be an Angel Investor</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ecw/">How to Be an Expert in a Changing World</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/siliconvalley/">How to Be Silicon Valley</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/convince/">How to Convince Investors</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/disagree/">How to Disagree</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/greatwork/">How to Do Great Work</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/philosophy/">How to Do Philosophy</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/love/">How to Do What You Love</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/startupfunding/">How to Fund a Startup</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/getideas/">How to Get New Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/startupideas/">How to Get Startup Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/selfindulgence/">How to Lose Time and Money</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/pgh/">How to Make Pittsburgh a Startup Hub</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/wealth/">How to Make Wealth</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/investors/">How to Present to Investors</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fr/">How to Raise Money</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/start/">How to Start a Startup</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/google/">How to Start Google</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/think/">How to Think for Yourself</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hwh/">How to Work Hard</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ycstart/">How Y Combinator Started</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/know/">How You Know</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ideas/">Ideas for Startups</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/iflisp/">If Lisp is So Great</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/inequality/">Inequality</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/acl1txtt1748944359/">Introduction to ANSI Common Lisp</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/herd/">Investor Herd Dynamics</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/wisdom/">Is It Worth Being Wise?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/goodtaste/">Is There Such a Thing as Good Taste?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/charisma/">It&#39;s Charisma, Stupid</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/javacover/">Java&#39;s Cover</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/jessica/">Jessica Livingston</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/identity/">Keep Your Identity Small</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link is-active" href="/paul_graham/essays_en/laundry/">Laundry</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/foundersatwork/">Learning from Founders</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/95/">Let the Other 95% of Great Programmers In</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/lies/">Lies We Tell Kids</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/vb/">Life is Short</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/lwba/">Lisp for Web-Based Applications</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/usa/">Made in USA</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/makersschedule/">Maker&#39;s Schedule, Manager&#39;s Schedule</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/maybe/">Maybe</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/mean/">Mean</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/microsoft/">Microsoft is Dead</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/gap/">Mind the Gap</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/mod/">Mod</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/wtax/">Modeling a Wealth Tax</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/colleges/">News from the Front</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/notnot/">Not Not</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/nov/">Novelty and Heresy</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/organic/">Organic Startup Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/orth/">Orthodox Privilege</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/discover/">Persuade xor Discover</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/publishing/">Post-Medium Publishing</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/pow/">Pow</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/progbot/">Progbot</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/prop62/">Prop62</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/property/">Property</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/words/">Putting Ideas into Words</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ramenprofitable/">Ramen Profitable</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/relres/">Relentlessly Resourceful</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/mac/">Return of the Mac</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/icad/">Revenge of the Nerds</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/rss/">RSS</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/schlep/">Schlep Blindness</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/randomness/">See Randomness</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/newthings/">Six Principles for Making New Things</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/vw/">Snapshot: Viaweb, June 1998</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/heroes/">Some Heroes</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/growth/">Startup = Growth</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/invtrend/">Startup Investing Trends</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/13sentences/">Startups in 13 Sentences</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/stuff/">Stuff</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/power/">Succinctness is Power</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/superlinear/">Superlinear Returns</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/tablets/">Tablets</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/taste/">Taste for Makers</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/startupmistakes/">The 18 Mistakes That Kill Startups</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/essay/">The Age of the Essay</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/airbnbs/">The Airbnbs</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/determination/">The Anatomy of Determination</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/best/">The Best Essay</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/genius/">The Bus Ticket Theory of Genius</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/equity/">The Equity Equation</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/pinch/">The Fatal Pinch</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/foundervisa/">The Founder Visa</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/future/">The Future of Startup Funding</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/webstartups/">The Future of Web Startups</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/guidetoinvestors/">The Hacker&#39;s Guide to Investors</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/startuplessons/">The Hardest Lessons for Startups to Learn</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hw/">The Hardware Renaissance</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/highres/">The High-Res Society</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hundred/">The Hundred-Year Language</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/island/">The Island Test</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/lesson/">The Lesson to Unlearn</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/nthings/">The List of N Things</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/read/">The Need to Read</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/superangels/">The New Funding Landscape</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/woke/">The Origins of Wokeness</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/artistsship/">The Other Half of &#39;Artists Ship&#39;</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/road/">The Other Road Ahead</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/patentpledge/">The Patent Pledge</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/prcmc/">The Pooled-Risk Company Management Company</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/marginal/">The Power of the Marginal</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/pypar/">The Python Paradox</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/real/">The Real Reason to End the Death Penalty</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/reddits/">The Reddits</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/re/">The Refragmentation</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/persistence/">The Right Kind of Stubborn</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/disc/">The Risk of Discovery</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/ronco/">The Ronco Principle</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/rootsoflisp/">The Roots of Lisp</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/field/">The Shape of the Essay Field</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/submarine/">The Submarine</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/top/">The Top Idea in Your Mind</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/todo/">The Top of My Todo List</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/segway/">The Trouble with the Segway</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/vcsqueeze/">The Venture Capital Squeeze</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/gba/">The Word &#39;Hacker&#39;</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/trolls/">Trolls</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/judgement/">Two Kinds of Judgement</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/college/">Undergraduation</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/useful/">Useful</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/web20/">Web 2.0</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/weird/">Weird Languages</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/acl2txtt1748944359/">Welcome to Lisp</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/opensource/">What Business Can Learn from Open Source</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/work/">What Doesn&#39;t Seem Like Work?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/yahoo/">What Happened to Yahoo</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/sfp/">What I Did this Summer</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/worked/">What I Worked On</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hackernews/">What I&#39;ve Learned from Hacker News</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/users/">What I&#39;ve Learned from Users</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/kate/">What Kate Saw in Silicon Valley</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/fix/">What Languages Fix</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/diff/">What Made Lisp Different</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/altair/">What Microsoft Is this the Altair Basic of?</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/really/">What Startups Are Really Like</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/bubble/">What the Bubble Got Right</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/do/">What to Do</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/founders/">What We Look for in Founders</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/want/">What You (Want to)* Want</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/say/">What You Can&#39;t Say</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hs/">What You&#39;ll Wish You&#39;d Known</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/when/">When To Do What You Love</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/seesv/">Where to See Silicon Valley</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/noop/">Why Arc Isn&#39;t Especially Object-Oriented</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/safe/">Why It&#39;s Safe for Founders to Be Nice</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/nerds/">Why Nerds are Unpopular</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/bronze/">Why Smart People Have Bad Ideas</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/hubs/">Why Startup Hubs Work</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/america/">Why Startups Condense in America</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/googles/">Why There Aren&#39;t More Googles</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/startuphubs/">Why to Move to a Startup Hub</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/badeconomy/">Why to Start a Startup in a Bad Economy</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/convergence/">Why TV Lost</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/twitter/">Why Twitter is a Big Deal</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/whyyc/">Why YC</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/talk/">Write Like You Talk</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/simply/">Write Simply</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/writes/">Writes and Write-Nots</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/speak/">Writing and Speaking</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/writing44/">Writing, Briefly</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_en/boss/">You Weren&#39;t Meant to Have a Boss</a>
-    
-  
-
-
-
-        </nav>
-      </div>
-    
-  </div>
-</aside>
-
-  
-  
-  
-  <main class="container">
-    
-
-
-
-
-
-
-
-
-<div class="docs-layout">
-  
-  <aside class="docs-sidebar" aria-label="Sections">
-    
-    <div class="docs-side-title">
-      Documentation
-    </div>
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    <nav class="docs-nav">
-      
-      
-      
-      
-      
-
-
-
-
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/6631327/">6,631,372</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fundraising/">A Fundraising Survival Guide</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/revolution/">A Local Revolution?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ycombinator/">A New Venture Animal</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/spam/">A Plan for Spam</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/own/">A Project of One&#39;s Own</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/mit/">A Student&#39;s Guide to Startups</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/venturecapital/">A Unified Theory of VC Suckage</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/bias/">A Way to Detect Bias</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/word/">A Word to the Resourceful</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ace/">Ace</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/addiction/">Addiction</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/credentials/">After Credentials</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ladder/">After the Ladder</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/airbnb/">Airbnb</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/alien/">Alien Truth</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/unions/">An Alternative Theory of Unions</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/nft/">An NFT That Saves Lives</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/apple/">Apple&#39;s Mistake</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/softwarepatents/">Are Software Patents Evil?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/good/">Be Good</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/avg/">Beating the Averages</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/before/">Before the Startup</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/noob/">Being a Noob</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/popular/">Being Popular</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/better/">Better Bayesian Filtering</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/smart/">Beyond Smart</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/swan/">Black Swan Farming</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/polls/">Bradley&#39;s Ghost</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/name/">Change Your Name</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/cities/">Cities and Ambition</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/conformism/">Conformism</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/control/">Control</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/copy/">Copy What You Like</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/cred/">Coronavirus and Credibility</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/corpdev/">Corpdev</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/divergence/">Could VC be a Casualty of the Recession?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/newideas/">Crazy New Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/aord/">Default Alive or Default Dead?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/desres/">Design and Research</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/distraction/">Distraction</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ds/">Do Things that Don&#39;t Scale</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/donate/">Donate Unrestricted</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/early/">Early</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/earnest/">Earnest</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ineq/">Economic Inequality</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fp/">Fashionable Problems</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fn/">Fierce Nerds</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ffb/">Filters that Fight Back</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/5founders/">Five Founders</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/langdes/">Five Questions about Language Design</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/foundermode/">Founder Mode</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ambitious/">Frighteningly Ambitious Startup Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/sun/">General and Surprising</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/procrastination/">Good and Bad Procrastination</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/goodwriting/">Good Writing</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/gh/">Great Hackers</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hp/">Hackers and Painters</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fh/">Haters</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/kids/">Having Kids</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/heresy/">Heresy</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hiresfund/">High Resolution Fundraising</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hiring/">Hiring is Obsolete</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/head/">Holding a Program in One&#39;s Head</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/goodart/">How Art Can Be Good</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/die/">How Not to Die</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/richnow/">How People Get Rich Now</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/angelinvesting/">How to Be an Angel Investor</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ecw/">How to Be an Expert in a Changing World</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/siliconvalley/">How to Be Silicon Valley</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/convince/">How to Convince Investors</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/disagree/">How to Disagree</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/greatwork/">How to Do Great Work</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/philosophy/">How to Do Philosophy</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/love/">How to Do What You Love</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/startupfunding/">How to Fund a Startup</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/getideas/">How to Get New Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/startupideas/">How to Get Startup Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/selfindulgence/">How to Lose Time and Money</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/pgh/">How to Make Pittsburgh a Startup Hub</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/wealth/">How to Make Wealth</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/investors/">How to Present to Investors</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fr/">How to Raise Money</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/start/">How to Start a Startup</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/google/">How to Start Google</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/think/">How to Think for Yourself</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hwh/">How to Work Hard</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ycstart/">How Y Combinator Started</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/know/">How You Know</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ideas/">Ideas for Startups</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/iflisp/">If Lisp is So Great</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/inequality/">Inequality</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/acl1txtt1748944359/">Introduction to ANSI Common Lisp</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/herd/">Investor Herd Dynamics</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/wisdom/">Is It Worth Being Wise?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/goodtaste/">Is There Such a Thing as Good Taste?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/charisma/">It&#39;s Charisma, Stupid</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/javacover/">Java&#39;s Cover</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/jessica/">Jessica Livingston</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/identity/">Keep Your Identity Small</a>
-  
-
-  
-  
-    <a class="depth-0 file-link is-active" href="/paul_graham/essays_en/laundry/">Laundry</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/foundersatwork/">Learning from Founders</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/95/">Let the Other 95% of Great Programmers In</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/lies/">Lies We Tell Kids</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/vb/">Life is Short</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/lwba/">Lisp for Web-Based Applications</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/usa/">Made in USA</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/makersschedule/">Maker&#39;s Schedule, Manager&#39;s Schedule</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/maybe/">Maybe</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/mean/">Mean</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/microsoft/">Microsoft is Dead</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/gap/">Mind the Gap</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/mod/">Mod</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/wtax/">Modeling a Wealth Tax</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/colleges/">News from the Front</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/notnot/">Not Not</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/nov/">Novelty and Heresy</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/organic/">Organic Startup Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/orth/">Orthodox Privilege</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/discover/">Persuade xor Discover</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/publishing/">Post-Medium Publishing</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/pow/">Pow</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/progbot/">Progbot</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/prop62/">Prop62</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/property/">Property</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/words/">Putting Ideas into Words</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ramenprofitable/">Ramen Profitable</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/relres/">Relentlessly Resourceful</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/mac/">Return of the Mac</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/icad/">Revenge of the Nerds</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/rss/">RSS</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/schlep/">Schlep Blindness</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/randomness/">See Randomness</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/newthings/">Six Principles for Making New Things</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/vw/">Snapshot: Viaweb, June 1998</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/heroes/">Some Heroes</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/growth/">Startup = Growth</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/invtrend/">Startup Investing Trends</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/13sentences/">Startups in 13 Sentences</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/stuff/">Stuff</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/power/">Succinctness is Power</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/superlinear/">Superlinear Returns</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/tablets/">Tablets</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/taste/">Taste for Makers</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/startupmistakes/">The 18 Mistakes That Kill Startups</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/essay/">The Age of the Essay</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/airbnbs/">The Airbnbs</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/determination/">The Anatomy of Determination</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/best/">The Best Essay</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/genius/">The Bus Ticket Theory of Genius</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/equity/">The Equity Equation</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/pinch/">The Fatal Pinch</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/foundervisa/">The Founder Visa</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/future/">The Future of Startup Funding</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/webstartups/">The Future of Web Startups</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/guidetoinvestors/">The Hacker&#39;s Guide to Investors</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/startuplessons/">The Hardest Lessons for Startups to Learn</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hw/">The Hardware Renaissance</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/highres/">The High-Res Society</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hundred/">The Hundred-Year Language</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/island/">The Island Test</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/lesson/">The Lesson to Unlearn</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/nthings/">The List of N Things</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/read/">The Need to Read</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/superangels/">The New Funding Landscape</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/woke/">The Origins of Wokeness</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/artistsship/">The Other Half of &#39;Artists Ship&#39;</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/road/">The Other Road Ahead</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/patentpledge/">The Patent Pledge</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/prcmc/">The Pooled-Risk Company Management Company</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/marginal/">The Power of the Marginal</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/pypar/">The Python Paradox</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/real/">The Real Reason to End the Death Penalty</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/reddits/">The Reddits</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/re/">The Refragmentation</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/persistence/">The Right Kind of Stubborn</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/disc/">The Risk of Discovery</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/ronco/">The Ronco Principle</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/rootsoflisp/">The Roots of Lisp</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/field/">The Shape of the Essay Field</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/submarine/">The Submarine</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/top/">The Top Idea in Your Mind</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/todo/">The Top of My Todo List</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/segway/">The Trouble with the Segway</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/vcsqueeze/">The Venture Capital Squeeze</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/gba/">The Word &#39;Hacker&#39;</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/trolls/">Trolls</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/judgement/">Two Kinds of Judgement</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/college/">Undergraduation</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/useful/">Useful</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/web20/">Web 2.0</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/weird/">Weird Languages</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/acl2txtt1748944359/">Welcome to Lisp</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/opensource/">What Business Can Learn from Open Source</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/work/">What Doesn&#39;t Seem Like Work?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/yahoo/">What Happened to Yahoo</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/sfp/">What I Did this Summer</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/worked/">What I Worked On</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hackernews/">What I&#39;ve Learned from Hacker News</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/users/">What I&#39;ve Learned from Users</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/kate/">What Kate Saw in Silicon Valley</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/fix/">What Languages Fix</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/diff/">What Made Lisp Different</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/altair/">What Microsoft Is this the Altair Basic of?</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/really/">What Startups Are Really Like</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/bubble/">What the Bubble Got Right</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/do/">What to Do</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/founders/">What We Look for in Founders</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/want/">What You (Want to)* Want</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/say/">What You Can&#39;t Say</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hs/">What You&#39;ll Wish You&#39;d Known</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/when/">When To Do What You Love</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/seesv/">Where to See Silicon Valley</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/noop/">Why Arc Isn&#39;t Especially Object-Oriented</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/safe/">Why It&#39;s Safe for Founders to Be Nice</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/nerds/">Why Nerds are Unpopular</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/bronze/">Why Smart People Have Bad Ideas</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/hubs/">Why Startup Hubs Work</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/america/">Why Startups Condense in America</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/googles/">Why There Aren&#39;t More Googles</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/startuphubs/">Why to Move to a Startup Hub</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/badeconomy/">Why to Start a Startup in a Bad Economy</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/convergence/">Why TV Lost</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/twitter/">Why Twitter is a Big Deal</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/whyyc/">Why YC</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/talk/">Write Like You Talk</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/simply/">Write Simply</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/writes/">Writes and Write-Nots</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/speak/">Writing and Speaking</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/writing44/">Writing, Briefly</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_en/boss/">You Weren&#39;t Meant to Have a Boss</a>
-  
-
-
-
-
-
-      
-      
-    </nav>
-    
-    
-    
-    
-  </aside>
-
-  
-  <article class="docs-content">
-    
-    <div class="prose">
-      
-      
-
-      
-      
-      
-      
-      
-      
-
-      
-      
-      
-      
-      
-      
-        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
-          <span class="meta-author">Paul Graham</span>
-          
-          
-        </div>
-      
-
-      
-      <p>→ <a href="/paul_graham/essays_zh/laundry/">中文版本</a></p>
-<div
-  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
-  data-url="https://www.paulgraham.com/laundry.html"
->
-  <a
-    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
-    href="https://www.paulgraham.com/laundry.html"
-    target="_blank"
-    rel="noopener"
-  >
-    https://www.paulgraham.com/laundry.html
-  </a>
-</div>
-
-<h1 id="laundry">Laundry</h1>
-<p>A Version 1.0</p>
-<p>October 2004</p>
-<p>As E. B. White said, &ldquo;good writing is rewriting.&rdquo; I didn&rsquo;t realize this when I was in school. In writing, as in math and science, they only show you the finished product. You don&rsquo;t see all the false starts. This gives students a misleading view of how things get made.</p>
-<p>Part of the reason it happens is that writers don&rsquo;t want people to see their mistakes. But I&rsquo;m willing to let people see an early draft if it will show how much you have to rewrite to beat an essay into shape.</p>
-<p>Below is the oldest version I can find of The Age of the Essay (probably the second or third day), with text that ultimately survived in red and text that later got deleted in gray. There seem to be several categories of cuts: things I got wrong, things that seem like bragging, flames, digressions, stretches of awkward prose, and unnecessary words.</p>
-<p>I discarded more from the beginning. That&rsquo;s not surprising; it takes a while to hit your stride. There are more digressions at the start, because I&rsquo;m not sure where I&rsquo;m heading.</p>
-<p>The amount of cutting is about average. I probably write three to four words for every one that appears in the final version of an essay.</p>
-<p>(Before anyone gets mad at me for opinions expressed here, remember that anything you see here that&rsquo;s not in the final version is obviously something I chose not to publish, often because I disagree with it.)</p>
-<p>Recently a friend said that what he liked about my essays was that they weren&rsquo;t written the way we&rsquo;d been taught to write essays in school. You remember: topic sentence, introductory paragraph, supporting paragraphs, conclusion. It hadn&rsquo;t occurred to me till then that those horrible things we had to write in school were even connected to what I was doing now. But sure enough, I thought, they did call them &ldquo;essays,&rdquo; didn&rsquo;t they?</p>
-<p>Well, they&rsquo;re not. Those things you have to write in school are not only not essays, they&rsquo;re one of the most pointless of all the pointless hoops you have to jump through in school. And I worry that they not only teach students the wrong things about writing, but put them off writing entirely.</p>
-<p>So I&rsquo;m going to give the other side of the story: what an essay really is, and how you write one. Or at least, how I write one. Students be forewarned: if you actually write the kind of essay I describe, you&rsquo;ll probably get bad grades. But knowing how it&rsquo;s really done should at least help you to understand the feeling of futility you have when you&rsquo;re writing the things they tell you to.</p>
-<p>The most obvious difference between real essays and the things one has to write in school is that real essays are not exclusively about English literature. It&rsquo;s a fine thing for schools to teach students how to write. But for some bizarre reason (actually, a very specific bizarre reason that I&rsquo;ll explain in a moment), the teaching of writing has gotten mixed together with the study of literature. And so all over the country, students are writing not about how a baseball team with a small budget might compete with the Yankees, or the role of color in fashion, or what constitutes a good dessert, but about symbolism in Dickens.</p>
-<p>With obvious results. Only a few people really care about symbolism in Dickens. The teacher doesn&rsquo;t. The students don&rsquo;t. Most of the people who&rsquo;ve had to write PhD dissertations about Dickens don&rsquo;t. And certainly Dickens himself would be more interested in an essay about color or baseball.</p>
-<p>How did things get this way? To answer that we have to go back almost a thousand years. Between about 500 and 1000, life was not very good in Europe. The term &ldquo;dark ages&rdquo; is presently out of fashion as too judgmental (the period wasn&rsquo;t dark; it was just different), but if this label didn&rsquo;t already exist, it would seem an inspired metaphor. What little original thought there was took place in lulls between constant wars and had something of the character of the thoughts of parents with a new baby. The most amusing thing written during this period, Liudprand of Cremona&rsquo;s Embassy to Constantinople, is, I suspect, mostly inadvertently so.</p>
-<p>Around 1000 Europe began to catch its breath. And once they had the luxury of curiosity, one of the first things they discovered was what we call &ldquo;the classics.&rdquo; Imagine if we were visited by aliens. If they could even get here they&rsquo;d presumably know a few things we don&rsquo;t. Immediately Alien Studies would become the most dynamic field of scholarship: instead of painstakingly discovering things for ourselves, we could simply suck up everything they&rsquo;d discovered. So it was in Europe in 1200. When classical texts began to circulate in Europe, they contained not just new answers, but new questions. (If anyone proved a theorem in Christian Europe before 1200, for example, there is no record of it.)</p>
-<p>For a couple centuries, some of the most important work being done was intellectual archaeology. Those were also the centuries during which schools were first established. And since reading ancient texts was the essence of what scholars did then, it became the basis of the curriculum.</p>
-<p>By 1700, someone who wanted to learn about physics didn&rsquo;t need to start by mastering Greek in order to read Aristotle. But schools change slower than scholarship: the study of ancient texts had such prestige that it remained the backbone of education until the late 19th century. By then it was merely a tradition. It did serve some purposes: reading a foreign language was difficult, and thus taught discipline, or at least, kept students busy; it introduced students to cultures quite different from their own; and its very uselessness made it function (like white gloves) as a social bulwark. But it certainly wasn&rsquo;t true, and hadn&rsquo;t been true for centuries, that students were serving apprenticeships in the hottest area of scholarship.</p>
-<p>Classical scholarship had also changed. In the early era, philology actually mattered. The texts that filtered into Europe were all corrupted to some degree by the errors of translators and copyists. Scholars had to figure out what Aristotle said before they could figure out what he meant. But by the modern era such questions were answered as well as they were ever going to be. And so the study of ancient texts became less about ancientness and more about texts.</p>
-<p>The time was then ripe for the question: if the study of ancient texts is a valid field for scholarship, why not modern texts? The answer, of course, is that the raison d&rsquo;etre of classical scholarship was a kind of intellectual archaeology that does not need to be done in the case of contemporary authors. But for obvious reasons no one wanted to give that answer. The archaeological work being mostly done, it implied that the people studying the classics were, if not wasting their time, at least working on problems of minor importance.</p>
-<p>And so began the study of modern literature. There was some initial resistance, but it didn&rsquo;t last long. The limiting reagent in the growth of university departments is what parents will let undergraduates study. If parents will let their children major in x, the rest follows straightforwardly. There will be jobs teaching x, and professors to fill them. The professors will establish scholarly journals and publish one another&rsquo;s papers. Universities with x departments will subscribe to the journals. Graduate students who want jobs as professors of x will write dissertations about it. It may take a good long while for the more prestigious universities to cave in and establish departments in cheesier xes, but at the other end of the scale there are so many universities competing to attract students that the mere establishment of a discipline requires little more than the desire to do it.</p>
-<p>High schools imitate universities. And so once university English departments were established in the late nineteenth century, the &lsquo;riting component of the 3 Rs was morphed into English. With the bizarre consequence that high school students now had to write about English literature&ndash; to write, without even realizing it, imitations of whatever English professors had been publishing in their journals a few decades before.</p>
-<p>It&rsquo;s no wonder if this seems to the student a pointless exercise, because we&rsquo;re now three steps removed from real work: the students are imitating English professors, who are imitating classical scholars, who are merely the inheritors of a tradition growing out of what was, 700 years ago, fascinating and urgently needed work.</p>
-<p>Perhaps high schools should drop English and just teach writing. The valuable part of English classes is learning to write, and that could be taught better by itself. Students learn better when they&rsquo;re interested in what they&rsquo;re doing, and it&rsquo;s hard to imagine a topic less interesting than symbolism in Dickens. Most of the people who write about that sort of thing professionally are not really interested in it. (Though indeed, it&rsquo;s been a while since they were writing about symbolism; now they&rsquo;re writing about gender.)</p>
-<p>I have no illusions about how eagerly this suggestion will be adopted. Public schools probably couldn&rsquo;t stop teaching English even if they wanted to; they&rsquo;re probably required to by law. But here&rsquo;s a related suggestion that goes with the grain instead of against it: that universities establish a writing major. Many of the students who now major in English would major in writing if they could, and most would be better off.</p>
-<p>It will be argued that it is a good thing for students to be exposed to their literary heritage. Certainly. But is that more important than that they learn to write well? And are English classes even the place to do it? After all, the average public high school student gets zero exposure to his artistic heritage. No disaster results. The people who are interested in art learn about it for themselves, and those who aren&rsquo;t don&rsquo;t. I find that American adults are no better or worse informed about literature than art, despite the fact that they spent years studying literature in high school and no time at all studying art. Which presumably means that what they&rsquo;re taught in school is rounding error compared to what they pick up on their own.</p>
-<p>Indeed, English classes may even be harmful. In my case they were effectively aversion therapy. Want to make someone dislike a book? Force him to read it and write an essay about it. And make the topic so intellectually bogus that you could not, if asked, explain why one ought to write about it. I love to read more than anything, but by the end of high school I never read the books we were assigned. I was so disgusted with what we were doing that it became a point of honor with me to write nonsense at least as good as the other students&rsquo; without having more than glanced over the book to learn the names of the characters and a few random events in it.</p>
-<p>I hoped this might be fixed in college, but I found the same problem there. It was not the teachers. It was English. We were supposed to read novels and write essays about them. About what, and why? That no one seemed to be able to explain. Eventually by trial and error I found that what the teacher wanted us to do was pretend that the story had really taken place, and to analyze based on what the characters said and did (the subtler clues, the better) what their motives must have been. One got extra credit for motives having to do with class, as I suspect one must now for those involving gender and sexuality. I learned how to churn out such stuff well enough to get an A, but I never took another English class.</p>
-<p>And the books we did these disgusting things to, like those we mishandled in high school, I find still have black marks against them in my mind. The one saving grace was that English courses tend to favor pompous, dull writers like Henry James, who deserve black marks against their names anyway. One of the principles the IRS uses in deciding whether to allow deductions is that, if something is fun, it isn&rsquo;t work. Fields that are intellectually unsure of themselves rely on a similar principle. Reading P.G. Wodehouse or Evelyn Waugh or Raymond Chandler is too obviously pleasing to seem like serious work, as reading Shakespeare would have been before English evolved enough to make it an effort to understand him. [sh] And so good writers (just you wait and see who&rsquo;s still in print in 300 years) are less likely to have readers turned against them by clumsy, self-appointed tour guides.</p>
-<p>The other big difference between a real essay and the things they make you write in school is that a real essay doesn&rsquo;t take a position and then defend it. That principle, like the idea that we ought to be writing about literature, turns out to be another intellectual hangover of long forgotten origins. It&rsquo;s often mistakenly believed that medieval universities were mostly seminaries. In fact they were more law schools. And at least in our tradition lawyers are advocates: they are trained to be able to take either side of an argument and make as good a case for it as they can. Whether or not this is a good idea (in the case of prosecutors, it probably isn&rsquo;t), it tended to pervade the atmosphere of early universities. After the lecture the most common form of discussion was the disputation. This idea is at least nominally preserved in our present-day thesis defense&ndash; indeed, in the very word thesis. Most people treat the words thesis and dissertation as interchangeable, but originally, at least, a thesis was a position one took and the dissertation was the argument by which one defended it.</p>
-<p>I&rsquo;m not complaining that we blur these two words together. As far as I&rsquo;m concerned, the sooner we lose the original sense of the word thesis, the better. For many, perhaps most, graduate students, it is stuffing a square peg into a round hole to try to recast one&rsquo;s work as a single thesis. And as for the disputation, that seems clearly a net loss. Arguing two sides of a case may be a necessary evil in a legal dispute, but it&rsquo;s not the best way to get at the truth, as I think lawyers would be the first to admit. And yet this principle is built into the very structure of the essays they teach you to write in high school. The topic sentence is your thesis, chosen in advance, the supporting paragraphs the blows you strike in the conflict, and the conclusion&mdash; uh, what is the conclusion? I was never sure about that in high school. If your thesis was well expressed, what need was there to restate it? In theory it seemed that the conclusion of a really good essay ought not to need to say any more than QED. But when you understand the origins of this sort of &ldquo;essay&rdquo;, you can see where the conclusion comes from. It&rsquo;s the concluding remarks to the jury. What other alternative is there?</p>
-<p>To answer that we have to reach back into history again, though this time not so far. To Michel de Montaigne, inventor of the essay. He was doing something quite different from what a lawyer does, and the difference is embodied in the name. Essayer is the French verb meaning &ldquo;to try&rdquo; (the cousin of our word assay), and an &ldquo;essai&rdquo; is an effort. An essay is something you write in order to figure something out.</p>
-<p>Figure out what? You don&rsquo;t know yet. And so you can&rsquo;t begin with a thesis, because you don&rsquo;t have one, and may never have one. An essay doesn&rsquo;t begin with a statement, but with a question. In a real essay, you don&rsquo;t take a position and defend it. You see a door that&rsquo;s ajar, and you open it and walk in to see what&rsquo;s inside.</p>
-<p>If all you want to do is figure things out, why do you need to write anything, though? Why not just sit and think? Well, there precisely is Montaigne&rsquo;s great discovery. Expressing ideas helps to form them. Indeed, helps is far too weak a word. 90% of what ends up in my essays was stuff I only thought of when I sat down to write them. That&rsquo;s why I write them.</p>
-<p>So there&rsquo;s another difference between essays and the things you have to write in school. In school you are, in theory, explaining yourself to someone else. In the best case&mdash;if you&rsquo;re really organized&mdash;you&rsquo;re just writing it down. In a real essay you&rsquo;re writing for yourself. You&rsquo;re thinking out loud.</p>
-<p>But not quite. Just as inviting people over forces you to clean up your apartment, writing something that you know other people will read forces you to think well. So it does matter to have an audience. The things I&rsquo;ve written just for myself are no good. Indeed, they&rsquo;re bad in a particular way: they tend to peter out. When I run into difficulties, I notice that I tend to conclude with a few vague questions and then drift off to get a cup of tea.</p>
-<p>This seems a common problem. It&rsquo;s practically the standard ending in blog entries&mdash; with the addition of a &ldquo;heh&rdquo; or an emoticon, prompted by the all too accurate sense that something is missing.</p>
-<p>And indeed, a lot of published essays peter out in this same way. Particularly the sort written by the staff writers of newsmagazines. Outside writers tend to supply editorials of the defend-a-position variety, which make a beeline toward a rousing (and foreordained) conclusion. But the staff writers feel obliged to write something more balanced, which in practice ends up meaning blurry. Since they&rsquo;re writing for a popular magazine, they start with the most radioactively controversial questions, from which (because they&rsquo;re writing for a popular magazine) they then proceed to recoil from in terror. Gay marriage, for or against? This group says one thing. That group says another. One thing is certain: the question is a complex one. (But don&rsquo;t get mad at us. We didn&rsquo;t draw any conclusions.)</p>
-<p>Questions aren&rsquo;t enough. An essay has to come up with answers. They don&rsquo;t always, of course. Sometimes you start with a promising question and get nowhere. But those you don&rsquo;t publish. Those are like experiments that get inconclusive results. Something you publish ought to tell the reader something he didn&rsquo;t already know. But what you tell him doesn&rsquo;t matter, so long as it&rsquo;s interesting. I&rsquo;m sometimes accused of meandering. In defend-a-position writing that would be a flaw. There you&rsquo;re not concerned with truth. You already know where you&rsquo;re going, and you want to go straight there, blustering through obstacles, and hand-waving your way across swampy ground. But that&rsquo;s not what you&rsquo;re trying to do in an essay. An essay is supposed to be a search for truth. It would be suspicious if it didn&rsquo;t meander.</p>
-<p>The Meander is a river in Asia Minor (aka Turkey). As you might expect, it winds all over the place. But does it do this out of frivolity? Quite the opposite. Like all rivers, it&rsquo;s rigorously following the laws of physics. The path it has discovered, winding as it is, represents the most economical route to the sea.</p>
-<p>The river&rsquo;s algorithm is simple. At each step, flow down. For the essayist this translates to: flow interesting. Of all the places to go next, choose whichever seems most interesting.</p>
-<p>I&rsquo;m pushing this metaphor a bit. An essayist can&rsquo;t have quite as little foresight as a river. In fact what you do (or what I do) is somewhere between a river and a roman road-builder. I have a general idea of the direction I want to go in, and I choose the next topic with that in mind. This essay is about writing, so I do occasionally yank it back in that direction, but it is not all the sort of essay I thought I was going to write about writing.</p>
-<p>Note too that hill-climbing (which is what this algorithm is called) can get you in trouble. Sometimes, just like a river, you run up against a blank wall. What I do then is just what the river does: backtrack. At one point in this essay I found that after following a certain thread I ran out of ideas. I had to go back n paragraphs and start over in another direction. For illustrative purposes I&rsquo;ve left the abandoned branch as a footnote. Err on the side of the river. An essay is not a reference work. It&rsquo;s not something you read looking for a specific answer, and feel cheated if you don&rsquo;t find it. I&rsquo;d much rather read an essay that went off in an unexpected but interesting direction than one that plodded dutifully along a prescribed course.</p>
-<p>So what&rsquo;s interesting? For me, interesting means surprise. Design, as Matz has said, should follow the principle of least surprise. A button that looks like it will make a machine stop should make it stop, not speed up. Essays should do the opposite. Essays should aim for maximum surprise.</p>
-<p>I was afraid of flying for a long time and could only travel vicariously. When friends came back from faraway places, it wasn&rsquo;t just out of politeness that I asked them about their trip. I really wanted to know. And I found that the best way to get information out of them was to ask what surprised them. How was the place different from what they expected? This is an extremely useful question. You can ask it of even the most unobservant people, and it will extract information they didn&rsquo;t even know they were recording. Indeed, you can ask it in real time. Now when I go somewhere new, I make a note of what surprises me about it. Sometimes I even make a conscious effort to visualize the place beforehand, so I&rsquo;ll have a detailed image to diff with reality. Surprises are facts you didn&rsquo;t already know. But they&rsquo;re more than that. They&rsquo;re facts that contradict things you thought you knew. And so they&rsquo;re the most valuable sort of fact you can get. They&rsquo;re like a food that&rsquo;s not merely healthy, but counteracts the unhealthy effects of things you&rsquo;ve already eaten.</p>
-<p>How do you find surprises? Well, therein lies half the work of essay writing. (The other half is expressing yourself well.) You can at least use yourself as a proxy for the reader. You should only write about things you&rsquo;ve thought about a lot. And anything you come across that surprises you, who&rsquo;ve thought about the topic a lot, will probably surprise most readers.</p>
-<p>For example, in a recent essay I pointed out that because you can only judge computer programmers by working with them, no one knows in programming who the heroes should be. I certainly didn&rsquo;t realize this when I started writing the essay, and even now I find it kind of weird. That&rsquo;s what you&rsquo;re looking for.</p>
-<p>So if you want to write essays, you need two ingredients: you need a few topics that you think about a lot, and you need some ability to ferret out the unexpected.</p>
-<p>What should you think about? My guess is that it doesn&rsquo;t matter. Almost everything is interesting if you get deeply enough into it. The one possible exception are things like working in fast food, which have deliberately had all the variation sucked out of them. In retrospect, was there anything interesting about working in Baskin-Robbins? Well, it was interesting to notice how important color was to the customers. Kids a certain age would point into the case and say that they wanted yellow. Did they want French Vanilla or Lemon? They would just look at you blankly. They wanted yellow. And then there was the mystery of why the perennial favorite Pralines n&rsquo; Cream was so appealing. I&rsquo;m inclined now to think it was the salt. And the mystery of why Passion Fruit tasted so disgusting. People would order it because of the name, and were always disappointed. It should have been called In-sink-erator Fruit. And there was the difference in the way fathers and mothers bought ice cream for their kids. Fathers tended to adopt the attitude of benevolent kings bestowing largesse, and mothers that of harried bureaucrats, giving in to pressure against their better judgement. So, yes, there does seem to be material, even in fast food.</p>
-<p>What about the other half, ferreting out the unexpected? That may require some natural ability. I&rsquo;ve noticed for a long time that I&rsquo;m pathologically observant. &hellip;.</p>
-<p>[That was as far as I&rsquo;d gotten at the time.]</p>
-<h2 id="notes">Notes</h2>
-<p>[sh] In Shakespeare&rsquo;s own time, serious writing meant theological discourses, not the bawdy plays acted over on the other side of the river among the bear gardens and whorehouses.</p>
-<p>The other extreme, the work that seems formidable from the moment it&rsquo;s created (indeed, is deliberately intended to be) is represented by Milton. Like the Aeneid, Paradise Lost is a rock imitating a butterfly that happened to get fossilized. Even Samuel Johnson seems to have balked at this, on the one hand paying Milton the compliment of an extensive biography, and on the other writing of Paradise Lost that &ldquo;none who read it ever wished it longer.&rdquo;</p>
-
-      
-    </div>
-    
-    
-    
-
-
-<div class="sibling-cards">
-  
-  <a class="sibling-card prev" href="/paul_graham/essays_en/foundersatwork/" aria-label="上一篇：Learning from Founders">
-    <div class="sibling-card-arrow">‹</div>
-    <div class="sibling-card-main">
-      <div class="sibling-card-title">Learning from Founders</div>
-      <div class="sibling-card-meta">
-        <span class="meta-author">Paul Graham</span>
-        
-        
-      </div>
-    </div>
-  </a>
-  
-
-  
-  <a class="sibling-card next" href="/paul_graham/essays_en/identity/" aria-label="下一篇：Keep Your Identity Small">
-    <div class="sibling-card-main">
-      <div class="sibling-card-title">Keep Your Identity Small</div>
-      <div class="sibling-card-meta">
-        <span class="meta-author">Paul Graham</span>
-        
-        
-      </div>
-    </div>
-    <div class="sibling-card-arrow">›</div>
-  </a>
-  
-</div>
-
-
-    <section class="comments" aria-label="Comments">
-  <div id="giscus_thread" class="giscus"
-    data-repo="Linguage/Giscus"
-    data-repo-id="R_kgDOLxA-eA"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOLxA-eM4Ce06R"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme-light="light"
-    data-theme-dark="dark"
-    data-lang="zh-CN">
-  </div>
-  <script>
-    (function(){
-      try{
-        const el = document.getElementById('giscus_thread');
-        if (!el) return;
-        
-        let saved = null;
-        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
-        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
-        
-        el.setAttribute('data-theme', theme);
-        
-        const s = document.createElement('script');
-        s.src = 'https://giscus.app/client.js';
-        s.setAttribute('data-repo', el.dataset.repo || '');
-        s.setAttribute('data-repo-id', el.dataset.repoId || '');
-        s.setAttribute('data-category', el.dataset.category || 'General');
-        s.setAttribute('data-category-id', el.dataset.categoryId || '');
-        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
-        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
-        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
-        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
-        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
-        s.setAttribute('data-theme', theme);
-        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
-        s.setAttribute('crossorigin','anonymous');
-        s.async = true;
-        el.parentNode.insertBefore(s, el.nextSibling);
-      }catch(_){   }
-    })();
-  </script>
-</section>
-  </article>
-
-  
-  
-  
-  
-    
-    <aside class="docs-toc" aria-label="On this page">
-      
-      <div class="toc-title">On this page</div>
-      
-      <nav class="toc">
-        
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#notes">Notes</a></li>
-  </ul>
-</nav>
-            
-      </nav>
-      
-      
-    </aside>
-  
-</div>
-
-
-
-<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-
-
-
-
-  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
-  <div id="tocDrawer" class="toc-drawer" hidden>
-    <div class="toc-drawer-inner">
-      <div class="toc-drawer-header">
-        <span>目录</span>
-        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
-      </div>
-      <nav class="toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#notes">Notes</a></li>
-  </ul>
-</nav>
-      </nav>
-    </div>
-  </div>
-
-
-
-
-
-
-  </main>
-  
-  
-  
-  <footer class="site-footer">
-  
-  <div class="container footer-inner">
-    
-    <div>
-      
-        
-          © 2025 Linguista
-        
-      
-    </div>
-    
-    
-    
-    <nav class="footer-nav social-links" aria-label="Social links">
-      
-      
-      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
-      </a>
-      
-      
-      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
-      </a>
-      
-      
-      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
-      </a>
-      
-      
-      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
-      
-    </nav>
-    
-  </div>
-  
-</footer>
-
-  
-  
-  <script src="/script.js?v=20251029-01" defer></script>
-  <script defer src="/js/search-core.js?v=20251029-01"></script>
-  <script>
-    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251029-01';
-    window.SEARCH_INDEX_URL = '\/index.json?v=20251029-01';
-  </script>
-  <script src="/js/search-advanced.js?v=20251029-01" defer></script>
-  
-  <script defer src="/js/table-7char.js?v=20251029-01"></script>
-  
-  <script defer src="/js/linkcard.js?v=20251029-01"></script>
-  <script defer src="/js/table-tooltips.js?v=20251029-01"></script>
-  <script defer src="/js/social-popup.js?v=20251029-01"></script>
-  
-  
-  
-  
-  <div id="social-popup-overlay" aria-hidden="true">
-  <div class="social-popup-card" role="dialog" aria-modal="true" aria-labelledby="social-popup-title" aria-describedby="social-popup-desc">
-    <button class="social-popup-close" type="button" aria-label="关闭">×</button>
-    <img class="social-popup-image" src="" alt="" />
-    <div class="social-popup-title" id="social-popup-title"></div>
-    <div class="social-popup-desc" id="social-popup-desc"></div>
-  </div>
-</div>
-
-  
-</body>
-</html>
+<!doctype html><html lang=zh-CN class=skin-gold><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Laundry • Linguista</title><script>(function(){try{var s="theme",e=window.localStorage?localStorage.getItem(s):null,n=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=e==="dark"||e==="light"?e:n?"dark":null;t?document.documentElement.dataset.theme=t:delete document.documentElement.dataset.theme}catch{}})()</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel=stylesheet><link rel=stylesheet href="/styles.css?v=20251029-01"><link rel=stylesheet href="/overrides.css?v=20251029-01"><link rel=stylesheet href="/css/search.css?v=20251029-01"><link rel=stylesheet href="/linkcard.css?v=20251029-01"><link rel=stylesheet href="/css/typography-mlsys.css?v=20251029-01"><link rel=stylesheet href="/css/table-tooltips.css?v=20251029-01"><link rel=stylesheet href="/css/sociallink.css?v=20251029-01"><link rel=stylesheet href="/css/social-popup.css?v=20251029-01"><style>:root{--theme-breadcrumbs-height:0px}</style><script>window.tailwind=window.tailwind||{},tailwind.config={corePlugins:{preflight:!1},safelist:["group/link-card","sm:flex-row","sm:items-center","h-[84px]","w-[84px]","sm:h-[84px]","sm:w-[84px]","line-clamp-2"]}</script><script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script><link rel=stylesheet href="/css/skin-gold.css?v=20251029-01"><style>:root{}</style><link rel=icon href=/favicon_io/favicon.ico sizes=any><link rel=icon type=image/png sizes=32x32 href=/favicon_io/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon_io/favicon-16x16.png><link rel=apple-touch-icon href=/favicon_io/apple-touch-icon.png><link rel=manifest href=/favicon_io/site.webmanifest><meta property="og:site_name" content="Linguista"><meta property="og:type" content="article"><meta property="og:title" content="Laundry"><meta property="og:description" content="→ 中文版本 https://www.paulgraham.com/laundry.html Laundry A Version 1.0 October 2004 As E. B. White said, “good writing is rewriting.” I didn’t realize this when I was in school. In …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_en/laundry/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400"><meta property="og:image:height" content="400"><meta name=twitter:card content="summary"><meta name=twitter:site content="@linguista2025"><meta name=twitter:creator content="@linguista2025"><meta name=twitter:title content="Laundry"><meta name=twitter:description content="→ 中文版本 https://www.paulgraham.com/laundry.html Laundry A Version 1.0 October 2004 As E. B. White said, “good writing is rewriting.” I didn’t realize this when I was in school. In …"><meta name=twitter:image content="https://linguage.github.io/img/Linguista_imresizer.png"><link rel=canonical href=https://linguage.github.io/paul_graham/essays_en/laundry/><script>window.MathJax={loader:{load:["[tex]/ams"]},tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,packages:{"[+]":["ams"]},macros:{unicodeInt:[`\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits`,1],oiint:"\\unicodeInt{x222F}",oiiint:"\\unicodeInt{x2230}"}},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}}</script><script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-99PGBGJH4S")</script></head><body><header class=site-header><div class="container header-inner"><div class=brand><a href=/ class=brand-avatar-link aria-label=Linguista><picture><img src=/img/Avatar5518800_2.jpg class=logo-avatar alt=Linguista width=32 height=32 loading=lazy decoding=async onerror='this.classList.add("avatar-fallback")'>
+</picture></a><button class="mobile-nav-btn mobile-nav-btn--header" aria-controls=navDrawer aria-expanded=false aria-label=打开导航>☰</button>
+<span class=brand-text>Linguista</span></div><nav class=nav><a href=/labs/ class=nav-link>工坊</a>
+<a href=/essays/ class=nav-link>经典</a>
+<a href=/courses/ class=nav-link>课程资料</a>
+<a href=/bookmarks/ class=nav-link>书签</a>
+<a href=/about/ class=nav-link>关于我</a></nav><div class=actions><button id=searchToggleBtn class="btn ghost search-toggle-btn" aria-label=打开搜索 title=搜索 type=button>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class=site-search role=search><button id=searchBackBtn class=mobile-search-back aria-label=返回 title=返回 type=button>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<span class=site-search-icon aria-hidden=true><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</span><input id=globalSearchInput class=site-search-input type=search placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）" aria-label=站内搜索 autocomplete=off spellcheck=false>
+<button id=pageSearchBtn class=page-search-btn aria-label=本页搜索 title=本页搜索 type=button>页</button><div id=globalSearchPopover class=site-search-popover hidden aria-live=polite></div></div><a href=/post/ class="btn ghost posts-btn">Posts</a>
+<button id=themeToggle class="btn ghost theme-toggle-btn" aria-label=切换主题 title=切换主题>🌙</button></div></div></header><aside id=navDrawer class=nav-drawer hidden><div class=nav-drawer-inner><div class=nav-drawer-header><div class=nav-drawer-title>Menu</div><button id=navCloseBtn class=nav-drawer-close aria-label="Close menu">×</button></div><nav class=nav-drawer-list aria-label="Mobile Primary"><a class=nav-drawer-item href=/labs/>工坊</a>
+<a class=nav-drawer-item href=/essays/>经典</a>
+<a class=nav-drawer-item href=/courses/>课程资料</a>
+<a class=nav-drawer-item href=/bookmarks/>书签</a>
+<a class=nav-drawer-item href=/about/>关于我</a></nav><div class=nav-drawer-folder><div class=nav-drawer-subtitle>Section</div><nav class="docs-nav in-drawer" aria-label="Current Section"><a class="depth-0 file-link" href=/paul_graham/essays_en/6631327/>6,631,372</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fundraising/>A Fundraising Survival Guide</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/revolution/>A Local Revolution?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ycombinator/>A New Venture Animal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/spam/>A Plan for Spam</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/own/>A Project of One's Own</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mit/>A Student's Guide to Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/venturecapital/>A Unified Theory of VC Suckage</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bias/>A Way to Detect Bias</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/word/>A Word to the Resourceful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ace/>Ace</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/addiction/>Addiction</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/credentials/>After Credentials</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ladder/>After the Ladder</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/airbnb/>Airbnb</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/alien/>Alien Truth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/unions/>An Alternative Theory of Unions</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nft/>An NFT That Saves Lives</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/apple/>Apple's Mistake</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/softwarepatents/>Are Software Patents Evil?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/good/>Be Good</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/avg/>Beating the Averages</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/before/>Before the Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/noob/>Being a Noob</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/popular/>Being Popular</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/better/>Better Bayesian Filtering</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/smart/>Beyond Smart</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/swan/>Black Swan Farming</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/polls/>Bradley's Ghost</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/name/>Change Your Name</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/cities/>Cities and Ambition</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/conformism/>Conformism</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/control/>Control</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/copy/>Copy What You Like</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/cred/>Coronavirus and Credibility</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/corpdev/>Corpdev</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/divergence/>Could VC be a Casualty of the Recession?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/newideas/>Crazy New Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/aord/>Default Alive or Default Dead?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/desres/>Design and Research</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/distraction/>Distraction</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ds/>Do Things that Don't Scale</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/donate/>Donate Unrestricted</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/early/>Early</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/earnest/>Earnest</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ineq/>Economic Inequality</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fp/>Fashionable Problems</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fn/>Fierce Nerds</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ffb/>Filters that Fight Back</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/5founders/>Five Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/langdes/>Five Questions about Language Design</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundermode/>Founder Mode</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ambitious/>Frighteningly Ambitious Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/sun/>General and Surprising</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/procrastination/>Good and Bad Procrastination</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodwriting/>Good Writing</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gh/>Great Hackers</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hp/>Hackers and Painters</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fh/>Haters</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/kids/>Having Kids</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/heresy/>Heresy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hiresfund/>High Resolution Fundraising</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hiring/>Hiring is Obsolete</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/head/>Holding a Program in One's Head</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodart/>How Art Can Be Good</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/die/>How Not to Die</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/richnow/>How People Get Rich Now</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/angelinvesting/>How to Be an Angel Investor</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ecw/>How to Be an Expert in a Changing World</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/siliconvalley/>How to Be Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/convince/>How to Convince Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/disagree/>How to Disagree</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/greatwork/>How to Do Great Work</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/philosophy/>How to Do Philosophy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/love/>How to Do What You Love</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupfunding/>How to Fund a Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/getideas/>How to Get New Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupideas/>How to Get Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/selfindulgence/>How to Lose Time and Money</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pgh/>How to Make Pittsburgh a Startup Hub</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wealth/>How to Make Wealth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/investors/>How to Present to Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fr/>How to Raise Money</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/start/>How to Start a Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/google/>How to Start Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/think/>How to Think for Yourself</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hwh/>How to Work Hard</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ycstart/>How Y Combinator Started</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/know/>How You Know</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ideas/>Ideas for Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/iflisp/>If Lisp is So Great</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/inequality/>Inequality</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/acl1txtt1748944359/>Introduction to ANSI Common Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/herd/>Investor Herd Dynamics</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wisdom/>Is It Worth Being Wise?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodtaste/>Is There Such a Thing as Good Taste?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/charisma/>It's Charisma, Stupid</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/javacover/>Java's Cover</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/jessica/>Jessica Livingston</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/identity/>Keep Your Identity Small</a>
+<a class="depth-0 file-link is-active" href=/paul_graham/essays_en/laundry/>Laundry</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundersatwork/>Learning from Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/95/>Let the Other 95% of Great Programmers In</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lies/>Lies We Tell Kids</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vb/>Life is Short</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lwba/>Lisp for Web-Based Applications</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/usa/>Made in USA</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/makersschedule/>Maker's Schedule, Manager's Schedule</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/maybe/>Maybe</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mean/>Mean</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/microsoft/>Microsoft is Dead</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gap/>Mind the Gap</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mod/>Mod</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wtax/>Modeling a Wealth Tax</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/colleges/>News from the Front</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/notnot/>Not Not</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nov/>Novelty and Heresy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/organic/>Organic Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/orth/>Orthodox Privilege</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/discover/>Persuade xor Discover</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/publishing/>Post-Medium Publishing</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pow/>Pow</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/progbot/>Progbot</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/prop62/>Prop62</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/property/>Property</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/words/>Putting Ideas into Words</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ramenprofitable/>Ramen Profitable</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/relres/>Relentlessly Resourceful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mac/>Return of the Mac</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/icad/>Revenge of the Nerds</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/rss/>RSS</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/schlep/>Schlep Blindness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/randomness/>See Randomness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/newthings/>Six Principles for Making New Things</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vw/>Snapshot: Viaweb, June 1998</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/heroes/>Some Heroes</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/growth/>Startup = Growth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/invtrend/>Startup Investing Trends</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/13sentences/>Startups in 13 Sentences</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/stuff/>Stuff</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/power/>Succinctness is Power</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/superlinear/>Superlinear Returns</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/tablets/>Tablets</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/taste/>Taste for Makers</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupmistakes/>The 18 Mistakes That Kill Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/essay/>The Age of the Essay</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/airbnbs/>The Airbnbs</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/determination/>The Anatomy of Determination</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/best/>The Best Essay</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/genius/>The Bus Ticket Theory of Genius</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/equity/>The Equity Equation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pinch/>The Fatal Pinch</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundervisa/>The Founder Visa</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/future/>The Future of Startup Funding</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/webstartups/>The Future of Web Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/guidetoinvestors/>The Hacker's Guide to Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startuplessons/>The Hardest Lessons for Startups to Learn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hw/>The Hardware Renaissance</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/highres/>The High-Res Society</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hundred/>The Hundred-Year Language</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/island/>The Island Test</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lesson/>The Lesson to Unlearn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nthings/>The List of N Things</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/read/>The Need to Read</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/superangels/>The New Funding Landscape</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/woke/>The Origins of Wokeness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/artistsship/>The Other Half of 'Artists Ship'</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/road/>The Other Road Ahead</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/patentpledge/>The Patent Pledge</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/prcmc/>The Pooled-Risk Company Management Company</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/marginal/>The Power of the Marginal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pypar/>The Python Paradox</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/real/>The Real Reason to End the Death Penalty</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/reddits/>The Reddits</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/re/>The Refragmentation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/persistence/>The Right Kind of Stubborn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/disc/>The Risk of Discovery</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ronco/>The Ronco Principle</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/rootsoflisp/>The Roots of Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/field/>The Shape of the Essay Field</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/submarine/>The Submarine</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/top/>The Top Idea in Your Mind</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/todo/>The Top of My Todo List</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/segway/>The Trouble with the Segway</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vcsqueeze/>The Venture Capital Squeeze</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gba/>The Word 'Hacker'</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/trolls/>Trolls</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/judgement/>Two Kinds of Judgement</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/college/>Undergraduation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/useful/>Useful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/web20/>Web 2.0</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/weird/>Weird Languages</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/acl2txtt1748944359/>Welcome to Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/opensource/>What Business Can Learn from Open Source</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/work/>What Doesn't Seem Like Work?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/yahoo/>What Happened to Yahoo</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/sfp/>What I Did this Summer</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/worked/>What I Worked On</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hackernews/>What I've Learned from Hacker News</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/users/>What I've Learned from Users</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/kate/>What Kate Saw in Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fix/>What Languages Fix</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/diff/>What Made Lisp Different</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/altair/>What Microsoft Is this the Altair Basic of?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/really/>What Startups Are Really Like</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bubble/>What the Bubble Got Right</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/do/>What to Do</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/founders/>What We Look for in Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/want/>What You (Want to)* Want</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/say/>What You Can't Say</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hs/>What You'll Wish You'd Known</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/when/>When To Do What You Love</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/seesv/>Where to See Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/noop/>Why Arc Isn't Especially Object-Oriented</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/safe/>Why It's Safe for Founders to Be Nice</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nerds/>Why Nerds are Unpopular</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bronze/>Why Smart People Have Bad Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hubs/>Why Startup Hubs Work</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/america/>Why Startups Condense in America</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/googles/>Why There Aren't More Googles</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startuphubs/>Why to Move to a Startup Hub</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/badeconomy/>Why to Start a Startup in a Bad Economy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/convergence/>Why TV Lost</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/twitter/>Why Twitter is a Big Deal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/whyyc/>Why YC</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/talk/>Write Like You Talk</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/simply/>Write Simply</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/writes/>Writes and Write-Nots</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/speak/>Writing and Speaking</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/writing44/>Writing, Briefly</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/boss/>You Weren't Meant to Have a Boss</a></nav></div></div></aside><main class=container><div class=docs-layout><aside class=docs-sidebar aria-label=Sections><div class=docs-side-title>Documentation</div><nav class=docs-nav><a class="depth-0 file-link" href=/paul_graham/essays_en/6631327/>6,631,372</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fundraising/>A Fundraising Survival Guide</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/revolution/>A Local Revolution?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ycombinator/>A New Venture Animal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/spam/>A Plan for Spam</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/own/>A Project of One's Own</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mit/>A Student's Guide to Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/venturecapital/>A Unified Theory of VC Suckage</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bias/>A Way to Detect Bias</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/word/>A Word to the Resourceful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ace/>Ace</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/addiction/>Addiction</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/credentials/>After Credentials</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ladder/>After the Ladder</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/airbnb/>Airbnb</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/alien/>Alien Truth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/unions/>An Alternative Theory of Unions</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nft/>An NFT That Saves Lives</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/apple/>Apple's Mistake</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/softwarepatents/>Are Software Patents Evil?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/good/>Be Good</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/avg/>Beating the Averages</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/before/>Before the Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/noob/>Being a Noob</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/popular/>Being Popular</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/better/>Better Bayesian Filtering</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/smart/>Beyond Smart</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/swan/>Black Swan Farming</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/polls/>Bradley's Ghost</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/name/>Change Your Name</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/cities/>Cities and Ambition</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/conformism/>Conformism</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/control/>Control</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/copy/>Copy What You Like</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/cred/>Coronavirus and Credibility</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/corpdev/>Corpdev</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/divergence/>Could VC be a Casualty of the Recession?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/newideas/>Crazy New Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/aord/>Default Alive or Default Dead?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/desres/>Design and Research</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/distraction/>Distraction</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ds/>Do Things that Don't Scale</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/donate/>Donate Unrestricted</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/early/>Early</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/earnest/>Earnest</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ineq/>Economic Inequality</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fp/>Fashionable Problems</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fn/>Fierce Nerds</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ffb/>Filters that Fight Back</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/5founders/>Five Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/langdes/>Five Questions about Language Design</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundermode/>Founder Mode</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ambitious/>Frighteningly Ambitious Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/sun/>General and Surprising</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/procrastination/>Good and Bad Procrastination</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodwriting/>Good Writing</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gh/>Great Hackers</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hp/>Hackers and Painters</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fh/>Haters</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/kids/>Having Kids</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/heresy/>Heresy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hiresfund/>High Resolution Fundraising</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hiring/>Hiring is Obsolete</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/head/>Holding a Program in One's Head</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodart/>How Art Can Be Good</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/die/>How Not to Die</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/richnow/>How People Get Rich Now</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/angelinvesting/>How to Be an Angel Investor</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ecw/>How to Be an Expert in a Changing World</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/siliconvalley/>How to Be Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/convince/>How to Convince Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/disagree/>How to Disagree</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/greatwork/>How to Do Great Work</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/philosophy/>How to Do Philosophy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/love/>How to Do What You Love</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupfunding/>How to Fund a Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/getideas/>How to Get New Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupideas/>How to Get Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/selfindulgence/>How to Lose Time and Money</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pgh/>How to Make Pittsburgh a Startup Hub</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wealth/>How to Make Wealth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/investors/>How to Present to Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fr/>How to Raise Money</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/start/>How to Start a Startup</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/google/>How to Start Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/think/>How to Think for Yourself</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hwh/>How to Work Hard</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ycstart/>How Y Combinator Started</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/know/>How You Know</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ideas/>Ideas for Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/iflisp/>If Lisp is So Great</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/inequality/>Inequality</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/acl1txtt1748944359/>Introduction to ANSI Common Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/herd/>Investor Herd Dynamics</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wisdom/>Is It Worth Being Wise?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/goodtaste/>Is There Such a Thing as Good Taste?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/charisma/>It's Charisma, Stupid</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/javacover/>Java's Cover</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/jessica/>Jessica Livingston</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/identity/>Keep Your Identity Small</a>
+<a class="depth-0 file-link is-active" href=/paul_graham/essays_en/laundry/>Laundry</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundersatwork/>Learning from Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/95/>Let the Other 95% of Great Programmers In</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lies/>Lies We Tell Kids</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vb/>Life is Short</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lwba/>Lisp for Web-Based Applications</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/usa/>Made in USA</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/makersschedule/>Maker's Schedule, Manager's Schedule</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/maybe/>Maybe</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mean/>Mean</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/microsoft/>Microsoft is Dead</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gap/>Mind the Gap</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mod/>Mod</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/wtax/>Modeling a Wealth Tax</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/colleges/>News from the Front</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/notnot/>Not Not</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nov/>Novelty and Heresy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/organic/>Organic Startup Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/orth/>Orthodox Privilege</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/discover/>Persuade xor Discover</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/publishing/>Post-Medium Publishing</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pow/>Pow</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/progbot/>Progbot</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/prop62/>Prop62</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/property/>Property</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/words/>Putting Ideas into Words</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ramenprofitable/>Ramen Profitable</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/relres/>Relentlessly Resourceful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/mac/>Return of the Mac</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/icad/>Revenge of the Nerds</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/rss/>RSS</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/schlep/>Schlep Blindness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/randomness/>See Randomness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/newthings/>Six Principles for Making New Things</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vw/>Snapshot: Viaweb, June 1998</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/heroes/>Some Heroes</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/growth/>Startup = Growth</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/invtrend/>Startup Investing Trends</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/13sentences/>Startups in 13 Sentences</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/stuff/>Stuff</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/power/>Succinctness is Power</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/superlinear/>Superlinear Returns</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/tablets/>Tablets</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/taste/>Taste for Makers</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startupmistakes/>The 18 Mistakes That Kill Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/essay/>The Age of the Essay</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/airbnbs/>The Airbnbs</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/determination/>The Anatomy of Determination</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/best/>The Best Essay</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/genius/>The Bus Ticket Theory of Genius</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/equity/>The Equity Equation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pinch/>The Fatal Pinch</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/foundervisa/>The Founder Visa</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/future/>The Future of Startup Funding</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/webstartups/>The Future of Web Startups</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/guidetoinvestors/>The Hacker's Guide to Investors</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startuplessons/>The Hardest Lessons for Startups to Learn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hw/>The Hardware Renaissance</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/highres/>The High-Res Society</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hundred/>The Hundred-Year Language</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/island/>The Island Test</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/lesson/>The Lesson to Unlearn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nthings/>The List of N Things</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/read/>The Need to Read</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/superangels/>The New Funding Landscape</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/woke/>The Origins of Wokeness</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/artistsship/>The Other Half of 'Artists Ship'</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/road/>The Other Road Ahead</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/patentpledge/>The Patent Pledge</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/prcmc/>The Pooled-Risk Company Management Company</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/marginal/>The Power of the Marginal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/pypar/>The Python Paradox</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/real/>The Real Reason to End the Death Penalty</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/reddits/>The Reddits</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/re/>The Refragmentation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/persistence/>The Right Kind of Stubborn</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/disc/>The Risk of Discovery</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/ronco/>The Ronco Principle</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/rootsoflisp/>The Roots of Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/field/>The Shape of the Essay Field</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/submarine/>The Submarine</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/top/>The Top Idea in Your Mind</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/todo/>The Top of My Todo List</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/segway/>The Trouble with the Segway</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/vcsqueeze/>The Venture Capital Squeeze</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/gba/>The Word 'Hacker'</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/trolls/>Trolls</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/judgement/>Two Kinds of Judgement</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/college/>Undergraduation</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/useful/>Useful</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/web20/>Web 2.0</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/weird/>Weird Languages</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/acl2txtt1748944359/>Welcome to Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/opensource/>What Business Can Learn from Open Source</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/work/>What Doesn't Seem Like Work?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/yahoo/>What Happened to Yahoo</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/sfp/>What I Did this Summer</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/worked/>What I Worked On</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hackernews/>What I've Learned from Hacker News</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/users/>What I've Learned from Users</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/kate/>What Kate Saw in Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/fix/>What Languages Fix</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/diff/>What Made Lisp Different</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/altair/>What Microsoft Is this the Altair Basic of?</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/really/>What Startups Are Really Like</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bubble/>What the Bubble Got Right</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/do/>What to Do</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/founders/>What We Look for in Founders</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/want/>What You (Want to)* Want</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/say/>What You Can't Say</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hs/>What You'll Wish You'd Known</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/when/>When To Do What You Love</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/seesv/>Where to See Silicon Valley</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/noop/>Why Arc Isn't Especially Object-Oriented</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/safe/>Why It's Safe for Founders to Be Nice</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/nerds/>Why Nerds are Unpopular</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/bronze/>Why Smart People Have Bad Ideas</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/hubs/>Why Startup Hubs Work</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/america/>Why Startups Condense in America</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/googles/>Why There Aren't More Googles</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/startuphubs/>Why to Move to a Startup Hub</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/badeconomy/>Why to Start a Startup in a Bad Economy</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/convergence/>Why TV Lost</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/twitter/>Why Twitter is a Big Deal</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/whyyc/>Why YC</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/talk/>Write Like You Talk</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/simply/>Write Simply</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/writes/>Writes and Write-Nots</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/speak/>Writing and Speaking</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/writing44/>Writing, Briefly</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_en/boss/>You Weren't Meant to Have a Boss</a></nav></aside><article class=docs-content><div class=prose><div class=post-meta style="color:var(--muted);font-size:14px;margin:4px 0 10px"><span class=meta-author>Paul Graham</span></div><p>→ <a href=/paul_graham/essays_zh/laundry/>中文版本</a></p><div class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]" data-url=https://www.paulgraham.com/laundry.html><a class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline" href=https://www.paulgraham.com/laundry.html target=_blank rel=noopener>https://www.paulgraham.com/laundry.html</a></div><h1 id=laundry>Laundry</h1><p>A Version 1.0</p><p>October 2004</p><p>As E. B. White said, &ldquo;good writing is rewriting.&rdquo; I didn&rsquo;t realize this when I was in school. In writing, as in math and science, they only show you the finished product. You don&rsquo;t see all the false starts. This gives students a misleading view of how things get made.</p><p>Part of the reason it happens is that writers don&rsquo;t want people to see their mistakes. But I&rsquo;m willing to let people see an early draft if it will show how much you have to rewrite to beat an essay into shape.</p><p>Below is the oldest version I can find of The Age of the Essay (probably the second or third day), with text that ultimately survived in red and text that later got deleted in gray. There seem to be several categories of cuts: things I got wrong, things that seem like bragging, flames, digressions, stretches of awkward prose, and unnecessary words.</p><p>I discarded more from the beginning. That&rsquo;s not surprising; it takes a while to hit your stride. There are more digressions at the start, because I&rsquo;m not sure where I&rsquo;m heading.</p><p>The amount of cutting is about average. I probably write three to four words for every one that appears in the final version of an essay.</p><p>(Before anyone gets mad at me for opinions expressed here, remember that anything you see here that&rsquo;s not in the final version is obviously something I chose not to publish, often because I disagree with it.)</p><p>Recently a friend said that what he liked about my essays was that they weren&rsquo;t written the way we&rsquo;d been taught to write essays in school. You remember: topic sentence, introductory paragraph, supporting paragraphs, conclusion. It hadn&rsquo;t occurred to me till then that those horrible things we had to write in school were even connected to what I was doing now. But sure enough, I thought, they did call them &ldquo;essays,&rdquo; didn&rsquo;t they?</p><p>Well, they&rsquo;re not. Those things you have to write in school are not only not essays, they&rsquo;re one of the most pointless of all the pointless hoops you have to jump through in school. And I worry that they not only teach students the wrong things about writing, but put them off writing entirely.</p><p>So I&rsquo;m going to give the other side of the story: what an essay really is, and how you write one. Or at least, how I write one. Students be forewarned: if you actually write the kind of essay I describe, you&rsquo;ll probably get bad grades. But knowing how it&rsquo;s really done should at least help you to understand the feeling of futility you have when you&rsquo;re writing the things they tell you to.</p><p>The most obvious difference between real essays and the things one has to write in school is that real essays are not exclusively about English literature. It&rsquo;s a fine thing for schools to teach students how to write. But for some bizarre reason (actually, a very specific bizarre reason that I&rsquo;ll explain in a moment), the teaching of writing has gotten mixed together with the study of literature. And so all over the country, students are writing not about how a baseball team with a small budget might compete with the Yankees, or the role of color in fashion, or what constitutes a good dessert, but about symbolism in Dickens.</p><p>With obvious results. Only a few people really care about symbolism in Dickens. The teacher doesn&rsquo;t. The students don&rsquo;t. Most of the people who&rsquo;ve had to write PhD dissertations about Dickens don&rsquo;t. And certainly Dickens himself would be more interested in an essay about color or baseball.</p><p>How did things get this way? To answer that we have to go back almost a thousand years. Between about 500 and 1000, life was not very good in Europe. The term &ldquo;dark ages&rdquo; is presently out of fashion as too judgmental (the period wasn&rsquo;t dark; it was just different), but if this label didn&rsquo;t already exist, it would seem an inspired metaphor. What little original thought there was took place in lulls between constant wars and had something of the character of the thoughts of parents with a new baby. The most amusing thing written during this period, Liudprand of Cremona&rsquo;s Embassy to Constantinople, is, I suspect, mostly inadvertently so.</p><p>Around 1000 Europe began to catch its breath. And once they had the luxury of curiosity, one of the first things they discovered was what we call &ldquo;the classics.&rdquo; Imagine if we were visited by aliens. If they could even get here they&rsquo;d presumably know a few things we don&rsquo;t. Immediately Alien Studies would become the most dynamic field of scholarship: instead of painstakingly discovering things for ourselves, we could simply suck up everything they&rsquo;d discovered. So it was in Europe in 1200. When classical texts began to circulate in Europe, they contained not just new answers, but new questions. (If anyone proved a theorem in Christian Europe before 1200, for example, there is no record of it.)</p><p>For a couple centuries, some of the most important work being done was intellectual archaeology. Those were also the centuries during which schools were first established. And since reading ancient texts was the essence of what scholars did then, it became the basis of the curriculum.</p><p>By 1700, someone who wanted to learn about physics didn&rsquo;t need to start by mastering Greek in order to read Aristotle. But schools change slower than scholarship: the study of ancient texts had such prestige that it remained the backbone of education until the late 19th century. By then it was merely a tradition. It did serve some purposes: reading a foreign language was difficult, and thus taught discipline, or at least, kept students busy; it introduced students to cultures quite different from their own; and its very uselessness made it function (like white gloves) as a social bulwark. But it certainly wasn&rsquo;t true, and hadn&rsquo;t been true for centuries, that students were serving apprenticeships in the hottest area of scholarship.</p><p>Classical scholarship had also changed. In the early era, philology actually mattered. The texts that filtered into Europe were all corrupted to some degree by the errors of translators and copyists. Scholars had to figure out what Aristotle said before they could figure out what he meant. But by the modern era such questions were answered as well as they were ever going to be. And so the study of ancient texts became less about ancientness and more about texts.</p><p>The time was then ripe for the question: if the study of ancient texts is a valid field for scholarship, why not modern texts? The answer, of course, is that the raison d&rsquo;etre of classical scholarship was a kind of intellectual archaeology that does not need to be done in the case of contemporary authors. But for obvious reasons no one wanted to give that answer. The archaeological work being mostly done, it implied that the people studying the classics were, if not wasting their time, at least working on problems of minor importance.</p><p>And so began the study of modern literature. There was some initial resistance, but it didn&rsquo;t last long. The limiting reagent in the growth of university departments is what parents will let undergraduates study. If parents will let their children major in x, the rest follows straightforwardly. There will be jobs teaching x, and professors to fill them. The professors will establish scholarly journals and publish one another&rsquo;s papers. Universities with x departments will subscribe to the journals. Graduate students who want jobs as professors of x will write dissertations about it. It may take a good long while for the more prestigious universities to cave in and establish departments in cheesier xes, but at the other end of the scale there are so many universities competing to attract students that the mere establishment of a discipline requires little more than the desire to do it.</p><p>High schools imitate universities. And so once university English departments were established in the late nineteenth century, the &lsquo;riting component of the 3 Rs was morphed into English. With the bizarre consequence that high school students now had to write about English literature&ndash; to write, without even realizing it, imitations of whatever English professors had been publishing in their journals a few decades before.</p><p>It&rsquo;s no wonder if this seems to the student a pointless exercise, because we&rsquo;re now three steps removed from real work: the students are imitating English professors, who are imitating classical scholars, who are merely the inheritors of a tradition growing out of what was, 700 years ago, fascinating and urgently needed work.</p><p>Perhaps high schools should drop English and just teach writing. The valuable part of English classes is learning to write, and that could be taught better by itself. Students learn better when they&rsquo;re interested in what they&rsquo;re doing, and it&rsquo;s hard to imagine a topic less interesting than symbolism in Dickens. Most of the people who write about that sort of thing professionally are not really interested in it. (Though indeed, it&rsquo;s been a while since they were writing about symbolism; now they&rsquo;re writing about gender.)</p><p>I have no illusions about how eagerly this suggestion will be adopted. Public schools probably couldn&rsquo;t stop teaching English even if they wanted to; they&rsquo;re probably required to by law. But here&rsquo;s a related suggestion that goes with the grain instead of against it: that universities establish a writing major. Many of the students who now major in English would major in writing if they could, and most would be better off.</p><p>It will be argued that it is a good thing for students to be exposed to their literary heritage. Certainly. But is that more important than that they learn to write well? And are English classes even the place to do it? After all, the average public high school student gets zero exposure to his artistic heritage. No disaster results. The people who are interested in art learn about it for themselves, and those who aren&rsquo;t don&rsquo;t. I find that American adults are no better or worse informed about literature than art, despite the fact that they spent years studying literature in high school and no time at all studying art. Which presumably means that what they&rsquo;re taught in school is rounding error compared to what they pick up on their own.</p><p>Indeed, English classes may even be harmful. In my case they were effectively aversion therapy. Want to make someone dislike a book? Force him to read it and write an essay about it. And make the topic so intellectually bogus that you could not, if asked, explain why one ought to write about it. I love to read more than anything, but by the end of high school I never read the books we were assigned. I was so disgusted with what we were doing that it became a point of honor with me to write nonsense at least as good as the other students&rsquo; without having more than glanced over the book to learn the names of the characters and a few random events in it.</p><p>I hoped this might be fixed in college, but I found the same problem there. It was not the teachers. It was English. We were supposed to read novels and write essays about them. About what, and why? That no one seemed to be able to explain. Eventually by trial and error I found that what the teacher wanted us to do was pretend that the story had really taken place, and to analyze based on what the characters said and did (the subtler clues, the better) what their motives must have been. One got extra credit for motives having to do with class, as I suspect one must now for those involving gender and sexuality. I learned how to churn out such stuff well enough to get an A, but I never took another English class.</p><p>And the books we did these disgusting things to, like those we mishandled in high school, I find still have black marks against them in my mind. The one saving grace was that English courses tend to favor pompous, dull writers like Henry James, who deserve black marks against their names anyway. One of the principles the IRS uses in deciding whether to allow deductions is that, if something is fun, it isn&rsquo;t work. Fields that are intellectually unsure of themselves rely on a similar principle. Reading P.G. Wodehouse or Evelyn Waugh or Raymond Chandler is too obviously pleasing to seem like serious work, as reading Shakespeare would have been before English evolved enough to make it an effort to understand him. [sh] And so good writers (just you wait and see who&rsquo;s still in print in 300 years) are less likely to have readers turned against them by clumsy, self-appointed tour guides.</p><p>The other big difference between a real essay and the things they make you write in school is that a real essay doesn&rsquo;t take a position and then defend it. That principle, like the idea that we ought to be writing about literature, turns out to be another intellectual hangover of long forgotten origins. It&rsquo;s often mistakenly believed that medieval universities were mostly seminaries. In fact they were more law schools. And at least in our tradition lawyers are advocates: they are trained to be able to take either side of an argument and make as good a case for it as they can. Whether or not this is a good idea (in the case of prosecutors, it probably isn&rsquo;t), it tended to pervade the atmosphere of early universities. After the lecture the most common form of discussion was the disputation. This idea is at least nominally preserved in our present-day thesis defense&ndash; indeed, in the very word thesis. Most people treat the words thesis and dissertation as interchangeable, but originally, at least, a thesis was a position one took and the dissertation was the argument by which one defended it.</p><p>I&rsquo;m not complaining that we blur these two words together. As far as I&rsquo;m concerned, the sooner we lose the original sense of the word thesis, the better. For many, perhaps most, graduate students, it is stuffing a square peg into a round hole to try to recast one&rsquo;s work as a single thesis. And as for the disputation, that seems clearly a net loss. Arguing two sides of a case may be a necessary evil in a legal dispute, but it&rsquo;s not the best way to get at the truth, as I think lawyers would be the first to admit. And yet this principle is built into the very structure of the essays they teach you to write in high school. The topic sentence is your thesis, chosen in advance, the supporting paragraphs the blows you strike in the conflict, and the conclusion&mdash; uh, what is the conclusion? I was never sure about that in high school. If your thesis was well expressed, what need was there to restate it? In theory it seemed that the conclusion of a really good essay ought not to need to say any more than QED. But when you understand the origins of this sort of &ldquo;essay&rdquo;, you can see where the conclusion comes from. It&rsquo;s the concluding remarks to the jury. What other alternative is there?</p><p>To answer that we have to reach back into history again, though this time not so far. To Michel de Montaigne, inventor of the essay. He was doing something quite different from what a lawyer does, and the difference is embodied in the name. Essayer is the French verb meaning &ldquo;to try&rdquo; (the cousin of our word assay), and an &ldquo;essai&rdquo; is an effort. An essay is something you write in order to figure something out.</p><p>Figure out what? You don&rsquo;t know yet. And so you can&rsquo;t begin with a thesis, because you don&rsquo;t have one, and may never have one. An essay doesn&rsquo;t begin with a statement, but with a question. In a real essay, you don&rsquo;t take a position and defend it. You see a door that&rsquo;s ajar, and you open it and walk in to see what&rsquo;s inside.</p><p>If all you want to do is figure things out, why do you need to write anything, though? Why not just sit and think? Well, there precisely is Montaigne&rsquo;s great discovery. Expressing ideas helps to form them. Indeed, helps is far too weak a word. 90% of what ends up in my essays was stuff I only thought of when I sat down to write them. That&rsquo;s why I write them.</p><p>So there&rsquo;s another difference between essays and the things you have to write in school. In school you are, in theory, explaining yourself to someone else. In the best case&mdash;if you&rsquo;re really organized&mdash;you&rsquo;re just writing it down. In a real essay you&rsquo;re writing for yourself. You&rsquo;re thinking out loud.</p><p>But not quite. Just as inviting people over forces you to clean up your apartment, writing something that you know other people will read forces you to think well. So it does matter to have an audience. The things I&rsquo;ve written just for myself are no good. Indeed, they&rsquo;re bad in a particular way: they tend to peter out. When I run into difficulties, I notice that I tend to conclude with a few vague questions and then drift off to get a cup of tea.</p><p>This seems a common problem. It&rsquo;s practically the standard ending in blog entries&mdash; with the addition of a &ldquo;heh&rdquo; or an emoticon, prompted by the all too accurate sense that something is missing.</p><p>And indeed, a lot of published essays peter out in this same way. Particularly the sort written by the staff writers of newsmagazines. Outside writers tend to supply editorials of the defend-a-position variety, which make a beeline toward a rousing (and foreordained) conclusion. But the staff writers feel obliged to write something more balanced, which in practice ends up meaning blurry. Since they&rsquo;re writing for a popular magazine, they start with the most radioactively controversial questions, from which (because they&rsquo;re writing for a popular magazine) they then proceed to recoil from in terror. Gay marriage, for or against? This group says one thing. That group says another. One thing is certain: the question is a complex one. (But don&rsquo;t get mad at us. We didn&rsquo;t draw any conclusions.)</p><p>Questions aren&rsquo;t enough. An essay has to come up with answers. They don&rsquo;t always, of course. Sometimes you start with a promising question and get nowhere. But those you don&rsquo;t publish. Those are like experiments that get inconclusive results. Something you publish ought to tell the reader something he didn&rsquo;t already know. But what you tell him doesn&rsquo;t matter, so long as it&rsquo;s interesting. I&rsquo;m sometimes accused of meandering. In defend-a-position writing that would be a flaw. There you&rsquo;re not concerned with truth. You already know where you&rsquo;re going, and you want to go straight there, blustering through obstacles, and hand-waving your way across swampy ground. But that&rsquo;s not what you&rsquo;re trying to do in an essay. An essay is supposed to be a search for truth. It would be suspicious if it didn&rsquo;t meander.</p><p>The Meander is a river in Asia Minor (aka Turkey). As you might expect, it winds all over the place. But does it do this out of frivolity? Quite the opposite. Like all rivers, it&rsquo;s rigorously following the laws of physics. The path it has discovered, winding as it is, represents the most economical route to the sea.</p><p>The river&rsquo;s algorithm is simple. At each step, flow down. For the essayist this translates to: flow interesting. Of all the places to go next, choose whichever seems most interesting.</p><p>I&rsquo;m pushing this metaphor a bit. An essayist can&rsquo;t have quite as little foresight as a river. In fact what you do (or what I do) is somewhere between a river and a roman road-builder. I have a general idea of the direction I want to go in, and I choose the next topic with that in mind. This essay is about writing, so I do occasionally yank it back in that direction, but it is not all the sort of essay I thought I was going to write about writing.</p><p>Note too that hill-climbing (which is what this algorithm is called) can get you in trouble. Sometimes, just like a river, you run up against a blank wall. What I do then is just what the river does: backtrack. At one point in this essay I found that after following a certain thread I ran out of ideas. I had to go back n paragraphs and start over in another direction. For illustrative purposes I&rsquo;ve left the abandoned branch as a footnote. Err on the side of the river. An essay is not a reference work. It&rsquo;s not something you read looking for a specific answer, and feel cheated if you don&rsquo;t find it. I&rsquo;d much rather read an essay that went off in an unexpected but interesting direction than one that plodded dutifully along a prescribed course.</p><p>So what&rsquo;s interesting? For me, interesting means surprise. Design, as Matz has said, should follow the principle of least surprise. A button that looks like it will make a machine stop should make it stop, not speed up. Essays should do the opposite. Essays should aim for maximum surprise.</p><p>I was afraid of flying for a long time and could only travel vicariously. When friends came back from faraway places, it wasn&rsquo;t just out of politeness that I asked them about their trip. I really wanted to know. And I found that the best way to get information out of them was to ask what surprised them. How was the place different from what they expected? This is an extremely useful question. You can ask it of even the most unobservant people, and it will extract information they didn&rsquo;t even know they were recording. Indeed, you can ask it in real time. Now when I go somewhere new, I make a note of what surprises me about it. Sometimes I even make a conscious effort to visualize the place beforehand, so I&rsquo;ll have a detailed image to diff with reality. Surprises are facts you didn&rsquo;t already know. But they&rsquo;re more than that. They&rsquo;re facts that contradict things you thought you knew. And so they&rsquo;re the most valuable sort of fact you can get. They&rsquo;re like a food that&rsquo;s not merely healthy, but counteracts the unhealthy effects of things you&rsquo;ve already eaten.</p><p>How do you find surprises? Well, therein lies half the work of essay writing. (The other half is expressing yourself well.) You can at least use yourself as a proxy for the reader. You should only write about things you&rsquo;ve thought about a lot. And anything you come across that surprises you, who&rsquo;ve thought about the topic a lot, will probably surprise most readers.</p><p>For example, in a recent essay I pointed out that because you can only judge computer programmers by working with them, no one knows in programming who the heroes should be. I certainly didn&rsquo;t realize this when I started writing the essay, and even now I find it kind of weird. That&rsquo;s what you&rsquo;re looking for.</p><p>So if you want to write essays, you need two ingredients: you need a few topics that you think about a lot, and you need some ability to ferret out the unexpected.</p><p>What should you think about? My guess is that it doesn&rsquo;t matter. Almost everything is interesting if you get deeply enough into it. The one possible exception are things like working in fast food, which have deliberately had all the variation sucked out of them. In retrospect, was there anything interesting about working in Baskin-Robbins? Well, it was interesting to notice how important color was to the customers. Kids a certain age would point into the case and say that they wanted yellow. Did they want French Vanilla or Lemon? They would just look at you blankly. They wanted yellow. And then there was the mystery of why the perennial favorite Pralines n&rsquo; Cream was so appealing. I&rsquo;m inclined now to think it was the salt. And the mystery of why Passion Fruit tasted so disgusting. People would order it because of the name, and were always disappointed. It should have been called In-sink-erator Fruit. And there was the difference in the way fathers and mothers bought ice cream for their kids. Fathers tended to adopt the attitude of benevolent kings bestowing largesse, and mothers that of harried bureaucrats, giving in to pressure against their better judgement. So, yes, there does seem to be material, even in fast food.</p><p>What about the other half, ferreting out the unexpected? That may require some natural ability. I&rsquo;ve noticed for a long time that I&rsquo;m pathologically observant. &mldr;.</p><p>[That was as far as I&rsquo;d gotten at the time.]</p><h2 id=notes>Notes</h2><p>[sh] In Shakespeare&rsquo;s own time, serious writing meant theological discourses, not the bawdy plays acted over on the other side of the river among the bear gardens and whorehouses.</p><p>The other extreme, the work that seems formidable from the moment it&rsquo;s created (indeed, is deliberately intended to be) is represented by Milton. Like the Aeneid, Paradise Lost is a rock imitating a butterfly that happened to get fossilized. Even Samuel Johnson seems to have balked at this, on the one hand paying Milton the compliment of an extensive biography, and on the other writing of Paradise Lost that &ldquo;none who read it ever wished it longer.&rdquo;</p></div><div class=sibling-cards><a class="sibling-card prev" href=/paul_graham/essays_en/foundersatwork/ aria-label="上一篇：Learning from Founders"><div class=sibling-card-arrow>‹</div><div class=sibling-card-main><div class=sibling-card-title>Learning from Founders</div><div class=sibling-card-meta><span class=meta-author>Paul Graham</span></div></div></a><a class="sibling-card next" href=/paul_graham/essays_en/identity/ aria-label="下一篇：Keep Your Identity Small"><div class=sibling-card-main><div class=sibling-card-title>Keep Your Identity Small</div><div class=sibling-card-meta><span class=meta-author>Paul Graham</span></div></div><div class=sibling-card-arrow>›</div></a></div><section class=comments aria-label=Comments><div id=giscus_thread class=giscus data-repo=Linguage/Giscus data-repo-id=R_kgDOLxA-eA data-category=Announcements data-category-id=DIC_kwDOLxA-eM4Ce06R data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme-light=light data-theme-dark=dark data-lang=zh-CN></div><script>(function(){try{const e=document.getElementById("giscus_thread");if(!e)return;let n=null;try{const e=localStorage.getItem("theme");(e==="light"||e==="dark")&&(n=e)}catch{n=null}const o=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,i=n?n:o?"dark":"light",s=i==="dark"?e.dataset.themeDark||"dark":e.dataset.themeLight||"light";e.setAttribute("data-theme",s);const t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo",e.dataset.repo||""),t.setAttribute("data-repo-id",e.dataset.repoId||""),t.setAttribute("data-category",e.dataset.category||"General"),t.setAttribute("data-category-id",e.dataset.categoryId||""),t.setAttribute("data-mapping",e.dataset.mapping||"pathname"),t.setAttribute("data-strict",String(e.dataset.strict||"0")),t.setAttribute("data-reactions-enabled",String(e.dataset.reactionsEnabled||"1")),t.setAttribute("data-emit-metadata",String(e.dataset.emitMetadata||"0")),t.setAttribute("data-input-position",e.dataset.inputPosition||"bottom"),t.setAttribute("data-theme",s),t.setAttribute("data-lang",e.dataset.lang||"zh-CN"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.parentNode.insertBefore(t,e.nextSibling)}catch{}})()</script></section></article><aside class=docs-toc aria-label="On this page"><div class=toc-title>On this page</div><nav class=toc><nav id=TableOfContents><ul><li><a href=#notes>Notes</a></li></ul></nav></nav></aside></div><button class=back-to-top id=backToTop aria-label="Back to top">↑</button>
+<button id=tocMiniBtn class=toc-mini-btn aria-controls=tocDrawer aria-expanded=false aria-label=打开目录>☰ 目录</button><div id=tocDrawer class=toc-drawer hidden><div class=toc-drawer-inner><div class=toc-drawer-header><span>目录</span>
+<button id=tocCloseBtn class=toc-drawer-close aria-label=关闭>×</button></div><nav class=toc><nav id=TableOfContents><ul><li><a href=#notes>Notes</a></li></ul></nav></nav></div></div></main><footer class=site-footer><div class="container footer-inner"><div>© 2026 Linguista</div><nav class="footer-nav social-links" aria-label="Social links"><a class=social-icon href=https://x.com/AztecaAlpaca target=_blank rel=noopener aria-label="X / Twitter"><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg alt="X logo" loading=lazy decoding=async>
+</a><a class=social-icon href=https://github.com/Linguage target=_blank rel=noopener aria-label=GitHub><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49.0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07.0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71.0.0.84-.27 2.75 1.05A9.28 9.28.0 0112 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74.0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92.0 1.38-.01 2.49-.01 2.83.0.27.18.6.69.49A10.03 10.03.0 0022 12.26C22 6.58 17.52 2 12 2z" clip-rule="evenodd"/></svg>
+</a><a class=social-icon href=https://linguista.notion.site/linguista-hub target=_blank rel=noopener aria-label=Notion><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013 alt="Notion logo" loading=lazy decoding=async>
+</a><a class="social-icon bear-badge" href=https://linguista.bearblog.dev/ target=_blank rel=noopener aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a></nav></div></footer><script src="/script.js?v=20251029-01" defer></script><script defer src="/js/search-core.js?v=20251029-01"></script><script>window.SEARCH_INDEX_URL_LITE="/index-lite.json?v=20251029-01",window.SEARCH_INDEX_URL="/index.json?v=20251029-01"</script><script src="/js/search-advanced.js?v=20251029-01" defer></script><script defer src="/js/table-7char.js?v=20251029-01"></script><script defer src="/js/linkcard.js?v=20251029-01"></script><script defer src="/js/table-tooltips.js?v=20251029-01"></script><script defer src="/js/social-popup.js?v=20251029-01"></script><div id=social-popup-overlay aria-hidden=true><div class=social-popup-card role=dialog aria-modal=true aria-labelledby=social-popup-title aria-describedby=social-popup-desc><button class=social-popup-close type=button aria-label=关闭>×</button>
+<img class=social-popup-image src alt><div class=social-popup-title id=social-popup-title></div><div class=social-popup-desc id=social-popup-desc></div></div></div></body></html>

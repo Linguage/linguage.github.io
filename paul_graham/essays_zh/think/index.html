@@ -1,3428 +1,484 @@
-<!doctype html>
-<html lang="zh-CN" class="skin-gold">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>如何独立思考 • Linguista</title>
-  <script>
-    (function(){
-      try{
-        var key = 'theme';
-        var stored = window.localStorage ? localStorage.getItem(key) : null;
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = (stored === 'dark' || stored === 'light') ? stored : (prefersDark ? 'dark' : null);
-        if (theme){
-          document.documentElement.dataset.theme = theme;
-        } else {
-          delete document.documentElement.dataset.theme;
-        }
-      }catch(err){   }
-    })();
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20251029-01" />
-  <link rel="stylesheet" href="/overrides.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/search.css?v=20251029-01" />
-  <link rel="stylesheet" href="/linkcard.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/typography-mlsys.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/table-tooltips.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/sociallink.css?v=20251029-01" />
-  <link rel="stylesheet" href="/css/social-popup.css?v=20251029-01" />
-  
-  <style>:root{ --theme-breadcrumbs-height: 0px; }</style>
-  
-  
-  <script>
-    window.tailwind = window.tailwind || {};
-    tailwind.config = {
-      corePlugins: {
-        preflight: false
-      },
-      safelist: [
-        'group/link-card',
-        'sm:flex-row',
-        'sm:items-center',
-        'h-[84px]',
-        'w-[84px]',
-        'sm:h-[84px]',
-        'sm:w-[84px]',
-        'line-clamp-2'
-      ]
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script>
-  
-  <link rel="stylesheet" href="/css/skin-gold.css?v=20251029-01" />
-  
-  
-  
-  
-  <style>
-    :root{
-      
-      
-      
-      
-      
-      
-    }
-  </style>
-  
-  
-  
-  
-
-<link rel="icon" href="/favicon_io/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/favicon_io/apple-touch-icon.png">
-<link rel="manifest" href="/favicon_io/site.webmanifest">
-
-  
-  
-<meta property="og:site_name" content="Linguista">
-<meta property="og:type" content="article">
-<meta property="og:title" content="如何独立思考"><meta property="og:description" content="→ English Version https://www.paulgraham.com/think.html 如何独立思考 2020年11月 有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。 投资者也是如 …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/think/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400">
-  <meta property="og:image:height" content="400">
-<meta name="twitter:card" content="summary"><meta name="twitter:site" content="@linguista2025"><meta name="twitter:creator" content="@linguista2025"><meta name="twitter:title" content="如何独立思考"><meta name="twitter:description" content="→ English Version https://www.paulgraham.com/think.html 如何独立思考 2020年11月 有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。 投资者也是如 …"><meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
-<link rel="canonical" href="https://linguage.github.io/paul_graham/essays_zh/think/">
-
-  
-  
-  <script>
-    window.MathJax = {
-      loader: { load: ['[tex]/ams'] },
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$','$$'], ['\\[','\\]']],
-        processEscapes: true,
-        packages: { '[+]': ['ams'] },
-        macros: {
-          unicodeInt: ['\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits', 1],
-          oiint: '\\unicodeInt{x222F}',
-          oiiint: '\\unicodeInt{x2230}'
-        }
-      },
-      options: {
-        skipHtmlTags: ['script','noscript','style','textarea','pre','code']
-      }
-    };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-99PGBGJH4S');
-  </script>
-</head>
-<body>
-  
-  
-  
-  
-  
-<header class="site-header">
-  
-  <div class="container header-inner">
-    
-    <div class="brand">
-      
-        
-          <a href="/" class="brand-avatar-link" aria-label="Linguista">
-            <picture>
-              <img src="/img/Avatar5518800_2.jpg" class="logo-avatar" alt="Linguista" width="32" height="32" loading="lazy" decoding="async" onerror="this.classList.add('avatar-fallback');" />
-            </picture>
-          </a>
-        
-      
-      
-      <button class="mobile-nav-btn mobile-nav-btn--header" aria-controls="navDrawer" aria-expanded="false" aria-label="打开导航">☰</button>
-      <span class="brand-text">Linguista</span>
-    </div>
-    
-    
-    <nav class="nav">
-      
-      
-      
-        
-          
-            <a href="/labs/" class="nav-link ">工坊</a>
-          
-        
-          
-            <a href="/essays/" class="nav-link ">经典</a>
-          
-        
-          
-            <a href="/courses/" class="nav-link ">课程资料</a>
-          
-        
-          
-            <a href="/bookmarks/" class="nav-link ">书签</a>
-          
-        
-          
-            <a href="/about/" class="nav-link ">关于我</a>
-          
-        
-      
-      
-    </nav>
-    
-    
-    <div class="actions">
-      
-        
-      
-      <button id="searchToggleBtn" class="btn ghost search-toggle-btn" aria-label="打开搜索" title="搜索" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-          <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </button>
-      <div class="site-search" role="search">
-        <button id="searchBackBtn" class="mobile-search-back" aria-label="返回" title="返回" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <span class="site-search-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
-            <line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </span>
-        <input id="globalSearchInput"
-               class="site-search-input"
-               type="search"
-               placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）"
-               aria-label="站内搜索"
-               autocomplete="off"
-               spellcheck="false" />
-        <button id="pageSearchBtn" class="page-search-btn" aria-label="本页搜索" title="本页搜索" type="button">页</button>
-        <div id="globalSearchPopover" class="site-search-popover" hidden aria-live="polite"></div>
-      </div>
-      <a href="/post/" class="btn ghost posts-btn">Posts</a>
-      <button id="themeToggle" class="btn ghost theme-toggle-btn" aria-label="切换主题" title="切换主题">🌙</button>
-    </div>
-    
-    
-  </div>
-
-  
-</header>
-
-
-<aside id="navDrawer" class="nav-drawer" hidden>
-  <div class="nav-drawer-inner">
-    
-    
-    <div class="nav-drawer-header">
-      <div class="nav-drawer-title">Menu</div>
-      <button id="navCloseBtn" class="nav-drawer-close" aria-label="Close menu">×</button>
-    </div>
-    
-      <nav class="nav-drawer-list" aria-label="Mobile Primary">
-        
-        
-          <a class="nav-drawer-item" href="/labs/">工坊</a>
-          
-        
-          <a class="nav-drawer-item" href="/essays/">经典</a>
-          
-        
-          <a class="nav-drawer-item" href="/courses/">课程资料</a>
-          
-        
-          <a class="nav-drawer-item" href="/bookmarks/">书签</a>
-          
-        
-          <a class="nav-drawer-item" href="/about/">关于我</a>
-          
-        
-      </nav>
-    
-
-    
-    
-    
-    
-      <div class="nav-drawer-folder">
-        <div class="nav-drawer-subtitle">Section</div>
-        <nav class="docs-nav in-drawer" aria-label="Current Section">
-          
-
-
-
-
-
-
-
-
-
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/prcmc/"> pooled-risk 公司管理公司</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/artistsship/">&#34;艺术家要发布&#34;的另一面</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/6631327/">6,631,372</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnb/">Airbnb</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnbs/">Airbnb团队</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl1txtt1748944359/">ANSI Common Lisp 简介</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/javacover/">Java的外衣</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/diff/">Lisp的不同之处</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/rootsoflisp/">Lisp的根源</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mac/">Mac的回归</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nthings/">N 件事的清单</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/progbot/">Progbot</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/prop62/">Prop62</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/property/">Property</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pypar/">Python悖论</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/reddits/">Reddit创始人</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ronco/">Ronco原则</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/rss/">RSS</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/web20/">Web 2.0</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycstart/">Y Combinator 的创立故事</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/heroes/">一些英雄</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/revolution/">一场本地革命？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycombinator/">一种新的风险投资动物</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/relres/">不屈不挠的足智多谋</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/inequality/">不平等</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/say/">不能说的话</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/notnot/">不要不要创业</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/patentpledge/">专利承诺</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/judgement/">两种判断</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/noop/">为什么 Arc 不是特别面向对象的</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nerds/">为什么书呆子不受欢迎</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hubs/">为什么创业中心有效</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/america/">为什么创业公司在美国聚集</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/safe/">为什么创始人友善是安全的</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/badeconomy/">为什么在经济衰退时期创业</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/twitter/">为什么推特很重要</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuphubs/">为什么搬到创业中心</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/whyyc/">为什么是YC</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/googles/">为什么没有更多的Google</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/convergence/">为什么电视输了</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bronze/">为什么聪明人有坏想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/maybe/">也许</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/icad/">书呆子的复仇</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/5founders/">五位创始人</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vb/">人生苦短</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/work/">什么不像工作？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/conformism/">从众主义</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ambitious/">令人恐惧的雄心勃勃的创业想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/corpdev/">企业开发</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/writes/">会写的人和不会写的人</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gh/">伟大的黑客</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/when/">何时做你热爱的事</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/want/">你（想要）*想要什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hs/">你会希望你当初知道的事</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/know/">你如何知道</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/boss/">你本不该有老板</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/top/">你脑海中最主要的想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/identity/">保持身份小规模</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wisdom/">值得拥有智慧吗？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/noob/">做个新手</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/good/">做善事</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ds/">做无法扩展的事情</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/talk/">像你说话一样写作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/langdes/">关于语言设计的五个问题</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/kids/">养育孩子</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/re/">再分化</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/speak/">写作与演讲</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/writing44/">写作简述</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/cred/">冠状病毒与信誉</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/determination/">决心的剖析</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/kate/">凯特在硅谷看到的</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/distraction/">分心</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/before/">创业之前</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/growth/">创业公司 = 增长</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuplessons/">创业公司最难学到的教训</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/really/">创业公司真实情况</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/future/">创业公司融资的未来</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ideas/">创业想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/invtrend/">创业投资趋势</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundermode/">创始人模式</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundervisa/">创始人签证</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/newthings/">创造新事物的六个原则</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/taste/">创造者的品味</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/makersschedule/">创造者的日程表，管理者的日程表</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mean/">刻薄</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/colleges/">前线消息</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ffb/">反击的过滤器</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/disc/">发现的风险</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/road/">另一条道路</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/publishing/">后媒体时代的出版</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundersatwork/">向创始人学习</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/opensource/">商业可以从开源中学到什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/seesv/">在哪里看硅谷</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/spam/">垃圾邮件过滤计划</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/cities/">城市与雄心</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lwba/">基于Web应用的Lisp</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/copy/">复制你喜欢的东西</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/alien/">外星真理</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/college/">大学本科</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/genius/">天才的公交车票理论</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/procrastination/">好坏拖延症</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodwriting/">好的写作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/disagree/">如何不同意</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/die/">如何不死</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupfunding/">如何为创业公司融资</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/love/">如何做你热爱的事情</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/greatwork/">如何做出伟大的工作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/philosophy/">如何做哲学</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/start/">如何创业</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/google/">如何创建Google</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wealth/">如何创造财富</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hwh/">如何努力工作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/popular/">如何变得流行</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/investors/">如何向投资者展示</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ecw/">如何在变化的世界中成为专家</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/angelinvesting/">如何成为天使投资人</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/siliconvalley/">如何成为硅谷</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/selfindulgence/">如何浪费时间和金钱</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link is-active" href="/paul_graham/essays_zh/think/">如何独立思考</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fr/">如何筹集资金</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupideas/">如何获得创业想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/getideas/">如何获得新想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pgh/">如何让匹兹堡成为创业中心</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/convince/">如何说服投资者</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/iflisp/">如果Lisp这么好</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mit/">学生创业指南</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/words/">将思想转化为文字</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/head/">将程序装在脑中</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/island/">岛屿测试</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/unions/">工会的另一种理论</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/polls/">布拉德利的幽灵</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/tablets/">平板电脑</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/real/">废除死刑的真正原因</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/heresy/">异端</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/microsoft/">微软已死</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vw/">快照：Viaweb，1998年6月</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/weird/">怪异语言</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/addiction/">成瘾性</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/sfp/">我今年夏天做了什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hackernews/">我从Hacker News学到的</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/users/">我从用户身上学到了什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lies/">我们告诉孩子的谎言</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/founders/">我们寻找创始人的品质</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/worked/">我所从事的工作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/todo/">我的待办事项清单顶端</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/herd/">投资者群体动态</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ramenprofitable/">拉面盈利</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/schlep/">拖累盲区</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiring/">招聘已经过时</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nft/">拯救生命的 NFT</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/control/">控制权</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/essay/">散文的时代</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/field/">散文领域的形态</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/superangels/">新的融资格局</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/nov/">新颖与异端</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/donate/">无限制捐赠</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/early/">早期</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fp/">时髦问题</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/charisma/">是魅力，笨蛋</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/sun/">普遍而惊人的</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/better/">更好的贝叶斯过滤</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/name/">更改你的名字</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/best/">最佳文章</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/organic/">有机的创业想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/useful/">有用的文章</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupmistakes/">杀死创业公司的18个错误</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pow/">权力</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/jessica/">杰西卡·利文斯顿</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ladder/">梯子之后</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bias/">检测偏见的一种方法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/wtax/">模拟财富税</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl2txtt1748944359/">欢迎来到Lisp</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/persistence/">正确的固执</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/orth/">正统特权</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/bubble/">泡沫的正确之处</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gap/">注意差距</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/laundry/">洗衣</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/woke/">清醒文化的起源</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/mod/">温和派</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/submarine/">潜水艇</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/stuff/">物品</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fn/">猛烈的极客</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/richnow/">现在人们如何变富</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/13sentences/">用13句话讲清楚创业</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/newideas/">疯狂的新想法</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hundred/">百年编程语言</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/randomness/">看见随机性</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodtaste/">真有好品味这回事吗？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/earnest/">真诚</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hw/">硬件复兴</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/simply/">简单写作</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/power/">简洁即力量</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ace/">精通</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/ineq/">经济不平等</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/word/">给足智多谋者的忠告</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fix/">编程语言修复了什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/webstartups/">网络创业公司的未来</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/trolls/">网络喷子</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/usa/">美国制造</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/equity/">股权方程式</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/own/">自己的项目</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/pinch/">致命的困境</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodart/">艺术如何能够优秀</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/apple/">苹果的错误</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fundraising/">融资生存指南</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/95/">让另外95%的优秀程序员进来</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/desres/">设计与研究</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/credentials/">证书之后</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/do/">该做什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/discover/">说服还是发现</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/segway/">赛格威的麻烦</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/superlinear/">超线性回报</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/avg/">超越平均水平</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/smart/">超越聪明</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/softwarepatents/">软件专利是邪恶的吗？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/marginal/">边缘的力量</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/altair/">这是哪个微软的Altair Basic？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/read/">阅读的必要</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/yahoo/">雅虎发生了什么</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/lesson/">需要忘掉的一课</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/divergence/">风险投资会成为经济衰退的牺牲品吗？</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/venturecapital/">风险投资糟糕性的统一理论</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/vcsqueeze/">风险资本挤压</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/guidetoinvestors/">骇客投资者指南</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/highres/">高分辨率社会</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiresfund/">高分辨率融资</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/swan/">黑天鹅养殖</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/hp/">黑客与画家</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/gba/">黑客这个词</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/fh/">黑粉</a>
-    
-  
-    
-    
-    
-      
-      <a class="depth-0 file-link " href="/paul_graham/essays_zh/aord/">默认生存还是默认死亡？</a>
-    
-  
-
-
-
-        </nav>
-      </div>
-    
-  </div>
-</aside>
-
-  
-  
-  
-  <main class="container">
-    
-
-
-
-
-
-
-
-
-<div class="docs-layout">
-  
-  <aside class="docs-sidebar" aria-label="Sections">
-    
-    <div class="docs-side-title">
-      Documentation
-    </div>
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    <nav class="docs-nav">
-      
-      
-      
-      
-      
-
-
-
-
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/prcmc/"> pooled-risk 公司管理公司</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/artistsship/">&#34;艺术家要发布&#34;的另一面</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/6631327/">6,631,372</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnb/">Airbnb</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/airbnbs/">Airbnb团队</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl1txtt1748944359/">ANSI Common Lisp 简介</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/javacover/">Java的外衣</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/diff/">Lisp的不同之处</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/rootsoflisp/">Lisp的根源</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mac/">Mac的回归</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nthings/">N 件事的清单</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/progbot/">Progbot</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/prop62/">Prop62</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/property/">Property</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pypar/">Python悖论</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/reddits/">Reddit创始人</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ronco/">Ronco原则</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/rss/">RSS</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/web20/">Web 2.0</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycstart/">Y Combinator 的创立故事</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/heroes/">一些英雄</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/revolution/">一场本地革命？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ycombinator/">一种新的风险投资动物</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/relres/">不屈不挠的足智多谋</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/inequality/">不平等</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/say/">不能说的话</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/notnot/">不要不要创业</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/patentpledge/">专利承诺</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/judgement/">两种判断</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/noop/">为什么 Arc 不是特别面向对象的</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nerds/">为什么书呆子不受欢迎</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hubs/">为什么创业中心有效</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/america/">为什么创业公司在美国聚集</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/safe/">为什么创始人友善是安全的</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/badeconomy/">为什么在经济衰退时期创业</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/twitter/">为什么推特很重要</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuphubs/">为什么搬到创业中心</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/whyyc/">为什么是YC</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/googles/">为什么没有更多的Google</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/convergence/">为什么电视输了</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bronze/">为什么聪明人有坏想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/maybe/">也许</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/icad/">书呆子的复仇</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/5founders/">五位创始人</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vb/">人生苦短</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/work/">什么不像工作？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/conformism/">从众主义</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ambitious/">令人恐惧的雄心勃勃的创业想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/corpdev/">企业开发</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/writes/">会写的人和不会写的人</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gh/">伟大的黑客</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/when/">何时做你热爱的事</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/want/">你（想要）*想要什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hs/">你会希望你当初知道的事</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/know/">你如何知道</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/boss/">你本不该有老板</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/top/">你脑海中最主要的想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/identity/">保持身份小规模</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wisdom/">值得拥有智慧吗？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/noob/">做个新手</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/good/">做善事</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ds/">做无法扩展的事情</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/talk/">像你说话一样写作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/langdes/">关于语言设计的五个问题</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/kids/">养育孩子</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/re/">再分化</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/speak/">写作与演讲</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/writing44/">写作简述</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/cred/">冠状病毒与信誉</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/determination/">决心的剖析</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/kate/">凯特在硅谷看到的</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/distraction/">分心</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/before/">创业之前</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/growth/">创业公司 = 增长</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startuplessons/">创业公司最难学到的教训</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/really/">创业公司真实情况</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/future/">创业公司融资的未来</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ideas/">创业想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/invtrend/">创业投资趋势</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundermode/">创始人模式</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundervisa/">创始人签证</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/newthings/">创造新事物的六个原则</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/taste/">创造者的品味</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/makersschedule/">创造者的日程表，管理者的日程表</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mean/">刻薄</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/colleges/">前线消息</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ffb/">反击的过滤器</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/disc/">发现的风险</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/road/">另一条道路</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/publishing/">后媒体时代的出版</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/foundersatwork/">向创始人学习</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/opensource/">商业可以从开源中学到什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/seesv/">在哪里看硅谷</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/spam/">垃圾邮件过滤计划</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/cities/">城市与雄心</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lwba/">基于Web应用的Lisp</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/copy/">复制你喜欢的东西</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/alien/">外星真理</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/college/">大学本科</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/genius/">天才的公交车票理论</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/procrastination/">好坏拖延症</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodwriting/">好的写作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/disagree/">如何不同意</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/die/">如何不死</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupfunding/">如何为创业公司融资</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/love/">如何做你热爱的事情</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/greatwork/">如何做出伟大的工作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/philosophy/">如何做哲学</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/start/">如何创业</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/google/">如何创建Google</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wealth/">如何创造财富</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hwh/">如何努力工作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/popular/">如何变得流行</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/investors/">如何向投资者展示</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ecw/">如何在变化的世界中成为专家</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/angelinvesting/">如何成为天使投资人</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/siliconvalley/">如何成为硅谷</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/selfindulgence/">如何浪费时间和金钱</a>
-  
-
-  
-  
-    <a class="depth-0 file-link is-active" href="/paul_graham/essays_zh/think/">如何独立思考</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fr/">如何筹集资金</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupideas/">如何获得创业想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/getideas/">如何获得新想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pgh/">如何让匹兹堡成为创业中心</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/convince/">如何说服投资者</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/iflisp/">如果Lisp这么好</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mit/">学生创业指南</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/words/">将思想转化为文字</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/head/">将程序装在脑中</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/island/">岛屿测试</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/unions/">工会的另一种理论</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/polls/">布拉德利的幽灵</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/tablets/">平板电脑</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/real/">废除死刑的真正原因</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/heresy/">异端</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/microsoft/">微软已死</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vw/">快照：Viaweb，1998年6月</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/weird/">怪异语言</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/addiction/">成瘾性</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/sfp/">我今年夏天做了什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hackernews/">我从Hacker News学到的</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/users/">我从用户身上学到了什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lies/">我们告诉孩子的谎言</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/founders/">我们寻找创始人的品质</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/worked/">我所从事的工作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/todo/">我的待办事项清单顶端</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/herd/">投资者群体动态</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ramenprofitable/">拉面盈利</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/schlep/">拖累盲区</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiring/">招聘已经过时</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nft/">拯救生命的 NFT</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/control/">控制权</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/essay/">散文的时代</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/field/">散文领域的形态</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/superangels/">新的融资格局</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/nov/">新颖与异端</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/donate/">无限制捐赠</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/early/">早期</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fp/">时髦问题</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/charisma/">是魅力，笨蛋</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/sun/">普遍而惊人的</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/better/">更好的贝叶斯过滤</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/name/">更改你的名字</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/best/">最佳文章</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/organic/">有机的创业想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/useful/">有用的文章</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/startupmistakes/">杀死创业公司的18个错误</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pow/">权力</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/jessica/">杰西卡·利文斯顿</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ladder/">梯子之后</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bias/">检测偏见的一种方法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/wtax/">模拟财富税</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/acl2txtt1748944359/">欢迎来到Lisp</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/persistence/">正确的固执</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/orth/">正统特权</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/bubble/">泡沫的正确之处</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gap/">注意差距</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/laundry/">洗衣</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/woke/">清醒文化的起源</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/mod/">温和派</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/submarine/">潜水艇</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/stuff/">物品</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fn/">猛烈的极客</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/richnow/">现在人们如何变富</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/13sentences/">用13句话讲清楚创业</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/newideas/">疯狂的新想法</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hundred/">百年编程语言</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/randomness/">看见随机性</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodtaste/">真有好品味这回事吗？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/earnest/">真诚</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hw/">硬件复兴</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/simply/">简单写作</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/power/">简洁即力量</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ace/">精通</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/ineq/">经济不平等</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/word/">给足智多谋者的忠告</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fix/">编程语言修复了什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/webstartups/">网络创业公司的未来</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/trolls/">网络喷子</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/usa/">美国制造</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/equity/">股权方程式</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/own/">自己的项目</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/pinch/">致命的困境</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/goodart/">艺术如何能够优秀</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/apple/">苹果的错误</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fundraising/">融资生存指南</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/95/">让另外95%的优秀程序员进来</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/desres/">设计与研究</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/credentials/">证书之后</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/do/">该做什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/discover/">说服还是发现</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/segway/">赛格威的麻烦</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/superlinear/">超线性回报</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/avg/">超越平均水平</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/smart/">超越聪明</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/softwarepatents/">软件专利是邪恶的吗？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/marginal/">边缘的力量</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/altair/">这是哪个微软的Altair Basic？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/read/">阅读的必要</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/yahoo/">雅虎发生了什么</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/lesson/">需要忘掉的一课</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/divergence/">风险投资会成为经济衰退的牺牲品吗？</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/venturecapital/">风险投资糟糕性的统一理论</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/vcsqueeze/">风险资本挤压</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/guidetoinvestors/">骇客投资者指南</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/highres/">高分辨率社会</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hiresfund/">高分辨率融资</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/swan/">黑天鹅养殖</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/hp/">黑客与画家</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/gba/">黑客这个词</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/fh/">黑粉</a>
-  
-
-  
-  
-    <a class="depth-0 file-link " href="/paul_graham/essays_zh/aord/">默认生存还是默认死亡？</a>
-  
-
-
-
-
-
-      
-      
-    </nav>
-    
-    
-    
-    
-  </aside>
-
-  
-  <article class="docs-content">
-    
-    <div class="prose">
-      
-      
-
-      
-      
-      
-      
-      
-      
-
-      
-      
-      
-      
-      
-      
-        <div class="post-meta" style="color:var(--muted);font-size:14px;margin:4px 0 10px;">
-          <span class="meta-author">Paul Graham</span>
-          
-          
-        </div>
-      
-
-      
-      <p>→ <a href="/paul_graham/essays_en/think/">English Version</a></p>
-<div
-  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
-  data-url="https://www.paulgraham.com/think.html"
->
-  <a
-    class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
-    href="https://www.paulgraham.com/think.html"
-    target="_blank"
-    rel="noopener"
-  >
-    https://www.paulgraham.com/think.html
-  </a>
-</div>
-
-<h1 id="如何独立思考">如何独立思考</h1>
-<p>2020年11月</p>
-<p>有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。</p>
-<p>投资者也是如此。公开市场投资者仅仅正确预测公司将如何表现是不够的。如果很多其他人做出相同的预测，股票价格将已经反映它，没有赚钱的空间。唯一有价值的见解是大多数其他投资者不分享的见解。</p>
-<p>你在创业公司创始人身上也看到这种模式。你不想创业去做每个人都同意是好主意的事情，或者已经有其他公司在做它。你必须做一件对大多数其他人来说听起来像坏主意，但你知道不是的事情——比如为几千个爱好者使用的微型计算机编写软件，或者创办一个让人们可以在陌生人地板上租充气床垫的网站。</p>
-<p>散文家也是如此。告诉人们他们已经知道的事情的散文会很无聊。你必须告诉他们一些新东西。</p>
-<p>但这种模式并不普遍。事实上，它对大多数类型的工作不成立。在大多数类型的工作中——例如，成为一名管理员——你只需要前一半。你只需要是正确的。其他人都不错并不是必需的。</p>
-<p>在大多数类型的工作中都有一些新意的空间，但在实践中，在必须独立思考的工作类型和不必须的工作类型之间有相当明显的区别。</p>
-<p>我希望有人在我小时候告诉我这种区别，因为这是在决定你想做什么类型工作时需要思考的最重要事情之一。你想做那种只能通过与每个人不同思考才能赢的工作吗？我怀疑大多数人的潜意识会在他们的意识有机会之前回答那个问题。我知道我的会。</p>
-<p>独立思考似乎更多是天生的而不是后天培养的。这意味着如果你选择了错误类型的工作，你将会不快乐。如果你天生独立思考，你会发现成为一名中层管理者很令人沮丧。如果你天生从众，如果你尝试做原创研究，你将会逆风而上。</p>
-<p>然而，这里的一个困难是，人们经常误解自己在从众到独立思考的光谱上的位置。从众的人不喜欢认为自己是从众的。而且，无论如何，他们真的感觉自己对一切都有自己的想法。他们的信念与同龄人的信念相同只是一个巧合。同时，独立思考的人常常没有意识到他们的想法与常规想法有多不同，至少在他们公开陈述它们之前。[1]</p>
-<p>到成年时，大多数人大致知道他们有多聪明（在解决预设问题的狭义能力上），因为他们不断地根据它被测试和排名。但学校通常忽视独立思考，除了他们试图压制它的程度。所以我们没有获得关于我们独立思考程度的任何相同类型的反馈。</p>
-<p>甚至可能有类似邓宁-克鲁格的现象在起作用，其中最从众的人自信他们是独立思考的，而真正独立思考的人担心他们可能不够独立思考。</p>
-<hr>
-<p>你能让自己更独立思考吗？我想是的。这种品质可能主要是天生的，但似乎有方法可以放大它，或者至少不压制它。</p>
-<p>最有效的技术之一是大多数书呆子无意中实践的：简单地更少知道常规信念是什么。如果你不知道你应该遵守什么，就很难成为从众者。但再次，可能这样的人已经是独立思考的。从众的人可能会因为不知道其他人想什么而感到焦虑，并更努力去寻找。</p>
-<p>你周围的人很重要。如果你被从众的人包围，这将限制你能表达的想法，而这反过来又将限制你有的想法。但如果你被独立思考的人包围，你将有相反的经历：听到其他人说令人惊讶的事情将鼓励你，并思考更多。</p>
-<p>因为独立思考的人发现被从众的人包围是不舒服的，一旦有机会，他们倾向于自我隔离。高中的问题在于他们还没有机会这样做。而且高中往往是一个向内看的小世界，其居民缺乏自信，这两者都放大了从众的力量。所以对独立思考的人来说，高中通常是一个糟糕的时期。但即使这里也有一些优势：它教会你避免什么。如果你后来发现自己在一个让你想&quot;这像高中&quot;的情况中，你知道你应该离开。[2]</p>
-<p>独立思考和从众的人被抛在一起的另一个地方是在成功的创业公司中。创始人和早期员工几乎总是独立思考的；否则创业公司不会成功。但从众的人在数量上大大超过独立思考的人，所以随着公司的发展，独立思考的原始精神不可避免地被稀释。除了公司开始变糟的明显问题外，这还导致了各种各样的问题。最奇怪的问题之一是，创始人发现自己能够与其他公司的创始人比与自己的员工更自由地交谈。[3]</p>
-<p>幸运的是，你不必把所有时间都花在独立思考的人身上。有一两个你可以定期交谈的就足够了。一旦你找到他们，他们通常和你一样渴望交谈；他们也需要你。虽然大学不再拥有它们过去对教育的垄断，但好大学仍然是遇到独立思考的人的绝佳方式。大多数学生仍将从众，但你至少会发现独立思考的小群体，而不是你在高中可能发现的接近零。</p>
-<p>另一种方法是反方向：除了培养一小群独立思考的朋友外，尝试尽可能多地遇到不同类型的人。如果你有其他几个同龄人群体，这将减少你直接同龄人的影响。而且如果你是几个不同世界的一部分，你经常可以从一个向另一个导入想法。</p>
-<p>但我说不同类型的人，不是指人口统计上不同的。为了这个技术有效，他们必须思考不同。所以虽然去其他国家访问是个好主意，但你可能就在拐角处能找到思考不同的人。当我遇到某个对不寻常事物了解很多的人（如果你挖得足够深，这实际上包括每个人），我尝试学习他们知道而其他人不知道的东西。这里几乎总是有惊喜。当你遇到陌生人时，这是开始对话的好方法，但我不是为了对话才这样做。我真的想知道。</p>
-<p>你也可以通过阅读历史在时间上和空间上扩大影响的来源。当我读历史时，我不仅是为了了解发生了什么，而是尝试进入生活在过去的人的头脑。事情对他们来说看起来如何？这很难做到，但值得努力，就像值得远行去三角定位一个点一样。</p>
-<p>你也可以采取更明确的措施来防止自己自动接受常规意见。最一般的是培养怀疑态度。当你听到有人说什么时，停下来问自己&quot;这是真的吗？&ldquo;不要大声说出来。我不是建议你给每个与你交谈的人强加证明他们所说的负担，而是你承担评估他们所说的负担。</p>
-<p>把它当作一个谜题。你知道一些公认的想法后来会被证明是错误的。看看你能否猜测是哪些。最终目标不是在你被告知的事情中找到缺陷，而是找到被损坏想法隐藏的新想法。所以这个游戏应该是对新颖性的激动人心的探索，而不是智力卫生的无聊协议。当你开始问&quot;这是真的吗？&ldquo;时，你会惊讶地发现答案往往不是立即是的。如果你有任何想象力，你更可能有过多的线索可循而不是过少。</p>
-<p>更一般地说，你的目标应该是不让任何东西未经审视就进入你的头脑，而东西并不总是以陈述的形式进入你的头脑。一些最强大的影响是隐含的。你甚至如何注意到这些？退后一步，观察其他人如何获得他们的想法。</p>
-<p>当你退后到足够的距离，你可以看到想法像波浪一样在人群中传播。最明显的是在时尚中：你注意到一些人穿某种衬衫，然后越来越多，直到你周围的一半人穿着相同的衬衫。你可能不太在乎你穿什么，但也有智力时尚，你绝对不想参与那些。不仅仅是因为你想要对自己思想的主权，而且是因为不时尚的想法不成比例地可能导致有趣的地方。发现未被发现想法的最好地方是没有人寻找的地方。[4]</p>
-<hr>
-<p>为了超越这个一般建议，我们需要看看独立思考的内部结构——就像我们需要锻炼的个别肌肉。在我看来，它有三个组成部分：对真理的挑剔，对被告知思考的抵抗，和好奇心。</p>
-<p>对真理的挑剔意味着不仅仅是不相信虚假的事情。它意味着对信念程度小心。对大多数人来说，信念程度未经审视地冲向极端：不可能的变成不可能，可能的变成确定的。[5] 对独立思考的人来说，这似乎是不可原谅的草率。他们愿意让任何东西进入他们的头脑，从高度推测的假设到（明显）的重言式，但在他们关心的主题上，一切都必须用仔细考虑的信念程度标记。[6]</p>
-<p>因此，独立思考的人对意识形态有恐惧感，意识形态要求一个人同时接受整个信念集合，并将它们当作信仰条款。对独立思考的人来说，这似乎令人反感，就像对食物挑剔的人会觉得咬一口充满各种不确定年龄和来源成分的潜艇三明治令人反感一样。</p>
-<p>没有这种对真理的挑剔，你不可能真正独立思考。仅仅有对被告知思考的抵抗是不够的。那种人拒绝常规想法只是为了用最随机的阴谋论取而代之。而且由于这些阴谋论常常是为捕获他们而制造的，他们最终比普通人更不独立思考，因为他们受制于一个比仅仅是常规更苛刻的主人。[7]</p>
-<p>你能增加对真理的挑剔吗？我想是的。根据我的经验，仅仅思考你挑剔的事情就会导致那种挑剔增长。如果是这样，这是我们仅仅通过想要就能拥有的少数美德之一。而且如果它像其他形式的挑剔，应该也可能在儿童中鼓励。我肯定从我父亲那里得到了强烈的剂量。[8]</p>
-<p>独立思考的第二个组成部分，对被告知思考的抵抗，是三个中最明显的。但即使这一点也经常被误解。人们犯的最大错误是把它视为仅仅消极的品质。我们使用的语言强化了那个想法。你不循规蹈矩。你不在乎别人想什么。但它不仅仅是一种免疫力。在最独立思考的人中，不想被告知思考的欲望是一种积极的力量。不仅仅是怀疑主义，而是对颠覆常规智慧的想法的积极喜悦，越违反直觉越好。</p>
-<p>一些最新颖的想法在当时几乎像恶作剧。想想你对新颖想法的反应经常是笑。我不认为新颖想法本身很有趣，而是因为新颖性和幽默分享某种惊奇。但虽然不相同，两者足够接近，以至于有幽默感和独立思考之间有明确的相关性——就像无幽默感和从众之间一样。[9]</p>
-<p>我不认为我们能显著增加对被告知思考的抵抗。它似乎似乎是独立思考三个组成部分中最天生的；成年时有这种品质的人通常在儿童时就有太明显的迹象。但如果我们不能增加对被告知思考的抵抗，我们至少可以通过让自己被其他独立思考的人包围来支撑它。</p>
-<p>独立思考的第三个组成部分，好奇心，可能是最有趣的。就我们能对新颖想法来自哪里给出简短答案而言，它是好奇心。那是人们通常在拥有它们之前的感觉。</p>
-<p>根据我的经验，独立思考和好奇心完美地相互预测。我认识的每个独立思考的人都深深好奇，我认识的每个从众的人都不是。奇怪的是，儿童除外。所有小孩子都好奇。也许原因是即使从众的人在开始时也必须好奇，为了学习常规是什么。而独立思考的人是好奇的贪吃者，即使饱了也继续吃。[10]</p>
-<p>独立思考的三个组成部分协同工作：对真理的挑剔和对被告知思考的抵抗在你大脑中创造空间，好奇心找到新想法来填充它。</p>
-<p>有趣的是，三个组成部分可以像肌肉一样在很大程度上相互替代。如果你对真理足够挑剔，你不需要对被告知思考有那么强的抵抗，因为挑剔本身会在你的知识中创造足够的空白。而且任何一个都可以补偿好奇心，因为如果你在大脑中创造足够的空间，你对由此产生的真空的不适将给你的好奇心增加力量。或者好奇心可以补偿它们：如果你足够好奇，你不需要在大脑中清除空间，因为你发现的新想法将把你默认获得的常规想法推出去。</p>
-<p>因为独立思考的组成部分如此可互换，你可以有不同程度地拥有它们并仍然得到相同的结果。所以独立思考不是单一模式。一些独立思考的人是公开颠覆性的，另一些则是安静地好奇的。但他们都知道秘密握手。</p>
-<p>有没有方法培养好奇心？首先，你想避免抑制它的情况。你目前正在做的工作在多大程度上激发你的好奇心？如果答案是&quot;不多&rdquo;，也许你应该改变一些事情。</p>
-<p>你可以采取的培养好奇心的最重要的积极步骤可能是寻找吸引它的主题。很少有成年人对一切都同样好奇，而且你似乎不能选择哪些主题吸引你。所以由你来找到它们。或者必要时发明它们。</p>
-<p>增加好奇心的另一个方法是纵容它，通过调查你感兴趣的事情。好奇心在这方面不同于大多数其他欲望：纵容它往往增加而不是满足它。问题导致更多问题。</p>
-<p>好奇心似乎比对真理的挑剔或对被告知思考的抵抗更个人化。在人们拥有后两者的程度上，他们通常相当普遍，而不同的人可以对非常不同的事物好奇。所以也许好奇心是指南针。也许，如果你的目标是发现新颖想法，你的座右铭不应该那么多是&quot;做你爱的&rdquo;，而是&quot;做你好奇的&quot;。</p>
-<h2 id="注释">注释</h2>
-<p>[1] 没有人认同为从众的人这一事实的一个方便后果是，你可以说你喜欢从众的人什么而不会陷入太多麻烦。当我写《从众的四个象限时，我预期从侵略性从众的人那里会有愤怒的风暴，但事实上它相当微弱。他们感觉到文章中有某种他们极度不喜欢的东西，但他们很难找到特定的段落来钉它。</p>
-<p>[2] 当我问自己生活中什么像高中时，答案是Twitter。它不仅充满了从众的人，就像任何它规模的东西不可避免的那样，而且受到暴力的从众风暴，让我想起木星的描述。但虽然在那里花时间可能是净损失，但至少让我更多地思考了独立和从众之间的区别，否则我可能不会这样做。</p>
-<p>[3] 成长创业公司中独立思考的减少仍然是一个开放问题，但可能有解决方案。</p>
-<p>创始人可以通过有意识地努力只雇佣独立思考的人来延迟问题。这当然也有他们有更好想法的附加好处。</p>
-<p>另一个可能的解决方案是创造某种政策，破坏从众的力量，很像控制棒减慢连锁反应，这样从众的人就不那么危险。洛克希德臭鼬工厂的物理分离可能有这方面作为一个好处。最近的例子表明像Slack这样的员工论坛可能不是纯粹的善。</p>
-<p>最激进的解决方案是在不增加公司的情况下增加收入。你认为雇佣那个初级公关人员会比程序员便宜，但对你公司平均独立思考水平的影响是什么？（相对于教员的员工增长似乎对大学有类似的影响。）也许关于外包不是你&quot;核心能力&quot;的工作的规则应该补充一个关于外包那些作为员工会破坏你文化的人的工作。</p>
-<p>一些投资公司似乎已经能够在不增加员工数量的情况下增加收入。自动化加上&quot;技术栈&quot;的不断增长的精确性表明有一天这对产品公司可能也是可能的。</p>
-<p>[4] 每个领域都有智力时尚，但它们的影响不同。例如，政治往往无聊的原因之一是它非常受它们影响。对政治有意见的门槛比对集合论有意见的门槛低得多。所以虽然政治中有一些想法，在实践中它们往往被智力时尚的浪潮淹没。</p>
-<p>[5] 从众的人经常被他们意见的力量欺骗，认为他们是独立思考的。但强烈的信念不是独立思考的标志。恰恰相反。</p>
-<p>[6] 对真理的挑剔并不意味着独立思考的人不会不诚实，而是他不会被欺骗。这有点像绅士的定义，即一个从不无礼的人。</p>
-<p>[7] 你在政治极端主义者中特别看到这一点。他们认为自己是叛逆者，但实际上他们是小众从众者。他们的意见可能不同于普通人的，但他们往往比普通人更受同龄人意见的影响。</p>
-<p>[8] 如果我们扩大对真理的挑剔的概念，使其除了严格意义上的虚假外，还包括迎合、虚假和浮夸，我们的独立思考模型可以进一步扩展到艺术。</p>
-<p>[9] 这种相关性远非完美。哥德尔和狄拉克在幽默部门似乎不是很强。但一个既&quot;神经典型&quot;又无幽默感的人很可能从众。</p>
-<p>[10] 例外：八卦。几乎每个人都对八卦好奇。</p>
-<p>感谢Trevor Blackwell、Paul Buchheit、Patrick Collison、Jessica Livingston、Robert Morris、Harj Taggar和Peter Thiel阅读本文的草稿。</p>
-<p>意大利语翻译</p>
-
-      
-    </div>
-    
-    
-    
-
-
-<div class="sibling-cards">
-  
-  <a class="sibling-card prev" href="/paul_graham/essays_zh/fr/" aria-label="上一篇：如何筹集资金">
-    <div class="sibling-card-arrow">‹</div>
-    <div class="sibling-card-main">
-      <div class="sibling-card-title">如何筹集资金</div>
-      <div class="sibling-card-meta">
-        <span class="meta-author">Paul Graham</span>
-        
-        
-      </div>
-    </div>
-  </a>
-  
-
-  
-  <a class="sibling-card next" href="/paul_graham/essays_zh/selfindulgence/" aria-label="下一篇：如何浪费时间和金钱">
-    <div class="sibling-card-main">
-      <div class="sibling-card-title">如何浪费时间和金钱</div>
-      <div class="sibling-card-meta">
-        <span class="meta-author">Paul Graham</span>
-        
-        
-      </div>
-    </div>
-    <div class="sibling-card-arrow">›</div>
-  </a>
-  
-</div>
-
-
-    <section class="comments" aria-label="Comments">
-  <div id="giscus_thread" class="giscus"
-    data-repo="Linguage/Giscus"
-    data-repo-id="R_kgDOLxA-eA"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOLxA-eM4Ce06R"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme-light="light"
-    data-theme-dark="dark"
-    data-lang="zh-CN">
-  </div>
-  <script>
-    (function(){
-      try{
-        const el = document.getElementById('giscus_thread');
-        if (!el) return;
-        
-        let saved = null;
-        try{ const v = localStorage.getItem('theme'); if (v === 'light' || v === 'dark') saved = v; }catch(_){ saved = null; }
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const effective = saved ? saved : (prefersDark ? 'dark' : 'light');
-        const theme = (effective === 'dark') ? (el.dataset.themeDark || 'dark') : (el.dataset.themeLight || 'light');
-        
-        el.setAttribute('data-theme', theme);
-        
-        const s = document.createElement('script');
-        s.src = 'https://giscus.app/client.js';
-        s.setAttribute('data-repo', el.dataset.repo || '');
-        s.setAttribute('data-repo-id', el.dataset.repoId || '');
-        s.setAttribute('data-category', el.dataset.category || 'General');
-        s.setAttribute('data-category-id', el.dataset.categoryId || '');
-        s.setAttribute('data-mapping', el.dataset.mapping || 'pathname');
-        s.setAttribute('data-strict', String(el.dataset.strict || '0'));
-        s.setAttribute('data-reactions-enabled', String(el.dataset.reactionsEnabled || '1'));
-        s.setAttribute('data-emit-metadata', String(el.dataset.emitMetadata || '0'));
-        s.setAttribute('data-input-position', el.dataset.inputPosition || 'bottom');
-        s.setAttribute('data-theme', theme);
-        s.setAttribute('data-lang', el.dataset.lang || 'zh-CN');
-        s.setAttribute('crossorigin','anonymous');
-        s.async = true;
-        el.parentNode.insertBefore(s, el.nextSibling);
-      }catch(_){   }
-    })();
-  </script>
-</section>
-  </article>
-
-  
-  
-  
-  
-    
-    <aside class="docs-toc" aria-label="On this page">
-      
-      <div class="toc-title">On this page</div>
-      
-      <nav class="toc">
-        
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#注释">注释</a></li>
-  </ul>
-</nav>
-            
-      </nav>
-      
-      
-    </aside>
-  
-</div>
-
-
-
-<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-
-
-
-
-  <button id="tocMiniBtn" class="toc-mini-btn" aria-controls="tocDrawer" aria-expanded="false" aria-label="打开目录">☰ 目录</button>
-  <div id="tocDrawer" class="toc-drawer" hidden>
-    <div class="toc-drawer-inner">
-      <div class="toc-drawer-header">
-        <span>目录</span>
-        <button id="tocCloseBtn" class="toc-drawer-close" aria-label="关闭">×</button>
-      </div>
-      <nav class="toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#注释">注释</a></li>
-  </ul>
-</nav>
-      </nav>
-    </div>
-  </div>
-
-
-
-
-
-
-  </main>
-  
-  
-  
-  <footer class="site-footer">
-  
-  <div class="container footer-inner">
-    
-    <div>
-      
-        
-          © 2025 Linguista
-        
-      
-    </div>
-    
-    
-    
-    <nav class="footer-nav social-links" aria-label="Social links">
-      
-      
-      <a class="social-icon" href="https://x.com/AztecaAlpaca" target="_blank" rel="noopener" aria-label="X / Twitter">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg" alt="X logo" loading="lazy" decoding="async" />
-      </a>
-      
-      
-      <a class="social-icon" href="https://github.com/Linguage" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.28 9.28 0 0 1 12 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" clip-rule="evenodd"/></svg>
-      </a>
-      
-      
-      <a class="social-icon" href="https://linguista.notion.site/linguista-hub" target="_blank" rel="noopener" aria-label="Notion">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013" alt="Notion logo" loading="lazy" decoding="async" />
-      </a>
-      
-      
-      <a class="social-icon bear-badge" href="https://linguista.bearblog.dev/" target="_blank" rel="noopener" aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a>
-      
-    </nav>
-    
-  </div>
-  
-</footer>
-
-  
-  
-  <script src="/script.js?v=20251029-01" defer></script>
-  <script defer src="/js/search-core.js?v=20251029-01"></script>
-  <script>
-    window.SEARCH_INDEX_URL_LITE = '\/index-lite.json?v=20251029-01';
-    window.SEARCH_INDEX_URL = '\/index.json?v=20251029-01';
-  </script>
-  <script src="/js/search-advanced.js?v=20251029-01" defer></script>
-  
-  <script defer src="/js/table-7char.js?v=20251029-01"></script>
-  
-  <script defer src="/js/linkcard.js?v=20251029-01"></script>
-  <script defer src="/js/table-tooltips.js?v=20251029-01"></script>
-  <script defer src="/js/social-popup.js?v=20251029-01"></script>
-  
-  
-  
-  
-  <div id="social-popup-overlay" aria-hidden="true">
-  <div class="social-popup-card" role="dialog" aria-modal="true" aria-labelledby="social-popup-title" aria-describedby="social-popup-desc">
-    <button class="social-popup-close" type="button" aria-label="关闭">×</button>
-    <img class="social-popup-image" src="" alt="" />
-    <div class="social-popup-title" id="social-popup-title"></div>
-    <div class="social-popup-desc" id="social-popup-desc"></div>
-  </div>
-</div>
-
-  
-</body>
-</html>
+<!doctype html><html lang=zh-CN class=skin-gold><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>如何独立思考 • Linguista</title><script>(function(){try{var s="theme",e=window.localStorage?localStorage.getItem(s):null,n=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=e==="dark"||e==="light"?e:n?"dark":null;t?document.documentElement.dataset.theme=t:delete document.documentElement.dataset.theme}catch{}})()</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel=stylesheet><link rel=stylesheet href="/styles.css?v=20251029-01"><link rel=stylesheet href="/overrides.css?v=20251029-01"><link rel=stylesheet href="/css/search.css?v=20251029-01"><link rel=stylesheet href="/linkcard.css?v=20251029-01"><link rel=stylesheet href="/css/typography-mlsys.css?v=20251029-01"><link rel=stylesheet href="/css/table-tooltips.css?v=20251029-01"><link rel=stylesheet href="/css/sociallink.css?v=20251029-01"><link rel=stylesheet href="/css/social-popup.css?v=20251029-01"><style>:root{--theme-breadcrumbs-height:0px}</style><script>window.tailwind=window.tailwind||{},tailwind.config={corePlugins:{preflight:!1},safelist:["group/link-card","sm:flex-row","sm:items-center","h-[84px]","w-[84px]","sm:h-[84px]","sm:w-[84px]","line-clamp-2"]}</script><script src="https://cdn.tailwindcss.com?plugins=aspect-ratio"></script><link rel=stylesheet href="/css/skin-gold.css?v=20251029-01"><style>:root{}</style><link rel=icon href=/favicon_io/favicon.ico sizes=any><link rel=icon type=image/png sizes=32x32 href=/favicon_io/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon_io/favicon-16x16.png><link rel=apple-touch-icon href=/favicon_io/apple-touch-icon.png><link rel=manifest href=/favicon_io/site.webmanifest><meta property="og:site_name" content="Linguista"><meta property="og:type" content="article"><meta property="og:title" content="如何独立思考"><meta property="og:description" content="→ English Version https://www.paulgraham.com/think.html 如何独立思考 2020年11月 有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。 投资者也是如 …"><meta property="og:url" content="https://linguage.github.io/paul_graham/essays_zh/think/"><meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png"><meta property="og:image:width" content="400"><meta property="og:image:height" content="400"><meta name=twitter:card content="summary"><meta name=twitter:site content="@linguista2025"><meta name=twitter:creator content="@linguista2025"><meta name=twitter:title content="如何独立思考"><meta name=twitter:description content="→ English Version https://www.paulgraham.com/think.html 如何独立思考 2020年11月 有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。 投资者也是如 …"><meta name=twitter:image content="https://linguage.github.io/img/Linguista_imresizer.png"><link rel=canonical href=https://linguage.github.io/paul_graham/essays_zh/think/><script>window.MathJax={loader:{load:["[tex]/ams"]},tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,packages:{"[+]":["ams"]},macros:{unicodeInt:[`\\mathop{\\vcenter{\\mathchoice{\\huge\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}{\\unicode{#1}}}}\\nolimits`,1],oiint:"\\unicodeInt{x222F}",oiiint:"\\unicodeInt{x2230}"}},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}}</script><script defer src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-99PGBGJH4S")</script></head><body><header class=site-header><div class="container header-inner"><div class=brand><a href=/ class=brand-avatar-link aria-label=Linguista><picture><img src=/img/Avatar5518800_2.jpg class=logo-avatar alt=Linguista width=32 height=32 loading=lazy decoding=async onerror='this.classList.add("avatar-fallback")'>
+</picture></a><button class="mobile-nav-btn mobile-nav-btn--header" aria-controls=navDrawer aria-expanded=false aria-label=打开导航>☰</button>
+<span class=brand-text>Linguista</span></div><nav class=nav><a href=/labs/ class=nav-link>工坊</a>
+<a href=/essays/ class=nav-link>经典</a>
+<a href=/courses/ class=nav-link>课程资料</a>
+<a href=/bookmarks/ class=nav-link>书签</a>
+<a href=/about/ class=nav-link>关于我</a></nav><div class=actions><button id=searchToggleBtn class="btn ghost search-toggle-btn" aria-label=打开搜索 title=搜索 type=button>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><div class=site-search role=search><button id=searchBackBtn class=mobile-search-back aria-label=返回 title=返回 type=button>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<span class=site-search-icon aria-hidden=true><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.65" y1="16.65" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</span><input id=globalSearchInput class=site-search-input type=search placeholder="搜索文章、标签、摘要…（按 / 快速聚焦）" aria-label=站内搜索 autocomplete=off spellcheck=false>
+<button id=pageSearchBtn class=page-search-btn aria-label=本页搜索 title=本页搜索 type=button>页</button><div id=globalSearchPopover class=site-search-popover hidden aria-live=polite></div></div><a href=/post/ class="btn ghost posts-btn">Posts</a>
+<button id=themeToggle class="btn ghost theme-toggle-btn" aria-label=切换主题 title=切换主题>🌙</button></div></div></header><aside id=navDrawer class=nav-drawer hidden><div class=nav-drawer-inner><div class=nav-drawer-header><div class=nav-drawer-title>Menu</div><button id=navCloseBtn class=nav-drawer-close aria-label="Close menu">×</button></div><nav class=nav-drawer-list aria-label="Mobile Primary"><a class=nav-drawer-item href=/labs/>工坊</a>
+<a class=nav-drawer-item href=/essays/>经典</a>
+<a class=nav-drawer-item href=/courses/>课程资料</a>
+<a class=nav-drawer-item href=/bookmarks/>书签</a>
+<a class=nav-drawer-item href=/about/>关于我</a></nav><div class=nav-drawer-folder><div class=nav-drawer-subtitle>Section</div><nav class="docs-nav in-drawer" aria-label="Current Section"><a class="depth-0 file-link" href=/paul_graham/essays_zh/prcmc/>pooled-risk 公司管理公司</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/artistsship/>"艺术家要发布"的另一面</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/6631327/>6,631,372</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/airbnb/>Airbnb</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/airbnbs/>Airbnb团队</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/acl1txtt1748944359/>ANSI Common Lisp 简介</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/javacover/>Java的外衣</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/diff/>Lisp的不同之处</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/rootsoflisp/>Lisp的根源</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mac/>Mac的回归</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nthings/>N 件事的清单</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/progbot/>Progbot</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/prop62/>Prop62</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/property/>Property</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pypar/>Python悖论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/reddits/>Reddit创始人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ronco/>Ronco原则</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/rss/>RSS</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/web20/>Web 2.0</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ycstart/>Y Combinator 的创立故事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/heroes/>一些英雄</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/revolution/>一场本地革命？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ycombinator/>一种新的风险投资动物</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/relres/>不屈不挠的足智多谋</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/inequality/>不平等</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/say/>不能说的话</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/notnot/>不要不要创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/patentpledge/>专利承诺</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/judgement/>两种判断</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/noop/>为什么 Arc 不是特别面向对象的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nerds/>为什么书呆子不受欢迎</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hubs/>为什么创业中心有效</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/america/>为什么创业公司在美国聚集</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/safe/>为什么创始人友善是安全的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/badeconomy/>为什么在经济衰退时期创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/twitter/>为什么推特很重要</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startuphubs/>为什么搬到创业中心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/whyyc/>为什么是YC</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/googles/>为什么没有更多的Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/convergence/>为什么电视输了</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bronze/>为什么聪明人有坏想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/maybe/>也许</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/icad/>书呆子的复仇</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/5founders/>五位创始人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vb/>人生苦短</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/work/>什么不像工作？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/conformism/>从众主义</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ambitious/>令人恐惧的雄心勃勃的创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/corpdev/>企业开发</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/writes/>会写的人和不会写的人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gh/>伟大的黑客</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/when/>何时做你热爱的事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/want/>你（想要）*想要什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hs/>你会希望你当初知道的事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/know/>你如何知道</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/boss/>你本不该有老板</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/top/>你脑海中最主要的想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/identity/>保持身份小规模</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wisdom/>值得拥有智慧吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/noob/>做个新手</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/good/>做善事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ds/>做无法扩展的事情</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/talk/>像你说话一样写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/langdes/>关于语言设计的五个问题</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/kids/>养育孩子</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/re/>再分化</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/speak/>写作与演讲</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/writing44/>写作简述</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/cred/>冠状病毒与信誉</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/determination/>决心的剖析</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/kate/>凯特在硅谷看到的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/distraction/>分心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/before/>创业之前</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/growth/>创业公司 = 增长</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startuplessons/>创业公司最难学到的教训</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/really/>创业公司真实情况</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/future/>创业公司融资的未来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ideas/>创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/invtrend/>创业投资趋势</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundermode/>创始人模式</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundervisa/>创始人签证</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/newthings/>创造新事物的六个原则</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/taste/>创造者的品味</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/makersschedule/>创造者的日程表，管理者的日程表</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mean/>刻薄</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/colleges/>前线消息</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ffb/>反击的过滤器</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/disc/>发现的风险</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/road/>另一条道路</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/publishing/>后媒体时代的出版</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundersatwork/>向创始人学习</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/opensource/>商业可以从开源中学到什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/seesv/>在哪里看硅谷</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/spam/>垃圾邮件过滤计划</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/cities/>城市与雄心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lwba/>基于Web应用的Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/copy/>复制你喜欢的东西</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/alien/>外星真理</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/college/>大学本科</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/genius/>天才的公交车票理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/procrastination/>好坏拖延症</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodwriting/>好的写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/disagree/>如何不同意</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/die/>如何不死</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupfunding/>如何为创业公司融资</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/love/>如何做你热爱的事情</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/greatwork/>如何做出伟大的工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/philosophy/>如何做哲学</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/start/>如何创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/google/>如何创建Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wealth/>如何创造财富</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hwh/>如何努力工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/popular/>如何变得流行</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/investors/>如何向投资者展示</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ecw/>如何在变化的世界中成为专家</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/angelinvesting/>如何成为天使投资人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/siliconvalley/>如何成为硅谷</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/selfindulgence/>如何浪费时间和金钱</a>
+<a class="depth-0 file-link is-active" href=/paul_graham/essays_zh/think/>如何独立思考</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fr/>如何筹集资金</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupideas/>如何获得创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/getideas/>如何获得新想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pgh/>如何让匹兹堡成为创业中心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/convince/>如何说服投资者</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/iflisp/>如果Lisp这么好</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mit/>学生创业指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/words/>将思想转化为文字</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/head/>将程序装在脑中</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/island/>岛屿测试</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/unions/>工会的另一种理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/polls/>布拉德利的幽灵</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/tablets/>平板电脑</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/real/>废除死刑的真正原因</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/heresy/>异端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/microsoft/>微软已死</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vw/>快照：Viaweb，1998年6月</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/weird/>怪异语言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/addiction/>成瘾性</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/sfp/>我今年夏天做了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hackernews/>我从Hacker News学到的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/users/>我从用户身上学到了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lies/>我们告诉孩子的谎言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/founders/>我们寻找创始人的品质</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/worked/>我所从事的工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/todo/>我的待办事项清单顶端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/herd/>投资者群体动态</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ramenprofitable/>拉面盈利</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/schlep/>拖累盲区</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hiring/>招聘已经过时</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nft/>拯救生命的 NFT</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/control/>控制权</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/essay/>散文的时代</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/field/>散文领域的形态</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/superangels/>新的融资格局</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nov/>新颖与异端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/donate/>无限制捐赠</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/early/>早期</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fp/>时髦问题</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/charisma/>是魅力，笨蛋</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/sun/>普遍而惊人的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/better/>更好的贝叶斯过滤</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/name/>更改你的名字</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/best/>最佳文章</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/organic/>有机的创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/useful/>有用的文章</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupmistakes/>杀死创业公司的18个错误</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pow/>权力</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/jessica/>杰西卡·利文斯顿</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ladder/>梯子之后</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bias/>检测偏见的一种方法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wtax/>模拟财富税</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/acl2txtt1748944359/>欢迎来到Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/persistence/>正确的固执</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/orth/>正统特权</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bubble/>泡沫的正确之处</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gap/>注意差距</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/laundry/>洗衣</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/woke/>清醒文化的起源</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mod/>温和派</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/submarine/>潜水艇</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/stuff/>物品</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fn/>猛烈的极客</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/richnow/>现在人们如何变富</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/13sentences/>用13句话讲清楚创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/newideas/>疯狂的新想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hundred/>百年编程语言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/randomness/>看见随机性</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodtaste/>真有好品味这回事吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/earnest/>真诚</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hw/>硬件复兴</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/simply/>简单写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/power/>简洁即力量</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ace/>精通</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ineq/>经济不平等</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/word/>给足智多谋者的忠告</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fix/>编程语言修复了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/webstartups/>网络创业公司的未来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/trolls/>网络喷子</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/usa/>美国制造</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/equity/>股权方程式</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/own/>自己的项目</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pinch/>致命的困境</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodart/>艺术如何能够优秀</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/apple/>苹果的错误</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fundraising/>融资生存指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/95/>让另外95%的优秀程序员进来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/desres/>设计与研究</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/credentials/>证书之后</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/do/>该做什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/discover/>说服还是发现</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/segway/>赛格威的麻烦</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/superlinear/>超线性回报</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/avg/>超越平均水平</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/smart/>超越聪明</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/softwarepatents/>软件专利是邪恶的吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/marginal/>边缘的力量</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/altair/>这是哪个微软的Altair Basic？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/read/>阅读的必要</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/yahoo/>雅虎发生了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lesson/>需要忘掉的一课</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/divergence/>风险投资会成为经济衰退的牺牲品吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/venturecapital/>风险投资糟糕性的统一理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vcsqueeze/>风险资本挤压</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/guidetoinvestors/>骇客投资者指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/highres/>高分辨率社会</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hiresfund/>高分辨率融资</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/swan/>黑天鹅养殖</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hp/>黑客与画家</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gba/>黑客这个词</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fh/>黑粉</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/aord/>默认生存还是默认死亡？</a></nav></div></div></aside><main class=container><div class=docs-layout><aside class=docs-sidebar aria-label=Sections><div class=docs-side-title>Documentation</div><nav class=docs-nav><a class="depth-0 file-link" href=/paul_graham/essays_zh/prcmc/>pooled-risk 公司管理公司</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/artistsship/>"艺术家要发布"的另一面</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/6631327/>6,631,372</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/airbnb/>Airbnb</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/airbnbs/>Airbnb团队</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/acl1txtt1748944359/>ANSI Common Lisp 简介</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/javacover/>Java的外衣</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/diff/>Lisp的不同之处</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/rootsoflisp/>Lisp的根源</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mac/>Mac的回归</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nthings/>N 件事的清单</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/progbot/>Progbot</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/prop62/>Prop62</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/property/>Property</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pypar/>Python悖论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/reddits/>Reddit创始人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ronco/>Ronco原则</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/rss/>RSS</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/web20/>Web 2.0</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ycstart/>Y Combinator 的创立故事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/heroes/>一些英雄</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/revolution/>一场本地革命？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ycombinator/>一种新的风险投资动物</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/relres/>不屈不挠的足智多谋</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/inequality/>不平等</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/say/>不能说的话</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/notnot/>不要不要创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/patentpledge/>专利承诺</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/judgement/>两种判断</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/noop/>为什么 Arc 不是特别面向对象的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nerds/>为什么书呆子不受欢迎</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hubs/>为什么创业中心有效</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/america/>为什么创业公司在美国聚集</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/safe/>为什么创始人友善是安全的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/badeconomy/>为什么在经济衰退时期创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/twitter/>为什么推特很重要</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startuphubs/>为什么搬到创业中心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/whyyc/>为什么是YC</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/googles/>为什么没有更多的Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/convergence/>为什么电视输了</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bronze/>为什么聪明人有坏想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/maybe/>也许</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/icad/>书呆子的复仇</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/5founders/>五位创始人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vb/>人生苦短</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/work/>什么不像工作？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/conformism/>从众主义</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ambitious/>令人恐惧的雄心勃勃的创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/corpdev/>企业开发</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/writes/>会写的人和不会写的人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gh/>伟大的黑客</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/when/>何时做你热爱的事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/want/>你（想要）*想要什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hs/>你会希望你当初知道的事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/know/>你如何知道</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/boss/>你本不该有老板</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/top/>你脑海中最主要的想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/identity/>保持身份小规模</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wisdom/>值得拥有智慧吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/noob/>做个新手</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/good/>做善事</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ds/>做无法扩展的事情</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/talk/>像你说话一样写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/langdes/>关于语言设计的五个问题</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/kids/>养育孩子</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/re/>再分化</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/speak/>写作与演讲</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/writing44/>写作简述</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/cred/>冠状病毒与信誉</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/determination/>决心的剖析</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/kate/>凯特在硅谷看到的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/distraction/>分心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/before/>创业之前</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/growth/>创业公司 = 增长</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startuplessons/>创业公司最难学到的教训</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/really/>创业公司真实情况</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/future/>创业公司融资的未来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ideas/>创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/invtrend/>创业投资趋势</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundermode/>创始人模式</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundervisa/>创始人签证</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/newthings/>创造新事物的六个原则</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/taste/>创造者的品味</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/makersschedule/>创造者的日程表，管理者的日程表</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mean/>刻薄</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/colleges/>前线消息</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ffb/>反击的过滤器</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/disc/>发现的风险</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/road/>另一条道路</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/publishing/>后媒体时代的出版</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/foundersatwork/>向创始人学习</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/opensource/>商业可以从开源中学到什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/seesv/>在哪里看硅谷</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/spam/>垃圾邮件过滤计划</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/cities/>城市与雄心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lwba/>基于Web应用的Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/copy/>复制你喜欢的东西</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/alien/>外星真理</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/college/>大学本科</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/genius/>天才的公交车票理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/procrastination/>好坏拖延症</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodwriting/>好的写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/disagree/>如何不同意</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/die/>如何不死</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupfunding/>如何为创业公司融资</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/love/>如何做你热爱的事情</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/greatwork/>如何做出伟大的工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/philosophy/>如何做哲学</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/start/>如何创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/google/>如何创建Google</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wealth/>如何创造财富</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hwh/>如何努力工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/popular/>如何变得流行</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/investors/>如何向投资者展示</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ecw/>如何在变化的世界中成为专家</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/angelinvesting/>如何成为天使投资人</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/siliconvalley/>如何成为硅谷</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/selfindulgence/>如何浪费时间和金钱</a>
+<a class="depth-0 file-link is-active" href=/paul_graham/essays_zh/think/>如何独立思考</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fr/>如何筹集资金</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupideas/>如何获得创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/getideas/>如何获得新想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pgh/>如何让匹兹堡成为创业中心</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/convince/>如何说服投资者</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/iflisp/>如果Lisp这么好</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mit/>学生创业指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/words/>将思想转化为文字</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/head/>将程序装在脑中</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/island/>岛屿测试</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/unions/>工会的另一种理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/polls/>布拉德利的幽灵</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/tablets/>平板电脑</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/real/>废除死刑的真正原因</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/heresy/>异端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/microsoft/>微软已死</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vw/>快照：Viaweb，1998年6月</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/weird/>怪异语言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/addiction/>成瘾性</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/sfp/>我今年夏天做了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hackernews/>我从Hacker News学到的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/users/>我从用户身上学到了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lies/>我们告诉孩子的谎言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/founders/>我们寻找创始人的品质</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/worked/>我所从事的工作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/todo/>我的待办事项清单顶端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/herd/>投资者群体动态</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ramenprofitable/>拉面盈利</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/schlep/>拖累盲区</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hiring/>招聘已经过时</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nft/>拯救生命的 NFT</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/control/>控制权</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/essay/>散文的时代</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/field/>散文领域的形态</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/superangels/>新的融资格局</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/nov/>新颖与异端</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/donate/>无限制捐赠</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/early/>早期</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fp/>时髦问题</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/charisma/>是魅力，笨蛋</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/sun/>普遍而惊人的</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/better/>更好的贝叶斯过滤</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/name/>更改你的名字</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/best/>最佳文章</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/organic/>有机的创业想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/useful/>有用的文章</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/startupmistakes/>杀死创业公司的18个错误</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pow/>权力</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/jessica/>杰西卡·利文斯顿</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ladder/>梯子之后</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bias/>检测偏见的一种方法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/wtax/>模拟财富税</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/acl2txtt1748944359/>欢迎来到Lisp</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/persistence/>正确的固执</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/orth/>正统特权</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/bubble/>泡沫的正确之处</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gap/>注意差距</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/laundry/>洗衣</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/woke/>清醒文化的起源</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/mod/>温和派</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/submarine/>潜水艇</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/stuff/>物品</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fn/>猛烈的极客</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/richnow/>现在人们如何变富</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/13sentences/>用13句话讲清楚创业</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/newideas/>疯狂的新想法</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hundred/>百年编程语言</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/randomness/>看见随机性</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodtaste/>真有好品味这回事吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/earnest/>真诚</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hw/>硬件复兴</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/simply/>简单写作</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/power/>简洁即力量</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ace/>精通</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/ineq/>经济不平等</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/word/>给足智多谋者的忠告</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fix/>编程语言修复了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/webstartups/>网络创业公司的未来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/trolls/>网络喷子</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/usa/>美国制造</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/equity/>股权方程式</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/own/>自己的项目</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/pinch/>致命的困境</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/goodart/>艺术如何能够优秀</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/apple/>苹果的错误</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fundraising/>融资生存指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/95/>让另外95%的优秀程序员进来</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/desres/>设计与研究</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/credentials/>证书之后</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/do/>该做什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/discover/>说服还是发现</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/segway/>赛格威的麻烦</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/superlinear/>超线性回报</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/avg/>超越平均水平</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/smart/>超越聪明</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/softwarepatents/>软件专利是邪恶的吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/marginal/>边缘的力量</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/altair/>这是哪个微软的Altair Basic？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/read/>阅读的必要</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/yahoo/>雅虎发生了什么</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/lesson/>需要忘掉的一课</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/divergence/>风险投资会成为经济衰退的牺牲品吗？</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/venturecapital/>风险投资糟糕性的统一理论</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/vcsqueeze/>风险资本挤压</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/guidetoinvestors/>骇客投资者指南</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/highres/>高分辨率社会</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hiresfund/>高分辨率融资</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/swan/>黑天鹅养殖</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/hp/>黑客与画家</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/gba/>黑客这个词</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/fh/>黑粉</a>
+<a class="depth-0 file-link" href=/paul_graham/essays_zh/aord/>默认生存还是默认死亡？</a></nav></aside><article class=docs-content><div class=prose><div class=post-meta style="color:var(--muted);font-size:14px;margin:4px 0 10px"><span class=meta-author>Paul Graham</span></div><p>→ <a href=/paul_graham/essays_en/think/>English Version</a></p><div class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]" data-url=https://www.paulgraham.com/think.html><a class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline" href=https://www.paulgraham.com/think.html target=_blank rel=noopener>https://www.paulgraham.com/think.html</a></div><h1 id=如何独立思考>如何独立思考</h1><p>2020年11月</p><p>有些类型的工作，如果不与同伴有不同的思考，你无法做好。例如，要成为一名成功的科学家，仅仅正确是不够的。你的想法必须既正确又新颖。你不能发表说其他人已经知道的事情的论文。你需要说还没有其他人意识到的事情。</p><p>投资者也是如此。公开市场投资者仅仅正确预测公司将如何表现是不够的。如果很多其他人做出相同的预测，股票价格将已经反映它，没有赚钱的空间。唯一有价值的见解是大多数其他投资者不分享的见解。</p><p>你在创业公司创始人身上也看到这种模式。你不想创业去做每个人都同意是好主意的事情，或者已经有其他公司在做它。你必须做一件对大多数其他人来说听起来像坏主意，但你知道不是的事情——比如为几千个爱好者使用的微型计算机编写软件，或者创办一个让人们可以在陌生人地板上租充气床垫的网站。</p><p>散文家也是如此。告诉人们他们已经知道的事情的散文会很无聊。你必须告诉他们一些新东西。</p><p>但这种模式并不普遍。事实上，它对大多数类型的工作不成立。在大多数类型的工作中——例如，成为一名管理员——你只需要前一半。你只需要是正确的。其他人都不错并不是必需的。</p><p>在大多数类型的工作中都有一些新意的空间，但在实践中，在必须独立思考的工作类型和不必须的工作类型之间有相当明显的区别。</p><p>我希望有人在我小时候告诉我这种区别，因为这是在决定你想做什么类型工作时需要思考的最重要事情之一。你想做那种只能通过与每个人不同思考才能赢的工作吗？我怀疑大多数人的潜意识会在他们的意识有机会之前回答那个问题。我知道我的会。</p><p>独立思考似乎更多是天生的而不是后天培养的。这意味着如果你选择了错误类型的工作，你将会不快乐。如果你天生独立思考，你会发现成为一名中层管理者很令人沮丧。如果你天生从众，如果你尝试做原创研究，你将会逆风而上。</p><p>然而，这里的一个困难是，人们经常误解自己在从众到独立思考的光谱上的位置。从众的人不喜欢认为自己是从众的。而且，无论如何，他们真的感觉自己对一切都有自己的想法。他们的信念与同龄人的信念相同只是一个巧合。同时，独立思考的人常常没有意识到他们的想法与常规想法有多不同，至少在他们公开陈述它们之前。[1]</p><p>到成年时，大多数人大致知道他们有多聪明（在解决预设问题的狭义能力上），因为他们不断地根据它被测试和排名。但学校通常忽视独立思考，除了他们试图压制它的程度。所以我们没有获得关于我们独立思考程度的任何相同类型的反馈。</p><p>甚至可能有类似邓宁-克鲁格的现象在起作用，其中最从众的人自信他们是独立思考的，而真正独立思考的人担心他们可能不够独立思考。</p><hr><p>你能让自己更独立思考吗？我想是的。这种品质可能主要是天生的，但似乎有方法可以放大它，或者至少不压制它。</p><p>最有效的技术之一是大多数书呆子无意中实践的：简单地更少知道常规信念是什么。如果你不知道你应该遵守什么，就很难成为从众者。但再次，可能这样的人已经是独立思考的。从众的人可能会因为不知道其他人想什么而感到焦虑，并更努力去寻找。</p><p>你周围的人很重要。如果你被从众的人包围，这将限制你能表达的想法，而这反过来又将限制你有的想法。但如果你被独立思考的人包围，你将有相反的经历：听到其他人说令人惊讶的事情将鼓励你，并思考更多。</p><p>因为独立思考的人发现被从众的人包围是不舒服的，一旦有机会，他们倾向于自我隔离。高中的问题在于他们还没有机会这样做。而且高中往往是一个向内看的小世界，其居民缺乏自信，这两者都放大了从众的力量。所以对独立思考的人来说，高中通常是一个糟糕的时期。但即使这里也有一些优势：它教会你避免什么。如果你后来发现自己在一个让你想"这像高中"的情况中，你知道你应该离开。[2]</p><p>独立思考和从众的人被抛在一起的另一个地方是在成功的创业公司中。创始人和早期员工几乎总是独立思考的；否则创业公司不会成功。但从众的人在数量上大大超过独立思考的人，所以随着公司的发展，独立思考的原始精神不可避免地被稀释。除了公司开始变糟的明显问题外，这还导致了各种各样的问题。最奇怪的问题之一是，创始人发现自己能够与其他公司的创始人比与自己的员工更自由地交谈。[3]</p><p>幸运的是，你不必把所有时间都花在独立思考的人身上。有一两个你可以定期交谈的就足够了。一旦你找到他们，他们通常和你一样渴望交谈；他们也需要你。虽然大学不再拥有它们过去对教育的垄断，但好大学仍然是遇到独立思考的人的绝佳方式。大多数学生仍将从众，但你至少会发现独立思考的小群体，而不是你在高中可能发现的接近零。</p><p>另一种方法是反方向：除了培养一小群独立思考的朋友外，尝试尽可能多地遇到不同类型的人。如果你有其他几个同龄人群体，这将减少你直接同龄人的影响。而且如果你是几个不同世界的一部分，你经常可以从一个向另一个导入想法。</p><p>但我说不同类型的人，不是指人口统计上不同的。为了这个技术有效，他们必须思考不同。所以虽然去其他国家访问是个好主意，但你可能就在拐角处能找到思考不同的人。当我遇到某个对不寻常事物了解很多的人（如果你挖得足够深，这实际上包括每个人），我尝试学习他们知道而其他人不知道的东西。这里几乎总是有惊喜。当你遇到陌生人时，这是开始对话的好方法，但我不是为了对话才这样做。我真的想知道。</p><p>你也可以通过阅读历史在时间上和空间上扩大影响的来源。当我读历史时，我不仅是为了了解发生了什么，而是尝试进入生活在过去的人的头脑。事情对他们来说看起来如何？这很难做到，但值得努力，就像值得远行去三角定位一个点一样。</p><p>你也可以采取更明确的措施来防止自己自动接受常规意见。最一般的是培养怀疑态度。当你听到有人说什么时，停下来问自己"这是真的吗？&ldquo;不要大声说出来。我不是建议你给每个与你交谈的人强加证明他们所说的负担，而是你承担评估他们所说的负担。</p><p>把它当作一个谜题。你知道一些公认的想法后来会被证明是错误的。看看你能否猜测是哪些。最终目标不是在你被告知的事情中找到缺陷，而是找到被损坏想法隐藏的新想法。所以这个游戏应该是对新颖性的激动人心的探索，而不是智力卫生的无聊协议。当你开始问"这是真的吗？&ldquo;时，你会惊讶地发现答案往往不是立即是的。如果你有任何想象力，你更可能有过多的线索可循而不是过少。</p><p>更一般地说，你的目标应该是不让任何东西未经审视就进入你的头脑，而东西并不总是以陈述的形式进入你的头脑。一些最强大的影响是隐含的。你甚至如何注意到这些？退后一步，观察其他人如何获得他们的想法。</p><p>当你退后到足够的距离，你可以看到想法像波浪一样在人群中传播。最明显的是在时尚中：你注意到一些人穿某种衬衫，然后越来越多，直到你周围的一半人穿着相同的衬衫。你可能不太在乎你穿什么，但也有智力时尚，你绝对不想参与那些。不仅仅是因为你想要对自己思想的主权，而且是因为不时尚的想法不成比例地可能导致有趣的地方。发现未被发现想法的最好地方是没有人寻找的地方。[4]</p><hr><p>为了超越这个一般建议，我们需要看看独立思考的内部结构——就像我们需要锻炼的个别肌肉。在我看来，它有三个组成部分：对真理的挑剔，对被告知思考的抵抗，和好奇心。</p><p>对真理的挑剔意味着不仅仅是不相信虚假的事情。它意味着对信念程度小心。对大多数人来说，信念程度未经审视地冲向极端：不可能的变成不可能，可能的变成确定的。[5] 对独立思考的人来说，这似乎是不可原谅的草率。他们愿意让任何东西进入他们的头脑，从高度推测的假设到（明显）的重言式，但在他们关心的主题上，一切都必须用仔细考虑的信念程度标记。[6]</p><p>因此，独立思考的人对意识形态有恐惧感，意识形态要求一个人同时接受整个信念集合，并将它们当作信仰条款。对独立思考的人来说，这似乎令人反感，就像对食物挑剔的人会觉得咬一口充满各种不确定年龄和来源成分的潜艇三明治令人反感一样。</p><p>没有这种对真理的挑剔，你不可能真正独立思考。仅仅有对被告知思考的抵抗是不够的。那种人拒绝常规想法只是为了用最随机的阴谋论取而代之。而且由于这些阴谋论常常是为捕获他们而制造的，他们最终比普通人更不独立思考，因为他们受制于一个比仅仅是常规更苛刻的主人。[7]</p><p>你能增加对真理的挑剔吗？我想是的。根据我的经验，仅仅思考你挑剔的事情就会导致那种挑剔增长。如果是这样，这是我们仅仅通过想要就能拥有的少数美德之一。而且如果它像其他形式的挑剔，应该也可能在儿童中鼓励。我肯定从我父亲那里得到了强烈的剂量。[8]</p><p>独立思考的第二个组成部分，对被告知思考的抵抗，是三个中最明显的。但即使这一点也经常被误解。人们犯的最大错误是把它视为仅仅消极的品质。我们使用的语言强化了那个想法。你不循规蹈矩。你不在乎别人想什么。但它不仅仅是一种免疫力。在最独立思考的人中，不想被告知思考的欲望是一种积极的力量。不仅仅是怀疑主义，而是对颠覆常规智慧的想法的积极喜悦，越违反直觉越好。</p><p>一些最新颖的想法在当时几乎像恶作剧。想想你对新颖想法的反应经常是笑。我不认为新颖想法本身很有趣，而是因为新颖性和幽默分享某种惊奇。但虽然不相同，两者足够接近，以至于有幽默感和独立思考之间有明确的相关性——就像无幽默感和从众之间一样。[9]</p><p>我不认为我们能显著增加对被告知思考的抵抗。它似乎似乎是独立思考三个组成部分中最天生的；成年时有这种品质的人通常在儿童时就有太明显的迹象。但如果我们不能增加对被告知思考的抵抗，我们至少可以通过让自己被其他独立思考的人包围来支撑它。</p><p>独立思考的第三个组成部分，好奇心，可能是最有趣的。就我们能对新颖想法来自哪里给出简短答案而言，它是好奇心。那是人们通常在拥有它们之前的感觉。</p><p>根据我的经验，独立思考和好奇心完美地相互预测。我认识的每个独立思考的人都深深好奇，我认识的每个从众的人都不是。奇怪的是，儿童除外。所有小孩子都好奇。也许原因是即使从众的人在开始时也必须好奇，为了学习常规是什么。而独立思考的人是好奇的贪吃者，即使饱了也继续吃。[10]</p><p>独立思考的三个组成部分协同工作：对真理的挑剔和对被告知思考的抵抗在你大脑中创造空间，好奇心找到新想法来填充它。</p><p>有趣的是，三个组成部分可以像肌肉一样在很大程度上相互替代。如果你对真理足够挑剔，你不需要对被告知思考有那么强的抵抗，因为挑剔本身会在你的知识中创造足够的空白。而且任何一个都可以补偿好奇心，因为如果你在大脑中创造足够的空间，你对由此产生的真空的不适将给你的好奇心增加力量。或者好奇心可以补偿它们：如果你足够好奇，你不需要在大脑中清除空间，因为你发现的新想法将把你默认获得的常规想法推出去。</p><p>因为独立思考的组成部分如此可互换，你可以有不同程度地拥有它们并仍然得到相同的结果。所以独立思考不是单一模式。一些独立思考的人是公开颠覆性的，另一些则是安静地好奇的。但他们都知道秘密握手。</p><p>有没有方法培养好奇心？首先，你想避免抑制它的情况。你目前正在做的工作在多大程度上激发你的好奇心？如果答案是"不多&rdquo;，也许你应该改变一些事情。</p><p>你可以采取的培养好奇心的最重要的积极步骤可能是寻找吸引它的主题。很少有成年人对一切都同样好奇，而且你似乎不能选择哪些主题吸引你。所以由你来找到它们。或者必要时发明它们。</p><p>增加好奇心的另一个方法是纵容它，通过调查你感兴趣的事情。好奇心在这方面不同于大多数其他欲望：纵容它往往增加而不是满足它。问题导致更多问题。</p><p>好奇心似乎比对真理的挑剔或对被告知思考的抵抗更个人化。在人们拥有后两者的程度上，他们通常相当普遍，而不同的人可以对非常不同的事物好奇。所以也许好奇心是指南针。也许，如果你的目标是发现新颖想法，你的座右铭不应该那么多是"做你爱的&rdquo;，而是"做你好奇的"。</p><h2 id=注释>注释</h2><p>[1] 没有人认同为从众的人这一事实的一个方便后果是，你可以说你喜欢从众的人什么而不会陷入太多麻烦。当我写《从众的四个象限时，我预期从侵略性从众的人那里会有愤怒的风暴，但事实上它相当微弱。他们感觉到文章中有某种他们极度不喜欢的东西，但他们很难找到特定的段落来钉它。</p><p>[2] 当我问自己生活中什么像高中时，答案是Twitter。它不仅充满了从众的人，就像任何它规模的东西不可避免的那样，而且受到暴力的从众风暴，让我想起木星的描述。但虽然在那里花时间可能是净损失，但至少让我更多地思考了独立和从众之间的区别，否则我可能不会这样做。</p><p>[3] 成长创业公司中独立思考的减少仍然是一个开放问题，但可能有解决方案。</p><p>创始人可以通过有意识地努力只雇佣独立思考的人来延迟问题。这当然也有他们有更好想法的附加好处。</p><p>另一个可能的解决方案是创造某种政策，破坏从众的力量，很像控制棒减慢连锁反应，这样从众的人就不那么危险。洛克希德臭鼬工厂的物理分离可能有这方面作为一个好处。最近的例子表明像Slack这样的员工论坛可能不是纯粹的善。</p><p>最激进的解决方案是在不增加公司的情况下增加收入。你认为雇佣那个初级公关人员会比程序员便宜，但对你公司平均独立思考水平的影响是什么？（相对于教员的员工增长似乎对大学有类似的影响。）也许关于外包不是你"核心能力"的工作的规则应该补充一个关于外包那些作为员工会破坏你文化的人的工作。</p><p>一些投资公司似乎已经能够在不增加员工数量的情况下增加收入。自动化加上"技术栈"的不断增长的精确性表明有一天这对产品公司可能也是可能的。</p><p>[4] 每个领域都有智力时尚，但它们的影响不同。例如，政治往往无聊的原因之一是它非常受它们影响。对政治有意见的门槛比对集合论有意见的门槛低得多。所以虽然政治中有一些想法，在实践中它们往往被智力时尚的浪潮淹没。</p><p>[5] 从众的人经常被他们意见的力量欺骗，认为他们是独立思考的。但强烈的信念不是独立思考的标志。恰恰相反。</p><p>[6] 对真理的挑剔并不意味着独立思考的人不会不诚实，而是他不会被欺骗。这有点像绅士的定义，即一个从不无礼的人。</p><p>[7] 你在政治极端主义者中特别看到这一点。他们认为自己是叛逆者，但实际上他们是小众从众者。他们的意见可能不同于普通人的，但他们往往比普通人更受同龄人意见的影响。</p><p>[8] 如果我们扩大对真理的挑剔的概念，使其除了严格意义上的虚假外，还包括迎合、虚假和浮夸，我们的独立思考模型可以进一步扩展到艺术。</p><p>[9] 这种相关性远非完美。哥德尔和狄拉克在幽默部门似乎不是很强。但一个既"神经典型"又无幽默感的人很可能从众。</p><p>[10] 例外：八卦。几乎每个人都对八卦好奇。</p><p>感谢Trevor Blackwell、Paul Buchheit、Patrick Collison、Jessica Livingston、Robert Morris、Harj Taggar和Peter Thiel阅读本文的草稿。</p><p>意大利语翻译</p></div><div class=sibling-cards><a class="sibling-card prev" href=/paul_graham/essays_zh/fr/ aria-label=上一篇：如何筹集资金><div class=sibling-card-arrow>‹</div><div class=sibling-card-main><div class=sibling-card-title>如何筹集资金</div><div class=sibling-card-meta><span class=meta-author>Paul Graham</span></div></div></a><a class="sibling-card next" href=/paul_graham/essays_zh/selfindulgence/ aria-label=下一篇：如何浪费时间和金钱><div class=sibling-card-main><div class=sibling-card-title>如何浪费时间和金钱</div><div class=sibling-card-meta><span class=meta-author>Paul Graham</span></div></div><div class=sibling-card-arrow>›</div></a></div><section class=comments aria-label=Comments><div id=giscus_thread class=giscus data-repo=Linguage/Giscus data-repo-id=R_kgDOLxA-eA data-category=Announcements data-category-id=DIC_kwDOLxA-eM4Ce06R data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme-light=light data-theme-dark=dark data-lang=zh-CN></div><script>(function(){try{const e=document.getElementById("giscus_thread");if(!e)return;let n=null;try{const e=localStorage.getItem("theme");(e==="light"||e==="dark")&&(n=e)}catch{n=null}const o=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,i=n?n:o?"dark":"light",s=i==="dark"?e.dataset.themeDark||"dark":e.dataset.themeLight||"light";e.setAttribute("data-theme",s);const t=document.createElement("script");t.src="https://giscus.app/client.js",t.setAttribute("data-repo",e.dataset.repo||""),t.setAttribute("data-repo-id",e.dataset.repoId||""),t.setAttribute("data-category",e.dataset.category||"General"),t.setAttribute("data-category-id",e.dataset.categoryId||""),t.setAttribute("data-mapping",e.dataset.mapping||"pathname"),t.setAttribute("data-strict",String(e.dataset.strict||"0")),t.setAttribute("data-reactions-enabled",String(e.dataset.reactionsEnabled||"1")),t.setAttribute("data-emit-metadata",String(e.dataset.emitMetadata||"0")),t.setAttribute("data-input-position",e.dataset.inputPosition||"bottom"),t.setAttribute("data-theme",s),t.setAttribute("data-lang",e.dataset.lang||"zh-CN"),t.setAttribute("crossorigin","anonymous"),t.async=!0,e.parentNode.insertBefore(t,e.nextSibling)}catch{}})()</script></section></article><aside class=docs-toc aria-label="On this page"><div class=toc-title>On this page</div><nav class=toc><nav id=TableOfContents><ul><li><a href=#注释>注释</a></li></ul></nav></nav></aside></div><button class=back-to-top id=backToTop aria-label="Back to top">↑</button>
+<button id=tocMiniBtn class=toc-mini-btn aria-controls=tocDrawer aria-expanded=false aria-label=打开目录>☰ 目录</button><div id=tocDrawer class=toc-drawer hidden><div class=toc-drawer-inner><div class=toc-drawer-header><span>目录</span>
+<button id=tocCloseBtn class=toc-drawer-close aria-label=关闭>×</button></div><nav class=toc><nav id=TableOfContents><ul><li><a href=#注释>注释</a></li></ul></nav></nav></div></div></main><footer class=site-footer><div class="container footer-inner"><div>© 2026 Linguista</div><nav class="footer-nav social-links" aria-label="Social links"><a class=social-icon href=https://x.com/AztecaAlpaca target=_blank rel=noopener aria-label="X / Twitter"><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/500px-X_logo.jpg alt="X logo" loading=lazy decoding=async>
+</a><a class=social-icon href=https://github.com/Linguage target=_blank rel=noopener aria-label=GitHub><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49.0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07.0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71.0.0.84-.27 2.75 1.05A9.28 9.28.0 0112 6.84c.85.01 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74.0 3.94-2.34 4.8-4.57 5.05.36.32.68.95.68 1.92.0 1.38-.01 2.49-.01 2.83.0.27.18.6.69.49A10.03 10.03.0 0022 12.26C22 6.58 17.52 2 12 2z" clip-rule="evenodd"/></svg>
+</a><a class=social-icon href=https://linguista.notion.site/linguista-hub target=_blank rel=noopener aria-label=Notion><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013 alt="Notion logo" loading=lazy decoding=async>
+</a><a class="social-icon bear-badge" href=https://linguista.bearblog.dev/ target=_blank rel=noopener aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a></nav></div></footer><script src="/script.js?v=20251029-01" defer></script><script defer src="/js/search-core.js?v=20251029-01"></script><script>window.SEARCH_INDEX_URL_LITE="/index-lite.json?v=20251029-01",window.SEARCH_INDEX_URL="/index.json?v=20251029-01"</script><script src="/js/search-advanced.js?v=20251029-01" defer></script><script defer src="/js/table-7char.js?v=20251029-01"></script><script defer src="/js/linkcard.js?v=20251029-01"></script><script defer src="/js/table-tooltips.js?v=20251029-01"></script><script defer src="/js/social-popup.js?v=20251029-01"></script><div id=social-popup-overlay aria-hidden=true><div class=social-popup-card role=dialog aria-modal=true aria-labelledby=social-popup-title aria-describedby=social-popup-desc><button class=social-popup-close type=button aria-label=关闭>×</button>
+<img class=social-popup-image src alt><div class=social-popup-title id=social-popup-title></div><div class=social-popup-desc id=social-popup-desc></div></div></div></body></html>

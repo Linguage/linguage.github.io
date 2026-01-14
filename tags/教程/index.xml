@@ -1,18 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>教程 on Linguista</title>
-    <link>https://linguage.github.io/tags/%E6%95%99%E7%A8%8B/</link>
-    <description>Recent content in 教程 on Linguista</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <atom:link href="https://linguage.github.io/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>欢迎来到Lisp</title>
-      <link>https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/</guid>
-      <description>&lt;p&gt;→ &lt;a href=&#34;https://linguage.github.io/paul_graham/essays_en/acl2txtt1748944359/&#34;&gt;English Version&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;欢迎来到lisp&#34;&gt;欢迎来到Lisp&lt;/h1&gt;&#xA;&lt;p&gt;本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。&lt;/p&gt;&#xA;&lt;h2 id=&#34;21-形式&#34;&gt;2.1 形式&lt;/h2&gt;&#xA;&lt;p&gt;对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&amp;gt;作为toplevel提示符。这就是我们在这里要使用的。&lt;/p&gt;&#xA;&lt;p&gt;最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; 1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。&lt;/p&gt;&#xA;&lt;p&gt;当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+ 2 3)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在表达式(+ 2 3)中，+被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 + 3，但在Lisp中，我们将+运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(+ 2 3)。这被称为前缀表示法，因为运算符在前。&lt;/p&gt;&#xA;&lt;p&gt;这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用+两次，2 + 3 + 4，而在Lisp中我们只需添加另一个参数：(+ 2 3 4)&lt;/p&gt;&#xA;&lt;p&gt;我们通常使用+的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，+可以接受任意数量的参数，包括无参数：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+ 2)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+ 2 3)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+ 2 3 4)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;9&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (+ 2 3 4 5)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;14&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; (/ (- 7 1) (- 4 2))&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用英语来说，这是七减一，除以四减二。&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on Linguista</title><link>https://linguage.github.io/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on Linguista</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://linguage.github.io/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>欢迎来到Lisp</title><link>https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguage.github.io/paul_graham/essays_zh/acl2txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguage.github.io/paul_graham/essays_en/acl2txtt1748944359/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="欢迎来到lisp"&gt;欢迎来到Lisp&lt;/h1&gt;
+&lt;p&gt;本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。&lt;/p&gt;
+&lt;h2 id="21-形式"&gt;2.1 形式&lt;/h2&gt;
+&lt;p&gt;对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&amp;gt;作为toplevel提示符。这就是我们在这里要使用的。&lt;/p&gt;
+&lt;p&gt;最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。&lt;/p&gt;
+&lt;p&gt;当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在表达式(+ 2 3)中，+被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 + 3，但在Lisp中，我们将+运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(+ 2 3)。这被称为前缀表示法，因为运算符在前。&lt;/p&gt;
+&lt;p&gt;这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用+两次，2 + 3 + 4，而在Lisp中我们只需添加另一个参数：(+ 2 3 4)&lt;/p&gt;
+&lt;p&gt;我们通常使用+的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，+可以接受任意数量的参数，包括无参数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;9
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4 5)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;14
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (/ (- 7 1) (- 4 2))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用英语来说，这是七减一，除以四减二。&lt;/p&gt;</description></item></channel></rss>

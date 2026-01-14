@@ -1,25 +1,94 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>垃圾邮件 on Linguista</title>
-    <link>https://linguage.github.io/tags/%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6/</link>
-    <description>Recent content in 垃圾邮件 on Linguista</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <atom:link href="https://linguage.github.io/tags/%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>垃圾邮件过滤计划</title>
-      <link>https://linguage.github.io/paul_graham/essays_zh/spam/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://linguage.github.io/paul_graham/essays_zh/spam/</guid>
-      <description>&lt;p&gt;→ &lt;a href=&#34;https://linguage.github.io/paul_graham/essays_en/spam/&#34;&gt;English Version&lt;/a&gt;&lt;/p&gt;&#xA;&lt;div&#xA;  class=&#34;link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]&#34;&#xA;  data-url=&#34;https://www.paulgraham.com/spam.html&#34;&#xA;&gt;&#xA;  &lt;a&#xA;    class=&#34;link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline&#34;&#xA;    href=&#34;https://www.paulgraham.com/spam.html&#34;&#xA;    target=&#34;_blank&#34;&#xA;    rel=&#34;noopener&#34;&#xA;  &gt;&#xA;    https://www.paulgraham.com/spam.html&#xA;  &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;垃圾邮件过滤计划&#34;&gt;垃圾邮件过滤计划&lt;/h1&gt;&#xA;&lt;p&gt;2002年8月&lt;/p&gt;&#xA;&lt;p&gt;（本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。&lt;/p&gt;&#xA;&lt;p&gt;对收件人来说，垃圾邮件很容易识别。如果你雇佣某人阅读你的邮件并丢弃垃圾邮件，他们会毫无困难地做到这一点。我们需要做多少工作，除了人工智能之外，来自动化这个过程？&lt;/p&gt;&#xA;&lt;p&gt;我认为我们将能够用相当简单的算法解决这个问题。事实上，我发现你可以使用不比单个词的垃圾邮件概率的贝叶斯组合更多的东西来相当好地过滤现在的垃圾邮件。使用一个稍微调整的（如下所述）贝叶斯过滤器，我们现在在每1000封垃圾邮件中遗漏少于5封，误报率为0。&lt;/p&gt;&#xA;&lt;p&gt;统计方法通常不是人们编写垃圾邮件过滤器时首先尝试的方法。大多数黑客的第一本能是尝试编写识别垃圾邮件单个特征的软件。你看着垃圾邮件，想，这些家伙竟然敢给我发送以&amp;quot;亲爱的朋友&amp;quot;开头的邮件，或者主题行全是大写并以八个感叹号结尾的邮件。我可以用大约一行代码过滤掉这些东西。&lt;/p&gt;&#xA;&lt;p&gt;于是你这样做了，开始时它有效。几个简单的规则会大量减少你收到的垃圾邮件。仅仅查找&amp;quot;点击&amp;quot;这个词就会捕获我垃圾邮件语料库中79.7%的邮件，误报率只有1.2%。&lt;/p&gt;&#xA;&lt;p&gt;在尝试统计方法之前，我花了大约六个月编写查找单个垃圾邮件特征的软件。我发现的是，识别最后百分之几的垃圾邮件变得非常困难，而且当我使过滤器更严格时，我得到了更多的误报。&lt;/p&gt;&#xA;&lt;p&gt;误报是被错误识别为垃圾邮件的无辜邮件。对于大多数用户来说，错过合法邮件比收到垃圾邮件糟糕一个数量级，因此产生误报的过滤器就像带有死亡风险的痤疮治疗。&lt;/p&gt;&#xA;&lt;p&gt;用户收到的垃圾邮件越多，他们注意到一封无辜邮件坐在垃圾邮件文件夹中的可能性就越小。奇怪的是，你的垃圾邮件过滤器越好，误报就变得越危险，因为当过滤器真的很好时，用户更可能忽略它们捕获的一切。&lt;/p&gt;&#xA;&lt;p&gt;我不知道为什么我这么长时间才尝试统计方法。我想这是因为我对试图自己识别垃圾邮件特征上了瘾，好像我在和垃圾邮件发送者玩某种竞争游戏。（非黑客通常不会意识到这一点，但大多数黑客非常有竞争心。）当我尝试统计分析时，我立即发现它比我聪明得多。它当然发现了像&amp;quot;virtumundo&amp;quot;和&amp;quot;teens&amp;quot;这样的术语是垃圾邮件的良好指标。但它还发现&amp;quot;per&amp;quot;和&amp;quot;FL&amp;quot;和&amp;quot;ff0000&amp;quot;是垃圾邮件的良好指标。事实上，&amp;ldquo;ff0000&amp;rdquo;（亮红色的html）结果证明和任何色情术语一样是垃圾邮件的良好指标。&lt;/p&gt;&#xA;&lt;p&gt;以下是我如何进行统计过滤的概述。我从一个垃圾邮件语料库和一个非垃圾邮件语料库开始。目前每个语料库中大约有4000条消息。我扫描每个语料库中每条消息的整个文本，包括标题、嵌入的html和javascript。我目前认为字母数字字符、破折号、撇号和美元符号是标记的一部分，其他一切都是标记分隔符。（这里可能还有改进的空间。）我忽略全是数字的标记，我也忽略html注释，甚至不将它们视为标记分隔符。&lt;/p&gt;&#xA;&lt;p&gt;我计算每个标记（目前忽略大小写）在每个语料库中出现的次数。在这个阶段，我最终得到两个大的哈希表，每个语料库一个，将标记映射到出现次数。&lt;/p&gt;&#xA;&lt;p&gt;接下来我创建第三个哈希表，这次将每个标记映射到包含它的电子邮件是垃圾邮件的概率，我计算如下[1]：(let ((g (* 2 (or (gethash word good) 0))) (b (or (gethash word bad) 0))) (unless (&amp;lt; (+ g b) 5) (max .01 (min .99 (float (/ (min 1 (/ b nbad)) (+ (min 1 (/ g ngood)) (min 1 (/ b nbad))))))))) 其中word是我们计算其概率的标记，good和bad是我在第一步创建的哈希表，ngood和nbad分别是非垃圾邮件和垃圾邮件的数量。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>更好的贝叶斯过滤</title>
-      <link>https://linguage.github.io/paul_graham/essays_zh/better/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://linguage.github.io/paul_graham/essays_zh/better/</guid>
-      <description>&lt;p&gt;→ &lt;a href=&#34;https://linguage.github.io/paul_graham/essays_en/better/&#34;&gt;English Version&lt;/a&gt;&lt;/p&gt;&#xA;&lt;div&#xA;  class=&#34;link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]&#34;&#xA;  data-url=&#34;https://www.paulgraham.com/better.html&#34;&#xA;&gt;&#xA;  &lt;a&#xA;    class=&#34;link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline&#34;&#xA;    href=&#34;https://www.paulgraham.com/better.html&#34;&#xA;    target=&#34;_blank&#34;&#xA;    rel=&#34;noopener&#34;&#xA;  &gt;&#xA;    https://www.paulgraham.com/better.html&#xA;  &lt;/a&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;h1 id=&#34;更好的贝叶斯过滤&#34;&gt;更好的贝叶斯过滤&lt;/h1&gt;&#xA;&lt;p&gt;2003年1月&lt;/p&gt;&#xA;&lt;p&gt;（本文是在2003年垃圾邮件会议上的演讲。它描述了我在改进《垃圾邮件计划》中描述的算法性能方面所做的工作，以及我未来的计划。）&lt;/p&gt;&#xA;&lt;p&gt;我在这里要介绍的第一个发现是研究论文的懒惰评估算法。随便写你想写的内容，不要引用任何以前的工作，愤怒的读者会发送给你所有你应该引用的论文的参考文献。我在《垃圾邮件计划》[1]登上Slashdot后发现了这个算法。&lt;/p&gt;&#xA;&lt;p&gt;垃圾邮件过滤是文本分类的一个子集，这是一个已经成熟的领域，但是关于贝叶斯垃圾邮件过滤本身的第一篇论文似乎是在1998年同一会议上发表的两篇，一篇是Pantel和Lin的[2]，另一篇是微软研究院的一个小组[3]。&lt;/p&gt;&#xA;&lt;p&gt;当我听说这项工作时，我有点惊讶。如果人们在四年前就已经开始研究贝叶斯过滤，为什么不是每个人都在使用它呢？当我阅读这些论文时，我找到了原因。Pantel和Lin的过滤器是两个中更有效的，但它只捕获了92%的垃圾邮件，有1.16%的误报率。&lt;/p&gt;&#xA;&lt;p&gt;当我尝试编写贝叶斯垃圾邮件过滤器时，它捕获了99.5%的垃圾邮件，误报率低于0.03%[4]。当两个人尝试相同的实验得到截然不同的结果时，总是令人担忧。在这里尤其令人担忧，因为这两组数字可能会得出相反的结论。不同的用户有不同的要求，但我认为对于许多人来说，92%的过滤率和1.16%的误报率意味着过滤不是一个可接受的解决方案，而99.5%的过滤率和低于0.03%的误报率意味着它是可接受的。&lt;/p&gt;&#xA;&lt;p&gt;那么为什么我们会得到如此不同的数字呢？我没有尝试重现Pantel和Lin的结果，但是通过阅读论文，我看到了五个可能解释这种差异的原因。&lt;/p&gt;&#xA;&lt;p&gt;一个是他们用很少的数据训练他们的过滤器：160封垃圾邮件和466封非垃圾邮件。过滤器的性能在这么小的数据集上应该还在提升。所以他们的数字可能甚至不能准确衡量他们算法的性能，更不用说一般的贝叶斯垃圾邮件过滤了。&lt;/p&gt;&#xA;&lt;p&gt;但我认为最重要的区别可能是他们忽略了邮件头。对于任何从事垃圾邮件过滤工作的人来说，这似乎是一个错误的决定。然而，在我尝试编写的第一个过滤器中，我也忽略了邮件头。为什么？因为我想让问题保持整洁。那时我对邮件头了解不多，它们在我看来充满了随机的东西。这里有一个教训给过滤器编写者：不要忽略数据。你会觉得这个教训太明显了，不需要提及，但我已经不得不学习了好几次。&lt;/p&gt;&#xA;&lt;p&gt;第三，Pantel和Lin对词干进行了提取，意味着他们将例如&amp;quot;mailing&amp;quot;和&amp;quot;mailed&amp;quot;都简化为根词&amp;quot;mail&amp;quot;。他们可能觉得他们被迫这样做是因为他们的语料库很小，但如果是这样，这是一种过早的优化。&lt;/p&gt;&#xA;&lt;p&gt;第四，他们计算概率的方式不同。他们使用了所有的标记，而我只使用15个最显著的。如果你使用所有的标记，你往往会错过较长的垃圾邮件，就是那种有人告诉你他们的生活故事直到他们从某个多层次营销计划中致富的类型。而且这样的算法很容易被垃圾邮件发送者欺骗：只需添加一大块随机文本来平衡垃圾邮件术语。&lt;/p&gt;&#xA;&lt;p&gt;最后，他们没有针对误报进行偏置。我认为任何垃圾邮件过滤算法都应该有一个方便的旋钮，你可以转动它来降低误报率，代价是降低过滤率。我通过将非垃圾邮件语料库中标记的出现次数加倍来实现这一点。我认为将垃圾邮件过滤视为一个直接的文本分类问题是个坏主意。你可以使用文本分类技术，但解决方案可以也应该反映文本是邮件这一事实，特别是垃圾邮件。邮件不仅仅是文本；它有结构。垃圾邮件过滤不仅仅是分类，因为误报比漏报要糟糕得多，你应该将它们视为不同类型的错误。而且错误的来源不仅仅是随机变化，而是一个活跃的人类垃圾邮件发送者积极工作以击败你的过滤器。&lt;/p&gt;&#xA;&lt;h2 id=&#34;标记&#34;&gt;标记&lt;/h2&gt;&#xA;&lt;p&gt;在Slashdot文章之后我听说的另一个项目是Bill Yerazunis的CRM114[5]。这证明了我刚才提到的设计原则的反例。它是一个直接的文本分类器，但它是如此惊人的有效，以至于它甚至不知道自己在做什么的情况下几乎完美地过滤垃圾邮件。&lt;/p&gt;&#xA;&lt;p&gt;一旦我理解了CRM114的工作原理，似乎我最终将不得不从基于单个词的过滤转向这样的方法。但是首先，我想，我会看看我用单个词能走多远。答案是，惊人的远。&lt;/p&gt;&#xA;&lt;p&gt;我主要在研究更智能的标记化。在当前的垃圾邮件上，我已经能够达到接近CRM114的过滤率。这些技术与Bill的技术大多是正交的；最优的解决方案可能包含两者。&lt;/p&gt;&#xA;&lt;p&gt;《垃圾邮件计划》使用了非常简单的标记定义。字母、数字、破折号、撇号和美元符号是组成字符，其他都是标记分隔符。我也忽略了大小写。&lt;/p&gt;&#xA;&lt;p&gt;现在我有一个更复杂的标记定义：保留大小写。感叹号是组成字符。句号和逗号如果出现在两个数字之间则是组成字符。这让我能够完整地获得IP地址和价格。像$20-25这样的价格范围产生两个标记，$20和$25。出现在To、From、Subject和Return-Path行中，或者url中的标记会相应地被标记。例如，Subject行中的&amp;quot;foo&amp;quot;变成&amp;quot;Subject*foo&amp;quot;。（星号可以是任何你不允许作为组成字符的字符。）这样的措施增加了过滤器的词汇量，使其更有区分力。例如，在当前的过滤器中，Subject行中的&amp;quot;free&amp;quot;有98%的垃圾邮件概率，而正文中的相同标记只有65%的垃圾邮件概率。&lt;/p&gt;&#xA;&lt;p&gt;以下是一些当前的概率[6]：&lt;/p&gt;&#xA;&lt;p&gt;Subject&lt;em&gt;FREE 0.9999&#xA;free!! 0.9999&#xA;To&lt;/em&gt;free 0.9998&#xA;Subject&lt;em&gt;free 0.9782&#xA;free! 0.9199&#xA;Free 0.9198&#xA;Url&lt;/em&gt;free 0.9091&#xA;FREE 0.8747&#xA;From*free 0.7636&#xA;free 0.6546&lt;/p&gt;&#xA;&lt;p&gt;在《垃圾邮件计划》过滤器中，所有这些标记都会有相同的概率，0.7602。那个过滤器识别了大约23,000个标记。当前的一个识别了大约187,000个。&lt;/p&gt;&#xA;&lt;p&gt;拥有更大的标记宇宙的缺点是有更多未命中的机会。将你的语料库分散到更多的标记上与使其变小的效果相同。例如，如果你将感叹号视为组成字符，那么你可能最终没有带有七个感叹号的free的垃圾邮件概率，即使你知道只有两个感叹号的free有99.99%的概率。&lt;/p&gt;&#xA;&lt;p&gt;对此的一个解决方案是我称之为退化的方法。如果你找不到标记的精确匹配，就将其视为不太具体的版本。我认为终端感叹号、大写字母以及出现在五个标记上下文中的任何一个使标记更具体。例如，如果我找不到&amp;quot;Subject&lt;em&gt;free!&amp;ldquo;的概率，我会查找&amp;quot;Subject&lt;/em&gt;free&amp;rdquo;、&amp;ldquo;free!&amp;ldquo;和&amp;quot;free&amp;quot;的概率，并取离0.5最远的那个。&lt;/p&gt;&#xA;&lt;p&gt;以下是过滤器在Subject行中看到&amp;quot;FREE!!!&amp;ldquo;且没有其概率时考虑的替代方案[7]：&lt;/p&gt;&#xA;&lt;p&gt;Subject&lt;em&gt;Free!!!&#xA;Subject&lt;/em&gt;free!!!&#xA;Subject&lt;em&gt;FREE!&#xA;Subject&lt;/em&gt;Free!&#xA;Subject&lt;em&gt;free!&#xA;Subject&lt;/em&gt;FREE&#xA;Subject&lt;em&gt;Free&#xA;Subject&lt;/em&gt;free&#xA;FREE!!!&#xA;Free!!!&#xA;free!!!&#xA;FREE!&#xA;Free!&#xA;free!&#xA;FREE&#xA;Free&#xA;free&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>垃圾邮件 on Linguista</title><link>https://linguage.github.io/tags/%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6/</link><description>Recent content in 垃圾邮件 on Linguista</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://linguage.github.io/tags/%E5%9E%83%E5%9C%BE%E9%82%AE%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>垃圾邮件过滤计划</title><link>https://linguage.github.io/paul_graham/essays_zh/spam/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguage.github.io/paul_graham/essays_zh/spam/</guid><description>&lt;p&gt;→ &lt;a href="https://linguage.github.io/paul_graham/essays_en/spam/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+ data-url="https://www.paulgraham.com/spam.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/spam.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/spam.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="垃圾邮件过滤计划"&gt;垃圾邮件过滤计划&lt;/h1&gt;
+&lt;p&gt;2002年8月&lt;/p&gt;
+&lt;p&gt;（本文描述了在我们构建的用于测试Arc的反垃圾邮件网络邮件阅读器中使用的垃圾邮件过滤技术。改进的算法在《更好的贝叶斯过滤》中有描述。）我认为可以阻止垃圾邮件，而基于内容的过滤器是实现这一目标的方法。垃圾邮件发送者的致命弱点是他们的消息。他们可以绕过你设置的任何其他障碍。至少到目前为止是这样。但他们必须传递他们的信息，无论是什么。如果我们能够编写识别他们消息的软件，就没有办法能够绕过它。&lt;/p&gt;
+&lt;p&gt;对收件人来说，垃圾邮件很容易识别。如果你雇佣某人阅读你的邮件并丢弃垃圾邮件，他们会毫无困难地做到这一点。我们需要做多少工作，除了人工智能之外，来自动化这个过程？&lt;/p&gt;
+&lt;p&gt;我认为我们将能够用相当简单的算法解决这个问题。事实上，我发现你可以使用不比单个词的垃圾邮件概率的贝叶斯组合更多的东西来相当好地过滤现在的垃圾邮件。使用一个稍微调整的（如下所述）贝叶斯过滤器，我们现在在每1000封垃圾邮件中遗漏少于5封，误报率为0。&lt;/p&gt;
+&lt;p&gt;统计方法通常不是人们编写垃圾邮件过滤器时首先尝试的方法。大多数黑客的第一本能是尝试编写识别垃圾邮件单个特征的软件。你看着垃圾邮件，想，这些家伙竟然敢给我发送以&amp;quot;亲爱的朋友&amp;quot;开头的邮件，或者主题行全是大写并以八个感叹号结尾的邮件。我可以用大约一行代码过滤掉这些东西。&lt;/p&gt;
+&lt;p&gt;于是你这样做了，开始时它有效。几个简单的规则会大量减少你收到的垃圾邮件。仅仅查找&amp;quot;点击&amp;quot;这个词就会捕获我垃圾邮件语料库中79.7%的邮件，误报率只有1.2%。&lt;/p&gt;
+&lt;p&gt;在尝试统计方法之前，我花了大约六个月编写查找单个垃圾邮件特征的软件。我发现的是，识别最后百分之几的垃圾邮件变得非常困难，而且当我使过滤器更严格时，我得到了更多的误报。&lt;/p&gt;
+&lt;p&gt;误报是被错误识别为垃圾邮件的无辜邮件。对于大多数用户来说，错过合法邮件比收到垃圾邮件糟糕一个数量级，因此产生误报的过滤器就像带有死亡风险的痤疮治疗。&lt;/p&gt;
+&lt;p&gt;用户收到的垃圾邮件越多，他们注意到一封无辜邮件坐在垃圾邮件文件夹中的可能性就越小。奇怪的是，你的垃圾邮件过滤器越好，误报就变得越危险，因为当过滤器真的很好时，用户更可能忽略它们捕获的一切。&lt;/p&gt;
+&lt;p&gt;我不知道为什么我这么长时间才尝试统计方法。我想这是因为我对试图自己识别垃圾邮件特征上了瘾，好像我在和垃圾邮件发送者玩某种竞争游戏。（非黑客通常不会意识到这一点，但大多数黑客非常有竞争心。）当我尝试统计分析时，我立即发现它比我聪明得多。它当然发现了像&amp;quot;virtumundo&amp;quot;和&amp;quot;teens&amp;quot;这样的术语是垃圾邮件的良好指标。但它还发现&amp;quot;per&amp;quot;和&amp;quot;FL&amp;quot;和&amp;quot;ff0000&amp;quot;是垃圾邮件的良好指标。事实上，&amp;ldquo;ff0000&amp;rdquo;（亮红色的html）结果证明和任何色情术语一样是垃圾邮件的良好指标。&lt;/p&gt;
+&lt;p&gt;以下是我如何进行统计过滤的概述。我从一个垃圾邮件语料库和一个非垃圾邮件语料库开始。目前每个语料库中大约有4000条消息。我扫描每个语料库中每条消息的整个文本，包括标题、嵌入的html和javascript。我目前认为字母数字字符、破折号、撇号和美元符号是标记的一部分，其他一切都是标记分隔符。（这里可能还有改进的空间。）我忽略全是数字的标记，我也忽略html注释，甚至不将它们视为标记分隔符。&lt;/p&gt;
+&lt;p&gt;我计算每个标记（目前忽略大小写）在每个语料库中出现的次数。在这个阶段，我最终得到两个大的哈希表，每个语料库一个，将标记映射到出现次数。&lt;/p&gt;
+&lt;p&gt;接下来我创建第三个哈希表，这次将每个标记映射到包含它的电子邮件是垃圾邮件的概率，我计算如下[1]：(let ((g (* 2 (or (gethash word good) 0))) (b (or (gethash word bad) 0))) (unless (&amp;lt; (+ g b) 5) (max .01 (min .99 (float (/ (min 1 (/ b nbad)) (+ (min 1 (/ g ngood)) (min 1 (/ b nbad))))))))) 其中word是我们计算其概率的标记，good和bad是我在第一步创建的哈希表，ngood和nbad分别是非垃圾邮件和垃圾邮件的数量。&lt;/p&gt;</description></item><item><title>更好的贝叶斯过滤</title><link>https://linguage.github.io/paul_graham/essays_zh/better/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguage.github.io/paul_graham/essays_zh/better/</guid><description>&lt;p&gt;→ &lt;a href="https://linguage.github.io/paul_graham/essays_en/better/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-[var(--lc-border,rgba(15,23,42,0.12))] bg-[var(--lc-bg,var(--card-bg,var(--surface,#ffffff))))] transition-shadow duration-150 hover:shadow-[var(--lc-shadow-hover,0_14px_30px_-18px_rgba(15,23,42,0.35))]"
+ data-url="https://www.paulgraham.com/better.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-[var(--lc-url,var(--link-color,#0e6a85))] underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/better.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/better.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="更好的贝叶斯过滤"&gt;更好的贝叶斯过滤&lt;/h1&gt;
+&lt;p&gt;2003年1月&lt;/p&gt;
+&lt;p&gt;（本文是在2003年垃圾邮件会议上的演讲。它描述了我在改进《垃圾邮件计划》中描述的算法性能方面所做的工作，以及我未来的计划。）&lt;/p&gt;
+&lt;p&gt;我在这里要介绍的第一个发现是研究论文的懒惰评估算法。随便写你想写的内容，不要引用任何以前的工作，愤怒的读者会发送给你所有你应该引用的论文的参考文献。我在《垃圾邮件计划》[1]登上Slashdot后发现了这个算法。&lt;/p&gt;
+&lt;p&gt;垃圾邮件过滤是文本分类的一个子集，这是一个已经成熟的领域，但是关于贝叶斯垃圾邮件过滤本身的第一篇论文似乎是在1998年同一会议上发表的两篇，一篇是Pantel和Lin的[2]，另一篇是微软研究院的一个小组[3]。&lt;/p&gt;
+&lt;p&gt;当我听说这项工作时，我有点惊讶。如果人们在四年前就已经开始研究贝叶斯过滤，为什么不是每个人都在使用它呢？当我阅读这些论文时，我找到了原因。Pantel和Lin的过滤器是两个中更有效的，但它只捕获了92%的垃圾邮件，有1.16%的误报率。&lt;/p&gt;
+&lt;p&gt;当我尝试编写贝叶斯垃圾邮件过滤器时，它捕获了99.5%的垃圾邮件，误报率低于0.03%[4]。当两个人尝试相同的实验得到截然不同的结果时，总是令人担忧。在这里尤其令人担忧，因为这两组数字可能会得出相反的结论。不同的用户有不同的要求，但我认为对于许多人来说，92%的过滤率和1.16%的误报率意味着过滤不是一个可接受的解决方案，而99.5%的过滤率和低于0.03%的误报率意味着它是可接受的。&lt;/p&gt;
+&lt;p&gt;那么为什么我们会得到如此不同的数字呢？我没有尝试重现Pantel和Lin的结果，但是通过阅读论文，我看到了五个可能解释这种差异的原因。&lt;/p&gt;
+&lt;p&gt;一个是他们用很少的数据训练他们的过滤器：160封垃圾邮件和466封非垃圾邮件。过滤器的性能在这么小的数据集上应该还在提升。所以他们的数字可能甚至不能准确衡量他们算法的性能，更不用说一般的贝叶斯垃圾邮件过滤了。&lt;/p&gt;
+&lt;p&gt;但我认为最重要的区别可能是他们忽略了邮件头。对于任何从事垃圾邮件过滤工作的人来说，这似乎是一个错误的决定。然而，在我尝试编写的第一个过滤器中，我也忽略了邮件头。为什么？因为我想让问题保持整洁。那时我对邮件头了解不多，它们在我看来充满了随机的东西。这里有一个教训给过滤器编写者：不要忽略数据。你会觉得这个教训太明显了，不需要提及，但我已经不得不学习了好几次。&lt;/p&gt;
+&lt;p&gt;第三，Pantel和Lin对词干进行了提取，意味着他们将例如&amp;quot;mailing&amp;quot;和&amp;quot;mailed&amp;quot;都简化为根词&amp;quot;mail&amp;quot;。他们可能觉得他们被迫这样做是因为他们的语料库很小，但如果是这样，这是一种过早的优化。&lt;/p&gt;
+&lt;p&gt;第四，他们计算概率的方式不同。他们使用了所有的标记，而我只使用15个最显著的。如果你使用所有的标记，你往往会错过较长的垃圾邮件，就是那种有人告诉你他们的生活故事直到他们从某个多层次营销计划中致富的类型。而且这样的算法很容易被垃圾邮件发送者欺骗：只需添加一大块随机文本来平衡垃圾邮件术语。&lt;/p&gt;
+&lt;p&gt;最后，他们没有针对误报进行偏置。我认为任何垃圾邮件过滤算法都应该有一个方便的旋钮，你可以转动它来降低误报率，代价是降低过滤率。我通过将非垃圾邮件语料库中标记的出现次数加倍来实现这一点。我认为将垃圾邮件过滤视为一个直接的文本分类问题是个坏主意。你可以使用文本分类技术，但解决方案可以也应该反映文本是邮件这一事实，特别是垃圾邮件。邮件不仅仅是文本；它有结构。垃圾邮件过滤不仅仅是分类，因为误报比漏报要糟糕得多，你应该将它们视为不同类型的错误。而且错误的来源不仅仅是随机变化，而是一个活跃的人类垃圾邮件发送者积极工作以击败你的过滤器。&lt;/p&gt;
+&lt;h2 id="标记"&gt;标记&lt;/h2&gt;
+&lt;p&gt;在Slashdot文章之后我听说的另一个项目是Bill Yerazunis的CRM114[5]。这证明了我刚才提到的设计原则的反例。它是一个直接的文本分类器，但它是如此惊人的有效，以至于它甚至不知道自己在做什么的情况下几乎完美地过滤垃圾邮件。&lt;/p&gt;
+&lt;p&gt;一旦我理解了CRM114的工作原理，似乎我最终将不得不从基于单个词的过滤转向这样的方法。但是首先，我想，我会看看我用单个词能走多远。答案是，惊人的远。&lt;/p&gt;
+&lt;p&gt;我主要在研究更智能的标记化。在当前的垃圾邮件上，我已经能够达到接近CRM114的过滤率。这些技术与Bill的技术大多是正交的；最优的解决方案可能包含两者。&lt;/p&gt;
+&lt;p&gt;《垃圾邮件计划》使用了非常简单的标记定义。字母、数字、破折号、撇号和美元符号是组成字符，其他都是标记分隔符。我也忽略了大小写。&lt;/p&gt;
+&lt;p&gt;现在我有一个更复杂的标记定义：保留大小写。感叹号是组成字符。句号和逗号如果出现在两个数字之间则是组成字符。这让我能够完整地获得IP地址和价格。像$20-25这样的价格范围产生两个标记，$20和$25。出现在To、From、Subject和Return-Path行中，或者url中的标记会相应地被标记。例如，Subject行中的&amp;quot;foo&amp;quot;变成&amp;quot;Subject*foo&amp;quot;。（星号可以是任何你不允许作为组成字符的字符。）这样的措施增加了过滤器的词汇量，使其更有区分力。例如，在当前的过滤器中，Subject行中的&amp;quot;free&amp;quot;有98%的垃圾邮件概率，而正文中的相同标记只有65%的垃圾邮件概率。&lt;/p&gt;
+&lt;p&gt;以下是一些当前的概率[6]：&lt;/p&gt;
+&lt;p&gt;Subject&lt;em&gt;FREE 0.9999
+free!! 0.9999
+To&lt;/em&gt;free 0.9998
+Subject&lt;em&gt;free 0.9782
+free! 0.9199
+Free 0.9198
+Url&lt;/em&gt;free 0.9091
+FREE 0.8747
+From*free 0.7636
+free 0.6546&lt;/p&gt;
+&lt;p&gt;在《垃圾邮件计划》过滤器中，所有这些标记都会有相同的概率，0.7602。那个过滤器识别了大约23,000个标记。当前的一个识别了大约187,000个。&lt;/p&gt;
+&lt;p&gt;拥有更大的标记宇宙的缺点是有更多未命中的机会。将你的语料库分散到更多的标记上与使其变小的效果相同。例如，如果你将感叹号视为组成字符，那么你可能最终没有带有七个感叹号的free的垃圾邮件概率，即使你知道只有两个感叹号的free有99.99%的概率。&lt;/p&gt;
+&lt;p&gt;对此的一个解决方案是我称之为退化的方法。如果你找不到标记的精确匹配，就将其视为不太具体的版本。我认为终端感叹号、大写字母以及出现在五个标记上下文中的任何一个使标记更具体。例如，如果我找不到&amp;quot;Subject&lt;em&gt;free!&amp;ldquo;的概率，我会查找&amp;quot;Subject&lt;/em&gt;free&amp;rdquo;、&amp;ldquo;free!&amp;ldquo;和&amp;quot;free&amp;quot;的概率，并取离0.5最远的那个。&lt;/p&gt;
+&lt;p&gt;以下是过滤器在Subject行中看到&amp;quot;FREE!!!&amp;ldquo;且没有其概率时考虑的替代方案[7]：&lt;/p&gt;
+&lt;p&gt;Subject&lt;em&gt;Free!!!
+Subject&lt;/em&gt;free!!!
+Subject&lt;em&gt;FREE!
+Subject&lt;/em&gt;Free!
+Subject&lt;em&gt;free!
+Subject&lt;/em&gt;FREE
+Subject&lt;em&gt;Free
+Subject&lt;/em&gt;free
+FREE!!!
+Free!!!
+free!!!
+FREE!
+Free!
+free!
+FREE
+Free
+free&lt;/p&gt;</description></item></channel></rss>
