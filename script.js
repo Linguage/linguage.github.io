@@ -1,4 +1,4 @@
-// Anthropic-style docs interactions (same as site-level)
+// Anthyle docs interactions (same as site-level)
 function slugify(text){
   return text.toString().trim().toLowerCase()
     .replace(/[^\w\u4e00-\u9fa5\-\s]/g, '')
@@ -47,7 +47,7 @@ function ensureIds(headings){
   headings.forEach(h => { if (!h.id){ h.id = slugify(h.textContent || 'section'); } });
 }
 function buildTOC(){
-  const content = document.querySelector('.docs-content .prose');
+  const content = document.querySelector('.prose');
   const tocEl = document.getElementById('toc');
   if (!content || !tocEl) return;
   const h2s = Array.from(content.querySelectorAll('h2'));
@@ -69,13 +69,23 @@ function buildTOC(){
   tocEl.innerHTML = html;
 }
 function setupScrollSpy(){
-  const anchorTargets = Array.from(document.querySelectorAll('.docs-content .prose h2, .docs-content .prose h3'));
+  const anchorTargets = Array.from(document.querySelectorAll('.prose h2, .prose h3'));
   if (!anchorTargets.length) return;
   const tocLinks = Array.from(document.querySelectorAll('.toc a'));
   const leftLinks = Array.from(document.querySelectorAll('.docs-sidebar .docs-nav a'));
   function setActive(id){
-    tocLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('data-target') === id || a.getAttribute('href') === `#${id}`));
+    let activeText = '';
+    tocLinks.forEach(a => {
+      const isActive = a.getAttribute('data-target') === id || a.getAttribute('href') === `#${id}`;
+      a.classList.toggle('is-active', isActive);
+      if (isActive) activeText = a.textContent.trim();
+    });
     leftLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === `#${id}`));
+    
+    // Update mobile TOC label if available
+    if (activeText && window.updateMobileTocLabel) {
+      window.updateMobileTocLabel(activeText);
+    }
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting){ setActive(entry.target.id); } });
@@ -143,37 +153,182 @@ function syncHeaderHeightVar(){
 }
 
 function setupMobileDrawers(){
-  // Mobile TOC drawer
-  const tocBtn = document.getElementById('tocMiniBtn');
-  const tocDrawer = document.getElementById('tocDrawer');
-  const tocClose = document.getElementById('tocCloseBtn');
-  if (tocBtn && tocDrawer){
-    const open = () => { tocDrawer.hidden = false; tocBtn.setAttribute('aria-expanded','true'); };
-    const close = () => { tocDrawer.hidden = true; tocBtn.setAttribute('aria-expanded','false'); };
-    tocBtn.addEventListener('click', () => { tocDrawer.hidden ? open() : close(); });
-    if (tocClose) tocClose.addEventListener('click', close);
-    document.addEventListener('click', (e) => {
-      if (!tocDrawer || tocDrawer.hidden) return;
-      const within = e.target.closest('#tocDrawer') || e.target.closest('#tocMiniBtn');
-      if (!within) close();
+  // Mobile Floating TOC Logic
+  const tocContainer = document.getElementById('mobileTocContainer');
+  const tocPanel = document.getElementById('mobileTocPanel');
+  const tocToggleBtn = document.getElementById('mobileTocToggleBtn');
+  const tocCloseBtn = document.getElementById('mobileTocCloseBtn');
+  const tocChevron = document.getElementById('mobileTocChevron');
+  const tocCurrentLabel = document.getElementById('mobileTocCurrentHeading');
+
+  if (tocContainer && tocPanel && tocToggleBtn) {
+    // Initial state: chevron points up (rotate -90deg) to indicate "Expand"
+    if (tocChevron) tocChevron.style.transform = 'rotate(-90deg)';
+
+    const openToc = () => {
+      tocPanel.classList.remove('hidden');
+      // Use RAF to allow display change to take effect before transition
+      requestAnimationFrame(() => {
+        tocPanel.classList.remove('scale-95', 'opacity-0');
+        tocPanel.classList.add('scale-100', 'opacity-100');
+      });
+      tocToggleBtn.setAttribute('aria-expanded', 'true');
+      if (tocChevron) tocChevron.style.transform = 'rotate(90deg)'; // Point down
+    };
+
+    const closeToc = () => {
+      tocPanel.classList.remove('scale-100', 'opacity-100');
+      tocPanel.classList.add('scale-95', 'opacity-0');
+      tocToggleBtn.setAttribute('aria-expanded', 'false');
+      if (tocChevron) tocChevron.style.transform = 'rotate(-90deg)'; // Point up
+      
+      // Wait for transition duration (200ms)
+      setTimeout(() => {
+        if (tocToggleBtn.getAttribute('aria-expanded') === 'false') {
+          tocPanel.classList.add('hidden');
+        }
+      }, 200);
+    };
+
+    const toggleToc = () => {
+      const isExpanded = tocToggleBtn.getAttribute('aria-expanded') === 'true';
+      isExpanded ? closeToc() : openToc();
+    };
+
+    tocToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleToc();
     });
+
+    if (tocCloseBtn) {
+      tocCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeToc();
+      });
+    }
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (tocPanel.classList.contains('hidden')) return;
+      if (!tocContainer.contains(e.target)) {
+        closeToc();
+      }
+    });
+
+    // Click on a link inside TOC closes the panel
+    const links = tocPanel.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', closeToc);
+    });
+
+    // Expose label updater
+    window.updateMobileTocLabel = (text) => {
+      if (tocCurrentLabel) tocCurrentLabel.textContent = text || "目录";
+    };
   }
 
   // Mobile NAV drawer (works on single, list and home pages)
   const navDrawer = document.getElementById('navDrawer');
+  const navOverlay = document.getElementById('navOverlay');
   const navClose = document.getElementById('navCloseBtn');
-  const navBtns = Array.from(document.querySelectorAll('.mobile-nav-btn, [data-nav-toggle]'));
+  // Match both the main header toggle and any other potential triggers
+  const navBtns = Array.from(document.querySelectorAll('.nav-toggle-btn, .mobile-nav-btn, [data-nav-toggle]'));
+  
+  console.log('[Drawer] Setup:', { 
+    drawer: !!navDrawer, 
+    overlay: !!navOverlay, 
+    btns: navBtns.length 
+  });
+
   if (navBtns.length && navDrawer){
     const setExpanded = (expanded) => { navBtns.forEach(b => b.setAttribute('aria-expanded', String(expanded))); };
-    const openNav = () => { navDrawer.hidden = false; setExpanded(true); };
-    const closeNav = () => { navDrawer.hidden = true; setExpanded(false); };
-    navBtns.forEach(btn => btn.addEventListener('click', () => { navDrawer.hidden ? openNav() : closeNav(); }));
+    
+    const openNav = () => {
+      console.log('[Drawer] Opening');
+      // Show overlay
+      if (navOverlay) {
+        navOverlay.classList.remove('pointer-events-none', 'opacity-0');
+        navOverlay.classList.add('pointer-events-auto', 'opacity-100');
+      }
+      // Slide in drawer
+      navDrawer.classList.remove('-translate-x-full');
+      setExpanded(true);
+      document.body.style.overflow = 'hidden'; // Lock body scroll
+    };
+    
+    const closeNav = () => {
+      console.log('[Drawer] Closing');
+      // Hide overlay
+      if (navOverlay) {
+        navOverlay.classList.remove('pointer-events-auto', 'opacity-100');
+        navOverlay.classList.add('pointer-events-none', 'opacity-0');
+      }
+      // Slide out drawer
+      navDrawer.classList.add('-translate-x-full');
+      setExpanded(false);
+      document.body.style.overflow = ''; // Unlock body scroll
+    };
+
+    // Toggle based on current state (check class)
+    const toggleNav = (e) => {
+      if(e) e.preventDefault(); // Prevent default button behavior
+      const isOpen = !navDrawer.classList.contains('-translate-x-full');
+      console.log('[Drawer] Toggle clicked. Currently open:', isOpen);
+      isOpen ? closeNav() : openNav();
+    };
+
+    navBtns.forEach(btn => btn.addEventListener('click', toggleNav));
     if (navClose) navClose.addEventListener('click', closeNav);
-    document.addEventListener('click', (e) => {
-      if (!navDrawer || navDrawer.hidden) return;
-      const within = e.target.closest('#navDrawer') || e.target.closest('.mobile-nav-btn, [data-nav-toggle]');
-      if (!within) closeNav();
+    
+    // Click outside (on overlay)
+    if (navOverlay) {
+      navOverlay.addEventListener('click', closeNav);
+    }
+
+    // Close on Escape key
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape' && !navDrawer.classList.contains('-translate-x-full')) {
+        closeNav();
+      }
     });
+  }
+}
+
+function setupMobileSearch() {
+  const searchInput = document.getElementById('globalSearchInput');
+  const searchContainer = document.getElementById('siteSearchContainer');
+  const searchBackBtn = document.getElementById('searchBackBtn');
+  const header = document.querySelector('header.site-header');
+
+  if (searchInput && searchContainer) {
+    const expandSearch = () => {
+      // Only expand on mobile/tablet (check if container isn't already taking up space naturally)
+      if (window.innerWidth < 1024) { 
+        searchContainer.classList.add('fixed', 'inset-0', 'z-[60]', 'glass-popover', 'px-4', 'h-16', 'border-b', 'border-border');
+        searchContainer.classList.remove('relative', 'w-full', 'max-w-md');
+        if (header) header.classList.add('z-[60]'); // Ensure header stack is high
+        if (searchBackBtn) searchBackBtn.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Lock scroll
+      }
+    };
+
+    const collapseSearch = () => {
+      searchContainer.classList.remove('fixed', 'inset-0', 'z-[60]', 'glass-popover', 'px-4', 'h-16', 'border-b', 'border-border');
+      searchContainer.classList.add('relative', 'w-full', 'max-w-md');
+      if (header) header.classList.remove('z-[60]');
+      if (searchBackBtn) searchBackBtn.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    searchInput.addEventListener('focus', expandSearch);
+    
+    if (searchBackBtn) {
+      searchBackBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        collapseSearch();
+        searchInput.value = ''; // Optional: clear on cancel
+      });
+    }
   }
 }
 
@@ -314,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Initialize mobile drawers on all pages (home, list, single)
   setupMobileDrawers();
+  // setupMobileSearch(); // Disabled to avoid conflict with search-advanced.js
   // Initialize footer auto-hide
   setupFooterAutoHide();
   // Theme toggle button (light/dark)

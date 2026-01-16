@@ -361,29 +361,31 @@
     const placeholder = mode === 'all' ? '全站搜索…' : (mode === 'posts' ? 'Posts 内部搜索…' : '当前页面搜索…');
     if (box) box.setAttribute('placeholder', placeholder);
 
-    const tabsHtml = '<div class="search-mode-head">'
-      + '<div class="search-mode-label">搜索选项</div>'
-      + '<div class="search-mode-tabs" role="tablist">'
-      + `<button class="mode-tab ${mode==='all'?'is-active':''}" data-mode="all">全站</button>`
-      + `<button class="mode-tab ${mode==='posts'?'is-active':''}" data-mode="posts">Posts</button>`
-      + `<button class="mode-tab ${mode==='page'?'is-active':''}" data-mode="page">本页</button>`
+    // Sticky header with glass effect matching parent
+    // Class-based styling for better theme support
+    const tabsHtml = '<div class="search-popover-tabs sticky top-0 z-10 flex items-center flex-wrap gap-2.5 px-3 py-2.5 border-b border-border backdrop-blur-md rounded-t-xl shadow-sm">'
+      + '<div class="text-xs text-muted font-semibold tracking-wide">搜索选项</div>'
+      + '<div class="flex gap-2 ml-auto flex-wrap" role="tablist">'
+      + `<button class="mode-tab appearance-none bg-transparent border border-border text-text rounded-full px-2.5 py-1.5 text-xs cursor-pointer leading-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${mode==='all'?'border-accent-2 bg-accent-2/10 text-accent-2':''}" data-mode="all">全站</button>`
+      + `<button class="mode-tab appearance-none bg-transparent border border-border text-text rounded-full px-2.5 py-1.5 text-xs cursor-pointer leading-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${mode==='posts'?'border-accent-2 bg-accent-2/10 text-accent-2':''}" data-mode="posts">Posts</button>`
+      + `<button class="mode-tab appearance-none bg-transparent border border-border text-text rounded-full px-2.5 py-1.5 text-xs cursor-pointer leading-none hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${mode==='page'?'border-accent-2 bg-accent-2/10 text-accent-2':''}" data-mode="page">本页</button>`
       + '</div>'
       + '</div>';
 
     // 加载提示
     let loadingBar = '';
     if (indexStatus === 'loading'){
-      loadingBar += '<div class="search-popover-info">正在加载索引…可先使用【本页】搜索</div>';
+      loadingBar += '<div class="search-popover-loading flex items-center gap-2.5 px-3 py-2.5 text-xs text-muted border-b border-border">正在加载索引…可先使用【本页】搜索</div>';
     } else if (indexStatus === 'error'){
-      loadingBar += '<div class="search-popover-info">索引加载失败，稍后重试；【本页】仍可用</div>';
+      loadingBar += '<div class="search-popover-loading flex items-center gap-2.5 px-3 py-2.5 text-xs text-muted border-b border-border">索引加载失败，稍后重试；【本页】仍可用</div>';
     }
     // 后台升级到“全文索引”时追加提示
     if (!hasFull && data && fullFetchStarted){
-      loadingBar += '<div class="search-popover-info">正在升级全文索引…</div>';
+      loadingBar += '<div class="search-popover-loading flex items-center gap-2.5 px-3 py-2.5 text-xs text-muted border-b border-border">正在升级全文索引…</div>';
     }
 
     pop.innerHTML = tabsHtml + loadingBar;
-    pop.hidden = false;
+    pop.style.display = 'block'; // Force display
     // 保留 openMobile() 设定的未来时间，避免刚打开就被 onDocClick 误关闭
     lastOpenAt = Math.max(lastOpenAt, Date.now());
     dbg('render header', { mode, q, total, lastOpenAt });
@@ -399,15 +401,15 @@
     const sliceNeeded = (mode !== 'page');
     if (sliceNeeded){ if (!visibleCount) visibleCount = pageSize; }
     const vis = sliceNeeded ? items.slice(0, Math.min(items.length, visibleCount)) : items;
-    const header = `<div class="search-popover-header">【${modeLabel}】显示前 ${vis.length} 条 / 共 ${total} ${mode==='page'?'条命中':'篇结果'} · 按 ↑/↓ 选择，Enter 打开，Esc 关闭</div>`;
+    const header = `<div class="px-3 py-2.5 text-xs text-muted border-b border-border">【${modeLabel}】显示前 ${vis.length} 条 / 共 ${total} ${mode==='page'?'条命中':'篇结果'} · 按 ↑/↓ 选择，Enter 打开，Esc 关闭</div>`;
     let list = '';
     if (mode === 'page'){
       const parts = [];
       vis.forEach((it, i)=>{
         const line = buildLineSnippet(it, qWords, qLower);
         if (!line || line.indexOf('<mark>') === -1) return; // 仅保留真正命中的行
-        const cls = 'search-item'+(i===activeIndex?' is-active':'');
-        parts.push(`<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="search-item-line">${line}</div>        </a>`);
+        const cls = 'search-item block p-2.5 rounded-lg text-inherit no-underline hover:bg-accent-2/10 transition-colors'+(i===activeIndex?' bg-accent-2/10':'');
+        parts.push(`<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="text-xs line-clamp-1 break-normal text-muted">${line}</div>        </a>`);
       });
       list = parts.join('');
     } else {
@@ -415,16 +417,16 @@
       const clampStyleMobile = clampStyle.replace(/2/g,'3');
       const isMobile = window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
       list = vis.map((it, i)=>{
-        const cls = 'search-item'+(i===activeIndex?' is-active':'');
+        const cls = 'search-item block p-2.5 rounded-lg text-inherit no-underline hover:bg-accent-2/10 transition-colors'+(i===activeIndex?' bg-accent-2/10':'');
         const snippet = buildSnippet(it, qWords);
-        return `<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="search-item-title">${highlight(it.title, qWords)}</div>          ${snippet?`<div class=\"search-snippet search-item-snippet\" style=\"${isMobile?clampStyleMobile:clampStyle}\">${snippet}</div>`:''}        </a>`;
+        return `<a class="${cls}" data-index="${i}" href="${it.url}">          <div class="font-semibold text-sm mb-1">${highlight(it.title, qWords)}</div>          ${snippet?`<div class=\"text-xs text-muted leading-relaxed\" style=\"${isMobile?clampStyleMobile:clampStyle}\">${snippet}</div>`:''}        </a>`;
       }).join('');
     }
-    pop.insertAdjacentHTML('beforeend', header + `<div class="search-results">${list||'<div style="padding:12px;">未找到结果</div>'}</div>`);
+    pop.insertAdjacentHTML('beforeend', header + `<div class="p-1.5">${list||'<div style="padding:12px;">未找到结果</div>'}</div>`);
 
     // 渐进加载按钮
     if (sliceNeeded && total > vis.length){
-      const moreHtml = `<div class="search-more"><button id="searchLoadMoreBtn" class="search-more-btn">显示更多</button></div>`;
+      const moreHtml = `<div class="p-3 flex justify-center"><button id="searchLoadMoreBtn" class="appearance-none bg-transparent border border-border text-text rounded-full px-3.5 py-2 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 transition-colors">显示更多</button></div>`;
       pop.insertAdjacentHTML('beforeend', moreHtml);
       const moreBtn = pop.querySelector('#searchLoadMoreBtn');
       if (moreBtn){
@@ -512,7 +514,12 @@
     const links = pop ? Array.from(pop.querySelectorAll('.search-item')) : [];
     if (!links.length) return;
     activeIndex = (activeIndex + delta + links.length) % links.length;
-    links.forEach((a, i)=> a.classList.toggle('is-active', i===activeIndex));
+    links.forEach((a, i)=> {
+      const isActive = (i === activeIndex);
+      a.classList.toggle('is-active', isActive);
+      // Toggle Tailwind background class for active state styling
+      a.classList.toggle('bg-accent-2/10', isActive);
+    });
     const active = links[activeIndex];
     if (active && active.scrollIntoView){ active.scrollIntoView({block:'nearest'}); }
   }
@@ -600,13 +607,13 @@
     render(items, q, total);
   }, 120);
 
-  function closePopover(){ if (pop){ pop.hidden = true; } }
+  function closePopover(){ if (pop){ pop.style.display = 'none'; } }
 
   function onDocClick(e){
-    if (!pop || pop.hidden) return;
+    if (!pop || pop.style.display === 'none') return;
     // 打开后的短时间内忽略文档点击，避免某些浏览器的事件顺序导致闪闭
     const delta = Date.now() - lastOpenAt;
-    dbg('doc event', e.type, { delta, popHidden: !!(pop && pop.hidden), mobile: document.body.classList.contains('mobile-searching') });
+    dbg('doc event', e.type, { delta, popHidden: !!(pop && pop.style.display === 'none'), mobile: document.body.classList.contains('mobile-searching') });
     if (delta < 400) { dbg('doc event ignored by guard'); return; }
     // 在输入框、图标容器或弹窗内部点击都不关闭
     const within = e.target.closest('#'+POPOVER_ID)
@@ -632,6 +639,7 @@
     pop = $(POPOVER_ID);
     toggleBtn = $(TOGGLE_ID);
     backBtn = $(BACK_ID);
+    console.log('[Search] Setup Advanced', { box: !!box, pop: !!pop });
     const pageBtn = document.getElementById('pageSearchBtn');
     dbg('setup', { box: !!box, pop: !!pop, toggleBtn: !!toggleBtn, backBtn: !!backBtn });
     if (!box || !pop) return;
@@ -658,8 +666,18 @@
     document.addEventListener('click', onDocClick);
     document.addEventListener('keydown', focusHotkey);
 
-    // 初始显示快捷入口（聚焦时且为空）
-    box.addEventListener('focus', () => { dbg('focus', { empty: !box.value.trim() }); if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } if (!box.value.trim()){ render([], '', 0); } });
+    // 初始显示快捷入口（聚焦/点击）；移动端自动展开
+    const onBoxInteract = () => {
+      dbg('box interact', { empty: !box.value.trim() }); 
+      if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } 
+      // Auto-open mobile mode
+      if (window.matchMedia('(max-width: 900px)').matches && !document.body.classList.contains('mobile-searching')){
+        openMobile();
+      }
+      if (!box.value.trim()){ render([], '', 0); } 
+    };
+    box.addEventListener('focus', onBoxInteract);
+    box.addEventListener('click', onBoxInteract);
 
     // 绑定移动端按钮（仅 click，避免重复与竞态）
     if (toggleBtn){ toggleBtn.addEventListener('click', (e)=>{ dbg('toggle click'); e.preventDefault(); if (!data) { try{ prefetchLiteIndex(); }catch(_){ } } openMobile(); }); }

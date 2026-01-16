@@ -7,9 +7,18 @@
       const hasMedia = td.querySelector('img, picture, video, iframe, object, embed, svg');
       // 媒体单元格不截断、也不浮层
       if (hasMedia) return;
-      if (!td.querySelector(':scope > .cell-inner')){
-        const wrap = document.createElement('div');
-        wrap.className = 'cell-inner';
+      // Using direct child check with :scope is good, but simpler check is fine too
+      let wrap = td.querySelector('.cell-inner');
+      if (!wrap) {
+        wrap = document.createElement('div');
+        // Apply Tailwind classes for default clamped state
+        // line-clamp-3: limits to 3 lines
+        // overflow-hidden: hides extra
+        wrap.className = 'cell-inner line-clamp-3 overflow-hidden text-ellipsis';
+        // Enforce block display to ensure clamp works
+        wrap.style.display = '-webkit-box';
+        wrap.style.webkitBoxOrient = 'vertical';
+        
         while (td.firstChild){ wrap.appendChild(td.firstChild); }
         td.appendChild(wrap);
       }
@@ -27,17 +36,36 @@
     cells.forEach(inner => {
       const td = inner.parentElement;
       if (isClamped(inner)){
-        td.classList.add('has-clamp');
+        td.classList.add('cursor-pointer'); // Tailwind-like behavior (or use class)
+        td.classList.add('has-clamp'); // Keep for logic selection
       } else {
+        td.classList.remove('cursor-pointer');
         td.classList.remove('has-clamp');
       }
     });
   }
 
   // 内联展开/收起
-  function expandCell(td){ td.classList.add('is-expanded'); }
-  function collapseCell(td){ td.classList.remove('is-expanded'); }
-  function toggleCell(td){ td.classList.toggle('is-expanded'); }
+  function expandCell(td){ 
+    td.classList.add('is-expanded');
+    const inner = td.querySelector('.cell-inner');
+    if (inner) {
+      inner.classList.remove('line-clamp-3');
+      inner.style.display = 'block'; // Reset display to allow full expansion
+    }
+  }
+  function collapseCell(td){ 
+    td.classList.remove('is-expanded'); 
+    const inner = td.querySelector('.cell-inner');
+    if (inner) {
+      inner.classList.add('line-clamp-3');
+      inner.style.display = '-webkit-box';
+    }
+  }
+  function toggleCell(td){ 
+    if (td.classList.contains('is-expanded')) collapseCell(td);
+    else expandCell(td);
+  }
 
   function attach(){
     const tables = document.querySelectorAll('table');
@@ -102,8 +130,11 @@
     });
 
     // 初始打标 + 可聚焦性
-    updateClampMarkers();
-    refreshTabIndex();
+    // Delay slightly to ensure layout is ready for height calc
+    setTimeout(() => {
+        updateClampMarkers();
+        refreshTabIndex();
+    }, 50);
   }
 
   if (document.readyState === 'loading'){

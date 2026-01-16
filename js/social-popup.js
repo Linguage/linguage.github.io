@@ -6,6 +6,7 @@
     var overlay = $('#social-popup-overlay');
     if (!overlay) return;
 
+    var card = $('.social-popup-card', overlay);
     var imgEl = $('.social-popup-image', overlay);
     var titleEl = $('.social-popup-title', overlay);
     var descEl = $('.social-popup-desc', overlay);
@@ -17,19 +18,42 @@
       imgEl.alt = title || '';
       if (titleEl) titleEl.textContent = title || '';
       if (descEl) descEl.textContent = desc || '';
-      overlay.classList.add('is-visible');
+      
+      // Tailwind visibility toggle
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.classList.add('opacity-100', 'pointer-events-auto');
+      
+      // Card animation
+      if (card) {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }
+
       overlay.setAttribute('aria-hidden', 'false');
       document.body.classList.add('popup-open');
     }
 
     function closePopup(){
-      overlay.classList.remove('is-visible');
+      // Tailwind visibility toggle
+      overlay.classList.remove('opacity-100', 'pointer-events-auto');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      
+      // Card animation
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+
       overlay.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('popup-open');
-      if (imgEl){
-        imgEl.src = '';
-        imgEl.alt = '';
-      }
+      
+      // Clear content after transition to avoid flicker
+      setTimeout(function(){
+        if (imgEl){
+          imgEl.src = '';
+          imgEl.alt = '';
+        }
+      }, 300);
     }
 
     on(closeBtn, 'click', closePopup);
@@ -37,7 +61,8 @@
       if (evt.target === overlay) closePopup();
     });
     on(document, 'keyup', function(evt){
-      if (evt.key === 'Escape' && overlay.classList.contains('is-visible')){
+      // Check for opacity class instead of is-visible
+      if (evt.key === 'Escape' && overlay.classList.contains('opacity-100')){
         closePopup();
       }
     });

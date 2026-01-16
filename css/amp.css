@@ -1,0 +1,295 @@
+/* AMP Theme Styles - Adapted from minimal-blog */
+
+/* Outer container for the card effect */
+.md-theme-amp-outer {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 32px 28px;
+  position: relative;
+}
+
+html[data-theme="dark"] .md-theme-amp-outer {
+  background: #1e1e1e;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Base container for the AMP theme content */
+.md-theme-amp {
+  position: relative;
+  z-index: 1;
+  color: #3e3832;
+  font-family: "Noto Sans SC", "PingFang SC", system-ui, -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+html[data-theme="dark"] .md-theme-amp {
+  color: #c9d1d9;
+}
+
+.md-theme-amp h1 {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 1.875rem;
+  line-height: 1.3;
+  font-weight: 900;
+  color: #3e3832;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+html[data-theme="dark"] .md-theme-amp h1 {
+  color: #f0f6fc;
+}
+
+.md-theme-amp h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3e3832;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 0.75rem;
+  border-left: 6px solid #8c5e3c;
+}
+
+html[data-theme="dark"] .md-theme-amp h2 {
+  color: #f0f6fc;
+  border-left-color: #c17f4a;
+}
+
+.md-theme-amp h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #c17f4a;
+  margin-top: 1.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-theme-amp p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555555;
+  margin-bottom: 1.25rem;
+}
+
+html[data-theme="dark"] .md-theme-amp p {
+  color: #8b949e;
+}
+
+.md-theme-amp ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-theme-amp li {
+  margin-bottom: 0.5rem;
+}
+
+.md-theme-amp ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-theme-amp blockquote {
+  background: #f8f6f3;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 25px 0;
+  border: none;
+  border-left: 8px solid #8c5e3c;
+  color: #555555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  font-style: normal;
+}
+
+html[data-theme="dark"] .md-theme-amp blockquote {
+  background: #252525;
+  color: #8b949e;
+  border-left-color: #c17f4a;
+}
+
+.md-theme-amp a {
+  color: #8c5e3c;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+html[data-theme="dark"] .md-theme-amp a {
+  color: #c17f4a;
+}
+
+.md-theme-amp strong {
+  color: #c17f4a;
+  font-weight: 700;
+}
+
+.md-theme-amp em {
+  color: #8c5e3c;
+  font-style: italic;
+}
+
+.md-theme-amp img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.md-theme-amp table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+}
+
+.md-theme-amp th {
+  background-color: #f8f6f3;
+  padding: 12px;
+  border-bottom: 2px solid #c17f4a;
+  color: #8c5e3c;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .md-theme-amp th {
+  background-color: #252525;
+  color: #c17f4a;
+}
+
+.md-theme-amp td {
+  padding: 12px;
+  border-bottom: 1px solid #eeeeee;
+  color: #555555;
+}
+
+html[data-theme="dark"] .md-theme-amp td {
+  border-bottom-color: #333;
+  color: #8b949e;
+}
+
+.md-theme-amp hr {
+  border: none;
+  border-top: 1px solid #eeeeee;
+  margin: 40px 0;
+}
+
+.md-theme-amp code {
+  background: #fff9f2;
+  color: #c17f4a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Menlo, Monaco, Consolas, "SFMono-Regular", monospace;
+  font-size: 0.875rem;
+  border: 1px solid #f0e6d2;
+}
+
+html[data-theme="dark"] .md-theme-amp code {
+  background: #2d2d2d;
+  border-color: #444;
+}
+
+.md-theme-amp pre {
+  margin: 1.5rem 0;
+  /* Inverse of #fff9f2 (Beige) is #00060d. 
+     We set the background to the inverse dark color, so that when we filter:invert(1), 
+     it becomes the desired light beige. !important is needed to override Hugo's inline styles. */
+  background-color: #00060d !important;
+  color: #dbdbdb !important; /* Inverse of desired text color approx */
+  border-radius: 8px;
+  border: 1px solid #f0e6d2;
+  padding: 15px;
+  overflow: auto;
+  /* Invert colors to create a light theme from the dark Monokai defaults */
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="dark"] .md-theme-amp pre {
+  background-color: #2d2d2d !important;
+  border-color: #444;
+  /* Reset filter for dark mode so it stays dark */
+  filter: none;
+  color: inherit !important;
+}
+
+.md-theme-amp pre code {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+html[data-theme="dark"] .md-theme-amp pre code {
+  color: #c9d1d9;
+}
+
+/* AMP TOC Styles (Card stuck on wall effect) */
+.md-theme-amp-toc {
+  background: #ffffff;
+  border-radius: 16px;
+  /* Soft shadow for floating card effect, no border */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); 
+  padding: 24px 20px;
+  font-family: "Noto Sans SC", "PingFang SC", system-ui, -apple-system, sans-serif;
+  transition: all 0.3s ease;
+}
+
+html[data-theme="dark"] .md-theme-amp-toc {
+  background: #1e1e1e;
+  /* Slightly stronger shadow for dark mode visibility */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.md-theme-amp-toc .toc-title {
+  font-family: "Noto Sans SC", "PingFang SC", system-ui, sans-serif; /* Clean sans-serif for "ON THIS PAGE" */
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #3e3832;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+}
+
+html[data-theme="dark"] .md-theme-amp-toc .toc-title {
+  color: #f0f6fc;
+}
+
+.md-theme-amp-toc nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.md-theme-amp-toc nav li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.md-theme-amp-toc nav a {
+  color: #666666;
+  text-decoration: none;
+  font-size: 0.925rem;
+  transition: color 0.2s, transform 0.2s;
+  display: block;
+}
+
+html[data-theme="dark"] .md-theme-amp-toc nav a {
+  color: #8b949e;
+}
+
+.md-theme-amp-toc nav a:hover,
+.md-theme-amp-toc nav a.active {
+  color: #8c5e3c;
+  font-weight: 500;
+}
+
+html[data-theme="dark"] .md-theme-amp-toc nav a:hover,
+html[data-theme="dark"] .md-theme-amp-toc nav a.active {
+  color: #c17f4a;
+}

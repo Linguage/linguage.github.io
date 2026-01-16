@@ -22,7 +22,7 @@
   function applySizing(el) {
     try {
       const ds = el.dataset || {};
-      const media = el.querySelector('.link-card__media');
+      const media = el.querySelector('.link-card__media') || el.querySelector('div[class*="rounded-xl"]');
       if (!media) return;
       const raw = ds.size || '84';
       const size = Math.max(24, Math.min(parseInt(String(raw).replace('px', ''), 10) || 84, 320));
@@ -96,7 +96,7 @@
   }
 
   function createCard({ url, data, ds }) {
-  const { title, description, publisher, image, logo } = data || {};
+    const { title, description, publisher, image, logo } = data || {};
     const a = document.createElement('a');
     const host = (() => {
       try { return new URL(url).hostname; } catch { return url; }
@@ -144,11 +144,12 @@
       'py-3',
       'transition-colors',
       'duration-150',
+      'no-underline',
       ...flowClasses
     ].join(' ');
     // Always prefer the original input URL to avoid being hijacked by stale canonical/og:url
     a.href = url;
-  a.target = (ds && ds.target) || '_blank';
+    a.target = (ds && ds.target) || '_blank';
     a.rel = 'noopener';
 
     const media = document.createElement('div');
@@ -160,13 +161,15 @@
       'flex-shrink-0',
       'overflow-hidden',
       'rounded-xl',
-      'bg-[var(--lc-media-bg,rgba(15,23,42,0.06))]'
+      'bg-black/5',
+      'dark:bg-white/5'
     ].join(' ');
     // Set size/ratio via inline styles to avoid depending on Tailwind class generation
     media.style.width = `${size}px`;
     if (ratio.w === ratio.h) {
       media.style.height = `${size}px`;
     } else if ('aspectRatio' in media.style) {
+      media.style.removeProperty('height');
       media.style.aspectRatio = `${ratio.w} / ${ratio.h}`;
     } else {
       // Fallback: compute height from ratio
@@ -211,20 +214,20 @@
     };
     media.appendChild(img);
 
-  const body = document.createElement('div');
+    const body = document.createElement('div');
     body.className = 'link-card__body min-w-0 flex flex-col gap-2';
 
     const siteEl = document.createElement('div');
-    siteEl.className = 'link-card__site text-xs uppercase tracking-wide text-[var(--lc-site,rgba(107,114,128,0.78))]';
-  siteEl.textContent = manualSite || publisher || host;
+    siteEl.className = 'text-xs uppercase tracking-wide text-muted';
+    siteEl.textContent = manualSite || publisher || host;
 
     const titleEl = document.createElement('div');
-    titleEl.className = 'link-card__title text-base font-semibold text-[var(--lc-title,#111827)] line-clamp-2 transition-colors duration-150 group-hover/link-card:text-[var(--lc-title-hover,#0f172a)]';
-  titleEl.textContent = manualTitle || title || host;
+    titleEl.className = 'link-card__title text-base font-semibold text-text line-clamp-2 transition-colors duration-150 group-hover/link-card:text-accent';
+    titleEl.textContent = manualTitle || title || host;
 
     const descEl = document.createElement('div');
-    descEl.className = 'link-card__desc text-sm text-[var(--lc-desc,rgba(55,65,81,0.88))] line-clamp-2';
-  descEl.textContent = manualDesc || description || url;
+    descEl.className = 'link-card__desc text-sm text-muted opacity-90 line-clamp-2';
+    descEl.textContent = manualDesc || description || url;
 
     body.appendChild(siteEl);
     body.appendChild(titleEl);
