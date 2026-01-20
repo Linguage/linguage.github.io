@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Straussian Memes Visual Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F5F2EB',
+                        ink: '#1A1918',
+                        sub: '#4A4A4A'
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-container {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Tight leading for massive text */
+        .title-massive {
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+        }
+        /* Justify fix for Chinese */
+        .text-justify-fix {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+        /* Watermark placement */
+        .watermark-icon {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            opacity: 0.06;
+            font-size: 10rem;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex justify-center items-center min-h-screen p-8 gap-8 overflow-x-auto">
+
+    <div class="card-container flex flex-col justify-between p-10 border-[4px] border-ink box-border">
+        
+        <div class="h-[32%] flex flex-col justify-center border-b-[4px] border-ink pb-4">
+            <div class="flex items-end justify-between mb-2">
+                <span class="font-display font-black text-2xl tracking-widest uppercase">Concept_01</span>
+                <span class="font-serif font-bold text-xl">BAOYU / KAP</span>
+            </div>
+            <h1 class="title-massive font-sans font-black text-[120px] uppercase break-words">
+                施特劳斯<br>
+                <span class="font-display italic text-[110px]">MEMES</span>
+            </h1>
+        </div>
+
+        <div class="h-[53%] grid grid-cols-2 relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-[4px] bg-ink -ml-[2px]"></div>
+
+            <div class="p-6 pr-8 flex flex-col justify-between h-full">
+                <div>
+                    <h2 class="font-sans font-black text-5xl mb-6">表层<br>叙事</h2>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify-fix">
+                        这是大众需要的“高贵的谎言”。它是焦虑的止痛药，提供确定性与归属感。它让受众在消费“标准化产品”的过程中，寻找虚幻的个性，并相信这就是人生的真理。
+                    </p>
+                </div>
+                <div class="font-mono text-xl border border-ink w-max px-2 py-1">LEVEL: LOW</div>
+            </div>
+
+            <div class="p-6 pl-8 flex flex-col justify-between h-full">
+                <div class="text-right"> <h2 class="font-sans font-black text-5xl mb-6 text-right">高阶<br>现实</h2>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify-fix">
+                        这是复杂而残酷的商业闭环。它是精密的变现系统，利用“身份认同”与“沉没成本”构建防御屏障。将结构性困境转化为个人责任，完成从恐惧到购买的情绪操控。
+                    </p>
+                </div>
+                <div class="font-mono text-xl border border-ink w-max px-2 py-1 ml-auto">LEVEL: HIGH</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] border-t-[4px] border-ink flex items-center justify-center p-4">
+            <p class="font-serif font-black text-3xl text-center leading-tight w-full">
+                “看穿那些‘听起来对，细想模糊’的信息，<br>在折叠的真理中建立清醒的免疫系统。”
+            </p>
+        </div>
+
+    </div>
+
+    <div class="card-container flex flex-col p-8 border-[1px] border-ink relative">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-4 mb-6 shrink-0">
+            <div>
+                <h1 class="font-display font-black text-6xl tracking-tighter">TACTICS</h1>
+                <p class="font-sans font-bold text-xl mt-1 uppercase tracking-widest">Straussian Information Structure</p>
+            </div>
+            <div class="font-display font-black text-8xl leading-[0.7]">02</div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 flex-grow">
+            
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-layer-group watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">01</span>
+                    <h3 class="font-sans font-black text-4xl">双层真理</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    信息天然分层。低阶解读是必要的安慰与简化，高阶解读是残酷的现实与机制。两者相关但不相同，互为表里，共同构成了一个自我稳定的传播结构。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-microphone-lines watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">02</span>
+                    <h3 class="font-sans font-black text-4xl">罗胖样本</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    演讲表层是AI时代的“人生指南”，深层是焦虑变现的“商业系统”。内容与广告边界被有意模糊，通过恐惧→希望→购买的路径，完成精密的商业收割。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-arrow-up-from-bracket watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">03</span>
+                    <h3 class="font-sans font-black text-4xl">向上屏障</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    阻止受众觉醒的核心是“身份认同”。承认被收割等同于自我否定，维护“上进者”形象迫使受众将商业植入内化为真知灼见，形成完美的心理防御闭环。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-arrow-down-long watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">04</span>
+                    <h3 class="font-sans font-black text-4xl">向下屏障</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    阻止精英点破的核心是“社会成本”。既得利益者不愿破坏生态，旁观者畏惧被标签为“负能量”，在相对主义的默许下，形成了一种坚固的“沉默螺旋”。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-magnifying-glass-chart watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">05</span>
+                    <h3 class="font-sans font-black text-4xl">识别测试</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    三步检验：不同人群是否有分层解读？告知低阶者真相是否引发防御？高阶者是否因成本而沉默？如果这三个信号同时出现，你面对的就是典型的施特劳斯模因。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-5 relative flex flex-col overflow-hidden bg-transparent">
+                <i class="fa-solid fa-shield-virus watermark-icon"></i>
+                <div class="flex items-baseline gap-3 mb-2 z-10">
+                    <span class="font-mono font-bold text-2xl bg-ink text-paper px-2">06</span>
+                    <h3 class="font-sans font-black text-4xl">清醒免疫</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-snug text-justify-fix z-10 mt-auto">
+                    AI时代多层结构将泛滥。识别不是为了愤世嫉俗，而是为了知情选择。唯有不断提问“谁在获益？”，才能在信息洪流中构建起属于自己的认知免疫系统。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-6 pt-4 border-t-[1px] border-ink flex justify-between text-ink text-sm font-sans font-bold uppercase tracking-wider">
+            <span>Source: @dotey / LessWrong</span>
+            <span>2026.01.03</span>
+            <span>Designed with AI</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

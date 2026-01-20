@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>凯文·杜兰特访谈：篮球效率与比赛未来</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="凯文·杜兰特访谈：篮球效率与比赛未来">
+<meta property="og:url" content="https://linguage.github.io/articles/kd-lbj-jnash-p1.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="凯文·杜兰特访谈：篮球效率与比赛未来">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/kd-lbj-jnash-p1.html">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Chosen Palette: Basketball Dynamics (Updated to more neutral background) -->
+        <!-- Application Structure Plan: 本应用采用主题式、可滚动单页结构。顶部固定导航栏提供“效率与进化”、“投篮艺术”、“中距离”、“雷霆岁月”和“比赛未来”等核心主题的快速跳转。这种结构允许用户根据兴趣点进行非线性探索，同时保持内容的连贯性。每个主题部分包含核心观点摘要、关键数据展示、交互式图表或概念图，旨在将访谈中的复杂篮球理念和数据以视觉化、互动化的方式呈现，提升用户理解和参与感。 -->
+        <!-- Visualization & Content Choices: 1. 效率与进化: HTML/CSS展示KD的投篮效率数据，并用列表和Unicode图标展示其比赛拓展性。2. 投篮艺术: Chart.js条形图对比KD和纳什的50/40/90赛季次数，直观呈现稀有性。3. 中距离: 并排卡片对比“数据分析派”与“明星球员派”对中距离的看法，并列出代表球员。4. 雷霆岁月: HTML/CSS/JS构建简化时间线，点击时间点显示详细文字，解释哈登交易和OKC的演变。5. 比赛未来: HTML/CSS/JS构建概念流程图，解释“有组织的混乱”进攻和“暴露协防”防守，并用Chart.js条形图概念性展示球员投篮距离变化趋势。所有可视化均未使用SVG或Mermaid。 -->
+        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+        <style>
+            body {
+                font-family: "Noto Sans SC", sans-serif;
+                background-color: #f5f5f5; /* 更素雅的浅灰色 */
+                color: #333333; /* 深灰色文本 */
+            }
+            .nav-link {
+                transition:
+                    color 0.3s,
+                    border-bottom-color 0.3s;
+            }
+            .nav-link.active,
+            .nav-link:hover {
+                color: #ea580c; /* orange-600 */
+                border-bottom-color: #ea580c;
+            }
+            .section-card {
+                background-color: #ffffff;
+                border: 1px solid #e2e8f0; /* slate-200 */
+                box-shadow:
+                    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                border-radius: 0.75rem; /* rounded-xl */
+            }
+            .chart-container {
+                position: relative;
+                width: 100%;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                height: 300px;
+                max-height: 40vh;
+            }
+            @media (min-width: 768px) {
+                .chart-container {
+                    height: 350px;
+                }
+            }
+            .timeline-item {
+                cursor: pointer;
+                transition: transform 0.2s ease-in-out;
+            }
+            .timeline-item:hover {
+                transform: translateY(-3px);
+            }
+            .concept-box {
+                transition:
+                    transform 0.2s ease-in-out,
+                    box-shadow 0.2s ease-in-out;
+            }
+            .concept-box:hover {
+                transform: translateY(-3px);
+                box-shadow:
+                    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                    0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            }
+        </style>
+    
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+    <body class="bg-stone-50 text-gray-800">
+        <header
+            class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-md"
+        >
+            <nav class="container mx-auto px-6">
+                <div class="flex items-center justify-between h-16">
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-700">
+                        Mind The Game: KD访谈
+                    </h1>
+                    <div
+                        class="hidden md:flex items-center space-x-6 lg:space-x-8"
+                    >
+                        <a
+                            href="#efficiency"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >效率与进化</a
+                        >
+                        <a
+                            href="#shooting-art"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >投篮艺术</a
+                        >
+                        <a
+                            href="#mid-range"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >中距离</a
+                        >
+                        <a
+                            href="#okc-years"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >雷霆岁月</a
+                        >
+                        <a
+                            href="#game-future"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >比赛未来</a
+                        >
+                        <a
+                            href="#brooklyn"
+                            class="nav-link border-b-2 border-transparent pb-1 text-lg"
+                            >布鲁克林片段</a
+                        >
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mx-auto px-6 py-10 md:py-16">
+            <div class="text-center mb-16 md:mb-20">
+                <h2
+                    class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900"
+                >
+                    凯文·杜兰特访谈：篮球效率与比赛未来
+                </h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+                    与勒布朗·詹姆斯和史蒂夫·纳什一起，深入探讨篮球比赛的演变与顶级球员的哲学。
+                </p>
+            </div>
+
+            <section id="efficiency" class="mb-20 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    KD的效率与进化
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    凯文·杜兰特被誉为NBA历史上最流畅、最高效的得分手之一。本节将展示他的惊人效率数据，并探讨他如何不断拓展自己的比赛。
+                </p>
+                <div class="section-card p-6 md:p-8">
+                    <div class="grid lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 text-orange-600">
+                                无与伦比的得分效率
+                            </h4>
+                            <p class="text-slate-700 leading-relaxed mb-4">
+                                勒布朗·詹姆斯盛赞KD是联盟有史以来“装备最齐全”的得分手，能在各个层面（三分、中距离、篮下）高效得分。
+                            </p>
+                            <ul class="list-none space-y-3 text-slate-700">
+                                <li class="flex items-center">
+                                    <span class="text-orange-500 text-2xl mr-2"
+                                        >✓</span
+                                    >
+                                    <strong>投篮命中率:</strong>
+                                    自2012年以来从未低于50%
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-orange-500 text-2xl mr-2"
+                                        >✓</span
+                                    >
+                                    <strong>2021-22赛季中距离:</strong>
+                                    3-10英尺：58%；10-16英尺：58%；16英尺-三分线：71%
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 text-orange-600">
+                                比赛的持续拓展
+                            </h4>
+                            <p class="text-slate-700 leading-relaxed mb-4">
+                                KD分享了他如何从一个纯粹的接球投篮手，成长为一名全能的进攻威胁，不再受限于任何进攻方式或位置。
+                            </p>
+                            <ul class="list-none space-y-3 text-slate-700">
+                                <li class="flex items-center">
+                                    <span class="text-orange-500 text-2xl mr-2"
+                                        >➤</span
+                                    >
+                                    <strong>挡拆持球进攻:</strong>
+                                    从早期不擅长到如今能高效决策和得分。
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-orange-500 text-2xl mr-2"
+                                        >➤</span
+                                    >
+                                    <strong>左右手均衡:</strong>
+                                    克服了左侧进攻的偏好，左右手都能高效完成跳投。
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-orange-500 text-2xl mr-2"
+                                        >➤</span
+                                    >
+                                    <strong>平衡与脚步:</strong>
+                                    通过刻苦训练，掌握了在不同区域、不同姿态下保持平衡和发力的技巧。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shooting-art" class="mb-20 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    投篮的艺术：50/40/90俱乐部
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    50/40/90俱乐部是衡量球员投篮效率的最高标准（投篮命中率50%以上，三分命中率40%以上，罚球命中率90%以上）。本节将通过数据和访谈内容，探讨其稀有性及背后的心智挑战。
+                </p>
+                <div class="section-card p-6 md:p-8">
+                    <p class="text-slate-700 leading-relaxed mb-6">
+                        历史上只有少数球员能达到50/40/90的成就。凯文·杜兰特和史蒂夫·纳什都是其中的佼佼者，但他们也分享了在追求完美过程中遇到的心智挑战。
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="504090Chart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2 text-slate-800">
+                            心智游戏与遗憾
+                        </h4>
+                        <p class="text-slate-700">
+                            KD曾有多次接近50/40/90的经历，却因“想太多”而失之交臂。勒布朗也分享了自己职业生涯中未能掌握中距离跳投的遗憾，以及对罚球命中率的执着。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mid-range" class="mb-20 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    中距离的回归
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    在强调“上篮、三分、罚球”的魔球时代，中距离跳投曾被视为低效。然而，顶级球星却在中距离找到了高效得分的秘诀。本节将对比两种观点。
+                </p>
+                <div class="section-card p-6 md:p-8">
+                    <p class="text-slate-700 leading-relaxed mb-6">
+                        访谈中，KD和勒布朗讨论了中距离投篮在现代篮球中的重要性，尤其是在季后赛中，当防守强度提升时，中距离成为明星球员的关键武器。
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div
+                            class="bg-orange-50 p-6 rounded-lg border border-orange-200"
+                        >
+                            <h4 class="text-xl font-bold text-orange-700 mb-3">
+                                数据分析派观点
+                            </h4>
+                            <ul
+                                class="list-disc list-inside text-slate-700 space-y-1"
+                            >
+                                <li>
+                                    强调上篮、三分和罚球是最高效的得分方式。
+                                </li>
+                                <li>认为中距离是“低效”的，应尽量避免。</li>
+                                <li>角色球员应更多投三分，而非中距离。</li>
+                            </ul>
+                        </div>
+                        <div
+                            class="bg-slate-100 p-6 rounded-lg border border-slate-200"
+                        >
+                            <h4 class="text-xl font-bold text-slate-700 mb-3">
+                                明星球员派观点
+                            </h4>
+                            <ul
+                                class="list-disc list-inside text-slate-700 space-y-1"
+                            >
+                                <li>季后赛防守强度大，中距离是破局利器。</li>
+                                <li>顶级球员能创造并命中高难度中距离。</li>
+                                <li>
+                                    不能为了追求三分而放弃更好的中距离机会。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2 text-slate-800">
+                            中距离大师：代表球员
+                        </h4>
+                        <p class="text-slate-700">
+                            访谈中提到的中距离高效球员包括：扬尼斯·阿德托昆博、科怀·伦纳德、谢伊·吉尔杰斯-亚历山大、朱利叶斯·兰德尔、卢卡·东契奇、凯里·欧文。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="okc-years" class="mb-20 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    雷霆岁月与联盟演变
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    从早期的西雅图超音速到俄克拉荷马城雷霆的辉煌与变迁，再到如今年轻雷霆队的崛起，本节将回顾KD的早期职业生涯及其对联盟格局的思考。
+                </p>
+                <div class="section-card p-6 md:p-8">
+                    <p class="text-slate-700 leading-relaxed mb-6">
+                        KD回顾了他在OKC的早期岁月，特别是哈登交易对球队的影响。他认为球队当时超出了预期，管理层未能及时适应这种快速成功。他还展望了当前雷霆队的未来，认为他们将成为联盟的“大麻烦”。
+                    </p>
+                    <h4
+                        class="text-2xl font-bold mb-4 text-orange-600 text-center"
+                    >
+                        OKC进化时间线
+                    </h4>
+                    <div
+                        class="flex flex-col md:flex-row justify-center items-stretch md:items-start gap-4 mb-8"
+                    >
+                        <div
+                            class="timeline-item bg-orange-50 p-4 rounded-lg flex-1 text-center"
+                            data-detail="KD早期在西雅图超音速/OKC雷霆，以接球投篮为主，联盟身体对抗更强，中距离和上篮更多。"
+                        >
+                            <h5 class="font-bold text-orange-700">
+                                早期（2007-2012）
+                            </h5>
+                            <p class="text-sm text-slate-700 mt-1">
+                                射手KD，联盟更强调身体对抗。
+                            </p>
+                        </div>
+                        <div
+                            class="timeline-item bg-orange-50 p-4 rounded-lg flex-1 text-center"
+                            data-detail="球队过早达到总决赛水平，管理层未能及时适应并升级阵容，导致詹姆斯·哈登被交易，团队核心受损。"
+                        >
+                            <h5 class="font-bold text-orange-700">
+                                哈登交易（2012）
+                            </h5>
+                            <p class="text-sm text-slate-700 mt-1">
+                                超预期成功后的决策失误。
+                            </p>
+                        </div>
+                        <div
+                            class="timeline-item bg-orange-50 p-4 rounded-lg flex-1 text-center"
+                            data-detail="OKC在经历多次重建和核心球员更迭后，拥有了谢伊、杰伦·威廉姆斯、切特等年轻核心，未来潜力巨大。"
+                        >
+                            <h5 class="font-bold text-orange-700">
+                                当前雷霆（2023-）
+                            </h5>
+                            <p class="text-sm text-slate-700 mt-1">
+                                年轻核心，未来可期。
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        id="timeline-detail"
+                        class="bg-slate-100 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-slate-700"
+                    >
+                        <p>点击上方时间点查看详情。</p>
+                    </div>
+                    <div class="mt-6 p-4 bg-slate-100 rounded-lg">
+                        <h4 class="font-bold text-lg mb-2 text-slate-800">
+                            对当前雷霆的展望
+                        </h4>
+                        <p class="text-slate-700">
+                            KD和勒布朗认为，当前雷霆的年轻核心（谢伊、杰伦·威廉姆斯、切特）将是联盟的巨大挑战。他们拥有天赋、年轻，并且已经适应了被追逐的心态。唯一的担忧是薪资空间问题，但他们拥有大量选秀权来保持竞争力。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="game-future" class="mb-20 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    比赛的未来走向
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    篮球比赛的战术和球员类型正在不断演变。本节将探讨攻防两端的新趋势，以及球员身体素质和技能组合的变化。
+                </p>
+                <div class="section-card p-6 md:p-8">
+                    <p class="text-slate-700 leading-relaxed mb-6">
+                        KD和勒布朗深入探讨了比赛的未来。他们认为，现代篮球正朝着“有组织的混乱”方向发展，进攻端强调无球跑动和模糊掩护，防守端则更注重暴露协防弱点。
+                    </p>
+                    <h4
+                        class="text-2xl font-bold mb-4 text-orange-600 text-center"
+                    >
+                        攻防新趋势
+                    </h4>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div
+                            class="concept-box bg-slate-100 p-4 rounded-lg border border-slate-200"
+                        >
+                            <h5 class="font-bold text-slate-800 mb-2">
+                                进攻：有组织的混乱
+                            </h5>
+                            <p class="text-slate-700 text-sm">
+                                强调球员间的阅读和反应，通过模糊掩护、传切、手递手等快速行动制造混乱，而非固定的战术跑位。
+                            </p>
+                        </div>
+                        <div
+                            class="concept-box bg-slate-100 p-4 rounded-lg border border-slate-200"
+                        >
+                            <h5 class="font-bold text-slate-800 mb-2">
+                                防守：暴露协防弱点
+                            </h5>
+                            <p class="text-slate-700 text-sm">
+                                防守不再只针对持球人，而是通过移动协防者、切入和外弹，暴露防守体系中的薄弱环节。
+                            </p>
+                        </div>
+                    </div>
+
+                    <h4
+                        class="text-2xl font-bold mb-4 text-orange-600 text-center"
+                    >
+                        球员轮廓的变化
+                    </h4>
+                    <p class="text-slate-700 leading-relaxed mb-6">
+                        联盟对球员身体素质的要求越来越高，特别是对后卫。身高不足且防守能力不强的球员，其价值正在下降。
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="playerProfileChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section id="brooklyn" class="mb-12 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-3">
+                    布鲁克林片段
+                </h3>
+                <p class="text-center text-slate-500 mb-10 max-w-2xl mx-auto">
+                    凯文·杜兰特和史蒂夫·纳什简要回顾了他们在布鲁克林篮网的时光。这一段对话为访谈的第二部分留下了悬念。
+                </p>
+                <div class="section-card p-6 md:p-8 text-center bg-slate-100">
+                    <p class="text-slate-700 leading-relaxed mb-4">
+                        访谈中，KD和史蒂夫·纳什简短地提到了他们在布鲁克林篮网的合作经历，并暗示了这段“过早结束”的时光中发生的事件。更多细节将在第二部分访谈中揭晓。
+                    </p>
+                    <span class="text-slate-500 text-6xl block mb-4">...</span>
+                    <p class="text-slate-700 font-medium">
+                        敬请期待访谈第二部分！
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-slate-900 text-slate-300 py-8">
+            <div class="container mx-auto px-6 text-center">
+                <p>
+                    &copy; 2025 Mind The Game 交互式解读。所有内容基于访谈整理。
+                </p>
+                <p class="text-sm text-slate-500 mt-2">
+                    本应用旨在促进篮球分析与讨论，不代表任何官方立场。
+                </p>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const handleNavScroll = () => {
+                    const navLinks = document.querySelectorAll(".nav-link");
+                    const sections = document.querySelectorAll("section");
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    navLinks.forEach((link) => {
+                                        link.classList.toggle(
+                                            "active",
+                                            link
+                                                .getAttribute("href")
+                                                .substring(1) ===
+                                                entry.target.id,
+                                        );
+                                    });
+                                }
+                            });
+                        },
+                        { rootMargin: "-40% 0px -60% 0px" },
+                    );
+
+                    sections.forEach((section) => observer.observe(section));
+                };
+
+                const create504090Chart = () => {
+                    const ctx = document
+                        .getElementById("504090Chart")
+                        .getContext("2d");
+                    new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: ["凯文·杜兰特", "史蒂夫·纳什"],
+                            datasets: [
+                                {
+                                    label: "50/40/90赛季次数",
+                                    data: [2, 4],
+                                    backgroundColor: [
+                                        "rgba(234, 88, 12, 0.7)",
+                                        "rgba(29, 78, 216, 0.7)",
+                                    ],
+                                    borderColor: [
+                                        "rgb(234, 88, 12)",
+                                        "rgb(29, 78, 216)",
+                                    ],
+                                    borderWidth: 1,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1,
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: "赛季次数",
+                                    },
+                                },
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            let label =
+                                                context.dataset.label || "";
+                                            if (label) {
+                                                label += ": ";
+                                            }
+                                            label += context.parsed.y + " 次";
+                                            return label;
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                };
+
+                const handleTimeline = () => {
+                    const timelineItems =
+                        document.querySelectorAll(".timeline-item");
+                    const detailDisplay =
+                        document.getElementById("timeline-detail");
+                    const defaultText = detailDisplay.innerHTML;
+
+                    timelineItems.forEach((item) => {
+                        item.addEventListener("click", () => {
+                            detailDisplay.innerHTML = `<p class="text-slate-700">${item.dataset.detail}</p>`;
+                        });
+                    });
+                    // Reset on mouseout (optional, but good for interactive clarity)
+                    detailDisplay.addEventListener("mouseleave", () => {
+                        detailDisplay.innerHTML = defaultText;
+                    });
+                };
+
+                const createPlayerProfileChart = () => {
+                    const ctx = document
+                        .getElementById("playerProfileChart")
+                        .getContext("2d");
+                    new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: ["15-20年前", "现在"],
+                            datasets: [
+                                {
+                                    label: "平均投篮距离（概念性）",
+                                    data: [5, 8],
+                                    backgroundColor: [
+                                        "rgba(59, 130, 246, 0.7)",
+                                        "rgba(234, 88, 12, 0.7)",
+                                    ],
+                                    borderColor: [
+                                        "rgb(59, 130, 246)",
+                                        "rgb(234, 88, 12)",
+                                    ],
+                                    borderWidth: 1,
+                                },
+                            ],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: "距离指数",
+                                    },
+                                },
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        afterBody: function (context) {
+                                            if (context[0].dataIndex === 0) {
+                                                return "特点：更多篮下和中距离，空间较小，内线球员多。";
+                                            }
+                                            return "特点：更多三分，空间拉开，对后卫防守能力要求更高。";
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                };
+
+                handleNavScroll();
+                create504090Chart();
+                handleTimeline();
+                createPlayerProfileChart();
+            });
+        </script>
+    </body>
+</html>

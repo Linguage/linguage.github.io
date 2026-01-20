@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Infographic - Altman's Decline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            font-family: 'Noto Sans SC', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        /* Borders & Lines */
+        .border-thick {
+            border: 3px solid var(--ink-black);
+        }
+        .border-top-thick {
+            border-top: 3px solid var(--ink-black);
+        }
+        .border-bottom-thick {
+            border-bottom: 3px solid var(--ink-black);
+        }
+        .border-right-thick {
+            border-right: 3px solid var(--ink-black);
+        }
+        
+        /* Typography */
+        .font-header {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+        .font-serif-bold {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        .font-serif-heavy {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+        }
+        
+        /* Utilities */
+        .text-justify-strict {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="gap-10 flex-wrap">
+
+    <div class="swiss-card border-thick p-8">
+        
+        <div class="h-[30%] flex flex-col justify-center relative">
+            <div class="absolute top-0 left-0 font-bold tracking-widest text-sm uppercase">The Report / Gary Marcus</div>
+            <h1 class="font-header text-[7rem] leading-[1.05] uppercase break-words">
+                Sam Altman<br>衰亡史
+            </h1>
+            <div class="mt-4 text-3xl font-serif-bold italic text-right w-full border-t border-black pt-2">
+                The Slow Decline of Sam Altman
+            </div>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-top-thick border-bottom-thick mt-6">
+            
+            <div class="border-right-thick p-6 flex flex-col justify-between h-full">
+                <div>
+                    <span class="text-6xl font-black opacity-20">01</span>
+                    <h2 class="text-5xl font-header mt-2 mb-6 leading-none">护城河<br>崩塌</h2>
+                </div>
+                <p class="font-serif-bold text-3xl leading-snug text-justify-strict">
+                    曾经的绝对垄断正在瓦解。苹果放弃独家合作转向谷歌，微软关系微妙。由于缺乏真正的技术壁垒，OpenAI 正在失去其作为行业“唯一选项”的特权地位。
+                </p>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between h-full">
+                <div>
+                    <span class="text-6xl font-black opacity-20">02</span>
+                    <h2 class="text-5xl font-header mt-2 mb-6 leading-none">叙事<br>破产</h2>
+                </div>
+                <p class="font-serif-bold text-3xl leading-snug text-justify-strict">
+                    仅靠“性格魅力”和宏大的 AGI 承诺已无法掩盖商业逻辑的苍白。GPT-5 表现不及预期，从“硅谷金童”到被质疑为“WeWork 式泡沫”，资本耐心正在耗尽。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[20%] flex items-center justify-center p-6 text-center">
+            <blockquote class="font-serif-heavy text-4xl leading-relaxed">
+                “魅力终究无法替代护城河。当技术光环褪去，留下的只有无法自圆其说的商业赤字。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-2 w-full left-0 px-8 flex justify-between text-xs font-bold uppercase tracking-widest border-t border-black pt-2">
+            <span>Source: Gary Marcus</span>
+            <span>2026.01.13</span>
+            <span>Designed with Gemini</span>
+        </div>
+    </div>
+
+    <div class="swiss-card border-thick p-8">
+        
+        <div class="flex justify-between items-end mb-6 border-bottom-thick pb-4">
+            <h1 class="font-header text-7xl leading-none">DECLINE<br>TACTICS</h1>
+            <span class="text-8xl font-serif-heavy">02</span>
+        </div>
+
+        <div class="grid grid-cols-2 grid-rows-3 gap-6 h-[85%]">
+            
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden group">
+                <i class="fa-brands fa-apple absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">苹果转向</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    苹果放弃了 OpenAI 的独家合作权，转而寻求将谷歌 Gemini 整合进 Siri。这标志着 OpenAI 失去了科技巨头中最具分量的背书，曾经“非你不可”的市场地位已成历史，这一损失不仅是商业上的，更是象征性的重创。
+                </p>
+            </div>
+
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden">
+                <i class="fa-solid fa-tags absolute -bottom-4 -right-4 text-[9rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">价格血战</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    大模型正在迅速商品化。DeepSeek 发动的价格战迫使 OpenAI 大幅降价，这一举动证明了 LLM 不再是稀缺资源。当单位 Token 成本下降百倍，单纯靠 API 售卖的利润空间被无限压缩，技术优势不再能转化为定价权。
+                </p>
+            </div>
+
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden">
+                <i class="fa-solid fa-microchip absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">算力瓶颈</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    GPT-5 曾被寄予厚望，但最终发布延迟且表现平庸，未能带来预期的“神迹”。这验证了 Scaling Law（规模法则）可能已触及边际效益递减的天花板，单纯堆砌算力不再能带来质的飞跃，技术停滞是当前最大的隐忧。
+                </p>
+            </div>
+
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden">
+                <i class="fa-solid fa-user-secret absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">信任透支</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    从马斯克的诉讼到投资者的质疑，奥特曼的公众信誉正在被“循环融资”和含糊其辞的 AGI 承诺所透支。面对 Brad Gerstner 关于盈利模式的质询，其防御性的空洞回应暴露了商业模式的脆弱，被戏称为“Scam Altman”。
+                </p>
+            </div>
+
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden">
+                <i class="fa-solid fa-crosshairs absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">竞品围剿</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    Anthropic 正在抢夺原本属于 OpenAI 的企业级客户午餐，其产品的安全性与稳定性更受 B 端青睐。同时，xAI 及各类中国公司紧随其后，市场格局从“一超”演变为“多强”，OpenAI 的市场份额正在被多方迅速蚕食。
+                </p>
+            </div>
+
+            <div class="relative flex flex-col border border-black p-4 overflow-hidden">
+                <i class="fa-solid fa-soap absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08] text-black"></i>
+                <h3 class="text-3xl font-header mb-3 z-10">泡沫阴影</h3>
+                <p class="font-serif-bold text-xl leading-snug text-justify-strict z-10 flex-grow">
+                    至今仍未盈利，却依赖政府救助传闻和色情内容解禁来维持热度。这种“WeWork 式”的运营特征——高估值、低造血能力、过度依赖 CEO 个人 IP——让市场开始重新审视：这位曾经的“硅谷之王”是否真的具备驾驭未来的能力。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-2 w-full left-0 px-8 flex justify-between text-xs font-bold uppercase tracking-widest border-t border-black pt-2">
+            <span>Source: Gary Marcus</span>
+            <span>2026.01.13</span>
+            <span>Designed with Gemini</span>
+        </div>
+    </div>
+
+</body>
+</html>

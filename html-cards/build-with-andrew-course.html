@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .serif-text {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .sans-text {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .display-font {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex gap-10 transform scale-[0.45] md:scale-[0.6] lg:scale-[0.8] xl:scale-100 origin-top">
+        
+        <div class="swiss-card border-[4px] border-[#1A1918] flex flex-col p-8">
+            
+            <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-[#1A1918] relative group">
+                <div class="absolute top-0 left-0 text-lg font-bold tracking-widest uppercase">DeepLearning.AI</div>
+                <div class="absolute top-0 right-0 text-lg font-bold tracking-widest uppercase">Andrew Ng</div>
+                
+                <h1 class="text-[130px] leading-[0.85] font-black tracking-tighter serif-bold-text mt-4">
+                    Build with Andrew
+                </h1>
+                <p class="text-3xl font-bold mt-4 tracking-wide text-right uppercase display-font">Zero Code Revolution</p>
+            </div>
+
+            <div class="h-[50%] grid grid-cols-2 border-b-[4px] border-[#1A1918]">
+                
+                <div class="border-r-[4px] border-[#1A1918] p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="text-6xl font-black block mb-4 opacity-20">01</span>
+                        <h2 class="text-5xl font-black mb-6 sans-text">技术祛魅</h2>
+                        <p class="text-3xl font-bold leading-snug text-justify serif-text">
+                            长期以来，软件开发被复杂的语法与工具链构筑的高墙所封锁。现在的核心范式正在发生剧烈断裂：从“手动编写代码”转向“纯粹意图描述”。理解算法不再是前置条件，清晰的逻辑表达才是。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between">
+                    <div>
+                        <span class="text-6xl font-black block mb-4 opacity-20">02</span>
+                        <h2 class="text-5xl font-black mb-6 sans-text">对话构建</h2>
+                        <p class="text-3xl font-bold leading-snug text-justify serif-text">
+                            这不仅是效率提升，更是身份的重构。开发过程演变为一场连续的对话——你给出草稿，AI 进行修订。试错成本被无限压缩，每个人都能从被动的“使用者”进化为主动的“建造者”。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-[20%] flex items-center justify-center p-6 text-center">
+                <blockquote class="text-4xl font-black leading-normal serif-text">
+                    “技术把路让出来了。<br>接下来要走哪一步，完全取决于人本身。”
+                </blockquote>
+            </div>
+
+            <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-bold uppercase tracking-widest opacity-60">
+                <span>Source: DeepLearning.AI</span>
+                <span>Designed with AI</span>
+                <span>2026.01.07</span>
+            </div>
+
+        </div>
+
+        <div class="swiss-card border-[4px] border-[#1A1918] flex flex-col p-8">
+            
+            <div class="flex justify-between items-end border-b-[4px] border-[#1A1918] pb-6 mb-8">
+                <div>
+                    <h1 class="text-6xl font-black sans-text leading-none">实操法则</h1>
+                    <p class="text-2xl font-bold serif-text mt-2">VIBE CODING TACTICS</p>
+                </div>
+                <span class="text-8xl font-black opacity-20">02</span>
+            </div>
+
+            <div class="flex-grow grid grid-cols-2 gap-x-8 gap-y-6">
+                
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">意图优先</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        在新范式下，创建应用的第一步不再是配置环境，而是用自然语言说明需求。只要能描述“做一个输入姓名生成祝福的网页”，系统就能补齐所有技术细节，让想法瞬间落地。
+                    </p>
+                    <i class="fa-solid fa-lightbulb absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">草稿思维</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        开发不再是一次性提交的考试，而是不断修订的草稿。先做出一个粗糙的可运行版本，然后通过“界面再美观一点”、“布局像卡片一样”等指令，逐步逼近理想状态。
+                    </p>
+                    <i class="fa-solid fa-pencil absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">结构指令</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        虽然不必完美，但清晰度至关重要。将需求拆解为五个维度：核心目标、用户输入、界面布局、特殊功能、输出形态。信息颗粒度越细，AI生成的软件结果就越可控。
+                    </p>
+                    <i class="fa-solid fa-list-check absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">自然调试</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        告别阅读复杂的错误日志。按钮没反应？直接告诉系统：“点击后没有任何结果”。只要能准确描述现象，AI就能理解逻辑漏洞并完成代码修复，调试变成了人类语言的交流。
+                    </p>
+                    <i class="fa-solid fa-bug-slash absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">不确定性</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        同样的指令每次生成的结果可能略有差异，这种不确定性并非缺陷，而是AI创造性的体现。人类的角色从执行者转变为筛选者和引导者，在变异中寻找最优解。
+                    </p>
+                    <i class="fa-solid fa-dice absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+                <div class="relative flex flex-col border-b-[2px] border-[#1A1918] pb-4">
+                    <h3 class="text-3xl font-black mb-3 sans-text">身份进化</h3>
+                    <p class="text-2xl font-semibold leading-snug text-justify serif-text flex-grow">
+                        “构建者”不再是少数人的职业标签。只要能提出正确的问题并判断结果，你就具备了构建工具的能力。但要避免停在直觉层，持续学习与动手实践结合，才能形成真正能力。
+                    </p>
+                    <i class="fa-solid fa-user-astronaut absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                </div>
+
+            </div>
+
+             <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-bold uppercase tracking-widest opacity-60">
+                <span>Source: DeepLearning.AI</span>
+                <span>Designed with AI</span>
+                <span>2026.01.07</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

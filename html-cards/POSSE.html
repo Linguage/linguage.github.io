@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards - POSSE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;900&family=Noto+Serif+SC:wght@600;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#F5F2EB',
+                        dark: '#1A1918',
+                        watermark: '#2C2C2C',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    },
+                    fontSize: {
+                        '10xl': '10rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for clean preview */
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center p-8 overflow-x-auto">
+
+    <div class="flex gap-8 scale-[0.85] transform-origin-center">
+
+        <div class="w-[900px] h-[1200px] bg-bg border-[3px] border-dark p-8 flex flex-col relative shrink-0">
+            
+            <div class="h-[30%] flex flex-col justify-center border-b-[3px] border-dark relative">
+                <div class="absolute top-0 right-0 font-sans font-black text-2xl tracking-widest">NO.01</div>
+                <h1 class="font-display font-black text-[160px] leading-[0.8] text-dark tracking-tighter mt-4">
+                    POSSE
+                </h1>
+                <p class="font-serif font-bold text-3xl mt-6 text-right w-full tracking-widest">
+                    INDIEWEB ARCHITECTURE
+                </p>
+            </div>
+
+            <div class="h-[45%] grid grid-cols-2 border-b-[3px] border-dark">
+                
+                <div class="border-r-[3px] border-dark p-6 flex flex-col justify-between">
+                    <h2 class="font-sans font-black text-6xl text-dark mb-4">
+                        数字<br>主权
+                    </h2>
+                    <p class="font-serif font-bold text-3xl leading-snug text-justify">
+                        拒绝被算法推荐与平台霸王条款绑架。POSSE 确保你拥有内容的原始链条与分发权。当第三方服务宕机或变质时，你的数据资产依然完好无损。
+                    </p>
+                    <div class="font-display text-8xl opacity-10 self-end">01</div>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between">
+                    <h2 class="font-sans font-black text-6xl text-dark mb-4">
+                        流量<br>归巢
+                    </h2>
+                    <p class="font-serif font-bold text-3xl leading-snug text-justify">
+                        让社交媒体回归“传播渠道”本质，而非终点。所有外部副本如同卫星，通过规范化链接，最终将注意力、评论与数据引力导回个人域名的核心。
+                    </p>
+                    <div class="font-display text-8xl opacity-10 self-end">02</div>
+                </div>
+            </div>
+
+            <div class="flex-grow flex items-center justify-center p-8 text-center">
+                <blockquote class="font-serif font-bold text-5xl leading-tight text-dark">
+                    “不做数字佃农，在自己的土地上耕种，<br>让副本去别人的领地里流浪。”
+                </blockquote>
+            </div>
+
+            <div class="absolute bottom-2 left-8 right-8 flex justify-between text-sm font-sans font-bold border-t border-dark pt-2">
+                <span>SOURCE: IndieWeb.org / Hacker News</span>
+                <span>DESIGNED WITH AI</span>
+                <span>JAN 03, 2026</span>
+            </div>
+        </div>
+
+
+        <div class="w-[900px] h-[1200px] bg-bg border-[3px] border-dark p-8 flex flex-col relative shrink-0">
+            
+            <div class="h-[12%] flex justify-between items-end border-b-[3px] border-dark pb-4 mb-6">
+                <div>
+                    <h1 class="font-display font-black text-7xl leading-none">TACTICS</h1>
+                    <p class="font-sans font-black text-xl tracking-[0.5em] mt-2">IMPLEMENTATION GUIDE</p>
+                </div>
+                <div class="font-display font-black text-8xl leading-none">02</div>
+            </div>
+
+            <div class="flex-grow grid grid-cols-2 gap-6 pb-12">
+
+                <div class="relative border-b-2 border-r-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">策略定义</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        POSSE 即“自有发布，它处同步”。确立个人网站为唯一信源，将内容副本分发至社交平台。这是一种反直觉的“去中心化”手段，用最原始的方式对抗围墙花园。
+                    </p>
+                    <i class="fa-solid fa-anchor absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+                <div class="relative border-b-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">掌控权</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        规避第三方平台的风险。拥有规范化的永久链接 (Permalink)，即使社交平台倒闭或封号，你的内容依然存在。你是房东，而非借宿的租客。
+                    </p>
+                    <i class="fa-solid fa-key absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+                <div class="relative border-b-2 border-r-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">搜索权重</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        同步副本必须包含指向原帖的链接。这不仅能让搜索引擎识别原创出处提升 SEO 权重，更能防止恶意爬虫将流量截流，将外部引用转化为反向背书。
+                    </p>
+                    <i class="fa-brands fa-google absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+                <div class="relative border-b-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">自动化</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        理想流程是“发布即忘”。通过 Bridgy、IFTTT 或 CMS 插件，在按下发布键的瞬间，自动触发 Webhook 将内容清洗并推送到 Twitter、Mastodon 或 LinkedIn。
+                    </p>
+                    <i class="fa-solid fa-robot absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+                <div class="relative border-b-2 border-r-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">模式对比</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        优于 PESOS（先发外网再存回），因为数据源头在你手中；优于 COPE（一处创作多处发布），因为 POSSE 强调“家”的概念，防止受众被稀释在不同平台。
+                    </p>
+                    <i class="fa-solid fa-scale-balanced absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+                <div class="relative border-b-2 border-dark/20 p-4 flex flex-col">
+                    <h3 class="font-sans font-black text-4xl mb-3">闭环管理</h3>
+                    <p class="font-serif font-semibold text-[26px] leading-snug text-justify flex-grow">
+                        并不止步于发布。高阶 POSSE 包含“回拉”机制，将社交平台上的点赞与评论抓取回个人博客展示（Webmention），并在删除或更新时保持全网同步。
+                    </p>
+                    <i class="fa-solid fa-rotate absolute bottom-[-10px] right-[-10px] text-9xl text-watermark opacity-[0.08]"></i>
+                </div>
+
+            </div>
+
+            <div class="absolute bottom-2 left-8 right-8 flex justify-between text-sm font-sans font-bold border-t border-dark pt-2">
+                <span>SOURCE: IndieWeb.org / Hacker News</span>
+                <span>DESIGNED WITH AI</span>
+                <span>JAN 03, 2026</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

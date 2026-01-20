@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Infographic - Social Math</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink: #1A1918;
+        }
+        body {
+            background-color: #333; /* Dark background to make cards pop */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink);
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Grid lines strategy using borders */
+        .border-ink { border-color: var(--ink); }
+        
+        /* Text Justification refinement */
+        .text-justify-strict {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="flex flex-wrap gap-12">
+
+    <div class="card border-[4px] border-ink p-8 flex flex-col justify-between">
+        
+        <div class="h-[30%] flex flex-col justify-center items-center border-b-[4px] border-ink relative">
+            <div class="absolute top-0 left-0 text-sm font-sans-sc font-black tracking-widest uppercase">Quanta Magazine</div>
+            <div class="absolute top-0 right-0 text-sm font-sans-sc font-black tracking-widest uppercase">Joseph Howlett</div>
+            
+            <h1 class="font-sans-black font-bold text-[8rem] leading-[0.85] tracking-tighter text-center uppercase">
+                数学与社交
+            </h1>
+            <p class="font-serif-sc font-bold text-2xl mt-4 tracking-widest text-center"><br>数学发现：灵感与咖啡的奇妙化学反应</p>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 divide-x-[4px] divide-ink">
+            
+            <div class="p-8 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-sans-sc font-black text-6xl mb-6">01<br>拒绝<br>独行</h2>
+                    <p class="font-serif-sc font-bold text-3xl leading-snug text-justify-strict">
+                        摒弃孤独天才喊出“Eureka”的陈旧想象。真正的数学突破，往往诞生于思想的激烈碰撞、走廊的偶然相遇，以及每一杯咖啡留下的余香中。
+                    </p>
+                </div>
+                <div class="font-sans-sc font-black text-lg uppercase tracking-widest opacity-60">The Myth of Solitude</div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-sans-sc font-black text-6xl mb-6">02<br>物理<br>连接</h2>
+                    <p class="font-serif-sc font-bold text-3xl leading-snug text-justify-strict">
+                        Zoom和AI永远无法替代面对面的化学反应。那些解决七年僵局的关键线索，往往隐藏在午餐水饺的传递或茶歇闲谈的非正式时刻里。
+                    </p>
+                </div>
+                <div class="font-sans-sc font-black text-lg uppercase tracking-widest opacity-60">Proof of Presence</div>
+            </div>
+
+        </div>
+
+        <div class="h-[20%] border-t-[4px] border-ink flex items-center justify-center p-6 relative">
+            <i class="fa-solid fa-quote-left absolute top-4 left-4 text-4xl opacity-20"></i>
+            <p class="font-serif-sc font-bold text-4xl text-center leading-normal max-w-4xl">
+                “数学家是将咖啡转化为定理的装置。”<br>
+                <span class="text-2xl mt-2 block font-sans-sc font-black opacity-70">— Alfréd Rényi</span>
+            </p>
+            <i class="fa-solid fa-quote-right absolute bottom-4 right-4 text-4xl opacity-20"></i>
+        </div>
+
+        <div class="absolute bottom-1 left-0 w-full flex justify-between px-2 text-[10px] font-sans-sc font-bold uppercase tracking-widest opacity-50">
+            <span>Source: Quanta Magazine</span>
+            <span>Date: 2026.01.07</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+    <div class="card border-[4px] border-ink p-0 flex flex-col">
+        
+        <div class="h-[8%] border-b-[4px] border-ink flex justify-between items-center px-8 bg-transparent">
+            <span class="font-display text-4xl">The Tactics</span>
+            <span class="font-sans-sc font-black text-2xl tracking-[0.5em]">SOCIAL ENGINE</span>
+            <span class="font-sans-sc font-black text-4xl">02</span>
+        </div>
+
+        <div class="h-[92%] grid grid-cols-2 grid-rows-3 divide-x-[4px] divide-y-[4px] divide-ink">
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-tree absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">黑森林法则</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    德国 Oberwolfach 研究所是数学界的朝圣地。这里刻意限制 Wi-Fi 信号，强制学者进行集体共餐。这种在黑森林中的“隔离”，迫使数学家们脱离数字干扰，在极度纯粹的环境中进行高强度的思想交融与碰撞。
+                </p>
+            </div>
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-mug-hot absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">咖啡定理</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    阿尔弗雷德·雷尼的名言绝非玩笑。从咖啡因带来的生理刺激，到排队买咖啡时促成的非正式谈话，这种黑色液体是现代数学史上无数关键转折点的幕后推手，它让思维活跃，让交流自然发生。
+                </p>
+            </div>
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-comments absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">意外突破</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    数学家凯瑟琳·曼恩本无意开启新课题，却因与托马斯·巴特尔梅的一杯偶遇咖啡，意外点燃了思维火花。这场不在计划内的对话，最终推动了关于 Anosov 流动力系统的重大描述工作，证明了随机社交的价值。
+                </p>
+            </div>
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-phone-volume absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">接力传递</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    帕加诺和科伊曼斯在一个问题上陷入了七年僵局。转机出现在多伦多的一顿水饺午餐中，帕斯滕将多年前未发表的一个关键发现像“电话游戏”一样传递给了他们，瞬间打通了证明路径。
+                </p>
+            </div>
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-video-slash absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">反虚拟化</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    帕斯滕直言：“Zoom 会议给不了你这些。”寻找下一个突破口的技巧，往往需要真实的午餐和面对面的温度。屏幕阻隔了细微的表情和非正式的试探，而这些正是灵感诞生的温床。
+                </p>
+            </div>
+
+            <div class="relative p-6 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-infinity absolute -bottom-4 -right-4 text-[10rem] opacity-[0.08]"></i>
+                <h3 class="font-sans-sc font-black text-4xl mb-2">拓扑玩笑</h3>
+                <p class="font-serif-sc font-bold text-[1.6rem] leading-snug text-justify-strict flex-grow">
+                    在拓扑学中，咖啡杯与甜甜圈是同构的。3Blue1Brown 曾给竞争对手寄出定制咖啡杯，附带不可解的拓扑难题。这证明了数学社区不仅有严谨的证明，更有基于实物互动的幽默与深厚文化。
+                </p>
+            </div>
+
+        </div>
+        
+         <div class="absolute bottom-1 left-0 w-full flex justify-between px-8 text-[10px] font-sans-sc font-bold uppercase tracking-widest opacity-50 pointer-events-none">
+            <span>Source: Quanta Magazine</span>
+            <span>Date: 2026.01.07</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+</body>
+</html>

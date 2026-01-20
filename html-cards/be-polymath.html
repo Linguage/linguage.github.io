@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Polymath Swiss Style Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F5F2EB',
+                        ink: '#1A1918',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities for Print-like precision */
+        .border-ink { border-color: #1A1918; }
+        .text-ink { color: #1A1918; }
+        .bg-paper { background-color: #F5F2EB; }
+        
+        /* Typography Tweaks */
+        .font-black-cn { font-weight: 900; }
+        .leading-tight-custom { line-height: 1.1; }
+        .text-justify-last-left { text-align: justify; text-align-last: left; }
+    </style>
+</head>
+<body class="bg-gray-200 p-10 flex justify-center items-start gap-10 min-h-screen overflow-x-auto">
+
+    <div class="relative w-[900px] h-[1200px] bg-paper border-[4px] border-ink flex flex-col shrink-0 p-8 overflow-hidden box-border">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink relative">
+            <div class="absolute top-0 left-0 text-lg font-sans font-bold tracking-widest uppercase">The Methodology</div>
+            <div class="absolute top-0 right-0 text-lg font-sans font-bold tracking-widest uppercase">By D4rsh</div>
+            
+            <h1 class="text-[140px] leading-[0.85] font-serif font-black-cn text-ink uppercase tracking-tighter text-center mt-4">
+                成为通才<br>
+                <span class="text-[60px] tracking-normal block mt-2 font-sans font-black-cn"><br>BE A POLYMATHY</span>
+            </h1>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-b-[4px] border-ink">
+            
+            <div class="border-r-[4px] border-ink p-8 flex flex-col justify-between">
+                <div>
+                    <span class="block text-6xl mb-4 text-ink"><i class="fa-solid fa-link-slash"></i></span>
+                    <h2 class="text-5xl font-sans font-black-cn text-ink mb-6">专精陷阱</h2>
+                </div>
+                <p class="text-3xl font-serif font-bold leading-tight text-ink text-justify">
+                    传统教育强推单一赛道，导致视野狭窄与隧道效应。在学术体系崩塌与AI崛起的时代，仅精通一门技艺已不足以应对复杂的跨学科挑战。过度专业化是思维的牢笼。
+                </p>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between">
+                <div>
+                    <span class="block text-6xl mb-4 text-ink"><i class="fa-solid fa-layer-group"></i></span>
+                    <h2 class="text-5xl font-sans font-black-cn text-ink mb-6">深度通识</h2>
+                </div>
+                <p class="text-3xl font-serif font-bold leading-tight text-ink text-justify">
+                    通才并非浅尝辄止的杂学家，而是在多个垂直领域达到精通。利用现代工具打破学科壁垒，将不同领域的知识融合，实现跨界降维打击。深度与广度并非对立，而是共生。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[20%] flex items-center justify-center p-6 text-center">
+            <p class="text-4xl font-serif font-black-cn leading-snug italic w-[90%]">
+                “这一过程并非为了抵达某个终点，而是要在跨越学科边界的征途中，通过无尽的好奇心重塑自我。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-0 w-full flex justify-between px-8 text-sm font-sans font-bold border-t border-ink pt-2">
+            <span>SOURCE: D4RSH_TW</span>
+            <span>DESIGNED WITH AI</span>
+            <span>2026.01.11</span>
+        </div>
+    </div>
+
+
+    <div class="relative w-[900px] h-[1200px] bg-paper border-[4px] border-ink flex flex-col shrink-0 p-8 overflow-hidden box-border">
+        
+        <div class="h-[100px] flex justify-between items-end border-b-[4px] border-ink pb-4 mb-6">
+            <h1 class="text-7xl font-sans font-black-cn text-ink">TACTICS</h1>
+            <span class="text-7xl font-serif font-black-cn text-ink">02</span>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2 grid-rows-3 gap-6">
+            
+            <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-brain absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">极度空杯</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    摒弃天赋论，拥抱成长型思维。时刻保持学徒心态，警惕“达克效应”带来的虚假自信。越是深入学习，越应感知未知的浩瀚，主动放下ego，将自己永远置于学习者的位置。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-cogs absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">系统制胜</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    宏大的目标往往导致瘫痪，唯有可执行的微习惯系统才能长存。用持续的行动替代空想，建立自动化的行为模式。一致性优于复杂计划，让复利效应在时间中爆发。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-heart-pulse absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">生理基石</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    智力活动建立在充沛的体能之上。无论是达芬奇还是现代通才，都需要严格的饮食、睡眠与锻炼纪律。身心健康不是可选项，而是支撑高强度认知运作的核燃料。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-eye absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">绝对聚焦</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    对抗数字时代的碎片化诅咒。在深度学习时切断一切干扰，拒绝 Doom Scrolling。利用番茄工作法或心流状态，保护多巴胺受体，夺回注意力的绝对控制权。
+                </p>
+            </div>
+
+             <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-stairs absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">学习阶梯</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    从单纯的“记忆”进化到“诠释”，最终达到“应用”与“创造”。真正的精通不在于背诵，而在于能用自己的语言重构知识，并解决现实世界的复杂问题。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col h-full bg-paper z-10">
+                <i class="fa-solid fa-mountain absolute bottom-[-10px] right-[-10px] text-[150px] text-ink opacity-[0.08] z-0"></i>
+                <h3 class="text-4xl font-sans font-black-cn mb-3 relative z-10 border-b-2 border-ink pb-2 inline-block w-full">突破平台</h3>
+                <p class="text-[25px] font-serif font-bold leading-snug text-justify relative z-10 flex-grow pt-2">
+                    绝大多数人倒在看似停滞的“平台期”，但这正是神经重塑的关键时刻。不要因为缺乏即时反馈而放弃，学会在枯燥的刻意练习中寻找乐趣，直到质变发生。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="w-full flex justify-between px-0 text-sm font-sans font-bold border-t border-ink pt-4 mt-6">
+            <span>SOURCE: D4RSH_TW</span>
+            <span>NO. 0002</span>
+            <span>2026.01.11</span>
+        </div>
+    </div>
+
+</body>
+</html>

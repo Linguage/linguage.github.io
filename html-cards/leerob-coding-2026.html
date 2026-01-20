@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineering Era Visual Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F5F2EB',
+                        ink: '#1A1918',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-container {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Massive Typography Strategy */
+        .title-massive {
+            line-height: 0.8;
+            letter-spacing: -0.05em;
+        }
+        .text-justify-fix {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+        .watermark-icon {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            opacity: 0.08;
+            font-size: 10rem;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex justify-center items-center min-h-screen p-8 gap-8 overflow-x-auto">
+
+    <div class="card-container flex flex-col justify-between p-8 border-[4px] border-ink box-border">
+        
+        <div class="h-[32%] flex flex-col justify-center border-b-[4px] border-ink pb-4 relative">
+            <div class="flex items-end justify-between mb-4">
+                <span class="font-display font-black text-3xl tracking-widest uppercase">Concept_01</span>
+                <span class="font-serif font-bold text-2xl">LEE ROBINSON</span>
+            </div>
+            <h1 class="title-massive font-sans font-black text-[130px] uppercase break-words leading-none">
+                AI 编程<br>
+                <span class="font-serif italic text-[110px] opacity-90">REVOLUTION</span>
+            </h1>
+        </div>
+
+        <div class="h-[53%] grid grid-cols-2 relative border-b-[4px] border-ink">
+            <div class="absolute left-1/2 top-0 bottom-0 w-[4px] bg-ink -ml-[2px]"></div>
+
+            <div class="p-6 pr-8 flex flex-col justify-center h-full">
+                <h2 class="font-sans font-black text-5xl mb-6">代码<br>廉价</h2>
+                <p class="font-serif font-bold text-3xl leading-snug text-justify-fix">
+                    手写代码不再是瓶颈。在2026年，AI代理能完成绝大多数编程任务，构建成本趋近于零。若你只关注“实现功能”，你的价值正在迅速蒸发。
+                </p>
+                <div class="mt-6 font-mono text-xl border border-ink w-max px-3 py-1 bg-ink text-paper">STATUS: FREE</div>
+            </div>
+
+            <div class="p-6 pl-8 flex flex-col justify-center h-full">
+                <div class="text-right flex flex-col items-end"> 
+                    <h2 class="font-sans font-black text-5xl mb-6">品味<br>至上</h2>
+                    <p class="font-serif font-bold text-3xl leading-snug text-justify-fix dir-rtl">
+                        当技术壁垒坍塌，核心竞争力转移至“产品品味”。如何设计、如何销售、如何让用户喜爱——这才是“产品工程师”真正的护城河。
+                    </p>
+                    <div class="mt-6 font-mono text-xl border border-ink w-max px-3 py-1">VALUE: HIGH</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-4">
+            <p class="font-serif font-black text-3xl text-center leading-tight w-full px-4">
+                “代码只是工具，从未是终点。<br>现在的关键不在于‘怎么写’，而在于‘造什么’。”
+            </p>
+        </div>
+
+    </div>
+
+    <div class="card-container flex flex-col p-8 border-[1px] border-ink relative">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-4 mb-6 shrink-0">
+            <div>
+                <h1 class="font-display font-black text-7xl tracking-tighter">TACTICS</h1>
+                <p class="font-sans font-bold text-2xl mt-2 uppercase tracking-widest">Strategies for the AI Era</p>
+            </div>
+            <div class="font-display font-black text-9xl leading-[0.7]">02</div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 flex-grow">
+            
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-robot watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">01</span>
+                    <h3 class="font-sans font-black text-4xl">拥抱代理</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    不要迟疑，立即熟练掌握 Cursor 或 Claude Code。这不仅是工具升级，更是生存之战。熟练运用 AI 代理的工程师，将与那些犹豫不决者拉开巨大的能力鸿沟。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-ban watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">02</span>
+                    <h3 class="font-sans font-black text-4xl">拒绝苦力</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    将样板代码、调试报错、配置文件（JSON/Shell）等枯燥工作全部外包给 AI。把宝贵的脑力从“重复劳动”中解放出来，专注于架构设计与核心逻辑。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-palette watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">03</span>
+                    <h3 class="font-sans font-black text-4xl">磨练品味</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    当代码变得廉价，决定胜负的是“产品感”。它看起来如何？用起来是否顺滑？你需要从单纯的 Coder 进化为拥有敏锐直觉与极致审美的创造者。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-users-gear watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">04</span>
+                    <h3 class="font-sans font-black text-4xl">全栈进化</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    不要只做螺丝钉。去构建完整产品，去学习市场推广，去直接获取用户。利用 AI 赋予的超级生产力，成为能独立闭环的“产品工程师”。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-graduation-cap watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">05</span>
+                    <h3 class="font-sans font-black text-4xl">主动提问</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    别让 AI 只给代码，让它教你原理。要求它生成“迷你课程”，解释底层逻辑。把 AI 当作 24 小时在线的私人导师，快速填补知识盲区，而非单纯依赖。
+                </p>
+            </div>
+
+            <div class="border-[2px] border-ink p-6 relative flex flex-col overflow-hidden bg-transparent group">
+                <i class="fa-solid fa-brain watermark-icon group-hover:opacity-20 transition-opacity"></i>
+                <div class="flex items-baseline gap-3 mb-3 z-10">
+                    <span class="font-mono font-bold text-3xl bg-ink text-paper px-2">06</span>
+                    <h3 class="font-sans font-black text-4xl">思维主权</h3>
+                </div>
+                <p class="font-serif font-bold text-2xl leading-normal text-justify-fix z-10 mt-auto">
+                    警惕被 LLM 产生的“懂了”的错觉欺骗。不要外包你的思考能力，用 AI 增强智慧，而非替代大脑。在高速生成的代码洪流中，保持清醒的判断力。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-6 pt-4 border-t-[1px] border-ink flex justify-between text-ink text-sm font-sans font-bold uppercase tracking-wider">
+            <span>Source: Lee Robinson / YouTube</span>
+            <span>2026.01.03</span>
+            <span>Designed with AI</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Financial Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1A1918;
+            --paper: #F5F2EB;
+        }
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card-container {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--paper);
+            color: var(--ink);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .serif-black {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+        }
+        .serif-bold {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        .display-black {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+        }
+        .sans-black {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+        }
+        /* Tight leading for dense look */
+        .dense-text {
+            line-height: 1.15;
+            text-align: justify;
+        }
+        .border-ink {
+            border-color: var(--ink);
+        }
+    </style>
+</head>
+<body class="gap-12 flex-row flex-wrap">
+
+    <div class="card-container border-[3px] border-ink p-8">
+        
+        <div class="h-[30%] flex flex-col justify-center items-center border-b-[3px] border-ink relative">
+            <div class="absolute top-0 left-0 text-lg font-bold tracking-widest uppercase">The Philosophy</div>
+            <div class="absolute top-0 right-0 text-lg font-bold tracking-widest uppercase">Case Study: S. Goel</div>
+            
+            <h1 class="display-black text-[140px] leading-[0.8] tracking-tighter text-center">
+                纯文本<br>记账十年
+            </h1>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-b-[3px] border-ink">
+            
+            <div class="border-r-[3px] border-ink p-8 flex flex-col justify-between">
+                <div class="w-16 h-2 bg-black mb-4"></div>
+                <div>
+                    <h2 class="sans-black text-6xl mb-6 tracking-tighter">数据主权</h2>
+                    <p class="serif-bold text-3xl leading-snug text-justify">
+                        拒绝将财务隐私托管于不可控的云端。通过 Git 版本控制与本地存储，确保每一比特数据都绝对属于自己，实现对个人财富历史的完全掌控。
+                    </p>
+                </div>
+                <div class="text-6xl self-end opacity-20"><i class="fa-solid fa-lock"></i></div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between">
+                <div class="w-16 h-2 bg-black mb-4"></div>
+                <div>
+                    <h2 class="sans-black text-6xl mb-6 tracking-tighter">复式哲学</h2>
+                    <p class="serif-bold text-3xl leading-snug text-justify">
+                        借贷必相等的严谨会计准则。利用 Python 自动化脚本清洗数据，构建 Beancount 生态，将混乱的消费流水转化为精准的长期财务真相。
+                    </p>
+                </div>
+                <div class="text-6xl self-end opacity-20"><i class="fa-solid fa-scale-balanced"></i></div>
+            </div>
+        </div>
+
+        <div class="h-[20%] flex items-center justify-center p-6 bg-transparent">
+            <blockquote class="serif-black text-4xl text-center leading-normal max-w-4xl">
+                “纯文本比任何特定应用程序或云服务存续更久，<br>这是对抗时间流逝的最强力量。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-mono uppercase tracking-widest border-t border-ink pt-2">
+            <span>Source: sgoel.dev</span>
+            <span>Designed with AI</span>
+            <span>2026.01.03</span>
+        </div>
+    </div>
+
+    <div class="card-container border-[3px] border-ink p-8">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-4 mb-6">
+            <h1 class="display-black text-7xl leading-none">TACTICS</h1>
+            <div class="flex flex-col text-right">
+                <span class="sans-black text-2xl">PLAIN TEXT FILES</span>
+                <span class="serif-bold text-4xl">PAGE 02</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-6 gap-y-6 flex-grow">
+            
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">数据规模</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    十年积累，45,000 行纯文本代码，分布于 16 个文件中。涵盖 1,086 个虚拟账户与 10,000 笔精准交易。这不仅仅是数字，更是生活资源配置的宏观地图。
+                </p>
+                <i class="fa-solid fa-database absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">仪式流程</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    每月固定的财务净化仪式：下载 CSV、运行 Python 转换器、追加数据、平衡账目。将原本耗时的整理工作压缩至 45 分钟，用严谨流程对抗混乱熵增。
+                </p>
+                <i class="fa-solid fa-list-check absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">脚本定制</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    由于居住在德国，作者亲自编写 Python 库适配 DKB、ING 等银行接口。填补了 Beancount 框架与现实银行数据格式之间的鸿沟，实现从原始数据到账本的无缝桥接。
+                </p>
+                <i class="fa-solid fa-code absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">凭证锚点</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    账本中直接关联了 507 份 PDF 原始凭证。通过简单的元数据链接，将抽象的记账条目与真实的消费发票物理绑定，为税务申报提供秒级检索能力。
+                </p>
+                <i class="fa-solid fa-file-invoice absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">年度归档</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    保持主文件轻量化的关键策略。每年年初将过往交易移入年份专属文件（如 2020.beancount），通过 Include 语法引用，既保留历史全貌又确保当前工作区整洁。
+                </p>
+                <i class="fa-solid fa-box-archive absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-2 border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="sans-black text-3xl mb-3 border-b-2 border-ink pb-2 inline-block w-full">长期主义</h3>
+                <p class="serif-bold text-[1.6rem] leading-snug text-justify flex-grow">
+                    系统随生活演进。从 2016 年的 715 个记账项增长至 2023 年的 2,651 个。纯文本的低熵特性使其能够跨越十年周期，成为最经得起时间考验的个人数据库。
+                </p>
+                <i class="fa-solid fa-timeline absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between text-xs font-mono uppercase tracking-widest border-t border-ink pt-2 mt-4">
+            <span>Source: sgoel.dev</span>
+            <span>Designed with AI</span>
+            <span>2026.01.03</span>
+        </div>
+    </div>
+
+</body>
+</html>

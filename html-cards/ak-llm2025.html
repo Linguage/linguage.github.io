@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 LLM Year in Review - Swiss Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-paper': '#F5F2EB',
+                        'deep-ink': '#1A1918',
+                    },
+                    fontFamily: {
+                        'sans-sc': ['"Noto Sans SC"', 'sans-serif'],
+                        'serif-sc': ['"Noto Serif SC"', 'serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                    },
+                    spacing: {
+                        'card-w': '900px',
+                        'card-h': '1200px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        /* Heavy Wireframe Borders */
+        .border-thick {
+            border: 3px solid #1A1918;
+        }
+        .border-t-thick {
+            border-top: 3px solid #1A1918;
+        }
+        .border-b-thick {
+            border-bottom: 3px solid #1A1918;
+        }
+        .border-r-thick {
+            border-right: 3px solid #1A1918;
+        }
+        /* Typography Tweaks */
+        .text-ink {
+            color: #1A1918;
+        }
+        .text-justify-last {
+            text-align-last: left;
+        }
+        /* Watermark styling */
+        .watermark-icon {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 8rem;
+            color: #2C2C2C;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex flex-wrap gap-12 justify-center">
+
+        <div class="swiss-card flex flex-col p-10 border-thick">
+            
+            <div class="h-[30%] flex flex-col justify-center relative z-10">
+                <p class="text-xl font-bold tracking-widest mb-2 uppercase border-b-2 border-deep-ink w-fit pb-1">Annual Report</p>
+                <h1 class="text-8xl font-black font-sans-sc leading-[0.9] tracking-tighter mb-4 text-deep-ink uppercase">
+                    2025<br>LLM Review
+                </h1>
+                <p class="text-3xl font-serif-sc font-bold text-right mt-4 italic">— Andrej Karpathy</p>
+            </div>
+
+            <div class="h-[50%] grid grid-cols-2 border-t-thick border-b-thick border-deep-ink relative">
+                <div class="absolute left-1/2 top-0 bottom-0 w-[3px] bg-deep-ink -ml-[1.5px]"></div>
+
+                <div class="p-8 flex flex-col justify-between h-full pr-12">
+                    <div>
+                        <span class="text-6xl font-black text-deep-ink/20 absolute top-4 left-4">01</span>
+                        <h2 class="text-5xl font-black font-sans-sc mb-6 mt-8 leading-tight">幽灵<br>心智</h2>
+                        <p class="text-2xl font-serif-sc font-semibold leading-relaxed text-justify">
+                            从模仿人类到“召唤幽灵”。RLVR范式通过自动化验证奖励，催生出一种非人类的、锯齿状的机器智力。它们在特定领域是天才，在常识上却是困惑的孩童。
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-ghost text-6xl self-end mt-4 opacity-100"></i>
+                </div>
+
+                <div class="p-8 flex flex-col justify-between h-full pl-12">
+                    <div>
+                        <span class="text-6xl font-black text-deep-ink/20 absolute top-4 right-4">02</span>
+                        <h2 class="text-5xl font-black font-sans-sc mb-6 mt-8 leading-tight">代码<br>消融</h2>
+                        <p class="text-2xl font-serif-sc font-semibold leading-relaxed text-justify">
+                            “Vibe Coding”让编程民主化，代码变得极其廉价且短暂。AI不再只是云端服务，而是驻留在本地（Localhost）的数字生灵，彻底重构了人机交互的界面与本质。
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-terminal text-6xl self-end mt-4 opacity-100"></i>
+                </div>
+            </div>
+
+            <div class="h-[20%] flex items-center justify-center text-center p-6 bg-transparent">
+                <p class="text-3xl font-serif-sc font-bold leading-normal w-[90%]">
+                    “LLM 正在涌现为一种新型智力，它同时比预期的聪明得多，也愚蠢得多。我们甚至未能触及它们 10% 的潜力。”
+                </p>
+            </div>
+
+            <div class="absolute bottom-4 left-0 w-full px-10 flex justify-between text-sm font-bold uppercase tracking-widest border-t-2 border-deep-ink pt-2">
+                <span>Source: Karpathy.bearblog.dev</span>
+                <span>Designed with AI</span>
+                <span>JAN 04 2026</span>
+            </div>
+        </div>
+
+
+        <div class="swiss-card flex flex-col p-10 border-thick">
+            
+            <div class="flex justify-between items-end border-b-thick border-deep-ink pb-6 mb-8">
+                <div>
+                    <h1 class="text-6xl font-black font-sans-sc tracking-tight leading-none">关键范式</h1>
+                    <p class="text-xl font-bold mt-2">PARADIGM SHIFTS & TACTICS</p>
+                </div>
+                <div class="text-6xl font-black font-display">02</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-8 gap-y-8 flex-grow">
+                
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">推理强化</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">RLVR</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        2025年的核心训练范式。通过数学或代码等可验证领域的奖励机制，模型自发习得类似“推理”的策略。这不仅延长了训练时间，更开启了通过增加“思考时间”来换取智能的新 Scaling Law。
+                    </p>
+                    <i class="fa-solid fa-brain watermark-icon"></i>
+                </div>
+
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">锯齿智能</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">JAGGED</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        我们不是在培养动物，而是在召唤幽灵。LLM展现出极端的“锯齿状”能力分布：在某些领域是全知天才，在常识上却是困惑的小学生。不能再用生物进化的逻辑来审视这种完全不同的实体。
+                    </p>
+                    <i class="fa-solid fa-shapes watermark-icon"></i>
+                </div>
+
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">应用编排</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">CURSOR</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        Cursor揭示了新的LLM应用层厚度。它不仅是编辑器，更是复杂的上下文工程师和多模型调度中心。未来的应用将由LLM实验室提供“大学毕业生”，而应用层负责将其训练为特定领域的“职业专家”。
+                    </p>
+                    <i class="fa-solid fa-layer-group watermark-icon"></i>
+                </div>
+
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">本地驻留</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">CLAUDE</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        AI不再只是网页聊天框，而是栖息在你电脑里的“灵体”。Claude Code证明了本地化Agent的优越性：直接访问私有数据与环境，与开发者协同工作。这是通往AGI过程中最务实的交互形态。
+                    </p>
+                    <i class="fa-solid fa-laptop-code watermark-icon"></i>
+                </div>
+
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">直觉编程</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">VIBE</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        编程门槛彻底崩塌。代码变得免费、短暂且可丢弃。无论是专家还是普通人，仅凭自然语言（Vibe）即可构建软件。这不仅改变了软件生产方式，更将彻底重塑程序员的职业定义。
+                    </p>
+                    <i class="fa-solid fa-wand-magic-sparkles watermark-icon"></i>
+                </div>
+
+                <div class="relative flex flex-col h-full border-b-2 border-deep-ink pb-4">
+                    <div class="flex justify-between items-baseline mb-3">
+                        <h3 class="text-3xl font-black font-sans-sc">原生界面</h3>
+                        <span class="text-sm font-bold border border-deep-ink px-2 py-1">NANO</span>
+                    </div>
+                    <p class="text-xl font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        文本是计算机的语言，而非人类的首选。Gemini Nano展示了未来的方向：LLM应当以人类偏好的视觉、空间形式（图表、幻灯片、UI）进行输出。这是计算范式从命令行向图形界面进化的AI版本。
+                    </p>
+                    <i class="fa-solid fa-palette watermark-icon"></i>
+                </div>
+
+            </div>
+
+            <div class="absolute bottom-4 left-0 w-full px-10 flex justify-between text-sm font-bold uppercase tracking-widest border-t-2 border-deep-ink pt-2 mt-4">
+                <span>Source: Karpathy.bearblog.dev</span>
+                <span>Designed with AI</span>
+                <span>JAN 04 2026</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

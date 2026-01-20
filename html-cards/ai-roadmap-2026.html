@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe AI Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&family=Noto+Serif+SC:wght@600;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Noto Sans SC', sans-serif;
+            padding: 40px;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .font-heavy {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+        }
+        .font-body {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        .border-ink {
+            border-color: var(--ink-black);
+        }
+        .text-ink {
+            color: var(--ink-black);
+        }
+        /* Custom Justify for density */
+        .dense-text {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="flex gap-10 flex-wrap">
+
+    <div class="swiss-card border-[4px] border-ink p-10 flex flex-col justify-between">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink relative">
+            <div class="absolute top-0 left-0 text-sm font-bold tracking-widest uppercase">The Blueprint</div>
+            <h1 class="font-heavy text-[8.5rem] leading-[0.85] tracking-tighter uppercase mt-4">
+                2026<br>
+                <span class="text-[5.5rem] tracking-tight">工程进化论</span>
+            </h1>
+            <div class="absolute bottom-4 right-0 text-xl font-body italic">By Rohit (@rohit4verse)</div>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-[4px] bg-[#1A1918] -ml-[2px]"></div>
+
+            <div class="pr-8 pt-8 flex flex-col h-full">
+                <h2 class="font-heavy text-6xl mb-6">套壳陷阱</h2>
+                <p class="font-body text-3xl leading-snug dense-text">
+                    市场充斥着 GPT 的薄层封装，这不仅是创造力的枯竭，更是商业的自杀。大多数开发者停留在构建“玩具”的舒适区，这种依赖 API 的通用包装毫无护城河，注定在科技巨头的下一次更新中被彻底吞噬。
+                </p>
+            </div>
+
+            <div class="pl-8 pt-8 flex flex-col h-full">
+                <h2 class="font-heavy text-6xl mb-6">系统深耕</h2>
+                <p class="font-body text-3xl leading-snug dense-text">
+                    若想不可替代，必须向深处构建。2026 年的胜负手在于是否掌握编排、长短期记忆管理与本地推理。必须跨越简单的提示词工程，去构建能够处理生产级复杂度的自主系统架构。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] border-t-[4px] border-ink flex items-center justify-center text-center p-6">
+            <p class="font-body text-4xl font-bold italic leading-tight w-[90%]">
+                “专业性是仅存的职业安全感，<br>生产级系统是唯一重要的作品集。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-10 right-10 flex justify-between text-xs font-mono uppercase tracking-widest opacity-60">
+            <span>Source: 2026 AI Engineer Roadmap</span>
+            <span>NO. 01 CONCEPT</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+
+    <div class="swiss-card border-[4px] border-ink p-8 flex flex-col">
+        
+        <div class="flex justify-between items-end border-b-[4px] border-ink pb-4 mb-6">
+            <h1 class="font-heavy text-6xl uppercase tracking-tighter">TACTICS / 实操路径</h1>
+            <span class="font-heavy text-6xl">02</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-6 gap-y-6 flex-grow">
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="font-heavy text-3xl mb-2">01 端侧智能架构</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>拒绝 API 依赖。</strong> 构建离线优先的移动应用，利用 SLM（小语言模型）实现零成本运行。核心在于模型管理：按需懒加载以节省内存，实施滑动窗口机制保留语义块，并针对旧设备采用 4-bit 动态量化。这证明了你对资源受限环境的极致掌控力。
+                </p>
+                <i class="fa-solid fa-mobile-screen-button absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="font-heavy text-3xl mb-2">02 自愈代码代理</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>从聊天机器人进化为智能体。</strong> 构建一个包含“计划-执行-测试-反思”循环的系统。关键在于错误记忆库：存储失败的上下文与特征，利用向量相似性避免重复错误。通过沙盒隔离执行环境，确保生产级调试的安全与迭代，实现代码的自我修复。
+                </p>
+                <i class="fa-solid fa-code-branch absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="font-heavy text-3xl mb-2">03 多模态编辑流</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>视觉与意图的翻译。</strong> 分叉开源编辑器，植入能理解“电影感”等抽象指令的 AI。架构需结合视觉模型分析帧构图，音频模型捕捉节奏，生成具体的剪辑决策表（EDL）。不仅是处理文本，而是让 Agent 看见并操作复杂媒体流，建立多模态护城河。
+                </p>
+                <i class="fa-solid fa-photo-film absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="font-heavy text-3xl mb-2">04 深度私有记忆</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>没有记忆的 AI 只是工具。</strong> 构建 Personal Life OS，实时摄取日历、财务与健康数据，构建个人知识图谱。核心在于隐私架构（本地加密）与主动监测（通过模式识别预测职业倦怠）。让 Agent 理解用户价值观，基于长期记忆提供具备“深度上下文”的决策支持。
+                </p>
+                <i class="fa-solid fa-fingerprint absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <h3 class="font-heavy text-3xl mb-2">05 企业级编排</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>AI 工程的终极 Boss。</strong> 构建端到端的业务流代理，整合 Slack/Jira 事件驱动架构。设计多智能体协作（分发、执行、审计），实施指数级退避重试机制与熔断模式。完整的审计日志与基于角色的访问控制（RBAC），证明你具备驾驭企业级复杂系统的能力。
+                </p>
+                <i class="fa-solid fa-sitemap absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden bg-stone-200">
+                <h3 class="font-heavy text-3xl mb-2">06 生存与行动</h3>
+                <p class="font-body text-[1.35rem] leading-snug dense-text flex-grow">
+                    <strong>不做那 90% 的旁观者。</strong> 2026 年的残酷真相是：Wrapper 构建者将被淘汰，系统交付者将不可替代。两者之间仅隔着这 5 个项目的距离。不要等待许可，选择一个项目，本周末就开始构建。市场只奖励交付结果的人，而非学习者。Build to survive.
+                </p>
+                <i class="fa-solid fa-rocket absolute bottom-[-15px] right-[-10px] text-[8rem] opacity-[0.15]"></i>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between text-xs font-mono uppercase tracking-widest opacity-60 mt-6">
+            <span>Source: Rohit (@rohit4verse)</span>
+            <span>NO. 02 DETAILS</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+</body>
+</html>

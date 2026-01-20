@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Infographic - JSON Prompting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .canvas-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+        }
+        /* Typography System */
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans-black { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; }
+        .font-serif-bold { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+        
+        /* Swiss Grid Borders */
+        .swiss-border { border: 3px solid #1A1918; }
+        .swiss-border-t { border-top: 3px solid #1A1918; }
+        .swiss-border-b { border-bottom: 3px solid #1A1918; }
+        .swiss-border-r { border-right: 3px solid #1A1918; }
+        
+        /* Utilities */
+        .text-justify-custom { text-align: justify; text-justify: inter-ideograph; }
+    </style>
+</head>
+<body>
+
+<div class="canvas-container">
+
+    <div class="card p-8 swiss-border">
+        
+        <div class="h-[30%] flex flex-col justify-center items-start relative">
+            <div class="absolute top-0 left-0 text-sm font-bold tracking-[0.2em] uppercase border-b-2 border-[#1A1918] pb-1">fofr.ai // Google DeepMind</div>
+            <h1 class="font-display text-[150px] leading-[0.85] tracking-tighter uppercase mt-4">
+                JSON<br>
+                <span class="text-[100px]">PROMPTING</span>
+            </h1>
+            <p class="font-serif-bold text-2xl mt-4 italic opacity-80">The Engineering of Aesthetics</p>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 swiss-border-t swiss-border-b">
+            
+            <div class="p-8 swiss-border-r flex flex-col justify-between relative group">
+                <i class="fa-solid fa-dice-d20 absolute top-4 right-4 text-8xl opacity-[0.05]"></i>
+                <div>
+                    <h2 class="font-sans-black text-6xl mb-6">模糊<br>语义</h2>
+                    <div class="w-12 h-2 bg-[#1A1918] mb-6"></div>
+                </div>
+                <p class="font-serif-bold text-3xl leading-snug text-justify-custom">
+                    自然语言存在固有的混沌。当你输入“一只狗”，模型仅调用数百万张图像的“平均值”。你得到的不是精准的意图，而是概率的产物——一张平庸的、缺乏个性的、随机拼凑的“大众脸”。
+                </p>
+                <div class="text-xs font-sans-black tracking-widest mt-4">THE DEFAULT TRAP</div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between relative">
+                <i class="fa-solid fa-code absolute top-4 right-4 text-8xl opacity-[0.05]"></i>
+                <div>
+                    <h2 class="font-sans-black text-6xl mb-6">参数<br>矩阵</h2>
+                    <div class="w-12 h-2 bg-[#1A1918] mb-6"></div>
+                </div>
+                <p class="font-serif-bold text-3xl leading-snug text-justify-custom">
+                    JSON 是提示词的“外骨骼”。通过强制定义光影、材质、焦段与构图，我们将随机的艺术创作降维为可控、可复现、可迭代的工程数据流。这不仅是描述，更是对生成结果的绝对控制。
+                </p>
+                <div class="text-xs font-sans-black tracking-widest mt-4">STRUCTURED CONTROL</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center text-center p-6 bg-transparent">
+            <p class="font-serif-bold text-4xl leading-tight w-[90%]">
+                “提示词的终极形态不再是描述性的文学，而是排他性的逻辑结构。”
+            </p>
+        </div>
+        
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-[10px] font-mono uppercase tracking-widest border-t border-[#1A1918] pt-2">
+            <span>Source: fofr.ai</span>
+            <span>Date: 2026.01.06</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+    <div class="card p-8 swiss-border">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-[#1A1918] pb-6 mb-6">
+            <div>
+                <h1 class="font-sans-black text-7xl uppercase">Tactics</h1>
+                <p class="font-serif-bold text-xl mt-2">STRUCTURED DATA WORKFLOW</p>
+            </div>
+            <div class="font-display text-8xl leading-none">02</div>
+        </div>
+
+        <div class="grid grid-cols-2 grid-rows-3 gap-6 h-full pb-8">
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-user-tag absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">01. 核心主体定义</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    拒绝模糊描述。在 JSON 中精确拆解 <span class="border-b-2 border-black">Demographics</span>（人口统计学）、皮肤质感、妆容细节与微表情。不要让 AI 猜测主角是“谁”，用数据强制规定骨相与皮相。
+                </p>
+            </div>
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-lightbulb absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">02. 环境光影物理</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    光线决定质感。通过 <span class="border-b-2 border-black">Lighting</span> 字段指定光源类型（柔光箱/顶光）、方向及眼神光细节。让 AI 从“画图”转变为“布光”，营造真实的物理空间深度。
+                </p>
+            </div>
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-camera absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">03. 光学相机参数</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    模拟真实摄影。明确定义 <span class="border-b-2 border-black">Camera Gear</span>：焦段（85mm 人像）、光圈（f/2.8 虚化）及胶片颗粒感。用摄影术语规训 AI，摆脱廉价的“AI 塑料感”。
+                </p>
+            </div>
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-ban absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">04. 负向约束边界</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    建立围栏。使用 <span class="border-b-2 border-black">Constraints</span> 模块，明确“Must Keep”（必须保留的特征）与“Avoid”（严禁出现的元素）。这是对抗模型默认幻觉的最强防火墙。
+                </p>
+            </div>
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-rotate absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">05. 逆向提取工程</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    工作流闭环：上传参考图 → 要求 AI 逆向生成极尽详细的 JSON → 人工微调 → 再次生成。利用多模态模型（如 Gemini）的视觉能力，将“感觉”转化为“代码”。
+                </p>
+            </div>
+
+            <div class="flex flex-col border-[2px] border-[#1A1918] p-5 relative overflow-hidden">
+                <i class="fa-solid fa-fingerprint absolute bottom-[-15px] right-[-15px] text-[140px] opacity-[0.06]"></i>
+                <h3 class="font-sans-black text-3xl mb-3 uppercase tracking-tighter">06. 风格锁定变体</h3>
+                <p class="font-serif-bold text-2xl leading-snug text-justify-custom flex-grow">
+                    一旦 JSON 模板确立，即可锁定 <span class="border-b-2 border-black">Vibe</span> 仅替换主体（Nouns）。这允许我们在保持统一美学风格（Aesthetic Series）的前提下，批量生产差异化内容。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-[10px] font-mono uppercase tracking-widest border-t border-[#1A1918] pt-2">
+            <span>Source: fofr.ai</span>
+            <span>Date: 2026.01.06</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

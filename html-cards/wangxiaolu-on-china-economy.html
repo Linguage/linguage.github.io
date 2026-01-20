@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王小鲁经济观察：交互式报告</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="王小鲁经济观察：交互式报告">
+<meta property="og:url" content="https://linguage.github.io/articles/wangxiaolu-on-china-economy.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="王小鲁经济观察：交互式报告">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/wangxiaolu-on-china-economy.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate Gray Neutral with Teal Accents -->
+    <!-- Application Structure Plan: The application uses a thematic, single-page dashboard structure. It's organized into three main, navigable sections: "诊断 (The Diagnosis)", "药方 (The Prescription)", and "引擎 (The Engine - Private Sector)". This structure was chosen to create a logical narrative flow, guiding the user from understanding the problems to exploring the proposed solutions and key economic drivers. This is more intuitive and engaging than a linear list of report points. User flow is managed by a sticky top navigation bar for easy access to each theme. Within each section, interactive cards and dynamic charts are used to break down complex topics, allowing users to explore details on demand without being overwhelmed. This design prioritizes user-driven exploration and comprehension. -->
+    <!-- Visualization & Content Choices: 
+        1.  Consumption/GDP Ratio (Donut Chart): Goal: Compare proportions. Viz: Chart.js Donut Chart. Interaction: Hover for tooltips. Justification: Instantly highlights the stark imbalance between China and other nations. Library: Chart.js.
+        2.  Social Security Coverage (Bar Chart): Goal: Compare parts of a whole. Viz: Chart.js Bar Chart. Interaction: Hover for tooltips. Justification: Clearly visualizes the significant coverage gap among urban workers, supporting the "afraid to spend" argument. Library: Chart.js.
+        3.  Gini Coefficient Comparison (Bar Chart): Goal: Compare distinct values. Viz: Chart.js Bar Chart. Interaction: Hover for tooltips. Justification: Effectively demonstrates the severity of income inequality in China relative to other countries. Library: Chart.js.
+        4.  Per Capita GDP Reality Check (Bar Chart): Goal: Compare against benchmarks. Viz: Chart.js Bar Chart. Interaction: Hover for tooltips. Justification: Visually debunks the "developed country" misconception by showing the gap to actual developed nations. Library: Chart.js.
+        5.  Ineffective Investment Cycle (HTML/CSS Diagram): Goal: Show a process. Viz: Styled HTML/Tailwind flexbox layout. Interaction: Static visual aid. Justification: A simple, clear flowchart is more effective for this conceptual cycle than a data chart. Method: HTML/Tailwind.
+        6.  Interactive Info Cards (JS Toggles): Goal: Organize and reveal details. Viz: HTML/Tailwind cards. Interaction: Click to show/hide detailed text. Justification: Keeps the UI clean and focused, preventing information overload and encouraging active user exploration of complex topics like real estate issues and private sector challenges. Method: Vanilla JS.
+        CONFIRMING NO SVG/Mermaid.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 640px) { .chart-container { height: 350px; } }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #0d9488; border-color: #0d9488; }
+        .card-toggle { cursor: pointer; transition: background-color 0.3s; }
+        .detail-card { transition: opacity 0.5s, max-height 0.5s; }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-white shadow-md py-4 px-6 text-center">
+        <h1 class="text-2xl md:text-3xl font-bold text-slate-800">王小鲁经济观察：交互式报告</h1>
+        <p class="mt-2 text-sm md:text-base text-slate-600">基于中国改革基金会国民经济研究所副所长王小鲁先生的访谈摘要</p>
+    </header>
+
+    <nav id="navbar" class="sticky top-0 bg-white/80 backdrop-blur-sm shadow-sm z-10">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-center items-center space-x-6 md:space-x-10 h-16">
+                <a href="#diagnosis" class="nav-link text-slate-600 font-medium pb-1 border-b-2 border-transparent">经济诊断</a>
+                <a href="#prescription" class="nav-link text-slate-600 font-medium pb-1 border-b-2 border-transparent">政策药方</a>
+                <a href="#engine" class="nav-link text-slate-600 font-medium pb-1 border-b-2 border-transparent">民营引擎</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto p-4 md:p-8 space-y-16">
+
+        <section id="diagnosis" class="space-y-12">
+            <div class="text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-teal-700">诊断：中国经济的结构性失衡</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-slate-600">本部分深入探讨了王小鲁先生指出的中国经济面临的核心挑战。从消费需求不足到无效投资的恶性循环，再到房地产市场的深层矛盾，这些分析揭示了经济增长表面之下隐藏的结构性问题。通过互动图表和分析卡片，您可以清晰地看到这些问题的严重性及其相互关联。</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-slate-800 text-center">消费困局：为何民众不敢花钱？</h3>
+                <p class="text-center mt-2 text-sm text-slate-500">居民消费占GDP比重远低于国际平均水平，这是经济内需不足的最直观体现。</p>
+                <div class="chart-container mt-6">
+                    <canvas id="consumptionChart"></canvas>
+                </div>
+                <div class="mt-8 grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-5 rounded-lg">
+                        <h4 class="font-semibold text-lg">症结一：社会保障体系的缺失</h4>
+                        <p class="mt-2 text-sm text-slate-600">尤其是对于庞大的外来务工群体，由于缺乏稳定的社会保障（如失业、医疗、养老保险），他们被迫进行预防性储蓄，以应对未来的不确定性，这极大地抑制了他们的消费能力。</p>
+                        <div class="mt-4">
+                             <div class="chart-container h-64 sm:h-72">
+                                <canvas id="socialSecurityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-lg">
+                        <h4 class="font-semibold text-lg">症结二：悬殊的收入分配格局</h4>
+                        <p class="mt-2 text-sm text-slate-600">高基尼系数和较低的收入中位数反映出财富分配的严重不均。大部分人的收入水平仅能维持温饱，缺乏进行更高层次消费的基础。统计数据在高收入群体中可能还存在失真。</p>
+                        <div class="mt-4">
+                            <div class="chart-container h-64 sm:h-72">
+                                <canvas id="giniChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-slate-800 text-center">投资陷阱：高增长背后的资源错配</h3>
+                 <p class="text-center mt-2 text-sm text-slate-500">长期以来对投资拉动增长的过度依赖，已形成一个恶性循环。</p>
+                <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-center">
+                    <div class="bg-teal-50 p-3 rounded-lg w-full md:w-auto">
+                        <p class="font-semibold">错误观念</p>
+                        <p class="text-xs text-slate-600">投资越多发展越快</p>
+                    </div>
+                    <div class="text-teal-600 text-2xl font-mono">&rarr;</div>
+                    <div class="bg-red-50 p-3 rounded-lg w-full md:w-auto">
+                        <p class="font-semibold">大量无效投资</p>
+                        <p class="text-xs text-slate-600">刺激政策下的盲目扩张</p>
+                    </div>
+                    <div class="text-red-600 text-2xl font-mono">&rarr;</div>
+                    <div class="bg-red-100 p-3 rounded-lg w-full md:w-auto">
+                        <p class="font-semibold">各行业产能过剩</p>
+                         <p class="text-xs text-slate-600">产大于需</p>
+                    </div>
+                    <div class="text-red-600 text-2xl font-mono">&rarr;</div>
+                    <div class="bg-red-200 p-3 rounded-lg w-full md:w-auto">
+                        <p class="font-semibold">巨大资源浪费</p>
+                         <p class="text-xs text-slate-600">压产能、封存设备</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                 <h3 class="text-xl font-bold text-slate-800 text-center">房地产迷思：高房价与高库存并存</h3>
+                 <p class="text-center mt-2 text-sm text-slate-500">房地产市场的畸形发展是多重因素共同作用的结果。点击下方卡片查看两大根本原因。</p>
+                 <div class="mt-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div id="toggle-land" class="card-toggle bg-slate-100 hover:bg-slate-200 p-4 rounded-lg flex justify-between items-center">
+                            <h4 class="font-semibold">原因一：土地财政</h4>
+                            <span class="text-teal-600 text-xl font-bold transform transition-transform duration-300">&#x25BC;</span>
+                        </div>
+                        <div id="detail-land" class="detail-card overflow-hidden max-h-0 opacity-0 mt-2 bg-slate-50 p-4 rounded-lg">
+                            <p class="text-sm text-slate-700">地方政府垄断土地一级市场，通过拍卖独家供应土地，以此作为重要的财政收入来源。这种垄断行为直接推高了地价，而地价的飙升最终必然传导至房价，成为房价高企的核心制度性因素。</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="toggle-money" class="card-toggle bg-slate-100 hover:bg-slate-200 p-4 rounded-lg flex justify-between items-center">
+                            <h4 class="font-semibold">原因二：货币超发</h4>
+                            <span class="text-teal-600 text-xl font-bold transform transition-transform duration-300">&#x25BC;</span>
+                        </div>
+                        <div id="detail-money" class="detail-card overflow-hidden max-h-0 opacity-0 mt-2 bg-slate-50 p-4 rounded-lg">
+                            <p class="text-sm text-slate-700">过去多年来，为刺激经济增长，宏观政策倾向于货币宽松，“放水”成为常态。大量的流动性涌入房地产市场，鼓励了房企大规模囤地、囤房，进一步加剧了市场的泡沫化，最终导致了惊人的在建面积和库存，远超实际需求。</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="prescription" class="space-y-12">
+            <div class="text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-teal-700">药方：回归以人为本的发展轨道</h2>
+                <p class="mt-4 max-w-3xl mx-auto text-slate-600">针对上述诊断，王小鲁先生提出了一系列以民生为核心的政策建议。这部分内容旨在阐明，真正的可持续发展需要对国家的发展水平有清醒的认知，并将资源优先用于解决民众最迫切的需求，特别是建立一个公平且全覆盖的社会保障体系。</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-slate-800 text-center">首要任务：织牢社会保障安全网</h3>
+                 <p class="text-center mt-2 text-sm text-slate-500">当前的核心不是大幅提高福利水平，而是解决“有没有”的问题。</p>
+                <div class="mt-6 text-center">
+                    <p class="text-lg">政府的资源应该优先用于：</p>
+                    <div class="mt-4 inline-flex items-center bg-teal-100 text-teal-800 text-lg font-semibold px-6 py-3 rounded-full">
+                        <span class="mr-2">&#x2714;</span> 雪中送炭：实现社保和公共服务全覆盖
+                    </div>
+                    <p class="mt-4 text-slate-600">而不是：</p>
+                    <div class="mt-2 inline-flex items-center bg-slate-200 text-slate-800 text-lg font-semibold px-6 py-3 rounded-full">
+                        <span class="mr-2">&#x2718;</span> 锦上添花：搞形象工程或无效投资
+                    </div>
+                    <p class="mt-6 max-w-2xl mx-auto text-slate-600">王小鲁认为，解决社会保障的公平性和覆盖面问题，让每个为社会做出贡献的人都能享有基本的保障，是释放消费潜力、实现社会公平的基石。这并非无法实现，关键在于政府是否愿意重新审视其政绩观，将资源从无效、浪费的项目中解放出来，用到真正对老百姓有用的地方。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-slate-800 text-center">现实定位：我们离发达国家还有多远？</h3>
+                 <p class="text-center mt-2 text-sm text-slate-500">对自身发展阶段的清醒认知，是制定正确政策的前提。</p>
+                <div class="chart-container mt-6">
+                    <canvas id="gdpPerCapitaChart"></canvas>
+                </div>
+                 <div class="mt-8 text-center bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+                    <p class="text-lg font-semibold text-amber-800">一个核心数据：月收入中位数</p>
+                    <p class="text-3xl font-bold text-amber-900 mt-2">¥2,600</p>
+                    <p class="mt-2 text-sm text-slate-600">这意味着全国14亿人中，有7亿人的月收入低于此数。这才是我们当前需要面对和解决的基本盘。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="engine" class="space-y-12">
+            <div class="text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-teal-700">引擎：民营经济的活力与困境</h2>
+                 <p class="mt-4 max-w-3xl mx-auto text-slate-600">民营经济是经济增长和就业的主要贡献者，其健康发展至关重要。然而，当前民营企业面临着严峻的信心问题。本部分将探讨这些问题的根源，并阐述王小鲁先生对于如何重振民营经济、创造公平竞争环境的看法。</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold text-slate-800 text-center">民营经济的贡献与信心危机</h3>
+                 <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-3xl font-bold text-teal-600">60%+</p>
+                        <p class="mt-1 font-semibold">GDP贡献</p>
+                    </div>
+                    <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-3xl font-bold text-teal-600">80%+</p>
+                        <p class="mt-1 font-semibold">城镇就业贡献</p>
+                    </div>
+                     <div class="bg-slate-100 p-4 rounded-lg">
+                        <p class="text-3xl font-bold text-teal-600">主要部分</p>
+                        <p class="mt-1 font-semibold">科技创新贡献</p>
+                    </div>
+                </div>
+                 <p class="text-center mt-6 text-slate-600">尽管贡献巨大，但民营企业家的信心却普遍不足。点击下方查看主要原因：</p>
+                <div class="mt-4 space-y-3">
+                     <div>
+                        <div id="toggle-intervention" class="card-toggle bg-slate-100 hover:bg-slate-200 p-4 rounded-lg flex justify-between items-center">
+                            <h4 class="font-semibold">信心杀手一：经营自主权被干预</h4>
+                            <span class="text-teal-600 text-xl font-bold transform transition-transform duration-300">&#x25BC;</span>
+                        </div>
+                        <div id="detail-intervention" class="detail-card overflow-hidden max-h-0 opacity-0 mt-2 bg-slate-50 p-4 rounded-lg">
+                            <p class="text-sm text-slate-700">一些地方政府仍将民营企业视为下级，随意干预其经营决策，甚至派人进驻。这种做法违背了市场经济的基本原则，即企业在合法经营的前提下应享有完全的自主权，政府应是服务者而非指挥者。</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="toggle-competition" class="card-toggle bg-slate-100 hover:bg-slate-200 p-4 rounded-lg flex justify-between items-center">
+                            <h4 class="font-semibold">信心杀手二：缺乏公平的竞争环境</h4>
+                            <span class="text-teal-600 text-xl font-bold transform transition-transform duration-300">&#x25BC;</span>
+                        </div>
+                        <div id="detail-competition" class="detail-card overflow-hidden max-h-0 opacity-0 mt-2 bg-slate-50 p-4 rounded-lg">
+                            <p class="text-sm text-slate-700">民营企业在实际经营中感到被忽视，遇到更多障碍，未能与国有企业在同一平台、同一起跑线上公平竞争。竞争的核心应是优胜劣汰，而不是由所有制身份决定企业的命运。</p>
+                        </div>
+                    </div>
+                     <div>
+                        <div id="toggle-slander" class="card-toggle bg-slate-100 hover:bg-slate-200 p-4 rounded-lg flex justify-between items-center">
+                            <h4 class="font-semibold">信心杀手三：网络“黑嘴”的负面舆论</h4>
+                            <span class="text-teal-600 text-xl font-bold transform transition-transform duration-300">&#x25BC;</span>
+                        </div>
+                        <div id="detail-slander" class="detail-card overflow-hidden max-h-0 opacity-0 mt-2 bg-slate-50 p-4 rounded-lg">
+                            <p class="text-sm text-slate-700">网络上散布的“对民营资本下手”等极端言论，制造了恐慌情绪，严重影响了企业家的心理预期。王小鲁认为，这些与改革开放大方向相悖的错误言论应受到批评和处理，网络空间需要法治来维护。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-slate-800 text-slate-400">
+        <p>信心比黄金更重要。</p>
+        <p class="text-xs mt-2">&copy; 2024 本交互报告根据王小鲁先生公开访谈内容制作</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const data = {
+                consumption: {
+                    labels: ['中国居民消费', '其他部分'],
+                    data: [38, 62],
+                },
+                socialSecurity: {
+                    labels: ['未被失业保险覆盖', '已覆盖'],
+                    data: [2.3, 2.3],
+                    total: 4.6,
+                },
+                gini: {
+                    labels: ['中国', '美国', '发达国家普遍水平'],
+                    data: [0.46, 0.40, 0.37],
+                },
+                gdpPerCapita: {
+                    labels: ['中国', '世行高收入门槛', '发达国家门槛 (葡)'],
+                    data: [12000, 13000, 24000],
+                }
+            };
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#475569',
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 12 },
+                    }
+                },
+            };
+            
+            function createChart(ctx, type, labels, data, datasetLabel, backgroundColors, borderColors) {
+                return new Chart(ctx, {
+                    type: type,
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: datasetLabel,
+                            data: data,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: chartOptions
+                });
+            }
+
+            const ctxConsumption = document.getElementById('consumptionChart').getContext('2d');
+            createChart(
+                ctxConsumption, 'doughnut',
+                data.consumption.labels.map((l, i) => `${l} (${data.consumption.data[i]}%)`),
+                data.consumption.data,
+                '占GDP比重',
+                ['rgba(20, 184, 166, 0.6)', 'rgba(203, 213, 225, 0.6)'],
+                ['rgba(13, 148, 136, 1)', 'rgba(100, 116, 139, 1)']
+            ).options.plugins.tooltip.callbacks.label = (context) => `${context.label}`;
+
+
+            const ctxSocialSecurity = document.getElementById('socialSecurityChart').getContext('2d');
+            createChart(
+                ctxSocialSecurity, 'bar',
+                data.socialSecurity.labels.map((l, i) => `${l} (${data.socialSecurity.data[i]}亿人)`),
+                data.socialSecurity.data,
+                '城镇就业者 (亿人)',
+                ['rgba(239, 68, 68, 0.6)', 'rgba(20, 184, 166, 0.6)'],
+                ['rgba(220, 38, 38, 1)', 'rgba(13, 148, 136, 1)']
+            ).options.plugins.tooltip.callbacks.label = (context) => `${context.label}`;
+
+            const ctxGini = document.getElementById('giniChart').getContext('2d');
+            createChart(
+                ctxGini, 'bar',
+                data.gini.labels,
+                data.gini.data,
+                '基尼系数 (越高越不均)',
+                ['rgba(239, 68, 68, 0.6)', 'rgba(245, 158, 11, 0.6)', 'rgba(20, 184, 166, 0.6)'],
+                ['rgba(220, 38, 38, 1)', 'rgba(217, 119, 6, 1)', 'rgba(13, 148, 136, 1)']
+            );
+            
+            const ctxGdpPerCapita = document.getElementById('gdpPerCapitaChart').getContext('2d');
+            createChart(
+                ctxGdpPerCapita, 'bar',
+                data.gdpPerCapita.labels.map((l, i) => `${l} ($${data.gdpPerCapita.data[i].toLocaleString()})`),
+                data.gdpPerCapita.data,
+                '人均GDP (美元)',
+                ['rgba(59, 130, 246, 0.6)', 'rgba(245, 158, 11, 0.6)', 'rgba(20, 184, 166, 0.6)'],
+                ['rgba(37, 99, 235, 1)', 'rgba(217, 119, 6, 1)', 'rgba(13, 148, 136, 1)']
+            ).options.plugins.tooltip.callbacks.label = (context) => `${context.label}`;
+
+            function setupToggle(toggleId, detailId) {
+                const toggleElement = document.getElementById(toggleId);
+                const detailElement = document.getElementById(detailId);
+                const iconElement = toggleElement.querySelector('span');
+
+                if (toggleElement && detailElement) {
+                    toggleElement.addEventListener('click', () => {
+                        const isHidden = detailElement.style.maxHeight === '0px' || detailElement.style.maxHeight === '';
+                        if (isHidden) {
+                            detailElement.style.maxHeight = detailElement.scrollHeight + "px";
+                            detailElement.style.opacity = '1';
+                            iconElement.style.transform = 'rotate(180deg)';
+                        } else {
+                            detailElement.style.maxHeight = '0px';
+                            detailElement.style.opacity = '0';
+                            iconElement.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                }
+            }
+
+            setupToggle('toggle-land', 'detail-land');
+            setupToggle('toggle-money', 'detail-money');
+            setupToggle('toggle-intervention', 'detail-intervention');
+            setupToggle('toggle-competition', 'detail-competition');
+            setupToggle('toggle-slander', 'detail-slander');
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            const navBar = document.getElementById('navbar');
+            const navHeight = navBar.offsetHeight;
+
+            const observerOptions = {
+                root: null,
+                rootMargin: `-${navHeight}px 0px 0px 0px`,
+                threshold: 0.4
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

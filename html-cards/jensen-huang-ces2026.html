@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Layout - Jensen Huang CES 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* 3:4 Aspect Ratio Container (900x1200 scale) */
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography Utilities */
+        .font-ink-heavy {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+        }
+        
+        .font-serif-bold {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        
+        .font-serif-heavy {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+        }
+
+        /* Utilities */
+        .border-ink {
+            border-color: #1A1918;
+        }
+        
+        .text-justify-stretch {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+
+        /* Watermark Icon */
+        .watermark-icon {
+            opacity: 0.06;
+            color: #1A1918;
+            line-height: 1;
+        }
+
+        /* Grid Lines */
+        .grid-line-r {
+            border-right: 3px solid #1A1918;
+        }
+        
+        .grid-line-b {
+            border-bottom: 3px solid #1A1918;
+        }
+        
+        .grid-line-t {
+            border-top: 3px solid #1A1918;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+
+    <div class="swiss-card border-[4px] border-ink p-10">
+        
+        <div class="h-[30%] flex flex-col justify-center items-start relative">
+            <div class="absolute top-0 left-0 text-xl font-bold tracking-widest uppercase border-b-2 border-ink pb-2 mb-4 w-full">
+                CES 2026 / Jensen Huang Keynote
+            </div>
+            <h1 class="text-[8.5rem] leading-[0.85] tracking-tighter font-serif-heavy mt-8">
+                计算洗牌
+            </h1>
+            <p class="text-3xl font-serif-bold mt-4 tracking-wide text-right w-full">
+                </br>THE GREAT SHUFFLE
+            </p>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-t-[4px] border-b-[4px] border-ink">
+            
+            <div class="p-8 border-r-[3px] border-ink flex flex-col justify-between">
+                <div>
+                    <span class="text-6xl font-ink-heavy block mb-2">01</span>
+                    <h2 class="text-5xl font-ink-heavy mb-6">范式转移</h2>
+                </div>
+                <p class="text-3xl font-serif-bold leading-snug text-justify-stretch">
+                    我们不再编程软件，而是训练软件。不再依赖 CPU 预编译，而是由 GPU 实时生成每个像素与 Token。过去十年十万亿美元的计算基建，正在经历一场暴力重构。
+                </p>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-6xl font-ink-heavy block mb-2">02</span>
+                    <h2 class="text-5xl font-ink-heavy mb-6">物种进化</h2>
+                </div>
+                <p class="text-3xl font-serif-bold leading-snug text-justify-stretch">
+                    AI 从被动问答的聊天机器人，进化为主动规划、调用工具的 Agentic AI。推理能力让系统学会了“三思而后行”，软件的角色从执行者变为决策者。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[20%] flex items-center justify-center p-6 text-center">
+            <blockquote class="text-4xl font-serif-bold leading-tight italic">
+                “AI 不再只是科技巨头的游戏，它正在变成每个人都能通过编排模型，让数字智能为自己干活的通用工具。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-4 left-10 right-10 flex justify-between text-sm font-bold border-t border-ink pt-2">
+            <span>SOURCE: CES 2026 KEYNOTE</span>
+            <span>DESIGNED WITH AI</span>
+            <span>DATE: JAN 2026</span>
+        </div>
+    </div>
+
+    <div class="swiss-card p-0">
+        
+        <div class="h-[10%] px-8 flex items-end justify-between border-b-[3px] border-ink bg-[#F5F2EB] z-10 pb-4">
+            <div>
+                <h2 class="text-6xl font-ink-heavy leading-none">TACTICS</h2>
+                <p class="text-xl font-serif-bold mt-1">THE BLUEPRINT OF AGENTIC AI</p>
+            </div>
+            <span class="text-8xl font-ink-heavy leading-none">02</span>
+        </div>
+
+        <div class="h-[85%] grid grid-cols-2 grid-rows-3">
+            
+            <div class="relative p-7 border-r-[3px] border-b-[3px] border-ink flex flex-col">
+                <i class="fa-solid fa-brain absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">推理拐点</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    2025 年 o1 模型的出现让 AI 学会了“思考”。不仅是给出答案，而是通过 Test-time Scaling（推理时间扩展），将复杂问题拆解推演。想得越久，质量越高，这是 Agent 智能的基石。
+                </p>
+            </div>
+
+            <div class="relative p-7 border-b-[3px] border-ink flex flex-col">
+                <i class="fa-solid fa-robot absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">代理爆发</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    Agentic AI 从实验室走向真实应用。它不再是被动百科全书，而是主动的“数字员工”。它能规划步骤、查阅文档、编写代码、测试 Bug，程序员正转变为“代码审核员”。
+                </p>
+            </div>
+
+            <div class="relative p-7 border-r-[3px] border-b-[3px] border-ink flex flex-col">
+                <i class="fa-solid fa-box-open absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">开源崛起</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    DeepSeek R1 证明了开源模型能达到前沿水平。这极大地降低了门槛，让创业公司和个人都能构建自己的 AI 能力。不需要从头训练，只需拿来即用，生态大爆发。
+                </p>
+            </div>
+
+            <div class="relative p-7 border-b-[3px] border-ink flex flex-col">
+                <i class="fa-solid fa-network-wired absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">思维蓝图</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    NVIDIA 的 Blueprint 框架揭示了 Agent 的构建逻辑：一个前沿大模型作为“大脑”，外挂邮件、日历等“工具”，中间通过“智能路由器”按意图分发任务，隐私数据本地跑，复杂任务云端跑。
+                </p>
+            </div>
+
+            <div class="relative p-7 border-r-[3px] border-ink flex flex-col">
+                <i class="fa-solid fa-comments absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">交互变革</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    软件交互从“人迁就机器”（填表、SQL）转向“机器迁就人”。未来的企业软件入口可能只是一个对话框，你用自然语言下达意图，Agent 自动翻译成机器操作，彻底重构 UI。
+                </p>
+            </div>
+
+            <div class="relative p-7 flex flex-col">
+                <i class="fa-solid fa-users-gear absolute bottom-[-10px] right-[-10px] text-[10rem] watermark-icon"></i>
+                <h3 class="text-4xl font-ink-heavy mb-3">协作智能</h3>
+                <p class="text-[1.7rem] leading-tight font-serif-bold text-justify-stretch flex-grow">
+                    现代 Agent 是多模型协作的。如 Perplexity，不同环节调用不同模型。一个项目经理（主模型）指挥多个专家（绘图、代码、总结模型）。多模态、多模型、多云混合是终局。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[5%] flex items-center justify-between px-8 text-sm font-bold border-t-[3px] border-ink">
+            <span>SOURCE: JENSEN HUANG KEYNOTE</span>
+            <span>WIRE/FRAME SERIES</span>
+            <span>2026.01.05</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Typography System */
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Grid Borders */
+        .grid-cell {
+            border-right: 2px solid var(--ink-black);
+            border-bottom: 2px solid var(--ink-black);
+        }
+        /* Remove borders for edge cases in grid */
+        .grid-row-last .grid-cell { border-bottom: none; }
+        .grid-cell:nth-child(3n) { border-right: none; } 
+    </style>
+</head>
+<body class="flex flex-row gap-12 items-start overflow-x-auto">
+
+    <div class="card border-[4px] border-[#1A1918] p-8">
+        
+        <div class="h-[30%] flex flex-col justify-center items-start border-b-[4px] border-[#1A1918] pb-6">
+            <p class="text-xl font-bold tracking-widest mb-4 uppercase">Google / Gemini Workflow</p>
+            <h1 class="font-sans-sc font-black text-[7.5rem] leading-[0.85] tracking-tighter uppercase w-full">
+                Gemini<br>
+                <span class="text-[8.5rem]">2026 </span> 生活指南
+            </h1>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 relative">
+            <div class="absolute inset-y-0 left-1/2 w-[3px] bg-[#1A1918] -ml-[1.5px]"></div>
+
+            <div class="p-8 flex flex-col justify-start pr-12">
+                <h2 class="font-sans-sc font-black text-6xl mb-8 leading-none mt-4">规划<br>断层</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    大多数新年决心的夭折，并非源于意志力的匮乏，而是死于“执行颗粒度”的粗糙。模糊的愿景无法抵抗日常生活的熵增。当目标缺乏具体的行动脚本时，失败便是唯一的终局。
+                </p>
+            </div>
+
+            <div class="p-8 flex flex-col justify-start pl-12">
+                <h2 class="font-sans-sc font-black text-6xl mb-8 leading-none mt-4">结构<br>重塑</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    Gemini 的本质并非简单的问答工具，而是一个能够将宏大愿景拆解为微小任务单元的“外部执行系统”。通过结构化的提示词与自动化日程，我们得以构建一个不依赖即时动力的闭环机制。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] border-t-[4px] border-[#1A1918] flex items-center justify-center p-6 bg-[#1A1918] text-[#F5F2EB]">
+            <p class="font-serif-sc font-bold text-4xl text-center leading-tight w-[90%]">
+                “不要让雄心止步于模糊的愿景，用精密的系统取代脆弱的意志力。”
+            </p>
+        </div>
+        
+        <div class="absolute bottom-2 right-4 text-xs font-mono opacity-60 text-[#F5F2EB]">
+            SOURCE: GOOGLE BLOG | DATE: JAN 2026 | DESIGNED WITH AI
+        </div>
+    </div>
+
+    <div class="card border-[4px] border-[#1A1918]">
+        
+        <div class="h-[120px] border-b-[3px] border-[#1A1918] flex justify-between items-center px-8 bg-[#1A1918] text-[#F5F2EB]">
+            <h1 class="font-sans-sc font-black text-6xl tracking-tighter">执行策略</h1>
+            <div class="text-right">
+                <span class="block text-xl font-bold tracking-[0.2em]">TACTICS</span>
+                <span class="block text-5xl font-black font-display">02</span>
+            </div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-3 grid-rows-3 w-full h-full">
+            
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">01 体能进阶</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    拒绝通用模板。输入当前体能基线与具体目标（如“6个月后跑全马”），要求 Gemini 生成结合地理位置（如仅限室内）的渐进式训练表，并动态调整每周负荷。
+                </p>
+                <i class="fa-solid fa-person-running absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">02 空间秩序</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    将令人畏惧的“全屋整理”拆解为30天微任务。利用 Gemini Live 摄像头实时扫描房间，获取针对性的空间优化建议，确保每日任务不超过20分钟且无需购买新物。
+                </p>
+                <i class="fa-solid fa-box-open absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">03 语言习得</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    定义可用时间，生成30天结构化课程。指令 AI 不仅输出计划，更要制作交互式动词变位测验与定制闪卡，将被动的阅读转化为主动的高频回顾与自我测试。
+                </p>
+                <i class="fa-solid fa-language absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">04 职业跃迁</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    模拟真实面试场景。上传模拟视频，要求 Gemini 分析语速、肢体语言及填充词的使用。利用 Nano Banana 润色职业头像，全方位优化职业形象的数据表现。
+                </p>
+                <i class="fa-solid fa-briefcase absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">05 膳食管理</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    消除决策疲劳。设定“周日早9点”为触发点，要求 AI 生成符合特定饮食偏好（如高蛋白素食）的7天晚餐计划，并自动拆解为精准的购物清单，缩短烹饪路径。
+                </p>
+                <i class="fa-solid fa-carrot absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">06 财富罗盘</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    上传支出数据表，指令 Gemini 识别非必要支出的“隐形黑洞”。不只分析过去，更要生成可立即执行的周度预算规则，将复杂的财务报表转化为简单的省钱指令。
+                </p>
+                <i class="fa-solid fa-chart-pie absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell border-b-0 p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">07 认知输入</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    建立自动化的知识筛选机制。设置每月循环任务，要求推荐特定领域（如广告学）的5本非虚构书目，并生成每本书的阅读进度表与核心观点摘要模板。
+                </p>
+                <i class="fa-solid fa-book absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell border-b-0 p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">08 习惯重构</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    针对坏习惯（如过度刷屏）建立“替换协议”。让 Gemini 识别触发时间点，并提供具体的替代活动建议（如微日记提示），用低摩擦的创造性行为覆盖旧回路。
+                </p>
+                <i class="fa-solid fa-rotate absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+            <div class="grid-cell border-b-0 p-5 flex flex-col relative group overflow-hidden">
+                <h3 class="font-sans-sc font-black text-3xl mb-2">09 长效维护</h3>
+                <p class="font-serif-sc font-semibold text-[1.2rem] leading-snug text-justify flex-grow">
+                    以“未来视角”进行规划。假设已经坚持了6个月，要求 AI 反向生成一份“维护计划”，将阶段性成功转化为永久的生活方式，并设定下半年的进阶目标。
+                </p>
+                <i class="fa-solid fa-flag-checkered absolute bottom-[-15px] right-[-15px] text-[8rem] opacity-[0.08]"></i>
+            </div>
+
+        </div>
+
+        <div class="h-[40px] border-t-[3px] border-[#1A1918] flex justify-between items-center px-4 bg-[#F5F2EB]">
+             <span class="text-xs font-mono font-bold">GEMINI PROMPTS & TACTICS</span>
+             <span class="text-xs font-mono font-bold">SOURCE: GOOGLE | DESIGNED WITH AI</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

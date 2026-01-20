@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Workflow - Visual Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        morandi: {
+                            bg: '#F5F2EB',      // Warm Paper
+                            terra: '#C29C91',   // Terra
+                            blue: '#7D939E',    // Muted Blue
+                            sage: '#8F9E8B',    // Sage Green
+                            cream: '#FFFBF0',   // Light Cream
+                            ink: '#1A1918',     // Deep Ink
+                            text: '#2B2928'     // Dark Grey
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+        }
+        /* Hide scrollbar for clean preview */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-10 overflow-x-auto">
+
+    <div class="flex flex-row gap-10 scale-[0.6] md:scale-[0.8] lg:scale-100 origin-top">
+        
+        <div class="w-[900px] h-[1200px] bg-morandi-bg flex flex-col justify-between p-12 card-shadow relative overflow-hidden">
+            
+            <div class="h-[35%] flex flex-col justify-center border-b-4 border-morandi-ink mb-8">
+                <div class="flex justify-between items-end mb-4">
+                    <span class="font-sans font-bold text-morandi-terra tracking-widest text-2xl">WORKFLOW SERIES</span>
+                    <span class="font-sans font-bold text-morandi-text text-xl">VOL. 2026</span>
+                </div>
+                <h1 class="font-sans font-black text-[110px] leading-[0.9] text-morandi-ink tracking-tight uppercase">
+                    Claude<br>
+                    <span class="text-morandi-blue">Code.</span>
+                </h1>
+                <p class="mt-6 font-serif font-medium text-3xl text-morandi-text text-right italic">
+                    by Boris Cherny
+                </p>
+            </div>
+
+            <div class="h-[40%] flex gap-8 mb-8">
+                <div class="flex-1 bg-morandi-terra p-8 flex flex-col justify-between text-white">
+                    <div class="border-b border-white/40 pb-4">
+                        <i class="fa-solid fa-link-slash text-5xl opacity-80"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-sans font-bold text-3xl mb-4 opacity-90">THE FRICTION</h3>
+                        <p class="font-serif font-medium text-2xl leading-relaxed text-justify opacity-95">
+                            传统 AI 编程往往受限于单点交互，缺乏并行处理能力，难以将碎片化的个人经验转化为团队协作的工程资产。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="flex-1 bg-morandi-sage p-8 flex flex-col justify-between text-white">
+                    <div class="border-b border-white/40 pb-4">
+                        <i class="fa-solid fa-layer-group text-5xl opacity-80"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-sans font-bold text-3xl mb-4 opacity-90">THE PHILOSOPHY</h3>
+                        <p class="font-serif font-medium text-2xl leading-relaxed text-justify opacity-95">
+                            构建并行化、自动化且具备自我验证能力的协作流。通过共享上下文与工具链，将个人智慧固化为团队的自动化标准。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-[15%] bg-morandi-ink flex items-center justify-center p-10 relative">
+                <i class="fa-solid fa-quote-left text-morandi-terra text-6xl absolute top-6 left-8 opacity-30"></i>
+                <p class="font-serif font-medium text-3xl text-white text-center leading-relaxed tracking-wide z-10">
+                    “给 Claude 一个验证其工作的方法。一旦建立了反馈闭环，最终交付的代码质量将提升两到三倍。”
+                </p>
+            </div>
+
+            <div class="h-[5%] flex items-end justify-between border-t border-morandi-text/20 pt-4 mt-4">
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">Source: Boris Cherny (Twitter)</span>
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">Designed with AI</span>
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">Jan 03, 2026</span>
+            </div>
+        </div>
+
+        <div class="w-[900px] h-[1200px] bg-morandi-cream flex flex-col p-12 card-shadow">
+            
+            <div class="flex items-center justify-between border-b-4 border-morandi-ink pb-6 mb-10">
+                <h2 class="font-sans font-black text-6xl text-morandi-ink tracking-tight">ENGINEERING OPS</h2>
+                <div class="text-right">
+                    <span class="block font-sans font-bold text-morandi-terra text-xl tracking-widest">TACTICS</span>
+                    <span class="block font-sans font-black text-5xl text-morandi-ink">02</span>
+                </div>
+            </div>
+
+            <div class="flex-grow grid grid-cols-3 grid-rows-3 gap-8">
+                
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">01 并行作业流</span>
+                        <i class="fa-solid fa-network-wired text-morandi-blue text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        在终端与网页端同时运行十余个实例，通过 Session 切换与 teleport 命令实现上下文在本地与云端的无缝流转。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">02 模型选择论</span>
+                        <i class="fa-solid fa-brain text-morandi-terra text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        全面采用 Opus 4.5 Thinking 模型。虽速度稍慢，但凭借卓越的工具使用能力，实际上大幅减少了人工纠偏的隐性成本。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">03 共享上下文</span>
+                        <i class="fa-brands fa-git-alt text-morandi-sage text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        团队共用 CLAUDE.md 并纳入 Git。遇到错误即刻更新文档，让 AI 的错误经验转化为全员共享的避坑指南。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">04 规划优先制</span>
+                        <i class="fa-solid fa-compass-drafting text-morandi-blue text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        绝大多数任务始于 Plan Mode。先与 AI 反复推敲生成严密计划，再切换至自动编辑模式，实现代码实现的“一次成功”。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">05 指令自动化</span>
+                        <i class="fa-solid fa-terminal text-morandi-terra text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        将高频工作流封装为 Slash Commands（如自动提交PR）。利用内联 Bash 预计算状态，减少与模型的无效交互轮次。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">06 子智能体群</span>
+                        <i class="fa-solid fa-robot text-morandi-sage text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        部署专用 Subagents 处理特定任务，例如代码简化器或端到端测试员，将复杂的软件工程拆解为流水线作业。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">07 格式守门员</span>
+                        <i class="fa-solid fa-align-left text-morandi-blue text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        启用 PostToolUse 钩子函数。在代码提交前自动运行格式化工具，解决最后 10% 的合规问题，彻底避免 CI 报错。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">08 全栈工具链</span>
+                        <i class="fa-solid fa-toolbox text-morandi-terra text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        通过 MCP 协议深度集成工具链。Claude 可直接操作 Slack 通知、运行 BigQuery 查询或抓取 Sentry 日志，打通数据孤岛。
+                    </p>
+                </div>
+
+                <div class="flex flex-col border-t border-morandi-text/30 pt-3">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-sans font-bold text-2xl text-morandi-ink">09 验证即核心</span>
+                        <i class="fa-solid fa-check-double text-morandi-sage text-xl"></i>
+                    </div>
+                    <p class="font-serif font-medium text-lg text-morandi-text leading-normal text-justify">
+                        建立自动化反馈闭环是质量的关键。无论是运行脚本还是浏览器测试，必须让 Claude 具备自我验证产出的能力。
+                    </p>
+                </div>
+
+            </div>
+
+             <div class="flex items-end justify-between border-t border-morandi-text/20 pt-4 mt-8">
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">Source: Boris Cherny</span>
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">The Details</span>
+                <span class="font-sans font-bold text-morandi-text/60 uppercase text-lg">Jan 03, 2026</span>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

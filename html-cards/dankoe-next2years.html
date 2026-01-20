@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Infographic - Dan Koe (Concise)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'swiss-paper': '#F5F2EB',
+                        'swiss-ink': '#1A1918',
+                        'swiss-gray': '#2C2C2C',
+                    },
+                    fontFamily: {
+                        'sans-cn': ['"Noto Sans SC"', 'sans-serif'],
+                        'serif-cn': ['"Noto Serif SC"', 'serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                    },
+                    spacing: {
+                        'card-w': '900px',
+                        'card-h': '1200px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 强制打印背景色 */
+        @media print {
+            body { -webkit-print-color-adjust: exact; }
+        }
+        /* 瑞士风格排版微调 */
+        .hyphens-auto {
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+        .text-justify-spacing {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-8 overflow-x-auto">
+
+    <div class="flex gap-12 scale-[0.6] md:scale-[0.8] lg:scale-100 origin-top-left">
+
+        <div class="w-card-w h-card-h bg-swiss-paper text-swiss-ink border-[3px] border-swiss-ink flex flex-col relative shrink-0 shadow-2xl">
+            
+            <div class="h-[30%] w-full flex flex-col justify-center px-12 border-b-[3px] border-swiss-ink relative">
+                <div class="absolute top-6 left-6 font-sans-cn font-bold tracking-widest text-sm uppercase">
+                    The Methodology / Vol.01
+                </div>
+                <div class="absolute top-6 right-6 font-display font-black tracking-widest text-xl">
+                    DAN KOE
+                </div>
+                
+                <h1 class="font-display font-black text-[140px] leading-[0.85] tracking-tight mt-4 uppercase">
+                    通才的时代
+                </h1>
+                
+                <div class="absolute bottom-4 right-6 font-serif-cn font-bold text-lg italic opacity-60">
+                    [ 第二次文艺复兴 ]
+                </div>
+            </div>
+
+            <div class="h-[55%] w-full grid grid-cols-2">
+                
+                <div class="h-full border-r-[3px] border-swiss-ink p-10 flex flex-col justify-between relative group hover:bg-swiss-ink hover:text-swiss-paper transition-colors duration-300">
+                    <i class="fa-solid fa-industry absolute top-6 right-6 text-6xl opacity-10 group-hover:opacity-20 group-hover:text-swiss-paper"></i>
+                    <div>
+                        <h2 class="font-sans-cn font-black text-6xl mb-8 tracking-tighter">
+                            工业<br>囚笼
+                        </h2>
+                        <div class="w-16 h-2 bg-current mb-8"></div>
+                    </div>
+                    <p class="font-serif-cn font-bold text-3xl leading-snug text-justify-spacing">
+                        社会让你误以为“专精”是唯一的出路。这是一场彻头彻尾的骗局。工业时代的教育旨在制造流水线上的螺丝钉，而非拥有主权的个体。只掌握一项技能，在 AI 时代等同于自断后路，陷入机械化的生存死局。
+                    </p>
+                    <div class="font-mono text-sm mt-6 opacity-60">PROBLEM: SPECIALIZATION TRAP</div>
+                </div>
+
+                <div class="h-full p-10 flex flex-col justify-between relative group hover:bg-swiss-ink hover:text-swiss-paper transition-colors duration-300">
+                    <i class="fa-solid fa-fingerprint absolute top-6 right-6 text-6xl opacity-10 group-hover:opacity-20 group-hover:text-swiss-paper"></i>
+                    <div>
+                        <h2 class="font-sans-cn font-black text-6xl mb-8 tracking-tighter">
+                            通才<br>复兴
+                        </h2>
+                        <div class="w-16 h-2 bg-current mb-8"></div>
+                    </div>
+                    <p class="font-serif-cn font-bold text-3xl leading-snug text-justify-spacing">
+                        这是属于博学者的时代。你无尽的好奇心并非弱点，而是构建独特世界观的终极优势。真正的护城河在于不同兴趣的“交集”。通过自我教育实现自给自足，将多元兴趣铸造成无法被复制的个人载体。
+                    </p>
+                    <div class="font-mono text-sm mt-6 opacity-60">SOLUTION: THE POLYMATH VESSEL</div>
+                </div>
+            </div>
+
+            <div class="h-[15%] w-full border-t-[3px] border-swiss-ink flex items-center justify-center p-8 bg-swiss-ink text-swiss-paper">
+                <blockquote class="font-serif-cn font-bold text-4xl text-center leading-normal">
+                    “他们想把你装进盒子里，别让他们得逞。<br>
+                    这是你最后的优势。”
+                </blockquote>
+            </div>
+
+            <div class="absolute top-[30%] left-0 w-4 h-[3px] bg-swiss-ink -ml-[3px]"></div>
+            <div class="absolute top-[85%] right-0 w-4 h-[3px] bg-swiss-ink -mr-[3px]"></div>
+        </div>
+
+        <div class="w-card-w h-card-h bg-swiss-paper text-swiss-ink border-[3px] border-swiss-ink flex flex-col relative shrink-0 shadow-2xl">
+            
+            <div class="h-[10%] border-b-[3px] border-swiss-ink flex justify-between items-center px-8 bg-white/50">
+                <div class="font-sans-cn font-black text-4xl uppercase tracking-tighter">
+                    Tactics <span class="text-swiss-ink/40 font-serif-cn italic text-3xl ml-2">实操指南</span>
+                </div>
+                <div class="font-mono font-bold text-5xl opacity-20">02</div>
+            </div>
+
+            <div class="h-[85%] grid grid-cols-2 gap-[3px] bg-swiss-ink border-b-[3px] border-swiss-ink">
+                
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-dharmachakra"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        1. 打造载体<br><span class="text-lg font-bold opacity-60">The Vessel</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        构建承载所有兴趣的“载体”业务，是摆脱可替代性的唯一解。这不仅是生计，更是将好奇心转化为有意义工作的途径。别寻找工作，去创造工作。
+                    </p>
+                </div>
+
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        2. 利益三角<br><span class="text-lg font-bold opacity-60">Self-Triangle</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        通才源于自我教育、自身利益与自给自足的三角闭环。为蓬勃发展而学，而非完成任务。不再依赖外部解释时，便拥有了主权，兴趣也将进化为生计。
+                    </p>
+                </div>
+
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        3. 独特视差<br><span class="text-lg font-bold opacity-60">Unique Perspective</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        AI 时代唯一的壁垒是“观点”。每个兴趣留下的思维“残留物”，增加了你解释现实的维度。跨领域的交集（如懂哲学的销售员）是无法被算法取代的降维打击。
+                    </p>
+                </div>
+
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-building-user"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        4. 品牌环境<br><span class="text-lg font-bold opacity-60">Brand Environment</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        品牌即你创造的“小世界”。你自己就是客户画像：不断学习，然后转身帮助“过去的自己”。你的故事与挣扎是信任基石。“你”本身就是不可复制的利基市场。
+                    </p>
+                </div>
+
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-box-archive"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        5. 创意博物馆<br><span class="text-lg font-bold opacity-60">Idea Museum</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        建立高密度思想库。捕捉高信号想法，立即记录。不做信息搬运工，要做思想策展人。去阅读古书，收集稀缺洞见。这个“创意博物馆”是对抗算法焦虑的最强武器。
+                    </p>
+                </div>
+
+                <div class="bg-swiss-paper p-8 flex flex-col relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 text-[160px] opacity-[0.04] text-swiss-ink rotate-[-10deg]">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="font-sans-cn font-black text-4xl mb-4 uppercase">
+                        6. 销售系统<br><span class="text-lg font-bold opacity-60">Systems Economy</span>
+                    </h3>
+                    <p class="font-serif-cn font-semibold text-[24px] leading-relaxed text-justify-spacing flex-grow">
+                        人们不要通用方案，只要“你的”方案。将方法论产品化——你的工作流即产品。在系统经济中，公开迭代这个系统，吸引志同道合的部落，这才是获利之道。
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="h-[5%] w-full flex items-center justify-between px-8 text-sm font-mono uppercase tracking-widest bg-swiss-paper">
+                <span>Source: Dan Koe Blog</span>
+                <span>Designed with AI</span>
+                <span>2026.01.12</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

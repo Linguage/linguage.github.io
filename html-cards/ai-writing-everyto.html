@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards - Writing First</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        swiss: {
+                            bg: '#F5F2EB', // Warm Paper
+                            ink: '#1A1918', // Deep Ink
+                            dim: '#2C2C2C', // Watermark
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hyphen-auto {
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+        }
+        /* Grid lines adjustment */
+        .grid-bordered > div {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center p-8 overflow-x-auto">
+
+    <div class="flex gap-8 scale-[0.8] origin-top">
+
+        <div class="w-[900px] h-[1200px] bg-swiss-bg text-swiss-ink border-[3px] border-swiss-ink flex flex-col relative shrink-0">
+            
+            <div class="h-[30%] flex flex-col justify-center px-12 border-b-[3px] border-swiss-ink">
+                <p class="font-sans font-bold tracking-[0.2em] text-lg uppercase mb-2 opacity-60">Eleanor Warnock // Every.to</p><br>
+                <h1 class="font-display font-black text-[8rem] leading-[0.85] tracking-tighter">
+                    写作优先者
+                </h1>
+                <p class="font-sans font-black text-2xl tracking-widest mt-4 uppercase text-right"><br>
+                    The Writing-First Practitioner</p>
+            </div>
+
+            <div class="h-[45%] grid grid-cols-2 border-b-[3px] border-swiss-ink">
+                
+                <div class="border-r-[3px] border-swiss-ink p-10 flex flex-col justify-between relative">
+                    <div class="absolute top-4 left-4 text-9xl font-display opacity-[0.05]">01</div>
+                    <div>
+                        <h2 class="font-sans font-black text-5xl mb-6">算法<br>洪流</h2>
+                        <div class="w-16 h-2 bg-swiss-ink mb-8"></div>
+                    </div>
+                    <p class="font-serif font-bold text-2xl leading-relaxed text-justify">
+                        AI 让内容生成的成本趋近于零，世界正被平庸的文本淹没。当“写出文字”不再是门槛，只有“写出观点”才是稀缺资产。算法可以无限复制平庸，却无法模仿灵魂。
+                    </p>
+                </div>
+
+                <div class="p-10 flex flex-col justify-between relative">
+                    <div class="absolute top-4 left-4 text-9xl font-display opacity-[0.05]">02</div>
+                    <div>
+                        <h2 class="font-sans font-black text-5xl mb-6">思维<br>护城河</h2>
+                        <div class="w-16 h-2 bg-swiss-ink mb-8"></div>
+                    </div>
+                    <p class="font-serif font-bold text-2xl leading-relaxed text-justify">
+                        写作不仅是营销，更是思维的脚手架。真正的“执笔者”通过文字梳理逻辑、建立声望。那些由实战经验铸就的独特声音与人际网络，是 Prompt 无法生成的绝对壁垒。
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex-grow flex items-center justify-center p-12 text-center bg-swiss-ink text-swiss-bg">
+                <blockquote class="font-serif font-bold text-3xl leading-snug w-3/4">
+                    “那些通过写作锤炼出的独特声音与人际网络，是任何 AI 提示词都无法凭空生成的护城河。”
+                </blockquote>
+            </div>
+
+            <div class="absolute bottom-2 right-4 text-xs font-sans opacity-60 text-swiss-bg">
+                SOURCE: EVERY.TO | DESIGNED WITH AI | 2026
+            </div>
+        </div>
+
+
+        <div class="w-[900px] h-[1200px] bg-swiss-bg text-swiss-ink border-[3px] border-swiss-ink flex flex-col shrink-0 p-8">
+            
+            <div class="flex justify-between items-end border-b-[3px] border-swiss-ink pb-6 mb-8">
+                <div>
+                    <h1 class="font-sans font-black text-6xl uppercase tracking-tighter">Tactics</h1>
+                    <p class="font-serif font-bold text-xl mt-2">为什么企业必须雇佣“执笔者”</p>
+                </div>
+                <div class="text-8xl font-display font-black leading-none opacity-20">02</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 flex-grow">
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-brain absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">思维厘清</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        写作不仅仅是表达，更是思维的最高级纪律。播客也许只是思维的初稿，但公开写作要求将观点提炼得极度清晰。这是一种通过文字强迫大脑进行决策的过程，反复的“写作-思考”循环，最终沉淀为不可动摇的逻辑判断力，这是任何即兴表达无法比拟的深度。
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-hourglass-half absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">信任代理</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        在风投、咨询或高管教练等领域，真正的业绩结果往往滞后数年才能显现。在结果未知时，写作就是能力的“临时信号”。AI 可以生成内容，但无法模拟基于多年经验积累的商业判断。写作是你当下向客户和市场证明“我具备专业判断力”的唯一即时凭证。
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-magnet absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">网络磁石</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        这是最高级的被动社交。传统的推销需要你主动出击，而“写作优先者”通过持续输出高质量观点，让投资人、合作伙伴和顶尖人才自动找上门。当你在睡觉时，你的文章在为你建立信任。在这个信息过载的世界，你通过文字构建的认知网络就是最深的护城河。
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-fingerprint absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">风格壁垒</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        AI 工具倾向于将所有内容“平均化”至平庸的安全区。在这样的环境下，独特的个人语调（Voice）变得价值连城。无论是“不废话”的犀利，还是“极度坦诚”的自我剖析，这种鲜活的人格魅力无法被算法模仿，它是你在同质化内容海洋中脱颖而出的灯塔。
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-bolt absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">敏捷洞察</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        在科技等快速迭代的行业，机会稍纵即逝。写作迫使你进行实时的信息合成（Synthesis）。当其他人还在等待局势明朗时，执笔者已经通过写作完成了对新趋势的消化和预判。AI 只能总结已知的过去，而写作能帮你构建关于未知的独特视角。
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-swiss-ink p-6 relative flex flex-col overflow-hidden">
+                    <i class="fa-solid fa-building absolute -bottom-6 -right-6 text-[10rem] opacity-[0.08]"></i>
+                    <h3 class="font-sans font-black text-3xl mb-3 z-10">企业资产</h3>
+                    <p class="font-serif font-semibold text-xl leading-snug text-justify flex-grow z-10">
+                        雇佣一位“写作优先者”，等于获得了一个免费的高级营销渠道。他们自带流量和受众，且沟通成本极低。糟糕的内部沟通每年给企业造成巨额损失，而擅长写作的员工天生具备清晰传达信息的能力。让他们在 LinkedIn 上发声，是企业也是性价比最高的品牌投资。
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="mt-8 pt-4 border-t-[2px] border-swiss-ink flex justify-between text-sm font-sans font-bold uppercase tracking-wider">
+                <span>Ref: Eleanor Warnock "Writing-first Practitioner"</span>
+                <span>Designed with AI (Claude)</span>
+                <span>Jan 08, 2026</span>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

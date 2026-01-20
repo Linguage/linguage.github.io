@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Infographic - The Suck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--ink-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--ink-black);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Typography overrides for extreme weight */
+        .font-black-serif { font-family: 'Noto Serif SC', serif; font-weight: 900; }
+        .font-bold-serif { font-family: 'Noto Serif SC', serif; font-weight: 700; }
+        .font-heavy-sans { font-family: 'Noto Sans SC', sans-serif; font-weight: 900; }
+        .font-playfair { font-family: 'Playfair Display', serif; font-weight: 900; }
+        
+        /* Layout Utilities */
+        .border-ink { border-color: var(--ink-black); }
+        .text-ink { color: var(--ink-black); }
+        
+        /* Watermark Icon */
+        .watermark-icon {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 140px; /* Reduced slightly to fit grid better if needed, but keeping huge */
+            opacity: 0.06;
+            color: #000;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+
+        <div class="swiss-card p-10">
+            <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink pb-6">
+                <div class="flex justify-between items-end mb-4">
+                    <span class="font-heavy-sans text-xl tracking-[0.2em] uppercase">The Philosophy</span>
+                    <span class="font-playfair text-xl">NO.01</span>
+                    
+                </div>
+                <br>
+                <h1 class="font-black-serif text-[130px] leading-[0.9] tracking-tighter w-full text-left">
+                    痛苦<span class="text-[132px]">即意义</span>
+                </h1>
+                <div class="mt-4 font-heavy-sans text-2xl text-right w-full"><br>THE SUCK IS WHY WE'RE HERE</div>
+            </div>
+
+            <div class="h-[55%] grid grid-cols-2 relative">
+                <div class="absolute inset-y-0 left-1/2 w-[3px] bg-[#1A1918] -translate-x-1/2"></div>
+
+                <div class="h-full flex flex-col justify-start p-8 pr-12">
+                    <h2 class="font-heavy-sans text-6xl mb-8 leading-none">思维<br>陷阱</h2>
+                    <p class="font-bold-serif text-3xl leading-snug text-justify">
+                        AI创作存在恐怖谷效应。它不仅会逻辑转向，更会构建脆弱的思想桥梁。一旦依赖这种无需“痛苦”的捷径，人类将失去在困境中打磨逻辑、建立独特联系的能力。
+                    </p>
+                </div>
+
+                <div class="h-full flex flex-col justify-start p-8 pl-12">
+                    <h2 class="font-heavy-sans text-6xl mb-8 leading-none">创作<br>本质</h2>
+                    <p class="font-bold-serif text-3xl leading-snug text-justify">
+                        写作绝非单纯产出，而是对大脑的日常锻炼。那些卡壳、难熬的时刻，恰恰是价值所在。消除困难就是消除思考本身，只有亲自克服阻力，才能获得真正的洞见。
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-[15%] flex items-center justify-center border-t-[4px] border-ink p-6">
+                <p class="font-bold-serif text-4xl text-center leading-tight w-[90%]">
+                    “追求简单的路径只会通向平庸。<br>只有亲自穿越痛苦的过程，才能收获思想的全部回报。”
+                </p>
+            </div>
+            
+            <div class="absolute bottom-4 left-10 right-10 flex justify-between text-sm font-heavy-sans border-t border-ink pt-2 mt-2 opacity-60">
+                <span>SOURCE: HACKER NEWS / NIK.ART</span>
+                <span>DESIGNED WITH AI</span>
+                <span>DATE: 2026.01.04</span>
+            </div>
+        </div>
+
+        <div class="swiss-card p-10">
+            <div class="h-[10%] flex justify-between items-end border-b-[4px] border-ink pb-4 mb-6">
+                <h1 class="font-playfair text-7xl leading-none">TACTICS</h1>
+                <span class="font-heavy-sans text-7xl leading-none">02</span>
+            </div>
+
+            <div class="h-[85%] grid grid-cols-2 gap-6 content-start">
+                
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-robot watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">恐怖谷效应</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        AI 生成的内容乍看完美，实则逻辑脆弱。它往往在不该自信时盲目自信，在论证关键点上南辕北辙。这种“似是而非”的填充物，无法构建坚实的思想大厦。
+                    </p>
+                </div>
+
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-brain watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">思考的锻炼</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        写作的目的不是为了得到一篇“文章”，而是为了确保我们没有忘记“如何思考”。每日的创作过程，本质上是对大脑认知肌肉的高强度训练，绝不可被替代。
+                    </p>
+                </div>
+
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-pen-nib watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">困境即价值</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        当你在创作中陷入停滞（Stuck），这并非由于系统故障，而是系统特性。这种卡壳迫使你进行深度挖掘。用 AI 填补空白是作弊，它剥夺了你突破瓶颈的机会。
+                    </p>
+                </div>
+
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-book-open watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">调研的必要</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        Ezra Klein 指出，AI 无法替代亲自阅读。AI 摘要只能提供平均值，而作者通过逐字阅读实体书，才能捕捉到那些基于个人经验的、AI 永远无法建立的独特连接。
+                    </p>
+                </div>
+
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-user-shield watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">对读者的承诺</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        坚持原创是一种仪式，也是对读者的庄重承诺。无论是否拥有庞大的受众，承诺“每天出现”并在此刻真诚地表达，这种行为本身的价值远超流量数据。
+                    </p>
+                </div>
+
+                <div class="relative border-[3px] border-ink p-6 flex flex-col h-full bg-transparent overflow-hidden">
+                    <i class="fa-solid fa-mountain watermark-icon"></i>
+                    <h3 class="font-heavy-sans text-4xl mb-3 z-10">拒绝平庸</h3>
+                    <p class="font-bold-serif text-[26px] leading-snug text-justify z-10 flex-grow">
+                        当大多数人选择 AI 捷径时，坚持原创反而更容易脱颖而出。逃避痛苦的过程只是海市蜃楼，唯有那些不畏艰难、亲自耕耘的创造者，才能避免陷入平庸的泥沼。
+                    </p>
+                </div>
+
+            </div>
+
+             <div class="absolute bottom-4 left-10 right-10 flex justify-between text-sm font-heavy-sans border-t border-ink pt-2 opacity-60">
+                <span>SOURCE: HACKER NEWS</span>
+                <span>DESIGNED WITH AI</span>
+                <span>DATE: 2026.01.04</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

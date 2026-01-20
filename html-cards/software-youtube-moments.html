@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,900;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .swiss-card {
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            width: 900px;
+            height: 1200px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #1A1918;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Typography System */
+        .font-main { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Utilities */
+        .border-ink { border-color: #1A1918; }
+        .text-ink { color: #1A1918; }
+        
+        /* Custom Tracking for Headings */
+        .tight-heading { letter-spacing: -0.05em; }
+    </style>
+</head>
+<body>
+
+    <div class="flex gap-12 transform scale-[0.5] origin-top md:scale-75 xl:scale-100 transition-all">
+
+        <div class="swiss-card">
+            <div class="h-[30%] flex flex-col justify-center px-10 border-b-[3px] border-ink relative">
+                <div class="absolute top-6 left-6 text-xl font-sans-sc font-bold tracking-widest uppercase">
+                    Ref. 2026 / a16z / Software's YouTube Moment is Happening Now
+                </div>
+                <h1 class="font-main font-black text-[7rem] leading-[1.05] uppercase tight-heading mt-4">
+                    软件：<br>
+                    一种新媒体
+                </h1>
+                <div class="absolute bottom-6 right-6 text-2xl font-serif-sc font-bold italic">
+                    By Anish A
+                </div>
+            </div>
+
+            <div class="h-[50%] grid grid-cols-2">
+                <div class="border-r-[3px] border-ink p-10 flex flex-col justify-between">
+                    <div>
+                        <span class="block text-8xl font-sans-sc font-black opacity-10 mb-[-20px] ml-[-10px]">01</span>
+                        <h2 class="text-6xl font-sans-sc font-black mb-8 leading-none mt-4">
+                            创作<br>平权
+                        </h2>
+                        <p class="text-3xl font-serif-sc font-bold leading-snug text-justify">
+                            曾需数周的编程构建，如今被 Claude Code 与 Cursor 压缩至数小时。不懂代码不再是阻碍，技术门槛彻底崩塌，唯一的限制仅剩你的想象力。
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-layer-group text-6xl self-end opacity-20"></i>
+                </div>
+
+                <div class="p-10 flex flex-col justify-between">
+                    <div>
+                        <span class="block text-8xl font-sans-sc font-black opacity-10 mb-[-20px] ml-[-10px]">02</span>
+                        <h2 class="text-6xl font-sans-sc font-black mb-8 leading-none mt-4">
+                            媒介<br>进化
+                        </h2>
+                        <p class="text-3xl font-serif-sc font-bold leading-snug text-justify">
+                            软件正从单纯的效用工具转变为自我表达的媒介。如同 YouTube 视频，应用变得即时、有趣且富有传播性，人人皆可发布自己的数字作品。
+                        </p>
+                    </div>
+                    <i class="fa-solid fa-shapes text-6xl self-end opacity-20"></i>
+                </div>
+            </div>
+
+            <div class="h-[20%] border-t-[3px] border-ink flex items-center justify-center p-12 text-center relative bg-transparent">
+                <div class="absolute top-2 bottom-2 left-2 right-2 border border-ink opacity-30"></div>
+                
+                <p class="text-4xl font-serif-sc font-bold leading-relaxed w-full">
+                    “AI 极大地普及了创造力的杠杆。这不仅是工具的胜利，更是代理权的回归。这是属于年轻一代的黄金时代。”
+                </p>
+            </div>
+
+            <div class="absolute bottom-0 w-full h-8 bg-[#1A1918] text-[#F5F2EB] flex justify-between items-center px-4 text-xs font-sans-sc uppercase tracking-widest">
+                <span>Source: a16z / Anish A</span>
+                <span>Designed with AI</span>
+                <span>Jan 17, 2026</span>
+            </div>
+        </div>
+
+        <div class="swiss-card">
+            <div class="h-[10%] border-b-[3px] border-ink flex justify-between items-end px-8 py-5">
+                <div class="flex flex-col">
+                    <span class="text-sm font-sans-sc font-bold tracking-[0.3em] mb-1">STRATEGY ANALYSIS</span>
+                    <h2 class="text-5xl font-main font-black uppercase">Tactics</h2>
+                </div>
+                <span class="text-6xl font-sans-sc font-black">02</span>
+            </div>
+
+            <div class="h-[87%] grid grid-cols-2 grid-rows-3 bg-transparent">
+                
+                <div class="border-r-[3px] border-b-[3px] border-ink p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">历史重演</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        正如视频制作从好莱坞的大制作时代，演变为 90 年代的独立电影，最终走向 YouTube 的全民创作；软件开发也正遵循相同的轨迹。从昂贵的企业级工程，走向 YC 独立黑客，如今在 LLM 的加持下，我们正式进入了软件的 YouTube 时代。
+                    </p>
+                    <i class="fa-solid fa-clock-rotate-left absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+                <div class="border-b-[3px] border-ink p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">市场扩张</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        “构建者”的市场定义被彻底改写。过去，你是深谙 Next.js 的程序员；现在，你只需拥有好点子。构建软件不再是极客的专利，而是任何对世界有洞察者的权利。市场准入证从“技术能力”变成了“创意与执行力”。
+                    </p>
+                    <i class="fa-solid fa-users-viewfinder absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+                <div class="border-r-[3px] border-b-[3px] border-ink p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">表达工具</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        软件不再仅仅为了解决效用（Utility），它开始承载情绪与幽默。就像 Riley Walz 开发的古怪应用一样，未来的软件可能只是为了博君一笑，或捕捉时代的瞬间情绪。软件成为了像推特帖子一样轻松、短促且富有表现力的文化载体。
+                    </p>
+                    <i class="fa-solid fa-pen-nib absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+                <div class="border-b-[3px] border-ink p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">价值复利</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        内容创作者必须不断更新视频以对抗算法遗忘，大多数内容的生命周期仅为 2-5 年。然而，软件具有独特的“抗衰减性”。一旦发布并获得用户，软件能长期持续积累价值。这是相对于传统媒体创作一个被严重低估的结构性优势。
+                    </p>
+                    <i class="fa-solid fa-chart-line absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+                <div class="border-r-[3px] border-ink p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">模仿效应</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        人类的行为本质是模仿（Mimetic）。正如看见朋友做 YouTuber 会激发你的创作欲，当周围的朋友开始用 AI 轻松构建应用时，这种能量会迅速传染。软件开发正在经历病毒式的社会化普及，借口消失了，剩下的只有行动。
+                    </p>
+                    <i class="fa-solid fa-masks-theater absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+                <div class="p-8 relative flex flex-col group">
+                    <h3 class="text-4xl font-sans-sc font-black mb-4">掌控命运</h3>
+                    <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                        无需为年轻一代想要成为网红而焦虑，他们追求的其实是“代理权”（Agency）。如今这股能量转向了软件。AI 赋予了个体前所未有的杠杆率，这是年轻一代将命运掌握在自己手中的最佳时机。The kids are gonna be alright.
+                    </p>
+                    <i class="fa-solid fa-hand-fist absolute bottom-[-15px] right-[-10px] text-[10rem] opacity-[0.08] z-0"></i>
+                </div>
+
+            </div>
+
+             <div class="absolute bottom-0 w-full h-8 bg-[#1A1918] text-[#F5F2EB] flex justify-between items-center px-4 text-xs font-sans-sc uppercase tracking-widest">
+                <span>Source: a16z / Anish A</span>
+                <span>Designed with AI</span>
+                <span>Jan 17, 2026</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

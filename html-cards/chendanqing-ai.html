@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        /* Custom Colors */
+        .bg-paper { background-color: #F5F2EB; }
+        .text-ink { color: #1A1918; }
+        .border-ink { border-color: #1A1918; }
+        
+        /* Typography Overrides */
+        .font-heavy-serif { font-family: 'Playfair Display', 'Noto Serif SC', serif; }
+        .font-body-serif { font-family: 'Noto Serif SC', serif; }
+        .font-ui-sans { font-family: 'Noto Sans SC', sans-serif; }
+
+        /* Card Container */
+        .card {
+            width: 900px;
+            height: 1200px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* Grid Lines Helper */
+        .grid-line-r { border-right: 3px solid #1A1918; }
+        .grid-line-b { border-bottom: 3px solid #1A1918; }
+        .grid-line-t { border-top: 3px solid #1A1918; }
+    </style>
+</head>
+<body class="gap-10 overflow-x-auto">
+
+    <div class="card bg-paper text-ink border-[4px] border-ink flex flex-col p-8">
+        
+        <div class="h-[32%] flex flex-col justify-center items-start border-b-[4px] border-ink pb-4">
+            <p class="font-ui-sans font-black text-xl tracking-widest uppercase mb-2">Issue. 2026 // AI Crisis</p>
+            <h1 class="font-heavy-serif text-[130px] leading-[0.85] tracking-tight w-full">
+                <br>声影重塑
+            </h1>
+            <p class="font-ui-sans font-bold text-2xl mt-4 self-end text-right w-full">—— 感官与信任的消亡史</p>
+        </div>
+
+        <div class="h-[53%] grid grid-cols-2 border-b-[4px] border-ink">
+            
+            <div class="border-r-[3px] border-ink p-6 flex flex-col justify-between h-full relative group">
+                <div>
+                    <h2 class="font-ui-sans font-black text-5xl mb-6">真伪<br>边界</h2>
+                    <p class="font-body-serif font-bold text-3xl leading-snug text-justify">
+                        AI仅仅需要几秒钟的样本，即可完美复刻已故亲人或公众人物的声线。当声音从“生物特征”异化为“可编辑数据”，听觉不再是验证真实的依据，世界陷入恐怖的不可知论。
+                    </p>
+                </div>
+                <div class="font-ui-sans font-black text-9xl absolute bottom-[-20px] left-[-10px] opacity-[0.05]">01</div>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between h-full relative">
+                <div>
+                    <h2 class="font-ui-sans font-black text-5xl mb-6">灵灵<br>分离</h2>
+                    <p class="font-body-serif font-bold text-3xl leading-snug text-justify">
+                        现代灵魂逃离复杂的现实社交，在算法构建的“安全窝”中寻求慰藉。人类不再通过肉身互动确认彼此，而是沉溺于与机器的虚幻共鸣，开启了人类情感史上的“灵肉剥离”时代。
+                    </p>
+                </div>
+                <div class="font-ui-sans font-black text-9xl absolute bottom-[-20px] right-[-10px] opacity-[0.05]">02</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-6 bg-transparent">
+            <blockquote class="font-body-serif font-bold text-3xl text-center leading-normal italic">
+                “AI对现实的渗透，正如海水渗入泰坦尼克号：<br>
+                起初静默无声地填满底层，直到整座感知大厦倾覆。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-2 w-full left-0 px-8 flex justify-between font-ui-sans font-bold text-xs uppercase tracking-widest opacity-60">
+            <span>Source: 陈丹青</span>
+            <span>Date: 2026.01.05</span>
+            <span>Designed with Gemini</span>
+        </div>
+    </div>
+
+
+    <div class="card bg-paper text-ink border-[4px] border-ink flex flex-col p-8">
+        
+        <div class="flex justify-between items-end border-b-[4px] border-ink pb-6 mb-6">
+            <h1 class="font-heavy-serif text-7xl leading-none">关键机制</h1>
+            <div class="text-right">
+                <span class="block font-ui-sans font-black text-6xl">06</span>
+                <span class="block font-ui-sans font-bold text-xl tracking-[0.2em] uppercase">Dimensions</span>
+            </div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2 grid-rows-3 gap-6">
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-fingerprint absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[-15deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">声音复刻</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    技术模糊了生与死的界限。AI不仅能重现大师的声线让人感动，更能通过Deepfake制造完美的伪证。当声音可以被无痕伪造，法律与道德的信任基石被彻底抽空。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-heart-crack absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[10deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">情感异化</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    AI成为现代孤独症的特效药。人们回避现实关系的摩擦，转向顺从的AI伴侣。这种“灵灵分离”导致肉身互动的萎缩，人类正在通过技术手段自我隔离于真实世界之外。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-scale-unbalanced absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[-5deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">信任危机</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    “眼见为实”已成历史。随着声音和图像被低成本地生成与篡改，严肃事物的神圣性被消解。话语权被虚假化，社会陷入一种无法验证真相的普遍焦虑之中。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-feather-pointed absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[15deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">真实稀释</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    事物的“重量”正在消失。名画被解构为短视频笑料，深刻的情感被压缩为廉价的数据流。在AI的无限复制下，原本厚重的真实感变得轻浮，一切皆可被娱乐化和消费。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-user-slash absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[-10deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">无用阶级</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    随着AI接管知识搬运工作，传统的白领职业（教师、律师、记者）面临存在的危机。人类社会可能分化出一个庞大的“无用阶级”，我们正处于从劳动者向旁观者转型的阵痛期。
+                </p>
+            </div>
+
+            <div class="relative border-[3px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-ship absolute -bottom-6 -right-6 text-[180px] opacity-[0.06] rotate-[5deg]"></i>
+                <h3 class="font-ui-sans font-black text-3xl mb-3">静默沉没</h3>
+                <p class="font-body-serif font-semibold text-[22px] leading-snug text-justify flex-grow">
+                    这不是一场爆炸，而是一次漫灌。如同泰坦尼克号的沉没，改变始于不可见的三等舱。当你意识到海水漫过脚踝时，旧有的观看习惯和交流方式实际上已经彻底消亡。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-2 w-full left-0 px-8 flex justify-between font-ui-sans font-bold text-xs uppercase tracking-widest opacity-60">
+            <span>Source: 陈丹青</span>
+            <span>Date: 2026.01.05</span>
+            <span>Designed with Gemini</span>
+        </div>
+    </div>
+
+</body>
+</html>

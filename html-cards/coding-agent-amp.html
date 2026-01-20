@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驾驭编程代理的新兴技能</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="驾驭编程代理的新兴技能">
+<meta property="og:url" content="https://linguage.github.io/articles/coding-agent-amp.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="驾驭编程代理的新兴技能">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/coding-agent-amp.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Slate, Zinc, Stone) with Sky Blue Accent -->
+    <!-- Application Structure Plan: A narrative single-page experience flowing from past to future. It starts with the evolution of AI eras (interactive timeline), delves into the core design philosophy (card grid), then showcases the Amp Agent demo with a detailed, step-by-step visual breakdown. It compares user strategies with an interactive radar chart, and concludes with the future outlook. This structure enhances understanding by transforming dense text into a guided, interactive journey. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Three Eras of AI -> Goal: Show Change -> Viz: Interactive Timeline -> Interaction: Click to expand -> Justification: Engaging way to present historical progression. -> Library/Method: HTML/CSS/JS.
+        - Report Info: Amp Agent Demo -> Goal: Explain Process -> Viz: Step-by-step card flow with icons -> Interaction: Static display -> Justification: Visually breaks down a complex workflow into digestible steps, highlighting key capabilities. -> Library/Method: HTML/Tailwind.
+        - Report Info: Power User Skills -> Goal: Compare Profiles -> Viz: Radar Chart -> Interaction: Toggle buttons -> Justification: Effectively visualizes multi-dimensional skill gaps. -> Library/Method: Chart.js.
+        - Report Info: Best Practices vs. Anti-Patterns -> Goal: Compare -> Viz: Two-column layout -> Interaction: Static display -> Justification: Direct comparison is clear and actionable. -> Library/Method: HTML/Tailwind. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+        .era-content, .amp-step-content {
+            display: none;
+            transition: all 0.5s ease-in-out;
+        }
+        .era-content.active, .amp-step-content.active {
+            display: block;
+        }
+        .tab-button.active {
+            background-color: #0ea5e9; /* sky-500 */
+            color: white;
+            border-color: #0ea5e9;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .step-connector {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #e2e8f0; /* slate-200 */
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 800px; /* Limit max width for larger screens */
+            margin: 0 auto; /* Center the video */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="antialiased">
+
+    <header class="text-center py-12 md:py-20 bg-slate-100">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">驾驭编程代理的新兴技能</h1>
+            <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                深入了解 Beyang Liu 关于 AI 编程范式转变的见解，探索从“副驾驶”到“自主代理”的演进之路。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 md:py-16 space-y-20 md:space-y-24">
+
+        <section id="evolution" class="section-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">范式转变：AI 编码工具的三大时代</h2>
+                <p class="mt-3 text-slate-500 max-w-2xl mx-auto">模型能力的“阶跃函数式转变”推动了应用架构的演进。点击下方标签，探索每个时代的特点。</p>
+            </div>
+            
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="flex justify-center border-b border-slate-200 mb-8">
+                    <button class="era-tab tab-button py-3 px-6 text-sm md:text-base font-medium text-slate-500 cursor-pointer rounded-t-lg transition-colors duration-300 active" data-target="gpt3-content">GPT-3 时代 (2022)</button>
+                    <button class="era-tab tab-button py-3 px-6 text-sm md:text-base font-medium text-slate-500 cursor-pointer rounded-t-lg transition-colors duration-300" data-target="chatgpt-content">ChatGPT 时代 (2023)</button>
+                    <button class="era-tab tab-button py-3 px-6 text-sm md:text-base font-medium text-slate-500 cursor-pointer rounded-t-lg transition-colors duration-300" data-target="agent-content">代理时代 (当下)</button>
+                </div>
+                
+                <div class="bg-slate-100 p-6 md:p-8 rounded-xl shadow-sm min-h-[150px]">
+                    <div id="gpt3-content" class="era-content active">
+                        <h3 class="text-2xl font-bold text-sky-600 mb-3">1. 文本补全时代</h3>
+                        <p class="text-slate-600 leading-relaxed">以 GPT-3 等文本补全模型为主导。主要应用是 <strong>“代码副驾驶” (Copilot)</strong> 或 <strong>“自动补全”</strong>。AI 根据前文上下文，预测并建议下一行或下一段代码。交互是被动和线性的，主要用于提升编码速度。</p>
+                    </div>
+                    <div id="chatgpt-content" class="era-content">
+                        <h3 class="text-2xl font-bold text-sky-600 mb-3">2. 指令交互时代</h3>
+                        <p class="text-slate-600 leading-relaxed">随着 GPT-3.5 等指令调优模型的出现，<strong>聊天机器人 (Chatbot)</strong> 成为主流。开发者可以通过自然语言提问，获取代码解释、调试建议，交互从被动建议变为了主动问答。</p>
+                    </div>
+                    <div id="agent-content" class="era-content">
+                        <h3 class="text-2xl font-bold text-sky-600 mb-3">3. 自主代理时代</h3>
+                        <p class="text-slate-600 leading-relaxed">当前我们正处于 <strong>代理 (Agent)</strong> 时代，模型具备了 <strong>工具使用</strong> 和 <strong>自主操作</strong> 的能力。AI 可以主动执行任务：<strong>直接编辑文件、运行测试、与外部 API 交互</strong>。开发者也需要从“操作者”转变为“指挥者”。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="amp-demo" class="section-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">Amp 代理实战演示</h2>
+                <p class="mt-3 text-slate-500 max-w-2xl mx-auto">一个真实案例：看 Amp 如何在生产代码库中自主完成一个看似简单、实则微妙的任务。</p>
+            </div>
+            <div class="max-w-5xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-lg border border-slate-200">
+                <div class="flex items-center justify-between mb-8 flex-wrap">
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-700 mb-4 md:mb-0">任务：为 Linear 连接器定制图标</h3>
+                    <div class="flex space-x-2">
+                        <span class="amp-step-tab tab-button text-sm px-3 py-1 rounded-full border-2 border-slate-300 cursor-pointer active" data-target="step1-content">1</span>
+                        <span class="amp-step-tab tab-button text-sm px-3 py-1 rounded-full border-2 border-slate-300 cursor-pointer" data-target="step2-content">2</span>
+                        <span class="amp-step-tab tab-button text-sm px-3 py-1 rounded-full border-2 border-slate-300 cursor-pointer" data-target="step3-content">3</span>
+                        <span class="amp-step-tab tab-button text-sm px-3 py-1 rounded-full border-2 border-slate-300 cursor-pointer" data-target="step4-content">4</span>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div id="step1-content" class="amp-step-content active">
+                        <h4 class="text-lg font-semibold text-sky-600 mb-2">第1步：理解任务与工具使用</h4>
+                        <p class="text-slate-600">Amp 接到任务后，首先调用 <strong>Linear API 工具</strong> 搜索相关 Issue，准确找到了任务描述。这展示了其与外部服务交互、理解人类意图的能力。</p>
+                    </div>
+                    <div id="step2-content" class="amp-step-content">
+                        <h4 class="text-lg font-semibold text-sky-600 mb-2">第2步：规划与执行</h4>
+                        <p class="text-slate-600">Amp 启动一个 <strong>搜索子代理</strong> 来收集代码库上下文，并生成一个待办事项列表进行规划。随后，它开始读取 Svelte 前端文件并进行增量修改，同时检查诊断信息以保证代码质量。</p>
+                    </div>
+                    <div id="step3-content" class="amp-step-content">
+                        <h4 class="text-lg font-semibold text-sky-600 mb-2">第3步：发现细微问题</h4>
+                        <p class="text-slate-600">首次修改后，图标只在“管理页”更新。Amp 发现了这个细微问题，并意识到“设置页”因安全策略未获取完整配置信息，导致图标不显示。这体现了其强大的 <strong>问题诊断能力</strong>。</p>
+                    </div>
+                    <div id="step4-content" class="amp-step-content">
+                        <h4 class="text-lg font-semibold text-sky-600 mb-2">第4步：智能解决与完成</h4>
+                        <p class="text-slate-600">Amp 根据诊断结果，调整了代码，只将必要的非机密信息传递给前端。最终，<strong>图标在所有相关页面都正确显示</strong>，完美解决了这个比表面更复杂的任务，展现了其 <strong>端到端的自主解决能力</strong>。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="playbook" class="section-fade-in">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">高阶玩家手册：最佳实践与反模式</h2>
+                <p class="mt-3 text-slate-500 max-w-2xl mx-auto">掌握正确的使用方法是发挥代理全部潜力的关键。以下是高级用户总结的经验与需要避免的误区。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+                <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-200">
+                    <h3 class="text-2xl font-bold text-emerald-700 mb-4">最佳实践 👍</h3>
+                    <ul class="space-y-3 text-emerald-800">
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">✍️</span><span><strong>详细的提示：</strong>提供充足的上下文和明确的指令，像给同事分配任务一样。</span></li>
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">🔄</span><span><strong>构建反馈循环：</strong>引导代理使用测试、构建工具来验证其工作，实现快速迭代。</span></li>
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">🧠</span><span><strong>深化代码理解：</strong>利用代理快速学习新代码库、理解复杂逻辑，而非跳过学习过程。</span></li>
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">🧐</span><span><strong>辅助代码审查：</strong>让代理总结大型变更、发现潜在问题，进行更彻底的审查。</span></li>
+                    </ul>
+                </div>
+                <div class="bg-rose-50 p-6 rounded-xl border border-rose-200">
+                    <h3 class="text-2xl font-bold text-rose-700 mb-4">反模式 👎</h3>
+                    <ul class="space-y-3 text-rose-800">
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">🔬</span><span><strong>微观管理：</strong>像对待聊天机器人一样，过度干预、步步审查，会扼杀其自主性。</span></li>
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">❓</span><span><strong>提示不足：</strong>给出模糊、简短的指令，尤其在处理复杂生产代码时，会导致结果偏离预期。</span></li>
+                        <li class="flex items-start"><span class="mr-3 mt-1 text-lg">🙈</span><span><strong>盲目信任：</strong>将代理视为“代码生成黑盒”，不经审查直接提交，是极不负责任的行为。</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skill-visualization" class="section-fade-in">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-800">技能可视化：新手 vs. 高手</h2>
+                <p class="mt-3 text-slate-500 max-w-2xl mx-auto">驾驭代理是一项“高上限”的技能。下图展示了新手与高级用户在关键能力维度上的差异。请点击按钮切换视图。</p>
+            </div>
+            <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg max-w-3xl mx-auto">
+                <div class="chart-container">
+                    <canvas id="skillRadarChart"></canvas>
+                </div>
+                <div class="flex justify-center mt-6 space-x-4">
+                    <button id="show-novice-btn" class="chart-btn px-4 py-2 text-sm font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition">新手用户</button>
+                    <button id="show-power-btn" class="chart-btn px-4 py-2 text-sm font-semibold rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400 transition">高级用户</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="section-fade-in text-center bg-slate-100 py-16 rounded-xl">
+             <div class="max-w-3xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-slate-800">未来展望：从操作者到指挥官</h2>
+                <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+                    编程代理并非要取代人类，而是将开发者从繁琐的执行工作中解放出来，成为策略制定者和系统指挥官。掌握这一新兴技能，意味着你将能以 10 倍甚至 100 倍的效率进行创造。这不仅是工具的胜利，更是人类智慧与机器智能协同进化的新篇章。
+                </p>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-slate-500 mb-4">内容提炼自 Beyang Liu 在 AI 工程师世界博览会的演讲。</p>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/F_RyElT_gJk" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">交互式报告由 Gemini 生成</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            function setupTabSystem(tabSelector, contentSelector) {
+                const tabs = document.querySelectorAll(tabSelector);
+                const contents = document.querySelectorAll(contentSelector);
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        const targetId = tab.getAttribute('data-target');
+                        
+                        contents.forEach(content => {
+                            content.classList.remove('active');
+                            if (content.id === targetId) {
+                                content.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
+
+            setupTabSystem('.era-tab', '.era-content');
+            setupTabSystem('.amp-step-tab', '.amp-step-content');
+
+            const radarCtx = document.getElementById('skillRadarChart').getContext('2d');
+            const noviceData = {
+                label: '新手用户',
+                data: [3, 4, 2, 2, 3],
+                backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                borderColor: 'rgba(14, 165, 233, 1)',
+                pointBackgroundColor: 'rgba(14, 165, 233, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
+            };
+            const powerUserData = {
+                label: '高级用户',
+                data: [9, 8, 8, 9, 7],
+                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                borderColor: 'rgba(220, 38, 38, 1)',
+                pointBackgroundColor: 'rgba(220, 38, 38, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(220, 38, 38, 1)'
+            };
+
+            const radarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['提示详细度', '反馈循环构建', '代码审查深度', '工具/子代理运用', '复杂任务处理'],
+                    datasets: []
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: {
+                                font: { size: 12, family: "'Noto Sans SC', sans-serif" },
+                                color: '#334155'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: '#64748b',
+                                stepSize: 2
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14, family: "'Noto Sans SC', sans-serif" }
+                            }
+                        },
+                        tooltip: {
+                             bodyFont: { family: "'Noto Sans SC', sans-serif" },
+                             titleFont: { family: "'Noto Sans SC', sans-serif" }
+                        }
+                    }
+                }
+            });
+
+            const showNoviceBtn = document.getElementById('show-novice-btn');
+            const showPowerBtn = document.getElementById('show-power-btn');
+            const chartBtns = document.querySelectorAll('.chart-btn');
+
+            function updateChart(dataset, activeBtn) {
+                 radarChart.data.datasets = [dataset];
+                 radarChart.update();
+                 chartBtns.forEach(btn => {
+                     btn.classList.remove('bg-sky-500', 'text-white');
+                     btn.classList.add('bg-slate-200', 'text-slate-700');
+                 });
+                 activeBtn.classList.add('bg-sky-500', 'text-white');
+                 activeBtn.classList.remove('bg-slate-200', 'text-slate-700');
+            }
+
+            showNoviceBtn.addEventListener('click', () => updateChart(noviceData, showNoviceBtn));
+            showPowerBtn.addEventListener('click', () => updateChart(powerUserData, showPowerBtn));
+            
+            showNoviceBtn.click();
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.section-fade-in').forEach(section => {
+                observer.observe(section);
+            });
+
+        });
+    </script>
+</body>
+</html>

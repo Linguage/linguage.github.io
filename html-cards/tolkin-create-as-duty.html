@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Infographic - Sub-Creation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'paper': '#F5F2EB',
+                        'ink': '#1A1918',
+                    },
+                    fontFamily: {
+                        'sans': ['"Noto Sans SC"', 'sans-serif'],
+                        'serif': ['"Noto Serif SC"', 'serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                    },
+                    borderColor: {
+                        'DEFAULT': '#1A1918',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-feature-settings: "palt";
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        /* Heavy border utility */
+        .b-heavy { border: 3px solid #1A1918; }
+        .b-t-heavy { border-top: 3px solid #1A1918; }
+        .b-b-heavy { border-bottom: 3px solid #1A1918; }
+        .b-r-heavy { border-right: 3px solid #1A1918; }
+        
+        .justify-fix {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <div class="flex gap-12 transform scale-[0.8] origin-top">
+
+        <div class="card b-heavy p-8 relative">
+            
+            <div class="h-[32%] flex flex-col justify-center items-start leading-none border-b-[3px] border-ink pb-6">
+                <span class="font-display font-black text-4xl tracking-widest mb-2">THE CULTURIST PRESENTS</span>
+                <h1 class="font-sans font-black text-[150px] leading-[0.85] tracking-tighter uppercase mt-2">
+                    创造的召唤
+                </h1>
+                <div class="flex justify-between w-full items-end mt-4">
+                    <span class="font-display font-black text-6xl">Tolkin on SUB-CREATION</span>
+                    <span class="font-serif font-bold text-xl border border-ink px-3 py-1 rounded-full">EST. 1939</span>
+                </div>
+            </div>
+
+            <div class="h-[48%] grid grid-cols-2">
+                
+                <div class="border-r-[3px] border-ink pr-8 pt-8 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-sans font-black text-6xl mb-6">消费囚笼</h2>
+                        <p class="font-serif font-bold text-3xl leading-snug text-justify">
+                            屏幕时代的致命诱惑。我们被动吞咽着源源不断的内容、愤怒与干扰。消费不仅是懒惰，更是一种让灵魂空心化的机制。
+                        </p>
+                    </div>
+                    <div class="font-mono text-xl opacity-60">PROBLEM: CONSUMPTION</div>
+                </div>
+
+                <div class="pl-8 pt-8 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-sans font-black text-6xl mb-6">神性镜像</h2>
+                        <p class="font-serif font-bold text-3xl leading-snug text-justify">
+                            托尔金神学核心：人照着造物主的形象受造，故必须创造。这不是逃避现实，而是复述真理，是参与神圣秩序的唯一方式。
+                        </p>
+                    </div>
+                    <div class="font-mono text-xl opacity-60">PHILOSOPHY: IMAGO DEI</div>
+                </div>
+            </div>
+
+            <div class="h-[20%] border-t-[3px] border-ink flex items-center justify-center p-8 text-center bg-ink">
+                <blockquote class="text-paper font-serif font-bold text-4xl leading-relaxed max-w-4xl">
+                    “我们创造，是因为我们被创造。若你忽视这个呼召，你不仅会错过美，更将失去你的人性。”
+                </blockquote>
+            </div>
+
+            <div class="absolute bottom-2 right-4 text-xs font-mono text-paper opacity-50">
+                SOURCE: J.R.R. TOLKIEN / LEAF BY NIGGLE • DESIGNED WITH AI
+            </div>
+        </div>
+
+
+        <div class="card p-8 b-heavy">
+            
+            <div class="h-[10%] flex justify-between items-end border-b-[3px] border-ink pb-4 mb-6">
+                <div>
+                    <h1 class="font-sans font-black text-6xl tracking-tighter">创造技艺</h1>
+                    <p class="font-serif italic text-2xl mt-1">The Theology of Making</p>
+                </div>
+                <div class="text-right">
+                    <span class="block font-sans font-black text-7xl">02</span>
+                    <span class="block font-mono text-sm tracking-widest">TACTICS & PRAXIS</span>
+                </div>
+            </div>
+
+            <div class="h-[85%] grid grid-cols-2 gap-6">
+                
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-volume-xmark absolute bottom-[-20px] right-[-20px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">抵抗虚无</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        现代生活充满了噪音。每一个“次创造”的行为都是对混乱的一击。停止无休止的滑屏，开始构建。你的作品是对抗熵增的防波堤，让周遭世界恢复秩序。
+                    </p>
+                </div>
+
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-fire-burner absolute bottom-[-20px] right-[-20px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">灵魂锻造</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        创造的果实不仅是作品，更是这过程塑造了谁。通过克服障碍、打磨细节，你锻炼了想象力的肌肉。创造是一种苦修，也是一种让灵魂与永恒对齐的祈祷。
+                    </p>
+                </div>
+
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-hand-holding-heart absolute bottom-[-20px] right-[-20px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">天赋利他</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        你的天赋不是私藏品。你是通过构建和创造来成长的——尤其是为了他人的益处而创造时。这是一个关于“管家职分”的真理：所有的才华必须在服务中倍增。
+                    </p>
+                </div>
+
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-leaf absolute bottom-[-20px] right-[-10px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">尼格尔之叶</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        完美主义是创造者的诅咒。不要像尼格尔那样沉迷于一片叶子而忽略了整棵树。如果你必须等到细节完美才肯前行，你将永远无法完成被托付的任务。
+                    </p>
+                </div>
+
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-hourglass-half absolute bottom-[-20px] right-[-20px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">未竟之功</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        你在爱中开始的事物，即使未在你生前完成，也不会被丢弃。真正的“树”存在于永恒中。不要因为害怕无法完成而拒绝开始，你的任务是播种，而非收割。
+                    </p>
+                </div>
+
+                <div class="relative border border-ink p-5 flex flex-col hover:bg-ink hover:text-paper transition-colors group">
+                    <i class="fa-solid fa-hammer absolute bottom-[-20px] right-[-20px] text-[180px] opacity-[0.06] group-hover:opacity-[0.1] text-ink group-hover:text-paper pointer-events-none"></i>
+                    <h3 class="font-sans font-black text-4xl mb-3 border-b-2 border-current pb-2 w-max">即刻行动</h3>
+                    <p class="font-serif font-bold text-2xl leading-tight justify-fix flex-grow">
+                        不要等待“有朝一日”，就在你此刻所在的小角落。无论是写作、经商还是育儿，怀着崇敬去建设，带着紧迫感去创造。世界需要你的树。
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="h-[5%] flex justify-between items-end border-t border-ink pt-2 mt-4 text-sm font-mono uppercase tracking-wider">
+                <div>Source: The Culturist</div>
+                <div>Date: 2026.01.18</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Swiss Style Infographic - AI Math Workflow</title> <script src="https://cdn.tailwindcss.com"></script> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> <script> tailwind.config = { theme: { extend: { colors: { 'warm-paper': '#F5F2EB', 'deep-ink': '#1A1918', }, fontFamily: { 'sans': ['"Noto Sans SC"', 'sans-serif'], 'serif': ['"Noto Serif SC"', 'serif'], 'display': ['"Playfair Display"', 'serif'], } } } } </script> <style> /* Force exact pixel dimensions for strict ratio preservation if needed, but typical responsive container is used here for viewing. */ .card-container { width: 900px; height: 1200px; flex-shrink: 0; } .text-justify-strict { text-align: justify; text-align-last: left; } </style> </head> <body class="bg-gray-200 p-8 flex flex-col items-center gap-12 min-h-screen overflow-x-auto">
+
+<div class="flex gap-16 scale-[0.6] origin-top md:scale-100 transition-transform duration-300">
+    
+    <div class="card-container bg-warm-paper border-[4px] border-deep-ink flex flex-col p-8 relative overflow-hidden">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-deep-ink">
+            <p class="font-sans font-black text-xl tracking-[0.2em] mb-2 uppercase text-deep-ink">Terence Tao / Erdős Problems</p>
+            <h1 class="font-display font-black text-[120px] leading-[1.05] tracking-tighter text-deep-ink uppercase">
+                AI驱动的<br>数学证明
+            </h1>
+            <p class="font-sans font-bold text-2xl mt-4 text-right pr-4 tracking-widest uppercase">The New Workflow</p>
+        </div>
+
+        <div class="h-[45%] grid grid-cols-2 border-b-[4px] border-deep-ink">
+            <div class="border-r-[4px] border-deep-ink p-6 flex flex-col justify-between">
+                <div>
+                    <span class="font-sans font-black text-6xl block mb-4 opacity-20">01</span>
+                    <h2 class="font-sans font-black text-5xl mb-6 text-deep-ink leading-tight">人机<br>闭环验证</h2>
+                </div>
+                <p class="font-serif font-bold text-[26px] leading-snug text-justify text-deep-ink">
+                    AI不仅解决了Erdős #728问题，更建立了从自然语言证明到Lean形式化验证，再回译为更优自然语言的“乒乓式”迭代闭环。这种交互填补了逻辑间隙,重塑了数学证明范式。
+                </p>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between">
+                <div>
+                    <span class="font-sans font-black text-6xl block mb-4 opacity-20">02</span>
+                    <h2 class="font-sans font-black text-5xl mb-6 text-deep-ink leading-tight">动态<br>文本重构</h2>
+                </div>
+                <p class="font-serif font-bold text-[26px] leading-snug text-justify text-deep-ink">
+                    核心变革在于AI赋予了文本极速重写与定制阐述的能力。数学论文不再是静态的孤本，而是可以针对不同受众，瞬间生成多种严谨度与叙事结构的“高重数”动态制品。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-8 text-center bg-deep-ink/5">
+            <blockquote class="font-serif font-bold text-[34px] leading-tight text-deep-ink">
+                “比起解题本身，更令人着迷的是AI驱动下数学文本的极速重写与动态阐述能力——这标志着‘高重数’论文时代的到来。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-4 left-8 right-8 flex justify-between border-t-[2px] border-deep-ink pt-2 font-sans font-bold text-sm uppercase tracking-widest">
+            <span>Source: Terence Tao Blog</span>
+            <span>Jan 2026</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+
+    <div class="card-container bg-warm-paper border-[4px] border-deep-ink flex flex-col relative overflow-hidden">
+        
+        <div class="h-[100px] border-b-[4px] border-deep-ink flex items-center justify-between px-8 bg-deep-ink text-warm-paper">
+            <h2 class="font-sans font-black text-5xl uppercase tracking-tighter">Tactics / Protocol</h2>
+            <span class="font-display font-black text-6xl">02</span>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2">
+            
+            <div class="border-b-[2px] border-r-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden group">
+                <i class="fa-solid fa-filter absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">模糊定义的澄清</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    Erdős问题的原始表述存在歧义。AI在初步尝试中发现了平凡解，促使人类研究者引入新约束 \(a,b \le (1-\varepsilon)n\)，从而排除了琐碎情况，重新确立了问题预期的精神内核与边界。
+                </p>
+            </div>
+
+            <div class="border-b-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-microchip absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">小常数的突破</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    ChatGPT在调整后的约束条件下，率先给出了常数 C 取较小值时的证明。尽管后续发现文献中已有类似结论，但这开启了从模糊自然语言到精确数学逻辑的关键转化步骤。
+                </p>
+            </div>
+
+            <div class="border-b-[2px] border-r-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-code absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">Lean 交互验证</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    AI工具Aristotle成功将自然语言证明转化为Lean代码。这种形式化验证不仅确认了逻辑的绝对正确性，还反过来自动修复了原证明中的微小错误，实现了“验证即修正”。
+                </p>
+            </div>
+
+            <div class="border-b-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-language absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">自然语言回译</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    通过将Lean证明重新输入ChatGPT，AI生成了更易读的自然语言版本。经多轮对话打磨，填补了逻辑跳跃，使其接近人类写作的流畅度，实现了机器语言向人类语言的高质量回归。
+                </p>
+            </div>
+
+            <div class="border-b-[2px] border-r-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-expand-arrows-alt absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">全场景覆盖</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    AI进一步调整论证结构，成功同时处理了常数 C 为大值和小值的情况。这种在不同参数设定间灵活切换证明路径的能力，展示了其在处理复杂数学逻辑结构中惊人的适应性。
+                </p>
+            </div>
+
+            <div class="border-b-[2px] border-deep-ink p-6 relative flex flex-col justify-between overflow-hidden bg-deep-ink/5">
+                <i class="fa-solid fa-copy absolute -bottom-4 -right-4 text-[140px] text-deep-ink opacity-[0.05]"></i>
+                <h3 class="font-sans font-black text-3xl mb-3 text-deep-ink border-l-[6px] border-deep-ink pl-3">论文的多重态</h3>
+                <p class="font-serif font-bold text-[22px] leading-snug text-justify text-deep-ink flex-grow">
+                    传统论文修改耗时费力，而AI允许针对不同受众快速生成多种阐述版本。未来的核心论文将不再单一，而是伴随大量由AI生成的、具有不同侧重点和详细程度的“卫星版本”。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[60px] flex items-center justify-between px-8 font-sans font-bold text-sm uppercase tracking-widest text-deep-ink">
+            <span>Source: Terence Tao Blog</span>
+            <span>Jan 2026</span>
+            <span>Designed with AI</span>
+        </div>
+
+    </div>
+
+</div>
+</body> </html>

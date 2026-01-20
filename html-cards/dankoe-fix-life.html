@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dan Koe - The One Day Fix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        /* Typography Overrides */
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Grid Lines */
+        .grid-line-v {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: #1A1918;
+            transform: translateX(-50%);
+        }
+        .border-ink { border-color: #1A1918; }
+        .text-ink { color: #1A1918; }
+        
+        /* Watermark Icon */
+        .watermark-icon {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 10rem;
+            opacity: 0.06;
+            color: #1A1918;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+
+    <div class="card p-8 flex flex-col justify-between border-[3px] border-ink">
+        
+        <div class="h-[32%] flex flex-col justify-center items-center text-center relative z-10">
+            <p class="font-sans-sc font-black text-xl tracking-[0.4em] mb-4 uppercase">Dan Koe Presents<br></p>
+            <h1 class="font-serif-sc font-black text-[9rem] leading-[0.85] tracking-tighter">
+                一日重构一生
+            </h1>
+            <p class="font-display italic text-3xl mt-6 opacity-80"><br>The 24-Hour Life Reset Protocol</p>
+        </div>
+
+        <div class="h-[53%] border-t-[3px] border-b-[3px] border-ink relative grid grid-cols-2">
+            <div class="grid-line-v z-20"></div>
+
+            <div class="p-8 flex flex-col justify-start pt-12 relative">
+                <i class="fa-solid fa-layer-group absolute top-4 right-6 text-6xl opacity-10"></i>
+                <h2 class="font-sans-sc font-black text-5xl mb-6">身份错位</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    多数人的失败，源于试图在腐烂的地基上建造大厦。改变不能仅靠行动（次序），必须改变身份（首序）。如果你想要某种结果，必须在结果出现前，先拥有能创造它的生活方式。
+                </p>
+            </div>
+
+            <div class="p-8 flex flex-col justify-start pt-12 relative">
+                <i class="fa-solid fa-microchip absolute top-4 right-6 text-6xl opacity-10"></i>
+                <h2 class="font-sans-sc font-black text-5xl mb-6">潜意识锚定</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    所有行为本质上都是“目标导向”的。你现在的停滞，实际上是你潜意识追求“安全”和“避免评判”的成功结果。真正的改变不是靠意志力，而是重写潜意识的目标代码。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-6 text-center">
+            <p class="font-serif-sc font-bold text-3xl leading-relaxed">
+                “如果你不改变作为‘输入端’的身份设定，<br>任何‘输出端’的努力都只是对现状的修修补补。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-sans-sc font-bold tracking-widest opacity-60">
+            <span>SOURCE: DAN KOE / THE ART OF FOCUS</span>
+            <span>DESIGNED WITH AI (SWISS STYLE)</span>
+        </div>
+    </div>
+
+    <div class="card p-8 flex flex-col border-[3px] border-ink">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-6 mb-6">
+            <div>
+                <h2 class="font-display font-black text-7xl leading-none">TACTICS</h2>
+                <p class="font-sans-sc font-bold text-xl mt-2 tracking-widest">PROTOCOL 02 // EXECUTION STRATEGY</p>
+            </div>
+            <div class="text-8xl font-display font-black opacity-20">02</div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2 gap-6">
+            
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-skull-crossbones watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">反向愿景挖掘</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    痛苦是改变的燃料。不要逃避不满，而是将其放大。想象如果你未来五年完全不改变，你的生活会是什么样？描述那个平庸至极的“周二”。利用这种“反向愿景”制造心理失调，迫使自己因厌恶现状而行动。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-user-astronaut watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">身份剧本预演</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    确立“最小可行愿景”。问自己：“要是那种已经过上理想生活的人，这周会做什么？” 写下身份声明：“我就是那种……的人”。忽略现实的可行性，专注于这一新身份带来的行为逻辑转变。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-stopwatch watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">自动驾驶阻断</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    设定随机闹钟（11am, 3pm, 8pm）。当铃声响起，强制问自己：“我现在是在逃避什么？”、“我是在走向我讨厌的生活还是我想要的生活？”。通过即时觉察，打断潜意识的自动导航模式。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-crosshairs watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">命名内部敌人</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    晚上复盘时，明确指出阻碍你的究竟是什么。不是“没有时间”或“经济环境”，而是具体的内部信念（如：对平庸的容忍、对失败的恐惧）。给它命名，将其具象化为必须击败的 Boss。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-glasses watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">透镜式目标法</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    目标不是终点线，而是观察世界的“透镜”。设定1年透镜（打破旧模式的标志）、1月透镜（技能习得）、每日透镜（具体行动）。通过这些透镜，你会自动过滤掉无关的杂音，只看到机会。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col overflow-hidden">
+                <i class="fa-solid fa-gamepad watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3 uppercase border-b-2 border-ink w-max pb-1">人生游戏化</h3>
+                <p class="font-serif-sc font-semibold text-[1.4rem] leading-snug text-justify flex-grow">
+                    构建系统：反愿景是“失败代价”，愿景是“胜利条件”，月度项目是“关卡Boss”，每日任务是“主线任务”。将生活转化为游戏，利用规则和反馈机制，进入心流状态，而非单纯依靠意志力。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between text-xs font-sans-sc font-bold tracking-widest mt-6 opacity-60">
+            <span>DATE: JAN 12, 2026</span>
+            <span>TOOL: HTML5 / TAILWIND</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

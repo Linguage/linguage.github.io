@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe - Shut Up and Calculate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-deep: #1A1918;
+        }
+        body {
+            background-color: #333; /* Dark outer background for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-deep);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Custom Utilities for Wireframe Look */
+        .border-ink {
+            border-color: var(--ink-deep);
+        }
+        .text-ink {
+            color: var(--ink-deep);
+        }
+        .font-black-serif {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 900;
+        }
+        .font-bold-serif {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        .font-heavy-sans {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Grid separation lines */
+        .grid-separator-x {
+            border-bottom: 3px solid var(--ink-deep);
+        }
+        .grid-separator-y {
+            border-right: 3px solid var(--ink-deep);
+        }
+        /* Justify fix */
+        .text-justify-fix {
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+    </style>
+</head>
+<body class="gap-10 flex-wrap">
+
+    <div class="swiss-card border-[3px] border-ink p-8 flex flex-col justify-between">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[3px] border-ink pb-4 relative">
+            <div class="absolute top-0 right-0 text-lg font-bold tracking-widest uppercase">The Philosophy</div>
+            <h1 class="text-[110px] leading-[0.9] font-black-serif tracking-tighter mt-4">
+                闭嘴<br>
+                <span class="italic font-display">去计算</span>
+            </h1>
+            <p class="text-2xl font-bold mt-4 tracking-widest uppercase">Shut Up And Calculate!</p>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 border-b-[3px] border-ink">
+            
+            <div class="border-r-[3px] border-ink p-6 flex flex-col justify-between relative">
+                <i class="fa-solid fa-question absolute top-6 right-6 text-8xl opacity-10"></i>
+                <div>
+                    <h2 class="text-5xl font-heavy-sans mb-6">意义迷思</h2>
+                    <p class="text-2xl font-bold-serif leading-snug text-justify-fix">
+                        量子力学的核心困境在于：当叠加态与纠缠现象挑战人类直觉时，我们是否必须寻找一个符合经典逻辑的“解释”？还是应该接受微观世界的荒诞本质？
+                    </p>
+                </div>
+                <div class="text-lg font-bold border-t-2 border-ink pt-2 w-max">PROBLEM</div>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between relative">
+                <i class="fa-solid fa-screwdriver-wrench absolute top-6 right-6 text-8xl opacity-10"></i>
+                <div>
+                    <h2 class="text-5xl font-heavy-sans mb-6">工具理性</h2>
+                    <p class="text-2xl font-bold-serif leading-snug text-justify-fix">
+                        与其陷入形而上学的争论，不如将理论视为一套精准的预测工具。不必追问“为什么”，只需关注“怎么做”。计算结果本身就是最高的真理。
+                    </p>
+                </div>
+                <div class="text-lg font-bold border-t-2 border-ink pt-2 w-max">SOLUTION</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-4">
+            <blockquote class="text-4xl font-black-serif text-center leading-tight">
+                “我们常常因为试图让量子力学变得平庸，<br>而失去了探索人类认知边界的机会。”
+            </blockquote>
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-bold uppercase tracking-widest border-t border-ink pt-2">
+            <span>Source: Physics In History</span>
+            <span>Designed with AI (Gemini)</span>
+            <span>2026.01.12</span>
+        </div>
+    </div>
+
+    <div class="swiss-card border-[3px] border-ink p-0 flex flex-col">
+        
+        <div class="h-[10%] border-b-[3px] border-ink flex items-end justify-between px-8 pb-4 bg-ink text-[#F5F2EB]">
+            <h1 class="text-6xl font-heavy-sans">TACTICS</h1>
+            <span class="text-6xl font-display italic">02</span>
+        </div>
+
+        <div class="h-[85%] grid grid-cols-2 grid-rows-3">
+            
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-atom absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">01. 量子之问</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    一个世纪以来，叠加态、纠缠和波粒二象性等反直觉现象困扰着无数物理学家。这些现象不仅挑战了经典物理学的大厦，更动摇了我们对“现实”本质的理解。为了解释这些怪诞现象，哥本哈根诠释、多世界理论等多种假说应运而生，试图为微观世界寻找合理逻辑。
+                </p>
+            </div>
+
+            <div class="border-b-[3px] border-ink p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-comments absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">02. 诠释博弈</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    每一种量子诠释都在试图回答三个核心问题：量子理论意味着什么？现实的本质是什么？观察者在其中扮演什么角色？然而，并非所有物理学家都热衷于这种哲学思辨。对于实用主义者而言，这些争论如同“针尖上能站几个天使”一般，虽有智力趣味，却无实际产出。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-calculator absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">03. 实用转向</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    “闭嘴，去计算！”这句口号代表了操作主义的态度。它主张量子力学仅仅是一套数学规则和工具，其唯一目的在于做出精准预测和操控量子系统。这种观点要求物理学家放下对“底层意义”的执念，转而关注公式本身的有效性，将形而上学的困惑悬置起来。
+                </p>
+            </div>
+
+            <div class="border-b-[3px] border-ink p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-user-astronaut absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">04. 众神之争</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    这一态度的根源可追溯至玻尔、海森堡与爱因斯坦等先驱的辩论。面对薛定谔的猫和EPR佯谬，爱因斯坦坚持“上帝不掷骰子”，认为理论必须完备且实在。而冯·诺依曼、费曼等人则反击道：如果理论能完美解释现象，就不需要寻找所谓的“隐变量”或更深层的现实。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-ink p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-microchip absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">05. 技术红利</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    历史证明了实用主义的巨大成功。正是因为科学家们暂时搁置了哲学困惑，专注于计算与应用，我们才迎来了原子弹、晶体管、激光以及量子计算机的诞生。这些改变人类命运的技术造物，全部建立在那些“无法直观理解”但“计算绝对正确”的数学公式之上。
+                </p>
+            </div>
+
+            <div class="p-5 flex flex-col relative overflow-hidden group">
+                <i class="fa-solid fa-triangle-exclamation absolute -bottom-4 -right-4 text-[160px] opacity-[0.06] group-hover:opacity-[0.1] transition-opacity"></i>
+                <h3 class="text-3xl font-heavy-sans mb-3">06. 认知警钟</h3>
+                <p class="text-xl font-bold-serif leading-snug text-justify-fix flex-grow">
+                    然而，大卫·默敏（该短语提出者）警告说，过度且强硬的实用主义也是危险的。如果我们将量子力学粉饰得过于平庸和顺手，就会剥夺人类探索思维局限性的动力。这种“安抚性”的态度，可能会让我们错失理解世界运作方式中最深刻、最令人不安的那部分真理。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[5%] flex items-center justify-between px-8 border-t-[3px] border-ink text-xs font-bold uppercase tracking-widest">
+            <span>Source: Physics In History / David Mermin</span>
+            <span>2026.01.12</span>
+        </div>
+    </div>
+
+</body>
+</html>

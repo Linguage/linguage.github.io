@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weierstrass Monster Function - High Density</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .paper-texture {
+            background-color: #F2EFE9; /* Warmer, denser paper tone */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
+        }
+
+        .serif-text { font-family: 'Noto Serif SC', serif; }
+        
+        /* Morandi Palette - Slightly Deeper for Readability */
+        .text-ink { color: #2C2825; }
+        .text-clay { color: #A87668; }
+        .bg-clay-light { background-color: #EBDCD8; }
+        .text-blue { color: #687F85; }
+        .bg-blue-light { background-color: #D6DEE0; }
+        .text-green { color: #758066; }
+        .bg-green-light { background-color: #DDE2D8; }
+        
+        /* High Density Typography */
+        .dense-leading { line-height: 1.5; }
+        .card-border { border: 1px solid #D6D1C5; }
+    </style>
+</head>
+<body>
+
+    <div class="paper-texture w-[900px] h-[1200px] relative p-10 flex flex-col justify-between box-border">
+        
+        <header class="flex justify-between items-end border-b-4 border-[#2C2825] pb-4 mb-4 shrink-0">
+            <div>
+                <h1 class="text-6xl font-black text-ink tracking-tight mb-1">数学的怪兽</h1>
+                <p class="text-xl text-clay font-bold tracking-widest uppercase">The Weierstrass Function</p>
+            </div>
+            <div class="text-right opacity-60">
+                <p class="serif-text text-lg italic">Logic vs. Intuition</p>
+                <p class="text-xs font-bold tracking-widest uppercase">EST. 1872</p>
+            </div>
+        </header>
+
+        <div class="flex-grow grid grid-rows-[auto_1fr_auto] gap-4">
+
+            <div class="grid grid-cols-2 gap-4 h-[240px]">
+                <div class="bg-white/60 p-6 rounded-lg card-border flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl text-clay"></i>
+                            <h3 class="text-2xl font-bold text-ink">几何直觉的陷阱</h3>
+                        </div>
+                        <p class="serif-text text-xl text-[#4A453E] leading-relaxed font-medium">
+                            早期微积分建立在脆弱的“视觉安全网”上。法国学派默认连续曲线必然光滑，这种直觉掩盖了数学逻辑深层的致命危机。
+                        </p>
+                    </div>
+                    <div class="h-2 w-full bg-clay-light rounded-full mt-2"></div>
+                </div>
+
+                <div class="bg-white/60 p-6 rounded-lg card-border flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-solid fa-bomb text-2xl text-blue"></i>
+                            <h3 class="text-2xl font-bold text-ink">反例作为武器</h3>
+                        </div>
+                        <p class="serif-text text-xl text-[#4A453E] leading-relaxed font-medium">
+                            魏尔斯特拉斯构造了“处处连续却不可导”的怪物。这不是技巧把戏，而是摧毁旧定义的逻辑核弹，迫使大厦重建。
+                        </p>
+                    </div>
+                    <div class="h-2 w-full bg-blue-light rounded-full mt-2"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 grid-rows-2 gap-4 flex-grow">
+                
+                <div class="bg-[#E8E6E1] p-6 rounded-lg flex flex-col justify-center border-l-8 border-clay shadow-sm">
+                    <h4 class="text-2xl font-black text-ink mb-2">01. 直觉彻底失效</h4>
+                    <p class="serif-text text-lg text-[#595450] leading-snug font-semibold">
+                        在微观尺度下，曲线不再平滑，而是极度粗糙。放大并不能带来秩序，只会暴露更深的锯齿。视觉经验在严格逻辑面前不堪一击。
+                    </p>
+                </div>
+
+                <div class="bg-[#E3E6E8] p-6 rounded-lg flex flex-col justify-center border-l-8 border-blue shadow-sm">
+                    <h4 class="text-2xl font-black text-ink mb-2">02. 性质的剥离</h4>
+                    <p class="serif-text text-lg text-[#595450] leading-snug font-semibold">
+                        “连续”与“可导”被强制脱钩。这不再是少数例外，而是两个完全独立的数学层级。魏尔斯特拉斯证明了直觉中的因果联系纯属错觉。
+                    </p>
+                </div>
+
+                <div class="bg-[#E4E6E1] p-6 rounded-lg flex flex-col justify-center border-l-8 border-green shadow-sm">
+                    <h4 class="text-2xl font-black text-ink mb-2">03. 语言体系重构</h4>
+                    <p class="serif-text text-lg text-[#595450] leading-snug font-semibold">
+                        数学语言从含糊的自然描述进化为精确的 ε-δ 符号体系。现代分析学的严谨性，并非修补的结果，而是在反例压力下的推倒重来。
+                    </p>
+                </div>
+
+                <div class="bg-[#E6E2D8] p-6 rounded-lg flex flex-col justify-center border-l-8 border-[#8C8680] shadow-sm">
+                    <h4 class="text-2xl font-black text-ink mb-2">04. 从怪物到基石</h4>
+                    <p class="serif-text text-lg text-[#595450] leading-snug font-semibold">
+                        数学中的怪物往往先被厌恶，后被理解，终被利用。这些看似“病态”的对象，最终在布朗运动与金融模型中找到了关键的现实归宿。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-[#2C2825] rounded-xl p-8 flex items-center justify-center relative overflow-hidden shrink-0 h-[200px]">
+                <div class="absolute -left-10 top-0 text-[#3E3834] text-[15rem] leading-none opacity-50 font-serif italic">”</div>
+                <div class="relative z-10 text-center max-w-3xl">
+                    <h3 class="text-[#A87668] text-sm font-bold tracking-[0.3em] uppercase mb-4">The Ultimate Insight</h3>
+                    <p class="serif-text text-[#F2EFE9] text-3xl font-medium leading-normal">
+                        真实的数学世界不承诺<span class="text-[#A87668]">优雅</span>，只承诺<span class="text-[#758066] border-b-2 border-[#758066]">一致与可证明</span>。
+                        <br><span class="text-xl text-[#8C8680] mt-2 block font-light">它并不以安抚人类的直觉为使命。</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-4 flex justify-between text-[#8C8680] text-sm font-bold tracking-widest uppercase">
+            <span>Visualized by Gemini</span>
+            <span>Source: Quanta Magazine</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式分析：专有技术困境与AI代码生成</title>
+<!-- Injected: Open Graph / Twitter -->
+<meta property="og:title" content="交互式分析：专有技术困境与AI代码生成">
+<meta property="og:url" content="https://linguage.github.io/articles/ai-know-how-dilemma.html">
+<meta property="og:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@linguista2025">
+<meta name="twitter:creator" content="@linguista2025">
+<meta name="twitter:title" content="交互式分析：专有技术困境与AI代码生成">
+<meta name="twitter:image" content="https://linguage.github.io/img/Linguista_imresizer.png">
+<link rel="canonical" href="https://linguage.github.io/articles/ai-know-how-dilemma.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA is designed as a four-part thematic exploration, moving from the central problem to its underlying causes and future implications. The structure is non-linear, encouraging exploration via a sticky navigation bar. 1) The Core Dilemma: Introduces the central conflict with key statistics. 2) The Machine's Limits: Explores the technical failures (causality, complexity). 3) The Human Element: Focuses on cognitive biases in human-AI interaction. 4) The Future of Expertise: Discusses long-term risks like skill erosion. This structure was chosen to break down a dense, academic report into digestible, interactive modules, making the complex arguments more accessible and memorable than a linear reading experience. -->
+    <!-- Visualization & Content Choices: 1) Info: Compounding Error. Goal: Impact. Viz: Interactive slider + number display. Justification: Makes an abstract concept tangible. Lib: JS. 2) Info: AI Code Quality Stats (40% insecure, 51.48% performance drop). Goal: Inform. Viz: Doughnut charts. Justification: Clear proportional representation. Lib: Chart.js. 3) Info: Human vs AI Knowledge (Table 1). Goal: Compare. Viz: Interactive HTML cards. Justification: More engaging than a static table. Lib: JS/HTML/CSS. 4) Info: Causality vs Correlation. Goal: Explain. Viz: Interactive diagram. Justification: Visualizes a core philosophical argument. Lib: JS/HTML/CSS. 5) Info: Cognitive Biases. Goal: Organize. Viz: Clickable diagram. Justification: Structures complex psychological concepts interactively. Lib: JS/HTML/CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #F8F7F4; color: #3D3D3D; }
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        .nav-link { transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .nav-link.active { color: #4A5568; border-bottom-color: #4A5568; }
+        .nav-link:hover { color: #4A5568; border-bottom-color: #A0AEC0; }
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+        .interactive-card { transition: all 0.3s ease; }
+        .interactive-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    </style>
+
+<!-- Injected: GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-99PGBGJH4S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-99PGBGJH4S');
+</script>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav id="main-nav" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16 space-x-6 md:space-x-10">
+                <a href="#dilemma" data-target="dilemma" class="nav-link text-gray-600 font-medium text-sm md:text-base py-2">核心困境</a>
+                <a href="#machine" data-target="machine" class="nav-link text-gray-600 font-medium text-sm md:text-base py-2">机器的边界</a>
+                <a href="#human" data-target="human" class="nav-link text-gray-600 font-medium text-sm md:text-base py-2">人的因素</a>
+                <a href="#future" data-target="future" class="nav-link text-gray-600 font-medium text-sm md:text-base py-2">未来的专业技能</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="dilemma" class="content-section active">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#4A5568] mb-4">专有技术困境 (Know-How Dilemma)</h1>
+                <p class="max-w-3xl mx-auto text-gray-600">AI擅长应用可编码的“事实知识”(Know-That)，但在需要经验、直觉和情境理解的“专有技术”(Know-How)领域却步履维艰。本应用将交互式地解析这一核心矛盾，揭示AI在软件工程中的能力边界与深层挑战。</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-[#4A5568]">复合错误效应</h3>
+                    <p class="text-center text-gray-500 text-sm mb-4">即使AI单次决策的正确率很高，在复杂任务中，错误会迅速累积，导致系统性失败。拖动滑块，观察成功概率如何随决策步骤的增加而急剧下降。</p>
+                    <div class="flex flex-col items-center">
+                        <label for="decision-slider" class="block text-sm font-medium text-gray-700 w-full text-center">决策步骤数: <span id="slider-value" class="font-bold text-[#4A5568]">10</span></label>
+                        <input id="decision-slider" type="range" min="1" max="300" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer my-4">
+                        <div class="text-center">
+                            <p class="text-gray-600">假设单步正确率99%</p>
+                            <p class="text-5xl font-bold text-[#4A5568] mt-2"><span id="success-probability">90.4</span>%</p>
+                            <p class="text-gray-600">最终完全正确的概率</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-[#4A5568]">安全漏洞风险</h3>
+                        <div class="chart-container mx-auto h-48 sm:h-56">
+                            <canvas id="securityChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">研究发现，AI生成的代码中有相当比例包含潜在安全缺陷，因为它会从公共代码库中学习并复制不安全的模式。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold mb-4 text-[#4A5568]">领域性能衰减</h3>
+                        <div class="chart-container mx-auto h-48 sm:h-56">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">当通用AI模型应用于特定专业领域时，由于缺乏专门的上下文知识，其代码生成质量会显著下降。</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="bg-gray-50 p-8 rounded-lg">
+                <h2 class="text-2xl font-bold text-center mb-6 text-[#4A5568]">人类专家 vs AI代码生成器</h2>
+                 <p class="text-center text-gray-600 mb-8">AI学习的是专业技能的*产物*（如代码文本），而非产生这些产物的*过程*或*内化理解*。点击下方卡片，深入了解两者在核心能力上的根本差异。</p>
+                <div id="comparison-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+            </div>
+        </section>
+
+        <section id="machine" class="content-section">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#4A5568] mb-4">机器的边界</h1>
+                <p class="max-w-3xl mx-auto text-gray-600">AI的核心机制是为“合理性”而非“正确性”进行优化。这导致它在面对需要深度因果推理和复杂系统理解的任务时，会暴露出根本性的局限。</p>
+            </div>
+             <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-center mb-2 text-[#4A5568]">相关性 vs. 因果性</h3>
+                <p class="text-center text-gray-500 mb-8">AI能识别“X和Y总是一起出现”（相关性），但无法理解“X导致了Y”（因果性）。这是其无法进行真正调试的根源。</p>
+                <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+                    <div class="flex-1 border p-6 rounded-lg text-center bg-blue-50 border-blue-200">
+                        <h4 class="font-bold text-lg mb-2 text-blue-800">人类的因果模型</h4>
+                        <div class="flex items-center justify-center space-x-4 my-6">
+                            <div class="bg-blue-200 text-blue-800 rounded-full w-16 h-16 flex items-center justify-center font-bold">错误A</div>
+                            <div class="text-4xl text-blue-500 font-sans">&rarr;</div>
+                            <div class="bg-blue-200 text-blue-800 rounded-full w-16 h-16 flex items-center justify-center font-bold">症状B</div>
+                        </div>
+                        <p class="text-sm text-gray-600">人类专家通过构建系统的因果心智模型，能够追溯症状的根本原因，进行有效的根因分析。</p>
+                    </div>
+                    <div class="flex-1 border p-6 rounded-lg text-center bg-orange-50 border-orange-200">
+                        <h4 class="font-bold text-lg mb-2 text-orange-800">AI的“因果鹦鹉”</h4>
+                        <div class="flex items-center justify-center space-x-4 my-6">
+                            <div class="bg-orange-200 text-orange-800 rounded-full w-16 h-16 flex items-center justify-center font-bold">错误A</div>
+                            <div class="text-4xl text-orange-500 font-sans">&harr;</div>
+                             <div class="bg-orange-200 text-orange-800 rounded-full w-16 h-16 flex items-center justify-center font-bold">症状B</div>
+                        </div>
+                        <p class="text-sm text-gray-600">AI仅学习文本中词语的统计关联，它在模仿因果陈述，而非真正理解。它可能会针对症状B提出修复，却无法理解导致它的底层逻辑错误A。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="human" class="content-section">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#4A5568] mb-4">人的因素</h1>
+                <p class="max-w-3xl mx-auto text-gray-600">引入AI不仅改变了工作流程，更重构了开发者的认知模式，并带来了新的心理学挑战。有效的人机协作，其障碍往往是心理-技术性的。</p>
+            </div>
+             <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-center mb-2 text-[#4A5568]">认知偏见竞技场</h3>
+                    <p class="text-center text-gray-500 mb-8">与AI协作时，人类固有的认知捷径可能被激活，导致错误的判断。点击下方的偏见类型，了解其表现及缓解策略。</p>
+                    <div class="flex flex-col sm:flex-row justify-around items-center gap-4 mb-8">
+                         <button data-bias="automation" class="bias-btn bg-gray-200 text-gray-800 py-2 px-4 rounded-full w-full sm:w-auto transition-all duration-300">自动化偏见</button>
+                         <button data-bias="confirmation" class="bias-btn bg-gray-200 text-gray-800 py-2 px-4 rounded-full w-full sm:w-auto transition-all duration-300">确认偏见</button>
+                         <button data-bias="dunning" class="bias-btn bg-gray-200 text-gray-800 py-2 px-4 rounded-full w-full sm:w-auto transition-all duration-300">邓宁-克鲁格效应</button>
+                    </div>
+                    <div id="bias-display" class="bg-gray-50 p-6 rounded-md min-h-[200px] transition-all duration-300">
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-[#4A5568]">审核的认知成本</h3>
+                    <div class="relative w-48 h-48">
+                         <div class="absolute inset-0 border-8 border-red-200 rounded-full"></div>
+                         <div id="cost-bar" class="absolute inset-0 bg-red-500 rounded-full transition-all duration-500" style="transform: scale(0.6);"></div>
+                         <div class="absolute inset-0 flex items-center justify-center text-white text-lg font-bold">
+                             <span id="cost-text">更高</span>
+                         </div>
+                    </div>
+                    <p class="text-center text-gray-500 mt-6">审核AI生成的“黑箱”代码，往往比审核人类代码需要<strong class="text-red-600">更高</strong>的认知负荷，因为无法依赖共享的心智模型来快速评估其意图。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="content-section">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#4A5568] mb-4">未来的专业技能</h1>
+                <p class="max-w-3xl mx-auto text-gray-600">过度依赖AI可能侵蚀人类专家的成长根基，导致整个软件生态系统变得脆弱。未来工程师的角色将发生转变，对元技能的需求将空前重要。</p>
+            </div>
+            <div class="space-y-12">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                     <h3 class="text-2xl font-semibold text-center mb-6 text-[#4A5568]">技能退化假说：被侵蚀的成长路径</h3>
+                     <p class="text-center text-gray-500 mb-8">隐性知识源于实践，而AI正自动化大量能提供此类实践经验的初级任务。这可能切断初级开发者通往专家的必经之路。</p>
+                    <div class="relative w-full">
+                        <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                             <div class="text-right pr-8">
+                                <h4 class="font-bold text-lg text-[#4A5568]">传统路径</h4>
+                                <p class="text-gray-600">初级任务 &rarr; 积累经验 &rarr; 发展直觉 &rarr; 成为专家</p>
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <div class="text-left pl-8 relative">
+                                <div class="absolute -left-1.5 top-1/2 -translate-y-1/2 w-4 h-4 bg-red-500 rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-lg text-red-600">AI增强（风险）路径</h4>
+                                <p class="text-red-500">AI自动化初级任务 &rarr; <span class="line-through">积累经验</span> &rarr; 人才断层</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-semibold text-center mb-8 text-[#4A5568]">未来软件工程师的核心技能转变</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                        <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-bold text-[#4A5568]">策展人</h4>
+                            <p class="text-sm text-gray-600">指导、验证和集成AI代理的工作</p>
+                        </div>
+                         <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-bold text-[#4A5568]">系统思想家</h4>
+                            <p class="text-sm text-gray-600">具备系统级意识，进行整体架构</p>
+                        </div>
+                         <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-bold text-[#4A5568]">批判性思维</h4>
+                            <p class="text-sm text-gray-600">识别并纠正AI的偏见与失败模式</p>
+                        </div>
+                         <div class="bg-gray-50 p-4 rounded-md">
+                            <h4 class="font-bold text-[#4A5568]">创造与共情</h4>
+                            <p class="text-sm text-gray-600">理解用户需求，进行创新性设计</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const appData = {
+        comparison: [
+            { title: '主要知识类型', human: '隐性的（“专有技术”）', ai: '显性的（“事实知识”）', detail: '人类专长在于无法言传的经验和直觉，而AI基于可编码的文本和数据。' },
+            { title: '学习机制', human: '经验积累、社会互动', ai: '统计模式识别', detail: '人类通过实践和指导学习，AI通过分析海量数据的相关性学习。' },
+            { title: '问题解决方法', human: '假设驱动、因果推理', ai: '概率性的模式匹配', detail: '人类能理解问题根源，AI只能生成统计上最合理的答案。' },
+            { title: '上下文感知', human: '整体的、系统级的', ai: '局限于提示窗口', detail: '人类理解项目的历史和架构，AI的“记忆”仅限于当前输入。' },
+            { title: '对新颖性的适应', human: '高（创造性思维）', ai: '低（依赖训练数据）', detail: '人类可以创造性地解决未知问题，AI在训练数据之外表现不佳。' },
+            { title: '“真理”的来源', human: '亲身经验、心智模型', ai: '训练数据集本身', detail: '人类的知识经过实践检验，AI的“知识”是其数据的统计映像。' },
+        ],
+        biases: {
+            automation: {
+                title: '自动化偏见',
+                description: '不加批判地接受AI生成的代码或建议，导致引入错误或漏洞。人类倾向于过度信任自动化系统，导致监督警惕性下降。',
+                mitigation: '对所有AI产出实施强制性、结构化的人工审查；利用AI生成多种备选方案以促进批判性比较，而非接受单一答案。'
+            },
+            confirmation: {
+                title: '确认偏见',
+                description: '利用AI寻找支持已有错误假设的证据，而忽略与之矛盾的建议。开发者会优先采纳符合自己想法的AI输出。',
+                mitigation: '设计能明确挑战用户假设并呈现反面证据的AI工具；流程上鼓励探索多种可能的因果路径。'
+            },
+            dunning: {
+                title: '邓宁-克鲁格效应',
+                description: '能力较弱的开发者可能过度信任AI，而能力强的开发者又可能过度不信任AI，两种情况都会导致不当的依赖。',
+                mitigation: '实施结对编程，由不同水平的开发者共同审查AI输出；提供关于AI在不同情境下可靠性的客观性能反馈。'
+            }
+        }
+    };
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    function navigateTo(targetId) {
+        sections.forEach(section => {
+            section.classList.toggle('active', section.id === targetId);
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.target === targetId);
+        });
+        window.location.hash = targetId;
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = e.currentTarget.dataset.target;
+            navigateTo(targetId);
+        });
+    });
+
+    const initialHash = window.location.hash.substring(1);
+    if (initialHash && document.getElementById(initialHash)) {
+        navigateTo(initialHash);
+    } else {
+        navigateTo('dilemma'); 
+    }
+
+    const slider = document.getElementById('decision-slider');
+    const sliderValue = document.getElementById('slider-value');
+    const probabilityDisplay = document.getElementById('success-probability');
+
+    slider.addEventListener('input', () => {
+        const steps = parseInt(slider.value);
+        sliderValue.textContent = steps;
+        const probability = Math.pow(0.99, steps) * 100;
+        probabilityDisplay.textContent = probability.toFixed(1);
+    });
+
+    const securityCtx = document.getElementById('securityChart').getContext('2d');
+    new Chart(securityCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['包含安全缺陷', '无明显缺陷'],
+            datasets: [{
+                data: [40, 60],
+                backgroundColor: ['#EF4444', '#A0AEC0'],
+                borderColor: '#F8F7F4',
+                borderWidth: 4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: (context) => `${context.label}: ${context.raw}%` }
+                }
+            }
+        }
+    });
+
+    const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(performanceCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['性能下降部分', '剩余性能'],
+            datasets: [{
+                data: [51.48, 100 - 51.48],
+                backgroundColor: ['#F97316', '#A0AEC0'],
+                borderColor: '#F8F7F4',
+                borderWidth: 4,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: (context) => `${context.label}: ${context.raw.toFixed(2)}%` }
+                }
+            }
+        }
+    });
+
+    const comparisonContainer = document.getElementById('comparison-container');
+    appData.comparison.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'interactive-card bg-white p-4 rounded-lg shadow cursor-pointer';
+        card.innerHTML = `
+            <h4 class="font-bold text-[#4A5568]">${item.title}</h4>
+            <div class="text-sm mt-2">
+                <p><strong class="text-blue-600">人类:</strong> <span class="text-gray-700">${item.human}</span></p>
+                <p><strong class="text-orange-600">AI:</strong> <span class="text-gray-700">${item.ai}</span></p>
+            </div>
+            <div class="text-xs text-gray-500 mt-3 pt-3 border-t border-gray-200 hidden detail">${item.detail}</div>
+        `;
+        card.addEventListener('click', () => {
+            card.querySelector('.detail').classList.toggle('hidden');
+        });
+        comparisonContainer.appendChild(card);
+    });
+
+    const biasBtns = document.querySelectorAll('.bias-btn');
+    const biasDisplay = document.getElementById('bias-display');
+
+    function displayBias(biasKey) {
+        const biasData = appData.biases[biasKey];
+        biasDisplay.innerHTML = `
+            <h4 class="font-bold text-lg text-[#4A5568] mb-2">${biasData.title}</h4>
+            <p class="text-sm text-gray-700 mb-3">${biasData.description}</p>
+            <p class="text-sm"><strong class="text-green-700">缓解策略:</strong> <span class="text-gray-600">${biasData.mitigation}</span></p>
+        `;
+        biasBtns.forEach(btn => {
+            btn.classList.toggle('bg-[#4A5568]', btn.dataset.bias === biasKey);
+            btn.classList.toggle('text-white', btn.dataset.bias === biasKey);
+            btn.classList.toggle('bg-gray-200', btn.dataset.bias !== biasKey);
+            btn.classList.toggle('text-gray-800', btn.dataset.bias !== biasKey);
+        });
+    }
+
+    biasBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            displayBias(e.currentTarget.dataset.bias);
+        });
+    });
+    
+    displayBias('automation');
+
+});
+</script>
+
+</body>
+</html>

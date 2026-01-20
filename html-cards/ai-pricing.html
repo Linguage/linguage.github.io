@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe Cards - AI Pricing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&family=Noto+Serif+SC:wght@600;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#F5F2EB', // Warm Paper
+                        ink: '#1A1918', // Deep Ink
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    },
+                    spacing: {
+                        'card-w': '900px',
+                        'card-h': '1200px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .swiss-border {
+            border: 3px solid #1A1918;
+        }
+        .swiss-border-t {
+            border-top: 3px solid #1A1918;
+        }
+        .swiss-border-b {
+            border-bottom: 3px solid #1A1918;
+        }
+        .swiss-border-r {
+            border-right: 3px solid #1A1918;
+        }
+        /* Grid lines for card 2 */
+        .grid-cell {
+            border-right: 1px solid #1A1918;
+            border-bottom: 1px solid #1A1918;
+        }
+        .grid-cell:nth-child(3n) {
+            border-right: none;
+        }
+        .grid-cell:nth-last-child(-n+3) {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 p-10 flex justify-center items-start gap-10 min-h-screen overflow-x-auto">
+
+    <div class="w-[900px] h-[1200px] bg-bg text-ink flex flex-col swiss-border shrink-0 relative overflow-hidden">
+        
+        <div class="h-[30%] flex flex-col justify-center px-12 relative">
+            <div class="absolute top-6 left-6 text-sm font-sans font-black tracking-widest uppercase">
+                The Issue / 01
+            </div>
+            <div class="absolute top-6 right-6 text-sm font-sans font-black tracking-widest uppercase">
+                Anh-Tho Chuong
+            </div>
+            
+            <h1 class="font-display font-sans text-[150px] leading-[0.85] tracking-tighter uppercase mt-4">
+                AI 定价策略<br>
+            </h1>
+            <p class="font-serif text-3xl mt-6 italic font-bold">
+                <br>AI产品增长悖论：AI 如何让定价策略重回“地狱模式”
+            </p>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 swiss-border-t swiss-border-b">
+            
+            <div class="p-10 flex flex-col justify-between swiss-border-r relative">
+                <div>
+                    <h2 class="font-sans text-5xl font-black mb-8 leading-tight">
+                        边际<br>崩塌
+                    </h2>
+                    <p class="font-serif text-2xl font-bold leading-normal text-justify">
+                        MoviePass 式的悲剧正在 AI 领域重演。传统 SaaS 的增长边际成本趋近于零，但 AI 公司的每一次 API 调用都在燃烧真金白银。当最忠实的用户变成了最昂贵的成本中心，增长不再是庆典，而是通往破产的快车道。
+                    </p>
+                </div>
+                <div class="font-sans text-xl font-black uppercase tracking-widest opacity-40">
+                    // The Trap
+                </div>
+            </div>
+
+            <div class="p-10 flex flex-col justify-between relative">
+                <div>
+                    <h2 class="font-sans text-5xl font-black mb-8 leading-tight">
+                        全员<br>战役
+                    </h2>
+                    <p class="font-serif text-2xl font-bold leading-normal text-justify">
+                        “定价”已不再是财务部门的独角戏。在 LLM 时代，工程团队必须像捍卫代码质量一样捍卫利润率。这是一场从底层代码到 CFO 办公室的认知重构：你需要精确计算每一个 Token 的投入产出比，否则无法生存。
+                    </p>
+                </div>
+                <div class="font-sans text-xl font-black uppercase tracking-widest opacity-40">
+                    // The Shift
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-12 text-center bg-ink text-bg">
+            <p class="font-serif text-3xl font-bold leading-snug w-3/4">
+                “AI 彻底粉碎了传统 SaaS 的高利润逻辑：当最好的客户成为最昂贵的负担，旧世界的规则必须被改写。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 w-full flex justify-between px-6 text-xs font-sans font-bold opacity-60 bg-bg text-ink">
+            <span>SOURCE: HOW AI MADE PRICING HARD AGAIN</span>
+            <span>DESIGNED WITH AI (GEMINI)</span>
+        </div>
+    </div>
+
+    <div class="w-[900px] h-[1200px] bg-bg text-ink flex flex-col swiss-border shrink-0 relative overflow-hidden">
+        
+        <div class="h-[10%] px-8 flex items-end justify-between border-b-[3px] border-ink pb-4">
+            <h1 class="font-display text-7xl uppercase">Tactics</h1>
+            <div class="text-right">
+                <div class="font-sans text-xl font-black uppercase">5 Models + 3 Principles</div>
+                <div class="font-display text-4xl">02</div>
+            </div>
+        </div>
+
+        <div class="h-[85%] grid grid-cols-3 grid-rows-3">
+            
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden group">
+                <h3 class="font-sans text-2xl font-black mb-3">01 按量付费</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    如同水电煤的基础设施逻辑。以 AWS 或 OpenAI 为代表，按 Gigabyte 或 Token 计费。这是最透明的模式，也是对供应商风险最小的模式，但对于买家而言，预算的不可预测性是最大的痛点。
+                </p>
+                <i class="fa-solid fa-server absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">02 席位订阅</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    SaaS 时代的黄金标准（每人/每月）。在协作类工具（如 Miro）中依然有效。但在 AI 时代面临巨大悖论：若 AI 显著提高了效率导致裁员，按人头收费的商业模式将面临客户群缩减的根本性危机。
+                </p>
+                <i class="fa-solid fa-users absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">03 基础+超额</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    类似于手机流量套餐。Cursor 代码编辑器采用此法：给予基础额度，超出后额外收费。这种模式保障了关键业务（如编程）的连续性，避免因欠费导致服务中断，适合高粘性生产力工具。
+                </p>
+                <i class="fa-solid fa-chart-line absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">04 积分点数</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    利用心理账户效应，将复杂的算力成本转化为“积分”。这解决了不同功能成本差异巨大的问题（如生成图片 vs 生成文本）。用户在预付费后感觉拥有了“无限”使用权，直至积分耗尽。
+                </p>
+                <i class="fa-solid fa-coins absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">05 结果导向</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    Intercom 的 Fin 机器人是典型代表：只为“成功解决”的工单付费。这看似完美，但充满了归因难题：如何定义“成功”？适合结果非黑即白、极度可量化的场景，不适合模糊的知识工作。
+                </p>
+                <i class="fa-solid fa-bullseye absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">06 成本原则</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    定价必须覆盖真实的物理成本。这听起来是废话，但在 AI 热潮中极易被忽视。许多初创公司只看收入增长，却没发现每个新用户的 LTV（生命周期价值）实际上低于其产生的 LLM 调用成本。
+                </p>
+                <i class="fa-solid fa-file-invoice-dollar absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">07 价值锚点</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    客户到底在为什么买单？Firebase 按用户量收费，是因为用户越多数据压力越大；Figma 按席位收费，是因为价值在于协作。AI 产品的定价单位必须与用户感知到的核心价值单位严格对齐。
+                </p>
+                <i class="fa-solid fa-scale-balanced absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">08 采购心理</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    CFO 讨厌“惊喜”，哪怕是好的惊喜。相比于“按实际使用量付费”的公平性，企业买家更倾向于支付溢价来换取预算的“确定性”。这也是为什么固定订阅制在 B2B 领域依然难以撼动。
+                </p>
+                <i class="fa-solid fa-handshake absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+
+            <div class="grid-cell p-6 flex flex-col relative overflow-hidden">
+                <h3 class="font-sans text-2xl font-black mb-3">09 研发变革</h3>
+                <p class="font-serif text-lg font-bold leading-snug text-justify flex-grow">
+                    未来，CFO 将直接拷问工程团队：“为什么用户增长 15%，OpenAI 账单却涨了 40%？”工程师必须具备财务思维，通过技术手段限制 Token 滥用，将成本控制写入产品架构的最底层。
+                </p>
+                <i class="fa-solid fa-code absolute -bottom-4 -right-4 text-[140px] opacity-[0.05]"></i>
+            </div>
+        </div>
+
+        <div class="h-[5%] flex items-center justify-between px-8 text-xs font-sans font-bold uppercase tracking-widest border-t-[3px] border-ink">
+            <span>Jan 2026</span>
+            <span>Ref: Every / Anh-Tho Chuong</span>
+        </div>
+    </div>
+
+</body>
+</html>

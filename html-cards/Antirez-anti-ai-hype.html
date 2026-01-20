@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Style Wireframe - Antirez AI Perspectives</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Noto Sans SC', sans-serif;
+            padding: 40px;
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            color: #1A1918; /* Deep Ink */
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .font-ink-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .font-ink-display {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Tight leading for that dense Swiss look */
+        .leading-tight-swiss {
+            line-height: 1.15;
+        }
+        .border-ink {
+            border-color: #1A1918;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+
+    <div class="swiss-card border-[3px] border-ink p-8">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[3px] border-ink relative">
+            <div class="absolute top-0 left-0 text-lg font-black tracking-widest uppercase">Antirez / Redis Creator</div>
+            <h1 class="text-[100px] leading-[1.05] font-black font-ink-display uppercase tracking-tighter mt-4">
+                编程<br>现实主义
+            </h1>
+            <div class="absolute bottom-2 right-0 text-xl font-bold font-ink-serif italic">The End of Manual Programming</div>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 border-b-[3px] border-ink">
+            <div class="border-r-[3px] border-ink p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-6xl font-black mb-6 tracking-tight">效率<br>坍缩</h2>
+                    <p class="text-3xl font-ink-serif font-bold leading-snug text-justify">
+                        不管你多怀念逐行写码的温度，事实是：编程已永远改变。原本数周的工作现在只需数小时。LLM 已能独立完成中型项目，且准确度惊人。
+                    </p>
+                </div>
+                <div class="text-8xl opacity-10 self-end"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-6xl font-black mb-6 tracking-tight">构建<br>本能</h2>
+                    <p class="text-3xl font-ink-serif font-bold leading-snug text-justify">
+                        不要因为抵触 AI 而错失进化的机会。编程的核心不是“敲击键盘”，而是“构建事物”。当你不再受限于手速，创造的乐趣只会更加纯粹。
+                    </p>
+                </div>
+                <div class="text-8xl opacity-10 self-end"><i class="fa-solid fa-layer-group"></i></div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center text-center px-4 relative">
+            <i class="fa-solid fa-quote-left absolute top-4 left-4 text-4xl opacity-20"></i>
+            <p class="text-4xl font-ink-serif font-black leading-tight w-full">
+                “你无法通过拒绝承认现实来掌控现实。<br>错过的不是工具，而是倍增自我的机会。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-8 text-xs font-bold uppercase tracking-widest opacity-60">
+            Source: antirez.com/news/158 | Date: 2026.01 | Designed with AI
+        </div>
+    </div>
+
+    <div class="swiss-card border-[3px] border-ink p-8">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-4 mb-0 h-[10%]">
+            <h1 class="text-6xl font-black uppercase tracking-tighter">Tactics</h1>
+            <div class="text-6xl font-black font-ink-display">02</div>
+        </div>
+
+        <div class="grid grid-cols-2 h-[85%] border-b-[3px] border-ink">
+            
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">01. 降维打击</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    这是量级的质变。我修改 linenoise 库支持 UTF-8、构建测试框架，原本需要数周的工作，现在仅需几小时。只需描述想法，代码即刻具象化。
+                </p>
+                <i class="fa-solid fa-clock absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+            <div class="border-b-[3px] border-ink p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">02. 调试革命</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    解决 Redis 复杂的时序与死锁 Bug 曾是噩梦。现在 Claude Code 能自动复现、检查进程状态并修复。我不再是“写代码的人”，而是“验收者”。
+                </p>
+                <i class="fa-solid fa-bug absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">03. 精神映射</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    现在最关键的能力是“构建问题的心理表征”。项目越独立、文本化描述越容易，AI 效果越好。系统编程是绝佳场景，LLM 是完美的执行搭档。
+                </p>
+                <i class="fa-solid fa-brain absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+            <div class="border-b-[3px] border-ink p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">04. 技术平权</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    正如 90 年代的开源运动，AI 正在再次民主化技术。小团队现在拥有了挑战大公司的资本。开源模型（尤其是中国的）正在紧追闭源前沿。
+                </p>
+                <i class="fa-solid fa-scale-balanced absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+            <div class="border-r-[3px] border-ink p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">05. 深度测试</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    不要用 5 分钟的测试来强化你的偏见。请投入数周去磨合新工具。这关乎你的职业存亡——学会“自我倍增”（Multiply Yourself），否则将被淘汰。
+                </p>
+                <i class="fa-solid fa-flask absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+            <div class="p-5 relative flex flex-col">
+                <h3 class="text-4xl font-black mb-3">06. 社会契约</h3>
+                <p class="text-[26px] font-ink-serif font-bold leading-snug text-justify flex-grow">
+                    失业风险是真实的。随着越来越多的人被解雇，我们需要支持那些承认现实并提供社会保障的政府。但同时，AI 也将极大降低人类在疾病与科研上的痛苦。
+                </p>
+                <i class="fa-solid fa-users absolute bottom-[-10px] right-[-10px] text-[10rem] opacity-[0.05]"></i>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-2 left-8 text-xs font-bold uppercase tracking-widest opacity-60">
+            Source: antirez.com/news/158 | Date: 2026.01 | Designed with AI
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

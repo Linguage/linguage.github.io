@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Infographic - AI Talent Density</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-deep: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-deep);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--ink-deep);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 20px 20px 0px rgba(26, 25, 24, 0.15);
+        }
+        
+        /* Typography Utilities */
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        
+        .text-ink { color: var(--ink-deep); }
+        .border-ink { border-color: var(--ink-deep); }
+        
+        /* Layout Utilities */
+        .grid-line-r { border-right: 2px solid var(--ink-deep); }
+        .grid-line-b { border-bottom: 2px solid var(--ink-deep); }
+        .grid-line-t { border-top: 2px solid var(--ink-deep); }
+
+        /* Icon Watermark */
+        .watermark-icon {
+            opacity: 0.06;
+            position: absolute;
+            bottom: -15px;
+            right: -10px;
+            font-size: 8rem;
+            pointer-events: none;
+            z-index: 0;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+
+    <div class="swiss-card p-8">
+        <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink relative">
+            <div class="absolute top-0 left-0 text-lg font-bold tracking-widest uppercase">Global Report</div>
+            <div class="absolute top-0 right-0 text-lg font-bold">JAN 2026</div>
+            
+            <h1 class="font-display text-[8.5rem] leading-[0.8] tracking-tighter mt-4">
+                TALENT<br>DENSITY
+            </h1>
+            <div class="flex justify-between items-end mt-4">
+                <span class="text-4xl font-serif-sc font-black tracking-wide">全球AI版图重塑</span>
+                <span class="text-xl font-medium italic">By @bookwormengr</span>
+            </div>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-b-[4px] border-ink">
+            <div class="border-r-[3px] border-ink p-6 flex flex-col justify-between relative group">
+                <i class="fa-solid fa-earth-asia watermark-icon !text-[10rem] !opacity-[0.04]"></i>
+                <div>
+                    <h2 class="text-6xl font-sans-sc font-black mb-6">重心<br>东移</h2>
+                    <p class="text-3xl font-serif-sc font-bold leading-snug text-justify">
+                        人口即命运。中国AI人才密度已反超美国，弹丸之地新加坡的产出竟匹敌整个欧洲。算力不再是唯一壁垒，人才规模正成为新时代的决定性变量。
+                    </p>
+                </div>
+                <div class="text-8xl font-display opacity-10 font-bold self-end">01</div>
+            </div>
+
+            <div class="p-6 flex flex-col justify-between relative">
+                <i class="fa-solid fa-network-wired watermark-icon !text-[10rem] !opacity-[0.04]"></i>
+                <div>
+                    <h2 class="text-6xl font-sans-sc font-black mb-6">集群<br>效应</h2>
+                    <p class="text-3xl font-serif-sc font-bold leading-snug text-justify">
+                        美国仅靠湾区一枝独秀，而中国坐拥北京、长三角、大湾区三大科研高地。这种多点开花的集群协同效应，正在形成对单点突破模式的结构性压制。
+                    </p>
+                </div>
+                <div class="text-8xl font-display opacity-10 font-bold self-end">02</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-4 bg-transparent">
+            <p class="text-[2.2rem] font-serif-sc font-black text-center leading-tight">
+                “北京海淀区的顶级实验室密度，<br>已实质性超越旧金山‘大脑谷’(Cerebral Valley)。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-bold uppercase tracking-widest border-t-2 border-ink pt-2">
+            <span>Source: NeurIPS / Global Metro Stats</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+    <div class="swiss-card p-6">
+        <div class="h-[10%] flex justify-between items-end border-b-[4px] border-ink pb-4 mb-6">
+            <div>
+                <h1 class="text-6xl font-sans-sc font-black">TACTICS</h1>
+                <p class="text-xl font-serif-sc font-bold mt-1">深度解析：数据背后的地缘真相</p>
+            </div>
+            <span class="text-8xl font-display font-black leading-none">02</span>
+        </div>
+
+        <div class="h-[82%] grid grid-cols-2 grid-rows-3 gap-6">
+            
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-city watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">北京海淀</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    北京海淀区拥有比整个旧金山更多的Tier 1实验室。月之暗面、MiniMax、字节跳动SEED等机构在此扎堆，其科研产出密度之高，使其成为当之无愧的全球AI心脏，也是“硬科技”创业的绝对高地。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-map-location-dot watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">三大高地</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    全球产出占比超10%的都市圈中，中国独占三席（北京、长三角、大湾区），而美国仅有旧金山湾区一处。这种“三核驱动”的模式，赋予了中国在科研广度与产业落地速度上难以复制的战略纵深。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-graduation-cap watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">高校力量</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    清华、北大及中科院的科研产出已领跑全球。同时，亚洲新兴高校（NUS, NTU, KSAIT）迅速崛起，形成了与美国科技巨头分庭抗礼的研发生态，证明了顶尖学术资源正在加速向东方转移。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-euro-sign watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">欧洲困局</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    尽管诞生了DeepMind，欧洲整体表现仍远低于其体量。反观新加坡，其顶会论文数竟与整个欧盟持平。这表明在AI时代，灵活的政策与激进的人才引进策略，比传统的科研底蕴更为关键。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-user-ninja watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">隐形巨头</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    DeepSeek、Z AI等中国实验室拥有数百名顶尖员工，虽然论文发表策略相对保守（做的多说的少），但其实际实验量级远超公开数据。这种“潜行模式”掩盖了其实际的技术储备与工程能力。
+                </p>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between bg-transparent">
+                <i class="fa-solid fa-robot watermark-icon"></i>
+                <h3 class="text-4xl font-sans-sc font-black mb-3">软硬协同</h3>
+                <p class="text-[1.35rem] font-serif-sc font-bold leading-snug text-justify flex-grow">
+                    中国AI集群不仅仅是算法中心，更是机器人、电动车、电池与半导体产业的高密度集散地。这种“软硬结合”的生态优势，将催生出美方纯软件实验室难以想象的物理世界交互产品。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-2 left-6 right-6 flex justify-between text-xs font-bold uppercase tracking-widest border-t-2 border-ink pt-2">
+            <span>Visualized by Gemini 2.0</span>
+            <span>Date: 2026.01.09</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

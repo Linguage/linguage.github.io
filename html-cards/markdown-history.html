@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #F5F2EB;
+            --ink-deep: #1A1918;
+        }
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-warm);
+            color: var(--ink-deep);
+            border: 3px solid var(--ink-deep);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Grid Lines for Wireframe Feel */
+        .wireframe-grid {
+            background-image: 
+                linear-gradient(var(--ink-deep) 1px, transparent 1px),
+                linear-gradient(90deg, var(--ink-deep) 1px, transparent 1px);
+            background-size: 100% 1px, 1px 100%;
+            background-position: 0 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex gap-12 transform scale-[0.6] lg:scale-[0.8] xl:scale-100 origin-top">
+        
+        <div class="swiss-card p-10">
+            <div class="h-[30%] flex flex-col justify-center border-b-[3px] border-[#1A1918] relative">
+                <div class="absolute top-0 left-0 text-sm font-bold tracking-widest uppercase">Anil Dash / Essay Analysis</div>
+                <h1 class="text-[140px] leading-[1.05] font-black tracking-tighter uppercase font-sans-sc mt-4">
+                    Markdown<br>的崛起
+                </h1>
+                <div class="absolute bottom-2 right-0 text-xl font-serif-sc italic">The Syntax of the World</div>
+            </div>
+
+            <div class="h-[50%] grid grid-cols-2 relative">
+                <div class="absolute inset-y-0 left-1/2 w-[3px] bg-[#1A1918] -ml-[1.5px]"></div>
+
+                <div class="p-8 flex flex-col justify-between h-full">
+                    <div>
+                        <span class="text-6xl font-black opacity-10 absolute top-4 left-4">01</span>
+                        <h2 class="text-4xl font-black mb-6 mt-4">草根哲学</h2>
+                        <p class="text-2xl font-serif-sc font-bold leading-relaxed text-justify">
+                            它并非诞生于科技巨头的战略会议室，亦非为了商业版图的扩张。这是一个关于“个人痛点”的解决方案——为了让普通写作者摆脱繁琐代码的束缚，用最朴素的纯文本符号，重塑了互联网内容的生产秩序。
+                        </p>
+                    </div>
+                    <div class="border-t-[2px] border-[#1A1918] w-12 pt-2">
+                        <span class="text-sm font-bold uppercase">Origin</span>
+                    </div>
+                </div>
+
+                <div class="p-8 flex flex-col justify-between h-full">
+                    <div>
+                        <span class="text-6xl font-black opacity-10 absolute top-4 right-4">02</span>
+                        <h2 class="text-4xl font-black mb-6 mt-4">通用基石</h2>
+                        <p class="text-2xl font-serif-sc font-bold leading-relaxed text-justify">
+                            从顶级 AI 模型的指令构建，到工程师的文档管理，再到你的随手便签。它已成为数字世界的“世界语”。Markdown 证明了：无需复杂的私有格式，只要有文本框的地方，就有结构化思考的可能性。
+                        </p>
+                    </div>
+                    <div class="border-t-[2px] border-[#1A1918] w-12 pt-2">
+                        <span class="text-sm font-bold uppercase">Ubiquity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-[20%] border-t-[3px] border-[#1A1918] flex items-center justify-center p-8 bg-transparent">
+                <blockquote class="text-3xl font-serif-sc font-bold text-center leading-normal w-[90%]">
+                    “互联网真正的基础设施，往往并非源自亿万富翁的宏大蓝图，而是源于普通人对细节的极致关怀与无私分享。”
+                </blockquote>
+            </div>
+
+            <div class="absolute bottom-2 left-0 w-full px-10 flex justify-between text-xs font-mono uppercase tracking-widest opacity-60">
+                <span>Source: Anil Dash</span>
+                <span>Designed with AI</span>
+                <span>2026.01.12</span>
+            </div>
+        </div>
+
+        <div class="swiss-card p-0">
+            <div class="h-[10%] px-8 flex items-end justify-between border-b-[3px] border-[#1A1918] pb-4 bg-transparent">
+                <h1 class="text-6xl font-black tracking-tight font-sans-sc">MARKDOWN</h1>
+                <div class="text-right">
+                    <div class="text-xl font-bold tracking-[0.5em] uppercase">Tactics</div>
+                    <div class="text-4xl font-black font-serif-sc">02</div>
+                </div>
+            </div>
+
+            <div class="h-[90%] grid grid-cols-3 grid-rows-3 gap-[3px] bg-[#1A1918] border-b-[3px] border-[#1A1918]">
+                
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-tag absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">命名艺术</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        “Mark-down”是对“Mark-up”（标记语言）的机智反叛。如果 HTML 代表着繁复的代码堆砌，Markdown 则象征着做减法。这个名字本身就传递了清晰的价值主张：降低门槛，回归内容本身。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-bullseye absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">痛点直击</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        在 2004 年，要在网页上发布内容，你需要手写脆弱的 HTML，哪怕一个标签闭合错误都会毁掉整个页面版式。Markdown 并非为了抽象的“更好”，而是为了解决当时写作者面临的真实、具体且痛苦的技术障碍。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-keyboard absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">习惯延续</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        天才之处在于“无感设计”。它沿用了电子邮件时代的纯文本习惯（如用 > 表示引用，* 表示强调）。用户无需学习新语法，因为他们已经在邮件中使用了这种格式几十年。它利用了既有的肌肉记忆。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-brands fa-creative-commons-zero absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">开源精神</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        没有专利，没有 IP 封锁。John Gruber 选择将其作为公用事业发布，而非商业软件。这消除了开发者的恐惧，任何人都可以放心地在其应用中集成 Markdown 支持，而无需担心法律风险或未来的“圈地运动”。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-users absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">社区共建</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        它的成功并非一人之功。Aaron Swartz 等早期天才作为 Beta 测试者，不仅修补了漏洞，更注入了对数字权利和开放互联网的深刻理解。这是一个由极客社区共同打磨、为了共同理想而生的工具。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-puzzle-piece absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">适应性强</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        随着时间推移，不同平台（如 GitHub）根据自身需求衍生出了特定的 Markdown“风味”。这种允许变体的灵活性，使其能适应从简单的博客评论到复杂的开发文档等各种场景，成为了技术界的“乐高积木”。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-clock absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">时机完美</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        它诞生于博客（Blogging）爆发的前夜。当数百万人开始尝试在线写作时，Markdown 恰逢其时地出现。利用用户处于“学习新事物”的窗口期，极低的学习成本使其迅速成为了事实上的行业标准。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-code absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">源码即所得</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        就像早期 Web 的“查看源代码”一样，Markdown 具有极强的自我解释性。你只需看一眼源文件，就能立刻明白标题是如何构成的。这种透明性使得知识的传递无需教程，仅靠模仿即可完成。
+                    </p>
+                </div>
+
+                <div class="bg-[#F5F2EB] p-6 relative flex flex-col">
+                    <i class="fa-solid fa-wrench absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.05]"></i>
+                    <h3 class="text-2xl font-black mb-3">构建工具</h3>
+                    <p class="text-lg font-serif-sc font-semibold leading-snug text-justify flex-grow">
+                        随着 Web 开发走向自动化，Markdown 完美契合了“编译”工作流。它是极佳的“原材料”，可以被自动化脚本无缝转换为 HTML。这种特性使其在静态网站生成器和开发者文档领域占据了统治地位。
+                    </p>
+                </div>
+
+            </div>
+             <div class="absolute bottom-2 left-0 w-full px-8 flex justify-between text-xs font-mono uppercase tracking-widest opacity-60">
+                <span>Source: Anil Dash</span>
+                <span>Designed with AI</span>
+                <span>2026.01.12</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

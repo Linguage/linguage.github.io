@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Workflow - Swiss Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Reset & Variables */
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        
+        body {
+            background-color: #333; /* Dark outer background for presentation */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* Container */
+        .gallery-wrapper {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Card Base */
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            position: relative;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.1); /* Subtle highlight */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography Helper Classes */
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        .text-justify-fill {
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        /* Card 1 Specifics: Borders & Layout */
+        .wireframe-border {
+            border: 4px solid var(--ink-black);
+        }
+        .wireframe-border-y {
+            border-top: 4px solid var(--ink-black);
+            border-bottom: 4px solid var(--ink-black);
+        }
+        .wireframe-border-r {
+            border-right: 4px solid var(--ink-black);
+        }
+
+        /* Card 2 Specifics: Grid Lines */
+        .grid-cell {
+            position: relative;
+            border-right: 2px solid var(--ink-black);
+            border-bottom: 2px solid var(--ink-black);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        /* Remove borders for last column/row to create clean outer edge */
+        .grid-cell:nth-child(3n) { border-right: none; }
+        .grid-cell:nth-child(n+7) { border-bottom: none; }
+
+        /* Watermark Icon */
+        .watermark-icon {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 8rem;
+            color: var(--ink-black);
+            opacity: 0.06;
+            transform: rotate(-10deg);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Text Utilities */
+        .leading-tight-custom { line-height: 1.15; }
+    </style>
+</head>
+<body class="gallery-wrapper">
+
+    <div class="card p-8">
+        <div class="w-full h-full wireframe-border flex flex-col justify-between relative">
+            
+            <div class="h-[30%] flex flex-col justify-center items-center text-center px-4 relative">
+                <div class="absolute top-4 left-4 font-sans-sc font-black text-sm uppercase tracking-[0.4em]">Boris Cherny</div>
+                <div class="absolute top-4 right-4 font-sans-sc font-black text-sm uppercase tracking-[0.4em]">2026</div>
+                
+                <h1 class="font-playfair font-black text-[7.5rem] leading-[0.8] tracking-tighter uppercase mb-2">
+                    Claude<br>Code
+                </h1>
+                <p class="font-sans-sc font-black text-xl tracking-[0.8em] uppercase mt-2 border-b-2 border-black pb-1">
+                    Workflow & Setup
+                </p>
+            </div>
+
+            <div class="h-[45%] w-full wireframe-border-y grid grid-cols-2">
+                
+                <div class="wireframe-border-r p-10 flex flex-col justify-between">
+                    <h2 class="font-sans-sc font-black text-6xl tracking-tighter mb-4">效率<br>瓶颈</h2>
+                    <p class="font-serif-sc font-bold text-2xl leading-tight text-justify">
+                        传统的单线程开发模式限制了 AI 的潜能。工程师不应沦为等待模型输出字符的“看守者”，而应是编排多路智能并发协作的“指挥官”。等待即是最大的浪费。
+                    </p>
+                </div>
+
+                <div class="p-10 flex flex-col justify-between">
+                    <h2 class="font-sans-sc font-black text-6xl tracking-tighter mb-4">核心<br>哲学</h2>
+                    <p class="font-serif-sc font-bold text-2xl leading-tight text-justify">
+                        通过极致的并行化消灭等待时间，坚持使用 Opus 模型的深度思考能力。用“慢模型”的精准度换取整体工程的“快交付”，构建零延迟的流式开发体验。
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-[15%] flex items-center justify-center p-8 bg-transparent">
+                <p class="font-serif-sc font-black text-3xl text-center w-full leading-normal">
+                    “给 Claude 一个验证结果的反馈闭环，<br>最终代码的质量将直接提升两到三倍。”
+                </p>
+            </div>
+
+            <div class="absolute bottom-2 left-0 w-full px-4 flex justify-between">
+                <span class="font-sans-sc font-bold text-xs uppercase">Source: Twitter Thread</span>
+                <span class="font-sans-sc font-bold text-xs uppercase">Designed with AI</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-10">
+        
+        <div class="h-[80px] w-full border-b-4 border-black flex items-end justify-between pb-4 mb-0">
+            <h2 class="font-sans-sc font-bold text-5xl tracking-tight">TACTICS / 战术拆解</h2>
+            <div class="font-sans-sc font-black text-6xl leading-none">02</div>
+        </div>
+
+        <div class="flex-grow w-full grid grid-cols-3 grid-rows-3 border-b-4 border-black">
+            
+            <div class="grid-cell">
+                <i class="fa-solid fa-layer-group watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">极限并行</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    不要等待。在终端与网页端同时并发运行 15 个以上的会话。利用系统通知管理输入请求，随时在不同环境间“瞬移”切换，将所有的等待时间压缩至零。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-brain watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">算力至上</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    始终坚持使用 Opus 4.5 思考模型。虽然推理速度较慢，但其卓越的工具使用与逻辑能力能大幅减少人工纠偏成本，最终交付结果反而比“快模型”更迅速。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-brands fa-git-alt watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">共享记忆</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    团队维护唯一的 CLAUDE.md 并纳入 Git 管理。在代码审查发现 AI 错误时，通过标签即时更新该文档，让团队的所有 AI 实例不再重蹈覆辙，实现复利。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-chess-board watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">先谋后动</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    在编写 PR 前强制先进入 Plan Mode。与 AI 充分探讨直至方案完美，再切换至 Auto-accept 模式，实现代码生成的“一次成型”，避免反复修改。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-terminal watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">指令封装</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    将高频工作流封装为斜杠命令（如 /commit-push-pr）。通过预计算 Git 状态等信息减少不必要的对话轮次，让复杂操作如闪电般流畅，提升交互效率。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-robot watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">智能代理</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    部署专用子代理以处理特定任务。如 code-simplifier 用于收尾代码清理，verify-app 用于端到端测试，让流程自动化更加彻底，解放人力。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-user-shield watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">权限预设</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    不要粗暴地跳过权限检查。使用 /permissions 预先批准常用的安全命令（如构建测试），在保障环境安全的前提下，最大程度消除确认弹窗的干扰。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-network-wired watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">全能连接</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    利用 MCP 协议连接 Slack、BigQuery 或 Sentry。让 Claude 能够自主查询日志、分析数据并汇报进度，打破工具孤岛，成为全能的技术伙伴。
+                </p>
+            </div>
+
+            <div class="grid-cell">
+                <i class="fa-solid fa-check-double watermark-icon"></i>
+                <h3 class="font-sans-sc font-black text-3xl mb-3">验证闭环</h3>
+                <p class="font-serif-sc font-bold text-lg leading-snug text-justify-fill flex-grow">
+                    核心秘籍：为 AI 提供具体的验证手段（如 Chrome 插件测试 UI）。建立“生成-测试-修复”的自动反馈闭环，是代码质量实现指数级跃升的关键。
+                </p>
+            </div>
+        </div>
+
+        <div class="pt-4 flex justify-between items-center">
+            <span class="font-sans-sc font-bold text-sm uppercase tracking-widest">Swiss Grid System</span>
+            <span class="font-sans-sc font-bold text-sm uppercase tracking-widest">Jan 03, 2026</span>
+        </div>
+    </div>
+
+</body>
+</html>

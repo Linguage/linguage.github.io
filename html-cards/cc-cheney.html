@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Workflow - Morandi Magazine Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                    },
+                    colors: {
+                        m: {
+                            bg: '#F2EFE9',       /* 暖白纸张 */
+                            text: '#4A453E',     /* 深褐灰 */
+                            sub: '#847E75',      /* 次级灰 */
+                            blue: '#8DA0A8',     /* 雾霾蓝 */
+                            green: '#94A38C',    /* 鼠尾草绿 */
+                            clay: '#B59D8B',     /* 陶土色 */
+                            rose: '#C7B2AD',     /* 干枯玫瑰 */
+                            border: '#E6E2D8',   /* 浅褐边框 */
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(74, 69, 62, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #E5E0D6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 纸质纹理 */
+        .paper-texture {
+            background-color: #F2EFE9;
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%238c867d' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* 紧凑卡片样式 */
+        .compact-card {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid #E6E2D8;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.25rem; /* p-5 */
+            transition: all 0.3s ease;
+        }
+        
+        /* 标题下划线装饰 */
+        .title-underline::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background-color: #B59D8B;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container: 3:4 Aspect Ratio (900x1200) -->
+    <div class="relative w-full max-w-[900px] aspect-[3/4] paper-texture shadow-2xl overflow-hidden flex flex-col p-10 md:p-14 text-m-text">
+        
+        <!-- Decoration: Background Circles -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-m-blue rounded-full opacity-5 blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-m-clay rounded-full opacity-5 blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
+
+        <!-- Header -->
+        <header class="mb-8 z-10 flex justify-between items-end border-b border-m-border pb-6">
+            <div>
+                <div class="font-serif text-m-blue text-xs tracking-[0.25em] uppercase mb-3 font-bold">The Engineering Setup</div>
+                <h1 class="font-sans font-black text-5xl md:text-6xl text-m-text tracking-tight leading-none">
+                    Claude Code<br>
+                    <span class="font-light text-m-sub font-serif italic">Workflow</span>
+                </h1>
+            </div>
+            <div class="text-right hidden sm:block">
+                <div class="font-serif italic text-m-text text-lg">Boris Cherny</div>
+                <div class="font-sans text-[10px] text-m-clay mt-1 font-bold uppercase tracking-widest border px-2 py-1 rounded border-m-border inline-block">Creator Profile</div>
+            </div>
+        </header>
+
+        <!-- Content Grid: CSS Grid for Layout Control -->
+        <div class="grid grid-cols-2 gap-5 flex-1 z-10">
+
+            <!-- ================= TOP SECTION (Problem & Methodology) ================= -->
+            
+            <!-- Card: The Problem -->
+            <div class="col-span-1 compact-card bg-m-bg/80 flex flex-col justify-center">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-bolt text-m-rose text-lg"></i>
+                    <span class="font-sans font-bold text-xs text-m-rose tracking-wider uppercase">Pain Point</span>
+                </div>
+                <h2 class="font-sans font-bold text-2xl text-m-text mb-2 leading-tight">规模与效率的悖论</h2>
+                <p class="font-serif text-m-sub text-sm leading-relaxed text-justify">
+                    如何在高复杂度的工程环境中，既保持极高的编码吞吐量，又不牺牲代码质量与系统安全性？
+                </p>
+            </div>
+
+            <!-- Card: The Methodology -->
+            <div class="col-span-1 compact-card bg-m-bg/80 flex flex-col justify-center border-l-4 border-l-m-blue">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-compass text-m-blue text-lg"></i>
+                    <span class="font-sans font-bold text-xs text-m-blue tracking-wider uppercase">Philosophy</span>
+                </div>
+                <h2 class="font-sans font-bold text-2xl text-m-text mb-2 leading-tight">极致并行 & 智能模型</h2>
+                <p class="font-serif text-m-sub text-sm leading-relaxed text-justify">
+                    <strong>并行：</strong>同时运行 5-10 个实例，利用多端流转消灭等待。
+                    <strong>模型：</strong>坚持使用 Opus 4.5 (Thinking)，用更少的纠偏换取更高的最终速度。
+                </p>
+            </div>
+
+
+            <!-- ================= MIDDLE SECTION (6 Key Tactics) ================= -->
+            <!-- 2 Columns x 3 Rows -->
+
+            <!-- Tactic 1: Memory -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-green transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">01. 知识复利</h3>
+                    <i class="fa-solid fa-book-bookmark text-m-green opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    维护 <span class="font-semibold text-m-text font-sans">CLAUDE.md</span> 作为团队外脑。通过 PR 不断沉淀规则，让 AI 越用越懂团队。
+                </p>
+            </div>
+
+            <!-- Tactic 2: Strategy -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-clay transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">02. 先策后动</h3>
+                    <i class="fa-solid fa-chess-knight text-m-clay opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    始终以 <span class="font-semibold text-m-text font-sans">Plan Mode</span> (Shift+Tab) 启动。确认架构方案无误后，再转入自动执行模式。
+                </p>
+            </div>
+
+            <!-- Tactic 3: Automation -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-rose transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">03. 自动化流</h3>
+                    <i class="fa-solid fa-code-branch text-m-rose opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    使用 <span class="font-semibold text-m-text font-sans">Slash Commands</span> 固化高频操作（如提交 PR），利用 Hooks 自动格式化代码。
+                </p>
+            </div>
+
+            <!-- Tactic 4: Agents -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-blue transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">04. 专职代理</h3>
+                    <i class="fa-solid fa-robot text-m-blue opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    使用 Subagents（如 <span class="font-semibold text-m-text font-sans">code-simplifier</span>）处理特定任务，将长流程拆解为专人专事。
+                </p>
+            </div>
+
+            <!-- Tactic 5: Security -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-text transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">05. 权限沙盒</h3>
+                    <i class="fa-solid fa-shield-halved text-m-text opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    通过 <span class="font-semibold text-m-text font-sans">/permissions</span> 预设白名单，在保障安全的前提下，避免 AI 被频繁打断。
+                </p>
+            </div>
+
+            <!-- Tactic 6: Context -->
+            <div class="compact-card flex flex-col justify-center space-y-2 group hover:border-m-clay transition-colors">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-sans font-bold text-lg text-m-text">06. 全域感知</h3>
+                    <i class="fa-solid fa-network-wired text-m-clay opacity-50 group-hover:opacity-100"></i>
+                </div>
+                <p class="font-serif text-m-sub text-sm leading-relaxed">
+                    集成 <span class="font-semibold text-m-text font-sans">MCP Tools</span>。让 Claude 直接读取 Slack、BigQuery 和 Sentry 日志。
+                </p>
+            </div>
+
+
+            <!-- ================= BOTTOM SECTION (The Insight) ================= -->
+            
+            <div class="col-span-2 mt-2 bg-[#EBE9E4] rounded-xl p-8 flex items-start gap-6 relative overflow-hidden">
+                 <!-- Decor -->
+                <div class="absolute right-[-20px] top-[-20px] text-[150px] text-m-text opacity-5 font-serif italic leading-none">”</div>
+
+                <div class="hidden sm:flex flex-col items-center justify-center w-14 h-14 rounded-full border border-m-text/20 bg-white/40 shrink-0 mt-1">
+                    <i class="fa-solid fa-check-double text-xl text-m-text"></i>
+                </div>
+                
+                <div class="space-y-3 z-10">
+                    <div class="flex items-center gap-3">
+                        <span class="px-2 py-0.5 bg-m-text text-white text-[10px] font-sans font-bold tracking-widest uppercase rounded-sm">Final Tip</span>
+                        <h3 class="font-sans font-bold text-xl text-m-text">The Verification Loop</h3>
+                    </div>
+                    
+                    <p class="font-serif text-m-text text-lg leading-relaxed italic">
+                        “给 Claude 一种自我验证的方法（如运行测试或检查 UI）。如果建立了这个反馈闭环，最终结果的质量将提升 2-3 倍。”
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 pt-4 border-t border-m-border flex justify-between items-center w-full z-10">
+            <div class="flex items-center gap-3 text-m-sub">
+                <i class="fa-brands fa-twitter text-sm"></i>
+                <span class="font-serif text-xs tracking-wider">@bcherny</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="h-px w-8 bg-m-clay"></div>
+                <span class="font-sans text-[10px] font-bold text-m-clay uppercase tracking-[0.2em]">Designed with Claude Code</span>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

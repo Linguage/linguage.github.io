@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Cards - Claude Code Workflow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#F5F2EB', // Warm Paper
+                        ink: '#1A1918', // Deep Ink
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        /* Custom Utilities for Wireframe Look */
+        .border-ink {
+            border-color: #1A1918;
+        }
+        .text-ink {
+            color: #1A1918;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container scale-[0.6] origin-top md:scale-[0.8] xl:scale-100">
+        
+        <div class="card flex flex-col p-8 border-[3px] border-ink">
+            
+            <div class="h-[30%] flex flex-col justify-center border-b-[3px] border-ink pb-4 relative">
+                <div class="absolute top-0 right-0 font-sans font-bold text-xl tracking-widest">VOL.01 // STRATEGY</div>
+                <h1 class="font-display text-8xl leading-[0.85] uppercase tracking-tighter">
+                    Claude<br>Code<br>Workflow
+                </h1>
+                <p class="font-sans font-black text-2xl mt-6 tracking-wide text-right uppercase">
+                    By Eyad Khrais<br>
+                    <span class="font-serif font-medium text-lg normal-case opacity-80">Reconstructed by AI</span>
+                </p>
+            </div>
+
+            <div class="h-[45%] grid grid-cols-2 border-b-[3px] border-ink">
+                
+                <div class="border-r-[3px] border-ink p-6 flex flex-col justify-between">
+                    <div class="text-9xl opacity-10 absolute pointer-events-none">
+                        <i class="fa-solid fa-chess-knight"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-sans font-black text-5xl mb-6">思维<br>先行</h2>
+                        <p class="font-serif font-bold text-2xl leading-snug text-justify">
+                            多数工程师错在直接输入。代码生成的核心不在于敲击键盘，而在于架构设计。Plan Mode 的产出质量远超直接对话，那是为了避免无效代码堆积的必要停顿。
+                        </p>
+                    </div>
+                    <div class="font-mono text-lg font-bold">01 // ARCHITECTURE FIRST</div>
+                </div>
+
+                <div class="p-6 flex flex-col justify-between relative">
+                    <div class="text-9xl opacity-10 absolute top-10 right-10 pointer-events-none">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-sans font-black text-5xl mb-6">语境<br>工程</h2>
+                        <p class="font-serif font-bold text-2xl leading-snug text-justify">
+                            CLAUDE.md 是模型的入职文档。保持简短，明确“为什么”而非仅“做什么”。当上下文占用超过 30% 时，模型智商即刻降级，必须果断重置以防崩塌。
+                        </p>
+                    </div>
+                    <div class="font-mono text-lg font-bold text-right">02 // CONTEXT HYGIENE</div>
+                </div>
+            </div>
+
+            <div class="h-[15%] flex items-center justify-center text-center p-6 relative">
+                <i class="fa-solid fa-quote-left absolute top-4 left-4 text-4xl opacity-20"></i>
+                <p class="font-serif font-bold text-3xl leading-normal w-[90%]">
+                    “输出即输入。如果结果糟糕，那是你的提示词在裸奔，而非模型能力不足。糟糕的输入永远无法诞生卓越的代码。”
+                </p>
+            </div>
+
+            <div class="flex-grow border-t border-ink mt-auto pt-4 flex justify-between items-end font-mono text-sm font-bold uppercase tracking-widest opacity-60">
+                <span>Source: The Complete Claude Code Tutorial</span>
+                <span>Date: 2026.01.11</span>
+                <span>Designed with AI</span>
+            </div>
+        </div>
+
+
+        <div class="card flex flex-col p-8 border-[3px] border-ink">
+            
+            <div class="flex justify-between items-end border-b-[3px] border-ink pb-6 mb-6">
+                <div>
+                    <h1 class="font-sans font-black text-6xl uppercase leading-none">Tactics</h1>
+                    <p class="font-serif font-bold text-xl mt-2">Claude Code 深度实操手册</p>
+                </div>
+                <div class="font-display text-8xl leading-none">02</div>
+            </div>
+
+            <div class="flex-grow grid grid-cols-2 gap-x-6 gap-y-6">
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">01. 谋定后动</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        不要直接开始对话，这是新手的通病。强制自己先进入 Plan Mode。在那里的五分钟深思熟虑，能省下后续数小时的调试地狱。架构设计不仅是给结果，更是为模型划定清晰的执行路径。
+                    </p>
+                    <i class="fa-solid fa-brain absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">02. 入职文档</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        将 CLAUDE.md 视为新员工的入职手册。不要写成长篇小说，严格限制在 200 条指令内。告诉模型“为什么”这样做（Context），它会比单纯执行命令更聪明地处理边缘情况。
+                    </p>
+                    <i class="fa-solid fa-book-journal-whills absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">03. 记忆止损</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        模型在上下文占用达到 30% 时就开始显现疲态。坚持单一会话只做单一功能。当逻辑开始混乱时，不要恋战，复制关键信息，使用 /clear 彻底重置，始终保持上下文的纯净度。
+                    </p>
+                    <i class="fa-solid fa-eraser absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">04. 负向约束</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        Claude 4.5 喜欢过度设计。必须明确告诉它“不要做什么”。明确要求：保持简单，不要增加未请求的抽象层，不要为了灵活性而牺牲可读性。用约束条件构筑围栏。
+                    </p>
+                    <i class="fa-solid fa-hand-cuffs absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">05. 双模切换</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        利用 Opus 4.5 的深度推理能力进行架构规划和权衡，随后切换至 Sonnet 3.5 (Shift+Tab) 进行具体的代码实现。让昂贵的模型做大脑，让快速的模型做手脚，这是最优解。
+                    </p>
+                    <i class="fa-solid fa-shuffle absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+                <div class="relative border-b-2 border-ink pb-2 flex flex-col">
+                    <h3 class="font-sans font-black text-3xl mb-3">06. 自动化闭环</h3>
+                    <p class="font-serif font-bold text-2xl leading-snug text-justify flex-grow">
+                        Claude Code 不仅是聊天机器人，更是系统组件。利用 Headless 模式 (-p) 串联 Bash 脚本。建立反馈闭环：错误触发日志，日志修正文档，文档优化下一次输出。
+                    </p>
+                    <i class="fa-solid fa-gears absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.08] pointer-events-none"></i>
+                </div>
+
+            </div>
+
+            <div class="border-t border-ink mt-8 pt-4 flex justify-between items-end font-mono text-sm font-bold uppercase tracking-widest opacity-60">
+                <span>Source: Eyad Khrais / X</span>
+                <span>Date: 2026.01.11</span>
+                <span>Designed with AI</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

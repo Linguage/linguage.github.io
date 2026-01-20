@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Workflow - Visual Narrative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Typography System */
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        
+        /* Layout Container */
+        .gallery-wrapper {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: #2b2928; /* Background for presentation */
+            padding: 80px 40px;
+            min-height: 100vh;
+            flex-wrap: wrap;
+        }
+
+        /* Card Base */
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB; /* Warm Paper */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        /* Morandi Palette Utilities */
+        .bg-terra { background-color: #C29C91; }
+        .bg-blue { background-color: #7D939E; }
+        .bg-sage { background-color: #8F9E8B; }
+        .bg-cream { background-color: #FFFBF0; }
+        .bg-ink { background-color: #1A1918; }
+        
+        .text-ink { color: #1A1918; }
+        .text-terra { color: #C29C91; }
+        .text-blue { color: #7D939E; }
+        .text-sage { color: #8F9E8B; }
+
+        /* Typography Utilities */
+        .text-justify-fill {
+            text-align: justify;
+            text-align-last: left;
+        }
+    </style>
+</head>
+<body class="gallery-wrapper">
+
+    <div class="card p-12 justify-between">
+        
+        <div class="h-[35%] flex flex-col justify-end pb-10 border-b-4 border-black">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="font-sans-sc font-bold text-sm tracking-[0.3em] text-gray-500 uppercase">Boris Cherny</span>
+                <span class="h-[1px] w-20 bg-gray-400"></span>
+                <span class="font-sans-sc font-bold text-sm tracking-[0.3em] text-gray-500 uppercase">Creator's Guide</span>
+            </div>
+            <h1 class="font-sans-sc font-black text-[7.5rem] leading-[0.85] text-ink tracking-tighter">
+                CLAUDE<br>
+                CODE<br>
+                <span class="text-[#7D939E]">WORKFLOW</span>
+            </h1>
+        </div>
+
+        <div class="h-[40%] flex flex-col gap-6 py-8">
+            <div class="bg-terra p-10 flex-1 flex flex-col justify-center relative shadow-sm">
+                <div class="absolute top-6 left-8 flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-white text-opacity-80"></i>
+                    <span class="font-sans-sc font-bold text-xs tracking-widest text-white text-opacity-80 uppercase">The Friction</span>
+                </div>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-white pr-4">
+                    传统的单线程开发限制了效率，而过度的人工微调与上下文切换，往往比让模型“自主思考”更耗时。
+                </p>
+            </div>
+            
+            <div class="bg-sage p-10 flex-1 flex flex-col justify-center relative shadow-sm">
+                <div class="absolute top-6 left-8 flex items-center gap-3">
+                    <i class="fa-solid fa-seedling text-white text-opacity-80"></i>
+                    <span class="font-sans-sc font-bold text-xs tracking-widest text-white text-opacity-80 uppercase">The Philosophy</span>
+                </div>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-white pr-4">
+                    以极致的多线程并行打破算力瓶颈，用“慢思考”模型构建自动化验证闭环，实现零等待的流式开发。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] bg-ink p-10 flex items-center justify-center relative">
+            <i class="fa-solid fa-quote-left absolute top-6 left-8 text-gray-600 text-2xl"></i>
+            <p class="font-serif-sc font-medium text-2xl text-center text-[#F5F2EB] leading-relaxed italic w-4/5">
+                “给 Claude 一个验证结果的反馈闭环，最终代码的质量将提升两到三倍。”
+            </p>
+        </div>
+
+        <div class="h-[10%] flex items-end justify-between border-t border-gray-300 pt-6">
+            <div class="flex flex-col">
+                <span class="font-sans-sc font-bold text-xs text-gray-400 tracking-widest uppercase">Source</span>
+                <span class="font-serif-sc font-bold text-sm text-ink">Boris Cherny (Twitter)</span>
+            </div>
+            <div class="flex flex-col text-right">
+                <span class="font-sans-sc font-bold text-xs text-gray-400 tracking-widest uppercase">Date</span>
+                <span class="font-serif-sc font-bold text-sm text-ink">Jan 03, 2026</span>
+            </div>
+            <div class="font-sans-sc font-black text-xs text-gray-300 tracking-widest uppercase self-end pb-1">Designed with AI</div>
+        </div>
+    </div>
+
+    <div class="card bg-cream p-12">
+        
+        <div class="h-[80px] flex items-end justify-between border-b-2 border-gray-200 pb-4 mb-8">
+            <h2 class="font-sans-sc font-bold text-4xl text-ink tracking-tight">OPERATIONAL TACTICS</h2>
+            <div class="flex items-center gap-3">
+                <span class="font-sans-sc font-bold text-lg text-gray-400">KEY POINTS</span>
+                <span class="font-sans-sc font-black text-5xl text-terra">09</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 grid-rows-3 gap-x-10 gap-y-12 flex-grow content-start">
+            
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">01 极限并行</span>
+                    <i class="fa-solid fa-layer-group text-blue text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    不要等待。同时在终端与网页端运行 10-15 个 Claude 实例。利用系统通知管理输入请求，随时在不同会话间无缝“瞬移”，将等待时间压缩至零。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">02 深度思考</span>
+                    <i class="fa-solid fa-brain text-terra text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    始终坚持使用 Opus 4.5。尽管推理较慢，但其卓越的工具使用与逻辑能力能大幅减少人工纠偏成本，最终交付结果反而比使用“快模型”更迅速。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">03 共享记忆</span>
+                    <i class="fa-solid fa-book-bookmark text-sage text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    团队维护唯一的 CLAUDE.md 并纳入 Git。在代码审查发现 AI 错误时，通过标签即时更新该文档，让团队的所有 AI 实例不再重蹈覆辙。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">04 先谋后动</span>
+                    <i class="fa-solid fa-chess text-blue text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    编写 PR 前先进入 Plan Mode（计划模式）。与 AI 充分探讨直至方案完美，再切换至自动接受模式，实现代码生成的“一次成型”。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">05 指令封装</span>
+                    <i class="fa-solid fa-terminal text-terra text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    将高频工作流封装为斜杠命令（如 /commit-push-pr）。通过预计算状态减少不必要的对话轮次，让复杂的 Git 操作如闪电般流畅。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">06 智能代理</span>
+                    <i class="fa-solid fa-robot text-sage text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    部署专用子代理以处理特定任务。如 code-simplifier 用于收尾代码清理，verify-app 用于端到端测试，让流程自动化更加彻底。
+                </p>
+            </div>
+
+             <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">07 权限预设</span>
+                    <i class="fa-solid fa-shield-halved text-blue text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    不要粗暴地跳过权限检查。使用 /permissions 预先批准常用的安全命令，在保障环境安全的前提下，最大程度消除确认弹窗的干扰。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">08 全能连接</span>
+                    <i class="fa-solid fa-network-wired text-terra text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    利用 MCP 协议连接 Slack、BigQuery 或 Sentry。让 Claude 能够自主查询日志、分析数据并汇报进度，成为全能的技术伙伴。
+                </p>
+            </div>
+
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between mb-4 border-b border-gray-300 pb-2">
+                    <span class="font-sans-sc font-black text-2xl text-ink">09 验证闭环</span>
+                    <i class="fa-solid fa-check-double text-sage text-lg"></i>
+                </div>
+                <p class="font-serif-sc font-medium text-lg leading-normal text-ink text-justify-fill text-gray-800">
+                    核心秘籍：为 AI 提供具体的验证手段（如浏览器测试插件）。建立“生成-测试-修复”的自动反馈闭环，是代码质量跃升的关键。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="h-[60px] flex items-end justify-between border-t border-gray-300 pt-4 mt-auto">
+             <div class="font-sans-sc font-bold text-xs text-gray-400 tracking-widest uppercase">From claude.ai</div>
+             <div class="font-serif-sc font-bold text-sm text-ink opacity-50">Page 02</div>
+        </div>
+    </div>
+
+</body>
+</html>

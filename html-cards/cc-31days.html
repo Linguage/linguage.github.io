@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Claude Code Workflow - Swiss Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&family=Inter:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F5F2EB',
+                        ink: '#1A1918',
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            font-feature-settings: "palt";
+        }
+        .card-container {
+            display: flex;
+            gap: 40px;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: #F5F2EB;
+            color: #1A1918;
+            border: 4px solid #1A1918;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Custom Utilities for Wireframe Look */
+        .border-ink { border-color: #1A1918; }
+        .border-ink-thick { border-color: #1A1918; border-width: 3px; }
+        .text-justify-strict { text-align: justify; text-justify: inter-ideograph; }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+
+    <div class="card flex flex-col p-10">
+        
+        <div class="h-[35%] flex flex-col justify-center items-start border-b-[4px] border-ink relative">
+            <div class="absolute top-0 right-0 text-xl font-bold tracking-widest font-sans">ISSUE 2026</div>
+            <h1 class="text-[140px] leading-[0.85] font-display uppercase tracking-tighter w-full">
+                Claude<br>Code
+            </h1>
+            <div class="mt-4 flex justify-between w-full items-end">
+                <span class="text-4xl font-sans font-black tracking-widest uppercase">Workflow</span>
+                <span class="text-2xl font-serif font-bold italic">By Ado Kukic</span>
+            </div>
+        </div>
+
+        <div class="h-[50%] grid grid-cols-2 border-b-[4px] border-ink">
+            
+            <div class="border-r-[3px] border-ink p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-6xl font-sans font-black opacity-20 block mb-4">01</span>
+                    <h2 class="text-6xl font-sans font-black mb-6 tracking-tight">深度协作</h2>
+                    <p class="text-3xl font-serif font-bold leading-snug text-justify-strict">
+                        AI 不是替代者，而是高阶杠杆。通过 <span class="border-b-2 border-ink">Plan Mode</span> 规划路径，利用 <span class="border-b-2 border-ink">Sandbox</span> 设定安全边界。将模糊的人类意图，转化为精准、可控的工程现实。
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between">
+                <div>
+                    <span class="text-6xl font-sans font-black opacity-20 block mb-4">02</span>
+                    <h2 class="text-6xl font-sans font-black mb-6 tracking-tight">心流加速</h2>
+                    <p class="text-3xl font-serif font-bold leading-snug text-justify-strict">
+                        消除上下文切换的摩擦力。从 <span class="border-b-2 border-ink">!Bash</span> 指令直达系统底层，到 <span class="border-b-2 border-ink">Vim</span> 模式的指尖律动。在终端内完成思考与构建，让开发重回绝对专注的心流状态。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-6 text-center">
+            <p class="text-[32px] font-serif font-bold leading-tight max-w-4xl">
+                “ 开发者不应臣服于工具的生成能力，而应驾驭其深度与边界。<br>
+                Claude Code 是杠杆，你需要找到最精准的发力点。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-10 right-10 flex justify-between text-sm font-sans font-bold uppercase tracking-wider opacity-60">
+            <span>Source: Advent of Claude</span>
+            <span>Designed with AI</span>
+            <span>2026</span>
+        </div>
+    </div>
+
+
+    <div class="card flex flex-col">
+        
+        <div class="h-[120px] border-b-[4px] border-ink flex items-center justify-between px-10 bg-paper z-10">
+            <h2 class="text-7xl font-sans font-black tracking-tighter">TACTICS</h2>
+            <div class="text-right">
+                <div class="text-4xl font-display font-black">09 / 31</div>
+                <div class="text-lg font-sans font-bold uppercase tracking-widest">Key Features</div>
+            </div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-3 grid-rows-3 bg-ink gap-[3px] border-b-[4px] border-ink">
+            
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-file-code absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">自动初始化</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    拒绝手写文档。输入 <span class="font-sans">/init</span> 让 Claude 主动阅读代码库，自动生成 CLAUDE.md。它不仅是说明书，更是 AI 的项目记忆，涵盖构建命令与架构决策。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-terminal absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">瞬时终端</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    无需切换窗口。使用 <span class="font-sans">!</span> 前缀直接在对话流中执行 Bash 命令（如 !git status）。输出即刻注入上下文，实现零延迟的无缝交互。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-clock-rotate-left absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">时光回溯</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    实验性的代码修改搞砸了？双击 <span class="font-sans">Esc</span> 键即可将对话与代码状态回滚至安全检查点。保留探索的勇气，同时拥有随时撤销的后悔药。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-at absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">语境注入</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    善用 <span class="font-sans">@</span> 符号实现毫秒级上下文引用。无论是 @src 还是 @mcp，这是将人类意图与 AI 认知同步的最快路径，支持智能模糊匹配。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-brain absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">思维链涌现</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    面对复杂架构，通过 <span class="font-sans">ultrathink</span> 强制调用 32k 思考 token。在输出代码前进行深度推理与自我博弈，用计算成本换取工程洞察。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-floppy-disk absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">会话持久化</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    无论是断电还是跨设备，<span class="font-sans">--resume</span> 让你随时找回工作流。为会话命名，像管理 Git 分支一样管理你的 AI 协作历史。
+                </p>
+            </div>
+
+             <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-shield-halved absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">安全沙箱</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    通过 <span class="font-sans">/sandbox</span> 预设权限边界。在 YOLO 模式的极致速度与严格授权之间找到平衡，确保 AI 在安全的笼中起舞。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-robot absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">无头自动化</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    并非所有任务都需要对话。使用 <span class="font-sans">-p</span> 启动 Headless 模式，将 Claude 接入 CI/CD 流水线，处理 Lint 修复并直接输出结果。
+                </p>
+            </div>
+
+            <div class="bg-paper p-6 relative flex flex-col justify-between overflow-hidden">
+                <i class="fa-solid fa-network-wired absolute -bottom-4 -right-4 text-[140px] opacity-[0.06] text-ink"></i>
+                <h3 class="text-4xl font-sans font-black mb-3">智能体群</h3>
+                <p class="text-[22px] font-serif font-bold leading-tight text-justify-strict flex-grow">
+                    复杂任务不必亲力亲为。调用 Subagents 处理并行子任务，利用 MCP 连接外部工具。从单兵作战进化为指挥官模式。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="h-[60px] flex items-center justify-between px-10 text-sm font-sans font-bold uppercase tracking-wider opacity-60">
+             <span>adocomplete.com/advent-of-claude</span>
+             <span>Designed with AI</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

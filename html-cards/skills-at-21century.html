@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;400;700;900&family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-deep: #1A1918;
+        }
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-deep);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        
+        /* Typography Scale overrides for impact */
+        .text-huge { font-size: 7.5rem; line-height: 1.1; letter-spacing: -0.04em; }
+        .text-super { font-size: 5rem; line-height: 0.9; letter-spacing: -0.03em; }
+        
+        /* Custom Utilities */
+        .border-ink { border-color: var(--ink-deep); }
+        .text-ink { color: var(--ink-deep); }
+        .text-justify-last { text-align-last: left; }
+    </style>
+</head>
+<body class="gap-10 flex-wrap">
+
+    <div class="swiss-card border-[4px] border-ink flex flex-col p-8">
+        
+        <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink pb-6">
+            <div class="flex justify-between items-end mb-4">
+                <span class="font-sans-sc font-bold text-2xl tracking-widest uppercase">The Paradigm</span>
+                <span class="font-sans-sc font-bold text-2xl">Skills in the 21st Century</span>
+            </div>
+            <h1 class="font-sans-sc font-black text-huge text-ink uppercase break-words">
+                21世纪<br>技能杠杆
+            </h1>
+            <div class="mt-4 text-right font-serif-sc font-bold text-3xl italic">
+                By Aaron Levie
+            </div>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 relative">
+            <div class="absolute left-1/2 top-0 bottom-0 w-[3px] bg-[#1A1918] -ml-[1.5px]"></div>
+
+            <div class="p-8 flex flex-col justify-start h-full">
+                <h2 class="font-sans-sc font-black text-5xl mb-6 tracking-tighter">存在<br>危机</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    随着AI Agent展现出惊人的自动化能力，人们普遍担忧人类技能的价值即将归零。当代码撰写、法律检索甚至医疗诊断都能被瞬间完成时，专业人士的传统立足之地似乎正在崩塌。
+                </p>
+                <div class="mt-auto pt-8">
+                     <i class="fa-solid fa-triangle-exclamation text-8xl opacity-10"></i>
+                </div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-start h-full">
+                <h2 class="font-sans-sc font-black text-5xl mb-6 tracking-tighter">深度<br>复利</h2>
+                <p class="font-serif-sc font-bold text-3xl leading-snug text-justify">
+                    历史证明自动化从未消灭技能，而是重塑了它。AI真正的威力在于放大“专业深度”——你需要极其深厚的领域知识，才能精准定义任务、构建心智模型，并判断AI输出的优劣。
+                </p>
+                <div class="mt-auto pt-8 text-right">
+                    <i class="fa-solid fa-layer-group text-8xl opacity-10"></i>
+               </div>
+            </div>
+        </div>
+
+        <div class="h-[15%] border-t-[4px] border-ink flex items-center justify-center p-6 bg-[#1A1918] text-[#F5F2EB]">
+            <p class="font-serif-sc font-black text-3xl text-center leading-normal w-full tracking-wide">
+                “技能不会在21世纪消失，<br>AI 将赋予专业深度前所未有的扩张杠杆。”
+            </p>
+        </div>
+
+        <div class="absolute bottom-2 left-8 right-8 flex justify-between text-xs font-sans-sc font-bold opacity-60 text-[#F5F2EB]">
+            <span>SOURCE: AARON LEVIE</span>
+            <span>DESIGNED WITH AI</span>
+        </div>
+    </div>
+
+
+    <div class="swiss-card border-[4px] border-ink flex flex-col p-8">
+        
+        <div class="flex justify-between items-end border-b-[4px] border-ink pb-4 mb-6">
+            <div>
+                <h1 class="font-sans-sc font-black text-6xl tracking-tighter leading-none">实操演进</h1>
+                <p class="font-serif-sc font-bold text-xl mt-2">SKILLS IN THE AGE OF AI AGENTS</p>
+            </div>
+            <div class="text-right">
+                <span class="block font-sans-sc font-black text-5xl">02</span>
+                <span class="block font-sans-sc font-bold text-sm tracking-[0.2em]">TACTICS</span>
+            </div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2 gap-x-8 gap-y-8">
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">01. 综合集成</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    工程师的核心价值从未局限于敲击代码。真正的工程是理解客户需求、系统集成、调试部署以及确保持续交付的复杂闭环。AI可以处理单一任务，但只有具备全局视野的人类，才能将这些碎片拼凑成有价值的完整产品。
+                </p>
+                <i class="fa-solid fa-network-wired absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">02. 剥离枯燥</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    顶尖工程师正在享受AI带来的红利。将重复性、低价值的“苦力活”外包给AI代理，从而释放宝贵精力专注于创新与核心逻辑。这不仅是效率的提升，更是职业满足感的回归，让工作重心重回创造价值本身。
+                </p>
+                <i class="fa-solid fa-robot absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">03. 历史押韵</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    回望1982年的律师需耗时数小时翻阅卷宗，而今检索仅需秒级。然而，法律行业并未因此消失，反而因监管复杂度的提升而变得更加精密。工具越强，市场对专业度的期待越高，基础技能的重要性不减反增。
+                </p>
+                <i class="fa-solid fa-landmark absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">04. 心智模型</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    驾驭AI的核心在于“判断力”。你必须在脑海中构建完整的任务心智模型，知道下一步该去哪里，以及什么是“好的结果”。若缺乏底层领域知识，你将无法验证AI的输出，只能在黑暗中盲目射击。
+                </p>
+                <i class="fa-solid fa-brain absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">05. 预期膨胀</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    当自动化降低了生产门槛，市场预期便会随之水涨船高。以前昂贵的定制化演示如今成为标配。仅仅完成任务已不足够，利用AI交付更高精度、更具创造性的成果，将成为新时代行业竞争的及格线。
+                </p>
+                <i class="fa-solid fa-arrow-trend-up absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+            <div class="relative flex flex-col border-b-2 border-ink pb-2">
+                <h3 class="font-sans-sc font-black text-3xl mb-3">06. 极速进化</h3>
+                <p class="font-serif-sc font-semibold text-xl leading-snug text-justify flex-grow">
+                    AI不仅武装了专家，更让初学者获得了前所未有的加速器。它降低了门槛并抬高了天花板。现在的年轻人拥有24/7在线的顶级导师，只要保持好奇与进取，任何人都能以惊人的速度掌握新技能。
+                </p>
+                <i class="fa-solid fa-bolt absolute bottom-[-10px] right-[-10px] text-9xl opacity-[0.06]"></i>
+            </div>
+
+        </div>
+
+        <div class="mt-4 pt-4  border-ink flex justify-between text-xs font-sans-sc font-bold uppercase tracking-wider">
+            <span>Source: 2026 Aaron Levie Archive</span>
+            <span>Generated: 2026.01.11</span>
+            <span>Designed with AI</span>
+        </div>
+    </div>
+
+</body>
+</html>

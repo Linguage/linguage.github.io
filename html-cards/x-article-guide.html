@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Articles Strategy - Swiss Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #F5F2EB;
+            --ink-color: #1A1918;
+        }
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .canvas-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-color);
+            color: var(--ink-color);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--ink-color);
+            display: flex;
+            flex-direction: column;
+        }
+        /* Typography Utilities */
+        .font-ink-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .font-ink-sans {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom Borders */
+        .border-ink {
+            border-color: var(--ink-color);
+        }
+        .border-b-ink {
+            border-bottom: 3px solid var(--ink-color);
+        }
+        .border-t-ink {
+            border-top: 3px solid var(--ink-color);
+        }
+        .border-r-ink {
+            border-right: 3px solid var(--ink-color);
+        }
+        
+        /* Watermark Icons */
+        .watermark-icon {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            font-size: 8rem;
+            opacity: 0.08;
+            color: #000;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="canvas-container">
+
+    <div class="card p-8">
+        <div class="h-[30%] flex flex-col justify-center items-center text-center relative z-10">
+            <h2 class="font-display text-2xl tracking-[0.3em] mb-4 uppercase">The Ultimate Guide</h2>
+            <h1 class="font-ink-sans font-black text-[120px] leading-[1.05] tracking-tighter">𝕏 Articles<br>官方指南</h1>
+            <p class="absolute bottom-4 right-0 font-ink-serif font-bold text-xl italic">By 𝕏 Creators</p>
+        </div>
+
+        <div class="h-[50%] border-t-[3px] border-b-[3px] border-ink grid grid-cols-2">
+            
+            <div class="border-r-[3px] border-ink p-8 flex flex-col justify-between relative">
+                <i class="fa-solid fa-pen-nib watermark-icon"></i>
+                <div class="relative z-10">
+                    <span class="font-display text-6xl font-black opacity-20 absolute -top-4 -left-2">01</span>
+                    <h3 class="font-ink-sans font-black text-5xl mb-8 mt-4">内容筑基</h3>
+                    <p class="font-ink-serif font-bold text-3xl leading-snug text-justify">
+                        摆脱碎片化表达的桎梏。从明确写作意图开始，建立自然且具有辨识度的声音。利用视觉呼吸感打破阅读疲劳，让每一个段落都成为逻辑严密的思想方砖。
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-between relative">
+                <i class="fa-solid fa-users-viewfinder watermark-icon"></i>
+                <div class="relative z-10">
+                    <span class="font-display text-6xl font-black opacity-20 absolute -top-4 -left-2">02</span>
+                    <h3 class="font-ink-sans font-black text-5xl mb-8 mt-4">价值闭环</h3>
+                    <p class="font-ink-serif font-bold text-3xl leading-snug text-justify">
+                        构建从免费吸引到付费订阅的完整生态。通过预告、串联与互动最大化分发效率，用独家深度内容设置软性付费墙，将读者的注意力转化为可持续的创作者收益。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center text-center px-6 relative">
+            <p class="font-ink-serif font-bold text-4xl leading-tight w-full">
+                “赋予思想应有的广度，<br>在算法洪流中重构深度连接与价值护城河。”
+            </p>
+        </div>
+
+        <div class="h-[5%] flex justify-between items-end border-t border-black pt-2 opacity-60 font-mono text-sm uppercase">
+            <span>Source: 𝕏 Creators Guide</span>
+            <span>Date: Jan 2026</span>
+            <span>Designed with AI (Gemini)</span>
+        </div>
+    </div>
+
+    <div class="card p-6">
+        <div class="h-[8%] border-b-[3px] border-ink flex justify-between items-center px-2 mb-4">
+            <h1 class="font-ink-sans font-black text-6xl uppercase tracking-tighter">Tactics</h1>
+            <div class="text-right">
+                <span class="block font-display font-black text-4xl">02</span>
+                <span class="block font-mono text-sm">PRACTICAL GUIDE</span>
+            </div>
+        </div>
+
+        <div class="h-[87%] grid grid-cols-3 grid-rows-3 gap-0 border-l-[3px] border-t-[3px] border-ink">
+            
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-bullseye watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">01 明确意图</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    在敲下第一个字之前，必须精准定义读者的预期反应。是为了激发思考、情感共鸣还是促成行动？清晰的目标感是所有优秀长文的导航灯塔，避免思维在写作中途的无序漫游。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-anchor watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">02 标题诱饵</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    拒绝平庸的通用型标题。优秀的标题应具体且充满张力（如“为什么95%的建议都失效”），配合强有力的首句钩子（Hook），迅速抓住读者好奇心，将其平滑地引入正文叙事。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-layer-group watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">03 扫读结构</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    针对移动端阅读习惯优化。段落控制在2-4行，频繁使用小标题、列表和加粗强调。让文章具有极高的“可扫视性”，确保读者即使快速滑动屏幕，也能捕捉到核心价值点。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-microphone-lines watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">04 真实声调</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    像对朋友说话一样写作。避免教科书式的枯燥说教，使用“你”和“你的”建立对话感。无论是分析型还是犀利型，保持语调的一致性是建立个人品牌信任感的最快路径。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-quote-right watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">05 展示证据</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    Show, don't just tell. 任何观点紧跟事实支撑：数据、个人故事或对比案例。利用X平台的特性，直接嵌入推文或过往文章作为“活体证据”，增强论点的不可辩驳性。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-scissors watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">06 无情删减</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    初稿是给自己的，二稿才是给读者的。大声朗读全文，无情砍掉20-30%的冗余字数，特别是“非常”、“以此”等填充词。让文字紧凑有力，不给读者的注意力留出逃逸空间。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-image watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">07 视觉呼吸</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    长文需要“透气孔”。利用图表、截图或嵌入式内容打破文字墙的压迫感。良好的视觉节奏（Bold Headers, Spacing）不仅提升阅读体验，更能显著增加文章的互动率与分享率。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-share-nodes watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">08 分发矩阵</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    发布即开始。发布前数小时预告造势；发布后72小时内通过置顶、拆解成Thread（推文串）引流。积极回复早期评论，激活算法推荐机制，并适时重发旧文以捕捉新流量。
+                </p>
+            </div>
+
+            <div class="border-r-[3px] border-b-[3px] border-ink p-5 relative flex flex-col overflow-hidden">
+                <i class="fa-solid fa-lock watermark-icon"></i>
+                <h3 class="font-ink-sans font-black text-3xl mb-3">09 订阅变现</h3>
+                <p class="font-ink-serif font-semibold text-xl leading-snug text-justify flex-grow">
+                    清晰界定免费与付费的边界。用免费文章吸引新读者，用软性付费墙（Soft Paywalls）锁定深度价值。提供幕后花絮、独家简报等增值内容，让忠实粉丝心甘情愿为知识付费。
+                </p>
+            </div>
+
+        </div>
+
+        <div class="h-[5%] flex justify-between items-end pt-2 opacity-60 font-mono text-sm uppercase">
+            <span>Source: 𝕏 Creators Guide</span>
+            <span>Date: Jan 2026</span>
+            <span>Designed with AI (Gemini)</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

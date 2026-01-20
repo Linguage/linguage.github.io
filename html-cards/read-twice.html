@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Infographic - Dual Reading Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F5F2EB', // Warm Paper
+                        ink: '#1A1918',   // Deep Ink
+                        watermark: 'rgba(26, 25, 24, 0.06)',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Hide scrollbar for clean presentation */
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Optical Alignment Adjustments */
+        .text-justify-last-center { text-align-last: center; }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center p-10 overflow-x-auto">
+
+    <div class="flex gap-10 scale-[0.65] origin-top md:scale-100 transition-transform">
+
+        <div class="relative w-[900px] h-[1200px] bg-paper text-ink border-[4px] border-ink flex flex-col p-8 overflow-hidden">
+            
+            <div class="h-[30%] flex flex-col justify-center border-b-[4px] border-ink pb-4">
+                <div class="flex justify-between items-end mb-4">
+                    <span class="font-sans font-bold text-2xl tracking-[0.2em] uppercase">Methodology</span>
+                    <span class="font-serif font-bold text-2xl">@AztecaAlpaca</span>
+                </div>
+                <h1 class="font-sans font-black text-[150px] leading-[0.85] tracking-tighter uppercase -ml-2">
+                    双重阅读
+                </h1>
+                <div class="text-right mt-2">
+                    <span class="font-display italic text-4xl font-black text-ink/80"><br>The Dual Reading Strategy</span>
+                </div>
+            </div>
+
+            <div class="h-[50%] grid grid-cols-2">
+                <div class="border-r-[4px] border-ink pr-8 pt-8 flex flex-col relative group">
+                    <i class="fa-solid fa-triangle-exclamation absolute top-4 right-4 text-9xl text-watermark"></i>
+                    <h2 class="font-sans font-black text-6xl mb-6">认知<br>陷阱</h2>
+                    <p class="font-serif font-bold text-3xl leading-snug text-justify flex-grow">
+                        单次阅读往往带来虚假的满足感。书读完了，笔记做了，但记忆模糊，观点未经推敲。书架变高，认知并未真正扩容。这是因为大脑无法在未知的语境中同时完成探索与建构。
+                    </p>
+                </div>
+
+                <div class="pl-8 pt-8 flex flex-col relative group">
+                    <i class="fa-solid fa-layer-group absolute top-4 right-4 text-9xl text-watermark"></i>
+                    <h2 class="font-sans font-black text-6xl mb-6">维度<br>分工</h2>
+                    <p class="font-serif font-bold text-3xl leading-snug text-justify flex-grow">
+                        必须将阅读拆解为两次独立的战略任务。初读是扫清地形的“探索”，复读是搭建体系的“建造”。这不是时间的浪费，而是用耐心的重复，换取认知的真正重组与内化。
+                    </p>
+                </div>
+            </div>
+
+            <div class="h-[20%] border-t-[4px] border-ink flex items-center justify-center p-6 relative">
+                 <i class="fa-solid fa-quote-left absolute top-6 left-6 text-6xl text-ink/20"></i>
+                <p class="font-serif font-bold text-4xl text-center leading-relaxed max-w-[90%]">
+                    “世界上真正改变过人的书，几乎没有是只读一遍的。<br>阅读不是简单的摄入，而是认知的重组。”
+                </p>
+                <div class="absolute bottom-2 w-full flex justify-between text-sm font-sans font-bold px-4 uppercase tracking-widest">
+                    <span>Source: Inspired by @dotey</span>
+                    <span>Date: 2026.01.04</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="relative w-[900px] h-[1200px] bg-paper text-ink border-[4px] border-ink flex flex-col p-8">
+            
+            <div class="h-[12%] border-b-[4px] border-ink flex justify-between items-end pb-4 mb-6">
+                <div>
+                    <h1 class="font-sans font-black text-7xl leading-none">实操篇</h1>
+                    <span class="font-serif text-2xl font-bold italic block mt-2">Implementation Tactics</span>
+                </div>
+                <div class="text-right">
+                    <span class="font-display font-black text-8xl leading-none opacity-40">02</span>
+                </div>
+            </div>
+
+            <div class="flex-grow grid grid-cols-2 gap-x-8 gap-y-8">
+                
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">01 / 任务分离</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        试图一次性完成理解、判断与内化是徒劳的。大脑无法在完全未知的环境中高效处理复杂任务。通过将目标强行拆解为“探索”与“建造”，才能降低认知负荷，提升吸收效率。
+                    </p>
+                    <i class="fa-solid fa-scissors absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">02 / 初读扫盲</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        目标极低，不求甚解。这一步像在陌生城市漫步，只需摸清主干道与地形。建立语境，标记停顿点，但不急于下结论。如果在此阶段纠结细节，会迷失在局部中。
+                    </p>
+                    <i class="fa-solid fa-map absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">03 / 克制笔记</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        第一次阅读时的笔记往往只是“情绪记录”。缺乏全书视野的判断容易站不住脚。必须克制长篇大论的冲动，仅做记号，将批判性的思考留给拥有完整视野的第二遍。
+                    </p>
+                    <i class="fa-solid fa-pen-slash absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">04 / 结构搭建</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        二刷是真正的“读书”。此时带着地图回归，主动拆解论证结构，审查逻辑自洽性。你不再被文字牵引，而是像建筑师看图纸一样，理解承重结构与力的走向。
+                    </p>
+                    <i class="fa-solid fa-shapes absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">05 / 效率悖论</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        单次阅读常因卡壳和反复回读浪费大量时间。双重阅读虽然看似读两遍，但第一遍容许模糊，第二遍精准发力，消除了“回头看”的隐性成本，总时间往往更短。
+                    </p>
+                    <i class="fa-solid fa-stopwatch absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+
+                <div class="flex flex-col border-b-2 border-ink pb-2 relative">
+                    <h3 class="font-sans font-black text-4xl mb-3">06 / 价值筛选</h3>
+                    <p class="font-serif font-semibold text-2xl leading-snug text-justify flex-grow">
+                        这种方法能显著降低“读了没用”的概率。它赋予你筛选书的能力，让你明白哪些书值得深钻，哪些书浅尝辄止。筛选与放弃，本身就是一种高级的阅读能力。
+                    </p>
+                    <i class="fa-solid fa-filter absolute bottom-0 right-0 text-8xl text-watermark"></i>
+                </div>
+            </div>
+
+            <div class="h-[5%] border-t-[4px] border-ink mt-6 pt-4 flex justify-between items-center">
+                <div class="font-sans font-bold text-lg uppercase tracking-widest">Designed with AI</div>
+                <div class="font-serif font-bold text-lg">SWISS WIREFRAME SERIES</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
