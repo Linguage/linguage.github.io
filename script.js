@@ -358,12 +358,8 @@ function syncGiscusTheme(theme){
 
 function updateThemeToggleIcon(){
   if (!themeToggleBtn) return;
-  const root = document.documentElement;
-  const manual = root.dataset.themeManual === 'true';
-  const manualTheme = manual ? (root.dataset.theme || null) : null;
-  const prefersDark = themeMediaQuery ? themeMediaQuery.matches : false;
-  const effectiveDark = manual ? manualTheme === 'dark' : prefersDark;
-  themeToggleBtn.textContent = effectiveDark ? THEME_ICON_DARK : THEME_ICON_LIGHT;
+  // Icon handled by CSS ::after based on data-theme to prevent FOUC
+  // themeToggleBtn.textContent = effectiveDark ? THEME_ICON_DARK : THEME_ICON_LIGHT;
   themeToggleBtn.setAttribute('aria-label','切换主题');
   themeToggleBtn.setAttribute('title','切换主题');
 }
