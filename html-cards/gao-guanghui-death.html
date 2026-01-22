@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe Infographic - CVTE Case</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@600;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-deep: #1A1918;
+        }
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .swiss-card {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-deep);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .font-heavy {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-weight: 900;
+        }
+        .font-serif-bold {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        .border-ink {
+            border-color: var(--ink-deep);
+        }
+        /* Tight leading for massive text */
+        .leading-negative {
+            line-height: 0.85;
+        }
+        .watermark {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 10rem;
+            opacity: 0.06;
+            color: var(--ink-deep);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Custom scrollbar hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="gap-10 flex-wrap overflow-auto">
+
+    <div class="swiss-card border-[4px] border-ink p-8 flex flex-col justify-between">
+        
+        <div class="h-[30%] flex flex-col justify-center items-center relative border-b-[3px] border-ink">
+            <div class="absolute top-0 left-0 text-sm font-bold tracking-widest uppercase">BlueWhale News / 2026.01.22</div>
+            <div class="absolute top-0 right-0 text-sm font-bold tracking-widest uppercase">Case Study: CVTE</div>
+            
+            <h1 class="text-[160px] font-heavy leading-negative tracking-tighter text-center uppercase w-full">
+                系统性过劳
+            </h1>
+            <p class="mt-4 text-2xl font-serif-bold tracking-[0.5em] uppercase"><br>Systemic Exhaustion</p>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 relative">
+            <div class="absolute inset-y-0 left-1/2 w-[3px] bg-[#1A1918] -ml-[1.5px]"></div>
+
+            <div class="p-8 flex flex-col justify-center h-full">
+                <span class="text-6xl font-heavy mb-6 block">01</span>
+                <h2 class="text-5xl font-heavy mb-6 tracking-tighter">薪酬<br>陷阱</h2>
+                <p class="text-2xl font-serif-bold leading-relaxed text-justify">
+                    极低的底薪结构强制构建了“自愿加班”的逻辑闭环。员工为获取足以维生的绩效工资，被迫放弃休息权，陷入无边界协作的吞噬之中。这不仅是薪酬制度，更是对生理极限的精准收割。
+                </p>
+            </div>
+
+            <div class="p-8 flex flex-col justify-center h-full pl-12">
+                <span class="text-6xl font-heavy mb-6 block">02</span>
+                <h2 class="text-5xl font-heavy mb-6 tracking-tighter">证据<br>隐匿</h2>
+                <p class="text-2xl font-serif-bold leading-relaxed text-justify">
+                    当生命在非工作时间终结，系统迅速启动防御机制。以后台数据涉密为由，物理切断工伤认定的证据链。商业机密的保护伞下，是一个个体在庞大企业机器面前的彻底失声。
+                </p>
+            </div>
+        </div>
+
+        <div class="h-[15%] w-full border-t-[3px] border-ink flex items-center justify-center p-6">
+            <p class="text-3xl font-serif-bold text-center leading-normal w-[90%]">
+                “这种无边界的加班文化模糊了工作与生活的界限，直到最终崩塌了生与死的边界。”
+            </p>
+        </div>
+    </div>
+
+    <div class="swiss-card border-[4px] border-ink p-8 flex flex-col">
+        
+        <div class="flex justify-between items-end border-b-[3px] border-ink pb-6 mb-6">
+            <div>
+                <h1 class="text-6xl font-heavy tracking-tighter leading-none">实操:<br>如何干翻你的员工</h1>
+            </div>
+            <div class="text-right">
+                <span class="block text-xl font-bold font-serif uppercase tracking-widest">Tactics & Reality</span>
+                <span class="block text-6xl font-heavy font-serif leading-none">02</span>
+            </div>
+        </div>
+
+        <div class="flex-grow grid grid-cols-2 gap-5">
+            
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.01</span>
+                    <h3 class="text-3xl font-heavy mb-3">一人七职</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        部门经理不仅负责核心研发，更需承担销售陪同、项目对接等多重职能。公司长期不增派人手，导致单兵作战负荷达到常人七倍。这种“能者多劳”的背后，是对中层管理者精力的极限透支，将人力成本压缩至生理崩溃的边缘。
+                    </p>
+                </div>
+                <i class="fa-solid fa-user-group watermark"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.02</span>
+                    <h3 class="text-3xl font-heavy mb-3">全时待命</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        每日睡眠压缩至6小时，通勤途中仍需接入会议。从“几分钟回复”到“无休止在线”，技术手段消灭了物理空间的下班概念。即便在抢救时刻，工作群的消息弹窗依然未停，这是一种彻头彻尾的24小时数字化奴役。
+                    </p>
+                </div>
+                <i class="fa-solid fa-clock watermark"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.03</span>
+                    <h3 class="text-3xl font-heavy mb-3">薪酬倒挂</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        3000元的底薪与1.9万元的实发工资形成巨大反差。这种极端的薪酬结构设计，本质上是一种强制性的行为诱导：若想维持体面收入，必须接受“无边界协作”的规则。高绩效不是奖励，而是出卖健康换取的生存门票。
+                    </p>
+                </div>
+                <i class="fa-solid fa-money-bill-wave watermark"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.04</span>
+                    <h3 class="text-3xl font-heavy mb-3">虚假关怀</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        对外宣传视频中充满着岁月静好的人文关怀与福利展示，对内却是冷酷的KPI考核与隐形加班。企业文化的双重面孔在猝死事件中暴露无遗：所谓的“家文化”，仅存在于宣传物料中，现实是冰冷的效率机器。
+                    </p>
+                </div>
+                <i class="fa-solid fa-masks-theater watermark"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.05</span>
+                    <h3 class="text-3xl font-heavy mb-3">数据黑箱</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        面对家属的工伤认定诉求，公司利用信息不对称，以“商业机密”为由隐匿死者事发前的后台登录日志。通过控制关键证据的流动，企业成功构建了一道法律防火墙，将明显的过劳死转化为难以认定的意外事件。
+                    </p>
+                </div>
+                <i class="fa-solid fa-database watermark"></i>
+            </div>
+
+            <div class="relative border-[2px] border-ink p-5 flex flex-col justify-between overflow-hidden">
+                <div>
+                    <span class="text-sm font-bold border border-ink px-2 py-1 inline-block mb-3">FACT.06</span>
+                    <h3 class="text-3xl font-heavy mb-3">系统异化</h3>
+                    <p class="text-lg font-serif-bold leading-snug text-justify z-10 relative">
+                        招聘启事中赤裸裸的“抗压能力强”要求，已成为筛选合格零件的标准。996工作制被正常化，项目进度永远凌驾于生命安全之上。这不是个例，而是整个互联网技术行业在资本裹挟下，对劳动者进行系统性异化的缩影。
+                    </p>
+                </div>
+                <i class="fa-solid fa-network-wired watermark"></i>
+            </div>
+
+        </div>
+
+        <div class="mt-6 pt-4 border-t-[2px] border-ink flex justify-between text-xs font-bold uppercase tracking-widest">
+            <span>Source: 蓝鲸新闻 / 陆鹏鹏</span>
+            <span>Date: 2026.01.22</span>
+            <span>Designed with AI</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
