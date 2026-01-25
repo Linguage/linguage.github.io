@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Wireframe - Honnold Taipei 101</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font Definitions */
+        .font-sans-sc { font-family: 'Noto Sans SC', sans-serif; }
+        .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        
+        /* Wireframe Color Palette */
+        :root {
+            --bg-paper: #F5F2EB;
+            --ink-black: #1A1918;
+        }
+        
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .card-container {
+            width: 900px;
+            height: 1200px;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            border: 3px solid var(--ink-black);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Strict Border Utilities */
+        .border-thick { border: 3px solid var(--ink-black); }
+        .border-t-thick { border-top: 3px solid var(--ink-black); }
+        .border-b-thick { border-bottom: 3px solid var(--ink-black); }
+        .border-r-thick { border-right: 3px solid var(--ink-black); }
+        .border-l-thick { border-left: 3px solid var(--ink-black); }
+
+        /* Typography Utilities */
+        .text-ink { color: var(--ink-black); }
+    </style>
+</head>
+<body class="gap-12 flex-wrap">
+
+    <div class="card-container">
+        <div class="h-[30%] flex flex-col justify-center items-center p-8 relative">
+            <div class="absolute top-6 left-6 font-sans-sc font-black text-xl tracking-widest">VOL.101</div>
+            <div class="absolute top-6 right-6 font-sans-sc font-black text-xl tracking-widest">ALEX HONNOLD</div>
+            
+            <h1 class="font-display text-[8rem] leading-[0.85] tracking-tighter text-center uppercase">
+                Urban<br>Summit
+            </h1>
+            <p class="font-serif-sc font-bold text-2xl mt-4 tracking-[0.3em] uppercase">台北天际线 · 徒手攀登</p>
+        </div>
+
+        <div class="h-[55%] grid grid-cols-2 border-t-thick border-b-thick">
+            
+            <div class="border-r-thick p-10 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-sans-sc font-black text-6xl mb-6">心流<br>秩序</h2>
+                    <div class="w-16 h-2 bg-[#1A1918] mb-8"></div>
+                </div>
+                <p class="font-serif-sc font-semibold text-3xl leading-snug text-justify">
+                    这不仅仅是一次攀爬，而是一场在都市钢筋丛林中的高山远征。在狂风骤雨与喧嚣人群的包围下，唯一的挑战在于屏蔽外部噪音，将恐惧转化为纯粹的各种孩童般的玩乐与喜悦。
+                </p>
+                <div class="font-sans-sc font-bold text-xl mt-4 opacity-60">01 — INTERNAL STATE</div>
+            </div>
+
+            <div class="p-10 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-sans-sc font-black text-6xl mb-6">信任<br>交付</h2>
+                    <div class="w-16 h-2 bg-[#1A1918] mb-8"></div>
+                </div>
+                <p class="font-serif-sc font-semibold text-3xl leading-snug text-justify">
+                    拒绝“特技表演”的标签。这是建立在十年愿景之上的工业奇迹。从世界级的索具架设到精确的运镜调度，每一米上升背后，都是对团队专业度与风险管理的极致计算。
+                </p>
+                <div class="font-sans-sc font-bold text-xl mt-4 opacity-60">02 — EXTERNAL REALITY</div>
+            </div>
+        </div>
+
+        <div class="h-[15%] flex items-center justify-center p-8 text-center">
+            <blockquote class="font-serif-sc font-bold text-4xl leading-normal max-w-4xl italic">
+                “生命是有限的。当你意识到这一点，你就会去追求那些真正艰难、独特且充满意义的目标。”
+            </blockquote>
+        </div>
+        
+        <div class="absolute bottom-2 w-full flex justify-between px-6 text-sm font-sans-sc font-bold uppercase tracking-widest opacity-50">
+            <span>Source: TVBS Interview</span>
+            <span>DESIGNED WITH AI</span>
+            <span>2026.01.24</span>
+        </div>
+    </div>
+
+
+    <div class="card-container">
+        <div class="h-[12%] flex justify-between items-end px-10 pb-6 border-b-thick">
+            <h1 class="font-sans-sc font-black text-7xl tracking-tighter uppercase">Tactics</h1>
+            <div class="text-right">
+                <div class="font-serif-sc font-bold text-2xl">执行细节与实操拆解</div>
+                <div class="font-sans-sc font-black text-5xl">PAGE 02</div>
+            </div>
+        </div>
+
+        <div class="h-[84%] grid grid-cols-2 grid-rows-3">
+            
+            <div class="border-b-thick border-r-thick p-8 relative flex flex-col overflow-hidden group">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">都市高山化</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    虽然身处台北市中心，但狂风与雨水让这次体验如同置身远方山脉。这不是单纯的建筑攀爬，而是一次完整的探险。将摩天大楼视为一座巨大的岩壁，环境的不确定性反而赋予了攀爬更原始的野性魅力。
+                </p>
+                <i class="fas fa-mountain absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+            <div class="border-b-thick p-8 relative flex flex-col overflow-hidden">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">噪音与专注</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    起步离地是心理压力最大的时刻，人群的喧嚣让感官过载。然而随着高度上升，专注力接管一切。这种“节日般”的嘈杂能量最终被转化为一种支撑力，让攀爬者在万众瞩目中进入独属于自己的静谧领域。
+                </p>
+                <i class="fas fa-volume-mute absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+            <div class="border-b-thick border-r-thick p-8 relative flex flex-col overflow-hidden">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">信任架构</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    这是一场信任游戏。摄影与索具团队由攀岩界的传奇人物组成，他们不仅记录影像，更是安全系统的一部分。攀爬者必须绝对相信头顶的设备不会掉落任何物体，这种对团队的无条件信任是完成 Free Solo 的先决条件。
+                </p>
+                <i class="fas fa-project-diagram absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+            <div class="border-b-thick p-8 relative flex flex-col overflow-hidden">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">父职与风险</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    成为父亲并未削减对攀爬的热爱，但改变了决策逻辑。更加审慎地选择项目，更精细地规划训练。台北 101 被戏称为“家庭友好型”项目，因为相比于在格陵兰岛冰川上失联一个月，这里能随时通过 FaceTime 与家人联络。
+                </p>
+                <i class="fas fa-baby-carriage absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+            <div class="border-r-thick p-8 relative flex flex-col overflow-hidden">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">游戏心态</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    外人眼中的“疯狂”，在当事人眼中是纯粹的“玩耍”。一旦开始攀爬，恐惧消退，取而代之的是孩童般的快乐。这不仅是体能的释放，更是一种在极度危险边缘寻找极致自由与掌控感的心理游戏。
+                </p>
+                <i class="fas fa-smile-beam absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+            <div class="p-8 relative flex flex-col overflow-hidden">
+                <h3 class="font-sans-sc font-black text-4xl mb-3">无限打磨</h3>
+                <p class="font-serif-sc font-semibold text-2xl leading-snug text-justify flex-grow">
+                    没有终点，只有下一个起点。即使完成了世界级的壮举，回到家后的第一件事依然是训练。这种对技艺的持续打磨（Striving）本身就是目的。不强求机会，但在机会来临时，必须确保自己已做好了万全的准备。
+                </p>
+                <i class="fas fa-infinity absolute bottom-[-15px] right-[-10px] text-9xl opacity-[0.08]"></i>
+            </div>
+
+        </div>
+
+        <div class="h-[4%] flex justify-between items-center px-6 border-t-thick text-sm font-sans-sc font-bold uppercase tracking-widest opacity-50">
+            <span>Visual Data: Honnold Interview</span>
+            <span>WIRE FRAME SYSTEM</span>
+            <span>TAIPEI 101</span>
+        </div>
+    </div>
+
+</body>
+</html>
