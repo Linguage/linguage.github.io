@@ -1,4 +1,4 @@
-/* Mobile TOC Dark Mode Fix */
+/* Mobile TOC Styles and Theme Overrides */
 
 /* Default (Light) - Explicitly set background and text colors */
 #mobileTocPanel {
@@ -17,10 +17,28 @@
     background-color: rgba(226, 45, 48, 0.05);
 }
 
-/* Force Light Theme overrides */
+/* Force Light Theme overrides (Fixes "Night Mode System + Light Mode Site" issue) */
 [data-theme='light'] #mobileTocPanel {
     background-color: rgba(255, 255, 255, 0.95) !important;
     border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* Fix sticky header background in light mode */
+[data-theme='light'] #mobileTocPanel > .sticky {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: #e2e8f0 !important;
+}
+
+[data-theme='light'] #mobileTocPanel h4 {
+    color: #0f172a !important;
+}
+
+[data-theme='light'] #mobileTocCloseBtn {
+    color: #64748b !important; /* slate-500 */
+}
+
+[data-theme='light'] #mobileTocCloseBtn:hover {
     color: #0f172a !important;
 }
 
@@ -28,11 +46,42 @@
     color: #334155 !important;
 }
 
+[data-theme='light'] #mobileTocPanel .toc a:hover,
+[data-theme='light'] #mobileTocPanel .toc a.active {
+    color: var(--highlight-color, #e22d30) !important;
+    background-color: rgba(226, 45, 48, 0.05) !important;
+}
+
+/* Force Light Theme Toggle Button */
+[data-theme='light'] #mobileTocToggleBtn {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+[data-theme='light'] #mobileTocToggleBtn svg {
+    color: #0f172a !important;
+}
+
+/* Fix the icon circle background */
+[data-theme='light'] #mobileTocToggleBtn .bg-slate-100 {
+    background-color: #f1f5f9 !important; /* slate-100 */
+}
+
+[data-theme='light'] #mobileTocCurrentHeading {
+    color: #0f172a !important;
+}
+
 /* Dark Theme overrides */
 [data-theme='dark'] #mobileTocPanel {
     background-color: rgba(15, 23, 42, 0.95) !important; /* slate-900 */
     border-color: rgba(255, 255, 255, 0.1) !important;
     color: #f8fafc !important; /* slate-50 */
+}
+
+[data-theme='dark'] #mobileTocPanel > .sticky {
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 [data-theme='dark'] #mobileTocPanel .toc a {
