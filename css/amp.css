@@ -191,6 +191,25 @@ html[data-theme="dark"] .md-table-shell {
   letter-spacing: 0.02em;
 }
 
+.md-table--kv {
+  table-layout: fixed;
+}
+
+.md-table--kv .md-table-col--key {
+  width: clamp(140px, 22%, 220px);
+}
+
+.md-table--kv .md-table-col--value {
+  width: auto;
+}
+
+.md-table--kv th:first-child,
+.md-table--kv td:first-child {
+  font-weight: 600;
+  color: var(--muted, #6c757d);
+  white-space: nowrap;
+}
+
 .md-table a {
   color: var(--brand-accent, #0e6a85);
   text-decoration: none;
