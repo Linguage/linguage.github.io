@@ -53,35 +53,7 @@ Anthropic 将 Claude Code 定位为一个“原始”（Primitive）或“力量
 &lt;li&gt;&lt;strong&gt;法务团队&lt;/strong&gt;采用“先在 Claude.ai 中规划，再到 Claude Code 中构建”的两步流程，确保在编码前思路已完全清晰。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="2-拥抱迭代式协作而非期待一次性奇迹"&gt;2. 拥抱迭代式协作，而非期待一次性奇迹&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;原则&lt;/strong&gt;：将 AI 视为一个迭代伙伴，而不是一个能一键解决所有问题的工具。通过持续的对话、修正和引导来共同完成任务。&lt;/p&gt;</description></item><item><title>关于Claude Code的对话</title><link>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</guid><description>&lt;h1 id="关于claude-code的对话"&gt;关于Claude Code的对话&lt;/h1&gt;
-&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
-&lt;p&gt;本文整理了Anthropic公司Claude关系主管Alex Albert与Claude Code创造者Boris Cherny的深度访谈。内容涵盖Claude Code的起源故事、安装使用方法、代理式编程的核心体验、编程范式从打孔卡到提示词的演进、Claude 4模型带来的能力提升，以及任务规划和Claude.md文件等实用技巧，为开发者提供了一份兼具宏观视角与微观操作的详实指南。&lt;/p&gt;
-&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
- &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
- &lt;iframe
- src="https://www.youtube-nocookie.com/embed/Yf_1w00qIKc?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
- title="关于Claude Code的对话"
- class="absolute inset-0 w-full h-full border-0"
- loading="lazy"
- allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
- allowfullscreen&gt;
- &lt;/iframe&gt;
- &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;代理式编程（Agentic Coding）&lt;/strong&gt;：一种AI驱动的编程方式，AI代理能够自主使用工具、探索代码库、读取文件并完成复杂编码任务，而非仅提供代码补全&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Dogfooding（自己吃自己的狗粮）&lt;/strong&gt;：指开发团队在日常工作中使用自己构建的产品，以便发现问题并持续改进用户体验&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;：Anthropic推出的终端代理式编程工具，通过NPM安装后可在任意终端环境中运行，支持各类IDE内置终端&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Claude.md文件&lt;/strong&gt;：Claude Code的配置文件机制，支持团队共享配置与个人偏好设置，用于定制AI代理的行为和指令&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Claude Max&lt;/strong&gt;：Anthropic推出的订阅服务，整合了Claude.ai与Claude Code的使用权限，提供按月付费的近乎无限制使用方案&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;&lt;img src="https://yt3.ggpht.com/ux-GXUpB4PkI-qXVOpj9gGEiCkytT0Q78ka4srlxOm_Y3m1gEh5qy8Vu6vTjGSDztMT0NybtC7I=s88-c-k-c0x00ffffff-no-rj" alt=""&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;视频链接：&lt;a href="https://www.youtube.com/watch?v=Yf_1w00qIKc"&gt;A conversation on Claude Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;Anthropic&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="内容概述"&gt;内容概述&lt;/h3&gt;
-&lt;p&gt;本文整理了 Anthropic 公司的一场深度对话，由 Claude 关系主管 Alex Albert 访谈 Claude Code 的创造者 Boris Cherny。本次访谈的核心是 Anthropic 推出的代理式编程工具——Claude Code。对话从 Claude Code 的起源谈起，揭示了其作为 Anthropic 内部高效工具的诞生背景，并介绍了基础的安装与使用方法。Boris 进一步阐述了其“代理式”核心体验，并将其置于从打孔卡到提示词的编程范式演进历程中进行解读，为我们理解AI时代软件工程的变革提供了独特的视角。访谈还涵盖了新模型（如 Claude 4）为工具带来的能力跃升，以及一系列提升效率的实用技巧，包括任务规划、扩展思考和 &lt;code&gt;Claude.md&lt;/code&gt; 文件的妙用。最后，双方探讨了 Claude Code 的未来发展方向。这篇访谈录为希望深入了解和高效使用 Claude Code 的开发者，提供了一份兼具宏观视角与微观技巧的详实指南。&lt;/p&gt;</description></item><item><title>Claude Code 工作流基础</title><link>https://linguista.cn/static/cc101/</link><pubDate>Sun, 11 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc101/</guid><description>这份卡片深度解析了 Claude Code 的高效工作流，核心在于“思维先行”而非直接编码。通过强调 Plan Mode 的重要性、CLAUDE.md 的语境工程以及上下文管理的必要性，提供了从架构设计到实战战术的完整指南，旨在帮助开发者规避无效代码堆积，利用 AI 智能构建卓越软件。</description></item><item><title>Claude Code 工作流：31天进阶指南</title><link>https://linguista.cn/static/cc-31days/</link><pubDate>Tue, 06 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-31days/</guid><description>探讨 Claude Code 的深度协作模式与开发工作流优化。本文详细介绍了如何利用 Plan Mode 和 Sandbox 将人类意图转化为工程现实，以及如何通过 Bash 指令和 Vim 模式消除上下文切换，实现绝对专注的心流状态。文中还涵盖了自动初始化、瞬时终端、时光回溯等核心战术功能，展示开发者如何驾驭 AI 工具的深度与边界。</description></item><item><title>Claude Code 工作流精要</title><link>https://linguista.cn/static/cc-cheney/</link><pubDate>Mon, 05 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cheney/</guid><description>Boris Cherny 分享的 Claude Code 工作流：通过极致并行、智能模型选择、知识复利、先策后动、自动化流、专职代理、权限沙盒和全域感知等策略，在高复杂度工程环境中实现极高编码吞吐量。</description></item><item><title>Claude Code 工作流可视化 (一)</title><link>https://linguista.cn/static/cc-cheney-1/</link><pubDate>Sat, 03 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cheney-1/</guid><description>本卡片系列深入探讨了 Boris Cherny 提出的 Claude Code 编程范式，旨在解决传统 AI 编程中单点交互与碎片化经验的局限性。通过建立并行作业流、共享上下文以及引入 Opus Thinking 模型，开发者可以构建自动化且具备自我验证能力的协作体系。文中强调了反馈闭环的重要性，即提供验证方法以将代码质量提升数倍，从而将个人智慧有效转化为团队的工程资产与自动化标准。</description></item><item><title>Claude Code 工作流可视化 (二)</title><link>https://linguista.cn/static/cc-cherny-2/</link><pubDate>Sat, 03 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cherny-2/</guid><description>本文探讨了 Boris Cherny 提出的 Claude Code 工作流理念。文章指出，传统的单线程开发限制了效率，而过度的人工微调往往比让模型“自主思考”更耗时。通过构建极致的多线程并行环境、使用慢思考模型进行自动化验证，以及建立共享的团队记忆库，开发者可以实现零等待的流式开发体验，最终将代码质量提升两到三倍。</description></item><item><title>Claude Code设计与开发全流程解读</title><link>https://linguista.cn/curated/henrinotes-2025_p2/claude-code-design-workflow-meaghan-choi/</link><pubDate>Sat, 27 Sep 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/claude-code-design-workflow-meaghan-choi/</guid><description>&lt;h1 id="claude-code设计与开发全流程解读"&gt;Claude Code设计与开发全流程解读&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;原则&lt;/strong&gt;：将 AI 视为一个迭代伙伴，而不是一个能一键解决所有问题的工具。通过持续的对话、修正和引导来共同完成任务。&lt;/p&gt;</description></item><item><title>Claude Code 工作流基础</title><link>https://linguista.cn/static/cc101/</link><pubDate>Sun, 11 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc101/</guid><description>这份卡片深度解析了 Claude Code 的高效工作流，核心在于“思维先行”而非直接编码。通过强调 Plan Mode 的重要性、CLAUDE.md 的语境工程以及上下文管理的必要性，提供了从架构设计到实战战术的完整指南，旨在帮助开发者规避无效代码堆积，利用 AI 智能构建卓越软件。</description></item><item><title>Claude Code 工作流：31天进阶指南</title><link>https://linguista.cn/static/cc-31days/</link><pubDate>Tue, 06 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-31days/</guid><description>探讨 Claude Code 的深度协作模式与开发工作流优化。本文详细介绍了如何利用 Plan Mode 和 Sandbox 将人类意图转化为工程现实，以及如何通过 Bash 指令和 Vim 模式消除上下文切换，实现绝对专注的心流状态。文中还涵盖了自动初始化、瞬时终端、时光回溯等核心战术功能，展示开发者如何驾驭 AI 工具的深度与边界。</description></item><item><title>Claude Code 工作流精要</title><link>https://linguista.cn/static/cc-cheney/</link><pubDate>Mon, 05 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cheney/</guid><description>Boris Cherny 分享的 Claude Code 工作流：通过极致并行、智能模型选择、知识复利、先策后动、自动化流、专职代理、权限沙盒和全域感知等策略，在高复杂度工程环境中实现极高编码吞吐量。</description></item><item><title>Claude Code 工作流可视化 (一)</title><link>https://linguista.cn/static/cc-cheney-1/</link><pubDate>Sat, 03 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cheney-1/</guid><description>本卡片系列深入探讨了 Boris Cherny 提出的 Claude Code 编程范式，旨在解决传统 AI 编程中单点交互与碎片化经验的局限性。通过建立并行作业流、共享上下文以及引入 Opus Thinking 模型，开发者可以构建自动化且具备自我验证能力的协作体系。文中强调了反馈闭环的重要性，即提供验证方法以将代码质量提升数倍，从而将个人智慧有效转化为团队的工程资产与自动化标准。</description></item><item><title>Claude Code 工作流可视化 (二)</title><link>https://linguista.cn/static/cc-cherny-2/</link><pubDate>Sat, 03 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/cc-cherny-2/</guid><description>本文探讨了 Boris Cherny 提出的 Claude Code 工作流理念。文章指出，传统的单线程开发限制了效率，而过度的人工微调往往比让模型“自主思考”更耗时。通过构建极致的多线程并行环境、使用慢思考模型进行自动化验证，以及建立共享的团队记忆库，开发者可以实现零等待的流式开发体验，最终将代码质量提升两到三倍。</description></item><item><title>Claude Code设计与开发全流程解读</title><link>https://linguista.cn/curated/henrinotes-2025_p2/claude-code-design-workflow-meaghan-choi/</link><pubDate>Sat, 27 Sep 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/claude-code-design-workflow-meaghan-choi/</guid><description>&lt;h1 id="claude-code设计与开发全流程解读"&gt;Claude Code设计与开发全流程解读&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;本期视频由Peter Yang采访Anthropic公司Claude Code的设计主管Meaghan Choi，详细展示设计师如何从设计到代码完成完整工作流程。作为设计负责人，Meaghan不仅主导新功能设计，还频繁亲自参与代码开发并直接上线。她分享了Claude Code的三大设计应用场景、具体操作技巧，以及AI如何加速设计师与工程师间的协作，推进产品快速迭代。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -422,7 +394,35 @@ Anthropic 将 Claude Code 定位为一个“原始”（Primitive）或“力量
 &lt;p&gt;&lt;strong&gt;AI 开发新范式：流程革新与人类智慧的融合&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;人工智能正以前所未有的速度重塑软件开发的蓝图，其核心驱动力在于构建高效的AI辅助工作流程，并清晰界定人类在这一变革中的关键干预角色。这一新范式昭示着一个时代的来临：AI将作为主要的执行者，承担起繁重的开发任务，而人类工程师则升维为管理者、指导者与最终质量的把控者。团队日益倾向于让AI完成绝大部分工作，包括编码、研究、工作流程优化乃至开发过程中的所有相关事务，人类则专注于更高层次的策略引导和AI管理。&lt;/p&gt;
 &lt;p&gt;在这些AI驱动的开发流程中，“复合工程”（Compounding Engineering）的理念尤为突出。其核心在于构建能够生成其他提示（prompts）的提示，使得每一次完成的工作都能为后续任务打下更坚实的基础，从而实现效率的指数级提升。一个生动的例子是，开发者仅需向AI工具（如Claude Code）提出一个功能需求，甚至可以通过语音输入，AI便能自动完成所有研究，创建详尽的开发文档——例如包含问题陈述、解决方案愿景、详细需求和技术要求的GitHub Issue——并将其无缝集成到项目管理看板中。这种“提示构建提示”的模式，如Kora团队所实践的，先投入时间构建一个能生成详细研究文档的“元提示”，该文档本身又成为AI执行后续编码任务的有效指令，极大地减少了每次开发新功能时所需的手动指令和前期准备工作。据Kora团队反馈，这种方法使得他们仅有两个人的团队感觉像一个15人的团队在高效运作。&lt;/p&gt;
-&lt;p&gt;并行工作与多智能体协同是AI驱动工作流程的另一显著优势。AI系统允许同时发起并处理多个任务请求，实现了真正意义上的任务并行化。团队可以根据任务特性，灵活调用不同AI智能体的专长，例如使用Claude Code进行深度研究，利用Friday完成UI设计与实现，借助Charlie进行代码审查。这些智能体能够协同作战，避免了对单一全能型智能体的过度依赖，并且能与现有的GitHub、拉取请求（Pull Requests）等开发者生态系统无缝集成，确保人类开发者能够轻松介入，进行协作、审查和管理。&lt;/p&gt;</description></item><item><title>Code with Claude 开幕主题演讲</title><link>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</link><pubDate>Thu, 22 May 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</guid><description>&lt;h1 id="code-with-claude-开幕主题演讲"&gt;Code with Claude 开幕主题演讲&lt;/h1&gt;
+&lt;p&gt;并行工作与多智能体协同是AI驱动工作流程的另一显著优势。AI系统允许同时发起并处理多个任务请求，实现了真正意义上的任务并行化。团队可以根据任务特性，灵活调用不同AI智能体的专长，例如使用Claude Code进行深度研究，利用Friday完成UI设计与实现，借助Charlie进行代码审查。这些智能体能够协同作战，避免了对单一全能型智能体的过度依赖，并且能与现有的GitHub、拉取请求（Pull Requests）等开发者生态系统无缝集成，确保人类开发者能够轻松介入，进行协作、审查和管理。&lt;/p&gt;</description></item><item><title>关于Claude Code的对话</title><link>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</link><pubDate>Wed, 04 Jun 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</guid><description>&lt;h1 id="关于claude-code的对话"&gt;关于Claude Code的对话&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文整理了Anthropic公司Claude关系主管Alex Albert与Claude Code创造者Boris Cherny的深度访谈。内容涵盖Claude Code的起源故事、安装使用方法、代理式编程的核心体验、编程范式从打孔卡到提示词的演进、Claude 4模型带来的能力提升，以及任务规划和Claude.md文件等实用技巧，为开发者提供了一份兼具宏观视角与微观操作的详实指南。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/Yf_1w00qIKc?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="关于Claude Code的对话"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;代理式编程（Agentic Coding）&lt;/strong&gt;：一种AI驱动的编程方式，AI代理能够自主使用工具、探索代码库、读取文件并完成复杂编码任务，而非仅提供代码补全&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dogfooding（自己吃自己的狗粮）&lt;/strong&gt;：指开发团队在日常工作中使用自己构建的产品，以便发现问题并持续改进用户体验&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;：Anthropic推出的终端代理式编程工具，通过NPM安装后可在任意终端环境中运行，支持各类IDE内置终端&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude.md文件&lt;/strong&gt;：Claude Code的配置文件机制，支持团队共享配置与个人偏好设置，用于定制AI代理的行为和指令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Max&lt;/strong&gt;：Anthropic推出的订阅服务，整合了Claude.ai与Claude Code的使用权限，提供按月付费的近乎无限制使用方案&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;&lt;img src="https://yt3.ggpht.com/ux-GXUpB4PkI-qXVOpj9gGEiCkytT0Q78ka4srlxOm_Y3m1gEh5qy8Vu6vTjGSDztMT0NybtC7I=s88-c-k-c0x00ffffff-no-rj" alt=""&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;视频链接：&lt;a href="https://www.youtube.com/watch?v=Yf_1w00qIKc"&gt;A conversation on Claude Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;Anthropic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="内容概述"&gt;内容概述&lt;/h3&gt;
+&lt;p&gt;本文整理了 Anthropic 公司的一场深度对话，由 Claude 关系主管 Alex Albert 访谈 Claude Code 的创造者 Boris Cherny。本次访谈的核心是 Anthropic 推出的代理式编程工具——Claude Code。对话从 Claude Code 的起源谈起，揭示了其作为 Anthropic 内部高效工具的诞生背景，并介绍了基础的安装与使用方法。Boris 进一步阐述了其“代理式”核心体验，并将其置于从打孔卡到提示词的编程范式演进历程中进行解读，为我们理解AI时代软件工程的变革提供了独特的视角。访谈还涵盖了新模型（如 Claude 4）为工具带来的能力跃升，以及一系列提升效率的实用技巧，包括任务规划、扩展思考和 &lt;code&gt;Claude.md&lt;/code&gt; 文件的妙用。最后，双方探讨了 Claude Code 的未来发展方向。这篇访谈录为希望深入了解和高效使用 Claude Code 的开发者，提供了一份兼具宏观视角与微观技巧的详实指南。&lt;/p&gt;</description></item><item><title>Code with Claude 开幕主题演讲</title><link>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</link><pubDate>Thu, 22 May 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</guid><description>&lt;h1 id="code-with-claude-开幕主题演讲"&gt;Code with Claude 开幕主题演讲&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;Anthropic 首届开发者大会 Code with Claude 的开幕主题演讲完整记录。会上正式发布了 Claude 4 Opus 和 Claude 4 Sonnet 两款旗舰模型，介绍了代码执行工具、文件 API、提示词缓存等平台更新，演示了 Claude Code 与主流 IDE 的深度集成及 SDK，并与 GitHub 宣布深化合作。演讲后半部分围绕 AI 未来走向、安全与可解释性等议题展开对话。&lt;/p&gt;
 &lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
