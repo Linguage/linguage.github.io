@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Anthropic on Linguista</title><link>https://linguista.cn/tags/anthropic/</link><description>Recent content in Anthropic on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sat, 18 Oct 2025 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/anthropic/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude Skills智能体标准操作流程解析</title><link>https://linguista.cn/curated/henrinotes-2025_p2/claude-skills-sops-ai-agents/</link><pubDate>Sat, 18 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/claude-skills-sops-ai-agents/</guid><description>&lt;h1 id="claude-skills智能体标准操作流程解析"&gt;Claude Skills智能体标准操作流程解析&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Anthropic on Linguista</title><link>https://linguista.cn/tags/anthropic/</link><description>Recent content in Anthropic on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 27 Jan 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/anthropic/index.xml" rel="self" type="application/rss+xml"/><item><title>Anthropic 团队如何使用 Claude Code</title><link>https://linguista.cn/rosetta/technology/how-anthropic-teams-use-claude-code/</link><pubDate>Tue, 27 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/how-anthropic-teams-use-claude-code/</guid><description>&lt;h1 id="anthropic-团队如何使用-claude-code"&gt;Anthropic 团队如何使用 Claude Code&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文介绍了 Anthropic 内部多个团队使用 Claude Code 的实际案例，涵盖数据基础设施、产品开发、安全工程等部门。各团队通过 Claude Code 实现了 Kubernetes 调试、快速原型设计、测试驱动开发、代码库探索等工作流的显著提效，同时总结了详细编写 Claude.md 文件、建立自给自足循环、培养任务分类直觉等最佳实践。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Claude Code &amp;ndash; Anthropic 推出的 AI 编程助手工具，可在终端中运行，支持代码编写、调试、测试生成及代码库探索等多种开发任务&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude.md &amp;ndash; 用于为 Claude Code 提供项目上下文的文档文件，记录工作流程、工具使用和期望，内容越详细则 Claude Code 的执行效果越好&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MCP 服务器 &amp;ndash; Model Context Protocol 服务器，用于在 Claude Code 访问敏感数据时提供更精细的权限控制和日志记录，替代直接使用命令行工具&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;自动接受模式 &amp;ndash; Claude Code 的一种运行模式，通过 Shift+Tab 启用，让 Claude 自主编写代码、运行测试并持续迭代，适用于快速原型设计和外围功能开发&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;测试驱动开发工作流 &amp;ndash; 安全工程团队采用的实践方法，先让 Claude Code 生成伪代码和测试用例，再引导其逐步实现功能，从而产出更可靠和可测试的代码&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ANTHROP\C&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="anthropic-团队如何使用-claude-code-1"&gt;Anthropic 团队如何使用 Claude Code&lt;/h1&gt;
+&lt;p&gt;Anthropic 的内部团队正在利用 Claude Code 转变其工作流程，使开发人员和非技术人员能够处理复杂项目、自动化任务，并弥合先前限制其生产力的技能差距。&lt;/p&gt;</description></item><item><title>Claude Code：重塑开发范式的 AI 编码代理</title><link>https://linguista.cn/rosetta/technology/claude-code-ai-coding-agent-reshaping-development/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/claude-code-ai-coding-agent-reshaping-development/</guid><description>&lt;h1 id="claude-code重塑开发范式的-ai-编码代理"&gt;Claude Code：重塑开发范式的 AI 编码代理&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文全面解析 Anthropic 推出的 Claude Code 终端 AI 编码代理，涵盖其代理性核心定位、深度工具链集成、智能记忆指令系统、多模型选择策略以及成本优化方案，展示了从代码补全到自主规划执行的范式跃迁，为开发者提供了高效人机协作的实践指南。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;代理性（Agentic）&lt;/strong&gt;：区别于传统代码补全，Claude Code 能理解指令、自主规划并执行多步骤任务，涵盖从需求理解到测试和版本控制的完整链路&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude.md 记忆系统&lt;/strong&gt;：通过多层级 Markdown 配置文件向 AI 传递项目上下文、编码规范和工作指令，支持团队共享与个人私有配置&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MCP（多代理通信协议）&lt;/strong&gt;：Claude Code 支持的扩展协议，可作为服务器或客户端连接数据库、文档等外部工具，拓展 AI 编码能力边界&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;扩展思考（Extended Thinking）&lt;/strong&gt;：一种高级提示策略，要求 AI 先阅读文件再暂停思考和头脑风暴，最后再编码，以获得更优质的输出结果&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;投资回报率思维&lt;/strong&gt;：将 AI 编码工具的使用成本视为对工程师生产力的投资，通过合理选择模型和订阅计划平衡效能与开支&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Code：重塑开发范式的 AI 编码代理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在人工智能飞速发展的今天，AI 技术正以前所未有的深度和广度渗透到各行各业，软件开发领域亦不例外。Anthropic 公司推出的 Claude Code，作为一款基于终端的 AI 编码代理，正以其独特的定位和强大的功能，挑战着传统的开发模式，并预示着软件工程未来的新图景。它不仅仅是一个代码补全工具，更是一个能够理解复杂指令、自主规划并执行多步骤任务的智能伙伴，旨在与开发者现有的工具链无缝集成，从而极大地提升生产力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一、核心定位与价值主张：从助手到代理的范式跃迁&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Claude Code 的核心价值在于其“代理性”（Agentic）。传统的 AI 代码助手，如集成开发环境（IDE）中的代码补全，大多停留在提供代码行或小段代码建议的层面。而 Claude Code 则致力于成为一个真正的“编码代理”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;超越代码补全的“代理”角色：&lt;/strong&gt;
+正如资料中反复强调的，“Claude Code 不仅仅是完成代码行或几行代码，它更具代理性。它会理解用户的查询，并使用 Bash、文件编辑等工具探索代码库、读取文件、获取所需上下文，然后编辑文件并进行更改。” 这种能力使其能够处理从需求理解到代码实现、再到测试和版本控制的完整任务链。它能“探索信息、彻底完成任务以及有效组合不同工具”，这是其与传统工具最根本的区别。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;“原始工具”与“力量工具”的哲学：&lt;/strong&gt;
+Anthropic 将 Claude Code 定位为一个“原始”（Primitive）或“力量”（Power）工具。这意味着它旨在“为高级用户提供强大的工作负载工具”，提供对底层 AI 模型能力的直接访问。这种设计哲学允许开发者将其像 Unix 实用工具一样组合和编排到更广泛、更复杂的工作流中，例如“并行处理大量任务”或“修复数千个 lint 违规”。&lt;/p&gt;</description></item><item><title>关于Claude Code的对话</title><link>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/claude-code-conversation/</guid><description>&lt;h1 id="关于claude-code的对话"&gt;关于Claude Code的对话&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文整理了Anthropic公司Claude关系主管Alex Albert与Claude Code创造者Boris Cherny的深度访谈。内容涵盖Claude Code的起源故事、安装使用方法、代理式编程的核心体验、编程范式从打孔卡到提示词的演进、Claude 4模型带来的能力提升，以及任务规划和Claude.md文件等实用技巧，为开发者提供了一份兼具宏观视角与微观操作的详实指南。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/Yf_1w00qIKc?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="关于Claude Code的对话"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;代理式编程（Agentic Coding）&lt;/strong&gt;：一种AI驱动的编程方式，AI代理能够自主使用工具、探索代码库、读取文件并完成复杂编码任务，而非仅提供代码补全&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dogfooding（自己吃自己的狗粮）&lt;/strong&gt;：指开发团队在日常工作中使用自己构建的产品，以便发现问题并持续改进用户体验&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;：Anthropic推出的终端代理式编程工具，通过NPM安装后可在任意终端环境中运行，支持各类IDE内置终端&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude.md文件&lt;/strong&gt;：Claude Code的配置文件机制，支持团队共享配置与个人偏好设置，用于定制AI代理的行为和指令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claude Max&lt;/strong&gt;：Anthropic推出的订阅服务，整合了Claude.ai与Claude Code的使用权限，提供按月付费的近乎无限制使用方案&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;&lt;img src="https://yt3.ggpht.com/ux-GXUpB4PkI-qXVOpj9gGEiCkytT0Q78ka4srlxOm_Y3m1gEh5qy8Vu6vTjGSDztMT0NybtC7I=s88-c-k-c0x00ffffff-no-rj" alt=""&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;视频链接：&lt;a href="https://www.youtube.com/watch?v=Yf_1w00qIKc"&gt;A conversation on Claude Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/@anthropic-ai"&gt;Anthropic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="内容概述"&gt;内容概述&lt;/h3&gt;
+&lt;p&gt;本文整理了 Anthropic 公司的一场深度对话，由 Claude 关系主管 Alex Albert 访谈 Claude Code 的创造者 Boris Cherny。本次访谈的核心是 Anthropic 推出的代理式编程工具——Claude Code。对话从 Claude Code 的起源谈起，揭示了其作为 Anthropic 内部高效工具的诞生背景，并介绍了基础的安装与使用方法。Boris 进一步阐述了其“代理式”核心体验，并将其置于从打孔卡到提示词的编程范式演进历程中进行解读，为我们理解AI时代软件工程的变革提供了独特的视角。访谈还涵盖了新模型（如 Claude 4）为工具带来的能力跃升，以及一系列提升效率的实用技巧，包括任务规划、扩展思考和 &lt;code&gt;Claude.md&lt;/code&gt; 文件的妙用。最后，双方探讨了 Claude Code 的未来发展方向。这篇访谈录为希望深入了解和高效使用 Claude Code 的开发者，提供了一份兼具宏观视角与微观技巧的详实指南。&lt;/p&gt;</description></item><item><title>Claude Skills智能体标准操作流程解析</title><link>https://linguista.cn/curated/henrinotes-2025_p2/claude-skills-sops-ai-agents/</link><pubDate>Sat, 18 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/claude-skills-sops-ai-agents/</guid><description>&lt;h1 id="claude-skills智能体标准操作流程解析"&gt;Claude Skills智能体标准操作流程解析&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;本视频深入探讨了Anthropic新发布的Claude Skills功能及其在AI智能体中的应用价值。主讲人Sam Witteveen从传统制造业的标准操作流程概念出发，类比阐述AI智能体如何通过模块化技能设计实现任务处理的规范化与可预测性，同时分析了Claude Skills的运行机制、与MCP的关联、平台化生态趋势以及技能创建的最佳实践。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -37,7 +98,7 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI代理中的上下文工程与Anthropic团队</title><link>https://linguista.cn/static/anthropic_context_engineering/</link><pubDate>Wed, 01 Oct 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/anthropic_context_engineering/</guid><description>本文深入探讨了人工智能代理开发中的关键范式转变：从传统的提示工程转向更系统的上下文工程。文章详细阐述了如何通过优化上下文结构来提升模型性能，特别是在管理长任务和复杂推理场景中的应用。内容涵盖了Transformer注意力机制的复杂度挑战、上下文窗口的最优配置策略，以及AI代理实现自我管理的核心技术路径。通过介绍Anthropic应用AI团队的最新研究成果，本文为开发者提供了从理论到实践的完整指南，揭示了在构建高效AI代理时如何充分利用上下文预算，实现更精准的意图理解和任务执行。</description></item><item><title>「翻译」Anthropic:为人工智能代理进行有效的上下文工程</title><link>https://linguista.cn/essays/rosetta/anthropic_context_engineering/</link><pubDate>Wed, 01 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/essays/rosetta/anthropic_context_engineering/</guid><description>&lt;p&gt;在提示工程（prompt engineering）成为应用人工智能领域关注焦点几年后，一个新术语开始崭露头角：&lt;strong&gt;上下文工程（context engineering）&lt;/strong&gt;。使用语言模型进行构建，正逐渐从为提示寻找合适的词语和短语，转变为回答一个更宏观的问题：“什么样的上下文配置最有可能产生我们模型的期望行为？”&lt;/p&gt;</description></item><item><title>通往智能之巅 Anthropic预训练负责人对AI未来路径的深度洞察</title><link>https://linguista.cn/curated/henrinotes-2025-p1/anthropic-pretraining-future-ai-path-insights/</link><pubDate>Wed, 01 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025-p1/anthropic-pretraining-future-ai-path-insights/</guid><description>&lt;h1 id="通往智能之巅anthropic预训练负责人对ai未来路径的深度洞察"&gt;通往智能之巅：Anthropic预训练负责人对AI未来路径的深度洞察&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>AI代理中的上下文工程与Anthropic团队</title><link>https://linguista.cn/static/anthropic_context_engineering/</link><pubDate>Wed, 01 Oct 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/anthropic_context_engineering/</guid><description>本文深入探讨了人工智能代理开发中的关键范式转变：从传统的提示工程转向更系统的上下文工程。文章详细阐述了如何通过优化上下文结构来提升模型性能，特别是在管理长任务和复杂推理场景中的应用。内容涵盖了Transformer注意力机制的复杂度挑战、上下文窗口的最优配置策略，以及AI代理实现自我管理的核心技术路径。通过介绍Anthropic应用AI团队的最新研究成果，本文为开发者提供了从理论到实践的完整指南，揭示了在构建高效AI代理时如何充分利用上下文预算，实现更精准的意图理解和任务执行。</description></item><item><title>「翻译」Anthropic:为人工智能代理进行有效的上下文工程</title><link>https://linguista.cn/rosetta/technology/anthropic_context_engineering/</link><pubDate>Wed, 01 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/anthropic_context_engineering/</guid><description>&lt;p&gt;在提示工程（prompt engineering）成为应用人工智能领域关注焦点几年后，一个新术语开始崭露头角：&lt;strong&gt;上下文工程（context engineering）&lt;/strong&gt;。使用语言模型进行构建，正逐渐从为提示寻找合适的词语和短语，转变为回答一个更宏观的问题：“什么样的上下文配置最有可能产生我们模型的期望行为？”&lt;/p&gt;</description></item><item><title>通往智能之巅 Anthropic预训练负责人对AI未来路径的深度洞察</title><link>https://linguista.cn/curated/henrinotes-2025-p1/anthropic-pretraining-future-ai-path-insights/</link><pubDate>Wed, 01 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025-p1/anthropic-pretraining-future-ai-path-insights/</guid><description>&lt;h1 id="通往智能之巅anthropic预训练负责人对ai未来路径的深度洞察"&gt;通往智能之巅：Anthropic预训练负责人对AI未来路径的深度洞察&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;本文基于Anthropic预训练团队负责人Nick Joseph的深度访谈，系统性地解析了AI发展的底层逻辑与未来路径。从预训练的核心哲学出发，探讨缩放定律如何驱动AI性能提升，揭示超大规模计算背后的工程挑战，并深入分析合成数据与AI对齐等前沿议题，为理解人工智能的未来发展提供了独特的视角。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -158,7 +219,47 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Claude 正在学习自我构建：Anthropic 的 Michael Gerstenhaber 访谈摘要</title><link>https://linguista.cn/static/claude-self-learning/</link><pubDate>Tue, 01 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/claude-self-learning/</guid><description>本期 Superhuman AI 播客深度对话 Anthropic 产品负责人 Michael Gerstenhaber，揭示 AI 模型如何在短短一年内发生惊人演变。文章探讨了编码为何成为衡量 AI 进步的终极基准，详细解析了从 Claude 3 到 4.0 的指数级进化速度，并展望了代理式 AI 的未来前景，以及 MCP 协议如何重新定义人机交互范式。</description></item><item><title>Anthropic API 引用功能上线，提升 AI 输出可验证性</title><link>https://linguista.cn/curated/henrinotes-2025_p2/anthropic-citations-api-verify-ai-outputs/</link><pubDate>Tue, 28 Jan 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/anthropic-citations-api-verify-ai-outputs/</guid><description>&lt;h1 id="anthropic-api-引用功能上线提升-ai-输出可验证性"&gt;Anthropic API 引用功能上线，提升 AI 输出可验证性&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Claude 金融服务行业主题演讲</title><link>https://linguista.cn/rosetta/chat-notes/claude-financial-services-keynote-2025/</link><pubDate>Tue, 15 Jul 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/claude-financial-services-keynote-2025/</guid><description>&lt;h1 id="claude-金融服务行业主题演讲"&gt;Claude 金融服务行业主题演讲&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;Anthropic 于2025年7月在纽约举办金融服务行业主题演讲，发布首个专为金融行业打造的 Claude 金融分析解决方案。演讲展示了桥水基金、AIG 等客户案例，介绍了与 FactSet、S&amp;amp;P Global 等数据源的深度集成，并通过实际场景演示了分析师工作流从数小时压缩至30分钟的效率提升。多位行业领袖围绕 AI 战略落地与组织变革展开圆桌讨论。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/50AhIyybR0M]%28https://www.youtube.com/watch?v=50AhIyybR0M?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="Claude 金融服务行业主题演讲"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Claude 金融分析解决方案&lt;/strong&gt;：Anthropic 推出的业内首个统一智能层，专为金融分析师设计，集成多源数据与智能体功能，支持投资分析、报告生成和风险建模等场景&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;智能体工作流&lt;/strong&gt;：Claude 支持多模态报告生成、原生读写 Excel 和 PowerPoint、蒙特卡洛模拟等高级功能，将传统多平台手工流程自动化&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;金融数据生态集成&lt;/strong&gt;：与 FactSet、S&amp;amp;P Global、Morningstar、Pitchbook 等权威数据源及 AWS、Snowflake 等云平台深度对接，实现企业数据无缝接入&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;变革管理与 AI 文化&lt;/strong&gt;：金融机构推动 AI 落地需兼顾自上而下的战略推动与自下而上的创新文化，通过培训、黑客松和冠军用户培养帮助员工拥抱新技术&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SOC 2 Type 2 认证&lt;/strong&gt;：一项针对服务组织的安全合规认证标准，确保平台在安全性、可用性和隐私保护方面满足企业级金融机构的严格要求&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主题与背景&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;本次演讲由 Anthropic 公司主办，聚焦于 Claude 在金融服务行业的应用与未来发展。演讲于 2025 年 7 月 15 日在纽约举行，汇集了 Anthropic 高管及多位金融行业领袖，共同探讨了 AI 如何重塑金融行业的工作方式。&lt;/p&gt;</description></item><item><title>Claude 正在学习自我构建：Anthropic 的 Michael Gerstenhaber 访谈摘要</title><link>https://linguista.cn/static/claude-self-learning/</link><pubDate>Tue, 01 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/claude-self-learning/</guid><description>本期 Superhuman AI 播客深度对话 Anthropic 产品负责人 Michael Gerstenhaber，揭示 AI 模型如何在短短一年内发生惊人演变。文章探讨了编码为何成为衡量 AI 进步的终极基准，详细解析了从 Claude 3 到 4.0 的指数级进化速度，并展望了代理式 AI 的未来前景，以及 MCP 协议如何重新定义人机交互范式。</description></item><item><title>Code with Claude 开幕主题演讲</title><link>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</link><pubDate>Thu, 22 May 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/code-with-claude-opening-keynote/</guid><description>&lt;h1 id="code-with-claude-开幕主题演讲"&gt;Code with Claude 开幕主题演讲&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;Anthropic 首届开发者大会 Code with Claude 的开幕主题演讲完整记录。会上正式发布了 Claude 4 Opus 和 Claude 4 Sonnet 两款旗舰模型，介绍了代码执行工具、文件 API、提示词缓存等平台更新，演示了 Claude Code 与主流 IDE 的深度集成及 SDK，并与 GitHub 宣布深化合作。演讲后半部分围绕 AI 未来走向、安全与可解释性等议题展开对话。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/EvtPBaaykdo]%28https://www.youtube.com/watch?v=EvtPBaaykdo?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="Code with Claude 开幕主题演讲"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Claude 4 系列模型&lt;/strong&gt;：Anthropic 发布的新一代旗舰大语言模型，包括功能最强的 Opus 4 和兼顾智能与效率的 Sonnet 4，均为混合模型，支持即时响应与深度推理&lt;/p&gt;</description></item><item><title>Anthropic API 引用功能上线，提升 AI 输出可验证性</title><link>https://linguista.cn/curated/henrinotes-2025_p2/anthropic-citations-api-verify-ai-outputs/</link><pubDate>Tue, 28 Jan 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/anthropic-citations-api-verify-ai-outputs/</guid><description>&lt;h1 id="anthropic-api-引用功能上线提升-ai-输出可验证性"&gt;Anthropic API 引用功能上线，提升 AI 输出可验证性&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;Anthropic 正式推出 Citations 功能，允许 Claude 在生成回答时自动引用源文档中的具体内容。该功能已在 Anthropic API 和 Google Cloud Vertex AI 全面上线，通过文档分块处理和精确引用生成，将召回准确率提升高达 15%，有效减少 AI 幻觉现象。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;

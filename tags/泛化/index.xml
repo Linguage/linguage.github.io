@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>泛化 on Linguista</title><link>https://linguista.cn/tags/%E6%B3%9B%E5%8C%96/</link><description>Recent content in 泛化 on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/%E6%B3%9B%E5%8C%96/index.xml" rel="self" type="application/rss+xml"/><item><title>关于《对泛化的一个观察》的笔记</title><link>https://linguista.cn/rosetta/technology/notes-on-an-observation-on-generalization/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/notes-on-an-observation-on-generalization/</guid><description>&lt;h1 id="关于对泛化的一个观察的笔记"&gt;关于《对泛化的一个观察》的笔记&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文是对 Ilya Sutskever 在2023年西蒙斯研究所研讨会演讲的详细笔记。演讲从压缩理论的视角解释无监督学习为何有效，核心论点是预测与压缩之间存在一一对应关系。通过引入柯尔莫戈洛夫复杂度、条件复杂度和联合压缩等概念，论证了好的无监督学习算法本质上是好的压缩器，并最终将联合压缩与最大似然估计联系起来。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;压缩与预测的等价性&lt;/strong&gt;：所有压缩器和所有预测器之间存在一一对应关系，能更好预测下一个字符就能更好压缩数据，这为理解无监督学习提供了理论基础&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;柯尔莫戈洛夫复杂度&lt;/strong&gt;：一个对象的柯尔莫戈洛夫复杂度是能输出该对象的最短程序的长度，它代表了理论上的终极压缩器，虽然不可计算但为分析提供了理论上界&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;条件柯尔莫戈洛夫复杂度&lt;/strong&gt;：K(Y|X) 衡量在已知数据集 X 的情况下描述 Y 所需的最短程序长度，它形式化了无监督数据对下游任务的价值&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分布匹配&lt;/strong&gt;：在没有对应关系的两个数据源之间寻找映射函数，使一个数据源的变换分布近似另一个数据源的分布，是理解无监督学习的重要桥梁&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;联合压缩与最大似然估计&lt;/strong&gt;：将两个数据集拼接后联合压缩等价于最大似然估计，这将压缩理论的分析框架与机器学习的标准训练范式统一起来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原文链接：&lt;a href="https://sumanthrh.com/post/notes-on-generalization/"&gt;Notes on &amp;ldquo;An Observation on Generalization&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;深入探讨 Ilya Sutskever 在 2023 年西蒙斯研究所大型语言模型与 Transformer 研讨会上的演讲“对泛化的一个观察”。&lt;/p&gt;
+&lt;p&gt;Ilya Sutskever，OpenAI 的联合创始人之一，最近在 2023 年西蒙斯研究所（Simons Institute）的大型语言模型与 Transformer 研讨会上发表了演讲。该演讲已被录制，并&lt;a href="https://www.youtube.com/live/AKMuA_TVz3A?si=vBMLcQcKzXPpFeom"&gt;可在 YouTube 上观看&lt;/a&gt;。演讲的主题是“对泛化的一个观察”（An Observation on Generalization），Ilya 探讨了我们如何利用压缩理论的视角来理解无监督学习。我觉得这次演讲非常有见地，但有时可能难以跟上思路，更难把握整体脉络，至少对于像我这样（大脑皮层功能没那么强大）的人来说是这样。不幸的是，这是研讨会中少数几个没有附带详细论文的演讲之一。我觉得这是一个很好的机会，可以写下我从演讲中做的笔记。鉴于 Ilya 阐述其理论的方式非常精彩，很难真正用不同的方式来解释和呈现。因此，我首先&lt;em&gt;转录&lt;/em&gt;了演讲内容，然后添加了我自己的笔记，以提供更好的背景信息或更详细的说明以求清晰。&lt;/p&gt;
+&lt;h1 id="对泛化的一个观察"&gt;对泛化的一个观察&lt;/h1&gt;
+&lt;p&gt;这次演讲的核心是试图真正理解为什么无监督学习能够奏效，并对其进行数学上的推理。为了达到这个目的，Ilya 首先提出了学习本身（从数据中学习）的概念以及为什么机器学习会起作用。这里的期望是数据具有规律性，而机器学习模型被&lt;em&gt;期望&lt;/em&gt;学习我们数据中的这种规律性。谈到监督学习，他提出了这个等式：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;低训练误差 + 训练数据量 &amp;gt; “自由度” = 低测试误差&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在，对于无监督学习，我们的梦想是，给定所有这些未标记的数据（图像、文本块等），我们期望机器学习模型能够发现数据中“真实”的、隐藏的结构。无监督学习的一个关键点是，我们通常优化一个代理目标（例如下一个词预测或重构），而我们关心的是一个不同的目标（例如学习数据中的隐藏模式以进行序列分类）。这为什么会奏效呢？&lt;/p&gt;
+&lt;h2 id="通过分布匹配进行无监督学习"&gt;通过分布匹配进行无监督学习&lt;/h2&gt;
+&lt;p&gt;为了理解这一点，我们首先来看分布匹配。考虑两个数据源 X 和 Y，它们之间没有任何对应关系。这可能就像是不同语言的数据集（比如英语和法语），样本之间没有对应。分布匹配的思想是找到一个映射 F，使得：&lt;/p&gt;
+&lt;p&gt;distribution(F(X)) ∼ Y&lt;/p&gt;
+&lt;p&gt;在我们上面的例子中，就是：distribution(F(English)) ∼ French&lt;/p&gt;
+&lt;p&gt;之前已经提出了许多方法（一个相关的例子：&lt;a href="https://arxiv.org/abs/1711.00043"&gt;无监督机器翻译&lt;/a&gt;），表明即使对于高维度的 X 和 Y，这种方法也是可行的。&lt;/p&gt;</description></item></channel></rss>

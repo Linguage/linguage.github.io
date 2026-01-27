@@ -1,4 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LLM on Linguista</title><link>https://linguista.cn/tags/llm/</link><description>Recent content in LLM on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sun, 04 Jan 2026 08:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/llm/index.xml" rel="self" type="application/rss+xml"/><item><title>2025 大语言模型年度回顾</title><link>https://linguista.cn/static/ak-llm2025/</link><pubDate>Sun, 04 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/ak-llm2025/</guid><description>本文回顾了 2025 年大语言模型（LLM）领域的核心演变，重点阐述了从模仿人类到“召唤幽灵”的范式转移。文章深入剖析了 RLVR（推理强化学习）如何通过可验证的奖励机制催生出非人类的“锯齿状”智力，并探讨了 Vibe Coding 如何通过降低门槛让编程变得廉价且短暂，将 AI 从云端服务转变为驻留在本地的数字生灵。</description></item><item><title>Andrej Karpathy 论人工智能的下一个十年</title><link>https://linguista.cn/curated/henrinotes-2025_p2/andrej-karpathy-ai-next-decade-agents/</link><pubDate>Sat, 18 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/andrej-karpathy-ai-next-decade-agents/</guid><description>&lt;h1 id="andrej-karpathy-论人工智能的下一个十年"&gt;Andrej Karpathy 论人工智能的下一个十年&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LLM on Linguista</title><link>https://linguista.cn/tags/llm/</link><description>Recent content in LLM on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Mon, 26 Jan 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/llm/index.xml" rel="self" type="application/rss+xml"/><item><title>OpenAI构建Agent的实用指南</title><link>https://linguista.cn/rosetta/technology/openai-practical-guide-to-building-agents/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/openai-practical-guide-to-building-agents/</guid><description>&lt;h1 id="openai构建agent的实用指南"&gt;OpenAI构建Agent的实用指南&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文是OpenAI发布的Agent构建实用指南，面向产品和工程团队，系统介绍了Agent的定义、适用场景、设计基础与编排模式。内容涵盖模型选择、工具定义、指令配置等核心组件，并提供了单Agent与多Agent系统的编排策略，帮助开发者从零开始构建安全、可预测且高效运行的智能Agent系统。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Agent&lt;/strong&gt;：一种由大语言模型驱动的自主系统，能够代表用户独立完成多步骤任务，具备推理决策、工具调用和自我纠错能力&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;编排模式&lt;/strong&gt;：Agent执行工作流的组织方式，分为单Agent系统和多Agent系统两类，前者通过逐步添加工具扩展能力，后者将任务分布在多个协调的Agent之间&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;工具定义&lt;/strong&gt;：赋予Agent与外部系统交互能力的接口，分为数据工具、操作工具和编排工具三类，用于检索信息、执行动作和协调其他Agent&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;指令配置&lt;/strong&gt;：为Agent提供的行为指南和安全措施，通过清晰的步骤分解、明确的操作定义和边缘情况处理来减少歧义并提升决策质量&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;模型选择策略&lt;/strong&gt;：根据任务复杂度选择合适模型的方法论，建议先用最强模型建立性能基线，再尝试用较小模型替换以优化成本和延迟&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://cdn-mineru.openxlab.org.cn/extract/51f3b54f-a769-46b0-8f9d-390240e70009/c97470a1a514227fb87d2419da99a9b55ac8292b6712f168df034e12999784e4.jpg" alt=""&gt;&lt;/p&gt;
+&lt;h3 id="目录"&gt;目录&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;什么是Agent？&lt;/li&gt;
+&lt;li&gt;何时应该构建Agent？&lt;/li&gt;
+&lt;li&gt;Agent设计基础&lt;/li&gt;
+&lt;li&gt;安全措施&lt;/li&gt;
+&lt;li&gt;结论&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="引言"&gt;引言&lt;/h2&gt;
+&lt;p&gt;大型语言模型 (LLM) 在处理复杂、多步骤任务方面的能力越来越强。推理、多模态和工具使用方面的进步开启了一种由 LLM 驱动的新型系统，即Agent。&lt;/p&gt;
+&lt;p&gt;本指南专为探索如何构建其第一个Agent的产品和工程团队而设计，将众多客户部署的见解提炼为实用且可操作的最佳实践。它包括用于识别有希望的用例的框架、用于设计Agent逻辑和编排的清晰模式，以及确保您的Agent安全、可预测和有效地运行的最佳实践。&lt;/p&gt;
+&lt;p&gt;阅读本指南后，您将掌握自信地开始构建您的第一个Agent所需的基础知识。&lt;/p&gt;
+&lt;h3 id="什么是agent"&gt;什么是Agent？&lt;/h3&gt;
+&lt;p&gt;虽然传统的软件使用户能够简化和自动化工作流程，但Agent能够以高度的自主性代表用户执行相同的工作流程。&lt;/p&gt;
+&lt;p&gt;Agent是独立代表您完成任务的系统。&lt;/p&gt;
+&lt;p&gt;工作流程是为了实现用户的目标而必须执行的一系列步骤，无论是解决客户服务问题、预订餐厅、提交代码更改还是生成报告。&lt;/p&gt;
+&lt;p&gt;集成 LLM 但不使用它们来控制工作流程执行的应用程序（例如简单的聊天机器人、单轮 LLM 或情感分类器）不是Agent。&lt;/p&gt;
+&lt;p&gt;更具体地说，Agent拥有核心特征，使其能够可靠且一致地代表用户执行操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;它利用 LLM 来管理工作流程执行并做出决策。它会识别工作流程何时完成，并在需要时主动纠正其操作。如果出现故障，它可以停止执行并将控制权交还给用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;它可以访问各种工具来与外部系统交互，既可以收集上下文，也可以采取行动，并根据工作流程的当前状态动态选择适当的工具，始终在明确定义的安全措施内运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="何时应该构建agent"&gt;何时应该构建Agent？&lt;/h3&gt;
+&lt;p&gt;构建Agent需要重新思考您的系统如何做出决策和处理复杂性。与传统的自动化不同，Agent非常适合传统确定性和基于规则的方法无法胜任的工作流程。&lt;/p&gt;
+&lt;p&gt;考虑一下支付欺诈分析的例子。传统的规则引擎就像一个清单，根据预设的标准标记交易。相比之下，LLM Agent更像是一位经验丰富的调查员，评估上下文，考虑微妙的模式，并在未违反明确规则的情况下识别可疑活动。这种细致的推理能力正是使Agent能够有效管理复杂、模糊的情况的原因。&lt;/p&gt;
+&lt;p&gt;在评估Agent可以增加价值的地方时，优先考虑以前难以自动化的工作流程，尤其是在传统方法遇到摩擦的地方：&lt;/p&gt;
+&lt;table&gt;
+ &lt;tr&gt;
+ &lt;td&gt;01&lt;/td&gt;
+ &lt;td&gt;复杂决策：&lt;/td&gt;
+ &lt;td&gt;涉及细致的判断、例外情况或上下文相关决策的工作流程，例如客户服务工作流程中的退款批准。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;02&lt;/td&gt;
+ &lt;td&gt;难以维护的规则：&lt;/td&gt;
+ &lt;td&gt;由于广泛而复杂的规则集而变得笨拙的系统，使得更新成本高昂或容易出错，例如执行供应商安全审查。&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;03&lt;/td&gt;
+ &lt;td&gt;严重依赖非结构化数据：&lt;/td&gt;
+ &lt;td&gt;涉及解释自然语言、从文档中提取含义或以对话方式与用户交互的场景，例如处理房屋保险索赔。&lt;/td&gt;
+ &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;在承诺构建Agent之前，请验证您的用例是否可以明确满足这些标准。
+否则，确定性解决方案可能就足够了。&lt;/p&gt;
+&lt;h2 id="agent设计基础"&gt;Agent设计基础&lt;/h2&gt;
+&lt;p&gt;在其最基本的形式中，Agent由三个核心组件组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模型：为Agent的推理和决策提供支持的 LLM&lt;/li&gt;
+&lt;li&gt;工具：Agent可用于执行操作的外部函数或 API&lt;/li&gt;
+&lt;li&gt;指令：定义Agent行为的明确指南和安全措施&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下是使用 OpenAI 的 Agents SDK 在代码中的样子。您也可以使用您喜欢的库或直接从头开始实现相同的概念。&lt;/p&gt;
+&lt;p&gt;Python&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; weather_agent &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Agent(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 	name&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;天气Agent&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 	instructions&lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;你是一个乐于助人的Agent，可以与用户讨论天气。&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 	tools&lt;span style="color:#f92672"&gt;=&lt;/span&gt;[get_weather],
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="选择您的模型"&gt;选择您的模型&lt;/h3&gt;
+&lt;p&gt;不同的模型在任务复杂性、延迟和成本方面具有不同的优势和权衡。正如我们将在下一节“编排”中看到的那样，您可能需要考虑使用各种模型来完成工作流程中的不同任务。&lt;/p&gt;</description></item><item><title>2025 大语言模型年度回顾</title><link>https://linguista.cn/static/ak-llm2025/</link><pubDate>Sun, 04 Jan 2026 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/ak-llm2025/</guid><description>本文回顾了 2025 年大语言模型（LLM）领域的核心演变，重点阐述了从模仿人类到“召唤幽灵”的范式转移。文章深入剖析了 RLVR（推理强化学习）如何通过可验证的奖励机制催生出非人类的“锯齿状”智力，并探讨了 Vibe Coding 如何通过降低门槛让编程变得廉价且短暂，将 AI 从云端服务转变为驻留在本地的数字生灵。</description></item><item><title>Andrej Karpathy 论人工智能的下一个十年</title><link>https://linguista.cn/curated/henrinotes-2025_p2/andrej-karpathy-ai-next-decade-agents/</link><pubDate>Sat, 18 Oct 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/andrej-karpathy-ai-next-decade-agents/</guid><description>&lt;h1 id="andrej-karpathy-论人工智能的下一个十年"&gt;Andrej Karpathy 论人工智能的下一个十年&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;本文综合分析了著名人工智能专家 Andrej Karpathy 的核心观点，他基于在 AI 领域近二十年的经验，对当前的人工智能发展、未来趋势及社会影响提出了深刻而务实的见解。Karpathy 认为，实现功能完备的智能体需要十年而非一年，当前的模型在智能、多模态和持续学习等方面存在显著的认知缺陷。他将强化学习的奖励机制比作通过吸管吸取监督信号，效率低下且充满噪声，并指出依赖模型自身生成的数据训练会导致模型坍塌问题。在 AI 工程实践方面，他认为当前的编码智能体对于新颖、复杂的任务来说更像是残次品，其作用更接近于高级自动补全，而非真正的程序员替代品。他强调从演示到可靠产品的巨大鸿沟，预示着高风险领域的自动化将是一个漫长过程。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -190,7 +264,26 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ThePrimeTime vs Andrej Karpathy: 软件正在改变（又一次）</title><link>https://linguista.cn/static/theprimetime-ak-software-changed-again/</link><pubDate>Fri, 04 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/theprimetime-ak-software-changed-again/</guid><description>这篇文章深入探讨了 Andrej Karpathy 提出的关于“软件 2.0”及大型语言模型（LLM）未来的革命性观点，并整合了 ThePrimeTime 对此议题的审慎评论。文章通过回顾软件从传统代码到神经网络，再到当今生成式 AI 的演变历程，展示了软件定义的重塑过程。内容不仅剖析了神经网络权重如何取代传统逻辑，还通过互动视角探讨了 Karpathy 关于 LLM 的精妙类比，以及这一技术变革带来的潜在机遇与挑战。这是一场关于代码、智能与未来的深度对话。</description></item><item><title>上下文工程: AI交互新范式</title><link>https://linguista.cn/static/context-engineering-next-generation-hci/</link><pubDate>Fri, 04 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/context-engineering-next-generation-hci/</guid><description>Andrej Karpathy 提出的“上下文工程”标志着人机交互的范式转移。本文深入探讨了从雕琢静态“提示词”向构建动态“信息世界”的演变，详细解析了LLM的上下文组件（指令、提示、状态），并对比了系统提示与用户提示在工程实践中的不同维度。文章还通过互动图表展示了行业领导者在技术栈上的布局，为构建下一代AI应用提供了清晰的路径指引。</description></item><item><title>互动报告：2025年软件工程与AI的现实检验</title><link>https://linguista.cn/static/software-engineering-with-llms-in2025-reality-check/</link><pubDate>Wed, 02 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/software-engineering-with-llms-in2025-reality-check/</guid><description>随着2025年的到来，软件工程领域正经历着一场关于AI效能的深刻反思。尽管高管们对自动化编程充满宏大愿景，但一线数据揭示了生产力的微妙悖论。本报告深入分析了从科技巨头到初创企业的实际落地情况，探讨了为何效率提升未达预期的深层原因，并展望了MCP协议等新技术可能带来的转折点。</description></item><item><title>AI编程工具底层逻辑深度剖析</title><link>https://linguista.cn/static/claudecode/</link><pubDate>Tue, 01 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/claudecode/</guid><description>本文深入剖析了以Claude和Cursor为代表的AI编程工具的底层运作逻辑。文章从大型语言模型（LLM）的训练基础出发，详细阐述了从预训练到监督微调的进化路径，并探讨了代码库理解的两种核心哲学。研究表明，这些工具能将开发效率提升高达55%，推动软件开发从手动编码向人机协作的新范式演进。</description></item><item><title>构建高效AI代理的实用指南</title><link>https://linguista.cn/curated/henrinotes-2025_p2/building-effective-agents-workflows/</link><pubDate>Tue, 25 Feb 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/building-effective-agents-workflows/</guid><description>&lt;h1 id="构建高效ai代理的实用指南"&gt;构建高效AI代理的实用指南&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ThePrimeTime vs Andrej Karpathy: 软件正在改变（又一次）</title><link>https://linguista.cn/static/theprimetime-ak-software-changed-again/</link><pubDate>Fri, 04 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/theprimetime-ak-software-changed-again/</guid><description>这篇文章深入探讨了 Andrej Karpathy 提出的关于“软件 2.0”及大型语言模型（LLM）未来的革命性观点，并整合了 ThePrimeTime 对此议题的审慎评论。文章通过回顾软件从传统代码到神经网络，再到当今生成式 AI 的演变历程，展示了软件定义的重塑过程。内容不仅剖析了神经网络权重如何取代传统逻辑，还通过互动视角探讨了 Karpathy 关于 LLM 的精妙类比，以及这一技术变革带来的潜在机遇与挑战。这是一场关于代码、智能与未来的深度对话。</description></item><item><title>上下文工程: AI交互新范式</title><link>https://linguista.cn/static/context-engineering-next-generation-hci/</link><pubDate>Fri, 04 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/context-engineering-next-generation-hci/</guid><description>Andrej Karpathy 提出的“上下文工程”标志着人机交互的范式转移。本文深入探讨了从雕琢静态“提示词”向构建动态“信息世界”的演变，详细解析了LLM的上下文组件（指令、提示、状态），并对比了系统提示与用户提示在工程实践中的不同维度。文章还通过互动图表展示了行业领导者在技术栈上的布局，为构建下一代AI应用提供了清晰的路径指引。</description></item><item><title>互动报告：2025年软件工程与AI的现实检验</title><link>https://linguista.cn/static/software-engineering-with-llms-in2025-reality-check/</link><pubDate>Wed, 02 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/software-engineering-with-llms-in2025-reality-check/</guid><description>随着2025年的到来，软件工程领域正经历着一场关于AI效能的深刻反思。尽管高管们对自动化编程充满宏大愿景，但一线数据揭示了生产力的微妙悖论。本报告深入分析了从科技巨头到初创企业的实际落地情况，探讨了为何效率提升未达预期的深层原因，并展望了MCP协议等新技术可能带来的转折点。</description></item><item><title>AI编程工具底层逻辑深度剖析</title><link>https://linguista.cn/static/claudecode/</link><pubDate>Tue, 01 Jul 2025 08:00:00 +0800</pubDate><guid>https://linguista.cn/static/claudecode/</guid><description>本文深入剖析了以Claude和Cursor为代表的AI编程工具的底层运作逻辑。文章从大型语言模型（LLM）的训练基础出发，详细阐述了从预训练到监督微调的进化路径，并探讨了代码库理解的两种核心哲学。研究表明，这些工具能将开发效率提升高达55%，推动软件开发从手动编码向人机协作的新范式演进。</description></item><item><title>如何充分利用 Vibe Coding | 创业学校讲座实录</title><link>https://linguista.cn/rosetta/chat-notes/how-to-get-the-most-out-of-vibe-coding/</link><pubDate>Fri, 25 Apr 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/how-to-get-the-most-out-of-vibe-coding/</guid><description>&lt;h1 id="如何充分利用-vibe-coding--创业学校讲座实录"&gt;如何充分利用 Vibe Coding | 创业学校讲座实录&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;YC 合伙人 Tom 分享了 Vibe Coding 的实用技巧与最佳实践，涵盖工具选择、项目规划、版本控制、测试驱动、调试策略、指令编写和文档管理等方面。多位 YC X25 批次创始人也贡献了各自的经验，包括同时使用多个 AI IDE、以测试用例为先导、以及在纯 LLM 环境中预先规划架构等方法，帮助开发者更高效地利用 AI 编码工具构建产品。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/BJjsfNO5JTo?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="如何充分利用 Vibe Coding | 创业学校讲座实录"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Vibe Coding&lt;/strong&gt;：一种利用 AI 大语言模型辅助编程的新范式，开发者通过自然语言描述需求，由 AI 生成代码，强调用提示词而非手写代码来完成开发任务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;测试驱动的 AI 开发&lt;/strong&gt;：先手动编写测试用例作为约束规则，再让 LLM 自由生成代码，通过测试通过与否来验证代码质量，减少人工审查负担&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Git 重置策略&lt;/strong&gt;：在 AI 生成代码不理想时，使用 git reset 回滚到干净状态后重新开始，避免多次修复尝试导致垃圾代码层层堆积&lt;/p&gt;</description></item><item><title>构建高效AI代理的实用指南</title><link>https://linguista.cn/curated/henrinotes-2025_p2/building-effective-agents-workflows/</link><pubDate>Tue, 25 Feb 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/building-effective-agents-workflows/</guid><description>&lt;h1 id="构建高效ai代理的实用指南"&gt;构建高效AI代理的实用指南&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;本文基于Anthropic与数十个团队合作的实战经验，阐述了构建有效AI代理的核心原则。作者强调最成功的实现并未使用复杂框架，而是采用简单、可组合的模式。文章系统地区分了&amp;quot;工作流&amp;quot;（预定义代码路径）与&amp;quot;代理&amp;quot;（LLM自主决策），详细介绍了五种工作流模式及其适用场景，并提供了从简单入手、逐步迭代的实施建议。&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -796,4 +889,71 @@
 &lt;p&gt;模型管理方面，作者使用 Ollama 模型页面下载最新的 LLMs，并通过 RSS 在 Thunderbird 上跟踪模型更新。对于图像生成模型，则使用 CivitAI 平台获取特定风格的模型。文章最后强调了本地运行 LLMs 的核心优势：完全的数据控制权和更低的响应延迟。&lt;/p&gt;
 &lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Ollama&lt;/strong&gt;：这是一个专门为运行 LLMs 设计的中间件工具，提供了便捷的 Python 和 JavaScript 库支持。作者推荐在 Docker 环境中使用 Ollama，这样可以更好地隔离和管理运行环境，简化部署流程。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Open WebUI&lt;/strong&gt;：作为本地 LLMs 的前端界面，它提供了类似 ChatGPT 的聊天体验，支持文本和图像输入，并与 Ollama 后端无缝通信。这种架构分离了模型运行和用户界面，使得整个系统更加模块化和易于维护。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;Open WebUI&lt;/strong&gt;：作为本地 LLMs 的前端界面，它提供了类似 ChatGPT 的聊天体验，支持文本和图像输入，并与 Ollama 后端无缝通信。这种架构分离了模型运行和用户界面，使得整个系统更加模块化和易于维护。&lt;/p&gt;</description></item><item><title>为你的软件工程职业生涯做好未来规划</title><link>https://linguista.cn/rosetta/technology/future-proofing-software-engineering-career/</link><pubDate>Tue, 24 Dec 2024 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/future-proofing-software-engineering-career/</guid><description>&lt;h1 id="为你的软件工程职业生涯做好未来规划"&gt;为你的软件工程职业生涯做好未来规划&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文以务实视角分析了大型语言模型对软件工程职业的实际影响。作者指出AI工具正在增强而非取代工程师，并针对初级、中级工程师分别提出适应策略。文章给出六项未来保障建议，包括深化计算机基础、发展系统设计能力、建立领域专长、精通开发运维、提升沟通技巧以及积极使用AI工具，同时强调设计思维和产品意识的重要性。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;LLM编码助手的能力边界&lt;/strong&gt;：当前AI工具擅长生成样板代码和实现文档完善的算法，但在处理复杂遗留系统重构、隐含业务逻辑和微妙边缘情况时仍存在明显局限&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;初级工程师的角色转变&lt;/strong&gt;：入门级岗位不会消失但门槛将提高，核心技能从编写基础代码转向理解系统架构、审查AI输出、识别安全隐患和编写全面测试&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中级工程师的提升方向&lt;/strong&gt;：传统实现类任务日益自动化，工程师需向系统设计与架构、组件边界管理、性能优化和跨职能沟通等高价值领域发展&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;设计思维与产品意识&lt;/strong&gt;：随着AI降低实现门槛，理解用户需求、工作流程和痛点的能力变得更加关键，工程师需要培养更强的产品思维和与设计团队的协作能力&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AI增强型工作流&lt;/strong&gt;：将AI视为工作流的组成部分而非威胁，用于代码搭建、快速原型、结对调试和优化建议，同时保持人类在架构和设计层面的主导判断&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原文链接：&lt;a href="https://addyo.substack.com/p/future-proofing-your-software-engineering"&gt;Future-proofing your Software Engineering career&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;作者：&lt;a href="https://substack.com/@addyosmani"&gt;Addy Osmani&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;日期：Dec 24, 2024&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="未来工程职业生涯的实用策略"&gt;未来工程职业生涯的实用策略&lt;/h3&gt;
+&lt;p&gt;今天，我们正面临大型语言模型（LLM）带来的新一轮自动化浪潮。围绕这些工具的讨论常常在两个极端之间摇摆——要么预示着我们所知的编程时代的终结，要么将其贬低为仅仅是复杂的自动完成工具。这两种观点都失之偏颇。&lt;/p&gt;
+&lt;p&gt;让我们以务实的视角，基于当前的技术能力和行业演变的历史模式，来审视AI对软件工程职业生涯影响的现实情况。&lt;/p&gt;
+&lt;h2 id="理解当前llm的能力"&gt;理解当前LLM的能力&lt;/h2&gt;
+&lt;p&gt;在讨论职业策略之前，我们需要准确评估LLM能做什么和不能做什么。过去几年，我一直在将各种AI编码助手集成到我的工作中，结果&lt;a href="https://addyo.substack.com/p/the-70-problem-hard-truths-about"&gt;颇具启发性&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这些工具在某些任务上表现出色。它们可以快速生成样板代码，在编程语言之间进行翻译，并实现文档完善的算法。在使用像React这样的流行框架时，它们通常能生成只需少量修改即可使用的代码。例如，让Claude Sonnet或GPT-4o创建一个基本的REST API和前端，通常会得到一个可行的实现，并带有错误处理和基本验证。你可能正通过Cursor、Copilot或Cline等工具层来完成这些工作。&lt;/p&gt;
+&lt;p&gt;然而，在更复杂的场景中，它们的局限性就显现出来了。最近，我尝试使用各种LLM来帮助重构一个遗留系统，该系统复杂的业务逻辑分布在多个服务中。这些工具始终无法掌握组件之间隐含的关系以及现有代码处理的微妙边缘情况。它们生成了看似合理但根本上存在缺陷的解决方案，如果不经过仔细审查就实施，会引入严重的错误。&lt;/p&gt;
+&lt;p&gt;我观察到的一个特别令人担忧的模式是，这些工具会自信地产生错误或过于复杂的解决方案。初级开发者渴望利用AI辅助，有时会在没有充分审查的情况下接受这些输出，导致技术债务或安全漏洞。我亲身经历过一些案例，初级工程师要么因为盲目听从AI建议而实现了完全无法工作的解决方案，要么创建了不必要的复杂实现，原因在于他们缺乏充分的理解。这再次强调了扎实的基础知识和批判性审查技能的重要性。&lt;/p&gt;
+&lt;h2 id="ai已经开始取代软件工程师了吗"&gt;AI已经开始取代软件工程师了吗？&lt;/h2&gt;
+&lt;p&gt;&lt;img src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7c79bf0-a360-4b54-a736-27d86b4b55a1_1026x1368.jpeg" alt=""&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;最近在旧金山拍摄的一张真实照片，“AI即将抢走你的工作”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在深入探讨职业影响之前，让我们先解决那个显而易见的问题：在AI辅助开发工具出现大约两年后，实际发生了什么变化？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AI辅助开发已经存在约2年多了，但&lt;strong&gt;没有&lt;/strong&gt;出现AI取代工作的广泛案例&lt;/li&gt;
+&lt;li&gt;众多旨在创建“AI工程师”的初创公司正在涌现（如Devin、Magic.dev等）&lt;/li&gt;
+&lt;li&gt;GitHub Copilot、Claude和Google的IDX等工具正变得主流&lt;/li&gt;
+&lt;li&gt;像Bolt.new和Lovable.dev这样的平台服务于特定用例，但并未取代传统开发&lt;/li&gt;
+&lt;li&gt;重要的是，&lt;strong&gt;没有&lt;/strong&gt;经验证据表明大规模采用导致工程师被取代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;理解这个背景对于如何在不过度反应的情况下适应至关重要。现实情况是，虽然AI工具正在改变我们的工作方式，但它们更多是在增强而非取代人类工程师。&lt;/p&gt;
+&lt;h2 id="初级工程师的困境"&gt;初级工程师的困境&lt;/h2&gt;
+&lt;p&gt;与普遍猜测相反，初级工程岗位不太可能完全消失。然而，它们将发生显著转变。通过实现基本的CRUD应用程序和简单功能来学习的传统路径将会演变，因为这些任务正变得日益自动化。&lt;/p&gt;
+&lt;p&gt;这种演变给处于职业生涯早期的开发者带来了挑战和机遇。入门级职位的门槛可能会提高，需要更强的基础知识才能有效地审查和验证AI生成的代码。然而，这种转变也意味着初级工程师可能在职业生涯早期就能接触到更有趣的问题。&lt;/p&gt;
+&lt;p&gt;考虑一个典型的初级任务：按照现有模式实现一个新的API端点。以前，这可能需要一天的编码和测试。有了AI辅助，实现时间可能缩短到一个小时，但关键技能变成了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;充分理解现有系统架构，以便正确指定需求&lt;/li&gt;
+&lt;li&gt;审查生成的代码，检查安全隐患和边缘情况&lt;/li&gt;
+&lt;li&gt;确保实现与现有模式保持一致性&lt;/li&gt;
+&lt;li&gt;编写全面的测试来验证业务逻辑&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这些技能无法单纯通过看教程或提示AI来学习——它们需要实际操作生产系统的经验和高级工程师的指导。&lt;/p&gt;
+&lt;h2 id="中级工程师适应的必要性"&gt;中级工程师：适应的必要性&lt;/h2&gt;
+&lt;p&gt;中级工程师可能面临着最大的演变压力。许多传统上占据他们时间的任务——实现功能、编写测试、调试直接的问题——正变得越来越可自动化。&lt;/p&gt;
+&lt;p&gt;这并不意味着过时；这意味着提升。焦点从编写代码转向：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;系统设计与架构&lt;/strong&gt; 与其花费数天实现一个新功能，中级工程师可能会将这些时间用于设计能够优雅处理规模和故障模式的健壮系统。这需要深入理解分布式系统原理、数据库内部机制和云基础设施——这些领域目前LLM提供的价值有限。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;集成与边界&lt;/strong&gt; 随着系统变得越来越复杂，理解和管理组件之间的边界变得至关重要。这包括API设计、事件模式和数据模型——所有这些都需要仔细考虑业务需求和未来的灵活性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;性能优化&lt;/strong&gt; 虽然LLM可以建议基本的优化，但识别和解决系统范围的性能问题需要深入理解整个技术栈，从数据库查询模式到前端渲染策略。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跨职能沟通&lt;/strong&gt; 随着实现时间的缩短，在业务需求和技术解决方案之间进行转换的能力变得更有价值。能够与产品经理、设计师和其他利益相关者有效沟通的工程师将变得越来越有价值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="职业生涯未来保障的实用步骤"&gt;职业生涯未来保障的实用步骤&lt;/h2&gt;
+&lt;p&gt;基于这些观察，以下是在AI增强的未来中维持和提升工程职业生涯的具体步骤：&lt;/p&gt;
+&lt;h3 id="1-深化你的计算机科学基础"&gt;1. 深化你的计算机科学基础&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;超越基础的数据结构和算法&lt;/li&gt;
+&lt;li&gt;分布式系统原理&lt;/li&gt;
+&lt;li&gt;数据库内部原理和查询优化&lt;/li&gt;
+&lt;li&gt;网络协议和安全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些知识有助于你理解AI生成代码的影响，并做出更好的架构决策。&lt;/p&gt;
+&lt;h3 id="2-发展系统设计专业知识"&gt;2. 发展系统设计专业知识&lt;/h3&gt;
+&lt;p&gt;练习设计能够大规模解决实际问题的系统。这包括：&lt;/p&gt;</description></item></channel></rss>

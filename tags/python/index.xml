@@ -37,7 +37,43 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Python 3.13 正式支持 iOS 平台移动开发的新机遇</title><link>https://linguista.cn/curated/henrinotes-2025_p2/python-3-13-ios-mobile-development/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/python-3-13-ios-mobile-development/</guid><description>&lt;h1 id="python-313-正式支持-ios-平台移动开发的新机遇"&gt;Python 3.13 正式支持 iOS 平台移动开发的新机遇&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>我用Python八年后学到的东西</title><link>https://linguista.cn/rosetta/technology/lessons-learned-after-8-years-of-python/</link><pubDate>Sat, 10 May 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/technology/lessons-learned-after-8-years-of-python/</guid><description>&lt;h1 id="我用python八年后学到的东西"&gt;我用Python八年后学到的东西&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;作者基于八年Python开发经验，结合Python之禅的核心原则，系统阐述了一套实用的编程最佳实践。文章涵盖代码命名规范、简洁设计、避免过度工程、提升可读性、正确处理异常以及善用命名空间等关键要点，帮助开发者写出更优雅、更健壮的Pythonic代码。&lt;/p&gt;
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Python之禅（Zen of Python）——由Tim Peters撰写的19条Python编程指导原则，强调优美、明确、简单和可读性，是Pythonic风格的理论基础&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;过度工程（Over-engineering）——在软件开发中添加不必要的复杂性和抽象层，违背了简单胜于复杂的原则，应当避免&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;异常处理（Exception Handling）——通过捕获FileNotFoundException、ValueError等内置异常来应对边缘情况，确保错误不会被静默忽略&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代码可读性（Code Readability）——编写清晰、扁平、逻辑隔离的代码，使团队成员能快速理解上下文，减少代码评审中的问题&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;命名空间（Namespaces）——Python中用于组织代码和避免命名冲突的机制，被Python之禅称为绝妙的主意，应当多加利用&lt;/strong&gt;：&lt;/p&gt;
+&lt;h3 id="python之禅示例我的建议以及其他技巧和窍门"&gt;Python之禅示例、我的建议以及其他技巧和窍门！&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;原文链接： &lt;a href="https://neuralbits.substack.com/p/what-ive-learned-after-8-years-of?utm_source=multiple-personal-recommendations-email&amp;amp;utm_medium=email&amp;amp;triedRedirect=true"&gt;What I&amp;rsquo;ve learned after 8 years of Python - by Alex Razvant&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;日期： 2025年5月10日&lt;/li&gt;
+&lt;li&gt;作者：&lt;a href="https://substack.com/@arazvant"&gt;Alex Razvant&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这篇实用的文章中，我将阐述一套帮助我改进 Python 编程方式的最佳实践。&lt;/p&gt;
+&lt;p&gt;我并非从一开始就了解这些，但随着我职业生涯的进步，它们变得显而易见，我是通过编写代码、学习 Python 中的最佳软件原则和简洁代码概念间接学到的。&lt;/p&gt;
+&lt;p&gt;让我们从几个有趣的图表开始！&lt;/p&gt;
+&lt;h3 id="python-的受欢迎程度"&gt;Python 的受欢迎程度&lt;/h3&gt;
+&lt;p&gt;&lt;img src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b80e55e-60b4-4f13-807f-c15a0a4752d7_2730x878.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;2025年 TIOBE 指数记录。(&lt;a href="https://www.tiobe.com/tiobe-index/"&gt;https://www.tiobe.com/tiobe-index/&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;甚至在人工智能领域飞速发展之前，Python 就已经是开发者中广受欢迎的语言。它拥有清晰易懂的语法，使得各种经验水平的人都能快速学习并提高生产力。&lt;/p&gt;
+&lt;p&gt;由于 Python 解释器的存在，它具有可移植性，因此跨平台开发不会涉及编译器版本或其他障碍。&lt;/p&gt;
+&lt;p&gt;随着人工智能的兴起，Python 变得更加流行，谷歌的 Tensorflow 团队和 Meta 的 PyTorch 团队等大型团队都选择了 Python 优先的方法。一个快速发展的领域需要一种简化的方法，而 Python 正好适合。&lt;/p&gt;
+&lt;p&gt;此外，许多其他工具、开源框架和库也积极响应，并以 Python 优先的理念进行构建。让我们看几个例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pandas&lt;/li&gt;
+&lt;li&gt;PyTorch (C++, Python)&lt;/li&gt;
+&lt;li&gt;Tensorflow, Keras (C++, Python)&lt;/li&gt;
+&lt;li&gt;Polars (后端 Rust, API Python)&lt;/li&gt;
+&lt;li&gt;Bytewax (后端 Rust, API Python)&lt;/li&gt;
+&lt;li&gt;HuggingFace Transformers&lt;/li&gt;
+&lt;li&gt;OpenAI GPU Triton Lang&lt;/li&gt;
+&lt;li&gt;Langchain, Langgraph, vLLM, SGLang, TRTLLM&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;等等，不胜枚举……&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;随着越来越多的公司使用人工智能进行构建，寻找在驱动人工智能的技术（包括精通 Python）方面经验丰富的开发人员，就变得理所当然了。这是来自 2024 年 StackOverflow 开发者调查的另一张图表，再次印证了上述观点。&lt;/p&gt;</description></item><item><title>Python 3.13 正式支持 iOS 平台移动开发的新机遇</title><link>https://linguista.cn/curated/henrinotes-2025_p2/python-3-13-ios-mobile-development/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0800</pubDate><guid>https://linguista.cn/curated/henrinotes-2025_p2/python-3-13-ios-mobile-development/</guid><description>&lt;h1 id="python-313-正式支持-ios-平台移动开发的新机遇"&gt;Python 3.13 正式支持 iOS 平台移动开发的新机遇&lt;/h1&gt;
 &lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
 &lt;p&gt;Python 3.13 正式支持 iOS 平台这是一个重要的里程碑更新为移动开发人员带来了新的机遇开发人员现在可以将 Python 无缝集成到他们的 iOS 项目中借助官方支持和新工具将 Python 解释器嵌入原生 iOS 应用本文将详细介绍这一更新带来的功能影响以及如何在 iOS 项目中使用 Python&lt;/p&gt;
 &lt;h2 id="内容框架与概述"&gt;内容框架与概述&lt;/h2&gt;
@@ -79,7 +115,68 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Python悖论</title><link>https://linguista.cn/paul_graham/essays_zh/pypar/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/paul_graham/essays_zh/pypar/</guid><description>&lt;div
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Machine Learning 的学习方法</title><link>https://linguista.cn/rosetta/chat-notes/how-to-learn-machine-learning/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0800</pubDate><guid>https://linguista.cn/rosetta/chat-notes/how-to-learn-machine-learning/</guid><description>&lt;h1 id="machine-learning-的学习方法"&gt;Machine Learning 的学习方法&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本文介绍了学习机器学习的六个关键步骤，从掌握Python基础和数学概念入手，逐步学习ML开发者工具栈、机器学习与深度学习课程，再到通过Kaggle挑战和论文复现进行实践。作者结合自身经历，推荐了Andrew Ng课程、Andrej Karpathy神经网络系列等优质资源，强调以兴趣驱动、注重动手实践的学习方式。&lt;/p&gt;
+&lt;div class="video-card group relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:shadow-md "&gt;
+ &lt;div style="aspect-ratio: 16/9;" class="w-full relative bg-black/5 dark:bg-white/5"&gt;
+ &lt;iframe
+ src="https://www.youtube-nocookie.com/embed/gUmagAluXpk?rel=0&amp;amp;modestbranding=1&amp;amp;playsinline=1"
+ title="Machine Learning 的学习方法"
+ class="absolute inset-0 w-full h-full border-0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ allowfullscreen&gt;
+ &lt;/iframe&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id="核心概念及解读"&gt;核心概念及解读&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;ML开发者堆栈&lt;/strong&gt;：指机器学习开发中常用的工具组合，包括Jupyter笔记本、Pandas、NumPy和Matplotlib等Python库，是数据处理与可视化的基础设施&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PyTorch&lt;/strong&gt;：由Meta开发的开源深度学习框架，以动态计算图和灵活易用著称，广泛应用于学术研究和工业实践&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kaggle&lt;/strong&gt;：全球知名的数据科学与机器学习竞赛平台，提供数据集、挑战赛和社区交流，是实践ML技能的重要渠道&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hugging Face&lt;/strong&gt;：专注于自然语言处理的开源社区和工具库，提供预训练模型和便捷的NLP开发接口，已成为NLP领域的核心基础设施&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;论文复现&lt;/strong&gt;：指重新实现学术论文中的方法并再现其实验结果，是深入理解算法原理和提升工程能力的高效学习方式&lt;/p&gt;
+&lt;h2 id="内容梗概"&gt;内容梗概&lt;/h2&gt;
+&lt;p&gt;文章的核心思想是教授学习机器学习的六个关键步骤，帮助初学者更高效地掌握这一领域。这六个步骤涵盖了从学习Python编程语言和基础工具，到深入了解数学概念、学习机器学习框架，最终实践项目的全过程。作者强调了按步骤学习的重要性，建议初学者注重实践和项目经验，通过挑战和重新实现论文结果来加深理解，最终在机器学习领域取得更好的表现。文章还提到了多个机器学习工具和学习资源，为学习者提供了具体的指导和推荐。&lt;/p&gt;
+&lt;p&gt;文章提到了学习机器学习的六个关键步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;学习Python基础知识：&lt;/strong&gt; 从掌握基本的Python编程开始，包括了解列表、字典、条件语句和循环等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;学习基础数学：&lt;/strong&gt; 虽然许多任务可以由Python库自动化处理，但仍需要理解微积分、线性代数和概率等基础数学概念。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;了解ML开发者堆栈：&lt;/strong&gt; 掌握Python基础后，学习使用Jupyter笔记本以及Pandas、NumPy和Matplotlib等库，这对机器学习至关重要。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;学习机器学习和深度学习：&lt;/strong&gt; 推荐通过免费的机器学习专业化课程学习基本概念，然后深入了解深度学习，包括使用PyTorch等框架。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;实践项目：&lt;/strong&gt; 在Kaggle上解决挑战，并尝试重新实现论文并重现结果，这将提升实际技能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;巩固知识并脱颖而出：&lt;/strong&gt; 学习并尝试一些更高级的概念，以在机器学习应用中脱颖而出，例如利用Kaggle竞赛、重新实现论文等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;作者建议不要匆忙学习所有课程，而是以有趣和实用为导向，随时根据需要查阅基础知识。最终目标是建立实际项目经验，提高机器学习应用技能。&lt;/p&gt;
+&lt;p&gt;在文章中，提到了以下机器学习工具和学习资源：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Python：&lt;/strong&gt; 建议从学习基础的Python编程开始，作为机器学习的编程语言基础。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Jupyter笔记本：&lt;/strong&gt; 用于学习和实践Python代码的工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pandas、NumPy、Matplotlib：&lt;/strong&gt; Python库，用于处理和可视化数据，是机器学习开发者堆栈的重要组成部分。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PyTorch：&lt;/strong&gt; 一种深度学习框架，推荐用于学习深度学习。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Kaggle：&lt;/strong&gt; 提供机器学习挑战和竞赛的平台，用于实践和应用学到的知识。&lt;/p&gt;</description></item><item><title>Python悖论</title><link>https://linguista.cn/paul_graham/essays_zh/pypar/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/paul_graham/essays_zh/pypar/</guid><description>&lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/pypar.html"
 &gt;
