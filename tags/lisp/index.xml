@@ -48,340 +48,7 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ANSI Common Lisp 简介</title><link>https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id="ansi-common-lisp-简介"&gt;ANSI Common Lisp 简介&lt;/h1&gt;
-&lt;p&gt;ANSI Common Lisp 简介&lt;/p&gt;
-&lt;p&gt;（这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。）&lt;/p&gt;
-&lt;h2 id="介绍"&gt;介绍&lt;/h2&gt;
-&lt;p&gt;John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之外，Lisp是仍在使用的最古老的语言。[1] 更值得注意的是，它仍然处于编程语言技术的前沿。了解Lisp的程序员会告诉你，这种语言有某种独特之处。&lt;/p&gt;
-&lt;p&gt;Lisp的独特之处部分在于它被设计为可进化的。你可以使用Lisp来定义新的Lisp操作符。当新的抽象变得流行时（例如面向对象编程），事实证明在Lisp中实现它们总是很容易的。像DNA这样的语言不会过时。&lt;/p&gt;
-&lt;h2 id="新工具"&gt;新工具&lt;/h2&gt;
-&lt;p&gt;为什么学习Lisp？因为它让你做其他语言做不到的事情。如果你只是想写一个返回小于n的数字之和的函数，在Lisp和C中看起来会非常相似：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-lisp" data-lang="lisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;; Lisp&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(defun sum (n)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; ((s &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (dotimes (i n s)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (incf s i))))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* C */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sum&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; n){
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i, s &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt;(i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; s &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; i;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;(s);
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你只需要做这样的简单事情，你使用哪种语言并不重要。假设相反，你想写一个函数，它接受一个数字n，并返回一个将n加到其参数上的函数：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-lisp" data-lang="lisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;; Lisp&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(defun addn (n)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;#&amp;#39;&lt;/span&gt;(lambda (x) (&lt;span style="color:#a6e22e"&gt;+&lt;/span&gt; x n)))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;addn在C中是什么样的？你根本写不出来。&lt;/p&gt;
-&lt;p&gt;你可能会想知道，什么时候有人会想做这样的事情？编程语言教会你不要渴望它们不能提供的东西。你必须用一种语言思考才能用其编写程序，很难渴望你无法描述的东西。当我开始编写程序时——使用Basic——我不想念递归，因为我不知道有这样的东西。我用Basic思考。我只能构想迭代算法，为什么要想念递归？&lt;/p&gt;
-&lt;p&gt;如果你不怀念词法闭包（这就是前面例子中制作的东西），暂时相信Lisp程序员一直使用它们。很难找到任何长度的Common Lisp程序不利用闭包。到第112页，你自己也会使用它们。而闭包只是我们在其他语言中找不到的抽象之一。&lt;/p&gt;</description></item><item><title>Beating the Averages</title><link>https://linguista.cn/person/paul_graham/essays_en/avg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/avg/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/avg/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/avg.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/avg.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/avg.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="beating-the-averages"&gt;Beating the Averages&lt;/h1&gt;
-&lt;p&gt;Want to start a startup? Get funded by Y Combinator. April 2001, rev. April 2003&lt;/p&gt;
-&lt;p&gt;(This article is derived from a talk given at the 2001 Franz Developer Symposium.)&lt;/p&gt;
-&lt;p&gt;In the summer of 1995, my friend Robert Morris and I started a startup called Viaweb. Our plan was to write software that would let end users build online stores. What was novel about this software, at the time, was that it ran on our server, using ordinary Web pages as the interface.&lt;/p&gt;</description></item><item><title>Being Popular</title><link>https://linguista.cn/person/paul_graham/essays_en/popular/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/popular/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/popular.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/popular.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/popular.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="being-popular"&gt;Being Popular&lt;/h1&gt;
-&lt;p&gt;May 2001&lt;/p&gt;
-&lt;p&gt;(This article was written as a kind of business plan for a new language. So it is missing (because it takes for granted) the most important feature of a good programming language: very powerful abstractions.)&lt;/p&gt;
-&lt;p&gt;A friend of mine once told an eminent operating systems expert that he wanted to design a really good programming language. The expert told him that it would be a waste of time, that programming languages don&amp;rsquo;t become popular or unpopular based on their merits, and so no matter how good his language was, no one would use it. At least, that was what had happened to the language he had designed.&lt;/p&gt;</description></item><item><title>Design and Research</title><link>https://linguista.cn/person/paul_graham/essays_en/desres/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/desres/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/desres/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/desres.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/desres.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/desres.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="design-and-research"&gt;Design and Research&lt;/h1&gt;
-&lt;p&gt;January 2003&lt;/p&gt;
-&lt;p&gt;(This article is derived from a keynote talk at the fall 2002 meeting of NEPLS.)&lt;/p&gt;
-&lt;p&gt;Visitors to this country are often surprised to find that Americans like to begin a conversation by asking &amp;ldquo;what do you do?&amp;rdquo; I&amp;rsquo;ve never liked this question. I&amp;rsquo;ve rarely had a neat answer to it. But I think I have finally solved the problem. Now, when someone asks me what I do, I look them straight in the eye and say &amp;ldquo;I&amp;rsquo;m designing a new dialect of Lisp.&amp;rdquo; I recommend this answer to anyone who doesn&amp;rsquo;t like being asked what they do. The conversation will turn immediately to other topics.&lt;/p&gt;</description></item><item><title>Five Questions about Language Design</title><link>https://linguista.cn/person/paul_graham/essays_en/langdes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/langdes/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/langdes.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/langdes.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/langdes.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="five-questions-about-language-design"&gt;Five Questions about Language Design&lt;/h1&gt;
-&lt;p&gt;May 2001&lt;/p&gt;
-&lt;p&gt;(These are some notes I made for a panel discussion on programming language design at MIT on May 10, 2001.)&lt;/p&gt;
-&lt;h2 id="1-programming-languages-are-for-people"&gt;1. Programming Languages Are for People.&lt;/h2&gt;
-&lt;p&gt;Programming languages are how people talk to computers. The computer would be just as happy speaking any language that was unambiguous. The reason we have high level languages is because people can&amp;rsquo;t deal with machine language. The point of programming languages is to prevent our poor frail human brains from being overwhelmed by a mass of detail.&lt;/p&gt;</description></item><item><title>If Lisp is So Great</title><link>https://linguista.cn/person/paul_graham/essays_en/iflisp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/iflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/iflisp/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/iflisp.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/iflisp.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/iflisp.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="if-lisp-is-so-great"&gt;If Lisp is So Great&lt;/h1&gt;
-&lt;p&gt;May 2003&lt;/p&gt;
-&lt;p&gt;If Lisp is so great, why don&amp;rsquo;t more people use it? I was asked this question by a student in the audience at a talk I gave recently. Not for the first time, either.&lt;/p&gt;
-&lt;p&gt;In languages, as in so many things, there&amp;rsquo;s not much correlation between popularity and quality. Why does John Grisham (King of Torts sales rank, 44) outsell Jane Austen (Pride and Prejudice sales rank, 6191)? Would even Grisham claim that it&amp;rsquo;s because he&amp;rsquo;s a better writer?&lt;/p&gt;</description></item><item><title>Introduction to ANSI Common Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id="introduction-to-ansi-common-lisp"&gt;Introduction to ANSI Common Lisp&lt;/h1&gt;
-&lt;p&gt;Introduction to ANSI Common Lisp&lt;/p&gt;
-&lt;p&gt;(This is the first chapter of ANSI Common Lisp, by Paul Graham. Copyright 1995, Prentice-Hall.)&lt;/p&gt;
-&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;John McCarthy and his students began work on the first Lisp implementation in 1958. After Fortran, Lisp is the oldest language still in use. [1] What&amp;rsquo;s more remarkable is that it is still in the forefront of programming language technology. Programmers who know Lisp will tell you, there is something about this language that sets it apart.&lt;/p&gt;</description></item><item><title>Lisp for Web-Based Applications</title><link>https://linguista.cn/person/paul_graham/essays_en/lwba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/lwba/</guid><description>&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/lwba.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/lwba.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/lwba.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="lisp-for-web-based-applications"&gt;Lisp for Web-Based Applications&lt;/h1&gt;
-&lt;p&gt;After a link to Beating the Averages was posted on slashdot, some readers wanted to hear in more detail about the specific technical advantages we got from using Lisp in Viaweb. For those who are interested, here are some excerpts from a talk I gave in April 2001 at BBN Labs in Cambridge, MA.&lt;/p&gt;</description></item><item><title>Lisp的不同之处</title><link>https://linguista.cn/person/paul_graham/essays_zh/diff/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/diff/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/diff/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/diff.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/diff.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/diff.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="lisp的不同之处"&gt;Lisp的不同之处&lt;/h1&gt;
-&lt;p&gt;2001年12月（修订于2002年5月）&lt;/p&gt;
-&lt;p&gt;（本文是回应LL1邮件列表上一些问题而产生的。现在已收录在《书呆子的复仇》中。）&lt;/p&gt;
-&lt;p&gt;当McCarthy在1950年代末设计Lisp时，它是对现有语言的彻底突破，其中最重要的是Fortran。&lt;/p&gt;
-&lt;p&gt;Lisp体现了九个新思想：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;条件语句。&lt;/strong&gt; 条件语句是if-then-else结构。现在我们认为这是理所当然的。它们是McCarthy在开发Lisp过程中发明的。（当时的Fortran只有条件goto，紧密基于底层硬件的分支指令。）McCarthy是Algol委员会的成员，他将条件语句引入Algol，随后传播到大多数其他语言。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;函数类型。&lt;/strong&gt; 在Lisp中，函数是一等对象——它们是一种数据类型，就像整数、字符串等，并且有字面表示，可以存储在变量中，可以作为参数传递，等等。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;递归。&lt;/strong&gt; 递归当然在Lisp之前作为数学概念存在，但Lisp是第一个支持递归的编程语言。（可以说这在使函数成为一等对象中是隐含的。）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;变量的新概念。&lt;/strong&gt; 在Lisp中，所有变量实际上都是指针。具有类型的是值，而不是变量，赋值或绑定变量意味着复制指针，而不是它们指向的内容。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;垃圾回收。&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;由表达式组成的程序。&lt;/strong&gt; Lisp程序是表达式的树，每个表达式都返回一个值。（在某些Lisp中，表达式可以返回多个值。）这与Fortran和大多数后续语言形成对比，后者区分表达式和语句。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在Fortran中有这种区别是很自然的，因为（在输入格式为打孔卡的语言中不足为奇）该语言是面向行的。你不能嵌套语句。因此，虽然你需要表达式来进行数学运算，但让其他任何东西返回值都没有意义，因为不可能有任何东西在等待它。&lt;/p&gt;
-&lt;p&gt;随着块结构语言的出现，这个限制消失了，但那时已经太晚了。表达式和语句的区别已经根深蒂固。它从Fortran传播到Algol，然后传播到它们的后代。&lt;/p&gt;
-&lt;p&gt;当一种语言完全由表达式构成时，你可以任意组合表达式。你可以说（使用Arc语法）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(if foo (= x 1) (= x 2))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(= x (if foo 1 2))
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="7"&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;符号类型。&lt;/strong&gt; 符号与字符串的不同在于你可以通过比较指针来测试相等性。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;使用符号树表示代码的记号。&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;整个语言始终可用。&lt;/strong&gt; 读取时间、编译时间和运行时间之间没有真正的区别。你可以在读取时编译或运行代码，在编译时读取或运行代码，在运行时读取或编译代码。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在读取时运行代码允许用户重新编程Lisp的语法；在编译时运行代码是宏的基础；在运行时编译是Lisp用作扩展语言的基础，如在Emacs等程序中；在运行时读取使程序能够使用s表达式进行通信，这个想法最近被重新发明为XML。&lt;/p&gt;
-&lt;p&gt;当Lisp首次发明时，所有这些想法都与当时的普通编程实践相去甚远，后者主要由1950年代末可用的硬件决定。&lt;/p&gt;
-&lt;p&gt;随着时间的推移，体现在一系列流行语言中的默认语言逐渐向Lisp演变。1-5现在已经广泛传播。6开始出现在主流中。Python具有7的一种形式，尽管似乎没有任何语法支持它。8（与9一起）是使Lisp宏成为可能的特性，到目前为止仍然是Lisp独有的，也许是因为（a）它需要那些括号，或者同样糟糕的东西，（b）如果你添加这最后的力量增量，你不能再声称发明了一种新语言，而只是设计了一种新的Lisp方言 ;-)&lt;/p&gt;
-&lt;p&gt;虽然对当今的程序员有用，但通过描述Lisp与其他语言采用的随机权宜之计的差异来描述它是很奇怪的。这可能不是McCarthy对它的看法。Lisp不是设计来修复Fortran中的错误；它更像是试图将计算公理化的副产品。&lt;/p&gt;
-&lt;p&gt;相关链接：&lt;/p&gt;</description></item><item><title>Lisp的根源</title><link>https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/rootsoflisp.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/rootsoflisp.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/rootsoflisp.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="lisp的根源"&gt;Lisp的根源&lt;/h1&gt;
-&lt;p&gt;2001年5月&lt;/p&gt;
-&lt;p&gt;（我写这篇文章是为了帮助自己准确理解McCarthy的发现。你不需要知道这些东西来用Lisp编程，但对于想要理解Lisp本质的人来说——无论是从起源还是语义核心的角度——这应该是有帮助的。Lisp拥有这样一个核心是其区别于其他语言的特征之一，也是为什么与其他语言不同，Lisp有方言的原因。）&lt;/p&gt;
-&lt;p&gt;1960年，John McCarthy发表了一篇非凡的论文，他在编程领域做了类似于欧几里得对几何学所做的事情。他展示了，给定一些简单的操作符和函数表示法，如何构建一个完整的编程语言。他称这种语言为Lisp，即&amp;quot;列表处理&amp;quot;，因为他的一个关键想法是使用一种称为列表的简单数据结构来同时表示代码和数据。&lt;/p&gt;
-&lt;p&gt;值得理解McCarthy的发现，不仅作为计算机史上的里程碑，而且作为我们时代编程发展方向的模型。在我看来，迄今为止有两个真正干净、一致的编程模型：C模型和Lisp模型。这两个模型似乎像是高地，之间是沼泽般的低地。随着计算机变得越来越强大，正在开发的新语言一直在稳步向Lisp模型移动。过去20年来，新编程语言的一个流行配方是采用C计算模型，然后零散地添加从Lisp模型中提取的部分，如运行时类型和垃圾收集。&lt;/p&gt;
-&lt;p&gt;在这篇文章中，我将尝试用最简单的术语解释McCarthy的发现。重点不仅仅是了解某人40年前想出的一个有趣的理论结果，而是展示语言的发展方向。Lisp的不寻常之处——事实上，Lisp的定义性特征——是它可以用自身来编写。要理解McCarthy的意思，我们将追溯他的步骤，将他的数学表示法转换为运行的Common Lisp代码。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;注意：这似乎是一篇较长文章的介绍或摘要。全文可能作为PostScript文件提供，在原始来源中链接为&amp;quot;Complete Article (Postscript)&amp;quot;。&lt;/em&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;相关链接：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;What Made Lisp Different&lt;/li&gt;
-&lt;li&gt;The Code&lt;/li&gt;
-&lt;li&gt;中文翻译&lt;/li&gt;
-&lt;li&gt;日语翻译&lt;/li&gt;
-&lt;li&gt;葡萄牙语翻译&lt;/li&gt;
-&lt;li&gt;韩语翻译&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Progbot</title><link>https://linguista.cn/person/paul_graham/essays_en/progbot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/progbot/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/progbot/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/progbot.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/progbot.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/progbot.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="progbot"&gt;Progbot&lt;/h1&gt;
-&lt;p&gt;January 1993 (This essay is from the introduction to On Lisp.)&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s a long-standing principle of programming style that the functional elements of a program should not be too large. If some component of a program grows beyond the stage where it&amp;rsquo;s readily comprehensible, it becomes a mass of complexity which conceals errors as easily as a big city conceals fugitives. Such software will be hard to read, hard to test, and hard to debug.&lt;/p&gt;</description></item><item><title>Progbot</title><link>https://linguista.cn/person/paul_graham/essays_zh/progbot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/progbot/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/progbot/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/progbot.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/progbot.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/progbot.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="progbot"&gt;Progbot&lt;/h1&gt;
-&lt;p&gt;1993年1月（本文选自《On Lisp》的引言）&lt;/p&gt;
-&lt;p&gt;编程风格的一个悠久原则是，程序的功能组件不应过大。如果程序的某个组件增长到难以理解的程度，它就会变成一团复杂性，如同大城市隐藏逃犯一样轻易地隐藏错误。这样的软件将难以阅读、难以测试、难以调试。&lt;/p&gt;
-&lt;p&gt;根据这一原则，大程序必须被分割成片段，程序越大，分割得越多。如何分割程序？传统的方法称为自顶向下设计：你说&amp;quot;程序的目的是做这七件事，所以我把它分成七个主要子程序。第一个子程序要做这四件事，所以它又有四个自己的子程序&amp;quot;，依此类推。这个过程持续到整个程序达到适当的粒度级别——每个部分足够大以完成实质性工作，又足够小以作为单个单元被理解。&lt;/p&gt;
-&lt;p&gt;有经验的Lisp程序员以不同的方式分割他们的程序。除了自顶向下设计，他们遵循一个可以称为自底向上设计的原则——改变语言以适应问题。在Lisp中，你不仅向语言的方向编写程序，还向程序的方向构建语言。当你编写程序时，你可能会想&amp;quot;我希望Lisp有这样那样的运算符&amp;quot;。于是你就去写它。之后你意识到使用新的运算符会简化程序另一部分的设计，如此类推。语言和程序共同进化。如同两个交战国家之间的边界，语言和程序之间的边界被绘制和重绘，直到最终沿着山脉和河流——你问题的自然边界——安定下来。最终，你的程序看起来就像语言是为它而设计的。当语言和程序相互适应时，你最终得到的代码是清晰、小型和高效的。&lt;/p&gt;
-&lt;p&gt;值得强调的是，自底向上设计不仅仅意味着以不同的顺序编写相同的程序。当你自底向上工作时，你通常最终会得到不同的程序。你得到的不是单一的、整体的程序，而是一个具有更多抽象运算符的更大语言，以及在其中编写的更小程序。你得到的不是门楣，而是拱门。在典型的代码中，一旦抽象出仅仅是簿记的部分，剩下的内容就短得多；你构建的语言层次越高，从上到下需要走的距离就越短。这带来了几个好处：&lt;/p&gt;
-&lt;p&gt;通过让语言做更多的工作，自底向上设计产生的程序更小、更灵活。较短的程序不必被分成那么多组件，更少的组件意味着更容易阅读或修改的程序。更少的组件也意味着组件之间的连接更少，因此出错的机会更少。正如工业设计师努力减少机器中的运动部件数量一样，有经验的Lisp程序员使用自底向上设计来减少程序的大小和复杂性。&lt;/p&gt;
-&lt;p&gt;自底向上设计促进代码重用。当你编写两个或更多程序时，你为第一个程序编写的许多实用程序在后续程序中也会很有用。一旦你获得了大量的实用程序基础，编写新程序可能只需要从头开始使用原始Lisp所需工作的一小部分。&lt;/p&gt;
-&lt;p&gt;自底向上设计使程序更容易阅读。这种类型的抽象实例要求读者理解通用运算符；功能抽象的实例要求读者理解专用子程序。&lt;/p&gt;
-&lt;p&gt;[1] 因为它使你总是在寻找代码中的模式，自底向上工作有助于澄清你对程序设计的想法。如果程序的两个相距较远的组件在形式上相似，你会注意到这种相似性，并可能以更简单的方式重新设计程序。&lt;/p&gt;
-&lt;p&gt;自底向上设计在Lisp以外的语言中在一定程度上也是可能的。每当看到库函数时，就在进行自底向上设计。然而，Lisp在这方面给你更广泛的能力，增强语言在Lisp风格中起着更大的作用——如此之大，以至于Lisp不仅是一种不同的语言，而是一种完全不同的编程方式。&lt;/p&gt;
-&lt;p&gt;确实，这种开发风格更适合可以由小组编写的程序。然而，同时，它扩展了小组可以做的事情的极限。在《人月神话》中，Frederick Brooks提出程序员小组的生产力不会随着其规模线性增长。随着小组规模的增加，单个程序员的生产力会下降。Lisp编程的经验提出了一种更令人振奋的方式来表述这个定律：随着小组规模的减小，单个程序员的生产力会提高。相对而言，小组获胜只是因为它更小。当小组也利用Lisp使之成为可能的技术时，它可以完全获胜。&lt;/p&gt;
-&lt;p&gt;新：免费下载《On Lisp》。&lt;/p&gt;
-&lt;p&gt;[1] &amp;ldquo;但是如果不理解你所有的新实用程序，没有人能读懂这个程序。&amp;ldquo;要了解为什么这样的陈述通常是错误的，请参见第4.8节。&lt;/p&gt;</description></item><item><title>Revenge of the Nerds</title><link>https://linguista.cn/person/paul_graham/essays_en/icad/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/icad/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/icad/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/icad.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/icad.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/icad.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="revenge-of-the-nerds"&gt;Revenge of the Nerds&lt;/h1&gt;
-&lt;p&gt;Want to start a startup? Get funded by Y Combinator.&lt;/p&gt;
-&lt;p&gt;May 2002&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;We were after the C++ programmers. We managed to drag a lot of them about halfway to Lisp.&amp;rdquo;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Guy Steele, co-author of the Java spec&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;In the software business there is an ongoing struggle between the pointy-headed academics, and another equally formidable force, the pointy-haired bosses. Everyone knows who the pointy-haired boss is, right? I think most people in the technology world not only recognize this cartoon character, but know the actual person in their company that he is modelled upon.&lt;/p&gt;</description></item><item><title>The Hundred-Year Language</title><link>https://linguista.cn/person/paul_graham/essays_en/hundred/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/hundred/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/hundred.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/hundred.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/hundred.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="the-hundred-year-language"&gt;The Hundred-Year Language&lt;/h1&gt;
-&lt;p&gt;April 2003&lt;/p&gt;
-&lt;p&gt;(This essay is derived from a keynote talk at PyCon 2003.)&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s hard to predict what life will be like in a hundred years. There are only a few things we can say with certainty. We know that everyone will drive flying cars, that zoning laws will be relaxed to allow buildings hundreds of stories tall, that it will be dark most of the time, and that women will all be trained in the martial arts. Here I want to zoom in on one detail of this picture. What kind of programming language will they use to write the software controlling those flying cars?&lt;/p&gt;</description></item><item><title>The Roots of Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/rootsoflisp.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/rootsoflisp.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/rootsoflisp.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="the-roots-of-lisp"&gt;The Roots of Lisp&lt;/h1&gt;
-&lt;p&gt;May 2001&lt;/p&gt;
-&lt;p&gt;(I wrote this article to help myself understand exactly what McCarthy discovered. You don&amp;rsquo;t need to know this stuff to program in Lisp, but it should be helpful to anyone who wants to understand the essence of Lisp — both in the sense of its origins and its semantic core. The fact that it has such a core is one of Lisp&amp;rsquo;s distinguishing features, and the reason why, unlike other languages, Lisp has dialects.)&lt;/p&gt;</description></item><item><title>Weird Languages</title><link>https://linguista.cn/person/paul_graham/essays_en/weird/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/weird/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/weird/"&gt;中文版&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;此文档由 AI 自动整理&lt;/em&gt;&lt;/p&gt;</description></item><item><title>Weird Languages</title><link>https://linguista.cn/person/paul_graham/essays_en/weird/</link><pubDate>Sun, 01 Aug 2021 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/weird/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/weird/"&gt;中文版&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/weird.html"
@@ -399,279 +66,7 @@
 &lt;h1 id="weird-languages"&gt;Weird Languages&lt;/h1&gt;
 &lt;p&gt;August 2021&lt;/p&gt;
 &lt;p&gt;When people say that in their experience all programming languages are basically equivalent, they&amp;rsquo;re making a statement not about languages but about the kind of programming they&amp;rsquo;ve done.&lt;/p&gt;
-&lt;p&gt;99.5% of programming consists of gluing together calls to library functions. All popular languages are equally good at this. So one can easily spend one&amp;rsquo;s whole career operating in the intersection of popular programming languages.&lt;/p&gt;</description></item><item><title>Welcome to Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id="welcome-to-lisp"&gt;Welcome to Lisp&lt;/h1&gt;
-&lt;p&gt;This chapter aims to get you programming as soon as possible. By the end of it you will know enough Common Lisp to begin writing programs.&lt;/p&gt;
-&lt;h2 id="21-form"&gt;2.1 Form&lt;/h2&gt;
-&lt;p&gt;It is particularly true of Lisp that you learn it by using it, because Lisp is an interactive language. Any Lisp system will include an interactive front-end called the toplevel. You type Lisp expressions into the toplevel, and the system displays their values. Lisp usually displays a prompt to tell you that it&amp;rsquo;s waiting for you to type something. Many implementations of Common Lisp use &amp;gt; as the toplevel prompt. That&amp;rsquo;s what we&amp;rsquo;ll use here.&lt;/p&gt;</description></item><item><title>What I Worked On</title><link>https://linguista.cn/person/paul_graham/essays_en/worked/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/worked/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/worked/"&gt;中文版&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/worked.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/worked.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/worked.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="what-i-worked-on"&gt;What I Worked On&lt;/h1&gt;
-&lt;p&gt;February 2021&lt;/p&gt;
-&lt;p&gt;Before college the two main things I worked on, outside of school, were writing and programming. I didn&amp;rsquo;t write essays. I wrote what beginning writers were supposed to write then, and probably still are: short stories. My stories were awful. They had hardly any plot, just characters with strong feelings, which I imagined made them deep.&lt;/p&gt;</description></item><item><title>What Made Lisp Different</title><link>https://linguista.cn/person/paul_graham/essays_en/diff/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/diff/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/diff/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/diff.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/diff.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/diff.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="what-made-lisp-different"&gt;What Made Lisp Different&lt;/h1&gt;
-&lt;p&gt;December 2001 (rev. May 2002)&lt;/p&gt;
-&lt;p&gt;(This article came about in response to some questions on the LL1 mailing list. It is now incorporated in Revenge of the Nerds.)&lt;/p&gt;
-&lt;p&gt;When McCarthy designed Lisp in the late 1950s, it was a radical departure from existing languages, the most important of which was Fortran.&lt;/p&gt;</description></item><item><title>Why Arc Isn't Especially Object-Oriented</title><link>https://linguista.cn/person/paul_graham/essays_en/noop/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/noop/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/noop/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/noop.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/noop.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/noop.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="why-arc-isnt-especially-object-oriented"&gt;Why Arc Isn&amp;rsquo;t Especially Object-Oriented&lt;/h1&gt;
-&lt;p&gt;There is a kind of mania for object-oriented programming at the moment, but some of the smartest programmers I know are some of the least excited about it.&lt;/p&gt;
-&lt;p&gt;My own feeling is that object-oriented programming is a useful technique in some cases, but it isn&amp;rsquo;t something that has to pervade every program you write. You should be able to define new types, but you shouldn&amp;rsquo;t have to express every program as the definition of new types.&lt;/p&gt;</description></item><item><title>为什么 Arc 不是特别面向对象的</title><link>https://linguista.cn/person/paul_graham/essays_zh/noop/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/noop/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/noop/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/noop.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/noop.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/noop.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="为什么-arc-不是特别面向对象的"&gt;为什么 Arc 不是特别面向对象的&lt;/h1&gt;
-&lt;p&gt;目前有一种对面向对象编程的狂热，但我认识的一些最聪明的程序员是对此最不兴奋的人。&lt;/p&gt;
-&lt;p&gt;我自己的感觉是，面向对象编程在某些情况下是一种有用的技术，但它不是必须渗透到你写的每个程序中的东西。你应该能够定义新类型，但不必将每个程序都表达为新类型的定义。&lt;/p&gt;
-&lt;p&gt;我认为人们喜欢面向对象编程有五个原因，其中三个半是坏的：&lt;/p&gt;
-&lt;p&gt;如果你有一个静态类型的语言，没有词法闭包或宏，面向对象编程是令人兴奋的。在某种程度上，它提供了一种绕过这些限制的方法。（见 Greenspun 第十规则。）&lt;/p&gt;
-&lt;p&gt;面向对象编程在大公司很受欢迎，因为它适合他们编写软件的方式。在大公司，软件往往由大量（且经常变动的）平庸程序员团队编写。面向对象编程对这些程序员施加了一种纪律，防止任何一个人造成太大的损害。代价是产生的代码充满了协议和重复。这对大公司来说不是太高的价格，因为他们的软件无论如何都可能是臃肿和充满重复的。&lt;/p&gt;
-&lt;p&gt;面向对象编程产生了很多看起来像工作的东西。在折叠纸的时代，有一种程序员只会在一页上放五到十行代码，前面是二十行精心格式化的注释。面向对象编程对这些来说就像可卡因：它让你将所有这些脚手架直接整合到源代码中。Lisp 黑客可能通过将符号推到列表上来处理的东西，变成了整个类的文件和方法。所以如果你想说服自己或其他人你正在做很多工作，这是一个好工具。&lt;/p&gt;
-&lt;p&gt;如果语言本身是一个面向对象的程序，它可以被用户扩展。嗯，也许。或者也许你可以通过提供面向对象编程的子概念单点来做得更好。例如，重载本质上并不与类绑定。我们拭目以待。&lt;/p&gt;
-&lt;p&gt;面向对象的抽象很好地映射到某些特定类型程序的领域，比如模拟和 CAD 系统。&lt;/p&gt;
-&lt;p&gt;我个人从来不需要面向对象的抽象。Common Lisp 有一个极其强大的对象系统，我从未使用过一次。我做过很多事情（例如，制作充满闭包的哈希表），这些在较弱的语言中需要面向对象技术，但我从未不得不使用 CLOS。&lt;/p&gt;
-&lt;p&gt;也许我只是很愚蠢，或者只在应用程序的有限子集上工作过。基于自己的编程经验设计语言是有危险的。但放入你从未需要的东西因为它被认为是个好主意似乎更危险。&lt;/p&gt;</description></item><item><title>书呆子的复仇</title><link>https://linguista.cn/person/paul_graham/essays_zh/icad/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/icad/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/icad/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/icad.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/icad.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/icad.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="书呆子的复仇"&gt;书呆子的复仇&lt;/h1&gt;
-&lt;p&gt;想要创业？获得Y Combinator的投资。&lt;/p&gt;
-&lt;p&gt;2002年5月&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;我们当时在追逐C++程序员。我们成功地将他们中的许多人拖到了Lisp的路上。&amp;rdquo;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Guy Steele，Java规范合著者&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在软件行业中，一直存在着一场持续的斗争，一方是尖脑袋的学者，另一方是同样强大的力量——尖头发的老板。大家都知道尖头发的老板是谁，对吧？我认为技术界的大多数人不仅认识这个卡通人物，而且知道他们公司中这个人物的原型是谁。&lt;/p&gt;
-&lt;p&gt;尖头发的老板奇迹般地结合了两个各自常见但很少同时出现的品质：(a)他对技术一无所知，(b)他对技术有非常强烈的看法。&lt;/p&gt;
-&lt;p&gt;假设，例如，你需要编写一个软件。尖头发的老板对这个软件应该如何工作一无所知，也无法区分一种编程语言和另一种，但他知道你应该用什么语言来编写它。完全正确。他认为你应该用Java来编写。&lt;/p&gt;
-&lt;p&gt;他为什么这么认为？让我们来看看尖头发的老板的大脑里面在想什么。他在想的大概是这样的。Java是一个标准。我知道它一定是标准，因为我总是在媒体上看到它。既然它是标准，我使用它就不会惹上麻烦。这也意味着总会有很多Java程序员，所以如果现在为我工作的程序员辞职了——为我工作的程序员总是神秘地辞职——我可以很容易地替换他们。&lt;/p&gt;
-&lt;p&gt;嗯，这听起来并不那么不合理。但这一切都基于一个未言明的假设，而这个假设结果是错误的。尖头发的老板认为所有编程语言都差不多是等价的。如果这是真的，那他完全正确。如果所有语言都等价，当然，使用其他人都在使用的语言。&lt;/p&gt;
-&lt;p&gt;但并非所有语言都是等价的，我想我甚至不需要深入它们之间的差异就能向你证明这一点。如果你在1992年问尖头发的老板软件应该用什么语言编写，他会像今天一样毫不犹豫地回答。软件应该用C++编写。但如果所有语言都等价，为什么尖头发的老板的意见会改变？事实上，Java的开发者为什么要费心创建一种新语言？&lt;/p&gt;
-&lt;p&gt;据推测，如果你创建一种新语言，那是因为你认为它在某些方面比人们已有的语言更好。事实上，Gosling在第一份Java白皮书中明确表示，Java被设计用来解决C++的一些问题。所以事情就是这样：语言并不都是等价的。如果你顺着尖头发的老板的大脑思路追踪到Java，然后再回溯Java的历史到它的起源，你最终会得到一个与你开始时的假设相矛盾的想法。&lt;/p&gt;
-&lt;p&gt;那么，谁是对的？James Gosling，还是尖头发的老板？毫不奇怪，Gosling是对的。某些语言对于某些问题来说比其他语言更好。你知道，这引发了一些有趣的问题。Java被设计为在特定问题上比C++更好。什么问题？什么时候Java更好，什么时候C++更好？是否存在某些情况下其他语言比两者都更好？&lt;/p&gt;
-&lt;p&gt;一旦你开始考虑这个问题，你就打开了一个真正的潘多拉盒子。如果尖头发的老板不得不以全部复杂性来思考这个问题，他的大脑会爆炸。只要他认为所有语言都等价，他所要做的就是选择一个似乎最有势头的语言，既然这更多是时尚问题而不是技术问题，即使他也可能得到正确的答案。但如果语言各不相同，他突然必须同时解两个方程，试图在他一无所知的两件事之间找到最佳平衡：解决他需要解决的问题的二十种左右主要语言的相对适用性，以及为每种语言找到程序员、库等的可能性。如果门后是这样的东西，尖头发的老板不想打开它也就不足为奇了。&lt;/p&gt;
-&lt;p&gt;认为所有编程语言都等价的缺点是这不是真的。但优点是它让你的生活简单得多。我认为这是这个想法如此广泛传播的主要原因。这是一个令人舒适的想法。&lt;/p&gt;
-&lt;p&gt;我们知道Java一定相当不错，因为它是酷的、新的编程语言。或者真是如此吗？如果你从远处看编程语言的世界，看起来Java是最新的事物。（从足够远的地方看，你只能看到Sun支付的大型闪烁广告牌。）但如果你近距离观察这个世界，你会发现酷的程度是不同的。在黑客亚文化中，有一种叫做Perl的语言被认为比Java酷得多。例如，Slashdot就是用Perl生成的。我想你不会发现那些家伙使用Java Server Pages。但还有另一种更新的语言叫做Python，它的用户倾向于看不起Perl，还有更多的语言在等待。&lt;/p&gt;
-&lt;p&gt;如果你按顺序看这些语言，Java、Perl、Python，你会注意到一个有趣的模式。至少，如果你是Lisp黑客，你会注意到这种模式。每一种都比前一种更像Lisp。Python甚至复制了许多Lisp黑客认为是错误的特性。你可以将简单的Lisp程序逐行翻译成Python。现在是2002年，编程语言几乎赶上了1958年。&lt;/p&gt;
-&lt;h2 id="追上数学"&gt;追上数学&lt;/h2&gt;
-&lt;p&gt;我的意思是，Lisp是John McCarthy在1958年首次发现的，而流行的编程语言现在才赶上他当时发展的想法。&lt;/p&gt;
-&lt;p&gt;现在，这怎么可能是真的？计算机技术不是变化很快的东西吗？我的意思是，在1958年，计算机是冰箱大小的庞然大物，处理能力相当于手表。怎么可能有那么古老的技术仍然相关，更不用说比最新的发展更优越？&lt;/p&gt;
-&lt;p&gt;我来告诉你原因。这是因为Lisp并不是真正被设计为一种编程语言，至少不是我们今天意义上的编程语言。我们所说的编程语言是我们用来告诉计算机做什么的东西。McCarthy最终确实打算发展这种意义上的编程语言，但我们实际得到的Lisp是基于他作为理论练习所做的另一件事——努力定义一个比图灵机更方便的替代方案。正如McCarthy后来所说，&lt;/p&gt;
-&lt;p&gt;展示Lisp比图灵机更整洁的另一种方法是编写一个通用的Lisp函数，并证明它比通用图灵机的描述更简洁、更易理解。这就是Lisp函数eval&amp;hellip;&amp;hellip;它计算Lisp表达式的值&amp;hellip;&amp;hellip;编写eval需要发明一种表示Lisp函数作为Lisp数据的符号，这种符号是为了论文的目的而设计的，并没有想到它会用来实际表达Lisp程序。&lt;/p&gt;
-&lt;p&gt;接下来发生的事情是，在1958年末的某个时候，Steve Russell，McCarthy的一个研究生，看着这个eval的定义，意识到如果将它翻译成机器语言，结果将是一个Lisp解释器。&lt;/p&gt;
-&lt;p&gt;这在当时是一个很大的惊喜。以下是McCarthy后来在采访中对此的评论：&lt;/p&gt;
-&lt;p&gt;Steve Russell说，看，为什么我不来编程这个eval&amp;hellip;&amp;hellip;，我对他说，呵，呵，你把理论和实践混淆了，这个eval是为了阅读，不是为了计算的。但他还是继续做了。也就是说，他把我论文中的eval编译成[IBM] 704机器码，修复了一些错误，然后将其宣传为Lisp解释器，它确实是。在那时，Lisp基本上就有了今天的形式。&lt;/p&gt;
-&lt;p&gt;所以，我想在几周内，McCarthy发现他的理论练习转变为实际的编程语言——而且是一种比他预期更强大的语言。&lt;/p&gt;
-&lt;p&gt;所以，这个1950年代的语言没有过时的简短解释是它不是技术而是数学，而数学不会过时。将Lisp比较的正确对象不是1950年代的硬件，而是，比如说，快速排序算法，它发现于1960年，至今仍然是最快的通用排序算法。&lt;/p&gt;
-&lt;p&gt;1950年代还有另一种语言幸存下来，Fortran，它代表了语言设计的相反方法。Lisp是一段意想不到地转变为编程语言的理论。Fortran是故意被开发为一种编程语言的，但我们现在认为是一种非常低级的语言。&lt;/p&gt;
-&lt;p&gt;1956年开发的Fortran I语言与现在的Fortran是完全不同的动物。Fortran I基本上是带有数学的汇编语言。在某些方面它比最近的汇编语言功能更弱；例如，没有子程序，只有分支。现在的Fortran可以说更接近Lisp而不是Fortran I。&lt;/p&gt;
-&lt;p&gt;Lisp和Fortran是两个独立进化树的树干，一个根植于数学，一个根植于机器架构。这两棵树从那时起一直在收敛。Lisp开始时很强大，在接下来的二十年里变得快速。所谓的主流语言开始时很快，在接下来的四十年里逐渐变得更强大，直到现在它们中最先进的相当接近Lisp。接近，但仍然缺少一些东西。&lt;/p&gt;
-&lt;h2 id="使lisp不同的东西"&gt;使Lisp不同的东西&lt;/h2&gt;
-&lt;p&gt;当Lisp首次被开发时，它体现了九个新想法。其中一些我们现在认为是理所当然的，其他只在更先进的语言中看到，有两个仍然是Lisp独有的。这九个想法按主流采用的顺序排列，&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;条件语句&lt;/strong&gt;。条件语句是if-then-else结构。我们现在认为这是理所当然的，但Fortran I没有它们。它只有基于底层机器指令的条件goto。&lt;/p&gt;</description></item><item><title>关于语言设计的五个问题</title><link>https://linguista.cn/person/paul_graham/essays_zh/langdes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/langdes/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/langdes.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/langdes.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/langdes.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="关于语言设计的五个问题"&gt;关于语言设计的五个问题&lt;/h1&gt;
-&lt;p&gt;2001年5月&lt;/p&gt;
-&lt;p&gt;（这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）&lt;/p&gt;
-&lt;h2 id="1-编程语言是为人设计的"&gt;1. 编程语言是为人设计的。&lt;/h2&gt;
-&lt;p&gt;编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。&lt;/p&gt;
-&lt;p&gt;建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。&lt;/p&gt;
-&lt;p&gt;软件也是如此。设计网络数据路由算法是一个很好的抽象问题，就像设计桥梁。而设计编程语言就像设计椅子：这完全是关于处理人类弱点的问题。&lt;/p&gt;
-&lt;p&gt;我们大多数人都讨厌承认这一点。设计具有数学优雅性的系统对我们大多数人来说比迎合人类弱点听起来更有吸引力。数学优雅确实有作用：某些优雅性使程序更容易理解。但优雅本身不是目的。&lt;/p&gt;
-&lt;p&gt;当我说语言必须设计得适合人类弱点时，我并不是说语言必须为糟糕的程序员设计。事实上我认为你应该为最好的程序员设计，但即使是最好的程序员也有局限性。我认为没有人会喜欢在所有变量都是带整数下标的字母x的语言中编程。&lt;/p&gt;
-&lt;h2 id="2-为自己和你的朋友设计"&gt;2. 为自己和你的朋友设计。&lt;/h2&gt;
-&lt;p&gt;如果你看看编程语言的历史，很多最好的语言都是为其作者自己使用的语言设计的，而很多最差的语言是为其他人使用而设计的。&lt;/p&gt;
-&lt;p&gt;当语言为其他人设计时，总是特定的一群其他人：没有语言设计师聪明的人。所以你得到一种居高临下的语言。Cobol是最极端的例子，但很多语言都充斥着这种精神。&lt;/p&gt;
-&lt;p&gt;这与语言的抽象程度无关。C是相当低级的，但它是为其作者使用而设计的，这就是为什么黑客喜欢它。&lt;/p&gt;
-&lt;p&gt;为糟糕的程序员设计语言的论点是糟糕的程序员比好程序员多。可能是这样。但是那些少数好程序员编写了不成比例的大量软件。&lt;/p&gt;
-&lt;p&gt;我对这个问题很感兴趣，你如何设计一种最好的黑客会喜欢的语言？我碰巧认为这与如何设计一种好的编程语言是同一个问题，但即使不是，它至少是一个有趣的问题。&lt;/p&gt;
-&lt;h2 id="3-给程序员尽可能多的控制权"&gt;3. 给程序员尽可能多的控制权。&lt;/h2&gt;
-&lt;p&gt;许多语言（特别是为其他人设计的语言）都有保姆的态度：它们试图阻止你做它们认为对你不好的事情。我喜欢相反的方法：给程序员尽可能多的控制权。&lt;/p&gt;
-&lt;p&gt;当我第一次学习Lisp时，我最喜欢的是它把我当作平等的伙伴。在我之前学习的其他语言中，有语言本身和用该语言写的我的程序，两者非常分离。但在Lisp中，我编写的函数和宏就像构成语言本身的那些一样。如果我想，我可以重写语言。它有着与开源软件相同的吸引力。&lt;/p&gt;
-&lt;h2 id="4-追求简洁"&gt;4. 追求简洁。&lt;/h2&gt;
-&lt;p&gt;简洁被低估甚至被鄙视。但如果你深入了解黑客的内心，你会发现他们真的很喜欢它。你有多少次听到黑客深情地谈到，比如说，在APL中，他们只需几行代码就能做出惊人的事情？我认为任何真正聪明的人真正喜欢的东西都值得注意。&lt;/p&gt;
-&lt;p&gt;我认为几乎任何能让程序更短的事情都是好的。应该有很多库函数；任何可以隐含的东西都应该；语法应该简洁到极致；甚至事物的名称都应该简短。&lt;/p&gt;
-&lt;p&gt;不仅程序应该简短。手册也应该薄。手册的很大部分被用于澄清、保留、警告和特殊情况。如果你强迫自己缩短手册，在最好的情况下，你会通过修复语言中需要这么多解释的东西来实现。&lt;/p&gt;
-&lt;h2 id="5-承认黑客的本质"&gt;5. 承认黑客的本质。&lt;/h2&gt;
-&lt;p&gt;很多人希望黑客是数学，或者至少是类似自然科学的东西。我认为黑客更像是建筑。建筑与物理学有关，因为建筑师必须设计不会倒塌的建筑，但建筑师的真正目标是建造伟大的建筑，而不是做出关于静力学的发现。&lt;/p&gt;
-&lt;p&gt;黑客喜欢做的是编写伟大的程序。而且我认为，至少在我们自己的心中，我们必须记住，编写伟大的程序是一件令人钦佩的事情，即使这项工作不容易转化为研究论文的传统智力货币。在智力上，设计程序员会喜欢的语言与设计一个包含你可以发表论文的某些想法的糟糕语言同样有价值。&lt;/p&gt;
-&lt;h2 id="开放性问题"&gt;开放性问题&lt;/h2&gt;
-&lt;h3 id="1-如何组织大型库"&gt;1. 如何组织大型库？&lt;/h3&gt;
-&lt;p&gt;库正在成为编程语言越来越重要的组成部分。它们也在变得更大，这可能很危险。如果找到能做你想要的事情的库函数比你自己编写它需要更长的时间，那么所有这些代码只是在让你的手册变厚。（Symbolics手册就是一个例子。）所以我认为我们必须研究组织库的方法。理想的情况是设计它们，使程序员能够猜测哪个库调用会做正确的事情。&lt;/p&gt;
-&lt;h3 id="2-人们真的害怕前缀语法吗"&gt;2. 人们真的害怕前缀语法吗？&lt;/h3&gt;
-&lt;p&gt;这是一个开放性问题，在这个意义上我多年来一直在思考它，但仍然不知道答案。前缀语法对我来说似乎完全自然，可能除了数学。但Lisp不受欢迎可能只是因为它有陌生的语法。如果这是真的，是否要对此做些什么是另一个问题。&lt;/p&gt;
-&lt;h3 id="3-基于服务器的软件需要什么"&gt;3. 基于服务器的软件需要什么？&lt;/h3&gt;
-&lt;p&gt;我认为未来二十年内编写的最令人兴奋的新应用程序中，很多将是基于Web的应用程序，意味着程序位于服务器上并通过Web浏览器与你交谈。而编写这类程序我们可能需要一些新东西。&lt;/p&gt;
-&lt;p&gt;我们需要的一件事是支持基于服务器的应用程序发布的新方式。不像桌面软件那样每年有一两个大的发布版本，基于服务器的应用程序作为一系列小变化发布。你一天可能有五到十个发布版本。而且作为规则，每个人都会总是使用最新版本。&lt;/p&gt;
-&lt;p&gt;你知道你可以设计程序以便调试吗？嗯，基于服务器的软件同样必须设计成可改变的。你必须能够轻松地改变它，或者至少知道什么是小的改变，什么是重大的改变。&lt;/p&gt;
-&lt;p&gt;另一个可能对基于服务器的软件有用的东西，令人惊讶的是，是continuations。在基于Web的软件中，你可以使用类似continuation-passing style的东西来在Web会话本质上无状态的世界中获得子程序的效果。如果不太昂贵，拥有实际的continuations可能是值得的。&lt;/p&gt;
-&lt;h3 id="4-还有什么新的抽象有待发现"&gt;4. 还有什么新的抽象有待发现？&lt;/h3&gt;
-&lt;p&gt;我不确定这个希望有多合理，但我个人真的很想做的一件事是发现一个新的抽象——某种能像拥有一等函数或递归甚至关键字参数那样产生巨大影响的东西。这可能是一个不可能实现的梦想。这些东西并不经常被发现。但我一直在寻找。&lt;/p&gt;</description></item><item><title>基于Web应用的Lisp</title><link>https://linguista.cn/person/paul_graham/essays_zh/lwba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/lwba/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/lwba/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/lwba.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/lwba.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/lwba.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="基于web应用的lisp"&gt;基于Web应用的Lisp&lt;/h1&gt;
-&lt;p&gt;在《击败平均值》的链接被发布在slashdot上之后，一些读者希望更详细地了解我们在Viaweb中使用Lisp获得的具体技术优势。对于那些感兴趣的人，以下是我2001年4月在剑桥BBN实验室的演讲节选。&lt;/p&gt;
-&lt;p&gt;BBN演讲节选（ASCII）&lt;/p&gt;</description></item><item><title>如何变得流行</title><link>https://linguista.cn/person/paul_graham/essays_zh/popular/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/popular/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/popular.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/popular.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/popular.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="如何变得流行"&gt;如何变得流行&lt;/h1&gt;
-&lt;p&gt;2001年5月&lt;/p&gt;
-&lt;p&gt;（本文是作为一种新语言的商业计划书而写的。因此它缺少（因为想当然）一个好的编程语言最重要的特征：非常强大的抽象能力。）&lt;/p&gt;
-&lt;p&gt;我有一个朋友曾经告诉一位著名的操作系统专家，他想设计一种真正好的编程语言。专家告诉他，这将是浪费时间，编程语言不会因为其优点而变得流行或不流行，所以无论他的语言有多好，都没人会使用。至少，这是他设计的语言所发生的情况。&lt;/p&gt;
-&lt;p&gt;到底是什么让一种语言变得流行？流行的语言是否配得上它们的流行度？试图定义一个好的编程语言是否值得？你会怎么做？&lt;/p&gt;
-&lt;p&gt;我认为这些问题的答案可以通过观察黑客并了解他们想要什么来找到。编程语言是为黑客而设计的，而编程语言作为编程语言（而不是，比如说，作为指称语义练习或编译器设计练习）是好的，当且仅当黑客喜欢它。&lt;/p&gt;
-&lt;h2 id="1-流行的机制"&gt;1 流行的机制&lt;/h2&gt;
-&lt;p&gt;当然，大多数人在选择编程语言时并不仅仅基于它们的优点。大多数程序员被告知要使用什么语言。然而我认为这些外部因素对编程语言流行度的影响并不像人们有时认为的那么大。我认为更大的问题是黑客对好的编程语言的想法与大多数语言设计者的想法不同。&lt;/p&gt;
-&lt;p&gt;在这两者之间，黑客的意见才是重要的。编程语言不是定理。它们是工具，为人们设计的，必须像鞋子必须为人类的脚设计一样，适合人类的优点和缺点。如果鞋子穿上时夹脚，那它就是一双坏鞋，无论它作为雕塑品多么优雅。&lt;/p&gt;
-&lt;p&gt;可能是大多数程序员无法区分好语言和坏语言。但这与其他工具没有什么不同。这并不意味着尝试设计好语言是浪费时间。专家黑客在看到好语言时能够识别出来，他们会使用它。诚然，专家黑客是极少数，但这个极少数群体编写了所有好的软件，他们的影响力使得其他程序员倾向于使用他们使用的任何语言。通常，这不仅仅是影响，而是命令：专家黑客通常就是那些作为老板或导师告诉其他程序员使用什么语言的人。&lt;/p&gt;
-&lt;p&gt;专家黑客的意见并不是决定编程语言相对流行度的唯一力量——遗留软件（Cobol）和炒作（Ada、Java）也起作用——但我认为它是长期内最强大的力量。考虑到初始的关键质量和足够的时间，编程语言可能会变得与其应得的流行度相当。而流行度进一步将好语言与坏语言分开，因为来自真实用户的反馈总是导致改进。看看任何流行语言在其生命周期中发生了多大变化。Perl和Fortran是极端的例子，但即使是Lisp也发生了很大变化。例如，Lisp 1.5没有宏；这些是后来发展的，在麻省理工学院的黑客花了几年时间使用Lisp编写真实程序之后。[1]&lt;/p&gt;
-&lt;p&gt;所以无论一种语言是否必须好才能流行，我认为一种语言必须流行才能好。它必须保持流行才能保持好。编程语言的工艺水平不会停滞不前。然而我们今天拥有的Lisp几乎与麻省理工学院在1980年代中期的Lisp相同，因为那是Lisp最后一次拥有足够大和要求高的用户群的时候。&lt;/p&gt;
-&lt;p&gt;当然，黑客在使用语言之前必须了解它。他们如何听到？从其他黑客那里。但必须有一些初始的黑客群体使用该语言，其他人才能听到。我想知道这个群体必须多大；多少用户构成关键质量？我随口一说，二十个。如果一种语言有二十个独立的用户，意味着二十个用户自己决定使用它，我会认为它是真实的。&lt;/p&gt;
-&lt;p&gt;达到那里并不容易。如果从零到二十比从二十到一千更难，我不会感到惊讶。获得那初始二十个用户的最好方法可能是使用特洛伊木马：给人们一个他们想要的应用程序，而这个应用程序恰好是用新语言编写的。&lt;/p&gt;
-&lt;h2 id="2-外部因素"&gt;2 外部因素&lt;/h2&gt;
-&lt;p&gt;让我们首先承认一个确实影响编程语言流行度的外部因素。要变得流行，编程语言必须是流行系统的脚本语言。Fortran和Cobol是早期IBM大型机的脚本语言。C是Unix的脚本语言，后来Perl也是。Tcl是Tk的脚本语言。Java和Javascript旨在成为Web浏览器的脚本语言。&lt;/p&gt;
-&lt;p&gt;Lisp不是一个大规模流行的语言，因为它不是大规模流行系统的脚本语言。它保留的流行度可以追溯到1960年代和1970年代，当时它是麻省理工学院的脚本语言。当时的许多伟大程序员都在某个时期与麻省理工学院有关联。在1970年代初期，在C之前，麻省理工学院的Lisp方言MacLisp是严肃黑客想要使用的唯一编程语言之一。&lt;/p&gt;
-&lt;p&gt;今天，Lisp是两个适度流行系统的脚本语言，Emacs和Autocad，因此我怀疑今天大部分Lisp编程都是在Emacs Lisp或AutoLisp中完成的。&lt;/p&gt;
-&lt;p&gt;编程语言不是孤立存在的。Hack是一个及物动词——黑客通常在hack某物——在实践中，语言是相对于它们用来hack的任何东西来评判的。所以如果你想设计一种流行的语言，你要么必须提供比语言更多的东西，要么你必须设计你的语言来取代某个现有系统的脚本语言。&lt;/p&gt;
-&lt;p&gt;Common Lisp不受欢迎的部分原因是因为它是一个孤儿。它确实伴随着一个要hack的系统：Lisp Machine。但Lisp Machines（以及并行计算机）在1980年代被通用处理器日益增长的力量压垮了。如果Common Lisp是Unix的好脚本语言，它可能会保持流行。唉，它是一个非常糟糕的脚本语言。&lt;/p&gt;
-&lt;p&gt;描述这种情况的一种方法是说语言不是根据其自身的优点来评判的。另一种观点是，编程语言除非也是某物的脚本语言，否则就不是真正的编程语言。如果这让人感到意外，这似乎不公平。我认为这并不比期望编程语言有实现更不公平。这只是编程语言的一部分。&lt;/p&gt;
-&lt;p&gt;当然，编程语言需要好的实现，而且这必须是免费的。公司会为软件付费，但个人黑客不会，而你需要吸引的是黑客。&lt;/p&gt;
-&lt;p&gt;语言也需要有一本关于它的书。这本书应该是薄的、写得好的，充满了好的例子。K&amp;amp;R是这里的理想。目前我几乎会说一种语言必须有一本O&amp;rsquo;Reilly出版的书。这正成为对黑客重要性的测试。&lt;/p&gt;
-&lt;p&gt;也应该有在线文档。事实上，书可以作为在线文档开始。但我不认为物理书已经过时了。它们的格式方便，出版商施加的事实审查是一种有用的、虽然不完美的过滤器。书店是学习新语言的最重要地方之一。&lt;/p&gt;
-&lt;h2 id="3-简洁"&gt;3 简洁&lt;/h2&gt;
-&lt;p&gt;假设你能提供任何语言需要的三个东西——一个免费的实现、一本书、以及要hack的东西——你如何制造一种黑客会喜欢的语言？&lt;/p&gt;
-&lt;p&gt;黑客喜欢的一件事是简洁。黑客是懒惰的，与数学家和现代主义建筑师是懒惰的方式相同：他们讨厌任何多余的东西。说一个即将编写程序的黑客基于他必须键入的字符总数来选择使用什么语言，至少是潜意识的，这离真相不远。如果这不是黑客思考的精确方式，语言设计者最好表现得好像是这样。&lt;/p&gt;
-&lt;p&gt;试图用冗长的表达来宠用户，这些表达旨在类似英语，是错误的。Cobol因此缺陷而臭名昭著。黑客会认为被要求写&lt;/p&gt;
-&lt;p&gt;add x to y giving z&lt;/p&gt;
-&lt;p&gt;而不是&lt;/p&gt;
-&lt;p&gt;z = x+y&lt;/p&gt;</description></item><item><title>如果Lisp这么好</title><link>https://linguista.cn/person/paul_graham/essays_zh/iflisp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/iflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/iflisp/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/iflisp.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/iflisp.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/iflisp.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="如果lisp这么好"&gt;如果Lisp这么好&lt;/h1&gt;
-&lt;p&gt;2003年5月&lt;/p&gt;
-&lt;p&gt;如果Lisp这么好，为什么没有更多人使用它？我最近在一次演讲中被听众中的一个学生问到了这个问题。而且不是第一次了。&lt;/p&gt;
-&lt;p&gt;在语言方面，就像在许多事情中一样，流行度和质量之间没有太大关联。为什么约翰·格里沙姆（《诉讼之王》销售排名第44）比简·奥斯汀（《傲慢与偏见》销售排名第6191）卖得更好？即使是格里沙姆会声称这是因为他是更好的作家吗？&lt;/p&gt;
-&lt;p&gt;这是《傲慢与偏见》的第一句话：&amp;ldquo;凡是有钱的单身汉，总想娶位太太，这已经成了一条举世公认的真理。&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;举世公认的真理？&amp;rdquo; 对于一个爱情故事的第一句话来说，这些词太长了。&lt;/p&gt;
-&lt;p&gt;就像简·奥斯汀的作品一样，Lisp看起来很难。它的语法，或者说缺乏语法，使它看起来完全不同于大多数人习惯的语言。在学习Lisp之前，我也害怕它。我最近发现了一本1983年的笔记本，我在上面写道：&amp;ldquo;我想我应该学习Lisp，但它看起来太陌生了。&amp;ldquo;幸运的是，我当时19岁，对学习新东西没有太多抵触。我非常无知，学习几乎任何东西都意味着学习新事物。&lt;/p&gt;
-&lt;p&gt;被Lisp吓到的人们编造了其他不使用它的理由。当C是默认语言时，标准的借口是Lisp太慢。现在Lisp方言是可用语言中较快的之一，这个借口已经消失了。现在的标准借口是公开循环的：其他语言更流行。&lt;/p&gt;
-&lt;p&gt;（小心这种推理。它会让你得到Windows。）&lt;/p&gt;
-&lt;p&gt;流行度总是自我延续的，但在编程语言中尤其如此。为流行语言编写的库更多，这使它们更流行。程序经常必须与现有程序一起工作，如果它们用相同的语言编写，这会更容易，所以语言像病毒一样从程序传播到程序。管理者更喜欢流行的语言，因为它们给他们更多对开发者的控制力，开发者可以更容易被替换。&lt;/p&gt;
-&lt;p&gt;确实，如果编程语言都或多或少等价，那么使用除最流行语言之外的任何语言都没有什么理由。但它们并不都等价，差远了。这就是为什么不那么流行的语言，像简·奥斯汀的小说，继续存在的原因。当其他人在阅读最新的约翰·格里沙姆小说时，总会有一小部分人在阅读简·奥斯汀。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;日语翻译 | 罗马尼亚语翻译 | 西班牙语翻译&lt;/em&gt;&lt;/p&gt;</description></item><item><title>怪异语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/weird/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/weird/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/weird/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;99.5% of programming consists of gluing together calls to library functions. All popular languages are equally good at this. So one can easily spend one&amp;rsquo;s whole career operating in the intersection of popular programming languages.&lt;/p&gt;</description></item><item><title>怪异语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/weird/</link><pubDate>Sun, 01 Aug 2021 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/weird/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/weird/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/weird.html"
@@ -695,7 +90,24 @@
 &lt;p&gt;一个具体的例子：Lisp宏。Lisp宏即使对许多Lisp程序员来说也显得怪异。它们不仅不在流行语言的交集中，而且它们的性质使得在语言中正确实现它们而不将其变成Lisp的方言会很困难。宏绝对证明超越了粘合编程的技术。例如，通过首先为该类型的问题编写一种语言，然后在其中编写你的特定应用程序来解决问题。这不是你用宏能做的全部；它只是程序操作技术空间中的一个区域，即使现在还远未被完全探索。&lt;/p&gt;
 &lt;p&gt;所以如果你想扩展你对编程可能性的概念，一种方法是学习怪异语言。选择一种大多数程序员认为怪异但其中位数用户聪明的语言，然后专注于这种语言与流行语言交集之间的差异。你能用这种语言说什么，而在其他语言中说会极其不便？在学习如何说你以前不能说的话的过程中，你可能会学习如何想你以前不能想的事。&lt;/p&gt;
 &lt;p&gt;感谢Trevor Blackwell、Patrick Collison、Daniel Gackle、Amjad Masad和Robert Morris阅读草稿。&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://paulgraham.com/weird.ja.html"&gt;日语翻译&lt;/a&gt;&lt;/p&gt;</description></item><item><title>我所从事的工作</title><link>https://linguista.cn/person/paul_graham/essays_zh/worked/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/worked/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/worked/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://paulgraham.com/weird.ja.html"&gt;日语翻译&lt;/a&gt;&lt;/p&gt;</description></item><item><title>What I Worked On</title><link>https://linguista.cn/person/paul_graham/essays_en/worked/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/worked/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/worked/"&gt;中文版&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/worked.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/worked.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/worked.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="what-i-worked-on"&gt;What I Worked On&lt;/h1&gt;
+&lt;p&gt;February 2021&lt;/p&gt;
+&lt;p&gt;Before college the two main things I worked on, outside of school, were writing and programming. I didn&amp;rsquo;t write essays. I wrote what beginning writers were supposed to write then, and probably still are: short stories. My stories were awful. They had hardly any plot, just characters with strong feelings, which I imagined made them deep.&lt;/p&gt;</description></item><item><title>我所从事的工作</title><link>https://linguista.cn/person/paul_graham/essays_zh/worked/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/worked/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/worked/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/worked.html"
@@ -741,36 +153,70 @@
 &lt;p&gt;我没有看到摆脱这种局面的方法。我不想退学，但我还能怎么出去呢？我记得当我的朋友Robert Morris因编写1988年互联网蠕虫而被康奈尔开除时，我羡慕他找到了如此壮观的方式来离开研究生院。&lt;/p&gt;
 &lt;p&gt;然后在1990年4月的一天，墙上出现了一道裂缝。我遇到了Cheatham教授，他问我是否已经足够进展可以在那年六月毕业。我的论文一个字都没有写，但一定是我一生中最快的思考，我决定在剩下的5周左右的时间内尝试写一篇，尽可能重用《On Lisp》的部分，我能够毫无察觉地延迟回答&amp;quot;是的，我想是的。我几天内给你一些东西阅读。&amp;quot;&lt;/p&gt;
 &lt;p&gt;我选择了continuations的应用作为主题。回想起来我应该写关于宏和嵌入式语言。那里有一个几乎未被探索的整个世界。但我只想离开研究生院，我快速写的论文足够了，勉强而已。&lt;/p&gt;
-&lt;p&gt;与此同时，我在申请艺术学院。我申请了两所：美国的RISD，和佛罗伦萨的Accademia di Belli Arti，因为它是最古老的艺术学校，我想象它会很好。RISD接受了我，而我从未收到Accademia的回音，所以我去了普罗维登斯。&lt;/p&gt;</description></item><item><title>欢迎来到Lisp</title><link>https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id="欢迎来到lisp"&gt;欢迎来到Lisp&lt;/h1&gt;
-&lt;p&gt;本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。&lt;/p&gt;
-&lt;h2 id="21-形式"&gt;2.1 形式&lt;/h2&gt;
-&lt;p&gt;对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&amp;gt;作为toplevel提示符。这就是我们在这里要使用的。&lt;/p&gt;
-&lt;p&gt;最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; 1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。&lt;/p&gt;
-&lt;p&gt;当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在表达式(+ 2 3)中，+被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 + 3，但在Lisp中，我们将+运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(+ 2 3)。这被称为前缀表示法，因为运算符在前。&lt;/p&gt;
-&lt;p&gt;这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用+两次，2 + 3 + 4，而在Lisp中我们只需添加另一个参数：(+ 2 3 4)&lt;/p&gt;
-&lt;p&gt;我们通常使用+的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，+可以接受任意数量的参数，包括无参数：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;9
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4 5)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;14
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (/ (- 7 1) (- 4 2))
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用英语来说，这是七减一，除以四减二。&lt;/p&gt;</description></item><item><title>百年编程语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/hundred/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/hundred/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;与此同时，我在申请艺术学院。我申请了两所：美国的RISD，和佛罗伦萨的Accademia di Belli Arti，因为它是最古老的艺术学校，我想象它会很好。RISD接受了我，而我从未收到Accademia的回音，所以我去了普罗维登斯。&lt;/p&gt;</description></item><item><title>If Lisp is So Great</title><link>https://linguista.cn/person/paul_graham/essays_en/iflisp/</link><pubDate>Thu, 01 May 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/iflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/iflisp/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/iflisp.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/iflisp.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/iflisp.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="if-lisp-is-so-great"&gt;If Lisp is So Great&lt;/h1&gt;
+&lt;p&gt;May 2003&lt;/p&gt;
+&lt;p&gt;If Lisp is so great, why don&amp;rsquo;t more people use it? I was asked this question by a student in the audience at a talk I gave recently. Not for the first time, either.&lt;/p&gt;
+&lt;p&gt;In languages, as in so many things, there&amp;rsquo;s not much correlation between popularity and quality. Why does John Grisham (King of Torts sales rank, 44) outsell Jane Austen (Pride and Prejudice sales rank, 6191)? Would even Grisham claim that it&amp;rsquo;s because he&amp;rsquo;s a better writer?&lt;/p&gt;</description></item><item><title>如果Lisp这么好</title><link>https://linguista.cn/person/paul_graham/essays_zh/iflisp/</link><pubDate>Thu, 01 May 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/iflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/iflisp/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/iflisp.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/iflisp.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/iflisp.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="如果lisp这么好"&gt;如果Lisp这么好&lt;/h1&gt;
+&lt;p&gt;2003年5月&lt;/p&gt;
+&lt;p&gt;如果Lisp这么好，为什么没有更多人使用它？我最近在一次演讲中被听众中的一个学生问到了这个问题。而且不是第一次了。&lt;/p&gt;
+&lt;p&gt;在语言方面，就像在许多事情中一样，流行度和质量之间没有太大关联。为什么约翰·格里沙姆（《诉讼之王》销售排名第44）比简·奥斯汀（《傲慢与偏见》销售排名第6191）卖得更好？即使是格里沙姆会声称这是因为他是更好的作家吗？&lt;/p&gt;
+&lt;p&gt;这是《傲慢与偏见》的第一句话：&amp;ldquo;凡是有钱的单身汉，总想娶位太太，这已经成了一条举世公认的真理。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;举世公认的真理？&amp;rdquo; 对于一个爱情故事的第一句话来说，这些词太长了。&lt;/p&gt;
+&lt;p&gt;就像简·奥斯汀的作品一样，Lisp看起来很难。它的语法，或者说缺乏语法，使它看起来完全不同于大多数人习惯的语言。在学习Lisp之前，我也害怕它。我最近发现了一本1983年的笔记本，我在上面写道：&amp;ldquo;我想我应该学习Lisp，但它看起来太陌生了。&amp;ldquo;幸运的是，我当时19岁，对学习新东西没有太多抵触。我非常无知，学习几乎任何东西都意味着学习新事物。&lt;/p&gt;
+&lt;p&gt;被Lisp吓到的人们编造了其他不使用它的理由。当C是默认语言时，标准的借口是Lisp太慢。现在Lisp方言是可用语言中较快的之一，这个借口已经消失了。现在的标准借口是公开循环的：其他语言更流行。&lt;/p&gt;
+&lt;p&gt;（小心这种推理。它会让你得到Windows。）&lt;/p&gt;
+&lt;p&gt;流行度总是自我延续的，但在编程语言中尤其如此。为流行语言编写的库更多，这使它们更流行。程序经常必须与现有程序一起工作，如果它们用相同的语言编写，这会更容易，所以语言像病毒一样从程序传播到程序。管理者更喜欢流行的语言，因为它们给他们更多对开发者的控制力，开发者可以更容易被替换。&lt;/p&gt;
+&lt;p&gt;确实，如果编程语言都或多或少等价，那么使用除最流行语言之外的任何语言都没有什么理由。但它们并不都等价，差远了。这就是为什么不那么流行的语言，像简·奥斯汀的小说，继续存在的原因。当其他人在阅读最新的约翰·格里沙姆小说时，总会有一小部分人在阅读简·奥斯汀。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;日语翻译 | 罗马尼亚语翻译 | 西班牙语翻译&lt;/em&gt;&lt;/p&gt;</description></item><item><title>The Hundred-Year Language</title><link>https://linguista.cn/person/paul_graham/essays_en/hundred/</link><pubDate>Tue, 01 Apr 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/hundred/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/hundred.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/hundred.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/hundred.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="the-hundred-year-language"&gt;The Hundred-Year Language&lt;/h1&gt;
+&lt;p&gt;April 2003&lt;/p&gt;
+&lt;p&gt;(This essay is derived from a keynote talk at PyCon 2003.)&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s hard to predict what life will be like in a hundred years. There are only a few things we can say with certainty. We know that everyone will drive flying cars, that zoning laws will be relaxed to allow buildings hundreds of stories tall, that it will be dark most of the time, and that women will all be trained in the martial arts. Here I want to zoom in on one detail of this picture. What kind of programming language will they use to write the software controlling those flying cars?&lt;/p&gt;</description></item><item><title>百年编程语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/hundred/</link><pubDate>Tue, 01 Apr 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/hundred/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/hundred.html"
@@ -824,7 +270,25 @@
 &lt;p&gt;&amp;ldquo;essay&amp;quot;这个词来自法语动词&amp;quot;essayer&amp;rdquo;，意思是&amp;quot;尝试&amp;rdquo;。essay在原始意义上是你写来试图弄清楚某些东西的东西。这在软件中也会发生。我认为一些最好的程序是essay，从这个意义上说，作者们在开始时并不知道他们确切地想要写什么。&lt;/p&gt;
 &lt;p&gt;Lisp黑客们已经知道灵活使用数据结构的价值。我们倾向于编写程序的第一版本，使其用列表做所有事情。这些初始版本可能如此惊人地低效，以至于需要conscious努力不去思考它们在做什么，就像，至少对我而言，吃牛排需要conscious努力不去思考它来自哪里。&lt;/p&gt;
 &lt;p&gt;一百年后的程序员最寻找的，最重要的是一种语言，你可以用最少的努力组合成一个令人难以置信的低效版本1程序。至少，这是我们现在会描述的方式。他们会说他们想要一种易于编程的语言。&lt;/p&gt;
-&lt;p&gt;低效的软件并不令人厌恶。令人厌恶的是让程序员做不必要工作的语言。浪费程序员时间是真正的低效，而不是浪费机器时间。随着计算机变得越来越快，这一点会变得越来越清晰。&lt;/p&gt;</description></item><item><title>设计与研究</title><link>https://linguista.cn/person/paul_graham/essays_zh/desres/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/desres/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/desres/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;低效的软件并不令人厌恶。令人厌恶的是让程序员做不必要工作的语言。浪费程序员时间是真正的低效，而不是浪费机器时间。随着计算机变得越来越快，这一点会变得越来越清晰。&lt;/p&gt;</description></item><item><title>Design and Research</title><link>https://linguista.cn/person/paul_graham/essays_en/desres/</link><pubDate>Wed, 01 Jan 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/desres/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/desres/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/desres.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/desres.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/desres.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="design-and-research"&gt;Design and Research&lt;/h1&gt;
+&lt;p&gt;January 2003&lt;/p&gt;
+&lt;p&gt;(This article is derived from a keynote talk at the fall 2002 meeting of NEPLS.)&lt;/p&gt;
+&lt;p&gt;Visitors to this country are often surprised to find that Americans like to begin a conversation by asking &amp;ldquo;what do you do?&amp;rdquo; I&amp;rsquo;ve never liked this question. I&amp;rsquo;ve rarely had a neat answer to it. But I think I have finally solved the problem. Now, when someone asks me what I do, I look them straight in the eye and say &amp;ldquo;I&amp;rsquo;m designing a new dialect of Lisp.&amp;rdquo; I recommend this answer to anyone who doesn&amp;rsquo;t like being asked what they do. The conversation will turn immediately to other topics.&lt;/p&gt;</description></item><item><title>设计与研究</title><link>https://linguista.cn/person/paul_graham/essays_zh/desres/</link><pubDate>Wed, 01 Jan 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/desres/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/desres/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/desres.html"
@@ -885,7 +349,433 @@
 &lt;li&gt;&lt;a href="https://linguista.cn/person/paul_graham/essays_zh/taste/"&gt;制造者的品味&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.cs.kent.ac.uk/people/staff/srk21/research/papers/graham/design_and_research_romanian.pdf"&gt;罗马尼亚语翻译&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.barrahome.org/blog/articulos/diseno_e_investigacion"&gt;西班牙语翻译&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>超越平均水平</title><link>https://linguista.cn/person/paul_graham/essays_zh/avg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/avg/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/avg/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;/ul&gt;</description></item><item><title>Revenge of the Nerds</title><link>https://linguista.cn/person/paul_graham/essays_en/icad/</link><pubDate>Wed, 01 May 2002 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/icad/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/icad/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/icad.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/icad.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/icad.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="revenge-of-the-nerds"&gt;Revenge of the Nerds&lt;/h1&gt;
+&lt;p&gt;Want to start a startup? Get funded by Y Combinator.&lt;/p&gt;
+&lt;p&gt;May 2002&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;We were after the C++ programmers. We managed to drag a lot of them about halfway to Lisp.&amp;rdquo;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Guy Steele, co-author of the Java spec&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the software business there is an ongoing struggle between the pointy-headed academics, and another equally formidable force, the pointy-haired bosses. Everyone knows who the pointy-haired boss is, right? I think most people in the technology world not only recognize this cartoon character, but know the actual person in their company that he is modelled upon.&lt;/p&gt;</description></item><item><title>书呆子的复仇</title><link>https://linguista.cn/person/paul_graham/essays_zh/icad/</link><pubDate>Wed, 01 May 2002 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/icad/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/icad/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/icad.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/icad.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/icad.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="书呆子的复仇"&gt;书呆子的复仇&lt;/h1&gt;
+&lt;p&gt;想要创业？获得Y Combinator的投资。&lt;/p&gt;
+&lt;p&gt;2002年5月&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;我们当时在追逐C++程序员。我们成功地将他们中的许多人拖到了Lisp的路上。&amp;rdquo;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Guy Steele，Java规范合著者&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在软件行业中，一直存在着一场持续的斗争，一方是尖脑袋的学者，另一方是同样强大的力量——尖头发的老板。大家都知道尖头发的老板是谁，对吧？我认为技术界的大多数人不仅认识这个卡通人物，而且知道他们公司中这个人物的原型是谁。&lt;/p&gt;
+&lt;p&gt;尖头发的老板奇迹般地结合了两个各自常见但很少同时出现的品质：(a)他对技术一无所知，(b)他对技术有非常强烈的看法。&lt;/p&gt;
+&lt;p&gt;假设，例如，你需要编写一个软件。尖头发的老板对这个软件应该如何工作一无所知，也无法区分一种编程语言和另一种，但他知道你应该用什么语言来编写它。完全正确。他认为你应该用Java来编写。&lt;/p&gt;
+&lt;p&gt;他为什么这么认为？让我们来看看尖头发的老板的大脑里面在想什么。他在想的大概是这样的。Java是一个标准。我知道它一定是标准，因为我总是在媒体上看到它。既然它是标准，我使用它就不会惹上麻烦。这也意味着总会有很多Java程序员，所以如果现在为我工作的程序员辞职了——为我工作的程序员总是神秘地辞职——我可以很容易地替换他们。&lt;/p&gt;
+&lt;p&gt;嗯，这听起来并不那么不合理。但这一切都基于一个未言明的假设，而这个假设结果是错误的。尖头发的老板认为所有编程语言都差不多是等价的。如果这是真的，那他完全正确。如果所有语言都等价，当然，使用其他人都在使用的语言。&lt;/p&gt;
+&lt;p&gt;但并非所有语言都是等价的，我想我甚至不需要深入它们之间的差异就能向你证明这一点。如果你在1992年问尖头发的老板软件应该用什么语言编写，他会像今天一样毫不犹豫地回答。软件应该用C++编写。但如果所有语言都等价，为什么尖头发的老板的意见会改变？事实上，Java的开发者为什么要费心创建一种新语言？&lt;/p&gt;
+&lt;p&gt;据推测，如果你创建一种新语言，那是因为你认为它在某些方面比人们已有的语言更好。事实上，Gosling在第一份Java白皮书中明确表示，Java被设计用来解决C++的一些问题。所以事情就是这样：语言并不都是等价的。如果你顺着尖头发的老板的大脑思路追踪到Java，然后再回溯Java的历史到它的起源，你最终会得到一个与你开始时的假设相矛盾的想法。&lt;/p&gt;
+&lt;p&gt;那么，谁是对的？James Gosling，还是尖头发的老板？毫不奇怪，Gosling是对的。某些语言对于某些问题来说比其他语言更好。你知道，这引发了一些有趣的问题。Java被设计为在特定问题上比C++更好。什么问题？什么时候Java更好，什么时候C++更好？是否存在某些情况下其他语言比两者都更好？&lt;/p&gt;
+&lt;p&gt;一旦你开始考虑这个问题，你就打开了一个真正的潘多拉盒子。如果尖头发的老板不得不以全部复杂性来思考这个问题，他的大脑会爆炸。只要他认为所有语言都等价，他所要做的就是选择一个似乎最有势头的语言，既然这更多是时尚问题而不是技术问题，即使他也可能得到正确的答案。但如果语言各不相同，他突然必须同时解两个方程，试图在他一无所知的两件事之间找到最佳平衡：解决他需要解决的问题的二十种左右主要语言的相对适用性，以及为每种语言找到程序员、库等的可能性。如果门后是这样的东西，尖头发的老板不想打开它也就不足为奇了。&lt;/p&gt;
+&lt;p&gt;认为所有编程语言都等价的缺点是这不是真的。但优点是它让你的生活简单得多。我认为这是这个想法如此广泛传播的主要原因。这是一个令人舒适的想法。&lt;/p&gt;
+&lt;p&gt;我们知道Java一定相当不错，因为它是酷的、新的编程语言。或者真是如此吗？如果你从远处看编程语言的世界，看起来Java是最新的事物。（从足够远的地方看，你只能看到Sun支付的大型闪烁广告牌。）但如果你近距离观察这个世界，你会发现酷的程度是不同的。在黑客亚文化中，有一种叫做Perl的语言被认为比Java酷得多。例如，Slashdot就是用Perl生成的。我想你不会发现那些家伙使用Java Server Pages。但还有另一种更新的语言叫做Python，它的用户倾向于看不起Perl，还有更多的语言在等待。&lt;/p&gt;
+&lt;p&gt;如果你按顺序看这些语言，Java、Perl、Python，你会注意到一个有趣的模式。至少，如果你是Lisp黑客，你会注意到这种模式。每一种都比前一种更像Lisp。Python甚至复制了许多Lisp黑客认为是错误的特性。你可以将简单的Lisp程序逐行翻译成Python。现在是2002年，编程语言几乎赶上了1958年。&lt;/p&gt;
+&lt;h2 id="追上数学"&gt;追上数学&lt;/h2&gt;
+&lt;p&gt;我的意思是，Lisp是John McCarthy在1958年首次发现的，而流行的编程语言现在才赶上他当时发展的想法。&lt;/p&gt;
+&lt;p&gt;现在，这怎么可能是真的？计算机技术不是变化很快的东西吗？我的意思是，在1958年，计算机是冰箱大小的庞然大物，处理能力相当于手表。怎么可能有那么古老的技术仍然相关，更不用说比最新的发展更优越？&lt;/p&gt;
+&lt;p&gt;我来告诉你原因。这是因为Lisp并不是真正被设计为一种编程语言，至少不是我们今天意义上的编程语言。我们所说的编程语言是我们用来告诉计算机做什么的东西。McCarthy最终确实打算发展这种意义上的编程语言，但我们实际得到的Lisp是基于他作为理论练习所做的另一件事——努力定义一个比图灵机更方便的替代方案。正如McCarthy后来所说，&lt;/p&gt;
+&lt;p&gt;展示Lisp比图灵机更整洁的另一种方法是编写一个通用的Lisp函数，并证明它比通用图灵机的描述更简洁、更易理解。这就是Lisp函数eval&amp;hellip;&amp;hellip;它计算Lisp表达式的值&amp;hellip;&amp;hellip;编写eval需要发明一种表示Lisp函数作为Lisp数据的符号，这种符号是为了论文的目的而设计的，并没有想到它会用来实际表达Lisp程序。&lt;/p&gt;
+&lt;p&gt;接下来发生的事情是，在1958年末的某个时候，Steve Russell，McCarthy的一个研究生，看着这个eval的定义，意识到如果将它翻译成机器语言，结果将是一个Lisp解释器。&lt;/p&gt;
+&lt;p&gt;这在当时是一个很大的惊喜。以下是McCarthy后来在采访中对此的评论：&lt;/p&gt;
+&lt;p&gt;Steve Russell说，看，为什么我不来编程这个eval&amp;hellip;&amp;hellip;，我对他说，呵，呵，你把理论和实践混淆了，这个eval是为了阅读，不是为了计算的。但他还是继续做了。也就是说，他把我论文中的eval编译成[IBM] 704机器码，修复了一些错误，然后将其宣传为Lisp解释器，它确实是。在那时，Lisp基本上就有了今天的形式。&lt;/p&gt;
+&lt;p&gt;所以，我想在几周内，McCarthy发现他的理论练习转变为实际的编程语言——而且是一种比他预期更强大的语言。&lt;/p&gt;
+&lt;p&gt;所以，这个1950年代的语言没有过时的简短解释是它不是技术而是数学，而数学不会过时。将Lisp比较的正确对象不是1950年代的硬件，而是，比如说，快速排序算法，它发现于1960年，至今仍然是最快的通用排序算法。&lt;/p&gt;
+&lt;p&gt;1950年代还有另一种语言幸存下来，Fortran，它代表了语言设计的相反方法。Lisp是一段意想不到地转变为编程语言的理论。Fortran是故意被开发为一种编程语言的，但我们现在认为是一种非常低级的语言。&lt;/p&gt;
+&lt;p&gt;1956年开发的Fortran I语言与现在的Fortran是完全不同的动物。Fortran I基本上是带有数学的汇编语言。在某些方面它比最近的汇编语言功能更弱；例如，没有子程序，只有分支。现在的Fortran可以说更接近Lisp而不是Fortran I。&lt;/p&gt;
+&lt;p&gt;Lisp和Fortran是两个独立进化树的树干，一个根植于数学，一个根植于机器架构。这两棵树从那时起一直在收敛。Lisp开始时很强大，在接下来的二十年里变得快速。所谓的主流语言开始时很快，在接下来的四十年里逐渐变得更强大，直到现在它们中最先进的相当接近Lisp。接近，但仍然缺少一些东西。&lt;/p&gt;
+&lt;h2 id="使lisp不同的东西"&gt;使Lisp不同的东西&lt;/h2&gt;
+&lt;p&gt;当Lisp首次被开发时，它体现了九个新想法。其中一些我们现在认为是理所当然的，其他只在更先进的语言中看到，有两个仍然是Lisp独有的。这九个想法按主流采用的顺序排列，&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;条件语句&lt;/strong&gt;。条件语句是if-then-else结构。我们现在认为这是理所当然的，但Fortran I没有它们。它只有基于底层机器指令的条件goto。&lt;/p&gt;</description></item><item><title>Lisp的不同之处</title><link>https://linguista.cn/person/paul_graham/essays_zh/diff/</link><pubDate>Sat, 01 Dec 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/diff/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/diff/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/diff.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/diff.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/diff.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="lisp的不同之处"&gt;Lisp的不同之处&lt;/h1&gt;
+&lt;p&gt;2001年12月（修订于2002年5月）&lt;/p&gt;
+&lt;p&gt;（本文是回应LL1邮件列表上一些问题而产生的。现在已收录在《书呆子的复仇》中。）&lt;/p&gt;
+&lt;p&gt;当McCarthy在1950年代末设计Lisp时，它是对现有语言的彻底突破，其中最重要的是Fortran。&lt;/p&gt;
+&lt;p&gt;Lisp体现了九个新思想：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;条件语句。&lt;/strong&gt; 条件语句是if-then-else结构。现在我们认为这是理所当然的。它们是McCarthy在开发Lisp过程中发明的。（当时的Fortran只有条件goto，紧密基于底层硬件的分支指令。）McCarthy是Algol委员会的成员，他将条件语句引入Algol，随后传播到大多数其他语言。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;函数类型。&lt;/strong&gt; 在Lisp中，函数是一等对象——它们是一种数据类型，就像整数、字符串等，并且有字面表示，可以存储在变量中，可以作为参数传递，等等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;递归。&lt;/strong&gt; 递归当然在Lisp之前作为数学概念存在，但Lisp是第一个支持递归的编程语言。（可以说这在使函数成为一等对象中是隐含的。）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;变量的新概念。&lt;/strong&gt; 在Lisp中，所有变量实际上都是指针。具有类型的是值，而不是变量，赋值或绑定变量意味着复制指针，而不是它们指向的内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;垃圾回收。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;由表达式组成的程序。&lt;/strong&gt; Lisp程序是表达式的树，每个表达式都返回一个值。（在某些Lisp中，表达式可以返回多个值。）这与Fortran和大多数后续语言形成对比，后者区分表达式和语句。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在Fortran中有这种区别是很自然的，因为（在输入格式为打孔卡的语言中不足为奇）该语言是面向行的。你不能嵌套语句。因此，虽然你需要表达式来进行数学运算，但让其他任何东西返回值都没有意义，因为不可能有任何东西在等待它。&lt;/p&gt;
+&lt;p&gt;随着块结构语言的出现，这个限制消失了，但那时已经太晚了。表达式和语句的区别已经根深蒂固。它从Fortran传播到Algol，然后传播到它们的后代。&lt;/p&gt;
+&lt;p&gt;当一种语言完全由表达式构成时，你可以任意组合表达式。你可以说（使用Arc语法）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(if foo (= x 1) (= x 2))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(= x (if foo 1 2))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="7"&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;符号类型。&lt;/strong&gt; 符号与字符串的不同在于你可以通过比较指针来测试相等性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用符号树表示代码的记号。&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;整个语言始终可用。&lt;/strong&gt; 读取时间、编译时间和运行时间之间没有真正的区别。你可以在读取时编译或运行代码，在编译时读取或运行代码，在运行时读取或编译代码。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在读取时运行代码允许用户重新编程Lisp的语法；在编译时运行代码是宏的基础；在运行时编译是Lisp用作扩展语言的基础，如在Emacs等程序中；在运行时读取使程序能够使用s表达式进行通信，这个想法最近被重新发明为XML。&lt;/p&gt;
+&lt;p&gt;当Lisp首次发明时，所有这些想法都与当时的普通编程实践相去甚远，后者主要由1950年代末可用的硬件决定。&lt;/p&gt;
+&lt;p&gt;随着时间的推移，体现在一系列流行语言中的默认语言逐渐向Lisp演变。1-5现在已经广泛传播。6开始出现在主流中。Python具有7的一种形式，尽管似乎没有任何语法支持它。8（与9一起）是使Lisp宏成为可能的特性，到目前为止仍然是Lisp独有的，也许是因为（a）它需要那些括号，或者同样糟糕的东西，（b）如果你添加这最后的力量增量，你不能再声称发明了一种新语言，而只是设计了一种新的Lisp方言 ;-)&lt;/p&gt;
+&lt;p&gt;虽然对当今的程序员有用，但通过描述Lisp与其他语言采用的随机权宜之计的差异来描述它是很奇怪的。这可能不是McCarthy对它的看法。Lisp不是设计来修复Fortran中的错误；它更像是试图将计算公理化的副产品。&lt;/p&gt;
+&lt;p&gt;相关链接：&lt;/p&gt;</description></item><item><title>What Made Lisp Different</title><link>https://linguista.cn/person/paul_graham/essays_en/diff/</link><pubDate>Sat, 01 Dec 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/diff/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/diff/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/diff.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/diff.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/diff.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="what-made-lisp-different"&gt;What Made Lisp Different&lt;/h1&gt;
+&lt;p&gt;December 2001 (rev. May 2002)&lt;/p&gt;
+&lt;p&gt;(This article came about in response to some questions on the LL1 mailing list. It is now incorporated in Revenge of the Nerds.)&lt;/p&gt;
+&lt;p&gt;When McCarthy designed Lisp in the late 1950s, it was a radical departure from existing languages, the most important of which was Fortran.&lt;/p&gt;</description></item><item><title>Why Arc Isn't Especially Object-Oriented</title><link>https://linguista.cn/person/paul_graham/essays_en/noop/</link><pubDate>Mon, 01 Oct 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/noop/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/noop/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/noop.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/noop.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/noop.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="why-arc-isnt-especially-object-oriented"&gt;Why Arc Isn&amp;rsquo;t Especially Object-Oriented&lt;/h1&gt;
+&lt;p&gt;There is a kind of mania for object-oriented programming at the moment, but some of the smartest programmers I know are some of the least excited about it.&lt;/p&gt;
+&lt;p&gt;My own feeling is that object-oriented programming is a useful technique in some cases, but it isn&amp;rsquo;t something that has to pervade every program you write. You should be able to define new types, but you shouldn&amp;rsquo;t have to express every program as the definition of new types.&lt;/p&gt;</description></item><item><title>为什么 Arc 不是特别面向对象的</title><link>https://linguista.cn/person/paul_graham/essays_zh/noop/</link><pubDate>Mon, 01 Oct 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/noop/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/noop/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/noop.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/noop.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/noop.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="为什么-arc-不是特别面向对象的"&gt;为什么 Arc 不是特别面向对象的&lt;/h1&gt;
+&lt;p&gt;目前有一种对面向对象编程的狂热，但我认识的一些最聪明的程序员是对此最不兴奋的人。&lt;/p&gt;
+&lt;p&gt;我自己的感觉是，面向对象编程在某些情况下是一种有用的技术，但它不是必须渗透到你写的每个程序中的东西。你应该能够定义新类型，但不必将每个程序都表达为新类型的定义。&lt;/p&gt;
+&lt;p&gt;我认为人们喜欢面向对象编程有五个原因，其中三个半是坏的：&lt;/p&gt;
+&lt;p&gt;如果你有一个静态类型的语言，没有词法闭包或宏，面向对象编程是令人兴奋的。在某种程度上，它提供了一种绕过这些限制的方法。（见 Greenspun 第十规则。）&lt;/p&gt;
+&lt;p&gt;面向对象编程在大公司很受欢迎，因为它适合他们编写软件的方式。在大公司，软件往往由大量（且经常变动的）平庸程序员团队编写。面向对象编程对这些程序员施加了一种纪律，防止任何一个人造成太大的损害。代价是产生的代码充满了协议和重复。这对大公司来说不是太高的价格，因为他们的软件无论如何都可能是臃肿和充满重复的。&lt;/p&gt;
+&lt;p&gt;面向对象编程产生了很多看起来像工作的东西。在折叠纸的时代，有一种程序员只会在一页上放五到十行代码，前面是二十行精心格式化的注释。面向对象编程对这些来说就像可卡因：它让你将所有这些脚手架直接整合到源代码中。Lisp 黑客可能通过将符号推到列表上来处理的东西，变成了整个类的文件和方法。所以如果你想说服自己或其他人你正在做很多工作，这是一个好工具。&lt;/p&gt;
+&lt;p&gt;如果语言本身是一个面向对象的程序，它可以被用户扩展。嗯，也许。或者也许你可以通过提供面向对象编程的子概念单点来做得更好。例如，重载本质上并不与类绑定。我们拭目以待。&lt;/p&gt;
+&lt;p&gt;面向对象的抽象很好地映射到某些特定类型程序的领域，比如模拟和 CAD 系统。&lt;/p&gt;
+&lt;p&gt;我个人从来不需要面向对象的抽象。Common Lisp 有一个极其强大的对象系统，我从未使用过一次。我做过很多事情（例如，制作充满闭包的哈希表），这些在较弱的语言中需要面向对象技术，但我从未不得不使用 CLOS。&lt;/p&gt;
+&lt;p&gt;也许我只是很愚蠢，或者只在应用程序的有限子集上工作过。基于自己的编程经验设计语言是有危险的。但放入你从未需要的东西因为它被认为是个好主意似乎更危险。&lt;/p&gt;</description></item><item><title>Being Popular</title><link>https://linguista.cn/person/paul_graham/essays_en/popular/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/popular/"&gt;Chinese Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/popular.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/popular.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/popular.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="being-popular"&gt;Being Popular&lt;/h1&gt;
+&lt;p&gt;May 2001&lt;/p&gt;
+&lt;p&gt;(This article was written as a kind of business plan for a new language. So it is missing (because it takes for granted) the most important feature of a good programming language: very powerful abstractions.)&lt;/p&gt;
+&lt;p&gt;A friend of mine once told an eminent operating systems expert that he wanted to design a really good programming language. The expert told him that it would be a waste of time, that programming languages don&amp;rsquo;t become popular or unpopular based on their merits, and so no matter how good his language was, no one would use it. At least, that was what had happened to the language he had designed.&lt;/p&gt;</description></item><item><title>Five Questions about Language Design</title><link>https://linguista.cn/person/paul_graham/essays_en/langdes/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/langdes/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/langdes.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/langdes.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/langdes.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="five-questions-about-language-design"&gt;Five Questions about Language Design&lt;/h1&gt;
+&lt;p&gt;May 2001&lt;/p&gt;
+&lt;p&gt;(These are some notes I made for a panel discussion on programming language design at MIT on May 10, 2001.)&lt;/p&gt;
+&lt;h2 id="1-programming-languages-are-for-people"&gt;1. Programming Languages Are for People.&lt;/h2&gt;
+&lt;p&gt;Programming languages are how people talk to computers. The computer would be just as happy speaking any language that was unambiguous. The reason we have high level languages is because people can&amp;rsquo;t deal with machine language. The point of programming languages is to prevent our poor frail human brains from being overwhelmed by a mass of detail.&lt;/p&gt;</description></item><item><title>Lisp的根源</title><link>https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/rootsoflisp.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/rootsoflisp.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/rootsoflisp.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="lisp的根源"&gt;Lisp的根源&lt;/h1&gt;
+&lt;p&gt;2001年5月&lt;/p&gt;
+&lt;p&gt;（我写这篇文章是为了帮助自己准确理解McCarthy的发现。你不需要知道这些东西来用Lisp编程，但对于想要理解Lisp本质的人来说——无论是从起源还是语义核心的角度——这应该是有帮助的。Lisp拥有这样一个核心是其区别于其他语言的特征之一，也是为什么与其他语言不同，Lisp有方言的原因。）&lt;/p&gt;
+&lt;p&gt;1960年，John McCarthy发表了一篇非凡的论文，他在编程领域做了类似于欧几里得对几何学所做的事情。他展示了，给定一些简单的操作符和函数表示法，如何构建一个完整的编程语言。他称这种语言为Lisp，即&amp;quot;列表处理&amp;quot;，因为他的一个关键想法是使用一种称为列表的简单数据结构来同时表示代码和数据。&lt;/p&gt;
+&lt;p&gt;值得理解McCarthy的发现，不仅作为计算机史上的里程碑，而且作为我们时代编程发展方向的模型。在我看来，迄今为止有两个真正干净、一致的编程模型：C模型和Lisp模型。这两个模型似乎像是高地，之间是沼泽般的低地。随着计算机变得越来越强大，正在开发的新语言一直在稳步向Lisp模型移动。过去20年来，新编程语言的一个流行配方是采用C计算模型，然后零散地添加从Lisp模型中提取的部分，如运行时类型和垃圾收集。&lt;/p&gt;
+&lt;p&gt;在这篇文章中，我将尝试用最简单的术语解释McCarthy的发现。重点不仅仅是了解某人40年前想出的一个有趣的理论结果，而是展示语言的发展方向。Lisp的不寻常之处——事实上，Lisp的定义性特征——是它可以用自身来编写。要理解McCarthy的意思，我们将追溯他的步骤，将他的数学表示法转换为运行的Common Lisp代码。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;注意：这似乎是一篇较长文章的介绍或摘要。全文可能作为PostScript文件提供，在原始来源中链接为&amp;quot;Complete Article (Postscript)&amp;quot;。&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;相关链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What Made Lisp Different&lt;/li&gt;
+&lt;li&gt;The Code&lt;/li&gt;
+&lt;li&gt;中文翻译&lt;/li&gt;
+&lt;li&gt;日语翻译&lt;/li&gt;
+&lt;li&gt;葡萄牙语翻译&lt;/li&gt;
+&lt;li&gt;韩语翻译&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>The Roots of Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/rootsoflisp/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/rootsoflisp/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/rootsoflisp.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/rootsoflisp.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/rootsoflisp.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="the-roots-of-lisp"&gt;The Roots of Lisp&lt;/h1&gt;
+&lt;p&gt;May 2001&lt;/p&gt;
+&lt;p&gt;(I wrote this article to help myself understand exactly what McCarthy discovered. You don&amp;rsquo;t need to know this stuff to program in Lisp, but it should be helpful to anyone who wants to understand the essence of Lisp — both in the sense of its origins and its semantic core. The fact that it has such a core is one of Lisp&amp;rsquo;s distinguishing features, and the reason why, unlike other languages, Lisp has dialects.)&lt;/p&gt;</description></item><item><title>关于语言设计的五个问题</title><link>https://linguista.cn/person/paul_graham/essays_zh/langdes/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/langdes/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/langdes.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/langdes.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/langdes.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="关于语言设计的五个问题"&gt;关于语言设计的五个问题&lt;/h1&gt;
+&lt;p&gt;2001年5月&lt;/p&gt;
+&lt;p&gt;（这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）&lt;/p&gt;
+&lt;h2 id="1-编程语言是为人设计的"&gt;1. 编程语言是为人设计的。&lt;/h2&gt;
+&lt;p&gt;编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。&lt;/p&gt;
+&lt;p&gt;建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。&lt;/p&gt;
+&lt;p&gt;软件也是如此。设计网络数据路由算法是一个很好的抽象问题，就像设计桥梁。而设计编程语言就像设计椅子：这完全是关于处理人类弱点的问题。&lt;/p&gt;
+&lt;p&gt;我们大多数人都讨厌承认这一点。设计具有数学优雅性的系统对我们大多数人来说比迎合人类弱点听起来更有吸引力。数学优雅确实有作用：某些优雅性使程序更容易理解。但优雅本身不是目的。&lt;/p&gt;
+&lt;p&gt;当我说语言必须设计得适合人类弱点时，我并不是说语言必须为糟糕的程序员设计。事实上我认为你应该为最好的程序员设计，但即使是最好的程序员也有局限性。我认为没有人会喜欢在所有变量都是带整数下标的字母x的语言中编程。&lt;/p&gt;
+&lt;h2 id="2-为自己和你的朋友设计"&gt;2. 为自己和你的朋友设计。&lt;/h2&gt;
+&lt;p&gt;如果你看看编程语言的历史，很多最好的语言都是为其作者自己使用的语言设计的，而很多最差的语言是为其他人使用而设计的。&lt;/p&gt;
+&lt;p&gt;当语言为其他人设计时，总是特定的一群其他人：没有语言设计师聪明的人。所以你得到一种居高临下的语言。Cobol是最极端的例子，但很多语言都充斥着这种精神。&lt;/p&gt;
+&lt;p&gt;这与语言的抽象程度无关。C是相当低级的，但它是为其作者使用而设计的，这就是为什么黑客喜欢它。&lt;/p&gt;
+&lt;p&gt;为糟糕的程序员设计语言的论点是糟糕的程序员比好程序员多。可能是这样。但是那些少数好程序员编写了不成比例的大量软件。&lt;/p&gt;
+&lt;p&gt;我对这个问题很感兴趣，你如何设计一种最好的黑客会喜欢的语言？我碰巧认为这与如何设计一种好的编程语言是同一个问题，但即使不是，它至少是一个有趣的问题。&lt;/p&gt;
+&lt;h2 id="3-给程序员尽可能多的控制权"&gt;3. 给程序员尽可能多的控制权。&lt;/h2&gt;
+&lt;p&gt;许多语言（特别是为其他人设计的语言）都有保姆的态度：它们试图阻止你做它们认为对你不好的事情。我喜欢相反的方法：给程序员尽可能多的控制权。&lt;/p&gt;
+&lt;p&gt;当我第一次学习Lisp时，我最喜欢的是它把我当作平等的伙伴。在我之前学习的其他语言中，有语言本身和用该语言写的我的程序，两者非常分离。但在Lisp中，我编写的函数和宏就像构成语言本身的那些一样。如果我想，我可以重写语言。它有着与开源软件相同的吸引力。&lt;/p&gt;
+&lt;h2 id="4-追求简洁"&gt;4. 追求简洁。&lt;/h2&gt;
+&lt;p&gt;简洁被低估甚至被鄙视。但如果你深入了解黑客的内心，你会发现他们真的很喜欢它。你有多少次听到黑客深情地谈到，比如说，在APL中，他们只需几行代码就能做出惊人的事情？我认为任何真正聪明的人真正喜欢的东西都值得注意。&lt;/p&gt;
+&lt;p&gt;我认为几乎任何能让程序更短的事情都是好的。应该有很多库函数；任何可以隐含的东西都应该；语法应该简洁到极致；甚至事物的名称都应该简短。&lt;/p&gt;
+&lt;p&gt;不仅程序应该简短。手册也应该薄。手册的很大部分被用于澄清、保留、警告和特殊情况。如果你强迫自己缩短手册，在最好的情况下，你会通过修复语言中需要这么多解释的东西来实现。&lt;/p&gt;
+&lt;h2 id="5-承认黑客的本质"&gt;5. 承认黑客的本质。&lt;/h2&gt;
+&lt;p&gt;很多人希望黑客是数学，或者至少是类似自然科学的东西。我认为黑客更像是建筑。建筑与物理学有关，因为建筑师必须设计不会倒塌的建筑，但建筑师的真正目标是建造伟大的建筑，而不是做出关于静力学的发现。&lt;/p&gt;
+&lt;p&gt;黑客喜欢做的是编写伟大的程序。而且我认为，至少在我们自己的心中，我们必须记住，编写伟大的程序是一件令人钦佩的事情，即使这项工作不容易转化为研究论文的传统智力货币。在智力上，设计程序员会喜欢的语言与设计一个包含你可以发表论文的某些想法的糟糕语言同样有价值。&lt;/p&gt;
+&lt;h2 id="开放性问题"&gt;开放性问题&lt;/h2&gt;
+&lt;h3 id="1-如何组织大型库"&gt;1. 如何组织大型库？&lt;/h3&gt;
+&lt;p&gt;库正在成为编程语言越来越重要的组成部分。它们也在变得更大，这可能很危险。如果找到能做你想要的事情的库函数比你自己编写它需要更长的时间，那么所有这些代码只是在让你的手册变厚。（Symbolics手册就是一个例子。）所以我认为我们必须研究组织库的方法。理想的情况是设计它们，使程序员能够猜测哪个库调用会做正确的事情。&lt;/p&gt;
+&lt;h3 id="2-人们真的害怕前缀语法吗"&gt;2. 人们真的害怕前缀语法吗？&lt;/h3&gt;
+&lt;p&gt;这是一个开放性问题，在这个意义上我多年来一直在思考它，但仍然不知道答案。前缀语法对我来说似乎完全自然，可能除了数学。但Lisp不受欢迎可能只是因为它有陌生的语法。如果这是真的，是否要对此做些什么是另一个问题。&lt;/p&gt;
+&lt;h3 id="3-基于服务器的软件需要什么"&gt;3. 基于服务器的软件需要什么？&lt;/h3&gt;
+&lt;p&gt;我认为未来二十年内编写的最令人兴奋的新应用程序中，很多将是基于Web的应用程序，意味着程序位于服务器上并通过Web浏览器与你交谈。而编写这类程序我们可能需要一些新东西。&lt;/p&gt;
+&lt;p&gt;我们需要的一件事是支持基于服务器的应用程序发布的新方式。不像桌面软件那样每年有一两个大的发布版本，基于服务器的应用程序作为一系列小变化发布。你一天可能有五到十个发布版本。而且作为规则，每个人都会总是使用最新版本。&lt;/p&gt;
+&lt;p&gt;你知道你可以设计程序以便调试吗？嗯，基于服务器的软件同样必须设计成可改变的。你必须能够轻松地改变它，或者至少知道什么是小的改变，什么是重大的改变。&lt;/p&gt;
+&lt;p&gt;另一个可能对基于服务器的软件有用的东西，令人惊讶的是，是continuations。在基于Web的软件中，你可以使用类似continuation-passing style的东西来在Web会话本质上无状态的世界中获得子程序的效果。如果不太昂贵，拥有实际的continuations可能是值得的。&lt;/p&gt;
+&lt;h3 id="4-还有什么新的抽象有待发现"&gt;4. 还有什么新的抽象有待发现？&lt;/h3&gt;
+&lt;p&gt;我不确定这个希望有多合理，但我个人真的很想做的一件事是发现一个新的抽象——某种能像拥有一等函数或递归甚至关键字参数那样产生巨大影响的东西。这可能是一个不可能实现的梦想。这些东西并不经常被发现。但我一直在寻找。&lt;/p&gt;</description></item><item><title>如何变得流行</title><link>https://linguista.cn/person/paul_graham/essays_zh/popular/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/popular/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/popular.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/popular.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/popular.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="如何变得流行"&gt;如何变得流行&lt;/h1&gt;
+&lt;p&gt;2001年5月&lt;/p&gt;
+&lt;p&gt;（本文是作为一种新语言的商业计划书而写的。因此它缺少（因为想当然）一个好的编程语言最重要的特征：非常强大的抽象能力。）&lt;/p&gt;
+&lt;p&gt;我有一个朋友曾经告诉一位著名的操作系统专家，他想设计一种真正好的编程语言。专家告诉他，这将是浪费时间，编程语言不会因为其优点而变得流行或不流行，所以无论他的语言有多好，都没人会使用。至少，这是他设计的语言所发生的情况。&lt;/p&gt;
+&lt;p&gt;到底是什么让一种语言变得流行？流行的语言是否配得上它们的流行度？试图定义一个好的编程语言是否值得？你会怎么做？&lt;/p&gt;
+&lt;p&gt;我认为这些问题的答案可以通过观察黑客并了解他们想要什么来找到。编程语言是为黑客而设计的，而编程语言作为编程语言（而不是，比如说，作为指称语义练习或编译器设计练习）是好的，当且仅当黑客喜欢它。&lt;/p&gt;
+&lt;h2 id="1-流行的机制"&gt;1 流行的机制&lt;/h2&gt;
+&lt;p&gt;当然，大多数人在选择编程语言时并不仅仅基于它们的优点。大多数程序员被告知要使用什么语言。然而我认为这些外部因素对编程语言流行度的影响并不像人们有时认为的那么大。我认为更大的问题是黑客对好的编程语言的想法与大多数语言设计者的想法不同。&lt;/p&gt;
+&lt;p&gt;在这两者之间，黑客的意见才是重要的。编程语言不是定理。它们是工具，为人们设计的，必须像鞋子必须为人类的脚设计一样，适合人类的优点和缺点。如果鞋子穿上时夹脚，那它就是一双坏鞋，无论它作为雕塑品多么优雅。&lt;/p&gt;
+&lt;p&gt;可能是大多数程序员无法区分好语言和坏语言。但这与其他工具没有什么不同。这并不意味着尝试设计好语言是浪费时间。专家黑客在看到好语言时能够识别出来，他们会使用它。诚然，专家黑客是极少数，但这个极少数群体编写了所有好的软件，他们的影响力使得其他程序员倾向于使用他们使用的任何语言。通常，这不仅仅是影响，而是命令：专家黑客通常就是那些作为老板或导师告诉其他程序员使用什么语言的人。&lt;/p&gt;
+&lt;p&gt;专家黑客的意见并不是决定编程语言相对流行度的唯一力量——遗留软件（Cobol）和炒作（Ada、Java）也起作用——但我认为它是长期内最强大的力量。考虑到初始的关键质量和足够的时间，编程语言可能会变得与其应得的流行度相当。而流行度进一步将好语言与坏语言分开，因为来自真实用户的反馈总是导致改进。看看任何流行语言在其生命周期中发生了多大变化。Perl和Fortran是极端的例子，但即使是Lisp也发生了很大变化。例如，Lisp 1.5没有宏；这些是后来发展的，在麻省理工学院的黑客花了几年时间使用Lisp编写真实程序之后。[1]&lt;/p&gt;
+&lt;p&gt;所以无论一种语言是否必须好才能流行，我认为一种语言必须流行才能好。它必须保持流行才能保持好。编程语言的工艺水平不会停滞不前。然而我们今天拥有的Lisp几乎与麻省理工学院在1980年代中期的Lisp相同，因为那是Lisp最后一次拥有足够大和要求高的用户群的时候。&lt;/p&gt;
+&lt;p&gt;当然，黑客在使用语言之前必须了解它。他们如何听到？从其他黑客那里。但必须有一些初始的黑客群体使用该语言，其他人才能听到。我想知道这个群体必须多大；多少用户构成关键质量？我随口一说，二十个。如果一种语言有二十个独立的用户，意味着二十个用户自己决定使用它，我会认为它是真实的。&lt;/p&gt;
+&lt;p&gt;达到那里并不容易。如果从零到二十比从二十到一千更难，我不会感到惊讶。获得那初始二十个用户的最好方法可能是使用特洛伊木马：给人们一个他们想要的应用程序，而这个应用程序恰好是用新语言编写的。&lt;/p&gt;
+&lt;h2 id="2-外部因素"&gt;2 外部因素&lt;/h2&gt;
+&lt;p&gt;让我们首先承认一个确实影响编程语言流行度的外部因素。要变得流行，编程语言必须是流行系统的脚本语言。Fortran和Cobol是早期IBM大型机的脚本语言。C是Unix的脚本语言，后来Perl也是。Tcl是Tk的脚本语言。Java和Javascript旨在成为Web浏览器的脚本语言。&lt;/p&gt;
+&lt;p&gt;Lisp不是一个大规模流行的语言，因为它不是大规模流行系统的脚本语言。它保留的流行度可以追溯到1960年代和1970年代，当时它是麻省理工学院的脚本语言。当时的许多伟大程序员都在某个时期与麻省理工学院有关联。在1970年代初期，在C之前，麻省理工学院的Lisp方言MacLisp是严肃黑客想要使用的唯一编程语言之一。&lt;/p&gt;
+&lt;p&gt;今天，Lisp是两个适度流行系统的脚本语言，Emacs和Autocad，因此我怀疑今天大部分Lisp编程都是在Emacs Lisp或AutoLisp中完成的。&lt;/p&gt;
+&lt;p&gt;编程语言不是孤立存在的。Hack是一个及物动词——黑客通常在hack某物——在实践中，语言是相对于它们用来hack的任何东西来评判的。所以如果你想设计一种流行的语言，你要么必须提供比语言更多的东西，要么你必须设计你的语言来取代某个现有系统的脚本语言。&lt;/p&gt;
+&lt;p&gt;Common Lisp不受欢迎的部分原因是因为它是一个孤儿。它确实伴随着一个要hack的系统：Lisp Machine。但Lisp Machines（以及并行计算机）在1980年代被通用处理器日益增长的力量压垮了。如果Common Lisp是Unix的好脚本语言，它可能会保持流行。唉，它是一个非常糟糕的脚本语言。&lt;/p&gt;
+&lt;p&gt;描述这种情况的一种方法是说语言不是根据其自身的优点来评判的。另一种观点是，编程语言除非也是某物的脚本语言，否则就不是真正的编程语言。如果这让人感到意外，这似乎不公平。我认为这并不比期望编程语言有实现更不公平。这只是编程语言的一部分。&lt;/p&gt;
+&lt;p&gt;当然，编程语言需要好的实现，而且这必须是免费的。公司会为软件付费，但个人黑客不会，而你需要吸引的是黑客。&lt;/p&gt;
+&lt;p&gt;语言也需要有一本关于它的书。这本书应该是薄的、写得好的，充满了好的例子。K&amp;amp;R是这里的理想。目前我几乎会说一种语言必须有一本O&amp;rsquo;Reilly出版的书。这正成为对黑客重要性的测试。&lt;/p&gt;
+&lt;p&gt;也应该有在线文档。事实上，书可以作为在线文档开始。但我不认为物理书已经过时了。它们的格式方便，出版商施加的事实审查是一种有用的、虽然不完美的过滤器。书店是学习新语言的最重要地方之一。&lt;/p&gt;
+&lt;h2 id="3-简洁"&gt;3 简洁&lt;/h2&gt;
+&lt;p&gt;假设你能提供任何语言需要的三个东西——一个免费的实现、一本书、以及要hack的东西——你如何制造一种黑客会喜欢的语言？&lt;/p&gt;
+&lt;p&gt;黑客喜欢的一件事是简洁。黑客是懒惰的，与数学家和现代主义建筑师是懒惰的方式相同：他们讨厌任何多余的东西。说一个即将编写程序的黑客基于他必须键入的字符总数来选择使用什么语言，至少是潜意识的，这离真相不远。如果这不是黑客思考的精确方式，语言设计者最好表现得好像是这样。&lt;/p&gt;
+&lt;p&gt;试图用冗长的表达来宠用户，这些表达旨在类似英语，是错误的。Cobol因此缺陷而臭名昭著。黑客会认为被要求写&lt;/p&gt;
+&lt;p&gt;add x to y giving z&lt;/p&gt;
+&lt;p&gt;而不是&lt;/p&gt;
+&lt;p&gt;z = x+y&lt;/p&gt;</description></item><item><title>Beating the Averages</title><link>https://linguista.cn/person/paul_graham/essays_en/avg/</link><pubDate>Sun, 01 Apr 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/avg/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/avg/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/avg.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/avg.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/avg.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="beating-the-averages"&gt;Beating the Averages&lt;/h1&gt;
+&lt;p&gt;Want to start a startup? Get funded by Y Combinator. April 2001, rev. April 2003&lt;/p&gt;
+&lt;p&gt;(This article is derived from a talk given at the 2001 Franz Developer Symposium.)&lt;/p&gt;
+&lt;p&gt;In the summer of 1995, my friend Robert Morris and I started a startup called Viaweb. Our plan was to write software that would let end users build online stores. What was novel about this software, at the time, was that it ran on our server, using ordinary Web pages as the interface.&lt;/p&gt;</description></item><item><title>Lisp for Web-Based Applications</title><link>https://linguista.cn/person/paul_graham/essays_en/lwba/</link><pubDate>Sun, 01 Apr 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/lwba/</guid><description>&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/lwba.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/lwba.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/lwba.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="lisp-for-web-based-applications"&gt;Lisp for Web-Based Applications&lt;/h1&gt;
+&lt;p&gt;After a link to Beating the Averages was posted on slashdot, some readers wanted to hear in more detail about the specific technical advantages we got from using Lisp in Viaweb. For those who are interested, here are some excerpts from a talk I gave in April 2001 at BBN Labs in Cambridge, MA.&lt;/p&gt;</description></item><item><title>基于Web应用的Lisp</title><link>https://linguista.cn/person/paul_graham/essays_zh/lwba/</link><pubDate>Sun, 01 Apr 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/lwba/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/lwba/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/lwba.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/lwba.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/lwba.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="基于web应用的lisp"&gt;基于Web应用的Lisp&lt;/h1&gt;
+&lt;p&gt;在《击败平均值》的链接被发布在slashdot上之后，一些读者希望更详细地了解我们在Viaweb中使用Lisp获得的具体技术优势。对于那些感兴趣的人，以下是我2001年4月在剑桥BBN实验室的演讲节选。&lt;/p&gt;
+&lt;p&gt;BBN演讲节选（ASCII）&lt;/p&gt;</description></item><item><title>超越平均水平</title><link>https://linguista.cn/person/paul_graham/essays_zh/avg/</link><pubDate>Sun, 01 Apr 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/avg/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/avg/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/avg.html"
@@ -934,4 +824,114 @@
 &lt;p&gt;不要担心别人会怎么说。做你认为正确的事情。&lt;/p&gt;
 &lt;p&gt;记住，创业公司的目标是成功。如果使用强大的语言帮助你成功，那就去做吧。&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;这篇文章基于Paul Graham在2001年4月发表的原创作品，讨论了编程语言之间的差异以及它们对创业公司的重要性。&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;em&gt;这篇文章基于Paul Graham在2001年4月发表的原创作品，讨论了编程语言之间的差异以及它们对创业公司的重要性。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>ANSI Common Lisp 简介</title><link>https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/</link><pubDate>Sun, 01 Jan 1995 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="ansi-common-lisp-简介"&gt;ANSI Common Lisp 简介&lt;/h1&gt;
+&lt;p&gt;ANSI Common Lisp 简介&lt;/p&gt;
+&lt;p&gt;（这是Paul Graham的《ANSI Common Lisp》一书的第一章。版权1995年，Prentice-Hall。）&lt;/p&gt;
+&lt;h2 id="介绍"&gt;介绍&lt;/h2&gt;
+&lt;p&gt;John McCarthy和他的学生于1958年开始在第一个Lisp实现上工作。除了Fortran之外，Lisp是仍在使用的最古老的语言。[1] 更值得注意的是，它仍然处于编程语言技术的前沿。了解Lisp的程序员会告诉你，这种语言有某种独特之处。&lt;/p&gt;
+&lt;p&gt;Lisp的独特之处部分在于它被设计为可进化的。你可以使用Lisp来定义新的Lisp操作符。当新的抽象变得流行时（例如面向对象编程），事实证明在Lisp中实现它们总是很容易的。像DNA这样的语言不会过时。&lt;/p&gt;
+&lt;h2 id="新工具"&gt;新工具&lt;/h2&gt;
+&lt;p&gt;为什么学习Lisp？因为它让你做其他语言做不到的事情。如果你只是想写一个返回小于n的数字之和的函数，在Lisp和C中看起来会非常相似：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-lisp" data-lang="lisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;; Lisp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(defun sum (n)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (&lt;span style="color:#66d9ef"&gt;let&lt;/span&gt; ((s &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (dotimes (i n s)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; (incf s i))))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/* C */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;sum&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; n){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i, s &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt;(i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; s &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; i;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;(s);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你只需要做这样的简单事情，你使用哪种语言并不重要。假设相反，你想写一个函数，它接受一个数字n，并返回一个将n加到其参数上的函数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-lisp" data-lang="lisp"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;; Lisp&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(defun addn (n)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;#&amp;#39;&lt;/span&gt;(lambda (x) (&lt;span style="color:#a6e22e"&gt;+&lt;/span&gt; x n)))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;addn在C中是什么样的？你根本写不出来。&lt;/p&gt;
+&lt;p&gt;你可能会想知道，什么时候有人会想做这样的事情？编程语言教会你不要渴望它们不能提供的东西。你必须用一种语言思考才能用其编写程序，很难渴望你无法描述的东西。当我开始编写程序时——使用Basic——我不想念递归，因为我不知道有这样的东西。我用Basic思考。我只能构想迭代算法，为什么要想念递归？&lt;/p&gt;
+&lt;p&gt;如果你不怀念词法闭包（这就是前面例子中制作的东西），暂时相信Lisp程序员一直使用它们。很难找到任何长度的Common Lisp程序不利用闭包。到第112页，你自己也会使用它们。而闭包只是我们在其他语言中找不到的抽象之一。&lt;/p&gt;</description></item><item><title>Introduction to ANSI Common Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/</link><pubDate>Sun, 01 Jan 1995 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/acl1txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/acl1txtt1748944359/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="introduction-to-ansi-common-lisp"&gt;Introduction to ANSI Common Lisp&lt;/h1&gt;
+&lt;p&gt;Introduction to ANSI Common Lisp&lt;/p&gt;
+&lt;p&gt;(This is the first chapter of ANSI Common Lisp, by Paul Graham. Copyright 1995, Prentice-Hall.)&lt;/p&gt;
+&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;John McCarthy and his students began work on the first Lisp implementation in 1958. After Fortran, Lisp is the oldest language still in use. [1] What&amp;rsquo;s more remarkable is that it is still in the forefront of programming language technology. Programmers who know Lisp will tell you, there is something about this language that sets it apart.&lt;/p&gt;</description></item><item><title>Welcome to Lisp</title><link>https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/</link><pubDate>Sun, 01 Jan 1995 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="welcome-to-lisp"&gt;Welcome to Lisp&lt;/h1&gt;
+&lt;p&gt;This chapter aims to get you programming as soon as possible. By the end of it you will know enough Common Lisp to begin writing programs.&lt;/p&gt;
+&lt;h2 id="21-form"&gt;2.1 Form&lt;/h2&gt;
+&lt;p&gt;It is particularly true of Lisp that you learn it by using it, because Lisp is an interactive language. Any Lisp system will include an interactive front-end called the toplevel. You type Lisp expressions into the toplevel, and the system displays their values. Lisp usually displays a prompt to tell you that it&amp;rsquo;s waiting for you to type something. Many implementations of Common Lisp use &amp;gt; as the toplevel prompt. That&amp;rsquo;s what we&amp;rsquo;ll use here.&lt;/p&gt;</description></item><item><title>欢迎来到Lisp</title><link>https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/</link><pubDate>Sun, 01 Jan 1995 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/acl2txtt1748944359/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/acl2txtt1748944359/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="欢迎来到lisp"&gt;欢迎来到Lisp&lt;/h1&gt;
+&lt;p&gt;本章旨在让你尽快开始编程。到本章结束时，你将了解足够的Common Lisp知识来开始编写程序。&lt;/p&gt;
+&lt;h2 id="21-形式"&gt;2.1 形式&lt;/h2&gt;
+&lt;p&gt;对于Lisp来说尤其如此，你通过使用它来学习它，因为Lisp是一种交互式语言。任何Lisp系统都包含一个称为toplevel的交互式前端。你将Lisp表达式输入到toplevel中，系统会显示它们的值。Lisp通常会显示一个提示符来告诉你它在等待你输入内容。许多Common Lisp实现使用&amp;gt;作为toplevel提示符。这就是我们在这里要使用的。&lt;/p&gt;
+&lt;p&gt;最简单的Lisp表达式之一是整数。如果我们在提示符后输入1，&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;1
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;系统将打印它的值，然后是另一个提示符，表示它准备好接受更多输入。在这种情况下，显示的值与我们输入的相同。像1这样的数字被称为求值为自身。&lt;/p&gt;
+&lt;p&gt;当我们输入需要一些工作来求值的表达式时，生活变得更加有趣。例如，如果我们想要将两个数字相加，我们输入类似这样的内容：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在表达式(+ 2 3)中，+被称为运算符，数字2和3被称为参数。在日常生活中，我们会将这个表达式写为2 + 3，但在Lisp中，我们将+运算符放在前面，后面跟着参数，整个表达式用一对括号括起来：(+ 2 3)。这被称为前缀表示法，因为运算符在前。&lt;/p&gt;
+&lt;p&gt;这种写表达式的方式起初可能看起来很奇怪，但实际上这种表示法是Lisp最棒的特点之一。例如，如果我们想要将三个数字相加，在普通表示法中我们必须使用+两次，2 + 3 + 4，而在Lisp中我们只需添加另一个参数：(+ 2 3 4)&lt;/p&gt;
+&lt;p&gt;我们通常使用+的方式是，它必须恰好有两个参数：一个在左边，一个在右边。前缀表示法的灵活性意味着，在Lisp中，+可以接受任意数量的参数，包括无参数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;0
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;9
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (+ 2 3 4 5)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;14
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;因为运算符可以接受不同数量的参数，我们需要括号来表示表达式的开始和结束。表达式可以嵌套。也就是说，表达式中的参数本身可能是复杂的表达式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt; (/ (- 7 1) (- 4 2))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用英语来说，这是七减一，除以四减二。&lt;/p&gt;</description></item><item><title>Progbot</title><link>https://linguista.cn/person/paul_graham/essays_en/progbot/</link><pubDate>Fri, 01 Jan 1993 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_en/progbot/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_zh/progbot/"&gt;中文版本&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/progbot.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/progbot.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/progbot.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="progbot"&gt;Progbot&lt;/h1&gt;
+&lt;p&gt;January 1993 (This essay is from the introduction to On Lisp.)&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s a long-standing principle of programming style that the functional elements of a program should not be too large. If some component of a program grows beyond the stage where it&amp;rsquo;s readily comprehensible, it becomes a mass of complexity which conceals errors as easily as a big city conceals fugitives. Such software will be hard to read, hard to test, and hard to debug.&lt;/p&gt;</description></item><item><title>Progbot</title><link>https://linguista.cn/person/paul_graham/essays_zh/progbot/</link><pubDate>Fri, 01 Jan 1993 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/progbot/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/progbot/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/progbot.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/progbot.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/progbot.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="progbot"&gt;Progbot&lt;/h1&gt;
+&lt;p&gt;1993年1月（本文选自《On Lisp》的引言）&lt;/p&gt;
+&lt;p&gt;编程风格的一个悠久原则是，程序的功能组件不应过大。如果程序的某个组件增长到难以理解的程度，它就会变成一团复杂性，如同大城市隐藏逃犯一样轻易地隐藏错误。这样的软件将难以阅读、难以测试、难以调试。&lt;/p&gt;
+&lt;p&gt;根据这一原则，大程序必须被分割成片段，程序越大，分割得越多。如何分割程序？传统的方法称为自顶向下设计：你说&amp;quot;程序的目的是做这七件事，所以我把它分成七个主要子程序。第一个子程序要做这四件事，所以它又有四个自己的子程序&amp;quot;，依此类推。这个过程持续到整个程序达到适当的粒度级别——每个部分足够大以完成实质性工作，又足够小以作为单个单元被理解。&lt;/p&gt;
+&lt;p&gt;有经验的Lisp程序员以不同的方式分割他们的程序。除了自顶向下设计，他们遵循一个可以称为自底向上设计的原则——改变语言以适应问题。在Lisp中，你不仅向语言的方向编写程序，还向程序的方向构建语言。当你编写程序时，你可能会想&amp;quot;我希望Lisp有这样那样的运算符&amp;quot;。于是你就去写它。之后你意识到使用新的运算符会简化程序另一部分的设计，如此类推。语言和程序共同进化。如同两个交战国家之间的边界，语言和程序之间的边界被绘制和重绘，直到最终沿着山脉和河流——你问题的自然边界——安定下来。最终，你的程序看起来就像语言是为它而设计的。当语言和程序相互适应时，你最终得到的代码是清晰、小型和高效的。&lt;/p&gt;
+&lt;p&gt;值得强调的是，自底向上设计不仅仅意味着以不同的顺序编写相同的程序。当你自底向上工作时，你通常最终会得到不同的程序。你得到的不是单一的、整体的程序，而是一个具有更多抽象运算符的更大语言，以及在其中编写的更小程序。你得到的不是门楣，而是拱门。在典型的代码中，一旦抽象出仅仅是簿记的部分，剩下的内容就短得多；你构建的语言层次越高，从上到下需要走的距离就越短。这带来了几个好处：&lt;/p&gt;
+&lt;p&gt;通过让语言做更多的工作，自底向上设计产生的程序更小、更灵活。较短的程序不必被分成那么多组件，更少的组件意味着更容易阅读或修改的程序。更少的组件也意味着组件之间的连接更少，因此出错的机会更少。正如工业设计师努力减少机器中的运动部件数量一样，有经验的Lisp程序员使用自底向上设计来减少程序的大小和复杂性。&lt;/p&gt;
+&lt;p&gt;自底向上设计促进代码重用。当你编写两个或更多程序时，你为第一个程序编写的许多实用程序在后续程序中也会很有用。一旦你获得了大量的实用程序基础，编写新程序可能只需要从头开始使用原始Lisp所需工作的一小部分。&lt;/p&gt;
+&lt;p&gt;自底向上设计使程序更容易阅读。这种类型的抽象实例要求读者理解通用运算符；功能抽象的实例要求读者理解专用子程序。&lt;/p&gt;
+&lt;p&gt;[1] 因为它使你总是在寻找代码中的模式，自底向上工作有助于澄清你对程序设计的想法。如果程序的两个相距较远的组件在形式上相似，你会注意到这种相似性，并可能以更简单的方式重新设计程序。&lt;/p&gt;
+&lt;p&gt;自底向上设计在Lisp以外的语言中在一定程度上也是可能的。每当看到库函数时，就在进行自底向上设计。然而，Lisp在这方面给你更广泛的能力，增强语言在Lisp风格中起着更大的作用——如此之大，以至于Lisp不仅是一种不同的语言，而是一种完全不同的编程方式。&lt;/p&gt;
+&lt;p&gt;确实，这种开发风格更适合可以由小组编写的程序。然而，同时，它扩展了小组可以做的事情的极限。在《人月神话》中，Frederick Brooks提出程序员小组的生产力不会随着其规模线性增长。随着小组规模的增加，单个程序员的生产力会下降。Lisp编程的经验提出了一种更令人振奋的方式来表述这个定律：随着小组规模的减小，单个程序员的生产力会提高。相对而言，小组获胜只是因为它更小。当小组也利用Lisp使之成为可能的技术时，它可以完全获胜。&lt;/p&gt;
+&lt;p&gt;新：免费下载《On Lisp》。&lt;/p&gt;
+&lt;p&gt;[1] &amp;ldquo;但是如果不理解你所有的新实用程序，没有人能读懂这个程序。&amp;ldquo;要了解为什么这样的陈述通常是错误的，请参见第4.8节。&lt;/p&gt;</description></item></channel></rss>

@@ -1,100 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>语言设计 on Linguista</title><link>https://linguista.cn/tags/%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1/</link><description>Recent content in 语言设计 on Linguista</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://linguista.cn/tags/%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml"/><item><title>关于语言设计的五个问题</title><link>https://linguista.cn/person/paul_graham/essays_zh/langdes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/langdes/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/langdes.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/langdes.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/langdes.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="关于语言设计的五个问题"&gt;关于语言设计的五个问题&lt;/h1&gt;
-&lt;p&gt;2001年5月&lt;/p&gt;
-&lt;p&gt;（这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）&lt;/p&gt;
-&lt;h2 id="1-编程语言是为人设计的"&gt;1. 编程语言是为人设计的。&lt;/h2&gt;
-&lt;p&gt;编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。&lt;/p&gt;
-&lt;p&gt;建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。&lt;/p&gt;
-&lt;p&gt;软件也是如此。设计网络数据路由算法是一个很好的抽象问题，就像设计桥梁。而设计编程语言就像设计椅子：这完全是关于处理人类弱点的问题。&lt;/p&gt;
-&lt;p&gt;我们大多数人都讨厌承认这一点。设计具有数学优雅性的系统对我们大多数人来说比迎合人类弱点听起来更有吸引力。数学优雅确实有作用：某些优雅性使程序更容易理解。但优雅本身不是目的。&lt;/p&gt;
-&lt;p&gt;当我说语言必须设计得适合人类弱点时，我并不是说语言必须为糟糕的程序员设计。事实上我认为你应该为最好的程序员设计，但即使是最好的程序员也有局限性。我认为没有人会喜欢在所有变量都是带整数下标的字母x的语言中编程。&lt;/p&gt;
-&lt;h2 id="2-为自己和你的朋友设计"&gt;2. 为自己和你的朋友设计。&lt;/h2&gt;
-&lt;p&gt;如果你看看编程语言的历史，很多最好的语言都是为其作者自己使用的语言设计的，而很多最差的语言是为其他人使用而设计的。&lt;/p&gt;
-&lt;p&gt;当语言为其他人设计时，总是特定的一群其他人：没有语言设计师聪明的人。所以你得到一种居高临下的语言。Cobol是最极端的例子，但很多语言都充斥着这种精神。&lt;/p&gt;
-&lt;p&gt;这与语言的抽象程度无关。C是相当低级的，但它是为其作者使用而设计的，这就是为什么黑客喜欢它。&lt;/p&gt;
-&lt;p&gt;为糟糕的程序员设计语言的论点是糟糕的程序员比好程序员多。可能是这样。但是那些少数好程序员编写了不成比例的大量软件。&lt;/p&gt;
-&lt;p&gt;我对这个问题很感兴趣，你如何设计一种最好的黑客会喜欢的语言？我碰巧认为这与如何设计一种好的编程语言是同一个问题，但即使不是，它至少是一个有趣的问题。&lt;/p&gt;
-&lt;h2 id="3-给程序员尽可能多的控制权"&gt;3. 给程序员尽可能多的控制权。&lt;/h2&gt;
-&lt;p&gt;许多语言（特别是为其他人设计的语言）都有保姆的态度：它们试图阻止你做它们认为对你不好的事情。我喜欢相反的方法：给程序员尽可能多的控制权。&lt;/p&gt;
-&lt;p&gt;当我第一次学习Lisp时，我最喜欢的是它把我当作平等的伙伴。在我之前学习的其他语言中，有语言本身和用该语言写的我的程序，两者非常分离。但在Lisp中，我编写的函数和宏就像构成语言本身的那些一样。如果我想，我可以重写语言。它有着与开源软件相同的吸引力。&lt;/p&gt;
-&lt;h2 id="4-追求简洁"&gt;4. 追求简洁。&lt;/h2&gt;
-&lt;p&gt;简洁被低估甚至被鄙视。但如果你深入了解黑客的内心，你会发现他们真的很喜欢它。你有多少次听到黑客深情地谈到，比如说，在APL中，他们只需几行代码就能做出惊人的事情？我认为任何真正聪明的人真正喜欢的东西都值得注意。&lt;/p&gt;
-&lt;p&gt;我认为几乎任何能让程序更短的事情都是好的。应该有很多库函数；任何可以隐含的东西都应该；语法应该简洁到极致；甚至事物的名称都应该简短。&lt;/p&gt;
-&lt;p&gt;不仅程序应该简短。手册也应该薄。手册的很大部分被用于澄清、保留、警告和特殊情况。如果你强迫自己缩短手册，在最好的情况下，你会通过修复语言中需要这么多解释的东西来实现。&lt;/p&gt;
-&lt;h2 id="5-承认黑客的本质"&gt;5. 承认黑客的本质。&lt;/h2&gt;
-&lt;p&gt;很多人希望黑客是数学，或者至少是类似自然科学的东西。我认为黑客更像是建筑。建筑与物理学有关，因为建筑师必须设计不会倒塌的建筑，但建筑师的真正目标是建造伟大的建筑，而不是做出关于静力学的发现。&lt;/p&gt;
-&lt;p&gt;黑客喜欢做的是编写伟大的程序。而且我认为，至少在我们自己的心中，我们必须记住，编写伟大的程序是一件令人钦佩的事情，即使这项工作不容易转化为研究论文的传统智力货币。在智力上，设计程序员会喜欢的语言与设计一个包含你可以发表论文的某些想法的糟糕语言同样有价值。&lt;/p&gt;
-&lt;h2 id="开放性问题"&gt;开放性问题&lt;/h2&gt;
-&lt;h3 id="1-如何组织大型库"&gt;1. 如何组织大型库？&lt;/h3&gt;
-&lt;p&gt;库正在成为编程语言越来越重要的组成部分。它们也在变得更大，这可能很危险。如果找到能做你想要的事情的库函数比你自己编写它需要更长的时间，那么所有这些代码只是在让你的手册变厚。（Symbolics手册就是一个例子。）所以我认为我们必须研究组织库的方法。理想的情况是设计它们，使程序员能够猜测哪个库调用会做正确的事情。&lt;/p&gt;
-&lt;h3 id="2-人们真的害怕前缀语法吗"&gt;2. 人们真的害怕前缀语法吗？&lt;/h3&gt;
-&lt;p&gt;这是一个开放性问题，在这个意义上我多年来一直在思考它，但仍然不知道答案。前缀语法对我来说似乎完全自然，可能除了数学。但Lisp不受欢迎可能只是因为它有陌生的语法。如果这是真的，是否要对此做些什么是另一个问题。&lt;/p&gt;
-&lt;h3 id="3-基于服务器的软件需要什么"&gt;3. 基于服务器的软件需要什么？&lt;/h3&gt;
-&lt;p&gt;我认为未来二十年内编写的最令人兴奋的新应用程序中，很多将是基于Web的应用程序，意味着程序位于服务器上并通过Web浏览器与你交谈。而编写这类程序我们可能需要一些新东西。&lt;/p&gt;
-&lt;p&gt;我们需要的一件事是支持基于服务器的应用程序发布的新方式。不像桌面软件那样每年有一两个大的发布版本，基于服务器的应用程序作为一系列小变化发布。你一天可能有五到十个发布版本。而且作为规则，每个人都会总是使用最新版本。&lt;/p&gt;
-&lt;p&gt;你知道你可以设计程序以便调试吗？嗯，基于服务器的软件同样必须设计成可改变的。你必须能够轻松地改变它，或者至少知道什么是小的改变，什么是重大的改变。&lt;/p&gt;
-&lt;p&gt;另一个可能对基于服务器的软件有用的东西，令人惊讶的是，是continuations。在基于Web的软件中，你可以使用类似continuation-passing style的东西来在Web会话本质上无状态的世界中获得子程序的效果。如果不太昂贵，拥有实际的continuations可能是值得的。&lt;/p&gt;
-&lt;h3 id="4-还有什么新的抽象有待发现"&gt;4. 还有什么新的抽象有待发现？&lt;/h3&gt;
-&lt;p&gt;我不确定这个希望有多合理，但我个人真的很想做的一件事是发现一个新的抽象——某种能像拥有一等函数或递归甚至关键字参数那样产生巨大影响的东西。这可能是一个不可能实现的梦想。这些东西并不经常被发现。但我一直在寻找。&lt;/p&gt;</description></item><item><title>如何变得流行</title><link>https://linguista.cn/person/paul_graham/essays_zh/popular/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/popular/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
-&lt;div
- class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
- data-url="https://www.paulgraham.com/popular.html"
-&gt;
- &lt;a
- class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
- href="https://www.paulgraham.com/popular.html"
- target="_blank"
- rel="noopener"
- &gt;
- https://www.paulgraham.com/popular.html
- &lt;/a&gt;
-&lt;/div&gt;
-
-&lt;h1 id="如何变得流行"&gt;如何变得流行&lt;/h1&gt;
-&lt;p&gt;2001年5月&lt;/p&gt;
-&lt;p&gt;（本文是作为一种新语言的商业计划书而写的。因此它缺少（因为想当然）一个好的编程语言最重要的特征：非常强大的抽象能力。）&lt;/p&gt;
-&lt;p&gt;我有一个朋友曾经告诉一位著名的操作系统专家，他想设计一种真正好的编程语言。专家告诉他，这将是浪费时间，编程语言不会因为其优点而变得流行或不流行，所以无论他的语言有多好，都没人会使用。至少，这是他设计的语言所发生的情况。&lt;/p&gt;
-&lt;p&gt;到底是什么让一种语言变得流行？流行的语言是否配得上它们的流行度？试图定义一个好的编程语言是否值得？你会怎么做？&lt;/p&gt;
-&lt;p&gt;我认为这些问题的答案可以通过观察黑客并了解他们想要什么来找到。编程语言是为黑客而设计的，而编程语言作为编程语言（而不是，比如说，作为指称语义练习或编译器设计练习）是好的，当且仅当黑客喜欢它。&lt;/p&gt;
-&lt;h2 id="1-流行的机制"&gt;1 流行的机制&lt;/h2&gt;
-&lt;p&gt;当然，大多数人在选择编程语言时并不仅仅基于它们的优点。大多数程序员被告知要使用什么语言。然而我认为这些外部因素对编程语言流行度的影响并不像人们有时认为的那么大。我认为更大的问题是黑客对好的编程语言的想法与大多数语言设计者的想法不同。&lt;/p&gt;
-&lt;p&gt;在这两者之间，黑客的意见才是重要的。编程语言不是定理。它们是工具，为人们设计的，必须像鞋子必须为人类的脚设计一样，适合人类的优点和缺点。如果鞋子穿上时夹脚，那它就是一双坏鞋，无论它作为雕塑品多么优雅。&lt;/p&gt;
-&lt;p&gt;可能是大多数程序员无法区分好语言和坏语言。但这与其他工具没有什么不同。这并不意味着尝试设计好语言是浪费时间。专家黑客在看到好语言时能够识别出来，他们会使用它。诚然，专家黑客是极少数，但这个极少数群体编写了所有好的软件，他们的影响力使得其他程序员倾向于使用他们使用的任何语言。通常，这不仅仅是影响，而是命令：专家黑客通常就是那些作为老板或导师告诉其他程序员使用什么语言的人。&lt;/p&gt;
-&lt;p&gt;专家黑客的意见并不是决定编程语言相对流行度的唯一力量——遗留软件（Cobol）和炒作（Ada、Java）也起作用——但我认为它是长期内最强大的力量。考虑到初始的关键质量和足够的时间，编程语言可能会变得与其应得的流行度相当。而流行度进一步将好语言与坏语言分开，因为来自真实用户的反馈总是导致改进。看看任何流行语言在其生命周期中发生了多大变化。Perl和Fortran是极端的例子，但即使是Lisp也发生了很大变化。例如，Lisp 1.5没有宏；这些是后来发展的，在麻省理工学院的黑客花了几年时间使用Lisp编写真实程序之后。[1]&lt;/p&gt;
-&lt;p&gt;所以无论一种语言是否必须好才能流行，我认为一种语言必须流行才能好。它必须保持流行才能保持好。编程语言的工艺水平不会停滞不前。然而我们今天拥有的Lisp几乎与麻省理工学院在1980年代中期的Lisp相同，因为那是Lisp最后一次拥有足够大和要求高的用户群的时候。&lt;/p&gt;
-&lt;p&gt;当然，黑客在使用语言之前必须了解它。他们如何听到？从其他黑客那里。但必须有一些初始的黑客群体使用该语言，其他人才能听到。我想知道这个群体必须多大；多少用户构成关键质量？我随口一说，二十个。如果一种语言有二十个独立的用户，意味着二十个用户自己决定使用它，我会认为它是真实的。&lt;/p&gt;
-&lt;p&gt;达到那里并不容易。如果从零到二十比从二十到一千更难，我不会感到惊讶。获得那初始二十个用户的最好方法可能是使用特洛伊木马：给人们一个他们想要的应用程序，而这个应用程序恰好是用新语言编写的。&lt;/p&gt;
-&lt;h2 id="2-外部因素"&gt;2 外部因素&lt;/h2&gt;
-&lt;p&gt;让我们首先承认一个确实影响编程语言流行度的外部因素。要变得流行，编程语言必须是流行系统的脚本语言。Fortran和Cobol是早期IBM大型机的脚本语言。C是Unix的脚本语言，后来Perl也是。Tcl是Tk的脚本语言。Java和Javascript旨在成为Web浏览器的脚本语言。&lt;/p&gt;
-&lt;p&gt;Lisp不是一个大规模流行的语言，因为它不是大规模流行系统的脚本语言。它保留的流行度可以追溯到1960年代和1970年代，当时它是麻省理工学院的脚本语言。当时的许多伟大程序员都在某个时期与麻省理工学院有关联。在1970年代初期，在C之前，麻省理工学院的Lisp方言MacLisp是严肃黑客想要使用的唯一编程语言之一。&lt;/p&gt;
-&lt;p&gt;今天，Lisp是两个适度流行系统的脚本语言，Emacs和Autocad，因此我怀疑今天大部分Lisp编程都是在Emacs Lisp或AutoLisp中完成的。&lt;/p&gt;
-&lt;p&gt;编程语言不是孤立存在的。Hack是一个及物动词——黑客通常在hack某物——在实践中，语言是相对于它们用来hack的任何东西来评判的。所以如果你想设计一种流行的语言，你要么必须提供比语言更多的东西，要么你必须设计你的语言来取代某个现有系统的脚本语言。&lt;/p&gt;
-&lt;p&gt;Common Lisp不受欢迎的部分原因是因为它是一个孤儿。它确实伴随着一个要hack的系统：Lisp Machine。但Lisp Machines（以及并行计算机）在1980年代被通用处理器日益增长的力量压垮了。如果Common Lisp是Unix的好脚本语言，它可能会保持流行。唉，它是一个非常糟糕的脚本语言。&lt;/p&gt;
-&lt;p&gt;描述这种情况的一种方法是说语言不是根据其自身的优点来评判的。另一种观点是，编程语言除非也是某物的脚本语言，否则就不是真正的编程语言。如果这让人感到意外，这似乎不公平。我认为这并不比期望编程语言有实现更不公平。这只是编程语言的一部分。&lt;/p&gt;
-&lt;p&gt;当然，编程语言需要好的实现，而且这必须是免费的。公司会为软件付费，但个人黑客不会，而你需要吸引的是黑客。&lt;/p&gt;
-&lt;p&gt;语言也需要有一本关于它的书。这本书应该是薄的、写得好的，充满了好的例子。K&amp;amp;R是这里的理想。目前我几乎会说一种语言必须有一本O&amp;rsquo;Reilly出版的书。这正成为对黑客重要性的测试。&lt;/p&gt;
-&lt;p&gt;也应该有在线文档。事实上，书可以作为在线文档开始。但我不认为物理书已经过时了。它们的格式方便，出版商施加的事实审查是一种有用的、虽然不完美的过滤器。书店是学习新语言的最重要地方之一。&lt;/p&gt;
-&lt;h2 id="3-简洁"&gt;3 简洁&lt;/h2&gt;
-&lt;p&gt;假设你能提供任何语言需要的三个东西——一个免费的实现、一本书、以及要hack的东西——你如何制造一种黑客会喜欢的语言？&lt;/p&gt;
-&lt;p&gt;黑客喜欢的一件事是简洁。黑客是懒惰的，与数学家和现代主义建筑师是懒惰的方式相同：他们讨厌任何多余的东西。说一个即将编写程序的黑客基于他必须键入的字符总数来选择使用什么语言，至少是潜意识的，这离真相不远。如果这不是黑客思考的精确方式，语言设计者最好表现得好像是这样。&lt;/p&gt;
-&lt;p&gt;试图用冗长的表达来宠用户，这些表达旨在类似英语，是错误的。Cobol因此缺陷而臭名昭著。黑客会认为被要求写&lt;/p&gt;
-&lt;p&gt;add x to y giving z&lt;/p&gt;
-&lt;p&gt;而不是&lt;/p&gt;
-&lt;p&gt;z = x+y&lt;/p&gt;</description></item><item><title>百年编程语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/hundred/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/hundred/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>语言设计 on Linguista</title><link>https://linguista.cn/tags/%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1/</link><description>Recent content in 语言设计 on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Tue, 01 Apr 2003 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1/index.xml" rel="self" type="application/rss+xml"/><item><title>百年编程语言</title><link>https://linguista.cn/person/paul_graham/essays_zh/hundred/</link><pubDate>Tue, 01 Apr 2003 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/hundred/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/hundred/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/hundred.html"
@@ -148,7 +52,7 @@
 &lt;p&gt;&amp;ldquo;essay&amp;quot;这个词来自法语动词&amp;quot;essayer&amp;rdquo;，意思是&amp;quot;尝试&amp;rdquo;。essay在原始意义上是你写来试图弄清楚某些东西的东西。这在软件中也会发生。我认为一些最好的程序是essay，从这个意义上说，作者们在开始时并不知道他们确切地想要写什么。&lt;/p&gt;
 &lt;p&gt;Lisp黑客们已经知道灵活使用数据结构的价值。我们倾向于编写程序的第一版本，使其用列表做所有事情。这些初始版本可能如此惊人地低效，以至于需要conscious努力不去思考它们在做什么，就像，至少对我而言，吃牛排需要conscious努力不去思考它来自哪里。&lt;/p&gt;
 &lt;p&gt;一百年后的程序员最寻找的，最重要的是一种语言，你可以用最少的努力组合成一个令人难以置信的低效版本1程序。至少，这是我们现在会描述的方式。他们会说他们想要一种易于编程的语言。&lt;/p&gt;
-&lt;p&gt;低效的软件并不令人厌恶。令人厌恶的是让程序员做不必要工作的语言。浪费程序员时间是真正的低效，而不是浪费机器时间。随着计算机变得越来越快，这一点会变得越来越清晰。&lt;/p&gt;</description></item><item><title>简洁即力量</title><link>https://linguista.cn/person/paul_graham/essays_zh/power/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/power/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/power/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;低效的软件并不令人厌恶。令人厌恶的是让程序员做不必要工作的语言。浪费程序员时间是真正的低效，而不是浪费机器时间。随着计算机变得越来越快，这一点会变得越来越清晰。&lt;/p&gt;</description></item><item><title>简洁即力量</title><link>https://linguista.cn/person/paul_graham/essays_zh/power/</link><pubDate>Wed, 01 May 2002 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/power/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/power/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
 &lt;div
  class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
  data-url="https://www.paulgraham.com/power.html"
@@ -202,4 +106,100 @@
 &lt;p&gt;我们必须小心区分单行代码的可读性和整个程序的可读性。重要的是后者。我同意Basic的一行代码可能比Lisp的一行代码更易读。但用Basic编写的程序行数会比用Lisp编写的相同程序多（特别是当你进入格林斯彭之地时）。阅读Basic程序的总工作量肯定会更大。总工作量 = 每行工作量 × 行数&lt;/p&gt;
 &lt;p&gt;我不像确信力量与简洁性成正比那样确信可读性与简洁性成正比，但简洁性肯定是可读性的一个因素（在数学意义上；见上面的公式）。所以，说语言的目标是可读性而不是简洁性可能甚至没有意义；这就像说目标是可读性，而不是可读性。&lt;/p&gt;
 &lt;p&gt;每行可读性对第一次遇到语言的用户来说，意味着源代码看起来不具威胁性。所以每行可读性可能是一个好的营销决策，即使它是一个糟糕的设计决策。它与让人们分期付款的非常成功的技术同构：不是用高昂的前期价格吓唬他们，而是告诉他们低月付款。分期付款对买方来说是净亏损，而每行可读性对程序员来说可能也是如此。买方将进行很多很多低月付款；而程序员将阅读很多很多单独可读的行。&lt;/p&gt;
-&lt;p&gt;这种权衡比编程语言更早。如果你习惯于阅读小说和报纸文章，你第一次阅读数学论文的经历可能会令人沮丧。阅读一页可能需要半小时。然而，我很确定符号不是问题，尽管感觉上可能是。数学论文难读是因为思想难。如果你用散文表达相同的思想（正如数学家在发展出简洁的符号之前必须做的那样），它们不会更容易读，因为论文会增长到一本书的大小。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;这种权衡比编程语言更早。如果你习惯于阅读小说和报纸文章，你第一次阅读数学论文的经历可能会令人沮丧。阅读一页可能需要半小时。然而，我很确定符号不是问题，尽管感觉上可能是。数学论文难读是因为思想难。如果你用散文表达相同的思想（正如数学家在发展出简洁的符号之前必须做的那样），它们不会更容易读，因为论文会增长到一本书的大小。&lt;/p&gt;</description></item><item><title>关于语言设计的五个问题</title><link>https://linguista.cn/person/paul_graham/essays_zh/langdes/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/langdes/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/langdes/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/langdes.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/langdes.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/langdes.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="关于语言设计的五个问题"&gt;关于语言设计的五个问题&lt;/h1&gt;
+&lt;p&gt;2001年5月&lt;/p&gt;
+&lt;p&gt;（这些是我在2001年5月10日MIT编程语言设计小组讨论会上所做的笔记。）&lt;/p&gt;
+&lt;h2 id="1-编程语言是为人设计的"&gt;1. 编程语言是为人设计的。&lt;/h2&gt;
+&lt;p&gt;编程语言是人们与计算机交流的方式。计算机对于任何无歧义的语言都会同样满意。我们有高级语言的原因是因为人们无法处理机器语言。编程语言的要点是防止我们可怜脆弱的人类大脑被大量细节所淹没。&lt;/p&gt;
+&lt;p&gt;建筑师知道某些设计问题比其他问题更具个人性。最干净、最抽象的设计问题之一是设计桥梁。在那里，你的工作主要是用最少的材料跨越给定的距离。光谱的另一端是设计椅子。椅子设计师必须花时间思考人类的臀部。&lt;/p&gt;
+&lt;p&gt;软件也是如此。设计网络数据路由算法是一个很好的抽象问题，就像设计桥梁。而设计编程语言就像设计椅子：这完全是关于处理人类弱点的问题。&lt;/p&gt;
+&lt;p&gt;我们大多数人都讨厌承认这一点。设计具有数学优雅性的系统对我们大多数人来说比迎合人类弱点听起来更有吸引力。数学优雅确实有作用：某些优雅性使程序更容易理解。但优雅本身不是目的。&lt;/p&gt;
+&lt;p&gt;当我说语言必须设计得适合人类弱点时，我并不是说语言必须为糟糕的程序员设计。事实上我认为你应该为最好的程序员设计，但即使是最好的程序员也有局限性。我认为没有人会喜欢在所有变量都是带整数下标的字母x的语言中编程。&lt;/p&gt;
+&lt;h2 id="2-为自己和你的朋友设计"&gt;2. 为自己和你的朋友设计。&lt;/h2&gt;
+&lt;p&gt;如果你看看编程语言的历史，很多最好的语言都是为其作者自己使用的语言设计的，而很多最差的语言是为其他人使用而设计的。&lt;/p&gt;
+&lt;p&gt;当语言为其他人设计时，总是特定的一群其他人：没有语言设计师聪明的人。所以你得到一种居高临下的语言。Cobol是最极端的例子，但很多语言都充斥着这种精神。&lt;/p&gt;
+&lt;p&gt;这与语言的抽象程度无关。C是相当低级的，但它是为其作者使用而设计的，这就是为什么黑客喜欢它。&lt;/p&gt;
+&lt;p&gt;为糟糕的程序员设计语言的论点是糟糕的程序员比好程序员多。可能是这样。但是那些少数好程序员编写了不成比例的大量软件。&lt;/p&gt;
+&lt;p&gt;我对这个问题很感兴趣，你如何设计一种最好的黑客会喜欢的语言？我碰巧认为这与如何设计一种好的编程语言是同一个问题，但即使不是，它至少是一个有趣的问题。&lt;/p&gt;
+&lt;h2 id="3-给程序员尽可能多的控制权"&gt;3. 给程序员尽可能多的控制权。&lt;/h2&gt;
+&lt;p&gt;许多语言（特别是为其他人设计的语言）都有保姆的态度：它们试图阻止你做它们认为对你不好的事情。我喜欢相反的方法：给程序员尽可能多的控制权。&lt;/p&gt;
+&lt;p&gt;当我第一次学习Lisp时，我最喜欢的是它把我当作平等的伙伴。在我之前学习的其他语言中，有语言本身和用该语言写的我的程序，两者非常分离。但在Lisp中，我编写的函数和宏就像构成语言本身的那些一样。如果我想，我可以重写语言。它有着与开源软件相同的吸引力。&lt;/p&gt;
+&lt;h2 id="4-追求简洁"&gt;4. 追求简洁。&lt;/h2&gt;
+&lt;p&gt;简洁被低估甚至被鄙视。但如果你深入了解黑客的内心，你会发现他们真的很喜欢它。你有多少次听到黑客深情地谈到，比如说，在APL中，他们只需几行代码就能做出惊人的事情？我认为任何真正聪明的人真正喜欢的东西都值得注意。&lt;/p&gt;
+&lt;p&gt;我认为几乎任何能让程序更短的事情都是好的。应该有很多库函数；任何可以隐含的东西都应该；语法应该简洁到极致；甚至事物的名称都应该简短。&lt;/p&gt;
+&lt;p&gt;不仅程序应该简短。手册也应该薄。手册的很大部分被用于澄清、保留、警告和特殊情况。如果你强迫自己缩短手册，在最好的情况下，你会通过修复语言中需要这么多解释的东西来实现。&lt;/p&gt;
+&lt;h2 id="5-承认黑客的本质"&gt;5. 承认黑客的本质。&lt;/h2&gt;
+&lt;p&gt;很多人希望黑客是数学，或者至少是类似自然科学的东西。我认为黑客更像是建筑。建筑与物理学有关，因为建筑师必须设计不会倒塌的建筑，但建筑师的真正目标是建造伟大的建筑，而不是做出关于静力学的发现。&lt;/p&gt;
+&lt;p&gt;黑客喜欢做的是编写伟大的程序。而且我认为，至少在我们自己的心中，我们必须记住，编写伟大的程序是一件令人钦佩的事情，即使这项工作不容易转化为研究论文的传统智力货币。在智力上，设计程序员会喜欢的语言与设计一个包含你可以发表论文的某些想法的糟糕语言同样有价值。&lt;/p&gt;
+&lt;h2 id="开放性问题"&gt;开放性问题&lt;/h2&gt;
+&lt;h3 id="1-如何组织大型库"&gt;1. 如何组织大型库？&lt;/h3&gt;
+&lt;p&gt;库正在成为编程语言越来越重要的组成部分。它们也在变得更大，这可能很危险。如果找到能做你想要的事情的库函数比你自己编写它需要更长的时间，那么所有这些代码只是在让你的手册变厚。（Symbolics手册就是一个例子。）所以我认为我们必须研究组织库的方法。理想的情况是设计它们，使程序员能够猜测哪个库调用会做正确的事情。&lt;/p&gt;
+&lt;h3 id="2-人们真的害怕前缀语法吗"&gt;2. 人们真的害怕前缀语法吗？&lt;/h3&gt;
+&lt;p&gt;这是一个开放性问题，在这个意义上我多年来一直在思考它，但仍然不知道答案。前缀语法对我来说似乎完全自然，可能除了数学。但Lisp不受欢迎可能只是因为它有陌生的语法。如果这是真的，是否要对此做些什么是另一个问题。&lt;/p&gt;
+&lt;h3 id="3-基于服务器的软件需要什么"&gt;3. 基于服务器的软件需要什么？&lt;/h3&gt;
+&lt;p&gt;我认为未来二十年内编写的最令人兴奋的新应用程序中，很多将是基于Web的应用程序，意味着程序位于服务器上并通过Web浏览器与你交谈。而编写这类程序我们可能需要一些新东西。&lt;/p&gt;
+&lt;p&gt;我们需要的一件事是支持基于服务器的应用程序发布的新方式。不像桌面软件那样每年有一两个大的发布版本，基于服务器的应用程序作为一系列小变化发布。你一天可能有五到十个发布版本。而且作为规则，每个人都会总是使用最新版本。&lt;/p&gt;
+&lt;p&gt;你知道你可以设计程序以便调试吗？嗯，基于服务器的软件同样必须设计成可改变的。你必须能够轻松地改变它，或者至少知道什么是小的改变，什么是重大的改变。&lt;/p&gt;
+&lt;p&gt;另一个可能对基于服务器的软件有用的东西，令人惊讶的是，是continuations。在基于Web的软件中，你可以使用类似continuation-passing style的东西来在Web会话本质上无状态的世界中获得子程序的效果。如果不太昂贵，拥有实际的continuations可能是值得的。&lt;/p&gt;
+&lt;h3 id="4-还有什么新的抽象有待发现"&gt;4. 还有什么新的抽象有待发现？&lt;/h3&gt;
+&lt;p&gt;我不确定这个希望有多合理，但我个人真的很想做的一件事是发现一个新的抽象——某种能像拥有一等函数或递归甚至关键字参数那样产生巨大影响的东西。这可能是一个不可能实现的梦想。这些东西并不经常被发现。但我一直在寻找。&lt;/p&gt;</description></item><item><title>如何变得流行</title><link>https://linguista.cn/person/paul_graham/essays_zh/popular/</link><pubDate>Tue, 01 May 2001 00:00:00 +0800</pubDate><guid>https://linguista.cn/person/paul_graham/essays_zh/popular/</guid><description>&lt;p&gt;→ &lt;a href="https://linguista.cn/person/paul_graham/essays_en/popular/"&gt;English Version&lt;/a&gt;&lt;/p&gt;
+&lt;div
+ class="link-card group relative my-3 w-full overflow-hidden rounded-xl border border-border bg-surface transition-shadow duration-300 hover:shadow-md"
+ data-url="https://www.paulgraham.com/popular.html"
+&gt;
+ &lt;a
+ class="link-card__fallback block px-4 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+ href="https://www.paulgraham.com/popular.html"
+ target="_blank"
+ rel="noopener"
+ &gt;
+ https://www.paulgraham.com/popular.html
+ &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;h1 id="如何变得流行"&gt;如何变得流行&lt;/h1&gt;
+&lt;p&gt;2001年5月&lt;/p&gt;
+&lt;p&gt;（本文是作为一种新语言的商业计划书而写的。因此它缺少（因为想当然）一个好的编程语言最重要的特征：非常强大的抽象能力。）&lt;/p&gt;
+&lt;p&gt;我有一个朋友曾经告诉一位著名的操作系统专家，他想设计一种真正好的编程语言。专家告诉他，这将是浪费时间，编程语言不会因为其优点而变得流行或不流行，所以无论他的语言有多好，都没人会使用。至少，这是他设计的语言所发生的情况。&lt;/p&gt;
+&lt;p&gt;到底是什么让一种语言变得流行？流行的语言是否配得上它们的流行度？试图定义一个好的编程语言是否值得？你会怎么做？&lt;/p&gt;
+&lt;p&gt;我认为这些问题的答案可以通过观察黑客并了解他们想要什么来找到。编程语言是为黑客而设计的，而编程语言作为编程语言（而不是，比如说，作为指称语义练习或编译器设计练习）是好的，当且仅当黑客喜欢它。&lt;/p&gt;
+&lt;h2 id="1-流行的机制"&gt;1 流行的机制&lt;/h2&gt;
+&lt;p&gt;当然，大多数人在选择编程语言时并不仅仅基于它们的优点。大多数程序员被告知要使用什么语言。然而我认为这些外部因素对编程语言流行度的影响并不像人们有时认为的那么大。我认为更大的问题是黑客对好的编程语言的想法与大多数语言设计者的想法不同。&lt;/p&gt;
+&lt;p&gt;在这两者之间，黑客的意见才是重要的。编程语言不是定理。它们是工具，为人们设计的，必须像鞋子必须为人类的脚设计一样，适合人类的优点和缺点。如果鞋子穿上时夹脚，那它就是一双坏鞋，无论它作为雕塑品多么优雅。&lt;/p&gt;
+&lt;p&gt;可能是大多数程序员无法区分好语言和坏语言。但这与其他工具没有什么不同。这并不意味着尝试设计好语言是浪费时间。专家黑客在看到好语言时能够识别出来，他们会使用它。诚然，专家黑客是极少数，但这个极少数群体编写了所有好的软件，他们的影响力使得其他程序员倾向于使用他们使用的任何语言。通常，这不仅仅是影响，而是命令：专家黑客通常就是那些作为老板或导师告诉其他程序员使用什么语言的人。&lt;/p&gt;
+&lt;p&gt;专家黑客的意见并不是决定编程语言相对流行度的唯一力量——遗留软件（Cobol）和炒作（Ada、Java）也起作用——但我认为它是长期内最强大的力量。考虑到初始的关键质量和足够的时间，编程语言可能会变得与其应得的流行度相当。而流行度进一步将好语言与坏语言分开，因为来自真实用户的反馈总是导致改进。看看任何流行语言在其生命周期中发生了多大变化。Perl和Fortran是极端的例子，但即使是Lisp也发生了很大变化。例如，Lisp 1.5没有宏；这些是后来发展的，在麻省理工学院的黑客花了几年时间使用Lisp编写真实程序之后。[1]&lt;/p&gt;
+&lt;p&gt;所以无论一种语言是否必须好才能流行，我认为一种语言必须流行才能好。它必须保持流行才能保持好。编程语言的工艺水平不会停滞不前。然而我们今天拥有的Lisp几乎与麻省理工学院在1980年代中期的Lisp相同，因为那是Lisp最后一次拥有足够大和要求高的用户群的时候。&lt;/p&gt;
+&lt;p&gt;当然，黑客在使用语言之前必须了解它。他们如何听到？从其他黑客那里。但必须有一些初始的黑客群体使用该语言，其他人才能听到。我想知道这个群体必须多大；多少用户构成关键质量？我随口一说，二十个。如果一种语言有二十个独立的用户，意味着二十个用户自己决定使用它，我会认为它是真实的。&lt;/p&gt;
+&lt;p&gt;达到那里并不容易。如果从零到二十比从二十到一千更难，我不会感到惊讶。获得那初始二十个用户的最好方法可能是使用特洛伊木马：给人们一个他们想要的应用程序，而这个应用程序恰好是用新语言编写的。&lt;/p&gt;
+&lt;h2 id="2-外部因素"&gt;2 外部因素&lt;/h2&gt;
+&lt;p&gt;让我们首先承认一个确实影响编程语言流行度的外部因素。要变得流行，编程语言必须是流行系统的脚本语言。Fortran和Cobol是早期IBM大型机的脚本语言。C是Unix的脚本语言，后来Perl也是。Tcl是Tk的脚本语言。Java和Javascript旨在成为Web浏览器的脚本语言。&lt;/p&gt;
+&lt;p&gt;Lisp不是一个大规模流行的语言，因为它不是大规模流行系统的脚本语言。它保留的流行度可以追溯到1960年代和1970年代，当时它是麻省理工学院的脚本语言。当时的许多伟大程序员都在某个时期与麻省理工学院有关联。在1970年代初期，在C之前，麻省理工学院的Lisp方言MacLisp是严肃黑客想要使用的唯一编程语言之一。&lt;/p&gt;
+&lt;p&gt;今天，Lisp是两个适度流行系统的脚本语言，Emacs和Autocad，因此我怀疑今天大部分Lisp编程都是在Emacs Lisp或AutoLisp中完成的。&lt;/p&gt;
+&lt;p&gt;编程语言不是孤立存在的。Hack是一个及物动词——黑客通常在hack某物——在实践中，语言是相对于它们用来hack的任何东西来评判的。所以如果你想设计一种流行的语言，你要么必须提供比语言更多的东西，要么你必须设计你的语言来取代某个现有系统的脚本语言。&lt;/p&gt;
+&lt;p&gt;Common Lisp不受欢迎的部分原因是因为它是一个孤儿。它确实伴随着一个要hack的系统：Lisp Machine。但Lisp Machines（以及并行计算机）在1980年代被通用处理器日益增长的力量压垮了。如果Common Lisp是Unix的好脚本语言，它可能会保持流行。唉，它是一个非常糟糕的脚本语言。&lt;/p&gt;
+&lt;p&gt;描述这种情况的一种方法是说语言不是根据其自身的优点来评判的。另一种观点是，编程语言除非也是某物的脚本语言，否则就不是真正的编程语言。如果这让人感到意外，这似乎不公平。我认为这并不比期望编程语言有实现更不公平。这只是编程语言的一部分。&lt;/p&gt;
+&lt;p&gt;当然，编程语言需要好的实现，而且这必须是免费的。公司会为软件付费，但个人黑客不会，而你需要吸引的是黑客。&lt;/p&gt;
+&lt;p&gt;语言也需要有一本关于它的书。这本书应该是薄的、写得好的，充满了好的例子。K&amp;amp;R是这里的理想。目前我几乎会说一种语言必须有一本O&amp;rsquo;Reilly出版的书。这正成为对黑客重要性的测试。&lt;/p&gt;
+&lt;p&gt;也应该有在线文档。事实上，书可以作为在线文档开始。但我不认为物理书已经过时了。它们的格式方便，出版商施加的事实审查是一种有用的、虽然不完美的过滤器。书店是学习新语言的最重要地方之一。&lt;/p&gt;
+&lt;h2 id="3-简洁"&gt;3 简洁&lt;/h2&gt;
+&lt;p&gt;假设你能提供任何语言需要的三个东西——一个免费的实现、一本书、以及要hack的东西——你如何制造一种黑客会喜欢的语言？&lt;/p&gt;
+&lt;p&gt;黑客喜欢的一件事是简洁。黑客是懒惰的，与数学家和现代主义建筑师是懒惰的方式相同：他们讨厌任何多余的东西。说一个即将编写程序的黑客基于他必须键入的字符总数来选择使用什么语言，至少是潜意识的，这离真相不远。如果这不是黑客思考的精确方式，语言设计者最好表现得好像是这样。&lt;/p&gt;
+&lt;p&gt;试图用冗长的表达来宠用户，这些表达旨在类似英语，是错误的。Cobol因此缺陷而臭名昭著。黑客会认为被要求写&lt;/p&gt;
+&lt;p&gt;add x to y giving z&lt;/p&gt;
+&lt;p&gt;而不是&lt;/p&gt;
+&lt;p&gt;z = x+y&lt;/p&gt;</description></item></channel></rss>
