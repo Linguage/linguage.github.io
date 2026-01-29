@@ -440,6 +440,133 @@ function initThemeToggle(){
   }
 }
 
+function anthyleParseDateStr(value){
+  if (!value) return null;
+  const parts = String(value).split('-').map(v => parseInt(v, 10));
+  if (parts.length !== 3 || parts.some(n => !Number.isFinite(n))) return null;
+  return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+}
+
+function anthyleFormatDateStr(date){
+  const y = date.getUTCFullYear();
+  const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const d = String(date.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function anthyleAddDays(date, days){
+  const d = new Date(date.getTime());
+  d.setUTCDate(d.getUTCDate() + days);
+  return d;
+}
+
+function anthyleEnsureTrailingSlash(value){
+  const s = String(value || '');
+  return s.endsWith('/') ? s : `${s}/`;
+}
+
+function anthyleHeatmapLevel(count){
+  const n = Number(count) || 0;
+  if (n <= 0) return 0;
+  if (n <= 3) return 1;
+  if (n <= 9) return 2;
+  if (n <= 19) return 3;
+  return 4;
+}
+
+function initAnthyleHeatmaps(){
+  const roots = Array.from(document.querySelectorAll('[data-heatmap-root]'));
+  if (!roots.length) return;
+
+  roots.forEach(root => {
+    const dataEl = root.querySelector('[data-heatmap-data]');
+    const gridEl = root.querySelector('[data-heatmap-grid]');
+    if (!dataEl || !gridEl) return;
+
+    let payload;
+    try {
+      payload = JSON.parse(dataEl.textContent || '{}');
+    } catch (e) {
+      return;
+    }
+
+    const counts = payload && payload.counts ? payload.counts : {};
+    const pages = payload && payload.pages ? payload.pages : {};
+    const keys = Object.keys(counts);
+    if (!keys.length) return;
+
+    const dates = keys.map(anthyleParseDateStr).filter(Boolean).sort((a, b) => a.getTime() - b.getTime());
+    if (!dates.length) return;
+    const minDate = dates[0];
+    const maxDate = dates[dates.length - 1];
+
+    let start = anthyleAddDays(minDate, 0);
+    while (start.getUTCDay() !== 0) start = anthyleAddDays(start, -1);
+    let end = anthyleAddDays(maxDate, 0);
+    while (end.getUTCDay() !== 6) end = anthyleAddDays(end, 1);
+
+    const base = anthyleEnsureTrailingSlash(root.dataset.heatmapBase || '/');
+    const frag = document.createDocumentFragment();
+    let cursor = start;
+    while (cursor.getTime() <= end.getTime()) {
+      const dateStr = anthyleFormatDateStr(cursor);
+      const count = Number(counts[dateStr] || 0);
+      const level = anthyleHeatmapLevel(count);
+      const title = `${dateStr} (${count})`;
+
+      if (count > 0) {
+        const pageNo = Number(pages[dateStr] || 1);
+        const href = pageNo > 1
+          ? `${base}page/${pageNo}/?d=${encodeURIComponent(dateStr)}`
+          : `${base}?d=${encodeURIComponent(dateStr)}`;
+        const a = document.createElement('a');
+        a.href = href;
+        a.className = `anthyle-heatmap-cell level-${level}`;
+        a.setAttribute('title', title);
+        a.setAttribute('aria-label', title);
+        a.dataset.date = dateStr;
+        frag.appendChild(a);
+      } else {
+        const span = document.createElement('span');
+        span.className = `anthyle-heatmap-cell level-${level} is-empty`;
+        span.setAttribute('title', title);
+        span.setAttribute('aria-hidden', 'true');
+        frag.appendChild(span);
+      }
+
+      cursor = anthyleAddDays(cursor, 1);
+    }
+
+    gridEl.textContent = '';
+    gridEl.appendChild(frag);
+  });
+}
+
+function focusAnthyleHeatmapDate(){
+  let dateStr = '';
+  try {
+    const params = new URLSearchParams(window.location.search);
+    dateStr = params.get('d') || '';
+  } catch (e) {
+    dateStr = '';
+  }
+  if (!dateStr) return;
+
+  const esc = window.CSS && typeof window.CSS.escape === 'function'
+    ? window.CSS.escape(dateStr)
+    : dateStr.replace(/"/g, '\\"');
+  const el = document.querySelector(`.post-card-item[data-date-string="${esc}"]`);
+  if (!el) return;
+
+  try {
+    el.classList.add('heatmap-focus');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => el.classList.remove('heatmap-focus'), 1400);
+  } catch (e) {
+    el.scrollIntoView(true);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initial measurement
   syncHeaderHeightVar();
@@ -470,6 +597,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setupFooterAutoHide();
   // Theme toggle button (light/dark)
   initThemeToggle();
+
+  initAnthyleHeatmaps();
+  focusAnthyleHeatmapDate();
 
   // Home hero search box: redirect to /search/?q=...
   try{
