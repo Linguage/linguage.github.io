@@ -487,6 +487,29 @@ html[data-theme="dark"] .anthyle-heatmap {
   padding: 6px 2px;
 }
 
+/* Dark mode scrollbar for heatmap grid (WebKit) */
+html[data-theme="dark"] .anthyle-heatmap-grid::-webkit-scrollbar {
+  height: 10px;
+}
+html[data-theme="dark"] .anthyle-heatmap-grid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+html[data-theme="dark"] .anthyle-heatmap-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  border: 2px solid rgba(15, 15, 15, 0.7);
+}
+html[data-theme="dark"] .anthyle-heatmap-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+/* Dark mode scrollbar for heatmap grid (Firefox) */
+html[data-theme="dark"] .anthyle-heatmap-grid {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.06);
+}
+
 .anthyle-heatmap-cell {
   width: 12px;
   height: 12px;
