@@ -498,7 +498,7 @@ function initAnthyleHeatmaps(){
 
     const dates = keys.map(anthyleParseDateStr).filter(Boolean).sort((a, b) => a.getTime() - b.getTime());
     if (!dates.length) return;
-    const keepRatio = 0.97;
+    const keepRatio = 0.98;
     const dateStrs = dates.map(anthyleFormatDateStr);
     const totalArticles = dateStrs.reduce((sum, dateStr) => sum + Number(counts[dateStr] || 0), 0);
     const keepArticles = Math.max(1, Math.ceil(totalArticles * keepRatio));
