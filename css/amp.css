@@ -548,6 +548,30 @@ html[data-theme="dark"] .anthyle-heatmap-swatch.level-4 { background: rgba(230, 
 .heatmap-focus {
   outline: 2px solid var(--brand-accent, #0e6a85);
   outline-offset: 2px;
+}
+
+/* Dark mode fallback for auto tabs when Tailwind dark: variants are unavailable */
+html[data-theme="dark"] .auto-tabs-surface {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+html[data-theme="dark"] .auto-tabs-surface .shadow-sm {
+  background-color: #1f2937 !important; /* slate-800 */
+  color: #f8fafc !important;           /* slate-50 */
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) !important;
+}
+html[data-theme="dark"] .auto-tabs-surface button:not(.shadow-sm) {
+  color: #cbd5e1 !important;            /* slate-300 */
+  background: transparent !important;
+}
+html[data-theme="dark"] .auto-tabs-surface button:not(.shadow-sm):hover {
+  color: #f8fafc !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.heatmap-focus {
   border-radius: 16px;
   box-shadow: 0 0 0 6px rgba(14, 106, 133, 0.12);
   scroll-margin-top: calc(var(--theme-header-height, 64px) + 12px);

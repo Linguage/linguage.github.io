@@ -377,6 +377,7 @@ function applyThemePreference(theme){
   } else {
     delete root.dataset.theme;
   }
+  root.classList.toggle('dark', effective === 'dark');
 
   if (manual){
     root.dataset.themeManual = 'true';
@@ -495,35 +496,26 @@ function initAnthyleHeatmaps(){
     const keys = Object.keys(counts);
     if (!keys.length) return;
 
-    const entries = keys.map((dateStr) => {
-      const date = anthyleParseDateStr(dateStr);
-      if (!date) return null;
-      return { date, dateStr, count: Number(counts[dateStr] || 0) };
-    }).filter(Boolean).sort((a, b) => a.date.getTime() - b.date.getTime());
-    if (!entries.length) return;
-
-    const totalPosts = entries.reduce((sum, entry) => sum + entry.count, 0);
-    const cutoffPosts = totalPosts * 0.03;
-    let startIndex = 0;
-    let droppedPosts = 0;
-    while (startIndex < entries.length - 1 && droppedPosts + entries[startIndex].count <= cutoffPosts) {
-      droppedPosts += entries[startIndex].count;
-      startIndex += 1;
+    const dates = keys.map(anthyleParseDateStr).filter(Boolean).sort((a, b) => a.getTime() - b.getTime());
+    if (!dates.length) return;
+    const keepRatio = 0.97;
+    const dateStrs = dates.map(anthyleFormatDateStr);
+    const totalArticles = dateStrs.reduce((sum, dateStr) => sum + Number(counts[dateStr] || 0), 0);
+    const keepArticles = Math.max(1, Math.ceil(totalArticles * keepRatio));
+    let dropRemaining = Math.max(0, totalArticles - keepArticles);
+    let minDate = dates[0];
+    if (dropRemaining > 0) {
+      let cumulative = 0;
+      for (let i = 0; i < dates.length; i += 1) {
+        const count = Number(counts[dateStrs[i]] || 0);
+        cumulative += count;
+        if (cumulative >= dropRemaining) {
+          minDate = dates[i];
+          break;
+        }
+      }
     }
-
-    const visibleEntries = entries.slice(startIndex);
-    if (!visibleEntries.length) return;
-    const visibleCounts = {};
-    const visiblePages = {};
-    visibleEntries.forEach((entry) => {
-      visibleCounts[entry.dateStr] = entry.count;
-      if (pages[entry.dateStr]) visiblePages[entry.dateStr] = pages[entry.dateStr];
-    });
-
-    const visibleDates = visibleEntries.map(entry => entry.date);
-    const minDate = visibleDates[0];
-    const maxDate = visibleDates[visibleDates.length - 1];
-    const years = Array.from(new Set(visibleDates.map(date => date.getUTCFullYear()))).sort((a, b) => b - a);
+    const maxDate = dates[dates.length - 1];
 
     let start = anthyleAddDays(minDate, 0);
     while (start.getUTCDay() !== 0) start = anthyleAddDays(start, -1);
@@ -532,21 +524,15 @@ function initAnthyleHeatmaps(){
 
     const base = anthyleEnsureTrailingSlash(root.dataset.heatmapBase || '/');
     const frag = document.createDocumentFragment();
-    const countsForRange = visibleCounts;
-    const pagesForRange = visiblePages;
-    const minTime = minDate.getTime();
-    const maxTime = maxDate.getTime();
-    const yearStarts = new Set();
     let cursor = start;
     while (cursor.getTime() <= end.getTime()) {
       const dateStr = anthyleFormatDateStr(cursor);
-      const count = Number(countsForRange[dateStr] || 0);
+      const count = Number(counts[dateStr] || 0);
       const level = anthyleHeatmapLevel(count);
       const title = `${dateStr} (${count})`;
-      let cell;
 
       if (count > 0) {
-        const pageNo = Number(pagesForRange[dateStr] || 1);
+        const pageNo = Number(pages[dateStr] || 1);
         const href = pageNo > 1
           ? `${base}page/${pageNo}/?d=${encodeURIComponent(dateStr)}`
           : `${base}?d=${encodeURIComponent(dateStr)}`;
@@ -555,92 +541,77 @@ function initAnthyleHeatmaps(){
         a.className = `anthyle-heatmap-cell level-${level}`;
         a.setAttribute('title', title);
         a.setAttribute('aria-label', title);
-        cell = a;
+        a.dataset.date = dateStr;
+        frag.appendChild(a);
       } else {
         const span = document.createElement('span');
         span.className = `anthyle-heatmap-cell level-${level} is-empty`;
         span.setAttribute('title', title);
         span.setAttribute('aria-hidden', 'true');
-        cell = span;
+        span.dataset.date = dateStr;
+        frag.appendChild(span);
       }
-
-      cell.dataset.date = dateStr;
-      const time = cursor.getTime();
-      const year = cursor.getUTCFullYear();
-      if (time >= minTime && time <= maxTime && !yearStarts.has(year)) {
-        cell.dataset.heatmapYearStart = String(year);
-        yearStarts.add(year);
-      }
-      frag.appendChild(cell);
 
       cursor = anthyleAddDays(cursor, 1);
     }
 
     gridEl.textContent = '';
     gridEl.appendChild(frag);
-
+    gridEl.style.width = 'max-content';
+    gridEl.style.maxWidth = '100%';
+    root.style.width = 'fit-content';
+    root.style.maxWidth = '100%';
+    const body = root.closest('.anthyle-heatmap-body');
+    if (body) {
+      body.style.width = 'fit-content';
+      body.style.maxWidth = '100%';
+    }
     const shell = root.closest('.anthyle-heatmap-shell');
-    const yearSelect = shell ? shell.querySelector('[data-heatmap-year-select]') : null;
-    const scrollToLatest = (behavior = 'auto') => {
-      try {
-        gridEl.scrollTo({ left: gridEl.scrollWidth, behavior });
-      } catch (e) {
-        gridEl.scrollLeft = gridEl.scrollWidth;
-      }
-    };
-    const scrollToYear = (year) => {
-      const yearStr = String(year);
-      const target = gridEl.querySelector(`[data-heatmap-year-start="${yearStr}"]`);
-      if (!target) return;
-      const left = Math.max(0, target.offsetLeft - 8);
-      try {
-        gridEl.scrollTo({ left, behavior: 'smooth' });
-      } catch (e) {
-        gridEl.scrollLeft = left;
-      }
-    };
-
-    if (yearSelect) {
-      yearSelect.innerHTML = '';
-      const latestOption = document.createElement('option');
-      latestOption.value = 'latest';
-      latestOption.textContent = '最近';
-      yearSelect.appendChild(latestOption);
-
-      const resetOption = document.createElement('option');
-      resetOption.value = 'reset';
-      resetOption.textContent = '重置';
-      yearSelect.appendChild(resetOption);
-
-      years.forEach((year) => {
-        const opt = document.createElement('option');
-        opt.value = String(year);
-        opt.textContent = String(year);
-        yearSelect.appendChild(opt);
-      });
-
-      yearSelect.value = 'latest';
-      const stopToggle = (event) => event.stopPropagation();
-      yearSelect.addEventListener('click', stopToggle);
-      yearSelect.addEventListener('mousedown', stopToggle);
-      yearSelect.addEventListener('change', () => {
-        const value = yearSelect.value;
-        if (value === 'reset' || value === 'latest') {
-          scrollToLatest('smooth');
-          if (value === 'reset') yearSelect.value = 'latest';
-          return;
-        }
-        scrollToYear(value);
-      });
-    }
-
     if (shell) {
-      shell.addEventListener('toggle', () => {
-        if (!shell.open) return;
-        requestAnimationFrame(() => scrollToLatest('auto'));
-      });
+      shell.style.display = 'inline-block';
+      shell.style.width = 'fit-content';
+      shell.style.maxWidth = '100%';
     }
-    requestAnimationFrame(() => scrollToLatest('auto'));
+
+    const cells = () => Array.from(gridEl.children || []);
+    const getYearByScroll = () => {
+      const list = cells();
+      if (!list.length) return '';
+      const viewportRight = gridEl.scrollLeft + gridEl.clientWidth;
+      let chosen = list[0];
+      for (let i = 0; i < list.length; i += 1) {
+        const el = list[i];
+        const left = el.offsetLeft;
+        const right = left + el.offsetWidth;
+        if (right <= viewportRight + 1) {
+          chosen = el;
+        } else {
+          break;
+        }
+      }
+      const ds = chosen.dataset ? (chosen.dataset.date || '') : '';
+      return ds ? ds.split('-')[0] : '';
+    };
+    const summaryMeta = shell ? shell.querySelector('.anthyle-heatmap-summary-meta') : null;
+    const refreshSummaryYear = () => {
+      if (!summaryMeta) return;
+      const y = getYearByScroll();
+      if (y) summaryMeta.textContent = y;
+    };
+
+    const scrollToLatest = () => {
+      gridEl.scrollLeft = gridEl.scrollWidth;
+      refreshSummaryYear();
+    };
+    const details = root.closest('details');
+    if (details && !details.open) {
+      details.addEventListener('toggle', () => {
+        if (details.open) requestAnimationFrame(scrollToLatest);
+      }, { once: true });
+    }
+    gridEl.addEventListener('scroll', () => requestAnimationFrame(refreshSummaryYear), { passive: true });
+    requestAnimationFrame(scrollToLatest);
+    requestAnimationFrame(refreshSummaryYear);
   });
 }
 
