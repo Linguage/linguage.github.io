@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code Execution on Linguista</title><link>https://linguista.cn/tags/code-execution/</link><description>Recent content in Code Execution on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 28 Jan 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/code-execution/index.xml" rel="self" type="application/rss+xml"/><item><title>Claude API 技能使用</title><link>https://linguista.cn/courses/agent-skills-with-anthropic/07.-skills-with-claude-api/</link><pubDate>Wed, 28 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/courses/agent-skills-with-anthropic/07.-skills-with-claude-api/</guid><description>&lt;h1 id="claude-api-技能使用"&gt;Claude API 技能使用&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本课程深入探讨如何在 Claude Messages API 中使用自定义技能。与 Claude AI 和 Claude Desktop 不同，API 环境需要手动配置代码执行工具和文件 API 才能让技能正常工作。课程通过两个实例演示如何上传技能目录、处理文件输入，并使用沙盒容器执行代码生成输出文件。最后展示了如何组合自定义技能与内置技能（如 docx）来完成复杂任务。&lt;/p&gt;
+&lt;h2 id="要点"&gt;要点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Claude AI 和 Claude Desktop 中的技能不会与 Claude API 共享，API 环境需要手动配置代码执行能力&lt;/li&gt;
+&lt;li&gt;代码执行工具提供隔离的沙盒容器，具备 RAM、磁盘和 CPU 限制，且无互联网连接&lt;/li&gt;
+&lt;li&gt;Files API 用于上传输入文件和下载生成文件，与代码执行工具配合完成技能任务&lt;/li&gt;
+&lt;li&gt;技能通过 &lt;code&gt;container&lt;/code&gt; 参数传递，可指定自定义技能或内置技能，并支持版本控制&lt;/li&gt;
+&lt;li&gt;可以组合多个技能（如自定义时间序列分析技能与内置 docx 技能）来创建复合输出&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;视频信息：&lt;a href="https://learn.deeplearning.ai/courses/agent-skills-with-anthropic/lesson/3sq9za/skills-with-the-claude-api"&gt;Skills with the Claude API&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="中文翻译"&gt;中文翻译&lt;/h2&gt;
+&lt;p&gt;在第一节课中,你看到了技能是如何在 Claude AI 中工作的。现在,我们将使用 Claude API 来测试我们在上一节课中制作的两个技能。要使用 Claude API 的技能,我们需要使用代码执行工具和文件 API。这将为 Claude 配备用于读写文件的文件系统访问权限,以及用于执行代码的 bash。让我们开始吧。&lt;/p&gt;
+&lt;p&gt;我们已经谈论了很多关于技能如何工作以及如何创建它们的内容。我们也稍微谈到了技能在 Claude 生态系统中不同环境之间的可移植性,以及许多其他智能体应用程序。我们从在 Claude AI 和 Claude Desktop 中查看技能开始,现在我们要转而讨论如何使用 Claude Messages API 来使用技能。有两件事需要注意。首先,你在 Claude AI 和 Claude Desktop 中创建的技能不会在 Claude API 或 Claude Code 中共享。第二个重要的部分是,为了让技能工作,我们需要 Claude 具有执行代码、创建和编辑文档、演示文稿、PDF 和数据报告以及使用文件系统的能力。这是我们在使用 Claude API 时必须手动完成的事情。而在使用 Claude AI 和 Claude Desktop 时,这是已经为你配置好的。&lt;/p&gt;</description></item></channel></rss>

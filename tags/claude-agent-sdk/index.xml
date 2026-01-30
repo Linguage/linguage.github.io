@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Claude Agent SDK on Linguista</title><link>https://linguista.cn/tags/claude-agent-sdk/</link><description>Recent content in Claude Agent SDK on Linguista</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 28 Jan 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://linguista.cn/tags/claude-agent-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Agent SDK 的技能</title><link>https://linguista.cn/courses/agent-skills-with-anthropic/09.-skills-with-the-agent-sdk/</link><pubDate>Wed, 28 Jan 2026 00:00:00 +0800</pubDate><guid>https://linguista.cn/courses/agent-skills-with-anthropic/09.-skills-with-the-agent-sdk/</guid><description>&lt;h1 id="使用-agent-sdk-的技能"&gt;使用 Agent SDK 的技能&lt;/h1&gt;
+&lt;h2 id="摘要"&gt;摘要&lt;/h2&gt;
+&lt;p&gt;本课程讲解如何使用 Claude Agent SDK 构建一个研究智能体应用，该应用能够利用技能系统协调多个子智能体，从多个信息源（文档、代码仓库、网络搜索）收集数据并生成结构化的学习指南。课程展示了如何集成 MCP 服务器连接外部服务（如 Notion），以及如何通过技能定义可预测的工作流程和输出格式，最终实现对开源工具的自动化研究和文档生成。&lt;/p&gt;
+&lt;h2 id="要点"&gt;要点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Agent SDK 架构&lt;/strong&gt;：主智能体作为协调者，调度文档研究员、仓库分析器和网络研究员三个子智能体并行工作&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技能系统应用&lt;/strong&gt;：通过 learning-a-tool 技能定义研究方法论、渐进式学习路径和标准化输出格式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MCP 服务器集成&lt;/strong&gt;：使用 Notion MCP 服务器将生成的文档自动写入团队知识库，实现工作流自动化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具权限管理&lt;/strong&gt;：需要在 allowed_tools 中显式声明 Write、Bash、WebSearch、WebFetch 等工具，确保主智能体和子智能体都能正确使用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;渐进式学习路径&lt;/strong&gt;：从概述和动机开始，经过安装、核心概念、实践模式，逐步深入到高级用法和生产级示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;视频信息：&lt;a href="https://learn.deeplearning.ai/courses/agent-skills-with-anthropic/lesson/rmykgh/skills-with-the-claude-agent-sdk"&gt;Skills with the Agent SDK&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="中文翻译"&gt;中文翻译&lt;/h2&gt;
+&lt;p&gt;在最后一节课中，我们将使用 Claude Agent SDK 创建一个研究智能体。该智能体将利用一项技能，基于其文档、GitHub 仓库和网络搜索，为一个开源工具创建学习指南。我们开始吧。既然我们已经看到了如何使用 Messages API 和 Claude Code 在网络上与 Claude 一起使用技能，让我们谈谈如何使用 Claude Agent SDK 使用技能。作为复习，Claude Agent SDK 是一种构建你自己的智能体应用程序的编程方式，它使用了 Claude Code 所使用的相同的内部工具包。&lt;/p&gt;
+&lt;p&gt;我们将在这里构建的是一个通用研究智能体。主智能体将能够从多个来源研究信息并综合成摘要。它将调度三个不同的子智能体，分别用于分析文档、分析和下载仓库，以及通过搜索网络研究信息。让我们来看看这些提示词，然后我们将看看用于指导主智能体进行研究方法以及需要提取和综合什么的技能。&lt;/p&gt;
+&lt;p&gt;首先，我们有我们的主智能体提示词。这是拥有三个可用子智能体访问权限的协调者，这三个子智能体具有以下能力：从文档中查找信息、分析仓库结构、查找文章、视频和社区内容并将它们整合在一起。在这个特定的应用程序中，我们提到如果提供了技能，我们要让它遵循特定的模式。对于我们正在构建的应用程序，可能会提供技能，也可能不提供，但在我们的例子中，我们将提供一个。如果技能与用户的请求匹配，我们需要精确地遵循该技能的说明。&lt;/p&gt;
+&lt;p&gt;由于我们是从头开始构建这个智能体应用程序，我们要非常有意识地处理当提供技能或未提供技能时该做什么。当我们继续时，我们有几个高级委派指南，关于如何生成子智能体以及在收到结果后如何综合所有这些信息片段。让我们简要深入了解一下我们子智能体的一些提示词。对于文档研究员，我们将拥有 WebSearch 和 WebFetch 的访问权限。我们提供了一个定位文档的过程。特定的输入格式、指南以及以某种方式返回发现的输出。&lt;/p&gt;
+&lt;p&gt;对于仓库分析器，我们也提供 WebSearch 来查找仓库，Bash 命令来克隆和运行 git，然后还有读取和查找文件及文件中数据的能力。同样，我们提供了一个过程、输入格式、指南和一个输出。最后，我们的网络研究员也利用了 WebSearch 和 WebFetch。这允许我们搜索与该主题相关的内容，并从主智能体那里接收提取说明。我们也提供了指南以及必要的输出格式，如果没有指定输出格式，则遵循默认结构。当我们设置使我们的智能体工作所需的代码时，所有这些提示词将一起使用。&lt;/p&gt;</description></item></channel></rss>
