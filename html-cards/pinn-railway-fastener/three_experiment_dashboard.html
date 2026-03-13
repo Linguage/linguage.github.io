@@ -1,0 +1,142 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dw{font-family:var(--font-sans);padding:1rem 0}
+.top-bar{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.top-bar label{font-size:13px;color:var(--color-text-secondary)}
+.top-bar input[type=range]{width:200px}
+.top-bar .vl{font-size:13px;font-weight:500;min-width:50px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:12px 14px;border:0.5px solid var(--color-border-tertiary)}
+.card-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.card-sub{font-size:11px;color:var(--color-text-secondary);margin-bottom:8px}
+.cwrap{position:relative;height:200px}
+.metrics-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+.mm{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 8px;text-align:center}
+.mm .ml{font-size:10px;color:var(--color-text-secondary)}
+.mm .mv{font-size:14px;font-weight:500;margin-top:2px}
+.timeline{position:relative;height:180px}
+.tl-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.phase-legend{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--color-text-secondary);flex-wrap:wrap}
+.phase-legend span{display:flex;align-items:center;gap:4px}
+.phase-legend .dot{width:10px;height:10px;border-radius:2px}
+</style>
+<div class="dw">
+<div class="top-bar">
+<label>循环次数 N</label>
+<input type="range" id="sN" min="100" max="3000" step="50" value="1500" oninput="up()">
+<span class="vl" id="vN">1500</span>
+<label>载荷幅值</label>
+<input type="range" id="sP" min="0.5" max="2" step="0.1" value="1.0" oninput="up()">
+<span class="vl" id="vP">1.0×</span>
+</div>
+<div class="metrics-row">
+<div class="mm"><div class="ml">预紧力 F</div><div class="mv" id="mF">--</div></div>
+<div class="mm"><div class="ml">转角 θ</div><div class="mv" id="mT">--</div></div>
+<div class="mm"><div class="ml">摩擦系数 μ</div><div class="mv" id="mU">--</div></div>
+<div class="mm"><div class="ml">磨损量 V_w</div><div class="mv" id="mV">--</div></div>
+<div class="mm"><div class="ml">模量 E</div><div class="mv" id="mE">--</div></div>
+<div class="mm"><div class="ml">损伤 D</div><div class="mv" id="mD">--</div></div>
+</div>
+<div class="grid3">
+<div class="card" style="border-left:3px solid #185FA5;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+<div class="card-title" style="color:#185FA5">螺栓松动</div>
+<div class="card-sub">预紧力 F(N)，累积转角 θ(N)</div>
+<div class="cwrap"><canvas id="c1"></canvas></div>
+</div>
+<div class="card" style="border-left:3px solid #0F6E56;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+<div class="card-title" style="color:#0F6E56">垫层磨损</div>
+<div class="card-sub">摩擦系数 μ(N)，磨损体积 V_w(N)</div>
+<div class="cwrap"><canvas id="c2"></canvas></div>
+</div>
+<div class="card" style="border-left:3px solid #D85A30;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+<div class="card-title" style="color:#D85A30">扣件疲劳</div>
+<div class="card-sub">有效模量 E(N)，损伤 D(N)</div>
+<div class="cwrap"><canvas id="c3"></canvas></div>
+</div>
+</div>
+<div class="tl-label">综合退化指标时间线</div>
+<div class="timeline"><canvas id="c4"></canvas></div>
+<div class="phase-legend">
+<span><span class="dot" style="background:#185FA5"></span>螺栓松动度</span>
+<span><span class="dot" style="background:#0F6E56"></span>垫层磨损度</span>
+<span><span class="dot" style="background:#D85A30"></span>扣件损伤度</span>
+<span><span class="dot" style="background:#534AB7"></span>综合退化指数</span>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dk=matchMedia('(prefers-color-scheme:dark)').matches;
+const gc=dk?'rgba(255,255,255,0.06)':'rgba(0,0,0,0.04)';
+const tc=dk?'#b4b2a9':'#5f5e5a';
+function mkC(id,ds,yAxes){
+return new Chart(document.getElementById(id),{type:'line',data:{labels:[],datasets:ds},
+options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+plugins:{legend:{display:true,labels:{font:{size:10},color:tc,boxWidth:10,padding:6}}},
+scales:{x:{grid:{color:gc},ticks:{color:tc,font:{size:9},maxTicksLimit:6},...(yAxes?{}:{})},
+...(yAxes||{y:{grid:{color:gc},ticks:{color:tc,font:{size:9}}}})}}});
+}
+const y2s={y:{position:'left',grid:{color:gc},ticks:{color:tc,font:{size:9}}},y2:{position:'right',grid:{drawOnChartArea:false},ticks:{color:tc,font:{size:9}}}};
+const ch1=mkC('c1',[
+{label:'F (kN)',data:[],borderColor:'#185FA5',borderWidth:1.5,pointRadius:0,fill:false,yAxisID:'y'},
+{label:'θ (°)',data:[],borderColor:'#85B7EB',borderWidth:1.2,borderDash:[3,2],pointRadius:0,fill:false,yAxisID:'y2'}
+],y2s);
+const ch2=mkC('c2',[
+{label:'μ',data:[],borderColor:'#0F6E56',borderWidth:1.5,pointRadius:0,fill:false,yAxisID:'y'},
+{label:'V_w (mm³)',data:[],borderColor:'#5DCAA5',borderWidth:1.2,borderDash:[3,2],pointRadius:0,fill:false,yAxisID:'y2'}
+],y2s);
+const ch3=mkC('c3',[
+{label:'E (GPa)',data:[],borderColor:'#D85A30',borderWidth:1.5,pointRadius:0,fill:false,yAxisID:'y'},
+{label:'D',data:[],borderColor:'#F0997B',borderWidth:1.2,borderDash:[3,2],pointRadius:0,fill:false,yAxisID:'y2'}
+],{y:{position:'left',grid:{color:gc},ticks:{color:tc,font:{size:9}}},y2:{position:'right',grid:{drawOnChartArea:false},ticks:{color:tc,font:{size:9}},min:0,max:1}});
+const ch4=mkC('c4',[
+{label:'螺栓',data:[],borderColor:'#185FA5',borderWidth:1.5,pointRadius:0,fill:false},
+{label:'垫层',data:[],borderColor:'#0F6E56',borderWidth:1.5,pointRadius:0,fill:false},
+{label:'扣件',data:[],borderColor:'#D85A30',borderWidth:1.5,pointRadius:0,fill:false},
+{label:'综合',data:[],borderColor:'#534AB7',borderWidth:2,pointRadius:0,fill:{target:'origin',above:'rgba(83,74,183,0.08)'},tension:0.3}
+],{y:{grid:{color:gc},ticks:{color:tc,font:{size:9}},min:0,max:1}});
+function up(){
+const Nmax=+document.getElementById('sN').value;
+const P=+document.getElementById('sP').value;
+document.getElementById('vN').textContent=Nmax;
+document.getElementById('vP').textContent=P.toFixed(1)+'×';
+const nPts=80;
+const labels=[],Fd=[],Td=[],Md=[],Vd=[],Ed=[],Dd=[];
+const boltDeg=[],padDeg=[],clipDeg=[],combDeg=[];
+for(let i=0;i<=nPts;i++){
+const n=i*Nmax/nPts;
+labels.push(Math.round(n));
+const F=50*Math.exp(-0.002*P*n);
+const theta=15*(1-Math.exp(-0.003*P*n));
+Fd.push(parseFloat(F.toFixed(1)));
+Td.push(parseFloat(theta.toFixed(2)));
+const mu=0.35+(0.6-0.35)*Math.exp(-0.001*P*n)+0.02*Math.sin(0.01*n);
+const Vw=0.5*P*P*n*0.001*(1+0.3*Math.sqrt(n/Nmax));
+Md.push(parseFloat(mu.toFixed(3)));
+Vd.push(parseFloat(Vw.toFixed(2)));
+const D=1-Math.exp(-0.0005*P*P*n);
+const E=200*(1-D);
+Ed.push(parseFloat(E.toFixed(1)));
+Dd.push(parseFloat(D.toFixed(4)));
+const bd=1-F/50;
+const pd=Math.min(1,Vw/(0.5*P*P*Nmax*0.001*1.3));
+const cd=D;
+boltDeg.push(parseFloat(bd.toFixed(3)));
+padDeg.push(parseFloat(pd.toFixed(3)));
+clipDeg.push(parseFloat(cd.toFixed(3)));
+combDeg.push(parseFloat((0.4*bd+0.3*pd+0.3*cd).toFixed(3)));
+}
+[ch1,ch2,ch3,ch4].forEach(c=>c.data.labels=labels);
+ch1.data.datasets[0].data=Fd;ch1.data.datasets[1].data=Td;ch1.update();
+ch2.data.datasets[0].data=Md;ch2.data.datasets[1].data=Vd;ch2.update();
+ch3.data.datasets[0].data=Ed;ch3.data.datasets[1].data=Dd;ch3.update();
+ch4.data.datasets[0].data=boltDeg;ch4.data.datasets[1].data=padDeg;ch4.data.datasets[2].data=clipDeg;ch4.data.datasets[3].data=combDeg;ch4.update();
+const li=Fd.length-1;
+document.getElementById('mF').textContent=Fd[li]+' kN';
+document.getElementById('mT').textContent=Td[li]+'°';
+document.getElementById('mU').textContent=Md[li];
+document.getElementById('mV').textContent=Vd[li]+' mm³';
+document.getElementById('mE').textContent=Ed[li]+' GPa';
+document.getElementById('mD').textContent=Dd[li];
+}
+up();
+</script>

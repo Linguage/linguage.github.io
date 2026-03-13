@@ -1,0 +1,102 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.bwrap{font-family:var(--font-sans);padding:1rem 0}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin-bottom:16px}
+.ctrl{display:flex;align-items:center;gap:8px}
+.ctrl label{font-size:13px;color:var(--color-text-secondary);min-width:32px}
+.ctrl input[type=range]{flex:1}
+.ctrl .val{font-size:13px;font-weight:500;min-width:48px;text-align:right;color:var(--color-text-primary)}
+.eq-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.eq-box .eq{font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.metric .ml{font-size:12px;color:var(--color-text-secondary)}
+.metric .mv{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-top:2px}
+</style>
+<div class="bwrap">
+<div class="eq-box">
+<div>螺栓松动-摩擦耦合 ODE：</div>
+<div class="eq">ds_slip/dN = (1/α)(μ₀F − M_cr − β·s_slip) &nbsp;&nbsp;... Eq.1</div>
+<div class="eq">dF/dN = −C_decay · F · f_slip(s_slip, P) &nbsp;&nbsp;&nbsp;... Eq.2</div>
+</div>
+<div class="controls">
+<div class="ctrl"><label>α</label><input type="range" id="s-alpha" min="0.5" max="5" step="0.1" value="2.0" oninput="update()"><span class="val" id="v-alpha">2.0</span></div>
+<div class="ctrl"><label>β</label><input type="range" id="s-beta" min="0.01" max="0.5" step="0.01" value="0.1" oninput="update()"><span class="val" id="v-beta">0.10</span></div>
+<div class="ctrl"><label>M_cr</label><input type="range" id="s-mcr" min="0" max="30" step="0.5" value="10" oninput="update()"><span class="val" id="v-mcr">10.0</span></div>
+<div class="ctrl"><label>μ₀</label><input type="range" id="s-mu0" min="0.05" max="0.6" step="0.01" value="0.3" oninput="update()"><span class="val" id="v-mu0">0.30</span></div>
+<div class="ctrl"><label>C_dec</label><input type="range" id="s-cdec" min="0.0001" max="0.01" step="0.0001" value="0.002" oninput="update()"><span class="val" id="v-cdec">0.0020</span></div>
+<div class="ctrl"><label>F₀</label><input type="range" id="s-f0" min="20" max="80" step="1" value="50" oninput="update()"><span class="val" id="v-f0">50</span></div>
+</div>
+<div style="position:relative;width:100%;height:320px"><canvas id="chart1"></canvas></div>
+<div class="metrics">
+<div class="metric"><div class="ml">最终预紧力</div><div class="mv" id="m-fend">--</div></div>
+<div class="metric"><div class="ml">衰减比 F_end/F₀</div><div class="mv" id="m-ratio">--</div></div>
+<div class="metric"><div class="ml">50%衰减循环</div><div class="mv" id="m-half">--</div></div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const ctx=document.getElementById('chart1').getContext('2d');
+const dark=matchMedia('(prefers-color-scheme:dark)').matches;
+const gridC=dark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.06)';
+const txtC=dark?'#c2c0b6':'#5f5e5a';
+const chart=new Chart(ctx,{
+type:'line',
+data:{labels:[],datasets:[
+{label:'预紧力 F(N)',data:[],borderColor:'#185FA5',backgroundColor:'rgba(24,95,165,0.08)',fill:true,pointRadius:0,borderWidth:2,tension:0.3},
+{label:'滑移量 s_slip(N)',data:[],borderColor:'#D85A30',backgroundColor:'transparent',fill:false,pointRadius:0,borderWidth:1.5,borderDash:[4,3],tension:0.3,yAxisID:'y2'}
+]},
+options:{responsive:true,maintainAspectRatio:false,animation:{duration:300},interaction:{mode:'index',intersect:false},
+plugins:{legend:{display:true,labels:{font:{size:12,family:'Anthropic Sans'},color:txtC,boxWidth:14,padding:12}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y.toFixed(2)}}}},
+scales:{x:{title:{display:true,text:'循环次数 N',color:txtC,font:{size:12}},grid:{color:gridC},ticks:{color:txtC,font:{size:11},maxTicksLimit:10}},
+y:{title:{display:true,text:'预紧力 F (kN)',color:txtC,font:{size:12}},grid:{color:gridC},ticks:{color:txtC,font:{size:11}},min:0},
+y2:{position:'right',title:{display:true,text:'滑移量 s_slip',color:txtC,font:{size:12}},grid:{drawOnChartArea:false},ticks:{color:txtC,font:{size:11}},min:0}
+}}
+});
+function solve(){
+const alpha=parseFloat(document.getElementById('s-alpha').value);
+const beta=parseFloat(document.getElementById('s-beta').value);
+const mcr=parseFloat(document.getElementById('s-mcr').value);
+const mu0=parseFloat(document.getElementById('s-mu0').value);
+const cdec=parseFloat(document.getElementById('s-cdec').value);
+const f0=parseFloat(document.getElementById('s-f0').value);
+const N=2000,dt=1;
+let F=f0,s=0;
+const Fs=[F],Ss=[s],Ns=[0];
+for(let i=1;i<=N;i++){
+const driving=mu0*F-mcr-beta*s;
+const ds=driving>0?(1/alpha)*driving*dt:0;
+const fslip=s>0?Math.tanh(s*0.5):0;
+const dF=-cdec*F*fslip*dt;
+s+=ds;F+=dF;
+if(F<0)F=0;
+if(i%10===0){Ns.push(i);Fs.push(F);Ss.push(s)}
+}
+return{Ns,Fs,Ss,Fend:F,f0}
+}
+function update(){
+['alpha','beta','mcr','mu0','cdec','f0'].forEach(k=>{
+const el=document.getElementById('s-'+k.replace('_',''));
+const vel=document.getElementById('v-'+k.replace('_',''));
+const v=parseFloat(el.value);
+if(k==='cdec')vel.textContent=v.toFixed(4);
+else if(k==='beta'||k==='mu0')vel.textContent=v.toFixed(2);
+else if(k==='alpha')vel.textContent=v.toFixed(1);
+else if(k==='mcr')vel.textContent=v.toFixed(1);
+else vel.textContent=Math.round(v);
+});
+const r=solve();
+chart.data.labels=r.Ns;
+chart.data.datasets[0].data=r.Fs;
+chart.data.datasets[1].data=r.Ss;
+chart.update();
+const fend=r.Fend;
+const ratio=fend/r.f0;
+document.getElementById('m-fend').textContent=fend.toFixed(1)+' kN';
+document.getElementById('m-ratio').textContent=(ratio*100).toFixed(1)+'%';
+let halfN='> 2000';
+for(let i=0;i<r.Fs.length;i++){if(r.Fs[i]<=r.f0*0.5){halfN=r.Ns[i].toString();break;}}
+document.getElementById('m-half').textContent=halfN;
+}
+update();
+</script>

@@ -1,0 +1,136 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.tw{font-family:var(--font-sans);padding:1rem 0}
+.desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.6}
+.sliders{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px 24px;margin-bottom:16px}
+.sl{display:flex;flex-direction:column;gap:4px}
+.sl .top{display:flex;justify-content:space-between;font-size:13px}
+.sl .lab{color:var(--color-text-secondary)}
+.sl .vl{font-weight:500}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cw{position:relative;height:260px}
+.cl{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.bar-row{display:flex;gap:12px;margin-top:14px}
+.bar-item{flex:1;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.bar-item .bl{font-size:11px;color:var(--color-text-secondary);margin-bottom:6px}
+.bar-fill{height:8px;border-radius:4px;transition:width .3s}
+.bar-val{font-size:13px;font-weight:500;margin-top:4px}
+.verdict{margin-top:14px;padding:12px 16px;border-radius:var(--border-radius-md);font-size:13px;line-height:1.6;border:0.5px solid var(--color-border-tertiary)}
+</style>
+<div class="tw">
+<div class="desc">调节 λ_data（数据损失权重）和 λ_phys（物理损失权重），观察 PINN 拟合行为的变化。蓝线 = PINN 预测，灰点 = 含噪实验数据，绿虚线 = 真实物理解。</div>
+<div class="sliders">
+<div class="sl"><div class="top"><span class="lab">λ_data</span><span class="vl" id="vd">1.00</span></div><input type="range" id="sd" min="0" max="2" step="0.05" value="1" oninput="up()"></div>
+<div class="sl"><div class="top"><span class="lab">λ_phys</span><span class="vl" id="vp">1.00</span></div><input type="range" id="sp" min="0" max="2" step="0.05" value="1" oninput="up()"></div>
+<div class="sl"><div class="top"><span class="lab">噪声水平</span><span class="vl" id="vn">0.10</span></div><input type="range" id="sn" min="0" max="0.3" step="0.01" value="0.1" oninput="up()"></div>
+</div>
+<div class="charts">
+<div><div class="cl">预紧力衰减曲线拟合</div><div class="cw"><canvas id="c1"></canvas></div></div>
+<div><div class="cl">物理残差 |dF/dN − ODE|</div><div class="cw"><canvas id="c2"></canvas></div></div>
+</div>
+<div class="bar-row">
+<div class="bar-item"><div class="bl">数据拟合误差 (MSE)</div><div class="bar-fill" id="bf1" style="background:#185FA5;width:50%"></div><div class="bar-val" id="bv1">--</div></div>
+<div class="bar-item"><div class="bl">物理一致性误差</div><div class="bar-fill" id="bf2" style="background:#0F6E56;width:50%"></div><div class="bar-val" id="bv2">--</div></div>
+<div class="bar-item"><div class="bl">总损失 L_total</div><div class="bar-fill" id="bf3" style="background:#534AB7;width:50%"></div><div class="bar-val" id="bv3">--</div></div>
+</div>
+<div class="verdict" id="verdict"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dk=matchMedia('(prefers-color-scheme:dark)').matches;
+const gc=dk?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.05)';
+const tc=dk?'#b4b2a9':'#5f5e5a';
+let seed=42;
+function rand(){seed=(seed*16807+0)%2147483647;return(seed-1)/2147483646}
+function trueF(n){return 50*Math.exp(-0.002*n)*(1+0.1*Math.sin(0.01*n))}
+const nPts=50,Nmax=1000;
+let noiseData=[];
+function genNoise(level){
+seed=42;noiseData=[];
+for(let i=0;i<nPts;i++){
+const n=i*Nmax/(nPts-1);
+noiseData.push({x:n,y:trueF(n)+(rand()-0.5)*2*level*50});
+}}
+genNoise(0.1);
+const ch1=new Chart(document.getElementById('c1'),{type:'scatter',data:{datasets:[
+{label:'实验数据',data:[],pointRadius:3,pointBackgroundColor:dk?'#888':'#aaa',pointBorderColor:dk?'#888':'#aaa',showLine:false},
+{label:'真实解',data:[],showLine:true,borderColor:'#0F6E56',borderWidth:1.5,borderDash:[5,3],pointRadius:0,fill:false},
+{label:'PINN 预测',data:[],showLine:true,borderColor:'#185FA5',borderWidth:2,pointRadius:0,fill:false}
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:250},
+plugins:{legend:{display:true,labels:{font:{size:11},color:tc,boxWidth:10}}},
+scales:{x:{title:{display:true,text:'循环次数 N',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}},
+y:{title:{display:true,text:'预紧力 F (kN)',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}},min:0}}}});
+const ch2=new Chart(document.getElementById('c2'),{type:'line',data:{labels:[],datasets:[
+{label:'物理残差',data:[],borderColor:'#E24B4A',borderWidth:1.5,pointRadius:0,fill:{target:'origin',above:'rgba(226,75,74,0.1)'},tension:0.3}
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:250},
+plugins:{legend:{display:false}},
+scales:{x:{title:{display:true,text:'N',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}},
+y:{title:{display:true,text:'|残差|',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}},min:0}}}});
+function up(){
+const ld=+document.getElementById('sd').value;
+const lp=+document.getElementById('sp').value;
+const nl=+document.getElementById('sn').value;
+document.getElementById('vd').textContent=ld.toFixed(2);
+document.getElementById('vp').textContent=lp.toFixed(2);
+document.getElementById('vn').textContent=nl.toFixed(2);
+genNoise(nl);
+const trueD=[],pinnD=[],resD=[],resLab=[];
+const total=ld+lp+0.001;
+const wd=ld/total,wp=lp/total;
+let mseSum=0,physSum=0;
+const nEval=100;
+for(let i=0;i<=nEval;i++){
+const n=i*Nmax/nEval;
+const ft=trueF(n);
+trueD.push({x:n,y:parseFloat(ft.toFixed(2))});
+let pred;
+if(wp<0.05){
+let closest=noiseData[0],minD=1e9;
+for(const p of noiseData){if(Math.abs(p.x-n)<minD){minD=Math.abs(p.x-n);closest=p}}
+const k=0.02;let wSum=0,vSum=0;
+for(const p of noiseData){const w=Math.exp(-k*(p.x-n)*(p.x-n));wSum+=w;vSum+=w*p.y}
+pred=vSum/wSum;
+}else if(wd<0.05){
+pred=ft+(rand()-0.5)*2;
+}else{
+const dataFit=(()=>{const k=0.02;let wS=0,vS=0;for(const p of noiseData){const w=Math.exp(-k*(p.x-n)*(p.x-n));wS+=w;vS+=w*p.y}return vS/wS})();
+pred=wp*ft+wd*dataFit;
+pred+=(rand()-0.5)*0.5*(1-wp);
+}
+pinnD.push({x:n,y:parseFloat(pred.toFixed(2))});
+const trueRate=-0.002*50*Math.exp(-0.002*n)+50*0.001*Math.cos(0.01*n)*Math.exp(-0.002*n);
+let predRate=0;
+if(i>0&&i<nEval){predRate=(pinnD[i].y-pinnD[i-1].y)/(Nmax/nEval)}
+const res=Math.abs(predRate-trueRate);
+if(i>0&&i<nEval){resD.push(parseFloat(res.toFixed(4)));resLab.push(Math.round(n))}
+}
+for(let i=0;i<noiseData.length;i++){
+const n=noiseData[i].x;
+const idx=Math.round(n/Nmax*nEval);
+if(idx<pinnD.length)mseSum+=(noiseData[i].y-pinnD[idx].y)**2;
+}
+mseSum/=noiseData.length;
+physSum=resD.reduce((a,b)=>a+b,0)/resD.length;
+ch1.data.datasets[0].data=noiseData;
+ch1.data.datasets[1].data=trueD;
+ch1.data.datasets[2].data=pinnD;
+ch1.update();
+ch2.data.labels=resLab;
+ch2.data.datasets[0].data=resD;
+ch2.update();
+const maxMse=200,maxPhys=0.3;
+document.getElementById('bf1').style.width=Math.min(100,mseSum/maxMse*100)+'%';
+document.getElementById('bv1').textContent=mseSum.toFixed(2);
+document.getElementById('bf2').style.width=Math.min(100,physSum/maxPhys*100)+'%';
+document.getElementById('bv2').textContent=physSum.toFixed(4);
+const lt=ld*mseSum+lp*physSum*1000;
+document.getElementById('bf3').style.width=Math.min(100,lt/200*100)+'%';
+document.getElementById('bv3').textContent=lt.toFixed(2);
+const v=document.getElementById('verdict');
+if(lp<0.2&&ld>0.5){v.textContent='⚠ 物理约束过弱：PINN 过拟合噪声数据点，预测曲线波动大，物理残差高。虽然数据拟合误差小，但模型泛化能力差。';v.style.background=dk?'rgba(226,75,74,0.1)':'rgba(226,75,74,0.06)'}
+else if(ld<0.2&&lp>0.5){v.textContent='⚠ 数据约束过弱：PINN 严格遵循物理方程但忽略实验观测，物理残差极低但与数据点偏差大。可能错过真实系统的非理想行为。';v.style.background=dk?'rgba(24,95,165,0.1)':'rgba(24,95,165,0.06)'}
+else if(ld>0.4&&lp>0.4){v.textContent='✓ 平衡状态：数据拟合与物理一致性取得良好折中，预测曲线既跟踪实验趋势又保持物理合理性。这是 PINN 的理想工作区间。';v.style.background=dk?'rgba(15,110,86,0.1)':'rgba(15,110,86,0.06)'}
+else{v.textContent='调节 λ_data 和 λ_phys 观察不同权重组合对拟合行为的影响。';v.style.background='var(--color-background-secondary)'}
+}
+up();
+</script>

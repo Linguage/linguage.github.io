@@ -1,0 +1,110 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.lw{font-family:var(--font-sans);padding:1rem 0}
+.eq-box{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--color-text-secondary);line-height:1.7}
+.eq-box .eq{font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-bottom:16px}
+.ct{display:flex;align-items:center;gap:8px}
+.ct label{font-size:13px;color:var(--color-text-secondary);min-width:36px}
+.ct input[type=range]{flex:1}
+.ct .vl{font-size:13px;font-weight:500;min-width:48px;text-align:right}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-wrap{position:relative;height:260px}
+.chart-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px}
+.mc .ml{font-size:11px;color:var(--color-text-secondary)}
+.mc .mv{font-size:16px;font-weight:500;margin-top:2px}
+</style>
+<div class="lw">
+<div class="eq-box">
+<div>LuGre 动态摩擦模型：</div>
+<div class="eq">dz/dt = v − σ₀|v|z / g(v)</div>
+<div class="eq">F_friction = σ₀z + σ₁(dz/dt) + σ₂v</div>
+<div class="eq">g(v) = μ_c + (μ_s − μ_c)e^(−(v/v_s)²)</div>
+<div style="margin-top:4px;font-size:12px">z = 鬃毛变形，v = 滑动速度，g(v) = Stribeck 函数</div>
+</div>
+<div class="cg">
+<div class="ct"><label>σ₀</label><input type="range" id="s-s0" min="500" max="8000" step="100" value="3000" oninput="up()"><span class="vl" id="v-s0">3000</span></div>
+<div class="ct"><label>σ₁</label><input type="range" id="s-s1" min="0.1" max="10" step="0.1" value="2" oninput="up()"><span class="vl" id="v-s1">2.0</span></div>
+<div class="ct"><label>σ₂</label><input type="range" id="s-s2" min="0" max="5" step="0.1" value="0.5" oninput="up()"><span class="vl" id="v-s2">0.5</span></div>
+<div class="ct"><label>μ_s</label><input type="range" id="s-mus" min="0.2" max="1.0" step="0.01" value="0.6" oninput="up()"><span class="vl" id="v-mus">0.60</span></div>
+<div class="ct"><label>μ_c</label><input type="range" id="s-muc" min="0.1" max="0.8" step="0.01" value="0.35" oninput="up()"><span class="vl" id="v-muc">0.35</span></div>
+<div class="ct"><label>v_s</label><input type="range" id="s-vs" min="0.01" max="0.5" step="0.01" value="0.1" oninput="up()"><span class="vl" id="v-vs">0.10</span></div>
+<div class="ct"><label>freq</label><input type="range" id="s-freq" min="0.5" max="5" step="0.1" value="1.5" oninput="up()"><span class="vl" id="v-freq">1.5</span></div>
+<div class="ct"><label>amp</label><input type="range" id="s-amp" min="0.05" max="1.0" step="0.01" value="0.3" oninput="up()"><span class="vl" id="v-amp">0.30</span></div>
+</div>
+<div class="charts">
+<div><div class="chart-label">摩擦力 vs 时间</div><div class="chart-wrap"><canvas id="c1"></canvas></div></div>
+<div><div class="chart-label">摩擦力 vs 速度 (滞回)</div><div class="chart-wrap"><canvas id="c2"></canvas></div></div>
+</div>
+<div class="metrics">
+<div class="mc"><div class="ml">峰值摩擦力</div><div class="mv" id="m1">--</div></div>
+<div class="mc"><div class="ml">Stribeck 降幅</div><div class="mv" id="m2">--</div></div>
+<div class="mc"><div class="ml">滞回面积 (耗能)</div><div class="mv" id="m3">--</div></div>
+<div class="mc"><div class="ml">稳态 μ_c/μ_s</div><div class="mv" id="m4">--</div></div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dk=matchMedia('(prefers-color-scheme:dark)').matches;
+const gc=dk?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.05)';
+const tc=dk?'#b4b2a9':'#5f5e5a';
+function mkChart(id,xLab,yLab){
+return new Chart(document.getElementById(id),{type:'line',data:{datasets:[
+{data:[],borderColor:'#0F6E56',borderWidth:1.8,pointRadius:0,tension:0,fill:false}
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+plugins:{legend:{display:false}},
+scales:{x:{type:'linear',title:{display:true,text:xLab,color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10},maxTicksLimit:8}},
+y:{title:{display:true,text:yLab,color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}}}}});
+}
+const ch1=mkChart('c1','时间 t (s)','F_friction');
+const ch2=mkChart('c2','速度 v (m/s)','F_friction');
+ch2.data.datasets[0].borderColor='#D85A30';
+function solve(){
+const s0=+document.getElementById('s-s0').value;
+const s1=+document.getElementById('s-s1').value;
+const s2=+document.getElementById('s-s2').value;
+const mus=+document.getElementById('s-mus').value;
+const muc=+document.getElementById('s-muc').value;
+const vs=+document.getElementById('s-vs').value;
+const freq=+document.getElementById('s-freq').value;
+const amp=+document.getElementById('s-amp').value;
+const dt=0.0005,T=3/freq,N=Math.floor(T/dt);
+let z=0;
+const Ft=[],Fv=[];
+let peakF=0,area=0,prevV=0,prevFf=0;
+for(let i=0;i<=N;i++){
+const t=i*dt;
+const v=amp*Math.sin(2*Math.PI*freq*t);
+const gv=muc+(mus-muc)*Math.exp(-(v/vs)*(v/vs));
+const dzdt=v-s0*Math.abs(v)*z/gv;
+z+=dzdt*dt;
+const Ff=s0*z+s1*dzdt+s2*v;
+if(i%4===0){Ft.push({x:parseFloat(t.toFixed(4)),y:parseFloat(Ff.toFixed(4))});Fv.push({x:parseFloat(v.toFixed(4)),y:parseFloat(Ff.toFixed(4))})}
+if(Math.abs(Ff)>peakF)peakF=Math.abs(Ff);
+if(i>0){area+=Math.abs((Ff+prevFf)/2*(v-prevV))}
+prevV=v;prevFf=Ff;
+}
+return{Ft,Fv,peakF,drop:mus-muc,area,ratio:muc/mus}
+}
+function up(){
+['s0','s1','s2','mus','muc','vs','freq','amp'].forEach(k=>{
+const el=document.getElementById('s-'+k);
+const vel=document.getElementById('v-'+k);
+const v=parseFloat(el.value);
+if(k==='s0')vel.textContent=Math.round(v);
+else if(k==='freq'||k==='s1')vel.textContent=v.toFixed(1);
+else vel.textContent=v.toFixed(2);
+});
+const r=solve();
+ch1.data.datasets[0].data=r.Ft;
+ch2.data.datasets[0].data=r.Fv;
+ch1.update();ch2.update();
+document.getElementById('m1').textContent=r.peakF.toFixed(2);
+document.getElementById('m2').textContent=r.drop.toFixed(2);
+document.getElementById('m3').textContent=r.area.toFixed(3);
+document.getElementById('m4').textContent=(r.ratio*100).toFixed(1)+'%';
+}
+up();
+</script>

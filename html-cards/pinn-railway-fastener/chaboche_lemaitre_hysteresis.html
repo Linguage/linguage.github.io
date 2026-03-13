@@ -1,0 +1,135 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cw{font-family:var(--font-sans);padding:1rem 0}
+.eq-box{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--color-text-secondary);line-height:1.7}
+.eq-box .eq{font-family:var(--font-mono);font-size:12px;color:var(--color-text-primary)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-bottom:16px}
+.ct{display:flex;align-items:center;gap:8px}
+.ct label{font-size:13px;color:var(--color-text-secondary);min-width:36px}
+.ct input[type=range]{flex:1}
+.ct .vl{font-size:13px;font-weight:500;min-width:48px;text-align:right}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-wrap{position:relative;height:280px}
+.chart-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px}
+.mc .ml{font-size:11px;color:var(--color-text-secondary)}
+.mc .mv{font-size:16px;font-weight:500;margin-top:2px}
+</style>
+<div class="cw">
+<div class="eq-box">
+<div>Chaboche 非线性运动硬化 + Lemaitre 损伤：</div>
+<div class="eq">σ = E(1−D)(ε − ε_p)</div>
+<div class="eq">dε_p = dλ · sign(σ − X) &nbsp;(|σ−X| ≥ σ_y)</div>
+<div class="eq">dX = C·dε_p − γ·X·|dε_p| &nbsp;(背应力演化)</div>
+<div class="eq">dD = (Y/S)^s · |dε_p| &nbsp;(损伤累积)</div>
+</div>
+<div class="cg">
+<div class="ct"><label>E₀</label><input type="range" id="s-E" min="50" max="250" step="5" value="200" oninput="up()"><span class="vl" id="v-E">200</span></div>
+<div class="ct"><label>σ_y</label><input type="range" id="s-sy" min="50" max="400" step="5" value="200" oninput="up()"><span class="vl" id="v-sy">200</span></div>
+<div class="ct"><label>C</label><input type="range" id="s-C" min="1000" max="30000" step="500" value="10000" oninput="up()"><span class="vl" id="v-C">10000</span></div>
+<div class="ct"><label>γ</label><input type="range" id="s-gam" min="10" max="500" step="5" value="100" oninput="up()"><span class="vl" id="v-gam">100</span></div>
+<div class="ct"><label>S</label><input type="range" id="s-S" min="1" max="50" step="1" value="10" oninput="up()"><span class="vl" id="v-S">10</span></div>
+<div class="ct"><label>s</label><input type="range" id="s-ss" min="1" max="8" step="0.5" value="2" oninput="up()"><span class="vl" id="v-ss">2.0</span></div>
+<div class="ct"><label>ε_amp</label><input type="range" id="s-ea" min="0.002" max="0.02" step="0.001" value="0.008" oninput="up()"><span class="vl" id="v-ea">0.008</span></div>
+<div class="ct"><label>cycles</label><input type="range" id="s-nc" min="5" max="60" step="1" value="20" oninput="up()"><span class="vl" id="v-nc">20</span></div>
+</div>
+<div class="charts">
+<div><div class="chart-label">应力-应变滞回环 σ-ε</div><div class="chart-wrap"><canvas id="c1"></canvas></div></div>
+<div><div class="chart-label">模量退化 E(N) 与损伤 D(N)</div><div class="chart-wrap"><canvas id="c2"></canvas></div></div>
+</div>
+<div class="metrics">
+<div class="mc"><div class="ml">最终损伤 D</div><div class="mv" id="m1">--</div></div>
+<div class="mc"><div class="ml">有效模量 E_eff</div><div class="mv" id="m2">--</div></div>
+<div class="mc"><div class="ml">峰值应力衰减</div><div class="mv" id="m3">--</div></div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const dk=matchMedia('(prefers-color-scheme:dark)').matches;
+const gc=dk?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.05)';
+const tc=dk?'#b4b2a9':'#5f5e5a';
+const ch1=new Chart(document.getElementById('c1'),{type:'scatter',data:{datasets:[
+{data:[],showLine:true,borderColor:'#993C1D',borderWidth:1.2,pointRadius:0,fill:false,tension:0},
+{data:[],showLine:true,borderColor:'#D85A30',borderWidth:1.8,pointRadius:0,fill:false,tension:0}
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+plugins:{legend:{display:true,labels:{font:{size:11},color:tc,boxWidth:12,generateLabels:function(chart){return[
+{text:'早期循环',fillStyle:'#993C1D',strokeStyle:'#993C1D',lineWidth:1},
+{text:'末期循环',fillStyle:'#D85A30',strokeStyle:'#D85A30',lineWidth:2}]}}}},
+scales:{x:{title:{display:true,text:'应变 ε',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}},
+y:{title:{display:true,text:'应力 σ (MPa)',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}}}}});
+const ch2=new Chart(document.getElementById('c2'),{type:'line',data:{labels:[],datasets:[
+{label:'E_eff (GPa)',data:[],borderColor:'#185FA5',borderWidth:1.8,pointRadius:0,fill:false,yAxisID:'y'},
+{label:'损伤 D',data:[],borderColor:'#E24B4A',borderWidth:1.8,pointRadius:0,borderDash:[4,3],fill:false,yAxisID:'y2'}
+]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:200},
+plugins:{legend:{display:true,labels:{font:{size:11},color:tc,boxWidth:12}}},
+scales:{x:{title:{display:true,text:'循环次数 N',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}}},
+y:{position:'left',title:{display:true,text:'E_eff (GPa)',color:tc,font:{size:11}},grid:{color:gc},ticks:{color:tc,font:{size:10}},min:0},
+y2:{position:'right',title:{display:true,text:'损伤 D',color:tc,font:{size:11}},grid:{drawOnChartArea:false},ticks:{color:tc,font:{size:10}},min:0,max:1}}}});
+function solve(){
+const E0=+document.getElementById('s-E').value;
+const sy=+document.getElementById('s-sy').value;
+const C=+document.getElementById('s-C').value;
+const gam=+document.getElementById('s-gam').value;
+const S=+document.getElementById('s-S').value;
+const ss=+document.getElementById('s-ss').value;
+const ea=+document.getElementById('s-ea').value;
+const nc=+document.getElementById('s-nc').value;
+const ptsPerCyc=200,dt=1.0/ptsPerCyc;
+let ep=0,X=0,D=0;
+const earlyLoop=[],lateLoop=[];
+const Eeff=[],Dvals=[],labels=[];
+let peakSig0=0,peakSigEnd=0;
+for(let cyc=0;cyc<nc;cyc++){
+const loop=[];
+for(let i=0;i<=ptsPerCyc;i++){
+const frac=i/ptsPerCyc;
+const eps=ea*Math.sin(2*Math.PI*frac);
+const Ecur=E0*(1-D);
+const sig=Ecur*(eps-ep);
+const fv=sig-X;
+if(Math.abs(fv)>sy&&D<0.99){
+const dep=0.0001*Math.sign(fv);
+ep+=dep;
+X+=C*dep-gam*X*Math.abs(dep);
+const Y=sig*sig/(2*E0*(1-D)*(1-D));
+const Ys=Y/S;
+D+=Math.pow(Math.abs(Ys),ss)*Math.abs(dep);
+if(D>0.99)D=0.99;
+}
+const sigF=E0*(1-D)*(eps-ep);
+loop.push({x:parseFloat(eps.toFixed(6)),y:parseFloat(sigF.toFixed(2))});
+if(cyc===0&&Math.abs(sigF)>peakSig0)peakSig0=Math.abs(sigF);
+if(cyc===nc-1&&Math.abs(sigF)>peakSigEnd)peakSigEnd=Math.abs(sigF);
+}
+if(cyc<=1)earlyLoop.push(...loop);
+if(cyc>=nc-2)lateLoop.push(...loop);
+Eeff.push(parseFloat((E0*(1-D)).toFixed(1)));
+Dvals.push(parseFloat(D.toFixed(4)));
+labels.push(cyc+1);
+}
+return{earlyLoop,lateLoop,Eeff,Dvals,labels,D,Ecur:E0*(1-D),drop:peakSig0>0?((peakSig0-peakSigEnd)/peakSig0*100):0}
+}
+function up(){
+document.getElementById('v-E').textContent=document.getElementById('s-E').value;
+document.getElementById('v-sy').textContent=document.getElementById('s-sy').value;
+document.getElementById('v-C').textContent=document.getElementById('s-C').value;
+document.getElementById('v-gam').textContent=document.getElementById('s-gam').value;
+document.getElementById('v-S').textContent=document.getElementById('s-S').value;
+document.getElementById('v-ss').textContent=parseFloat(document.getElementById('s-ss').value).toFixed(1);
+document.getElementById('v-ea').textContent=document.getElementById('s-ea').value;
+document.getElementById('v-nc').textContent=document.getElementById('s-nc').value;
+const r=solve();
+ch1.data.datasets[0].data=r.earlyLoop;
+ch1.data.datasets[1].data=r.lateLoop;
+ch1.update();
+ch2.data.labels=r.labels;
+ch2.data.datasets[0].data=r.Eeff;
+ch2.data.datasets[1].data=r.Dvals;
+ch2.update();
+document.getElementById('m1').textContent=r.D.toFixed(4);
+document.getElementById('m2').textContent=r.Ecur.toFixed(1)+' GPa';
+document.getElementById('m3').textContent=r.drop.toFixed(1)+'%';
+}
+up();
+</script>
