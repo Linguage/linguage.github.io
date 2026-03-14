@@ -21,49 +21,28 @@
 </a><a class="inline-flex w-8 h-8 rounded-full items-center justify-center text-muted/80 bg-black/5 no-underline transition-all duration-250 hover:bg-accent hover:text-white hover:-translate-y-0.5 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-gray-200 dark:hover:text-black" href=https://linguista.notion.site/linguista-hub target=_blank rel=noopener aria-label=Notion><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013 alt="Notion logo" class="w-4.5 h-4.5 object-contain rounded" loading=lazy decoding=async>
 </a><a class="inline-flex w-auto min-w-[32px] px-3.5 h-8 rounded-full items-center justify-center text-sm font-semibold tracking-wide leading-none text-muted/80 bg-black/5 no-underline transition-all duration-250 hover:bg-accent hover:text-white hover:-translate-y-0.5 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-gray-200 dark:hover:text-black" href=https://linguista.bearblog.dev/ target=_blank rel=noopener aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a></nav><div class="text-xs text-muted">© 2026 Linguista</div></div></div></aside><main class="w-full flex-grow mx-auto max-w-container px-4"><div class="grid grid-cols-1 lg:grid-cols-[200px_minmax(0,1fr)_220px] gap-8 py-8 pb-20 items-start max-w-7xl mx-auto"><div class="hidden lg:block" aria-hidden=true></div><article class="docs-content min-w-0"><div class=mb-4><a href=/rosetta/technology/ class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border bg-surface text-sm text-text no-underline hover:bg-bg transition-colors">← 返回目录页</a></div><div class=md-theme-amp-outer><div class=md-theme-amp><div class="text-muted text-sm mb-6"><span class=font-medium>Julia Wiesinger, Patrick Marlow, Vladimir Vuskovic</span>
 ·
-<span>2026-01-27</span></div><h1 id=智能体agentgoogle白皮书解读>智能体（Agent）——Google白皮书解读</h1><h2 id=摘要>摘要</h2><p>本文为Google发布的智能体白皮书，系统阐述了生成式AI智能体的核心概念与架构。智能体由模型、工具和编排层三大组件构成，能够自主观察环境、调用外部工具并采取行动以实现目标。文章详细介绍了ReAct、思维链、思维树等推理框架，并对比了智能体与传统模型的本质差异，为构建生产级智能体应用提供了完整的技术参考。</p><h2 id=核心概念及解读>核心概念及解读</h2><p><strong>智能体（Agent）</strong>：一种超越独立生成式AI模型能力的应用程序，能够通过观察环境、调用工具并自主决策来实现目标</p><p><strong>认知架构</strong>：智能体内部由模型、工具和编排层组成的系统结构，负责信息接收、推理规划、执行行动和反馈调整的循环过程</p><p><strong>ReAct框架</strong>：一种结合推理（Reason）与行动（Action）的提示工程策略，使模型能够交替进行思考和工具调用，逐步解决复杂问题</p><p><strong>编排层</strong>：管理智能体信息处理循环的核心层，负责维护记忆、状态、推理和规划，持续运行直到目标达成</p><p><strong>工具（Tools）</strong>：弥合智能体内部能力与外部世界差距的桥梁，使模型能够访问实时数据和外部服务，实现如数据库查询、API调用等操作</p><p>「Google白皮书」智能体（Agent）</p><ul><li>单位：Google</li><li>作者：Julia Wiesinger, Patrick Marlow 和 Vladimir Vuskovic</li><li>原文：<a href=https://www.kaggle.com/whitepaper-agents>Agent</a></li></ul><p><img src=https://cdn-mineru.openxlab.org.cn/extract/7b099934-d40b-403d-8804-2269062d890e/1e617186aa14acffc2355bf30615e8ccb40d24be539626e598f7d93f16c094df.jpg alt></p><h2 id=目录>目录</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>1. 引言 4
-</span></span><span class=line><span class=cl>2. 什么是智能体？ 5
-</span></span><span class=line><span class=cl>3. 模型 6
-</span></span><span class=line><span class=cl>4. 工具 7
-</span></span><span class=line><span class=cl>5. 编排层 7
-</span></span><span class=line><span class=cl>6. 智能体 vs. 模型 8
-</span></span><span class=line><span class=cl>7. 认知架构：智能体如何运作 8
-</span></span><span class=line><span class=cl>8. 工具：我们通往外部世界的钥匙 12
-</span></span><span class=line><span class=cl>9. 扩展 13
-</span></span><span class=line><span class=cl>10. 扩展示例 15
-</span></span><span class=line><span class=cl>11. 函数 18
-</span></span><span class=line><span class=cl>12. 用例 21
-</span></span><span class=line><span class=cl>13. 函数示例代码 24
-</span></span><span class=line><span class=cl>14. 数据存储 27
-</span></span><span class=line><span class=cl>15. 实现与应用 28
-</span></span><span class=line><span class=cl>16. 工具回顾 32
-</span></span><span class=line><span class=cl>17. 通过目标学习提升模型性能 33
-</span></span><span class=line><span class=cl>18. 使用 LangChain 快速开始智能体开发 35
-</span></span><span class=line><span class=cl>19. 使用 Vertex AI 智能体进行生产应用 38
-</span></span><span class=line><span class=cl>20. 总结 40
-</span></span><span class=line><span class=cl>21. 尾注 42
-</span></span></code></pre></td></tr></table></div></div><p>这种将推理、逻辑和对外部信息的访问结合起来，并全部连接到生成式 AI 模型的方式，引出了智能体的概念。</p><h1 id=引言>引言</h1><p>人类非常擅长处理混乱的模式识别任务。然而，在得出结论之前，他们通常依赖书籍、Google 搜索或计算器等工具来补充先前的知识。与人类一样，生成式 AI 模型也可以被训练使用工具来访问实时信息或建议现实世界的行动。例如，模型可以利用数据库检索工具访问特定信息，如客户的购买历史，以便生成量身定制的购物推荐。或者，根据用户的查询，模型可以进行各种 API 调用，代表您向同事发送电子邮件回复或完成金融交易。为此，模型不仅需要访问一组外部工具，还需要具备以自我导向的方式规划和执行任何任务的能力。这种将推理、逻辑和对外部信息的访问结合起来，并全部连接到生成式 AI 模型的方式，引出了智能体（Agent）的概念，即一个超越了独立生成式 AI 模型能力的程序。本白皮书将更详细地探讨所有这些及相关方面。</p><h2 id=什么是智能体>什么是智能体？</h2><p>在其最基本的形式中，生成式 AI 智能体可以定义为一个应用程序，它试图通过观察世界并使用其可用的工具对其采取行动来达到目标。智能体是自主的，可以在没有人为干预的情况下独立行动，尤其是在为其设定了明确的目标或要实现的目的时。智能体在实现目标的方法上也可以是主动的。即使在没有人类明确指令集的情况下，智能体也可以推理出下一步应该做什么来实现其最终目标。虽然 AI 中智能体的概念非常普遍且强大，但本白皮书侧重于发布时生成式 AI 模型能够构建的特定类型的智能体。</p><p>为了理解智能体的内部工作原理，让我们首先介绍驱动智能体行为、行动和决策的基础组件。这些组件的组合可以描述为一个认知架构，通过混合和匹配这些组件可以实现许多这样的架构。关注核心功能，智能体的认知架构中有三个基本组件，如图 1 所示。</p><p><img src=https://cdn-mineru.openxlab.org.cn/extract/7b099934-d40b-403d-8804-2269062d890e/84926dd6c958870f1d39d138e0b8752636fb1c816080558319cce62629158ea1.jpg alt>
+<span>2026-01-27</span></div><h1 id=智能体agentgoogle白皮书解读>智能体（Agent）——Google白皮书解读</h1><h2 id=摘要>摘要</h2><p>本文为Google发布的智能体白皮书，系统阐述了生成式AI智能体的核心概念与架构。智能体由模型、工具和编排层三大组件构成，能够自主观察环境、调用外部工具并采取行动以实现目标。文章详细介绍了ReAct、思维链、思维树等推理框架，并对比了智能体与传统模型的本质差异，为构建生产级智能体应用提供了完整的技术参考。</p><h2 id=核心概念及解读>核心概念及解读</h2><p><strong>智能体（Agent）</strong>：一种超越独立生成式AI模型能力的应用程序，能够通过观察环境、调用工具并自主决策来实现目标</p><p><strong>认知架构</strong>：智能体内部由模型、工具和编排层组成的系统结构，负责信息接收、推理规划、执行行动和反馈调整的循环过程</p><p><strong>ReAct框架</strong>：一种结合推理（Reason）与行动（Action）的提示工程策略，使模型能够交替进行思考和工具调用，逐步解决复杂问题</p><p><strong>编排层</strong>：管理智能体信息处理循环的核心层，负责维护记忆、状态、推理和规划，持续运行直到目标达成</p><p><strong>工具（Tools）</strong>：弥合智能体内部能力与外部世界差距的桥梁，使模型能够访问实时数据和外部服务，实现如数据库查询、API调用等操作</p><p>「Google白皮书」智能体（Agent）</p><ul><li>单位：Google</li><li>作者：Julia Wiesinger, Patrick Marlow 和 Vladimir Vuskovic</li><li>原文：<a href=https://www.kaggle.com/whitepaper-agents>Agent</a></li></ul><p><img src=https://cdn-mineru.openxlab.org.cn/extract/7b099934-d40b-403d-8804-2269062d890e/1e617186aa14acffc2355bf30615e8ccb40d24be539626e598f7d93f16c094df.jpg alt></p><h2 id=目录>目录</h2><pre tabindex=0><code>1. 引言 4
+2. 什么是智能体？ 5
+3. 模型 6
+4. 工具 7
+5. 编排层 7
+6. 智能体 vs. 模型 8
+7. 认知架构：智能体如何运作 8
+8. 工具：我们通往外部世界的钥匙 12
+9. 扩展 13
+10. 扩展示例 15
+11. 函数 18
+12. 用例 21
+13. 函数示例代码 24
+14. 数据存储 27
+15. 实现与应用 28
+16. 工具回顾 32
+17. 通过目标学习提升模型性能 33
+18. 使用 LangChain 快速开始智能体开发 35
+19. 使用 Vertex AI 智能体进行生产应用 38
+20. 总结 40
+21. 尾注 42
+</code></pre><p>这种将推理、逻辑和对外部信息的访问结合起来，并全部连接到生成式 AI 模型的方式，引出了智能体的概念。</p><h1 id=引言>引言</h1><p>人类非常擅长处理混乱的模式识别任务。然而，在得出结论之前，他们通常依赖书籍、Google 搜索或计算器等工具来补充先前的知识。与人类一样，生成式 AI 模型也可以被训练使用工具来访问实时信息或建议现实世界的行动。例如，模型可以利用数据库检索工具访问特定信息，如客户的购买历史，以便生成量身定制的购物推荐。或者，根据用户的查询，模型可以进行各种 API 调用，代表您向同事发送电子邮件回复或完成金融交易。为此，模型不仅需要访问一组外部工具，还需要具备以自我导向的方式规划和执行任何任务的能力。这种将推理、逻辑和对外部信息的访问结合起来，并全部连接到生成式 AI 模型的方式，引出了智能体（Agent）的概念，即一个超越了独立生成式 AI 模型能力的程序。本白皮书将更详细地探讨所有这些及相关方面。</p><h2 id=什么是智能体>什么是智能体？</h2><p>在其最基本的形式中，生成式 AI 智能体可以定义为一个应用程序，它试图通过观察世界并使用其可用的工具对其采取行动来达到目标。智能体是自主的，可以在没有人为干预的情况下独立行动，尤其是在为其设定了明确的目标或要实现的目的时。智能体在实现目标的方法上也可以是主动的。即使在没有人类明确指令集的情况下，智能体也可以推理出下一步应该做什么来实现其最终目标。虽然 AI 中智能体的概念非常普遍且强大，但本白皮书侧重于发布时生成式 AI 模型能够构建的特定类型的智能体。</p><p>为了理解智能体的内部工作原理，让我们首先介绍驱动智能体行为、行动和决策的基础组件。这些组件的组合可以描述为一个认知架构，通过混合和匹配这些组件可以实现许多这样的架构。关注核心功能，智能体的认知架构中有三个基本组件，如图 1 所示。</p><p><img src=https://cdn-mineru.openxlab.org.cn/extract/7b099934-d40b-403d-8804-2269062d890e/84926dd6c958870f1d39d138e0b8752636fb1c816080558319cce62629158ea1.jpg alt>
 图 1. 通用智能体架构和组件</p><h3 id=模型>模型</h3><p>在智能体的范围内，模型指的是将用作智能体过程的中心决策者的语言模型（LM）。智能体使用的模型可以是一个或多个任何大小（小型/大型）的语言模型，这些模型能够遵循基于指令的推理和逻辑框架，如 ReAct、思维链（Chain-of-Thought）或思维树（Tree-of-Thoughts）。模型可以是通用的、多模态的或根据特定智能体架构的需求进行微调的。为了获得最佳的生产结果，您应该利用最适合您期望的最终应用程序的模型，并且理想情况下，该模型已经在与您计划在认知架构中使用的工具相关的数据特征上进行了训练。需要注意的是，模型通常不会针对智能体的特定配置设置（例如工具选择、编排/推理设置）进行训练。但是，可以通过向模型提供展示智能体能力的示例（包括智能体在各种上下文中使用特定工具或推理步骤的实例）来进一步为智能体的任务优化模型。</p><h3 id=工具>工具</h3><p>基础模型尽管在文本和图像生成方面表现出色，但仍然受到无法与外部世界互动的限制。工具弥合了这一差距，使智能体能够与外部数据和服务交互，同时解锁了超越底层模型本身的更广泛行动范围。工具可以采取多种形式，并具有不同的复杂程度，但通常与常见的 Web API 方法（如 GET、POST、PATCH 和 DELETE）保持一致。例如，工具可以更新数据库中的客户信息或获取天气数据以影响智能体向用户提供的旅行建议。借助工具，智能体可以访问和处理现实世界的信息。这使它们能够支持更专业的系统，如检索增强生成（RAG），这显著扩展了智能体的能力，超越了基础模型本身所能达到的水平。我们将在下面更详细地讨论工具，但最重要的是要理解工具弥合了智能体内部能力与外部世界之间的差距，解锁了更广泛的可能性。</p><h3 id=编排层>编排层</h3><p>编排层描述了一个循环过程，该过程管理智能体如何接收信息、执行一些内部推理，并使用该推理来指导其下一步行动或决策。通常，这个循环将持续进行，直到智能体达到其目标或某个停止点。编排层的复杂性可能因智能体及其执行的任务而有很大差异。一些循环可以是带有决策规则的简单计算，而另一些则可能包含链式逻辑、涉及额外的机器学习算法或实现其他概率推理技术。我们将在认知架构部分更详细地讨论智能体编排层的具体实现。</p><h3 id=智能体-vs-模型>智能体 vs. 模型</h3><p>为了更清楚地理解智能体和模型之间的区别，请参考下表：</p><html><body><table><tr><td>模型</td><td>智能体</td></tr><tr><td>知识仅限于其训练数据中可用的内容。</td><td>通过工具与外部系统连接来扩展知识。</td></tr><tr><td>基于用户查询的单次推理/预测。除非为模型明确实现，否则没有会话历史或连续上下文的管理（例如聊天历史记录）。</td><td>管理的会话历史（例如聊天历史记录），允许基于用户查询和编排层中做出的决策进行多轮推理/预测。在此上下文中，“轮”定义为交互系统与智能体之间的一次交互（例如，1 个传入事件/查询和 1 个智能体响应）。</td></tr><tr><td>没有原生工具实现。</td><td>工具在智能体架构中原生实现。</td></tr><tr><td>没有实现原生逻辑层。用户可以将提示表述为简单问题，或使用推理框架（CoT、ReAct 等）形成复杂提示来指导模型进行预测。</td><td>使用 CoT、ReAct 等推理框架或 LangChain 等其他预构建智能体框架的原生认知架构。</td></tr></table></body></html><h3 id=认知架构智能体如何运作>认知架构：智能体如何运作</h3><p>想象一下繁忙厨房里的厨师。他们的目标是为餐厅顾客制作美味佳肴，这涉及规划、执行和调整的某种循环。</p><ul><li>他们收集信息，例如顾客的订单以及食品储藏室和冰箱里有哪些食材。</li><li>他们根据刚刚收集到的信息，对可以制作的菜肴和风味进行一些内部推理。</li><li>他们采取行动制作菜肴：切蔬菜、混合香料、煎肉。</li></ul><p>在过程的每个阶段，厨师都会根据需要进行调整，随着食材耗尽或收到客户反馈而完善他们的计划，并使用先前结果集来确定下一个行动计划。这种信息接收、规划、执行和调整的循环描述了厨师为实现其目标所采用的独特认知架构。</p><p>就像厨师一样，智能体可以使用认知架构，通过迭代处理信息、做出明智决策以及根据先前输出完善下一步行动来达到其最终目标。智能体认知架构的核心是编排层，负责维护记忆、状态、推理和规划。它利用快速发展的提示工程领域及相关框架来指导推理和规划，使智能体能够更有效地与其环境互动并完成任务。语言模型的提示工程框架和任务规划领域的研究正在迅速发展，产生了各种有前途的方法。虽然不是详尽的列表，但以下是本出版物发布时一些最流行的框架和推理技术：</p><ul><li>ReAct：一种提示工程框架，为语言模型提供了一种思考过程策略，用于对用户查询进行推理（Reason）和采取行动（Action），无论是否有上下文示例。ReAct 提示已被证明优于几种 SOTA 基线，并提高了 LLM 的人类互操作性和可信赖度。</li><li>思维链（CoT）：一种提示工程框架，通过中间步骤实现推理能力。CoT 有多种子技术，包括自洽性（self-consistency）、主动提示（active-prompt）和多模态 CoT，每种技术根据具体应用都有其优缺点。</li><li>思维树（ToT）：一种提示工程框架，非常适合探索或战略前瞻任务。它泛化了思维链提示，并允许模型探索各种思维链，这些思维链作为使用语言模型解决一般问题的中间步骤。</li></ul><p>智能体可以利用上述推理技术之一或许多其他技术来为给定的用户请求选择下一个最佳行动。例如，让我们考虑一个被编程为使用 ReAct 框架为用户查询选择正确行动和工具的智能体。事件序列可能如下所示：</p><ol><li>用户向智能体发送查询。</li><li>智能体开始 ReAct 序列。</li><li>智能体向模型提供提示，要求其生成下一个 ReAct 步骤及其对应的输出：
 a. 问题：来自用户查询的输入问题，随提示提供。
 b. 思考：模型关于下一步应该做什么的想法。

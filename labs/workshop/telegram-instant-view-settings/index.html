@@ -21,49 +21,28 @@
 </a><a class="inline-flex w-8 h-8 rounded-full items-center justify-center text-muted/80 bg-black/5 no-underline transition-all duration-250 hover:bg-accent hover:text-white hover:-translate-y-0.5 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-gray-200 dark:hover:text-black" href=https://linguista.notion.site/linguista-hub target=_blank rel=noopener aria-label=Notion><img src=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/200px-Notion-logo.svg.png?20220918151013 alt="Notion logo" class="w-4.5 h-4.5 object-contain rounded" loading=lazy decoding=async>
 </a><a class="inline-flex w-auto min-w-[32px] px-3.5 h-8 rounded-full items-center justify-center text-sm font-semibold tracking-wide leading-none text-muted/80 bg-black/5 no-underline transition-all duration-250 hover:bg-accent hover:text-white hover:-translate-y-0.5 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-gray-200 dark:hover:text-black" href=https://linguista.bearblog.dev/ target=_blank rel=noopener aria-label="Bear Blog ʕ•ᴥ•ʔ">ʕ•ᴥ•ʔ</a></nav><div class="text-xs text-muted">© 2026 Linguista</div></div></div></aside><main class="w-full flex-grow mx-auto max-w-container px-4"><div class="grid grid-cols-1 lg:grid-cols-[200px_minmax(0,1fr)_220px] gap-8 py-8 pb-20 items-start max-w-7xl mx-auto"><div class="hidden lg:block" aria-hidden=true></div><article class="docs-content min-w-0"><div class=mb-4><a href=/labs/workshop/ class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-border bg-surface text-sm text-text no-underline hover:bg-bg transition-colors">← 返回目录页</a></div><div class=md-theme-amp-outer><div class=md-theme-amp><h1>为静态站点配置 Telegram Instant View：从页面标记到部署等待</h1><div class="text-muted text-sm mb-6"><span class=font-medium>Henri</span>
 ·
-<span>2026-03-14</span></div><p>Telegram 的 Instant View（IV）可以让用户在 Telegram 客户端里直接阅读网页正文，不用跳转浏览器。对内容站来说，文章链接带上 <code>INSTANT VIEW</code> 按钮，阅读体验会好不少。</p><p>但要让 IV 稳定工作，特别是对部署在 GitHub Pages 上的静态站点来说，需要把页面标记、IV 规则、Bot 消息和部署时序几个环节串起来。这篇文章按操作顺序整理了关键步骤。</p><h2 id=1-页面端加语义标记>1. 页面端：加语义标记</h2><p>IV 模板需要从页面 HTML 中提取标题、正文、作者、发布时间等信息。最直觉的做法是靠 CSS 类名来定位——但这非常脆弱。你用 Tailwind 生成的 <code>text-xl</code>、<code>mt-16</code> 之类的类名随时可能因为样式调整而变化，IV 规则会悄悄失效，而且没有任何报错。</p><p>更稳妥的做法是在页面模板中加一组专用的 <code>data-iv-*</code> 属性：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>article</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>page</span><span class=o>=</span><span class=s>&#34;post&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>header</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>header</span><span class=o>=</span><span class=s>&#34;true&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>h1</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>title</span><span class=o>=</span><span class=s>&#34;true&#34;</span><span class=p>&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>title</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=nx>post</span><span class=p>.</span><span class=nx>subtitle</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
-</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>p</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>subtitle</span><span class=o>=</span><span class=s>&#34;true&#34;</span><span class=p>&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>subtitle</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>)}</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>time</span> <span class=na>dateTime</span><span class=o>=</span><span class=p>{</span><span class=nx>post</span><span class=p>.</span><span class=nx>date</span><span class=p>}</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>published</span><span class=o>=</span><span class=p>{</span><span class=nb>String</span><span class=p>(</span><span class=nx>publishedUnix</span><span class=p>)}&gt;</span>
-</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>publishedLabel</span><span class=p>}</span>
-</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>time</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>span</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>author</span><span class=o>=</span><span class=s>&#34;true&#34;</span><span class=p>&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>author</span><span class=p>}&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>header</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>body</span><span class=o>=</span><span class=s>&#34;true&#34;</span>
-</span></span><span class=line><span class=cl>       <span class=na>dangerouslySetInnerHTML</span><span class=o>=</span><span class=p>{{</span> <span class=nx>__html</span><span class=o>:</span> <span class=nx>post</span><span class=p>.</span><span class=nx>contentHtml</span> <span class=p>}}</span>
-</span></span><span class=line><span class=cl>  <span class=p>/&gt;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  <span class=p>{</span><span class=cm>/* 不希望 IV 抓取的区域 */</span><span class=p>}</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>nav</span> <span class=na>data</span><span class=err>-</span><span class=na>iv</span><span class=err>-</span><span class=na>ignore</span><span class=o>=</span><span class=s>&#34;true&#34;</span><span class=p>&gt;...&lt;/</span><span class=nt>nav</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>article</span><span class=p>&gt;</span>
-</span></span></code></pre></td></tr></table></div></div><p>几个要点：</p><ul><li><code>data-iv-title</code>、<code>data-iv-body</code>、<code>data-iv-author</code> 分别标记标题、正文和作者</li><li><code>data-iv-published</code> 放在 <code>&lt;time></code> 元素上，值为 Unix 时间戳（IV 引擎可以直接解析）</li><li><code>data-iv-ignore</code> 标记导航栏、侧边栏、评论区等不应出现在阅读视图中的元素</li></ul><p>同时检查一下页面的 <code>&lt;link rel="canonical"></code> 是否包含了正确的部署子路径。如果你的站点部署在 <code>/alpacanotes</code> 下，canonical URL 也要带上这个前缀。这个问题浏览器不在乎，但 Telegram 在抓取和缓存时会参考 canonical。</p><h2 id=2-iv-规则编写与同域名兼容>2. IV 规则：编写与同域名兼容</h2><p>到 <a href=https://instantview.telegram.org/my/>Telegram Instant View Editor</a> 编写规则。规则用 XPath 语法告诉 IV 引擎从页面中提取哪些内容。</p><p>如果你的域名下只有一套页面结构，规则很简单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<span>2026-03-14</span></div><p>Telegram 的 Instant View（IV）可以让用户在 Telegram 客户端里直接阅读网页正文，不用跳转浏览器。对内容站来说，文章链接带上 <code>INSTANT VIEW</code> 按钮，阅读体验会好不少。</p><p>但要让 IV 稳定工作，特别是对部署在 GitHub Pages 上的静态站点来说，需要把页面标记、IV 规则、Bot 消息和部署时序几个环节串起来。这篇文章按操作顺序整理了关键步骤。</p><h2 id=1-页面端加语义标记>1. 页面端：加语义标记</h2><p>IV 模板需要从页面 HTML 中提取标题、正文、作者、发布时间等信息。最直觉的做法是靠 CSS 类名来定位——但这非常脆弱。你用 Tailwind 生成的 <code>text-xl</code>、<code>mt-16</code> 之类的类名随时可能因为样式调整而变化，IV 规则会悄悄失效，而且没有任何报错。</p><p>更稳妥的做法是在页面模板中加一组专用的 <code>data-iv-*</code> 属性：</p><pre tabindex=0><code>&lt;article data-iv-page=&#34;post&#34;&gt;
+  &lt;header data-iv-header=&#34;true&#34;&gt;
+    &lt;h1 data-iv-title=&#34;true&#34;&gt;{post.title}&lt;/h1&gt;
+    {post.subtitle &amp;&amp; (
+      &lt;p data-iv-subtitle=&#34;true&#34;&gt;{post.subtitle}&lt;/p&gt;
+    )}
+    &lt;div&gt;
+      &lt;time dateTime={post.date} data-iv-published={String(publishedUnix)}&gt;
+        {publishedLabel}
+      &lt;/time&gt;
+      &lt;span data-iv-author=&#34;true&#34;&gt;{post.author}&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;div data-iv-body=&#34;true&#34;
+       dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+  /&gt;
+
+  {/* 不希望 IV 抓取的区域 */}
+  &lt;nav data-iv-ignore=&#34;true&#34;&gt;...&lt;/nav&gt;
+&lt;/article&gt;
+</code></pre><p>几个要点：</p><ul><li><code>data-iv-title</code>、<code>data-iv-body</code>、<code>data-iv-author</code> 分别标记标题、正文和作者</li><li><code>data-iv-published</code> 放在 <code>&lt;time></code> 元素上，值为 Unix 时间戳（IV 引擎可以直接解析）</li><li><code>data-iv-ignore</code> 标记导航栏、侧边栏、评论区等不应出现在阅读视图中的元素</li></ul><p>同时检查一下页面的 <code>&lt;link rel="canonical"></code> 是否包含了正确的部署子路径。如果你的站点部署在 <code>/alpacanotes</code> 下，canonical URL 也要带上这个前缀。这个问题浏览器不在乎，但 Telegram 在抓取和缓存时会参考 canonical。</p><h2 id=2-iv-规则编写与同域名兼容>2. IV 规则：编写与同域名兼容</h2><p>到 <a href=https://instantview.telegram.org/my/>Telegram Instant View Editor</a> 编写规则。规则用 XPath 语法告诉 IV 引擎从页面中提取哪些内容。</p><p>如果你的域名下只有一套页面结构，规则很简单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -107,9 +86,8 @@
 </span></span></span><span class=line><span class=cl><span class=nt>@remove</span><span class=p>:</span><span class=w> </span><span class=l>//*[@data-iv-ignore] | //article[contains(@class, &#34;docs-content&#34;)]//div[contains(@class, &#34;mb-4&#34;)]</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>
 </span></span></span><span class=line><span class=cl>@<span class=l>set_attr(width, &#34;auto&#34;): //img</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><p>规则会从左到右尝试匹配，第一个命中的生效。把 <code>data-iv-*</code> 放在前面，回退规则放在 <code>|</code> 后面。</p><p>写好之后在编辑器里用几个不同页面测试，确认都能正确提取，然后点 <strong>Mark as Published</strong>，会得到一个 <code>rhash</code>。把它存到 GitHub Secrets 的 <code>TELEGRAM_IV_RHASH</code> 里。</p><h2 id=3-bot-消息构造>3. Bot 消息构造</h2><p>有了 <code>rhash</code>，就可以构造 IV 链接了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>https://t.me/iv?url=&lt;encoded_article_url&gt;&amp;rhash=&lt;your_rhash&gt;
-</span></span></code></pre></td></tr></table></div></div><p>通过 Bot API 发消息时，可以用 <code>link_preview_options</code> 参数指定预览 URL：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></span></code></pre></td></tr></table></div></div><p>规则会从左到右尝试匹配，第一个命中的生效。把 <code>data-iv-*</code> 放在前面，回退规则放在 <code>|</code> 后面。</p><p>写好之后在编辑器里用几个不同页面测试，确认都能正确提取，然后点 <strong>Mark as Published</strong>，会得到一个 <code>rhash</code>。把它存到 GitHub Secrets 的 <code>TELEGRAM_IV_RHASH</code> 里。</p><h2 id=3-bot-消息构造>3. Bot 消息构造</h2><p>有了 <code>rhash</code>，就可以构造 IV 链接了：</p><pre tabindex=0><code>https://t.me/iv?url=&lt;encoded_article_url&gt;&amp;rhash=&lt;your_rhash&gt;
+</code></pre><p>通过 Bot API 发消息时，可以用 <code>link_preview_options</code> 参数指定预览 URL：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
