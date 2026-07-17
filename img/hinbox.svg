@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+    <defs>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/>
+        </filter>
+        <filter id="light-shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.05"/>
+        </filter>
+    </defs>
+
+    <rect width="800" height="800" fill="#f8f7f2" />
+
+    <rect x="150" y="335" width="500" height="300" fill="#a8473e" />
+
+    <polygon points="150,335 400,145 650,335" fill="#a8473e" />
+    <polygon points="165,335 400,163 635,335" fill="#c15c51" />
+
+    <g filter="url(#light-shadow)">
+        <rect x="180" y="320" width="440" height="250" fill="#f5f2eb" />
+
+        <path d="M 360,355 v 100 h 25 v -40 h 30 v 40 h 25 v -100 h -25 v 40 h -30 v -40 z" fill="#334a5e" />
+
+        <g stroke="#d5d0c5" fill="none" stroke-width="1.5">
+            <line x1="465" y1="340" x2="465" y2="550" stroke-dasharray="3,4" />
+
+            <rect x="565" y="335" width="40" height="50" stroke-dasharray="3,3" />
+
+            <circle cx="535" cy="380" r="26" />
+            <circle cx="535" cy="380" r="18" />
+
+            <path d="M 480 365 Q 490 355 500 365 T 520 365" />
+            <path d="M 480 380 Q 490 370 500 380 T 520 380" />
+            <path d="M 480 395 Q 490 385 500 395 T 520 395" />
+        </g>
+    </g>
+
+    <polygon points="150,335 400,525 150,635" fill="#e2dbcd" filter="url(#shadow)" />
+    <polygon points="650,335 400,525 650,635" fill="#dfd6c6" filter="url(#shadow)" />
+
+    <polygon points="150,635 400,425 650,635" fill="#dcb25b" filter="url(#shadow)" />
+
+</svg>
